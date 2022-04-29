@@ -215,7 +215,7 @@ class Menu extends React.Component {
                       </Link>
                     </li>
                     <li class="nk-menu-item">
-                      <a class="nk-menu-link">
+                      <a href="html/crypto/wallets.html" class="nk-menu-link">
                         <span class="nk-menu-icon">
                           <em class="icon ni ni-user-c"></em>
                         </span>
@@ -297,12 +297,12 @@ class Menu extends React.Component {
                     {/* Add Line */}
 
                     <li class="nk-menu-item">
-                      <a href="html/crypto/chats.html" class="nk-menu-link">
+                      <Link to="/userlist" class="nk-menu-link">
                         <span class="nk-menu-icon">
                           <em class="icon ni ni-user-circle"></em>
                         </span>
                         <span class="nk-menu-text">Affiliate</span>
-                      </a>
+                      </Link>
                     </li>
                     <li class="nk-menu-heading">
                       <h6 class="overline-title">Fundamentals</h6>
@@ -340,12 +340,12 @@ class Menu extends React.Component {
                       </a>
                     </li>
                     <li class="nk-menu-item">
-                      <a href="html/components.html" class="nk-menu-link">
+                      <Link to="html/components.html" class="nk-menu-link">
                         <span class="nk-menu-icon">
                           <em class="icon ni ni-layers"></em>
                         </span>
                         <span class="nk-menu-text">Affiliate</span>
-                      </a>
+                      </Link>
                     </li>
                     <li class="nk-menu-item">
                       <a href="html/components.html" class="nk-menu-link">

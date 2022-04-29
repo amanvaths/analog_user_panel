@@ -75,6 +75,14 @@ display: none;
 .referal{
   margin-top: 13X;
 }
+/* .card-stretch{
+  margin:10px 100px;
+  padding: 0px;
+}
+.nk-block-head{
+  margin: 0px 100px;
+  padding: 0px;
+} */
 @media (min-width: 992px){
 .nk-auth-container {
     width: 35%;
@@ -321,12 +329,12 @@ font-size: 12px;
     right: 10px;
   }
 }
-
-
-
-
 .countdown{
   padding-left: 290px ;
  padding-top: 10px;
 }
 
+.btn-outline-light {
+  color:black; 
+  border-color:black;
+}

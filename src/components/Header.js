@@ -69,9 +69,7 @@ class Header extends React.Component {
                             </p>
                           </div> */}
                         </div>
-
-                        {/* Energy */}
-                        {/* <div class="energy">
+                        <div class="energy">
                           <div class="nk-block-head-content">
                             <ul class="nk-block-tools gx-3">
                               <divx></divx>
@@ -100,7 +98,7 @@ class Header extends React.Component {
                               {"  "} J]
                             </div>
                           </div>
-                        </div> */}
+                        </div>
                       </div>
                     </div>
                   </li>
@@ -212,27 +210,7 @@ class Header extends React.Component {
                         </div> */}
                       </div>
                     </a>
-
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      <div class="user-toggle">
-                        <div class="user-avatar sm">
-                          <em class="icon ni ni-user-alt"></em>
-                        </div>
-                        <div class="user-info d-none d-md-block">
-                          <div class="user-status user-status-unverified">
-                            Unverified
-                          </div>
-                          <div class="user-name dropdown-indicator">
-                            Ia5ghTL2paqchJTR65nBKvZ
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-
-
-
-                        {/* Vipin */}
-                    {/* <div class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1">
+                    <div class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1">
                       <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                         <div class="user-card">
                           <div class="user-avatar">
@@ -300,86 +278,7 @@ class Header extends React.Component {
                           </li>
                         </ul>
                       </div>
-                    </div> */}
-
-
-                        {/* Amit */}
-
-                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1">
-                      <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
-                        <div class="user-card">
-                          <div class="user-avatar">
-                            <span>AB</span>
-                          </div>
-                          <div class="user-info">
-                            <span class="lead-text">
-                              Ia5ghTL2paqchJTR65nBKvZ
-                            </span>
-                            <span class="sub-text">user@inrx.network.com</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="dropdown-inner user-account-info">
-                        <h6 class="overline-title-alt">Nio Wallet Account</h6>
-                        <div class="user-balance">
-                          12.395769{" "}
-                          <small class="currency currency-btc">BTC</small>
-                        </div>
-                        <div class="user-balance-sub">
-                          Locked{" "}
-                          <span>
-                            0.344939{" "}
-                            <span class="currency currency-btc">BTC</span>
-                          </span>
-                        </div>
-                        <a href="#" class="link">
-                          <span>Withdraw Funds</span>{" "}
-                          <em class="icon ni ni-wallet-out"></em>
-                        </a>
-                      </div>
-                      <div class="dropdown-inner">
-                        <ul class="link-list">
-                          <li>
-                            <a href="html/crypto/profile.html">
-                              <em class="icon ni ni-user-alt"></em>
-                              <span>View Profile</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="html/crypto/profile-security.html">
-                              <em class="icon ni ni-setting-alt"></em>
-                              <span>Account Setting</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="html/crypto/profile-activity.html">
-                              <em class="icon ni ni-activity-alt"></em>
-                              <span>Login Activity</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a class="dark-switch" href="#">
-                              <em class="icon ni ni-moon"></em>
-                              <span>Dark Mode</span>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="dropdown-inner">
-                        <ul class="link-list">
-                          <li>
-                            <a href="#">
-                              <em class="icon ni ni-signout"></em>
-                              <span>Sign out</span>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
                     </div>
-
-
-
-
                   </li>
                   {/* Remove */}
                 </ul>
