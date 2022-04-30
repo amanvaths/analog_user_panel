@@ -126,7 +126,7 @@ const PersonalInfo = () => {
               </div>
             </div> */}
           </div>
-          <div className="nk-data data-list">
+         {/*  <div className="nk-data data-list">
             <div className="data-head">
               <h6 className="overline-title">Preferences</h6>
             </div>
@@ -163,7 +163,7 @@ const PersonalInfo = () => {
                 </a>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

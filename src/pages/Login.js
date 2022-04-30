@@ -2,7 +2,7 @@ import React, { useState} from "react";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import { BASE_URL } from "../Api_connection/config";
 import { Link, useNavigate } from "react-router-dom";
-import ForgetPassword from "./ForgetPassword";
+// import ForgetPassword from "./ForgetPassword";
 import swal from "sweetalert";
 
 // import FacebookLogin from "react-facebook-login";
