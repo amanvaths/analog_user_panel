@@ -54,7 +54,9 @@ const Wallet = (props) => {
   useEffect(() => {
     // console.log("", coinData);
     if (coinData.length > 0 && walletDetails.length > 0) {
-      const cd = [];
+      const cd = [{
+        
+      }];
       for (let coind of coinData) {
         const w = walletDetails.filter((w) => w.symbol == coind.symbol);
         cd.push({ ...coind, wallet: w[0] });
