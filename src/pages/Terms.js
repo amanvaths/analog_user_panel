@@ -12,16 +12,16 @@ class Terms extends React.Component{
 
 
 
-<div class="nk-app-root">
+<div className="nk-app-root">
        
-       <div class="nk-main ">
+       <div className="nk-main ">
  
  
  <Menu/>
  
  
  
-           <div class="nk-wrap ">
+           <div className="nk-wrap ">
  
 
 

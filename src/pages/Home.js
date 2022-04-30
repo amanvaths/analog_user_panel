@@ -38,6 +38,8 @@ class Home extends React.Component {
       this.setState({ res: res.data.user_data });
     });
   }
+  
+
   render() {
     console.log(this.state.res[0]?.levelname, "Respons ");
     const responsive = {
@@ -60,11 +62,11 @@ class Home extends React.Component {
     };
     return (
       <div>
-        <div class="nk-app-root">
-          <div class="nk-main ">
+        <div className="nk-app-root">
+          <div className="nk-main ">
             <Menu />
 
-            <div class="nk-wrap ">
+            <div className="nk-wrap ">
               <Header />
               {/* Add this code  */}
               <div className="slide-container">
@@ -96,9 +98,9 @@ class Home extends React.Component {
               <Carousel
                 responsive={responsive}
                 arrows={false}
-                itemClass="carousel-item-padding-80-px"
-                containerClass="carousel-container"
-                class="position-absolute top-50 start-50 translate-middle"
+                itemclassName="carousel-item-padding-80-px"
+                containerclassName="carousel-container"
+                className="position-absolute top-50 start-50 translate-middle"
               >
                 {this.state.res.map((data) => {
                   return (
@@ -112,49 +114,49 @@ class Home extends React.Component {
                 })}
               </Carousel>
 
-              <div class="nk-content nk-content-fluid">
-                <div class="container-xl wide-lg">
-                  <div class="nk-content-body">
-                    <div class="nk-block-between-md g-4">
-                      <div class="nk-block-head-content"></div>
+              <div className="nk-content nk-content-fluid">
+                <div className="container-xl wide-lg">
+                  <div className="nk-content-body">
+                    <div className="nk-block-between-md g-4">
+                      <div className="nk-block-head-content"></div>
                     </div>
                   </div>
 
-                  <div class="nk-block">
-                    <div class="row gy-gs">
-                      <div class="col-lg-5 col-xl-4">
-                        <div class="nk-block">
-                          <div class="nk-block-head-xs">
-                            <div class="nk-block-head-content">
-                              <h5 class="nk-block-title title">Overview</h5>
+                  <div className="nk-block">
+                    <div className="row gy-gs">
+                      <div className="col-lg-5 col-xl-4">
+                        <div className="nk-block">
+                          <div className="nk-block-head-xs">
+                            <div className="nk-block-head-content">
+                              <h5 className="nk-block-title title">Overview</h5>
                             </div>
                           </div>
-                          <div class="nk-block">
-                            <div class="card card-bordered text-light is-dark h-100">
-                              <div class="card-inner">
-                                <div class="nk-wg7">
-                                  <div class="nk-wg7-stats">
-                                    <div class="nk-wg7-title">
+                          <div className="nk-block">
+                            <div className="card card-bordered text-light is-dark h-100">
+                              <div className="card-inner">
+                                <div className="nk-wg7">
+                                  <div className="nk-wg7-stats">
+                                    <div className="nk-wg7-title">
                                       TOTAL ANOLOG BUY
                                     </div>
-                                    <div class="number-lg amount">
+                                    <div className="number-lg amount">
                                       179,850.950
                                     </div>
                                   </div>
-                                  <div class="nk-wg7-stats-group">
-                                    <div class="nk-wg7-stats w-50">
-                                      <div class="nk-wg7-title">Wallets</div>
-                                      <div class="number-lg">5</div>
+                                  <div className="nk-wg7-stats-group">
+                                    <div className="nk-wg7-stats w-50">
+                                      <div className="nk-wg7-title">Wallets</div>
+                                      <div className="number-lg">5</div>
                                     </div>
-                                    <div class="nk-wg7-stats w-50">
-                                      <div class="nk-wg7-title">
+                                    <div className="nk-wg7-stats w-50">
+                                      <div className="nk-wg7-title">
                                         Transactions
                                       </div>
-                                      <div class="number">34,405</div>
+                                      <div className="number">34,405</div>
                                     </div>
                                   </div>
-                                  <div class="nk-wg7-foot">
-                                    <span class="nk-wg7-note">
+                                  <div className="nk-wg7-foot">
+                                    <span className="nk-wg7-note">
                                       Last activity at <span>19 Nov, 2019</span>
                                     </span>
                                   </div>
@@ -164,38 +166,38 @@ class Home extends React.Component {
                           </div>
                         </div>
                       </div>
-                      <div class="col-lg-7 col-xl-8">
-                        <div class="nk-block">
-                          <div class="nk-block-head-xs">
-                            <div class="nk-block-between-md g-2">
-                              <div class="nk-block-head-content">
-                                <h5 class="nk-block-title title">
+                      <div className="col-lg-7 col-xl-8">
+                        <div className="nk-block">
+                          <div className="nk-block-head-xs">
+                            <div className="nk-block-between-md g-2">
+                              <div className="nk-block-head-content">
+                                <h5 className="nk-block-title title">
                                   INCEPTIVE WALLETS
                                 </h5>
                               </div>
-                              <div class="nk-block-head-content"></div>
+                              <div className="nk-block-head-content"></div>
                             </div>
                           </div>
-                          <div class="row g-2">
-                            <div class="col-sm-4">
-                              <div class="card bg-light">
-                                <div class="nk-wgw sm">
+                          <div className="row g-2">
+                            <div className="col-sm-4">
+                              <div className="card bg-light">
+                                <div className="nk-wgw sm">
                                   <a
-                                    class="nk-wgw-inner"
+                                    className="nk-wgw-inner"
                                     href="html/crypto/wallet-bitcoin.html"
                                   >
-                                    <div class="nk-wgw-name">
-                                      <div class="nk-wgw-icon">
-                                        <em class="icon ni ni-sign-btc"></em>
+                                    <div className="nk-wgw-name">
+                                      <div className="nk-wgw-icon">
+                                        <em className="icon ni ni-sign-btc"></em>
                                       </div>
-                                      <h5 class="nk-wgw-title title">
+                                      <h5 className="nk-wgw-title title">
                                         INCEPTIVE
                                       </h5>
                                     </div>
-                                    <div class="nk-wgw-balance">
-                                      <div class="amount">
+                                    <div className="nk-wgw-balance">
+                                      <div className="amount">
                                         4.434953
-                                        <span class="currency currency-nio">
+                                        <span className="currency currency-nio">
                                           INRX
                                         </span>
                                       </div>
@@ -204,25 +206,25 @@ class Home extends React.Component {
                                 </div>
                               </div>
                             </div>
-                            <div class="col-sm-4">
-                              <div class="card bg-light">
-                                <div class="nk-wgw sm">
+                            <div className="col-sm-4">
+                              <div className="card bg-light">
+                                <div className="nk-wgw sm">
                                   <a
-                                    class="nk-wgw-inner"
+                                    className="nk-wgw-inner"
                                     href="html/crypto/wallet-bitcoin.html"
                                   >
-                                    <div class="nk-wgw-name">
-                                      <div class="nk-wgw-icon">
-                                        <em class="icon ni ni-sign-btc"></em>
+                                    <div className="nk-wgw-name">
+                                      <div className="nk-wgw-icon">
+                                        <em className="icon ni ni-sign-btc"></em>
                                       </div>
-                                      <h5 class="nk-wgw-title title">
+                                      <h5 className="nk-wgw-title title">
                                         AIRDROP
                                       </h5>
                                     </div>
-                                    <div class="nk-wgw-balance">
-                                      <div class="amount">
+                                    <div className="nk-wgw-balance">
+                                      <div className="amount">
                                         4.434953
-                                        <span class="currency currency-btc">
+                                        <span className="currency currency-btc">
                                           INRX
                                         </span>
                                       </div>
@@ -231,22 +233,22 @@ class Home extends React.Component {
                                 </div>
                               </div>
                             </div>
-                            <div class="col-sm-4">
-                              <div class="card bg-light">
-                                <div class="nk-wgw sm">
-                                  <a class="nk-wgw-inner" href="#">
-                                    <div class="nk-wgw-name">
-                                      <div class="nk-wgw-icon">
-                                        <em class="icon ni ni-sign-eth"></em>
+                            <div className="col-sm-4">
+                              <div className="card bg-light">
+                                <div className="nk-wgw sm">
+                                  <a className="nk-wgw-inner" href="#">
+                                    <div className="nk-wgw-name">
+                                      <div className="nk-wgw-icon">
+                                        <em className="icon ni ni-sign-eth"></em>
                                       </div>
-                                      <h5 class="nk-wgw-title title">
+                                      <h5 className="nk-wgw-title title">
                                         AFFILIATES{" "}
                                       </h5>
                                     </div>
-                                    <div class="nk-wgw-balance">
-                                      <div class="amount">
+                                    <div className="nk-wgw-balance">
+                                      <div className="amount">
                                         0.000560
-                                        <span class="currency currency-eth">
+                                        <span className="currency currency-eth">
                                           INRX
                                         </span>
                                       </div>
@@ -257,32 +259,32 @@ class Home extends React.Component {
                             </div>
                           </div>
                         </div>
-                        <div class="nk-block nk-block-md">
-                          <div class="nk-block-head-xs">
-                            <div class="nk-block-between-md g-2">
-                              <div class="nk-block-head-content">
-                                <h6 class="nk-block-title title">GROWTH</h6>
+                        <div className="nk-block nk-block-md">
+                          <div className="nk-block-head-xs">
+                            <div className="nk-block-between-md g-2">
+                              <div className="nk-block-head-content">
+                                <h6 className="nk-block-title title">GROWTH</h6>
                               </div>
-                              <div class="nk-block-head-content"></div>
+                              <div className="nk-block-head-content"></div>
                             </div>
                           </div>
-                          <div class="row g-2">
-                            <div class="col-sm-4">
-                              <div class="card bg-light">
-                                <div class="nk-wgw sm">
-                                  <a class="nk-wgw-inner" href="#">
-                                    <div class="nk-wgw-name">
-                                      <div class="nk-wgw-icon">
-                                        <em class="icon ni ni-sign-btc"></em>
+                          <div className="row g-2">
+                            <div className="col-sm-4">
+                              <div className="card bg-light">
+                                <div className="nk-wgw sm">
+                                  <a className="nk-wgw-inner" href="#">
+                                    <div className="nk-wgw-name">
+                                      <div className="nk-wgw-icon">
+                                        <em className="icon ni ni-sign-btc"></em>
                                       </div>
-                                      <h5 class="nk-wgw-title title">
+                                      <h5 className="nk-wgw-title title">
                                         INHERITED
                                       </h5>
                                     </div>
-                                    <div class="nk-wgw-balance">
-                                      <div class="amount">
+                                    <div className="nk-wgw-balance">
+                                      <div className="amount">
                                         1.5%
-                                        <span class="currency currency-nio">
+                                        <span className="currency currency-nio">
                                           INRX
                                         </span>
                                       </div>
@@ -291,30 +293,30 @@ class Home extends React.Component {
                                 </div>
                               </div>
                             </div>
-                            <div class="col-sm-4">
-                              <div class="card bg-light">
-                                <div class="nk-wgw sm">
+                            <div className="col-sm-4">
+                              <div className="card bg-light">
+                                <div className="nk-wgw sm">
                                   <a
-                                    class="nk-wgw-inner"
+                                    className="nk-wgw-inner"
                                     href="html/crypto/wallet-bitcoin.html"
                                   >
-                                    <div class="nk-wgw-name">
-                                      <div class="nk-wgw-icon">
-                                        <em class="icon ni ni-sign-btc"></em>
+                                    <div className="nk-wgw-name">
+                                      <div className="nk-wgw-icon">
+                                        <em className="icon ni ni-sign-btc"></em>
                                       </div>
-                                      <h5 class="nk-wgw-title title">
+                                      <h5 className="nk-wgw-title title">
                                         BOUNTY{" "}
                                       </h5>
                                     </div>
-                                    <div class="nk-wgw-balance">
+                                    <div className="nk-wgw-balance">
                                       <div
-                                        class="amount"
+                                        className="amount"
                                         // style={{ fontSize: "10px" }}
                                       >
                                         {/* [L<sup>1</sup> / L<sup>2</sup> / L
                                         <sup>3</sup>][1% / 0.5% / 0.2% ] */}
                                         4.434953
-                                        <span class="currency currency-btc">
+                                        <span className="currency currency-btc">
                                           INRX
                                         </span>
                                       </div>
@@ -323,25 +325,25 @@ class Home extends React.Component {
                                 </div>
                               </div>
                             </div>
-                            <div class="col-sm-4">
-                              <div class="card bg-light">
-                                <div class="nk-wgw sm">
+                            <div className="col-sm-4">
+                              <div className="card bg-light">
+                                <div className="nk-wgw sm">
                                   <a
-                                    class="nk-wgw-inner"
+                                    className="nk-wgw-inner"
                                     href="html/crypto/wallet-bitcoin.html"
                                   >
-                                    <div class="nk-wgw-name">
-                                      <div class="nk-wgw-icon">
-                                        <em class="icon ni ni-sign-eth"></em>
+                                    <div className="nk-wgw-name">
+                                      <div className="nk-wgw-icon">
+                                        <em className="icon ni ni-sign-eth"></em>
                                       </div>
-                                      <h5 class="nk-wgw-title title">
+                                      <h5 className="nk-wgw-title title">
                                         HANDOUT{" "}
                                       </h5>
                                     </div>
-                                    <div class="nk-wgw-balance">
-                                      <div class="amount">
+                                    <div className="nk-wgw-balance">
+                                      <div className="amount">
                                         0.5%
-                                        <span class="currency currency-eth">
+                                        <span className="currency currency-eth">
                                           INRX
                                         </span>
                                       </div>
@@ -355,184 +357,184 @@ class Home extends React.Component {
                       </div>
                     </div>
                   </div>
-                  <div class="nk-block nk-block-lg">
-                    <div class="row gy-gs">
-                      <div class="col-md-6">
-                        <div class="card-head">
-                          <div class="card-title  mb-0">
-                            <h5 class="title">Recent Activities</h5>
+                  <div className="nk-block nk-block-lg">
+                    <div className="row gy-gs">
+                      <div className="col-md-6">
+                        <div className="card-head">
+                          <div className="card-title  mb-0">
+                            <h5 className="title">Recent Activities</h5>
                           </div>
-                          <div class="card-tools">
-                            <ul class="card-tools-nav">
+                          <div className="card-tools">
+                            <ul className="card-tools-nav">
                               <li>
                                 <a href="#">Buy</a>
                               </li>
                               <li>
                                 <a href="#">Sell</a>
                               </li>
-                              <li class="active">
+                              <li className="active">
                                 <a href="#">All</a>
                               </li>
                             </ul>
                           </div>
                         </div>
-                        <div class="tranx-list card card-bordered">
-                          <div class="tranx-item">
-                            <div class="tranx-col">
-                              <div class="tranx-info">
-                                <div class="tranx-data">
-                                  <div class="tranx-label">
+                        <div className="tranx-list card card-bordered">
+                          <div className="tranx-item">
+                            <div className="tranx-col">
+                              <div className="tranx-info">
+                                <div className="tranx-data">
+                                  <div className="tranx-label">
                                     Buy ANA{" "}
-                                    <em class="tranx-icon sm icon ni ni-sign-btc"></em>
+                                    <em className="tranx-icon sm icon ni ni-sign-btc"></em>
                                   </div>
-                                  <div class="tranx-date">
+                                  <div className="tranx-date">
                                     Nov 12, 2019 11:34 PM
                                   </div>
                                 </div>
                               </div>
                             </div>
-                            <div class="tranx-col">
-                              <div class="tranx-amount">
-                                <div class="number">
+                            <div className="tranx-col">
+                              <div className="tranx-amount">
+                                <div className="number">
                                   5384{" "}
-                                  <span class="currency currency-btc">ANA</span>
+                                  <span className="currency currency-btc">ANA</span>
                                 </div>
-                                <div class="number-sm">
+                                <div className="number-sm">
                                   3,980.93{" "}
-                                  <span class="currency currency-usd">USD</span>
+                                  <span className="currency currency-usd">USD</span>
                                 </div>
                               </div>
                             </div>
                           </div>
-                          <div class="tranx-item">
-                            <div class="tranx-col">
-                              <div class="tranx-info">
-                                <div class="tranx-data">
-                                  <div class="tranx-label">
+                          <div className="tranx-item">
+                            <div className="tranx-col">
+                              <div className="tranx-info">
+                                <div className="tranx-data">
+                                  <div className="tranx-label">
                                     Buy Shield{" "}
-                                    <span class="tranx-icon sm">
+                                    <span className="tranx-icon sm">
                                       <img src="images/coins/eth.svg" alt="" />
                                     </span>
                                   </div>
-                                  <div class="tranx-date">
+                                  <div className="tranx-date">
                                     Nov 12, 2019 11:34 PM
                                   </div>
                                 </div>
                               </div>
                             </div>
-                            <div class="tranx-col">
-                              <div class="tranx-amount">
-                                <div class="number">
+                            <div className="tranx-col">
+                              <div className="tranx-amount">
+                                <div className="number">
                                   17.6{" "}
-                                  <span class="currency currency-btc">ANA</span>
+                                  <span className="currency currency-btc">ANA</span>
                                 </div>
-                                <div class="number-sm">
+                                <div className="number-sm">
                                   1,176.34{" "}
-                                  <span class="currency currency-usd">USD</span>
+                                  <span className="currency currency-usd">USD</span>
                                 </div>
                               </div>
                             </div>
                           </div>
-                          <div class="tranx-item">
-                            <div class="tranx-col">
-                              <div class="tranx-info">
-                                <div class="tranx-data">
-                                  <div class="tranx-label">
+                          <div className="tranx-item">
+                            <div className="tranx-col">
+                              <div className="tranx-info">
+                                <div className="tranx-data">
+                                  <div className="tranx-label">
                                     Buy ET{" "}
-                                    <em class="tranx-icon sm icon ni ni-sign-btc"></em>
+                                    <em className="tranx-icon sm icon ni ni-sign-btc"></em>
                                   </div>
-                                  <div class="tranx-date">
+                                  <div className="tranx-date">
                                     Nov 12, 2019 11:34 PM
                                   </div>
                                 </div>
                               </div>
                             </div>
-                            <div class="tranx-col">
-                              <div class="tranx-amount">
-                                <div class="number">
+                            <div className="tranx-col">
+                              <div className="tranx-amount">
+                                <div className="number">
                                   1000{" "}
-                                  <span class="currency currency-btc">ANA</span>
+                                  <span className="currency currency-btc">ANA</span>
                                 </div>
-                                <div class="number-sm">
+                                <div className="number-sm">
                                   3,980.93{" "}
-                                  <span class="currency currency-usd">USD</span>
+                                  <span className="currency currency-usd">USD</span>
                                 </div>
                               </div>
                             </div>
                           </div>
-                          <div class="tranx-item">
-                            <div class="tranx-col">
-                              <div class="tranx-info">
-                                <div class="tranx-data">
-                                  <div class="tranx-label">
+                          <div className="tranx-item">
+                            <div className="tranx-col">
+                              <div className="tranx-info">
+                                <div className="tranx-data">
+                                  <div className="tranx-label">
                                     Sell ANA{" "}
-                                    <span class="tranx-icon sm">
+                                    <span className="tranx-icon sm">
                                       <img src="images/coins/eth.svg" alt="" />
                                     </span>
                                   </div>
-                                  <div class="tranx-date">
+                                  <div className="tranx-date">
                                     Nov 12, 2019 11:34 PM
                                   </div>
                                 </div>
                               </div>
                             </div>
-                            <div class="tranx-col">
-                              <div class="tranx-amount">
-                                <div class="number">
+                            <div className="tranx-col">
+                              <div className="tranx-amount">
+                                <div className="number">
                                   1.538405{" "}
-                                  <span class="currency currency-btc">ANA</span>
+                                  <span className="currency currency-btc">ANA</span>
                                 </div>
-                                <div class="number-sm">
+                                <div className="number-sm">
                                   1,176.34{" "}
-                                  <span class="currency currency-usd">USD</span>
+                                  <span className="currency currency-usd">USD</span>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <div class="card-head">
-                          <div class="card-title mb-0">
-                            <h5 class="title">Balance Flow</h5>
+                      <div className="col-md-6">
+                        <div className="card-head">
+                          <div className="card-title mb-0">
+                            <h5 className="title">Balance Flow</h5>
                           </div>
-                          <div class="card-tools">
-                            <ul class="card-tools-nav">
+                          <div className="card-tools">
+                            <ul className="card-tools-nav">
                               <li>
                                 <a href="#">This Month</a>
                               </li>
-                              <li class="active">
+                              <li className="active">
                                 <a href="#">This Years</a>
                               </li>
                             </ul>
                           </div>
                         </div>
-                        <div class="card card-bordered">
-                          <div class="card-inner">
-                            <div class="nk-wg4">
-                              <div class="nk-wg4-group justify-center gy-3 gx-4">
-                                <div class="nk-wg4-item">
-                                  <div class="sub-text">
+                        <div className="card card-bordered">
+                          <div className="card-inner">
+                            <div className="nk-wg4">
+                              <div className="nk-wg4-group justify-center gy-3 gx-4">
+                                <div className="nk-wg4-item">
+                                  <div className="sub-text">
                                     <div
-                                      class="dot dot-lg sq"
+                                      className="dot dot-lg sq"
                                       data-bg="#5ce0aa"
                                     ></div>{" "}
                                     <span>Received</span>
                                   </div>
                                 </div>
-                                <div class="nk-wg4-item">
-                                  <div class="sub-text">
+                                <div className="nk-wg4-item">
+                                  <div className="sub-text">
                                     <div
-                                      class="dot dot-lg sq"
+                                      className="dot dot-lg sq"
                                       data-bg="#798bff"
                                     ></div>{" "}
                                     <span>Send</span>
                                   </div>
                                 </div>
-                                <div class="nk-wg4-item">
-                                  <div class="sub-text">
+                                <div className="nk-wg4-item">
+                                  <div className="sub-text">
                                     <div
-                                      class="dot dot-lg sq"
+                                      className="dot dot-lg sq"
                                       data-bg="#f6ca3e"
                                     ></div>
                                     <span>Withdraw</span>
@@ -540,9 +542,9 @@ class Home extends React.Component {
                                 </div>
                               </div>
                             </div>
-                            <div class="nk-ck3">
+                            <div className="nk-ck3">
                               <canvas
-                                class="chart-account-summary"
+                                className="chart-account-summary"
                                 id="summaryBalance"
                               ></canvas>
                             </div>
@@ -551,79 +553,79 @@ class Home extends React.Component {
                       </div>
                     </div>
                   </div>
-                  <div class="nk-block">
-                    <div class="card card-bordered">
-                      <div class="nk-refwg">
-                        <div class="nk-refwg-invite card-inner">
-                          <div class="nk-refwg-head g-3">
-                            <div class="nk-refwg-title">
-                              <h5 class="title">Refer Us & Earn</h5>
-                              <div class="title-sub">
+                  <div className="nk-block">
+                    <div className="card card-bordered">
+                      <div className="nk-refwg">
+                        <div className="nk-refwg-invite card-inner">
+                          <div className="nk-refwg-head g-3">
+                            <div className="nk-refwg-title">
+                              <h5 className="title">Refer Us & Earn</h5>
+                              <div className="title-sub">
                                 Use the bellow link to invite your friends.
                               </div>
                             </div>
-                            <div class="nk-refwg-action">
-                              <a href="#" class="btn btn-primary">
+                            <div className="nk-refwg-action">
+                              <a href="#" className="btn btn-primary">
                                 Invite
                               </a>
                             </div>
                           </div>
-                          <div class="nk-refwg-url">
-                            <div class="form-control-wrap">
+                          <div className="nk-refwg-url">
+                            <div className="form-control-wrap">
                               <div
-                                class="form-clip clipboard-init"
+                                className="form-clip clipboard-init"
                                 data-clipboard-target="#refUrl"
                                 data-success="Copied"
                                 data-text="Copy Link"
                               >
-                                <em class="clipboard-icon icon ni ni-copy"></em>{" "}
-                                <span class="clipboard-text">Copy Link</span>
+                                <em className="clipboard-icon icon ni ni-copy"></em>{" "}
+                                <span className="clipboard-text">Copy Link</span>
                               </div>
-                              <div class="form-icon">
-                                <em class="icon ni ni-link-alt"></em>
+                              <div className="form-icon">
+                                <em className="icon ni ni-link-alt"></em>
                               </div>
                               <input
                                 type="text"
-                                class="form-control copy-text"
+                                className="form-control copy-text"
                                 id="refUrl"
                                 value="https://inceptive.network/?ref=Ia5ghTL2paqchJTR65nBKvZ"
                               />
                             </div>
                           </div>
                         </div>
-                        <div class="nk-refwg-stats card-inner bg-lighter">
-                          <div class="nk-refwg-group g-3">
-                            <div class="nk-refwg-name">
-                              <h6 class="title">
+                        <div className="nk-refwg-stats card-inner bg-lighter">
+                          <div className="nk-refwg-group g-3">
+                            <div className="nk-refwg-name">
+                              <h6 className="title">
                                 My Referral{" "}
                                 <em
-                                  class="icon ni ni-info"
+                                  className="icon ni ni-info"
                                   data-toggle="tooltip"
                                   data-placement="right"
                                   title="Referral Informations"
                                 ></em>
                               </h6>
                             </div>
-                            <div class="nk-refwg-info g-3">
-                              <div class="nk-refwg-sub">
-                                <div class="title">394</div>
-                                <div class="sub-text">Total Joined</div>
+                            <div className="nk-refwg-info g-3">
+                              <div className="nk-refwg-sub">
+                                <div className="title">394</div>
+                                <div className="sub-text">Total Joined</div>
                               </div>
-                              <div class="nk-refwg-sub">
-                                <div class="title">548.49</div>
-                                <div class="sub-text">Referral Earn</div>
+                              <div className="nk-refwg-sub">
+                                <div className="title">548.49</div>
+                                <div className="sub-text">Referral Earn</div>
                               </div>
                             </div>
-                            <div class="nk-refwg-more dropdown mt-n1 mr-n1">
+                            <div className="nk-refwg-more dropdown mt-n1 mr-n1">
                               <a
                                 href="#"
-                                class="btn btn-icon btn-trigger"
+                                className="btn btn-icon btn-trigger"
                                 data-toggle="dropdown"
                               >
-                                <em class="icon ni ni-more-h"></em>
+                                <em className="icon ni ni-more-h"></em>
                               </a>
-                              <div class="dropdown-menu dropdown-menu-xs dropdown-menu-right">
-                                <ul class="link-list-plain sm">
+                              <div className="dropdown-menu dropdown-menu-xs dropdown-menu-right">
+                                <ul className="link-list-plain sm">
                                   <li>
                                     <a href="#">7 days</a>
                                   </li>
@@ -637,9 +639,9 @@ class Home extends React.Component {
                               </div>
                             </div>
                           </div>
-                          <div class="nk-refwg-ck">
+                          <div className="nk-refwg-ck">
                             <canvas
-                              class="chart-refer-stats"
+                              className="chart-refer-stats"
                               id="refBarChart"
                             ></canvas>
                           </div>
@@ -647,11 +649,11 @@ class Home extends React.Component {
                       </div>
                     </div>
                   </div>
-                  <div class="nk-block">
-                    <div class="card card-bordered">
-                      <div class="card-inner card-inner-lg">
-                        <div class="align-center flex-wrap flex-md-nowrap g-4">
-                          <div class="nk-block-image w-120px flex-shrink-0">
+                  <div className="nk-block">
+                    <div className="card card-bordered">
+                      <div className="card-inner card-inner-lg">
+                        <div className="align-center flex-wrap flex-md-nowrap g-4">
+                          <div className="nk-block-image w-120px flex-shrink-0">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               viewBox="0 0 120 118"
@@ -824,18 +826,18 @@ class Home extends React.Component {
                               />
                             </svg>
                           </div>
-                          <div class="nk-block-content">
-                            <div class="nk-block-content-head px-lg-4">
+                          <div className="nk-block-content">
+                            <div className="nk-block-content-head px-lg-4">
                               <h5>We’re here to help you!</h5>
-                              <p class="text-soft">
+                              <p className="text-soft">
                                 Ask a question or file a support ticket, mANAge
                                 request, report an issues. Our team support team
                                 will get back to you by email.
                               </p>
                             </div>
                           </div>
-                          <div class="nk-block-content flex-shrink-0">
-                            <a href="#" class="btn btn-lg btn-outline-primary">
+                          <div className="nk-block-content flex-shrink-0">
+                            <a href="#" className="btn btn-lg btn-outline-primary">
                               Get Support Now
                             </a>
                           </div>

@@ -3124,6 +3124,7 @@ const UserList = () => {
                                           Verified
                                         </label>
                                       </div>
+<<<<<<< HEAD
                                     </li>
                                     <li>
                                       <div class="custom-control custom-control-sm custom-checkbox">
@@ -3138,6 +3139,163 @@ const UserList = () => {
                                         >
                                           Status
                                         </label>
+=======
+                                    </div>
+                                    <div className="col-6">
+                                      <div className="custom-control custom-control-sm custom-checkbox">
+                                        <input
+                                          type="checkbox"
+                                          className="custom-control-input"
+                                          id="hasKYC"
+                                        />
+                                        <label
+                                          className="custom-control-label"
+                                          for="hasKYC"
+                                        >
+                                          KYC Verified
+                                        </label>
+                                      </div>
+                                    </div>
+                                    <div className="col-6">
+                                      <div className="form-group">
+                                        <label className="overline-title overline-title-alt">
+                                          Role
+                                        </label>
+                                        <select
+                                          className="form-select js-select2 select2-hidden-accessible"
+                                          data-select2-id="4"
+                                          tabindex="-1"
+                                          aria-hidden="true"
+                                        >
+                                          <option
+                                            value="any"
+                                            data-select2-id="6"
+                                          >
+                                            Any Role
+                                          </option>
+                                          <option value="investor">
+                                            Investor
+                                          </option>
+                                          <option value="seller">Seller</option>
+                                          <option value="buyer">Buyer</option>
+                                        </select>
+                                        <span
+                                          className="select2 select2-container select2-container--default"
+                                          dir="ltr"
+                                          data-select2-id="5"
+                                          style="width: auto"
+                                        >
+                                          <span className="selection">
+                                            <span
+                                              className="select2-selection select2-selection--single"
+                                              role="combobox"
+                                              aria-haspopup="true"
+                                              aria-expanded="false"
+                                              tabindex="0"
+                                              aria-disabled="false"
+                                              aria-labelledby="select2-bmpy-container"
+                                            >
+                                              <span
+                                                className="select2-selection__rendered"
+                                                id="select2-bmpy-container"
+                                                role="textbox"
+                                                aria-readonly="true"
+                                                title="Any Role"
+                                              >
+                                                Any Role
+                                              </span>
+                                              <span
+                                                className="select2-selection__arrow"
+                                                role="presentation"
+                                              >
+                                                <b role="presentation"></b>
+                                              </span>
+                                            </span>
+                                          </span>
+                                          <span
+                                            className="dropdown-wrapper"
+                                            aria-hidden="true"
+                                          ></span>
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <div className="col-6">
+                                      <div className="form-group">
+                                        <label className="overline-title overline-title-alt">
+                                          Status
+                                        </label>
+                                        <select
+                                          className="form-select js-select2 select2-hidden-accessible"
+                                          data-select2-id="7"
+                                          tabindex="-1"
+                                          aria-hidden="true"
+                                        >
+                                          <option
+                                            value="any"
+                                            data-select2-id="9"
+                                          >
+                                            Any Status
+                                          </option>
+                                          <option value="active">Active</option>
+                                          <option value="pending">
+                                            Pending
+                                          </option>
+                                          <option value="suspend">
+                                            Suspend
+                                          </option>
+                                          <option value="deleted">
+                                            Deleted
+                                          </option>
+                                        </select>
+                                        <span
+                                          className="select2 select2-container select2-container--default"
+                                          dir="ltr"
+                                          data-select2-id="8"
+                                          style="width: auto"
+                                        >
+                                          <span className="selection">
+                                            <span
+                                              className="select2-selection select2-selection--single"
+                                              role="combobox"
+                                              aria-haspopup="true"
+                                              aria-expanded="false"
+                                              tabindex="0"
+                                              aria-disabled="false"
+                                              aria-labelledby="select2-cyca-container"
+                                            >
+                                              <span
+                                                className="select2-selection__rendered"
+                                                id="select2-cyca-container"
+                                                role="textbox"
+                                                aria-readonly="true"
+                                                title="Any Status"
+                                              >
+                                                Any Status
+                                              </span>
+                                              <span
+                                                className="select2-selection__arrow"
+                                                role="presentation"
+                                              >
+                                                <b role="presentation"></b>
+                                              </span>
+                                            </span>
+                                          </span>
+                                          <span
+                                            className="dropdown-wrapper"
+                                            aria-hidden="true"
+                                          ></span>
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <div className="col-12">
+                                      <div className="form-group">
+                                        <button
+                                          type="button"
+                                          className="btn btn-secondary"
+                                        >
+                                          Filter
+                                        </button>
+>>>>>>> origin/amit_frontend
                                       </div>
                                     </li>
                                   </ul>
@@ -3304,6 +3462,7 @@ const UserList = () => {
                                 <div class="user-avatar xs bg-warning">
                                   <span>PN</span>
                                 </div>
+<<<<<<< HEAD
                                 <div class="user-name">
                                   <span class="tb-lead">Patrick Newman</span>
                                 </div>
@@ -3348,6 +3507,11 @@ const UserList = () => {
                                     aria-label="Wallet"
                                   >
                                     <em class="icon ni ni-wallet-fill"></em>
+=======
+                                <div className="dropdown-foot between">
+                                  <a className="clickable" href="#">
+                                    Reset Filter
+>>>>>>> origin/amit_frontend
                                   </a>
                                 </li>
                                 <li class="nk-tb-action-hidden">
@@ -3449,6 +3613,7 @@ const UserList = () => {
                                 </div>
                               </div>
                             </div>
+<<<<<<< HEAD
                             <div class="nk-tb-col tb-col-md">
                               <span>Customer</span>
                             </div>
@@ -3579,6 +3744,44 @@ const UserList = () => {
                                   class="custom-control-label"
                                   for="uid4"
                                 ></label>
+=======
+                          </li>
+                          <li>
+                            <div className="dropdown">
+                              <a
+                                href="#"
+                                className="btn btn-trigger btn-icon dropdown-toggle"
+                                data-bs-toggle="dropdown"
+                              >
+                                <em className="icon ni ni-setting"></em>
+                              </a>
+                              <div className="dropdown-menu dropdown-menu-xs dropdown-menu-end">
+                                <ul className="link-check">
+                                  <li>
+                                    <span>Show</span>
+                                  </li>
+                                  <li className="active">
+                                    <a href="#">10</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">20</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">50</a>
+                                  </li>
+                                </ul>
+                                <ul className="link-check">
+                                  <li>
+                                    <span>Order</span>
+                                  </li>
+                                  <li className="active">
+                                    <a href="#">DESC</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">ASC</a>
+                                  </li>
+                                </ul>
+>>>>>>> origin/amit_frontend
                               </div>
                             </div>
                             <div class="nk-tb-col">
