@@ -3,12 +3,12 @@ import React from 'react';
 const SecuritySettings = ()=>{
     return(
         <>
-        <div class="card-inner card-inner-lg">
-                        <div class="nk-block-head nk-block-head-lg">
-                          <div class="nk-block-between">
-                            <div class="nk-block-head-content">
-                              <h4 class="nk-block-title">Security Settings</h4>
-                              <div class="nk-block-des">
+        <div className="card-inner card-inner-lg">
+                        <div className="nk-block-head nk-block-head-lg">
+                          <div className="nk-block-between">
+                            <div className="nk-block-head-content">
+                              <h4 className="nk-block-title">Security Settings</h4>
+                              <div className="nk-block-des">
                                 <p>
                                   These settings are helps you keep your account
                                   secure.
@@ -16,44 +16,44 @@ const SecuritySettings = ()=>{
                               </div>
                             </div>
                             <div
-                              class="nk-block-head-content align-self-start d-lg-none"
+                              className="nk-block-head-content align-self-start d-lg-none"
                             >
                               <a
                                 href="#"
-                                class="toggle btn btn-icon btn-trigger mt-n1"
+                                className="toggle btn btn-icon btn-trigger mt-n1"
                                 data-target="userAside"
-                                ><em class="icon ni ni-menu-alt-r"></em
+                                ><em className="icon ni ni-menu-alt-r"></em
                               ></a>
                             </div>
                           </div>
                         </div>
-                        <div class="nk-block">
-                          <div class="card card-bordered">
-                            <div class="card-inner-group">
-                              <div class="card-inner">
+                        <div className="nk-block">
+                          <div className="card card-bordered">
+                            <div className="card-inner-group">
+                              <div className="card-inner">
                                 <div
-                                  class="between-center flex-wrap flex-md-nowrap g-3"
+                                  className="between-center flex-wrap flex-md-nowrap g-3"
                                 >
-                                  <div class="nk-block-text">
+                                  <div className="nk-block-text">
                                     <h6>Save my Activity Logs</h6>
                                     <p>
                                       You can save your all activity logs
                                       including unusual activity detected.
                                     </p>
                                   </div>
-                                  <div class="nk-block-actions">
-                                    <ul class="align-center gx-3">
-                                      <li class="order-md-last">
+                                  <div className="nk-block-actions">
+                                    <ul className="align-center gx-3">
+                                      <li className="order-md-last">
                                         <div
-                                          class="custom-control custom-switch me-n2"
+                                          className="custom-control custom-switch me-n2"
                                         >
                                           <input
                                             type="checkbox"
-                                            class="custom-control-input"
+                                            className="custom-control-input"
                                             checked=""
                                             id="activity-log"
                                           /><label
-                                            class="custom-control-label"
+                                            className="custom-control-label"
                                             for="activity-log"
                                           ></label>
                                         </div>
@@ -62,9 +62,9 @@ const SecuritySettings = ()=>{
                                   </div>
                                 </div>
                               </div>
-                              <div class="card-inner">
-                                <div class="between-center flex-wrap g-3">
-                                  <div class="nk-block-text">
+                              <div className="card-inner">
+                                <div className="between-center flex-wrap g-3">
+                                  <div className="nk-block-text">
                                     <h6>Change Password</h6>
                                     <p>
                                       Set a unique password to protect your
@@ -72,18 +72,18 @@ const SecuritySettings = ()=>{
                                     </p>
                                   </div>
                                   <div
-                                    class="nk-block-actions flex-shrink-sm-0"
+                                    className="nk-block-actions flex-shrink-sm-0"
                                   >
                                     <ul
-                                      class="align-center flex-wrap flex-sm-nowrap gx-3 gy-2"
+                                      className="align-center flex-wrap flex-sm-nowrap gx-3 gy-2"
                                     >
-                                      <li class="order-md-last">
-                                        <a href="#" class="btn btn-primary"
+                                      <li className="order-md-last">
+                                        <a href="#" className="btn btn-primary"
                                           >Change Password</a
                                         >
                                       </li>
                                       <li>
-                                        <em class="text-soft text-date fs-12px"
+                                        <em className="text-soft text-date fs-12px"
                                           >Last changed:
                                           <span>Oct 2, 2019</span></em
                                         >
@@ -92,14 +92,14 @@ const SecuritySettings = ()=>{
                                   </div>
                                 </div>
                               </div>
-                              <div class="card-inner">
+                              <div className="card-inner">
                                 <div
-                                  class="between-center flex-wrap flex-md-nowrap g-3"
+                                  className="between-center flex-wrap flex-md-nowrap g-3"
                                 >
-                                  <div class="nk-block-text">
+                                  <div className="nk-block-text">
                                     <h6>
                                       2 Factor Auth &nbsp;
-                                      <span class="badge badge-success ms-0"
+                                      <span className="badge badge-success ms-0"
                                         >Enabled</span
                                       >
                                     </h6>
@@ -111,8 +111,8 @@ const SecuritySettings = ()=>{
                                       this code by in mobile app.
                                     </p>
                                   </div>
-                                  <div class="nk-block-actions">
-                                    <a href="#" class="btn btn-primary"
+                                  <div className="nk-block-actions">
+                                    <a href="#" className="btn btn-primary"
                                       >Disable</a
                                     >
                                   </div>

@@ -39,25 +39,25 @@ const Getpresale = (props) => {
   }
 
   return (
-    <div class="nk-block first-card">
-      <div class="card card-bordered  text-secondary  h-100">
-        <div class="card-inner">
-          <div class="nk-wg7">
-            <div class="nk-wg7-stats">
-              <div class="nk-wg7-title is-dark text-body">{levelname}</div>
-              <div class="number-lg amount text-success">{coinPrice}</div>
+    <div className="nk-block first-card">
+      <div className="card card-bordered  text-secondary  h-100">
+        <div className="card-inner">
+          <div className="nk-wg7">
+            <div className="nk-wg7-stats">
+              <div className="nk-wg7-title is-dark text-body">{levelname}</div>
+              <div className="number-lg amount text-success">{coinPrice}</div>
             </div>
-            <div class="nk-wg7-stats-group">
-              <div class="nk-wg7-stats w-50">
-                <div class="nk-wg7-title "></div>
-                <div class="number-lg text-success coinqty">{coinQty}</div>
+            <div className="nk-wg7-stats-group">
+              <div className="nk-wg7-stats w-50">
+                <div className="nk-wg7-title "></div>
+                <div className="number-lg text-success coinqty">{coinQty}</div>
               </div>
               <div
-                class="nk-wg7-stats w-50  duration"
+                className="nk-wg7-stats w-50  duration"
                 style={{ paddingLeft: 110 }}
               >
-                <div class="nk-wg7-title text-body ">Duration</div>
-                <div class="number text-success ">{duration}</div>
+                <div className="nk-wg7-title text-body ">Duration</div>
+                <div className="number text-success ">{duration}</div>
               </div>
             </div>
             <div style={{ paddingTop: 11 }}>
@@ -69,7 +69,7 @@ const Getpresale = (props) => {
                 aria-valuemin={1000000}
               />
             </div>
-            <div class="number text-dark countdown">
+            <div className="number text-dark countdown">
               {timer.days}:{timer.hour}:{timer.minute}:{timer.second}
             </div>
           </div>

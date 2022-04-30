@@ -1,42 +1,42 @@
 {
-  /* <div class="container-xl wide-lg">
-  <div class="nk-content-body">
-    <div class="nk-block-head nk-block-head-sm">
-      <div class="nk-block-between">
-        <div class="nk-block-head-content">
-          <h3 class="nk-block-title page-title">Users Lists</h3>
-          <div class="nk-block-des text-soft">
+  /* <div className="container-xl wide-lg">
+  <div className="nk-content-body">
+    <div className="nk-block-head nk-block-head-sm">
+      <div className="nk-block-between">
+        <div className="nk-block-head-content">
+          <h3 className="nk-block-title page-title">Users Lists</h3>
+          <div className="nk-block-des text-soft">
             <p>You have total 2,595 users.</p>
           </div>
         </div>
-        <div class="nk-block-head-content">
-          <div class="toggle-wrap nk-block-tools-toggle">
+        <div className="nk-block-head-content">
+          <div className="toggle-wrap nk-block-tools-toggle">
             <a
               href="#"
-              class="btn btn-icon btn-trigger toggle-expand me-n1"
+              className="btn btn-icon btn-trigger toggle-expand me-n1"
               data-target="pageMenu"
             >
-              <em class="icon ni ni-menu-alt-r"></em>
+              <em className="icon ni ni-menu-alt-r"></em>
             </a>
-            <div class="toggle-expand-content" data-content="pageMenu">
-              <ul class="nk-block-tools g-3">
+            <div className="toggle-expand-content" data-content="pageMenu">
+              <ul className="nk-block-tools g-3">
                 <li>
-                  <a href="#" class="btn btn-white btn-outline-light">
-                    <em class="icon ni ni-download-cloud"></em>
+                  <a href="#" className="btn btn-white btn-outline-light">
+                    <em className="icon ni ni-download-cloud"></em>
                     <span>Export</span>
                   </a>
                 </li>
-                <li class="nk-block-tools-opt">
-                  <div class="drodown">
+                <li className="nk-block-tools-opt">
+                  <div className="drodown">
                     <a
                       href="#"
-                      class="dropdown-toggle btn btn-icon btn-primary"
+                      className="dropdown-toggle btn btn-icon btn-primary"
                       data-bs-toggle="dropdown"
                     >
-                      <em class="icon ni ni-plus"></em>
+                      <em className="icon ni ni-plus"></em>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-end">
-                      <ul class="link-list-opt no-bdr">
+                    <div className="dropdown-menu dropdown-menu-end">
+                      <ul className="link-list-opt no-bdr">
                         <li>
                           <a href="#">
                             <span>Add User</span>
@@ -62,16 +62,16 @@
         </div>
       </div>
     </div>
-    <div class="nk-block">
-      <div class="card card-bordered card-stretch">
-        <div class="card-inner-group">
-          <div class="card-inner position-relative card-tools-toggle">
-            <div class="card-title-group">
-              <div class="card-tools">
-                <div class="form-inline flex-nowrap gx-3">
-                  <div class="form-wrap w-150px">
+    <div className="nk-block">
+      <div className="card card-bordered card-stretch">
+        <div className="card-inner-group">
+          <div className="card-inner position-relative card-tools-toggle">
+            <div className="card-title-group">
+              <div className="card-tools">
+                <div className="form-inline flex-nowrap gx-3">
+                  <div className="form-wrap w-150px">
                     <select
-                      class="form-select js-select2 select2-hidden-accessible"
+                      className="form-select js-select2 select2-hidden-accessible"
                       data-search="off"
                       data-placeholder="Bulk Action"
                       data-select2-id="1"
@@ -87,14 +87,14 @@
                       <option value="delete">Delete User</option>
                     </select>
                     <span
-                      class="select2 select2-container select2-container--default"
+                      className="select2 select2-container select2-container--default"
                       dir="ltr"
                       data-select2-id="2"
                       style="width: 134px"
                     >
-                      <span class="selection">
+                      <span className="selection">
                         <span
-                          class="select2-selection select2-selection--single"
+                          className="select2-selection select2-selection--single"
                           role="combobox"
                           aria-haspopup="true"
                           aria-expanded="false"
@@ -103,133 +103,133 @@
                           aria-labelledby="select2-nsl6-container"
                         >
                           <span
-                            class="select2-selection__rendered"
+                            className="select2-selection__rendered"
                             id="select2-nsl6-container"
                             role="textbox"
                             aria-readonly="true"
                           >
-                            <span class="select2-selection__placeholder">
+                            <span className="select2-selection__placeholder">
                               Bulk Action
                             </span>
                           </span>
                           <span
-                            class="select2-selection__arrow"
+                            className="select2-selection__arrow"
                             role="presentation"
                           >
                             <b role="presentation"></b>
                           </span>
                         </span>
                       </span>
-                      <span class="dropdown-wrapper" aria-hidden="true"></span>
+                      <span className="dropdown-wrapper" aria-hidden="true"></span>
                     </span>
                   </div>
-                  <div class="btn-wrap">
-                    <span class="d-none d-md-block">
-                      <button class="btn btn-dim btn-outline-light disabled">
+                  <div className="btn-wrap">
+                    <span className="d-none d-md-block">
+                      <button className="btn btn-dim btn-outline-light disabled">
                         Apply
                       </button>
                     </span>
-                    <span class="d-md-none">
-                      <button class="btn btn-dim btn-outline-light btn-icon disabled">
-                        <em class="icon ni ni-arrow-right"></em>
+                    <span className="d-md-none">
+                      <button className="btn btn-dim btn-outline-light btn-icon disabled">
+                        <em className="icon ni ni-arrow-right"></em>
                       </button>
                     </span>
                   </div>
                 </div>
               </div>
-              <div class="card-tools me-n1">
-                <ul class="btn-toolbar gx-1">
+              <div className="card-tools me-n1">
+                <ul className="btn-toolbar gx-1">
                   <li>
                     <a
                       href="#"
-                      class="btn btn-icon search-toggle toggle-search"
+                      className="btn btn-icon search-toggle toggle-search"
                       data-target="search"
                     >
-                      <em class="icon ni ni-search"></em>
+                      <em className="icon ni ni-search"></em>
                     </a>
                   </li>
-                  <li class="btn-toolbar-sep"></li>
+                  <li className="btn-toolbar-sep"></li>
                   <li>
-                    <div class="toggle-wrap">
+                    <div className="toggle-wrap">
                       <a
                         href="#"
-                        class="btn btn-icon btn-trigger toggle"
+                        className="btn btn-icon btn-trigger toggle"
                         data-target="cardTools"
                       >
-                        <em class="icon ni ni-menu-right"></em>
+                        <em className="icon ni ni-menu-right"></em>
                       </a>
-                      <div class="toggle-content" data-content="cardTools">
-                        <ul class="btn-toolbar gx-1">
-                          <li class="toggle-close">
+                      <div className="toggle-content" data-content="cardTools">
+                        <ul className="btn-toolbar gx-1">
+                          <li className="toggle-close">
                             <a
                               href="#"
-                              class="btn btn-icon btn-trigger toggle"
+                              className="btn btn-icon btn-trigger toggle"
                               data-target="cardTools"
                             >
-                              <em class="icon ni ni-arrow-left"></em>
+                              <em className="icon ni ni-arrow-left"></em>
                             </a>
                           </li>
                           <li>
-                            <div class="dropdown">
+                            <div className="dropdown">
                               <a
                                 href="#"
-                                class="btn btn-trigger btn-icon dropdown-toggle"
+                                className="btn btn-trigger btn-icon dropdown-toggle"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
                               >
-                                <div class="dot dot-primary"></div>
-                                <em class="icon ni ni-filter-alt"></em>
+                                <div className="dot dot-primary"></div>
+                                <em className="icon ni ni-filter-alt"></em>
                               </a>
-                              <div class="filter-wg dropdown-menu dropdown-menu-xl dropdown-menu-end">
-                                <div class="dropdown-head">
-                                  <span class="sub-title dropdown-title">
+                              <div className="filter-wg dropdown-menu dropdown-menu-xl dropdown-menu-end">
+                                <div className="dropdown-head">
+                                  <span className="sub-title dropdown-title">
                                     Filter Users
                                   </span>
-                                  <div class="dropdown">
-                                    <a href="#" class="btn btn-sm btn-icon">
-                                      <em class="icon ni ni-more-h"></em>
+                                  <div className="dropdown">
+                                    <a href="#" className="btn btn-sm btn-icon">
+                                      <em className="icon ni ni-more-h"></em>
                                     </a>
                                   </div>
                                 </div>
-                                <div class="dropdown-body dropdown-body-rg">
-                                  <div class="row gx-6 gy-3">
-                                    <div class="col-6">
-                                      <div class="custom-control custom-control-sm custom-checkbox">
+                                <div className="dropdown-body dropdown-body-rg">
+                                  <div className="row gx-6 gy-3">
+                                    <div className="col-6">
+                                      <div className="custom-control custom-control-sm custom-checkbox">
                                         <input
                                           type="checkbox"
-                                          class="custom-control-input"
+                                          className="custom-control-input"
                                           id="hasBalance"
                                         />
                                         <label
-                                          class="custom-control-label"
+                                          className="custom-control-label"
                                           for="hasBalance"
                                         >
                                           Have Balance
                                         </label>
                                       </div>
                                     </div>
-                                    <div class="col-6">
-                                      <div class="custom-control custom-control-sm custom-checkbox">
+                                    <div className="col-6">
+                                      <div className="custom-control custom-control-sm custom-checkbox">
                                         <input
                                           type="checkbox"
-                                          class="custom-control-input"
+                                          className="custom-control-input"
                                           id="hasKYC"
                                         />
                                         <label
-                                          class="custom-control-label"
+                                          className="custom-control-label"
                                           for="hasKYC"
                                         >
                                           KYC Verified
                                         </label>
                                       </div>
                                     </div>
-                                    <div class="col-6">
-                                      <div class="form-group">
-                                        <label class="overline-title overline-title-alt">
+                                    <div className="col-6">
+                                      <div className="form-group">
+                                        <label className="overline-title overline-title-alt">
                                           Role
                                         </label>
                                         <select
-                                          class="form-select js-select2 select2-hidden-accessible"
+                                          className="form-select js-select2 select2-hidden-accessible"
                                           data-select2-id="4"
                                           tabindex="-1"
                                           aria-hidden="true"
@@ -247,14 +247,14 @@
                                           <option value="buyer">Buyer</option>
                                         </select>
                                         <span
-                                          class="select2 select2-container select2-container--default"
+                                          className="select2 select2-container select2-container--default"
                                           dir="ltr"
                                           data-select2-id="5"
                                           style="width: auto"
                                         >
-                                          <span class="selection">
+                                          <span className="selection">
                                             <span
-                                              class="select2-selection select2-selection--single"
+                                              className="select2-selection select2-selection--single"
                                               role="combobox"
                                               aria-haspopup="true"
                                               aria-expanded="false"
@@ -263,7 +263,7 @@
                                               aria-labelledby="select2-bmpy-container"
                                             >
                                               <span
-                                                class="select2-selection__rendered"
+                                                className="select2-selection__rendered"
                                                 id="select2-bmpy-container"
                                                 role="textbox"
                                                 aria-readonly="true"
@@ -272,7 +272,7 @@
                                                 Any Role
                                               </span>
                                               <span
-                                                class="select2-selection__arrow"
+                                                className="select2-selection__arrow"
                                                 role="presentation"
                                               >
                                                 <b role="presentation"></b>
@@ -280,19 +280,19 @@
                                             </span>
                                           </span>
                                           <span
-                                            class="dropdown-wrapper"
+                                            className="dropdown-wrapper"
                                             aria-hidden="true"
                                           ></span>
                                         </span>
                                       </div>
                                     </div>
-                                    <div class="col-6">
-                                      <div class="form-group">
-                                        <label class="overline-title overline-title-alt">
+                                    <div className="col-6">
+                                      <div className="form-group">
+                                        <label className="overline-title overline-title-alt">
                                           Status
                                         </label>
                                         <select
-                                          class="form-select js-select2 select2-hidden-accessible"
+                                          className="form-select js-select2 select2-hidden-accessible"
                                           data-select2-id="7"
                                           tabindex="-1"
                                           aria-hidden="true"
@@ -315,14 +315,14 @@
                                           </option>
                                         </select>
                                         <span
-                                          class="select2 select2-container select2-container--default"
+                                          className="select2 select2-container select2-container--default"
                                           dir="ltr"
                                           data-select2-id="8"
                                           style="width: auto"
                                         >
-                                          <span class="selection">
+                                          <span className="selection">
                                             <span
-                                              class="select2-selection select2-selection--single"
+                                              className="select2-selection select2-selection--single"
                                               role="combobox"
                                               aria-haspopup="true"
                                               aria-expanded="false"
@@ -331,7 +331,7 @@
                                               aria-labelledby="select2-cyca-container"
                                             >
                                               <span
-                                                class="select2-selection__rendered"
+                                                className="select2-selection__rendered"
                                                 id="select2-cyca-container"
                                                 role="textbox"
                                                 aria-readonly="true"
@@ -340,7 +340,7 @@
                                                 Any Status
                                               </span>
                                               <span
-                                                class="select2-selection__arrow"
+                                                className="select2-selection__arrow"
                                                 role="presentation"
                                               >
                                                 <b role="presentation"></b>
@@ -348,17 +348,17 @@
                                             </span>
                                           </span>
                                           <span
-                                            class="dropdown-wrapper"
+                                            className="dropdown-wrapper"
                                             aria-hidden="true"
                                           ></span>
                                         </span>
                                       </div>
                                     </div>
-                                    <div class="col-12">
-                                      <div class="form-group">
+                                    <div className="col-12">
+                                      <div className="form-group">
                                         <button
                                           type="button"
-                                          class="btn btn-secondary"
+                                          className="btn btn-secondary"
                                         >
                                           Filter
                                         </button>
@@ -366,8 +366,8 @@
                                     </div>
                                   </div>
                                 </div>
-                                <div class="dropdown-foot between">
-                                  <a class="clickable" href="#">
+                                <div className="dropdown-foot between">
+                                  <a className="clickable" href="#">
                                     Reset Filter
                                   </a>
                                   <a href="#">Save Filter</a>
@@ -376,20 +376,20 @@
                             </div>
                           </li>
                           <li>
-                            <div class="dropdown">
+                            <div className="dropdown">
                               <a
                                 href="#"
-                                class="btn btn-trigger btn-icon dropdown-toggle"
+                                className="btn btn-trigger btn-icon dropdown-toggle"
                                 data-bs-toggle="dropdown"
                               >
-                                <em class="icon ni ni-setting"></em>
+                                <em className="icon ni ni-setting"></em>
                               </a>
-                              <div class="dropdown-menu dropdown-menu-xs dropdown-menu-end">
-                                <ul class="link-check">
+                              <div className="dropdown-menu dropdown-menu-xs dropdown-menu-end">
+                                <ul className="link-check">
                                   <li>
                                     <span>Show</span>
                                   </li>
-                                  <li class="active">
+                                  <li className="active">
                                     <a href="#">10</a>
                                   </li>
                                   <li>
@@ -399,11 +399,11 @@
                                     <a href="#">50</a>
                                   </li>
                                 </ul>
-                                <ul class="link-check">
+                                <ul className="link-check">
                                   <li>
                                     <span>Order</span>
                                   </li>
-                                  <li class="active">
+                                  <li className="active">
                                     <a href="#">DESC</a>
                                   </li>
                                   <li>
@@ -420,124 +420,124 @@
                 </ul>
               </div>
             </div>
-            <div class="card-search search-wrap" data-search="search">
-              <div class="card-body">
-                <div class="search-content">
+            <div className="card-search search-wrap" data-search="search">
+              <div className="card-body">
+                <div className="search-content">
                   <a
                     href="#"
-                    class="search-back btn btn-icon toggle-search"
+                    className="search-back btn btn-icon toggle-search"
                     data-target="search"
                   >
-                    <em class="icon ni ni-arrow-left"></em>
+                    <em className="icon ni ni-arrow-left"></em>
                   </a>
                   <input
                     type="text"
-                    class="form-control border-transparent form-focus-none"
+                    className="form-control border-transparent form-focus-none"
                     placeholder="Search by user or email"
                   />
-                  <button class="search-submit btn btn-icon">
-                    <em class="icon ni ni-search"></em>
+                  <button className="search-submit btn btn-icon">
+                    <em className="icon ni ni-search"></em>
                   </button>
                 </div>
               </div>
             </div>
           </div>
-          <div class="card-inner p-0">
-            <div class="nk-tb-list nk-tb-ulist is-compact">
-              <div class="nk-tb-item nk-tb-head">
-                <div class="nk-tb-col nk-tb-col-check">
-                  <div class="custom-control custom-control-sm custom-checkbox notext">
+          <div className="card-inner p-0">
+            <div className="nk-tb-list nk-tb-ulist is-compact">
+              <div className="nk-tb-item nk-tb-head">
+                <div className="nk-tb-col nk-tb-col-check">
+                  <div className="custom-control custom-control-sm custom-checkbox notext">
                     <input
                       type="checkbox"
-                      class="custom-control-input"
+                      className="custom-control-input"
                       id="uid"
                     />
-                    <label class="custom-control-label" for="uid"></label>
+                    <label className="custom-control-label" for="uid"></label>
                   </div>
                 </div>
-                <div class="nk-tb-col">
-                  <span class="sub-text">User</span>
+                <div className="nk-tb-col">
+                  <span className="sub-text">User</span>
                 </div>
-                <div class="nk-tb-col tb-col-md">
-                  <span class="sub-text">Role</span>
+                <div className="nk-tb-col tb-col-md">
+                  <span className="sub-text">Role</span>
                 </div>
-                <div class="nk-tb-col tb-col-sm">
-                  <span class="sub-text">Email</span>
+                <div className="nk-tb-col tb-col-sm">
+                  <span className="sub-text">Email</span>
                 </div>
-                <div class="nk-tb-col tb-col-md">
-                  <span class="sub-text">Phone</span>
+                <div className="nk-tb-col tb-col-md">
+                  <span className="sub-text">Phone</span>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
-                  <span class="sub-text">Company</span>
+                <div className="nk-tb-col tb-col-xxl">
+                  <span className="sub-text">Company</span>
                 </div>
-                <div class="nk-tb-col tb-col-lg">
-                  <span class="sub-text">Verified</span>
+                <div className="nk-tb-col tb-col-lg">
+                  <span className="sub-text">Verified</span>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
-                  <span class="sub-text">Last Login</span>
+                <div className="nk-tb-col tb-col-xxl">
+                  <span className="sub-text">Last Login</span>
                 </div>
-                <div class="nk-tb-col">
-                  <span class="sub-text">Status</span>
+                <div className="nk-tb-col">
+                  <span className="sub-text">Status</span>
                 </div>
-                <div class="nk-tb-col nk-tb-col-tools text-end">
-                  <div class="dropdown">
+                <div className="nk-tb-col nk-tb-col-tools text-end">
+                  <div className="dropdown">
                     <a
                       href="#"
-                      class="btn btn-xs btn-outline-light btn-icon dropdown-toggle"
+                      className="btn btn-xs btn-outline-light btn-icon dropdown-toggle"
                       data-bs-toggle="dropdown"
                       data-offset="0,5"
                       aria-expanded="false"
                     >
-                      <em class="icon ni ni-plus"></em>
+                      <em className="icon ni ni-plus"></em>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-xs dropdown-menu-end">
-                      <ul class="link-tidy sm no-bdr">
+                    <div className="dropdown-menu dropdown-menu-xs dropdown-menu-end">
+                      <ul className="link-tidy sm no-bdr">
                         <li>
-                          <div class="custom-control custom-control-sm custom-checkbox checked">
+                          <div className="custom-control custom-control-sm custom-checkbox checked">
                             <input
                               type="checkbox"
-                              class="custom-control-input"
+                              className="custom-control-input"
                               checked=""
                               id="bl"
                             />
-                            <label class="custom-control-label" for="bl">
+                            <label className="custom-control-label" for="bl">
                               Balance
                             </label>
                           </div>
                         </li>
                         <li>
-                          <div class="custom-control custom-control-sm custom-checkbox checked">
+                          <div className="custom-control custom-control-sm custom-checkbox checked">
                             <input
                               type="checkbox"
-                              class="custom-control-input"
+                              className="custom-control-input"
                               checked=""
                               id="ph"
                             />
-                            <label class="custom-control-label" for="ph">
+                            <label className="custom-control-label" for="ph">
                               Phone
                             </label>
                           </div>
                         </li>
                         <li>
-                          <div class="custom-control custom-control-sm custom-checkbox">
+                          <div className="custom-control custom-control-sm custom-checkbox">
                             <input
                               type="checkbox"
-                              class="custom-control-input"
+                              className="custom-control-input"
                               id="vri"
                             />
-                            <label class="custom-control-label" for="vri">
+                            <label className="custom-control-label" for="vri">
                               Verified
                             </label>
                           </div>
                         </li>
                         <li>
-                          <div class="custom-control custom-control-sm custom-checkbox">
+                          <div className="custom-control custom-control-sm custom-checkbox">
                             <input
                               type="checkbox"
-                              class="custom-control-input"
+                              className="custom-control-input"
                               id="st"
                             />
-                            <label class="custom-control-label" for="st">
+                            <label className="custom-control-label" for="st">
                               Status
                             </label>
                           </div>
@@ -547,133 +547,133 @@
                   </div>
                 </div>
               </div>
-              <div class="nk-tb-item">
-                <div class="nk-tb-col nk-tb-col-check">
-                  <div class="custom-control custom-control-sm custom-checkbox notext">
+              <div className="nk-tb-item">
+                <div className="nk-tb-col nk-tb-col-check">
+                  <div className="custom-control custom-control-sm custom-checkbox notext">
                     <input
                       type="checkbox"
-                      class="custom-control-input"
+                      className="custom-control-input"
                       id="uid1"
                     />
-                    <label class="custom-control-label" for="uid1"></label>
+                    <label className="custom-control-label" for="uid1"></label>
                   </div>
                 </div>
-                <div class="nk-tb-col">
-                  <div class="user-card">
-                    <div class="user-avatar xs bg-primary">
+                <div className="nk-tb-col">
+                  <div className="user-card">
+                    <div className="user-avatar xs bg-primary">
                       <span>AB</span>
                     </div>
-                    <div class="user-name">
-                      <span class="tb-lead">Abu Bin Ishtiyak</span>
+                    <div className="user-name">
+                      <span className="tb-lead">Abu Bin Ishtiyak</span>
                     </div>
                   </div>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>Customer</span>
                 </div>
-                <div class="nk-tb-col tb-col-sm">
+                <div className="nk-tb-col tb-col-sm">
                   <span>info@softnio.com</span>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>+811 847-4958</span>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>Bangladesh</span>
                 </div>
-                <div class="nk-tb-col tb-col-lg">
-                  <ul class="list-status">
+                <div className="nk-tb-col tb-col-lg">
+                  <ul className="list-status">
                     <li>
-                      <em class="icon text-success ni ni-check-circle"></em>
+                      <em className="icon text-success ni ni-check-circle"></em>
                       <span>Email</span>
                     </li>
                   </ul>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>10 Feb 2020</span>
                 </div>
-                <div class="nk-tb-col">
-                  <span class="tb-status text-success">Active</span>
+                <div className="nk-tb-col">
+                  <span className="tb-status text-success">Active</span>
                 </div>
-                <div class="nk-tb-col nk-tb-col-tools">
-                  <ul class="nk-tb-actions gx-2">
-                    <li class="nk-tb-action-hidden">
+                <div className="nk-tb-col nk-tb-col-tools">
+                  <ul className="nk-tb-actions gx-2">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Wallet"
                         aria-label="Wallet"
                       >
-                        <em class="icon ni ni-wallet-fill"></em>
+                        <em className="icon ni ni-wallet-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Send Email"
                         aria-label="Send Email"
                       >
-                        <em class="icon ni ni-mail-fill"></em>
+                        <em className="icon ni ni-mail-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Suspend"
                         aria-label="Suspend"
                       >
-                        <em class="icon ni ni-user-cross-fill"></em>
+                        <em className="icon ni ni-user-cross-fill"></em>
                       </a>
                     </li>
                     <li>
-                      <div class="drodown">
+                      <div className="drodown">
                         <a
                           href="#"
-                          class="btn btn-sm btn-icon btn-trigger dropdown-toggle"
+                          className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
                           data-bs-toggle="dropdown"
                         >
-                          <em class="icon ni ni-more-h"></em>
+                          <em className="icon ni ni-more-h"></em>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                          <ul class="link-list-opt no-bdr">
+                        <div className="dropdown-menu dropdown-menu-end">
+                          <ul className="link-list-opt no-bdr">
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-eye"></em>
+                                <em className="icon ni ni-eye"></em>
                                 <span>View Details</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-repeat"></em>
+                                <em className="icon ni ni-repeat"></em>
                                 <span>Orders</span>
                               </a>
                             </li>
-                            <li class="divider"></li>
+                            <li className="divider"></li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-star"></em>
+                                <em className="icon ni ni-shield-star"></em>
                                 <span>Reset Pass</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-off"></em>
+                                <em className="icon ni ni-shield-off"></em>
                                 <span>Reset 2FA</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-na"></em>
+                                <em className="icon ni ni-na"></em>
                                 <span>Suspend User</span>
                               </a>
                             </li>
@@ -684,133 +684,133 @@
                   </ul>
                 </div>
               </div>
-              <div class="nk-tb-item">
-                <div class="nk-tb-col nk-tb-col-check">
-                  <div class="custom-control custom-control-sm custom-checkbox notext">
+              <div className="nk-tb-item">
+                <div className="nk-tb-col nk-tb-col-check">
+                  <div className="custom-control custom-control-sm custom-checkbox notext">
                     <input
                       type="checkbox"
-                      class="custom-control-input"
+                      className="custom-control-input"
                       id="uid2"
                     />
-                    <label class="custom-control-label" for="uid2"></label>
+                    <label className="custom-control-label" for="uid2"></label>
                   </div>
                 </div>
-                <div class="nk-tb-col">
-                  <div class="user-card">
-                    <div class="user-avatar xs bg-warning">
+                <div className="nk-tb-col">
+                  <div className="user-card">
+                    <div className="user-avatar xs bg-warning">
                       <span>PN</span>
                     </div>
-                    <div class="user-name">
-                      <span class="tb-lead">Patrick Newman</span>
+                    <div className="user-name">
+                      <span className="tb-lead">Patrick Newman</span>
                     </div>
                   </div>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>Investor</span>
                 </div>
-                <div class="nk-tb-col tb-col-sm">
+                <div className="nk-tb-col tb-col-sm">
                   <span>patrick@example.com</span>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>+942 238-4474</span>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>United States</span>
                 </div>
-                <div class="nk-tb-col tb-col-lg">
-                  <ul class="list-status">
+                <div className="nk-tb-col tb-col-lg">
+                  <ul className="list-status">
                     <li>
-                      <em class="icon text-success ni ni-check-circle"></em>
+                      <em className="icon text-success ni ni-check-circle"></em>
                       <span>Email</span>
                     </li>
                   </ul>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>06 Feb 2020</span>
                 </div>
-                <div class="nk-tb-col">
-                  <span class="tb-status text-success">Active</span>
+                <div className="nk-tb-col">
+                  <span className="tb-status text-success">Active</span>
                 </div>
-                <div class="nk-tb-col nk-tb-col-tools">
-                  <ul class="nk-tb-actions gx-2">
-                    <li class="nk-tb-action-hidden">
+                <div className="nk-tb-col nk-tb-col-tools">
+                  <ul className="nk-tb-actions gx-2">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Wallet"
                         aria-label="Wallet"
                       >
-                        <em class="icon ni ni-wallet-fill"></em>
+                        <em className="icon ni ni-wallet-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Send Email"
                         aria-label="Send Email"
                       >
-                        <em class="icon ni ni-mail-fill"></em>
+                        <em className="icon ni ni-mail-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Suspend"
                         aria-label="Suspend"
                       >
-                        <em class="icon ni ni-user-cross-fill"></em>
+                        <em className="icon ni ni-user-cross-fill"></em>
                       </a>
                     </li>
                     <li>
-                      <div class="drodown">
+                      <div className="drodown">
                         <a
                           href="#"
-                          class="btn btn-sm btn-icon btn-trigger dropdown-toggle"
+                          className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
                           data-bs-toggle="dropdown"
                         >
-                          <em class="icon ni ni-more-h"></em>
+                          <em className="icon ni ni-more-h"></em>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                          <ul class="link-list-opt no-bdr">
+                        <div className="dropdown-menu dropdown-menu-end">
+                          <ul className="link-list-opt no-bdr">
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-eye"></em>
+                                <em className="icon ni ni-eye"></em>
                                 <span>View Details</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-repeat"></em>
+                                <em className="icon ni ni-repeat"></em>
                                 <span>Orders</span>
                               </a>
                             </li>
-                            <li class="divider"></li>
+                            <li className="divider"></li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-star"></em>
+                                <em className="icon ni ni-shield-star"></em>
                                 <span>Reset Pass</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-off"></em>
+                                <em className="icon ni ni-shield-off"></em>
                                 <span>Reset 2FA</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-na"></em>
+                                <em className="icon ni ni-na"></em>
                                 <span>Suspend User</span>
                               </a>
                             </li>
@@ -821,133 +821,133 @@
                   </ul>
                 </div>
               </div>
-              <div class="nk-tb-item">
-                <div class="nk-tb-col nk-tb-col-check">
-                  <div class="custom-control custom-control-sm custom-checkbox notext">
+              <div className="nk-tb-item">
+                <div className="nk-tb-col nk-tb-col-check">
+                  <div className="custom-control custom-control-sm custom-checkbox notext">
                     <input
                       type="checkbox"
-                      class="custom-control-input"
+                      className="custom-control-input"
                       id="uid3"
                     />
-                    <label class="custom-control-label" for="uid3"></label>
+                    <label className="custom-control-label" for="uid3"></label>
                   </div>
                 </div>
-                <div class="nk-tb-col">
-                  <div class="user-card">
-                    <div class="user-avatar xs bg-success">
+                <div className="nk-tb-col">
+                  <div className="user-card">
+                    <div className="user-avatar xs bg-success">
                       <span>HK</span>
                     </div>
-                    <div class="user-name">
-                      <span class="tb-lead">Howard Kennedy</span>
+                    <div className="user-name">
+                      <span className="tb-lead">Howard Kennedy</span>
                     </div>
                   </div>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>Customer</span>
                 </div>
-                <div class="nk-tb-col tb-col-sm">
+                <div className="nk-tb-col tb-col-sm">
                   <span>howard@example.com</span>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>+447 595-6725</span>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>England</span>
                 </div>
-                <div class="nk-tb-col tb-col-lg">
-                  <ul class="list-status">
+                <div className="nk-tb-col tb-col-lg">
+                  <ul className="list-status">
                     <li>
-                      <em class="icon text-info ni ni-alarm-alt"></em>
+                      <em className="icon text-info ni ni-alarm-alt"></em>
                       <span>Email</span>
                     </li>
                   </ul>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>01 Feb 2020</span>
                 </div>
-                <div class="nk-tb-col">
-                  <span class="tb-status text-warning">Pending</span>
+                <div className="nk-tb-col">
+                  <span className="tb-status text-warning">Pending</span>
                 </div>
-                <div class="nk-tb-col nk-tb-col-tools">
-                  <ul class="nk-tb-actions gx-2">
-                    <li class="nk-tb-action-hidden">
+                <div className="nk-tb-col nk-tb-col-tools">
+                  <ul className="nk-tb-actions gx-2">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Wallet"
                         aria-label="Wallet"
                       >
-                        <em class="icon ni ni-wallet-fill"></em>
+                        <em className="icon ni ni-wallet-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Send Email"
                         aria-label="Send Email"
                       >
-                        <em class="icon ni ni-mail-fill"></em>
+                        <em className="icon ni ni-mail-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Suspend"
                         aria-label="Suspend"
                       >
-                        <em class="icon ni ni-user-cross-fill"></em>
+                        <em className="icon ni ni-user-cross-fill"></em>
                       </a>
                     </li>
                     <li>
-                      <div class="drodown">
+                      <div className="drodown">
                         <a
                           href="#"
-                          class="btn btn-sm btn-icon btn-trigger dropdown-toggle"
+                          className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
                           data-bs-toggle="dropdown"
                         >
-                          <em class="icon ni ni-more-h"></em>
+                          <em className="icon ni ni-more-h"></em>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                          <ul class="link-list-opt no-bdr">
+                        <div className="dropdown-menu dropdown-menu-end">
+                          <ul className="link-list-opt no-bdr">
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-eye"></em>
+                                <em className="icon ni ni-eye"></em>
                                 <span>View Details</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-repeat"></em>
+                                <em className="icon ni ni-repeat"></em>
                                 <span>Orders</span>
                               </a>
                             </li>
-                            <li class="divider"></li>
+                            <li className="divider"></li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-star"></em>
+                                <em className="icon ni ni-shield-star"></em>
                                 <span>Reset Pass</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-off"></em>
+                                <em className="icon ni ni-shield-off"></em>
                                 <span>Reset 2FA</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-na"></em>
+                                <em className="icon ni ni-na"></em>
                                 <span>Suspend User</span>
                               </a>
                             </li>
@@ -958,133 +958,133 @@
                   </ul>
                 </div>
               </div>
-              <div class="nk-tb-item">
-                <div class="nk-tb-col nk-tb-col-check">
-                  <div class="custom-control custom-control-sm custom-checkbox notext">
+              <div className="nk-tb-item">
+                <div className="nk-tb-col nk-tb-col-check">
+                  <div className="custom-control custom-control-sm custom-checkbox notext">
                     <input
                       type="checkbox"
-                      class="custom-control-input"
+                      className="custom-control-input"
                       id="uid4"
                     />
-                    <label class="custom-control-label" for="uid4"></label>
+                    <label className="custom-control-label" for="uid4"></label>
                   </div>
                 </div>
-                <div class="nk-tb-col">
-                  <div class="user-card">
-                    <div class="user-avatar xs bg-purple">
+                <div className="nk-tb-col">
+                  <div className="user-card">
+                    <div className="user-avatar xs bg-purple">
                       <span>AB</span>
                     </div>
-                    <div class="user-name">
-                      <span class="tb-lead">Albert Brown</span>
+                    <div className="user-name">
+                      <span className="tb-lead">Albert Brown</span>
                     </div>
                   </div>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>Subscriber</span>
                 </div>
-                <div class="nk-tb-col tb-col-sm">
+                <div className="nk-tb-col tb-col-sm">
                   <span>howard@example.com</span>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>+408 595-6725</span>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>United States</span>
                 </div>
-                <div class="nk-tb-col tb-col-lg">
-                  <ul class="list-status">
+                <div className="nk-tb-col tb-col-lg">
+                  <ul className="list-status">
                     <li>
-                      <em class="icon ni ni-alert-circle"></em>
+                      <em className="icon ni ni-alert-circle"></em>
                       <span>Email</span>
                     </li>
                   </ul>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>31 Jan 2020</span>
                 </div>
-                <div class="nk-tb-col">
-                  <span class="tb-status text-success">Active</span>
+                <div className="nk-tb-col">
+                  <span className="tb-status text-success">Active</span>
                 </div>
-                <div class="nk-tb-col nk-tb-col-tools">
-                  <ul class="nk-tb-actions gx-2">
-                    <li class="nk-tb-action-hidden">
+                <div className="nk-tb-col nk-tb-col-tools">
+                  <ul className="nk-tb-actions gx-2">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Wallet"
                         aria-label="Wallet"
                       >
-                        <em class="icon ni ni-wallet-fill"></em>
+                        <em className="icon ni ni-wallet-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Send Email"
                         aria-label="Send Email"
                       >
-                        <em class="icon ni ni-mail-fill"></em>
+                        <em className="icon ni ni-mail-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Suspend"
                         aria-label="Suspend"
                       >
-                        <em class="icon ni ni-user-cross-fill"></em>
+                        <em className="icon ni ni-user-cross-fill"></em>
                       </a>
                     </li>
                     <li>
-                      <div class="drodown">
+                      <div className="drodown">
                         <a
                           href="#"
-                          class="btn btn-sm btn-icon btn-trigger dropdown-toggle"
+                          className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
                           data-bs-toggle="dropdown"
                         >
-                          <em class="icon ni ni-more-h"></em>
+                          <em className="icon ni ni-more-h"></em>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                          <ul class="link-list-opt no-bdr">
+                        <div className="dropdown-menu dropdown-menu-end">
+                          <ul className="link-list-opt no-bdr">
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-eye"></em>
+                                <em className="icon ni ni-eye"></em>
                                 <span>View Details</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-repeat"></em>
+                                <em className="icon ni ni-repeat"></em>
                                 <span>Orders</span>
                               </a>
                             </li>
-                            <li class="divider"></li>
+                            <li className="divider"></li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-star"></em>
+                                <em className="icon ni ni-shield-star"></em>
                                 <span>Reset Pass</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-off"></em>
+                                <em className="icon ni ni-shield-off"></em>
                                 <span>Reset 2FA</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-na"></em>
+                                <em className="icon ni ni-na"></em>
                                 <span>Suspend User</span>
                               </a>
                             </li>
@@ -1095,133 +1095,133 @@
                   </ul>
                 </div>
               </div>
-              <div class="nk-tb-item">
-                <div class="nk-tb-col nk-tb-col-check">
-                  <div class="custom-control custom-control-sm custom-checkbox notext">
+              <div className="nk-tb-item">
+                <div className="nk-tb-col nk-tb-col-check">
+                  <div className="custom-control custom-control-sm custom-checkbox notext">
                     <input
                       type="checkbox"
-                      class="custom-control-input"
+                      className="custom-control-input"
                       id="uid5"
                     />
-                    <label class="custom-control-label" for="uid5"></label>
+                    <label className="custom-control-label" for="uid5"></label>
                   </div>
                 </div>
-                <div class="nk-tb-col">
-                  <div class="user-card">
-                    <div class="user-avatar xs bg-danger">
+                <div className="nk-tb-col">
+                  <div className="user-card">
+                    <div className="user-avatar xs bg-danger">
                       <span>BH</span>
                     </div>
-                    <div class="user-name">
-                      <span class="tb-lead">Brian Hunter</span>
+                    <div className="user-name">
+                      <span className="tb-lead">Brian Hunter</span>
                     </div>
                   </div>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>Manager</span>
                 </div>
-                <div class="nk-tb-col tb-col-sm">
+                <div className="nk-tb-col tb-col-sm">
                   <span>brian@example.com</span>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>+811 521-6695</span>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>Bangladesh</span>
                 </div>
-                <div class="nk-tb-col tb-col-lg">
-                  <ul class="list-status">
+                <div className="nk-tb-col tb-col-lg">
+                  <ul className="list-status">
                     <li>
-                      <em class="icon text-success ni ni-check-circle"></em>
+                      <em className="icon text-success ni ni-check-circle"></em>
                       <span>Email</span>
                     </li>
                   </ul>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>28 Jan 2020</span>
                 </div>
-                <div class="nk-tb-col">
-                  <span class="tb-status text-info">Inactive</span>
+                <div className="nk-tb-col">
+                  <span className="tb-status text-info">Inactive</span>
                 </div>
-                <div class="nk-tb-col nk-tb-col-tools">
-                  <ul class="nk-tb-actions gx-2">
-                    <li class="nk-tb-action-hidden">
+                <div className="nk-tb-col nk-tb-col-tools">
+                  <ul className="nk-tb-actions gx-2">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Wallet"
                         aria-label="Wallet"
                       >
-                        <em class="icon ni ni-wallet-fill"></em>
+                        <em className="icon ni ni-wallet-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Send Email"
                         aria-label="Send Email"
                       >
-                        <em class="icon ni ni-mail-fill"></em>
+                        <em className="icon ni ni-mail-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Suspend"
                         aria-label="Suspend"
                       >
-                        <em class="icon ni ni-user-cross-fill"></em>
+                        <em className="icon ni ni-user-cross-fill"></em>
                       </a>
                     </li>
                     <li>
-                      <div class="drodown">
+                      <div className="drodown">
                         <a
                           href="#"
-                          class="btn btn-sm btn-icon btn-trigger dropdown-toggle"
+                          className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
                           data-bs-toggle="dropdown"
                         >
-                          <em class="icon ni ni-more-h"></em>
+                          <em className="icon ni ni-more-h"></em>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                          <ul class="link-list-opt no-bdr">
+                        <div className="dropdown-menu dropdown-menu-end">
+                          <ul className="link-list-opt no-bdr">
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-eye"></em>
+                                <em className="icon ni ni-eye"></em>
                                 <span>View Details</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-repeat"></em>
+                                <em className="icon ni ni-repeat"></em>
                                 <span>Orders</span>
                               </a>
                             </li>
-                            <li class="divider"></li>
+                            <li className="divider"></li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-star"></em>
+                                <em className="icon ni ni-shield-star"></em>
                                 <span>Reset Pass</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-off"></em>
+                                <em className="icon ni ni-shield-off"></em>
                                 <span>Reset 2FA</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-na"></em>
+                                <em className="icon ni ni-na"></em>
                                 <span>Suspend User</span>
                               </a>
                             </li>
@@ -1232,133 +1232,133 @@
                   </ul>
                 </div>
               </div>
-              <div class="nk-tb-item">
-                <div class="nk-tb-col nk-tb-col-check">
-                  <div class="custom-control custom-control-sm custom-checkbox notext">
+              <div className="nk-tb-item">
+                <div className="nk-tb-col nk-tb-col-check">
+                  <div className="custom-control custom-control-sm custom-checkbox notext">
                     <input
                       type="checkbox"
-                      class="custom-control-input"
+                      className="custom-control-input"
                       id="uid6"
                     />
-                    <label class="custom-control-label" for="uid6"></label>
+                    <label className="custom-control-label" for="uid6"></label>
                   </div>
                 </div>
-                <div class="nk-tb-col">
-                  <div class="user-card">
-                    <div class="user-avatar xs bg-dark">
+                <div className="nk-tb-col">
+                  <div className="user-card">
+                    <div className="user-avatar xs bg-dark">
                       <span>TS</span>
                     </div>
-                    <div class="user-name">
-                      <span class="tb-lead">Timothy Silva</span>
+                    <div className="user-name">
+                      <span className="tb-lead">Timothy Silva</span>
                     </div>
                   </div>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>Investor</span>
                 </div>
-                <div class="nk-tb-col tb-col-sm">
+                <div className="nk-tb-col tb-col-sm">
                   <span>timothy@example.com</span>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>+91 411-5392</span>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>India</span>
                 </div>
-                <div class="nk-tb-col tb-col-lg">
-                  <ul class="list-status">
+                <div className="nk-tb-col tb-col-lg">
+                  <ul className="list-status">
                     <li>
-                      <em class="icon text-success ni ni-check-circle"></em>
+                      <em className="icon text-success ni ni-check-circle"></em>
                       <span>Email</span>
                     </li>
                   </ul>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>26 Jan 2020</span>
                 </div>
-                <div class="nk-tb-col">
-                  <span class="tb-status text-info">Inactive</span>
+                <div className="nk-tb-col">
+                  <span className="tb-status text-info">Inactive</span>
                 </div>
-                <div class="nk-tb-col nk-tb-col-tools">
-                  <ul class="nk-tb-actions gx-2">
-                    <li class="nk-tb-action-hidden">
+                <div className="nk-tb-col nk-tb-col-tools">
+                  <ul className="nk-tb-actions gx-2">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Wallet"
                         aria-label="Wallet"
                       >
-                        <em class="icon ni ni-wallet-fill"></em>
+                        <em className="icon ni ni-wallet-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Send Email"
                         aria-label="Send Email"
                       >
-                        <em class="icon ni ni-mail-fill"></em>
+                        <em className="icon ni ni-mail-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Suspend"
                         aria-label="Suspend"
                       >
-                        <em class="icon ni ni-user-cross-fill"></em>
+                        <em className="icon ni ni-user-cross-fill"></em>
                       </a>
                     </li>
                     <li>
-                      <div class="drodown">
+                      <div className="drodown">
                         <a
                           href="#"
-                          class="btn btn-sm btn-icon btn-trigger dropdown-toggle"
+                          className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
                           data-bs-toggle="dropdown"
                         >
-                          <em class="icon ni ni-more-h"></em>
+                          <em className="icon ni ni-more-h"></em>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                          <ul class="link-list-opt no-bdr">
+                        <div className="dropdown-menu dropdown-menu-end">
+                          <ul className="link-list-opt no-bdr">
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-eye"></em>
+                                <em className="icon ni ni-eye"></em>
                                 <span>View Details</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-repeat"></em>
+                                <em className="icon ni ni-repeat"></em>
                                 <span>Orders</span>
                               </a>
                             </li>
-                            <li class="divider"></li>
+                            <li className="divider"></li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-star"></em>
+                                <em className="icon ni ni-shield-star"></em>
                                 <span>Reset Pass</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-off"></em>
+                                <em className="icon ni ni-shield-off"></em>
                                 <span>Reset 2FA</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-na"></em>
+                                <em className="icon ni ni-na"></em>
                                 <span>Suspend User</span>
                               </a>
                             </li>
@@ -1369,133 +1369,133 @@
                   </ul>
                 </div>
               </div>
-              <div class="nk-tb-item">
-                <div class="nk-tb-col nk-tb-col-check">
-                  <div class="custom-control custom-control-sm custom-checkbox notext">
+              <div className="nk-tb-item">
+                <div className="nk-tb-col nk-tb-col-check">
+                  <div className="custom-control custom-control-sm custom-checkbox notext">
                     <input
                       type="checkbox"
-                      class="custom-control-input"
+                      className="custom-control-input"
                       id="uid7"
                     />
-                    <label class="custom-control-label" for="uid7"></label>
+                    <label className="custom-control-label" for="uid7"></label>
                   </div>
                 </div>
-                <div class="nk-tb-col">
-                  <div class="user-card">
-                    <div class="user-avatar xs bg-success">
+                <div className="nk-tb-col">
+                  <div className="user-card">
+                    <div className="user-avatar xs bg-success">
                       <span>JC</span>
                     </div>
-                    <div class="user-name">
-                      <span class="tb-lead">Janice Cooper</span>
+                    <div className="user-name">
+                      <span className="tb-lead">Janice Cooper</span>
                     </div>
                   </div>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>Investor</span>
                 </div>
-                <div class="nk-tb-col tb-col-sm">
+                <div className="nk-tb-col tb-col-sm">
                   <span>janice@example.com</span>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>+91 483-6614</span>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>India</span>
                 </div>
-                <div class="nk-tb-col tb-col-lg">
-                  <ul class="list-status">
+                <div className="nk-tb-col tb-col-lg">
+                  <ul className="list-status">
                     <li>
-                      <em class="icon text-warning ni ni-alarm-alt"></em>
+                      <em className="icon text-warning ni ni-alarm-alt"></em>
                       <span>Email</span>
                     </li>
                   </ul>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>21 Jan 2020</span>
                 </div>
-                <div class="nk-tb-col">
-                  <span class="tb-status text-danger">Suspend</span>
+                <div className="nk-tb-col">
+                  <span className="tb-status text-danger">Suspend</span>
                 </div>
-                <div class="nk-tb-col nk-tb-col-tools">
-                  <ul class="nk-tb-actions gx-2">
-                    <li class="nk-tb-action-hidden">
+                <div className="nk-tb-col nk-tb-col-tools">
+                  <ul className="nk-tb-actions gx-2">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Wallet"
                         aria-label="Wallet"
                       >
-                        <em class="icon ni ni-wallet-fill"></em>
+                        <em className="icon ni ni-wallet-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Send Email"
                         aria-label="Send Email"
                       >
-                        <em class="icon ni ni-mail-fill"></em>
+                        <em className="icon ni ni-mail-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Suspend"
                         aria-label="Suspend"
                       >
-                        <em class="icon ni ni-user-cross-fill"></em>
+                        <em className="icon ni ni-user-cross-fill"></em>
                       </a>
                     </li>
                     <li>
-                      <div class="drodown">
+                      <div className="drodown">
                         <a
                           href="#"
-                          class="btn btn-sm btn-icon btn-trigger dropdown-toggle"
+                          className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
                           data-bs-toggle="dropdown"
                         >
-                          <em class="icon ni ni-more-h"></em>
+                          <em className="icon ni ni-more-h"></em>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                          <ul class="link-list-opt no-bdr">
+                        <div className="dropdown-menu dropdown-menu-end">
+                          <ul className="link-list-opt no-bdr">
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-eye"></em>
+                                <em className="icon ni ni-eye"></em>
                                 <span>View Details</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-repeat"></em>
+                                <em className="icon ni ni-repeat"></em>
                                 <span>Orders</span>
                               </a>
                             </li>
-                            <li class="divider"></li>
+                            <li className="divider"></li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-star"></em>
+                                <em className="icon ni ni-shield-star"></em>
                                 <span>Reset Pass</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-off"></em>
+                                <em className="icon ni ni-shield-off"></em>
                                 <span>Reset 2FA</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-na"></em>
+                                <em className="icon ni ni-na"></em>
                                 <span>Suspend User</span>
                               </a>
                             </li>
@@ -1506,133 +1506,133 @@
                   </ul>
                 </div>
               </div>
-              <div class="nk-tb-item">
-                <div class="nk-tb-col nk-tb-col-check">
-                  <div class="custom-control custom-control-sm custom-checkbox notext">
+              <div className="nk-tb-item">
+                <div className="nk-tb-col nk-tb-col-check">
+                  <div className="custom-control custom-control-sm custom-checkbox notext">
                     <input
                       type="checkbox"
-                      class="custom-control-input"
+                      className="custom-control-input"
                       id="uid8"
                     />
-                    <label class="custom-control-label" for="uid8"></label>
+                    <label className="custom-control-label" for="uid8"></label>
                   </div>
                 </div>
-                <div class="nk-tb-col">
-                  <div class="user-card">
-                    <div class="user-avatar xs bg-dark">
+                <div className="nk-tb-col">
+                  <div className="user-card">
+                    <div className="user-avatar xs bg-dark">
                       <span>EC</span>
                     </div>
-                    <div class="user-name">
-                      <span class="tb-lead">Elizabeth Carter</span>
+                    <div className="user-name">
+                      <span className="tb-lead">Elizabeth Carter</span>
                     </div>
                   </div>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>Customer</span>
                 </div>
-                <div class="nk-tb-col tb-col-sm">
+                <div className="nk-tb-col tb-col-sm">
                   <span>elizabeth93@example.com</span>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>+862 507-4068</span>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>China</span>
                 </div>
-                <div class="nk-tb-col tb-col-lg">
-                  <ul class="list-status">
+                <div className="nk-tb-col tb-col-lg">
+                  <ul className="list-status">
                     <li>
-                      <em class="icon text-info ni ni-alarm-alt"></em>
+                      <em className="icon text-info ni ni-alarm-alt"></em>
                       <span>Email</span>
                     </li>
                   </ul>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>21 Jan 2020</span>
                 </div>
-                <div class="nk-tb-col">
-                  <span class="tb-status text-success">Active</span>
+                <div className="nk-tb-col">
+                  <span className="tb-status text-success">Active</span>
                 </div>
-                <div class="nk-tb-col nk-tb-col-tools">
-                  <ul class="nk-tb-actions gx-2">
-                    <li class="nk-tb-action-hidden">
+                <div className="nk-tb-col nk-tb-col-tools">
+                  <ul className="nk-tb-actions gx-2">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Wallet"
                         aria-label="Wallet"
                       >
-                        <em class="icon ni ni-wallet-fill"></em>
+                        <em className="icon ni ni-wallet-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Send Email"
                         aria-label="Send Email"
                       >
-                        <em class="icon ni ni-mail-fill"></em>
+                        <em className="icon ni ni-mail-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Suspend"
                         aria-label="Suspend"
                       >
-                        <em class="icon ni ni-user-cross-fill"></em>
+                        <em className="icon ni ni-user-cross-fill"></em>
                       </a>
                     </li>
                     <li>
-                      <div class="drodown">
+                      <div className="drodown">
                         <a
                           href="#"
-                          class="btn btn-sm btn-icon btn-trigger dropdown-toggle"
+                          className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
                           data-bs-toggle="dropdown"
                         >
-                          <em class="icon ni ni-more-h"></em>
+                          <em className="icon ni ni-more-h"></em>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                          <ul class="link-list-opt no-bdr">
+                        <div className="dropdown-menu dropdown-menu-end">
+                          <ul className="link-list-opt no-bdr">
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-eye"></em>
+                                <em className="icon ni ni-eye"></em>
                                 <span>View Details</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-repeat"></em>
+                                <em className="icon ni ni-repeat"></em>
                                 <span>Orders</span>
                               </a>
                             </li>
-                            <li class="divider"></li>
+                            <li className="divider"></li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-star"></em>
+                                <em className="icon ni ni-shield-star"></em>
                                 <span>Reset Pass</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-off"></em>
+                                <em className="icon ni ni-shield-off"></em>
                                 <span>Reset 2FA</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-na"></em>
+                                <em className="icon ni ni-na"></em>
                                 <span>Suspend User</span>
                               </a>
                             </li>
@@ -1643,133 +1643,133 @@
                   </ul>
                 </div>
               </div>
-              <div class="nk-tb-item">
-                <div class="nk-tb-col nk-tb-col-check">
-                  <div class="custom-control custom-control-sm custom-checkbox notext">
+              <div className="nk-tb-item">
+                <div className="nk-tb-col nk-tb-col-check">
+                  <div className="custom-control custom-control-sm custom-checkbox notext">
                     <input
                       type="checkbox"
-                      class="custom-control-input"
+                      className="custom-control-input"
                       id="uid9"
                     />
-                    <label class="custom-control-label" for="uid9"></label>
+                    <label className="custom-control-label" for="uid9"></label>
                   </div>
                 </div>
-                <div class="nk-tb-col">
-                  <div class="user-card">
-                    <div class="user-avatar xs bg-warning">
+                <div className="nk-tb-col">
+                  <div className="user-card">
+                    <div className="user-avatar xs bg-warning">
                       <span>LN</span>
                     </div>
-                    <div class="user-name">
-                      <span class="tb-lead">Lori Newman</span>
+                    <div className="user-name">
+                      <span className="tb-lead">Lori Newman</span>
                     </div>
                   </div>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>Investor</span>
                 </div>
-                <div class="nk-tb-col tb-col-sm">
+                <div className="nk-tb-col tb-col-sm">
                   <span>newman@example.com</span>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>+123 287-2360</span>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>United States</span>
                 </div>
-                <div class="nk-tb-col tb-col-lg">
-                  <ul class="list-status">
+                <div className="nk-tb-col tb-col-lg">
+                  <ul className="list-status">
                     <li>
-                      <em class="icon text-info ni ni-alarm-alt"></em>
+                      <em className="icon text-info ni ni-alarm-alt"></em>
                       <span>Email</span>
                     </li>
                   </ul>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>18 Jan 2020</span>
                 </div>
-                <div class="nk-tb-col">
-                  <span class="tb-status text-success">Active</span>
+                <div className="nk-tb-col">
+                  <span className="tb-status text-success">Active</span>
                 </div>
-                <div class="nk-tb-col nk-tb-col-tools">
-                  <ul class="nk-tb-actions gx-2">
-                    <li class="nk-tb-action-hidden">
+                <div className="nk-tb-col nk-tb-col-tools">
+                  <ul className="nk-tb-actions gx-2">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Wallet"
                         aria-label="Wallet"
                       >
-                        <em class="icon ni ni-wallet-fill"></em>
+                        <em className="icon ni ni-wallet-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Send Email"
                         aria-label="Send Email"
                       >
-                        <em class="icon ni ni-mail-fill"></em>
+                        <em className="icon ni ni-mail-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Suspend"
                         aria-label="Suspend"
                       >
-                        <em class="icon ni ni-user-cross-fill"></em>
+                        <em className="icon ni ni-user-cross-fill"></em>
                       </a>
                     </li>
                     <li>
-                      <div class="drodown">
+                      <div className="drodown">
                         <a
                           href="#"
-                          class="btn btn-sm btn-icon btn-trigger dropdown-toggle"
+                          className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
                           data-bs-toggle="dropdown"
                         >
-                          <em class="icon ni ni-more-h"></em>
+                          <em className="icon ni ni-more-h"></em>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                          <ul class="link-list-opt no-bdr">
+                        <div className="dropdown-menu dropdown-menu-end">
+                          <ul className="link-list-opt no-bdr">
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-eye"></em>
+                                <em className="icon ni ni-eye"></em>
                                 <span>View Details</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-repeat"></em>
+                                <em className="icon ni ni-repeat"></em>
                                 <span>Orders</span>
                               </a>
                             </li>
-                            <li class="divider"></li>
+                            <li className="divider"></li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-star"></em>
+                                <em className="icon ni ni-shield-star"></em>
                                 <span>Reset Pass</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-off"></em>
+                                <em className="icon ni ni-shield-off"></em>
                                 <span>Reset 2FA</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-na"></em>
+                                <em className="icon ni ni-na"></em>
                                 <span>Suspend User</span>
                               </a>
                             </li>
@@ -1780,133 +1780,133 @@
                   </ul>
                 </div>
               </div>
-              <div class="nk-tb-item">
-                <div class="nk-tb-col nk-tb-col-check">
-                  <div class="custom-control custom-control-sm custom-checkbox notext">
+              <div className="nk-tb-item">
+                <div className="nk-tb-col nk-tb-col-check">
+                  <div className="custom-control custom-control-sm custom-checkbox notext">
                     <input
                       type="checkbox"
-                      class="custom-control-input"
+                      className="custom-control-input"
                       id="uid10"
                     />
-                    <label class="custom-control-label" for="uid10"></label>
+                    <label className="custom-control-label" for="uid10"></label>
                   </div>
                 </div>
-                <div class="nk-tb-col">
-                  <div class="user-card">
-                    <div class="user-avatar xs bg-success">
+                <div className="nk-tb-col">
+                  <div className="user-card">
+                    <div className="user-avatar xs bg-success">
                       <span>AC</span>
                     </div>
-                    <div class="user-name">
-                      <span class="tb-lead">Alice Contreras</span>
+                    <div className="user-name">
+                      <span className="tb-lead">Alice Contreras</span>
                     </div>
                   </div>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>Manager</span>
                 </div>
-                <div class="nk-tb-col tb-col-sm">
+                <div className="nk-tb-col tb-col-sm">
                   <span>alice92@example.com</span>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>+123 751-5981</span>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>United States</span>
                 </div>
-                <div class="nk-tb-col tb-col-lg">
-                  <ul class="list-status">
+                <div className="nk-tb-col tb-col-lg">
+                  <ul className="list-status">
                     <li>
-                      <em class="icon text-success ni ni-check-circle"></em>
+                      <em className="icon text-success ni ni-check-circle"></em>
                       <span>Email</span>
                     </li>
                   </ul>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>11 Jan 2020</span>
                 </div>
-                <div class="nk-tb-col">
-                  <span class="tb-status text-success">Active</span>
+                <div className="nk-tb-col">
+                  <span className="tb-status text-success">Active</span>
                 </div>
-                <div class="nk-tb-col nk-tb-col-tools">
-                  <ul class="nk-tb-actions gx-2">
-                    <li class="nk-tb-action-hidden">
+                <div className="nk-tb-col nk-tb-col-tools">
+                  <ul className="nk-tb-actions gx-2">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Wallet"
                         aria-label="Wallet"
                       >
-                        <em class="icon ni ni-wallet-fill"></em>
+                        <em className="icon ni ni-wallet-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Send Email"
                         aria-label="Send Email"
                       >
-                        <em class="icon ni ni-mail-fill"></em>
+                        <em className="icon ni ni-mail-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Suspend"
                         aria-label="Suspend"
                       >
-                        <em class="icon ni ni-user-cross-fill"></em>
+                        <em className="icon ni ni-user-cross-fill"></em>
                       </a>
                     </li>
                     <li>
-                      <div class="drodown">
+                      <div className="drodown">
                         <a
                           href="#"
-                          class="btn btn-sm btn-icon btn-trigger dropdown-toggle"
+                          className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
                           data-bs-toggle="dropdown"
                         >
-                          <em class="icon ni ni-more-h"></em>
+                          <em className="icon ni ni-more-h"></em>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                          <ul class="link-list-opt no-bdr">
+                        <div className="dropdown-menu dropdown-menu-end">
+                          <ul className="link-list-opt no-bdr">
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-eye"></em>
+                                <em className="icon ni ni-eye"></em>
                                 <span>View Details</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-repeat"></em>
+                                <em className="icon ni ni-repeat"></em>
                                 <span>Orders</span>
                               </a>
                             </li>
-                            <li class="divider"></li>
+                            <li className="divider"></li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-star"></em>
+                                <em className="icon ni ni-shield-star"></em>
                                 <span>Reset Pass</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-off"></em>
+                                <em className="icon ni ni-shield-off"></em>
                                 <span>Reset 2FA</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-na"></em>
+                                <em className="icon ni ni-na"></em>
                                 <span>Suspend User</span>
                               </a>
                             </li>
@@ -1917,133 +1917,133 @@
                   </ul>
                 </div>
               </div>
-              <div class="nk-tb-item">
-                <div class="nk-tb-col nk-tb-col-check">
-                  <div class="custom-control custom-control-sm custom-checkbox notext">
+              <div className="nk-tb-item">
+                <div className="nk-tb-col nk-tb-col-check">
+                  <div className="custom-control custom-control-sm custom-checkbox notext">
                     <input
                       type="checkbox"
-                      class="custom-control-input"
+                      className="custom-control-input"
                       id="uid11"
                     />
-                    <label class="custom-control-label" for="uid11"></label>
+                    <label className="custom-control-label" for="uid11"></label>
                   </div>
                 </div>
-                <div class="nk-tb-col">
-                  <div class="user-card">
-                    <div class="user-avatar xs bg-primary">
+                <div className="nk-tb-col">
+                  <div className="user-card">
+                    <div className="user-avatar xs bg-primary">
                       <span>JG</span>
                     </div>
-                    <div class="user-name">
-                      <span class="tb-lead">Jesse Guzman</span>
+                    <div className="user-name">
+                      <span className="tb-lead">Jesse Guzman</span>
                     </div>
                   </div>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>Customer</span>
                 </div>
-                <div class="nk-tb-col tb-col-sm">
+                <div className="nk-tb-col tb-col-sm">
                   <span>guzman@example.com</span>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>+842 842-2621</span>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>Vietnam</span>
                 </div>
-                <div class="nk-tb-col tb-col-lg">
-                  <ul class="list-status">
+                <div className="nk-tb-col tb-col-lg">
+                  <ul className="list-status">
                     <li>
-                      <em class="icon text-success ni ni-check-circle"></em>
+                      <em className="icon text-success ni ni-check-circle"></em>
                       <span>Email</span>
                     </li>
                   </ul>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>10 Jan 2020</span>
                 </div>
-                <div class="nk-tb-col">
-                  <span class="tb-status text-success">Active</span>
+                <div className="nk-tb-col">
+                  <span className="tb-status text-success">Active</span>
                 </div>
-                <div class="nk-tb-col nk-tb-col-tools">
-                  <ul class="nk-tb-actions gx-2">
-                    <li class="nk-tb-action-hidden">
+                <div className="nk-tb-col nk-tb-col-tools">
+                  <ul className="nk-tb-actions gx-2">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Wallet"
                         aria-label="Wallet"
                       >
-                        <em class="icon ni ni-wallet-fill"></em>
+                        <em className="icon ni ni-wallet-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Send Email"
                         aria-label="Send Email"
                       >
-                        <em class="icon ni ni-mail-fill"></em>
+                        <em className="icon ni ni-mail-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Suspend"
                         aria-label="Suspend"
                       >
-                        <em class="icon ni ni-user-cross-fill"></em>
+                        <em className="icon ni ni-user-cross-fill"></em>
                       </a>
                     </li>
                     <li>
-                      <div class="drodown">
+                      <div className="drodown">
                         <a
                           href="#"
-                          class="btn btn-sm btn-icon btn-trigger dropdown-toggle"
+                          className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
                           data-bs-toggle="dropdown"
                         >
-                          <em class="icon ni ni-more-h"></em>
+                          <em className="icon ni ni-more-h"></em>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                          <ul class="link-list-opt no-bdr">
+                        <div className="dropdown-menu dropdown-menu-end">
+                          <ul className="link-list-opt no-bdr">
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-eye"></em>
+                                <em className="icon ni ni-eye"></em>
                                 <span>View Details</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-repeat"></em>
+                                <em className="icon ni ni-repeat"></em>
                                 <span>Orders</span>
                               </a>
                             </li>
-                            <li class="divider"></li>
+                            <li className="divider"></li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-star"></em>
+                                <em className="icon ni ni-shield-star"></em>
                                 <span>Reset Pass</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-off"></em>
+                                <em className="icon ni ni-shield-off"></em>
                                 <span>Reset 2FA</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-na"></em>
+                                <em className="icon ni ni-na"></em>
                                 <span>Suspend User</span>
                               </a>
                             </li>
@@ -2054,133 +2054,133 @@
                   </ul>
                 </div>
               </div>
-              <div class="nk-tb-item">
-                <div class="nk-tb-col nk-tb-col-check">
-                  <div class="custom-control custom-control-sm custom-checkbox notext">
+              <div className="nk-tb-item">
+                <div className="nk-tb-col nk-tb-col-check">
+                  <div className="custom-control custom-control-sm custom-checkbox notext">
                     <input
                       type="checkbox"
-                      class="custom-control-input"
+                      className="custom-control-input"
                       id="uid12"
                     />
-                    <label class="custom-control-label" for="uid12"></label>
+                    <label className="custom-control-label" for="uid12"></label>
                   </div>
                 </div>
-                <div class="nk-tb-col">
-                  <div class="user-card">
-                    <div class="user-avatar xs bg-danger">
+                <div className="nk-tb-col">
+                  <div className="user-card">
+                    <div className="user-avatar xs bg-danger">
                       <span>GB</span>
                     </div>
-                    <div class="user-name">
-                      <span class="tb-lead">Gary Bishop</span>
+                    <div className="user-name">
+                      <span className="tb-lead">Gary Bishop</span>
                     </div>
                   </div>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>Customer</span>
                 </div>
-                <div class="nk-tb-col tb-col-sm">
+                <div className="nk-tb-col tb-col-sm">
                   <span>bishop@example.com</span>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>+651 979-7962</span>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>Singapore</span>
                 </div>
-                <div class="nk-tb-col tb-col-lg">
-                  <ul class="list-status">
+                <div className="nk-tb-col tb-col-lg">
+                  <ul className="list-status">
                     <li>
-                      <em class="icon text-success ni ni-check-circle"></em>
+                      <em className="icon text-success ni ni-check-circle"></em>
                       <span>Email</span>
                     </li>
                   </ul>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>10 Jan 2020</span>
                 </div>
-                <div class="nk-tb-col">
-                  <span class="tb-status text-warning">Pending</span>
+                <div className="nk-tb-col">
+                  <span className="tb-status text-warning">Pending</span>
                 </div>
-                <div class="nk-tb-col nk-tb-col-tools">
-                  <ul class="nk-tb-actions gx-2">
-                    <li class="nk-tb-action-hidden">
+                <div className="nk-tb-col nk-tb-col-tools">
+                  <ul className="nk-tb-actions gx-2">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Wallet"
                         aria-label="Wallet"
                       >
-                        <em class="icon ni ni-wallet-fill"></em>
+                        <em className="icon ni ni-wallet-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Send Email"
                         aria-label="Send Email"
                       >
-                        <em class="icon ni ni-mail-fill"></em>
+                        <em className="icon ni ni-mail-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Suspend"
                         aria-label="Suspend"
                       >
-                        <em class="icon ni ni-user-cross-fill"></em>
+                        <em className="icon ni ni-user-cross-fill"></em>
                       </a>
                     </li>
                     <li>
-                      <div class="drodown">
+                      <div className="drodown">
                         <a
                           href="#"
-                          class="btn btn-sm btn-icon btn-trigger dropdown-toggle"
+                          className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
                           data-bs-toggle="dropdown"
                         >
-                          <em class="icon ni ni-more-h"></em>
+                          <em className="icon ni ni-more-h"></em>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                          <ul class="link-list-opt no-bdr">
+                        <div className="dropdown-menu dropdown-menu-end">
+                          <ul className="link-list-opt no-bdr">
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-eye"></em>
+                                <em className="icon ni ni-eye"></em>
                                 <span>View Details</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-repeat"></em>
+                                <em className="icon ni ni-repeat"></em>
                                 <span>Orders</span>
                               </a>
                             </li>
-                            <li class="divider"></li>
+                            <li className="divider"></li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-star"></em>
+                                <em className="icon ni ni-shield-star"></em>
                                 <span>Reset Pass</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-off"></em>
+                                <em className="icon ni ni-shield-off"></em>
                                 <span>Reset 2FA</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-na"></em>
+                                <em className="icon ni ni-na"></em>
                                 <span>Suspend User</span>
                               </a>
                             </li>
@@ -2191,133 +2191,133 @@
                   </ul>
                 </div>
               </div>
-              <div class="nk-tb-item">
-                <div class="nk-tb-col nk-tb-col-check">
-                  <div class="custom-control custom-control-sm custom-checkbox notext">
+              <div className="nk-tb-item">
+                <div className="nk-tb-col nk-tb-col-check">
+                  <div className="custom-control custom-control-sm custom-checkbox notext">
                     <input
                       type="checkbox"
-                      class="custom-control-input"
+                      className="custom-control-input"
                       id="uid13"
                     />
-                    <label class="custom-control-label" for="uid13"></label>
+                    <label className="custom-control-label" for="uid13"></label>
                   </div>
                 </div>
-                <div class="nk-tb-col">
-                  <div class="user-card">
-                    <div class="user-avatar xs bg-dark">
+                <div className="nk-tb-col">
+                  <div className="user-card">
+                    <div className="user-avatar xs bg-dark">
                       <span>WL</span>
                     </div>
-                    <div class="user-name">
-                      <span class="tb-lead">Wayne Lewis</span>
+                    <div className="user-name">
+                      <span className="tb-lead">Wayne Lewis</span>
                     </div>
                   </div>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>Customer</span>
                 </div>
-                <div class="nk-tb-col tb-col-sm">
+                <div className="nk-tb-col tb-col-sm">
                   <span>waynelewis@example.com</span>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>+632 979-7962</span>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>Philippines</span>
                 </div>
-                <div class="nk-tb-col tb-col-lg">
-                  <ul class="list-status">
+                <div className="nk-tb-col tb-col-lg">
+                  <ul className="list-status">
                     <li>
-                      <em class="icon text-success ni ni-check-circle"></em>
+                      <em className="icon text-success ni ni-check-circle"></em>
                       <span>Email</span>
                     </li>
                   </ul>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>05 Jan 2020</span>
                 </div>
-                <div class="nk-tb-col">
-                  <span class="tb-status text-warning">Pending</span>
+                <div className="nk-tb-col">
+                  <span className="tb-status text-warning">Pending</span>
                 </div>
-                <div class="nk-tb-col nk-tb-col-tools">
-                  <ul class="nk-tb-actions gx-2">
-                    <li class="nk-tb-action-hidden">
+                <div className="nk-tb-col nk-tb-col-tools">
+                  <ul className="nk-tb-actions gx-2">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Wallet"
                         aria-label="Wallet"
                       >
-                        <em class="icon ni ni-wallet-fill"></em>
+                        <em className="icon ni ni-wallet-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Send Email"
                         aria-label="Send Email"
                       >
-                        <em class="icon ni ni-mail-fill"></em>
+                        <em className="icon ni ni-mail-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Suspend"
                         aria-label="Suspend"
                       >
-                        <em class="icon ni ni-user-cross-fill"></em>
+                        <em className="icon ni ni-user-cross-fill"></em>
                       </a>
                     </li>
                     <li>
-                      <div class="drodown">
+                      <div className="drodown">
                         <a
                           href="#"
-                          class="btn btn-sm btn-icon btn-trigger dropdown-toggle"
+                          className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
                           data-bs-toggle="dropdown"
                         >
-                          <em class="icon ni ni-more-h"></em>
+                          <em className="icon ni ni-more-h"></em>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                          <ul class="link-list-opt no-bdr">
+                        <div className="dropdown-menu dropdown-menu-end">
+                          <ul className="link-list-opt no-bdr">
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-eye"></em>
+                                <em className="icon ni ni-eye"></em>
                                 <span>View Details</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-repeat"></em>
+                                <em className="icon ni ni-repeat"></em>
                                 <span>Orders</span>
                               </a>
                             </li>
-                            <li class="divider"></li>
+                            <li className="divider"></li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-star"></em>
+                                <em className="icon ni ni-shield-star"></em>
                                 <span>Reset Pass</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-off"></em>
+                                <em className="icon ni ni-shield-off"></em>
                                 <span>Reset 2FA</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-na"></em>
+                                <em className="icon ni ni-na"></em>
                                 <span>Suspend User</span>
                               </a>
                             </li>
@@ -2328,133 +2328,133 @@
                   </ul>
                 </div>
               </div>
-              <div class="nk-tb-item">
-                <div class="nk-tb-col nk-tb-col-check">
-                  <div class="custom-control custom-control-sm custom-checkbox notext">
+              <div className="nk-tb-item">
+                <div className="nk-tb-col nk-tb-col-check">
+                  <div className="custom-control custom-control-sm custom-checkbox notext">
                     <input
                       type="checkbox"
-                      class="custom-control-input"
+                      className="custom-control-input"
                       id="uid14"
                     />
-                    <label class="custom-control-label" for="uid14"></label>
+                    <label className="custom-control-label" for="uid14"></label>
                   </div>
                 </div>
-                <div class="nk-tb-col">
-                  <div class="user-card">
-                    <div class="user-avatar xs bg-warning">
+                <div className="nk-tb-col">
+                  <div className="user-card">
+                    <div className="user-avatar xs bg-warning">
                       <span>FP</span>
                     </div>
-                    <div class="user-name">
-                      <span class="tb-lead">Frank Phillips</span>
+                    <div className="user-name">
+                      <span className="tb-lead">Frank Phillips</span>
                     </div>
                   </div>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>Customer</span>
                 </div>
-                <div class="nk-tb-col tb-col-sm">
+                <div className="nk-tb-col tb-col-sm">
                   <span>frank97@example.com</span>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>+632 577-9342</span>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>Philippines</span>
                 </div>
-                <div class="nk-tb-col tb-col-lg">
-                  <ul class="list-status">
+                <div className="nk-tb-col tb-col-lg">
+                  <ul className="list-status">
                     <li>
-                      <em class="icon text-success ni ni-check-circle"></em>
+                      <em className="icon text-success ni ni-check-circle"></em>
                       <span>Email</span>
                     </li>
                   </ul>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>01 Jan 2020</span>
                 </div>
-                <div class="nk-tb-col">
-                  <span class="tb-status text-success">Active</span>
+                <div className="nk-tb-col">
+                  <span className="tb-status text-success">Active</span>
                 </div>
-                <div class="nk-tb-col nk-tb-col-tools">
-                  <ul class="nk-tb-actions gx-2">
-                    <li class="nk-tb-action-hidden">
+                <div className="nk-tb-col nk-tb-col-tools">
+                  <ul className="nk-tb-actions gx-2">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Wallet"
                         aria-label="Wallet"
                       >
-                        <em class="icon ni ni-wallet-fill"></em>
+                        <em className="icon ni ni-wallet-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Send Email"
                         aria-label="Send Email"
                       >
-                        <em class="icon ni ni-mail-fill"></em>
+                        <em className="icon ni ni-mail-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Suspend"
                         aria-label="Suspend"
                       >
-                        <em class="icon ni ni-user-cross-fill"></em>
+                        <em className="icon ni ni-user-cross-fill"></em>
                       </a>
                     </li>
                     <li>
-                      <div class="drodown">
+                      <div className="drodown">
                         <a
                           href="#"
-                          class="btn btn-sm btn-icon btn-trigger dropdown-toggle"
+                          className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
                           data-bs-toggle="dropdown"
                         >
-                          <em class="icon ni ni-more-h"></em>
+                          <em className="icon ni ni-more-h"></em>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                          <ul class="link-list-opt no-bdr">
+                        <div className="dropdown-menu dropdown-menu-end">
+                          <ul className="link-list-opt no-bdr">
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-eye"></em>
+                                <em className="icon ni ni-eye"></em>
                                 <span>View Details</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-repeat"></em>
+                                <em className="icon ni ni-repeat"></em>
                                 <span>Orders</span>
                               </a>
                             </li>
-                            <li class="divider"></li>
+                            <li className="divider"></li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-star"></em>
+                                <em className="icon ni ni-shield-star"></em>
                                 <span>Reset Pass</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-off"></em>
+                                <em className="icon ni ni-shield-off"></em>
                                 <span>Reset 2FA</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-na"></em>
+                                <em className="icon ni ni-na"></em>
                                 <span>Suspend User</span>
                               </a>
                             </li>
@@ -2465,133 +2465,133 @@
                   </ul>
                 </div>
               </div>
-              <div class="nk-tb-item">
-                <div class="nk-tb-col nk-tb-col-check">
-                  <div class="custom-control custom-control-sm custom-checkbox notext">
+              <div className="nk-tb-item">
+                <div className="nk-tb-col nk-tb-col-check">
+                  <div className="custom-control custom-control-sm custom-checkbox notext">
                     <input
                       type="checkbox"
-                      class="custom-control-input"
+                      className="custom-control-input"
                       id="uid15"
                     />
-                    <label class="custom-control-label" for="uid15"></label>
+                    <label className="custom-control-label" for="uid15"></label>
                   </div>
                 </div>
-                <div class="nk-tb-col">
-                  <div class="user-card">
-                    <div class="user-avatar xs bg-success">
+                <div className="nk-tb-col">
+                  <div className="user-card">
+                    <div className="user-avatar xs bg-success">
                       <span>MB</span>
                     </div>
-                    <div class="user-name">
-                      <span class="tb-lead">Marilyn Bradley</span>
+                    <div className="user-name">
+                      <span className="tb-lead">Marilyn Bradley</span>
                     </div>
                   </div>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>Customer</span>
                 </div>
-                <div class="nk-tb-col tb-col-sm">
+                <div className="nk-tb-col tb-col-sm">
                   <span>marilyn84@example.com</span>
                 </div>
-                <div class="nk-tb-col tb-col-md">
+                <div className="nk-tb-col tb-col-md">
                   <span>+601 890-3578</span>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>Malaysia</span>
                 </div>
-                <div class="nk-tb-col tb-col-lg">
-                  <ul class="list-status">
+                <div className="nk-tb-col tb-col-lg">
+                  <ul className="list-status">
                     <li>
-                      <em class="icon text-warning/ ni ni-alarm-alt"></em>
+                      <em className="icon text-warning/ ni ni-alarm-alt"></em>
                       <span>Email</span>
                     </li>
                   </ul>
                 </div>
-                <div class="nk-tb-col tb-col-xxl">
+                <div className="nk-tb-col tb-col-xxl">
                   <span>01 Jan 2020</span>
                 </div>
-                <div class="nk-tb-col">
-                  <span class="tb-status text-success">Active</span>
+                <div className="nk-tb-col">
+                  <span className="tb-status text-success">Active</span>
                 </div>
-                <div class="nk-tb-col nk-tb-col-tools">
-                  <ul class="nk-tb-actions gx-2">
-                    <li class="nk-tb-action-hidden">
+                <div className="nk-tb-col nk-tb-col-tools">
+                  <ul className="nk-tb-actions gx-2">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Wallet"
                         aria-label="Wallet"
                       >
-                        <em class="icon ni ni-wallet-fill"></em>
+                        <em className="icon ni ni-wallet-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Send Email"
                         aria-label="Send Email"
                       >
-                        <em class="icon ni ni-mail-fill"></em>
+                        <em className="icon ni ni-mail-fill"></em>
                       </a>
                     </li>
-                    <li class="nk-tb-action-hidden">
+                    <li className="nk-tb-action-hidden">
                       <a
                         href="#"
-                        class="btn btn-sm btn-icon btn-trigger"
+                        className="btn btn-sm btn-icon btn-trigger"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title=""
                         data-bs-original-title="Suspend"
                         aria-label="Suspend"
                       >
-                        <em class="icon ni ni-user-cross-fill"></em>
+                        <em className="icon ni ni-user-cross-fill"></em>
                       </a>
                     </li>
                     <li>
-                      <div class="drodown">
+                      <div className="drodown">
                         <a
                           href="#"
-                          class="btn btn-sm btn-icon btn-trigger dropdown-toggle"
+                          className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
                           data-bs-toggle="dropdown"
                         >
-                          <em class="icon ni ni-more-h"></em>
+                          <em className="icon ni ni-more-h"></em>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                          <ul class="link-list-opt no-bdr">
+                        <div className="dropdown-menu dropdown-menu-end">
+                          <ul className="link-list-opt no-bdr">
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-eye"></em>
+                                <em className="icon ni ni-eye"></em>
                                 <span>View Details</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-repeat"></em>
+                                <em className="icon ni ni-repeat"></em>
                                 <span>Orders</span>
                               </a>
                             </li>
-                            <li class="divider"></li>
+                            <li className="divider"></li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-star"></em>
+                                <em className="icon ni ni-shield-star"></em>
                                 <span>Reset Pass</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-shield-off"></em>
+                                <em className="icon ni ni-shield-off"></em>
                                 <span>Reset 2FA</span>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <em class="icon ni ni-na"></em>
+                                <em className="icon ni ni-na"></em>
                                 <span>Suspend User</span>
                               </a>
                             </li>
@@ -2604,40 +2604,40 @@
               </div>
             </div>
           </div>
-          <div class="card-inner">
-            <ul class="pagination justify-content-center justify-content-md-start">
-              <li class="page-item">
-                <a class="page-link" href="#">
+          <div className="card-inner">
+            <ul className="pagination justify-content-center justify-content-md-start">
+              <li className="page-item">
+                <a className="page-link" href="#">
                   Prev
                 </a>
               </li>
-              <li class="page-item">
-                <a class="page-link" href="#">
+              <li className="page-item">
+                <a className="page-link" href="#">
                   1
                 </a>
               </li>
-              <li class="page-item">
-                <a class="page-link" href="#">
+              <li className="page-item">
+                <a className="page-link" href="#">
                   2
                 </a>
               </li>
-              <li class="page-item">
-                <span class="page-link">
-                  <em class="icon ni ni-more-h"></em>
+              <li className="page-item">
+                <span className="page-link">
+                  <em className="icon ni ni-more-h"></em>
                 </span>
               </li>
-              <li class="page-item">
-                <a class="page-link" href="#">
+              <li className="page-item">
+                <a className="page-link" href="#">
                   6
                 </a>
               </li>
-              <li class="page-item">
-                <a class="page-link" href="#">
+              <li className="page-item">
+                <a className="page-link" href="#">
                   7
                 </a>
               </li>
-              <li class="page-item">
-                <a class="page-link" href="#">
+              <li className="page-item">
+                <a className="page-link" href="#">
                   Next
                 </a>
               </li>

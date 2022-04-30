@@ -6,159 +6,159 @@ import Menu from "../components/Menu";
 const PersonalInfo = () => {
   return (
     <>
-      <div class="card-inner card-inner-lg">
-        <div class="nk-block-head nk-block-head-lg">
-          <div class="nk-block-between">
-            <div class="nk-block-head-content">
-              <h4 class="nk-block-title">Personal Information</h4>
-              <div class="nk-block-des">
+      <div className="card-inner card-inner-lg">
+        <div className="nk-block-head nk-block-head-lg">
+          <div className="nk-block-between">
+            <div className="nk-block-head-content">
+              <h4 className="nk-block-title">Personal Information</h4>
+              <div className="nk-block-des">
                 <p>
                   Basic info, like your name and address, that you use on Nio
                   Platform.
                 </p>
               </div>
             </div>
-            <div class="nk-block-head-content align-self-start d-lg-none">
+            <div className="nk-block-head-content align-self-start d-lg-none">
               <a
                 href="#"
-                class="toggle btn btn-icon btn-trigger mt-n1"
+                className="toggle btn btn-icon btn-trigger mt-n1"
                 data-target="userAside"
               >
-                <em class="icon ni ni-menu-alt-r"></em>
+                <em className="icon ni ni-menu-alt-r"></em>
               </a>
             </div>
           </div>
         </div>
-        <div class="nk-block">
-          <div class="nk-data data-list">
-            <div class="data-head">
-              <h6 class="overline-title">Basics</h6>
+        <div className="nk-block">
+          <div className="nk-data data-list">
+            <div className="data-head">
+              <h6 className="overline-title">Basics</h6>
             </div>
             {/*  <div
-              class="data-item"
+              className="data-item"
               data-bs-toggle="modal"
               data-bs-target="#profile-edit"
             >
-              <div class="data-col">
-                <span class="data-label">Full Name</span>
-                <span class="data-value">Abu Bin Ishtiyak</span>
+              <div className="data-col">
+                <span className="data-label">Full Name</span>
+                <span className="data-value">Abu Bin Ishtiyak</span>
               </div>
-              <div class="data-col data-col-end">
-                <span class="data-more">
-                  <em class="icon ni ni-forward-ios"></em>
+              <div className="data-col data-col-end">
+                <span className="data-more">
+                  <em className="icon ni ni-forward-ios"></em>
                 </span>
               </div>
             </div> */}
             <div
-              class="data-item"
+              className="data-item"
               data-bs-toggle="modal"
               data-bs-target="#profile-edit"
             >
-              <div class="data-col">
-                <span class="data-label">Display Name</span>
-                <span class="data-value">Ishtiyak</span>
+              <div className="data-col">
+                <span className="data-label">Display Name</span>
+                <span className="data-value">Ishtiyak</span>
               </div>
-              <div class="data-col data-col-end">
-                <span class="data-more">
-                  <em class="icon ni ni-forward-ios"></em>
+              <div className="data-col data-col-end">
+                <span className="data-more">
+                  <em className="icon ni ni-forward-ios"></em>
                 </span>
               </div>
             </div>
-            <div class="data-item">
-              <div class="data-col">
-                <span class="data-label">Email</span>
-                <span class="data-value">info@softnio.com</span>
+            <div className="data-item">
+              <div className="data-col">
+                <span className="data-label">Email</span>
+                <span className="data-value">info@softnio.com</span>
               </div>
-              <div class="data-col data-col-end">
-                <span class="data-more disable">
-                  <em class="icon ni ni-lock-alt"></em>
-                </span>
-              </div>
-            </div>
-            <div
-              class="data-item"
-              data-bs-toggle="modal"
-              data-bs-target="#profile-edit"
-            >
-              <div class="data-col">
-                <span class="data-label">Phone Number</span>
-                <span class="data-value text-soft">Not add yet</span>
-              </div>
-              <div class="data-col data-col-end">
-                <span class="data-more">
-                  <em class="icon ni ni-forward-ios"></em>
+              <div className="data-col data-col-end">
+                <span className="data-more disable">
+                  <em className="icon ni ni-lock-alt"></em>
                 </span>
               </div>
             </div>
             <div
-              class="data-item"
+              className="data-item"
               data-bs-toggle="modal"
               data-bs-target="#profile-edit"
             >
-              <div class="data-col">
-                <span class="data-label">Date of Birth</span>
-                <span class="data-value">29 Feb, 1986</span>
+              <div className="data-col">
+                <span className="data-label">Phone Number</span>
+                <span className="data-value text-soft">Not add yet</span>
               </div>
-              <div class="data-col data-col-end">
-                <span class="data-more">
-                  <em class="icon ni ni-forward-ios"></em>
+              <div className="data-col data-col-end">
+                <span className="data-more">
+                  <em className="icon ni ni-forward-ios"></em>
+                </span>
+              </div>
+            </div>
+            <div
+              className="data-item"
+              data-bs-toggle="modal"
+              data-bs-target="#profile-edit"
+            >
+              <div className="data-col">
+                <span className="data-label">Date of Birth</span>
+                <span className="data-value">29 Feb, 1986</span>
+              </div>
+              <div className="data-col data-col-end">
+                <span className="data-more">
+                  <em className="icon ni ni-forward-ios"></em>
                 </span>
               </div>
             </div>
             {/*   <div
-              class="data-item"
+              className="data-item"
               data-bs-toggle="modal"
               data-bs-target="#profile-edit"
               data-tab-target="#address"
             >
-              <div class="data-col">
-                <span class="data-label">Address</span>
-                <span class="data-value">
+              <div className="data-col">
+                <span className="data-label">Address</span>
+                <span className="data-value">
                   2337 Kildeer Drive,
                   <br />
                   Kentucky, Canada
                 </span>
               </div>
-              <div class="data-col data-col-end">
-                <span class="data-more">
-                  <em class="icon ni ni-forward-ios"></em>
+              <div className="data-col data-col-end">
+                <span className="data-more">
+                  <em className="icon ni ni-forward-ios"></em>
                 </span>
               </div>
             </div> */}
           </div>
-          <div class="nk-data data-list">
-            <div class="data-head">
-              <h6 class="overline-title">Preferences</h6>
+          <div className="nk-data data-list">
+            <div className="data-head">
+              <h6 className="overline-title">Preferences</h6>
             </div>
-            <div class="data-item">
-              <div class="data-col">
-                <span class="data-label">Language</span>
-                <span class="data-value">English (United State)</span>
+            <div className="data-item">
+              <div className="data-col">
+                <span className="data-label">Language</span>
+                <span className="data-value">English (United State)</span>
               </div>
-              <div class="data-col data-col-end">
-                <a href="#" class="link link-primary">
+              <div className="data-col data-col-end">
+                <a href="#" className="link link-primary">
                   Change Language
                 </a>
               </div>
             </div>
-            <div class="data-item">
-              <div class="data-col">
-                <span class="data-label">Date Format</span>
-                <span class="data-value">M d, YYYY</span>
+            <div className="data-item">
+              <div className="data-col">
+                <span className="data-label">Date Format</span>
+                <span className="data-value">M d, YYYY</span>
               </div>
-              <div class="data-col data-col-end">
-                <a href="#" class="link link-primary">
+              <div className="data-col data-col-end">
+                <a href="#" className="link link-primary">
                   Change
                 </a>
               </div>
             </div>
-            <div class="data-item">
-              <div class="data-col">
-                <span class="data-label">Timezone</span>
-                <span class="data-value">Bangladesh (GMT +6)</span>
+            <div className="data-item">
+              <div className="data-col">
+                <span className="data-label">Timezone</span>
+                <span className="data-value">Bangladesh (GMT +6)</span>
               </div>
-              <div class="data-col data-col-end">
-                <a href="#" class="link link-primary">
+              <div className="data-col data-col-end">
+                <a href="#" className="link link-primary">
                   Change
                 </a>
               </div>

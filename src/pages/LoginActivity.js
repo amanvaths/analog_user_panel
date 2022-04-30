@@ -12,246 +12,246 @@ const Loginactivity = () => {
   return (
     <>
       <div>
-        <div class="nk-app-root">
-          <div class="nk-main ">
+        <div className="nk-app-root">
+          <div className="nk-main ">
             <Menu />
-            <div class="nk-wrap">
+            <div className="nk-wrap">
               <Header />
-              <div class="nk-content nk-content-fluid">
-                <div class="container-xl wide-lg"></div>
-                <div class="nk-content-body">
-                  <div class="nk-block">
-                    <div class="card card-bordered">
-                      <div class="card-aside-wrap">
+              <div className="nk-content nk-content-fluid">
+                <div className="container-xl wide-lg"></div>
+                <div className="nk-content-body">
+                  <div className="nk-block">
+                    <div className="card card-bordered">
+                      <div className="card-aside-wrap">
                           {securitySettings == true ? <SecuritySettings/> : null}
                         
                         {personaInfo == true && <PersonalInfo />}
 
                         {activity == true ? (
-                          <div class="card-inner card-inner-lg">
-                            <div class="nk-block-head nk-block-head-lg">
-                              <div class="nk-block-between">
-                                <div class="nk-block-head-content">
-                                  <h4 class="nk-block-title">Login Activity</h4>
-                                  <div class="nk-block-des">
+                          <div className="card-inner card-inner-lg">
+                            <div className="nk-block-head nk-block-head-lg">
+                              <div className="nk-block-between">
+                                <div className="nk-block-head-content">
+                                  <h4 className="nk-block-title">Login Activity</h4>
+                                  <div className="nk-block-des">
                                     <p>
                                       Here is your last 20 login activities log.
-                                      <span class="text-soft">
-                                        <em class="icon ni ni-info"></em>
+                                      <span className="text-soft">
+                                        <em className="icon ni ni-info"></em>
                                       </span>
                                     </p>
                                   </div>
                                 </div>
-                                <div class="nk-block-head-content align-self-start d-lg-none">
+                                <div className="nk-block-head-content align-self-start d-lg-none">
                                   <a
                                     href="#"
-                                    class="toggle btn btn-icon btn-trigger mt-n1"
+                                    className="toggle btn btn-icon btn-trigger mt-n1"
                                     data-target="userAside"
                                   >
-                                    <em class="icon ni ni-menu-alt-r"></em>
+                                    <em className="icon ni ni-menu-alt-r"></em>
                                   </a>
                                 </div>
                               </div>
                             </div>
-                            <div class="nk-block card card-bordered">
-                              <table class="table table-ulogs">
-                                <thead class="table-light">
+                            <div className="nk-block card card-bordered">
+                              <table className="table table-ulogs">
+                                <thead className="table-light">
                                   <tr>
-                                    <th class="tb-col-os">
-                                      <span class="overline-title">
+                                    <th className="tb-col-os">
+                                      <span className="overline-title">
                                         Browser
-                                        <span class="d-sm-none">/ IP</span>
+                                        <span className="d-sm-none">/ IP</span>
                                       </span>
                                     </th>
-                                    <th class="tb-col-ip">
-                                      <span class="overline-title">IP</span>
+                                    <th className="tb-col-ip">
+                                      <span className="overline-title">IP</span>
                                     </th>
-                                    <th class="tb-col-time">
-                                      <span class="overline-title">Time</span>
+                                    <th className="tb-col-time">
+                                      <span className="overline-title">Time</span>
                                     </th>
-                                    <th class="tb-col-action">
-                                      <span class="overline-title">&nbsp;</span>
+                                    <th className="tb-col-action">
+                                      <span className="overline-title">&nbsp;</span>
                                     </th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                   <tr>
-                                    <td class="tb-col-os">Chrome on Window</td>
-                                    <td class="tb-col-ip">
-                                      <span class="sub-text">
+                                    <td className="tb-col-os">Chrome on Window</td>
+                                    <td className="tb-col-ip">
+                                      <span className="sub-text">
                                         192.149.122.128
                                       </span>
                                     </td>
-                                    <td class="tb-col-time">
-                                      <span class="sub-text">11:34 PM</span>
+                                    <td className="tb-col-time">
+                                      <span className="sub-text">11:34 PM</span>
                                     </td>
-                                    <td class="tb-col-action"></td>
+                                    <td className="tb-col-action"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tb-col-os">Mozilla on Window</td>
-                                    <td class="tb-col-ip">
-                                      <span class="sub-text">
+                                    <td className="tb-col-os">Mozilla on Window</td>
+                                    <td className="tb-col-ip">
+                                      <span className="sub-text">
                                         86.188.154.225
                                       </span>
                                     </td>
-                                    <td class="tb-col-time">
-                                      <span class="sub-text">
+                                    <td className="tb-col-time">
+                                      <span className="sub-text">
                                         Nov 20, 2019
-                                        <span class="d-none d-sm-inline-block">
+                                        <span className="d-none d-sm-inline-block">
                                           10:34 PM
                                         </span>
                                       </span>
                                     </td>
-                                    <td class="tb-col-action">
-                                      <a href="#" class="link-cross me-sm-n1">
-                                        <em class="icon ni ni-cross"></em>
+                                    <td className="tb-col-action">
+                                      <a href="#" className="link-cross me-sm-n1">
+                                        <em className="icon ni ni-cross"></em>
                                       </a>
                                     </td>
                                   </tr>
                                   <tr>
-                                    <td class="tb-col-os">Chrome on iMac</td>
-                                    <td class="tb-col-ip">
-                                      <span class="sub-text">
+                                    <td className="tb-col-os">Chrome on iMac</td>
+                                    <td className="tb-col-ip">
+                                      <span className="sub-text">
                                         192.149.122.128
                                       </span>
                                     </td>
-                                    <td class="tb-col-time">
-                                      <span class="sub-text">
+                                    <td className="tb-col-time">
+                                      <span className="sub-text">
                                         Nov 12, 2019
-                                        <span class="d-none d-sm-inline-block">
+                                        <span className="d-none d-sm-inline-block">
                                           08:56 PM
                                         </span>
                                       </span>
                                     </td>
-                                    <td class="tb-col-action">
-                                      <a href="#" class="link-cross me-sm-n1">
-                                        <em class="icon ni ni-cross"></em>
+                                    <td className="tb-col-action">
+                                      <a href="#" className="link-cross me-sm-n1">
+                                        <em className="icon ni ni-cross"></em>
                                       </a>
                                     </td>
                                   </tr>
                                   <tr>
-                                    <td class="tb-col-os">Chrome on Window</td>
-                                    <td class="tb-col-ip">
-                                      <span class="sub-text">
+                                    <td className="tb-col-os">Chrome on Window</td>
+                                    <td className="tb-col-ip">
+                                      <span className="sub-text">
                                         192.149.122.128
                                       </span>
                                     </td>
-                                    <td class="tb-col-time">
-                                      <span class="sub-text">
+                                    <td className="tb-col-time">
+                                      <span className="sub-text">
                                         Nov 03, 2019
-                                        <span class="d-none d-sm-inline-block">
+                                        <span className="d-none d-sm-inline-block">
                                           04:29 PM
                                         </span>
                                       </span>
                                     </td>
-                                    <td class="tb-col-action">
-                                      <a href="#" class="link-cross me-sm-n1">
-                                        <em class="icon ni ni-cross"></em>
+                                    <td className="tb-col-action">
+                                      <a href="#" className="link-cross me-sm-n1">
+                                        <em className="icon ni ni-cross"></em>
                                       </a>
                                     </td>
                                   </tr>
                                   <tr>
-                                    <td class="tb-col-os">Mozilla on Window</td>
-                                    <td class="tb-col-ip">
-                                      <span class="sub-text">
+                                    <td className="tb-col-os">Mozilla on Window</td>
+                                    <td className="tb-col-ip">
+                                      <span className="sub-text">
                                         86.188.154.225
                                       </span>
                                     </td>
-                                    <td class="tb-col-time">
-                                      <span class="sub-text">
+                                    <td className="tb-col-time">
+                                      <span className="sub-text">
                                         Oct 29, 2019
-                                        <span class="d-none d-sm-inline-block">
+                                        <span className="d-none d-sm-inline-block">
                                           09:38 AM
                                         </span>
                                       </span>
                                     </td>
-                                    <td class="tb-col-action">
-                                      <a href="#" class="link-cross me-sm-n1">
-                                        <em class="icon ni ni-cross"></em>
+                                    <td className="tb-col-action">
+                                      <a href="#" className="link-cross me-sm-n1">
+                                        <em className="icon ni ni-cross"></em>
                                       </a>
                                     </td>
                                   </tr>
                                   <tr>
-                                    <td class="tb-col-os">Chrome on iMac</td>
-                                    <td class="tb-col-ip">
-                                      <span class="sub-text">
+                                    <td className="tb-col-os">Chrome on iMac</td>
+                                    <td className="tb-col-ip">
+                                      <span className="sub-text">
                                         192.149.122.128
                                       </span>
                                     </td>
-                                    <td class="tb-col-time">
-                                      <span class="sub-text">
+                                    <td className="tb-col-time">
+                                      <span className="sub-text">
                                         Oct 23, 2019
-                                        <span class="d-none d-sm-inline-block">
+                                        <span className="d-none d-sm-inline-block">
                                           04:16 PM
                                         </span>
                                       </span>
                                     </td>
-                                    <td class="tb-col-action">
-                                      <a href="#" class="link-cross me-sm-n1">
-                                        <em class="icon ni ni-cross"></em>
+                                    <td className="tb-col-action">
+                                      <a href="#" className="link-cross me-sm-n1">
+                                        <em className="icon ni ni-cross"></em>
                                       </a>
                                     </td>
                                   </tr>
                                   <tr>
-                                    <td class="tb-col-os">Chrome on Window</td>
-                                    <td class="tb-col-ip">
-                                      <span class="sub-text">
+                                    <td className="tb-col-os">Chrome on Window</td>
+                                    <td className="tb-col-ip">
+                                      <span className="sub-text">
                                         192.149.122.128
                                       </span>
                                     </td>
-                                    <td class="tb-col-time">
-                                      <span class="sub-text">
+                                    <td className="tb-col-time">
+                                      <span className="sub-text">
                                         Oct 15, 2019
-                                        <span class="d-none d-sm-inline-block">
+                                        <span className="d-none d-sm-inline-block">
                                           11:41 PM
                                         </span>
                                       </span>
                                     </td>
-                                    <td class="tb-col-action">
-                                      <a href="#" class="link-cross me-sm-n1">
-                                        <em class="icon ni ni-cross"></em>
+                                    <td className="tb-col-action">
+                                      <a href="#" className="link-cross me-sm-n1">
+                                        <em className="icon ni ni-cross"></em>
                                       </a>
                                     </td>
                                   </tr>
                                   <tr>
-                                    <td class="tb-col-os">Mozilla on Window</td>
-                                    <td class="tb-col-ip">
-                                      <span class="sub-text">
+                                    <td className="tb-col-os">Mozilla on Window</td>
+                                    <td className="tb-col-ip">
+                                      <span className="sub-text">
                                         86.188.154.225
                                       </span>
                                     </td>
-                                    <td class="tb-col-time">
-                                      <span class="sub-text">
+                                    <td className="tb-col-time">
+                                      <span className="sub-text">
                                         Oct 13, 2019
-                                        <span class="d-none d-sm-inline-block">
+                                        <span className="d-none d-sm-inline-block">
                                           05:43 AM
                                         </span>
                                       </span>
                                     </td>
-                                    <td class="tb-col-action">
-                                      <a href="#" class="link-cross me-sm-n1">
-                                        <em class="icon ni ni-cross"></em>
+                                    <td className="tb-col-action">
+                                      <a href="#" className="link-cross me-sm-n1">
+                                        <em className="icon ni ni-cross"></em>
                                       </a>
                                     </td>
                                   </tr>
                                   <tr>
-                                    <td class="tb-col-os">Chrome on iMac</td>
-                                    <td class="tb-col-ip">
-                                      <span class="sub-text">
+                                    <td className="tb-col-os">Chrome on iMac</td>
+                                    <td className="tb-col-ip">
+                                      <span className="sub-text">
                                         192.149.122.128
                                       </span>
                                     </td>
-                                    <td class="tb-col-time">
-                                      <span class="sub-text">
+                                    <td className="tb-col-time">
+                                      <span className="sub-text">
                                         Oct 03, 2019
-                                        <span class="d-none d-sm-inline-block">
+                                        <span className="d-none d-sm-inline-block">
                                           04:12 AM
                                         </span>
                                       </span>
                                     </td>
-                                    <td class="tb-col-action">
-                                      <a href="#" class="link-cross me-sm-n1">
-                                        <em class="icon ni ni-cross"></em>
+                                    <td className="tb-col-action">
+                                      <a href="#" className="link-cross me-sm-n1">
+                                        <em className="icon ni ni-cross"></em>
                                       </a>
                                     </td>
                                   </tr>
@@ -262,44 +262,44 @@ const Loginactivity = () => {
                         ) : null}
 
                         <div
-                          class="card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg"
+                          className="card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg"
                           data-toggle-body="true"
                           data-content="userAside"
                           data-toggle-screen="lg"
                           data-toggle-overlay="true"
                         >
-                          <div class="card-inner-group">
-                            <div class="card-inner">
-                              <div class="user-card">
-                                <div class="user-avatar bg-primary">
+                          <div className="card-inner-group">
+                            <div className="card-inner">
+                              <div className="user-card">
+                                <div className="user-avatar bg-primary">
                                   <span>AB</span>
                                 </div>
-                                <div class="user-info">
-                                  <span class="lead-text">
+                                <div className="user-info">
+                                  <span className="lead-text">
                                     Abu Bin Ishtiyak
                                   </span>
-                                  <span class="sub-text">info@softnio.com</span>
+                                  <span className="sub-text">info@softnio.com</span>
                                 </div>
-                                <div class="user-action">
-                                  <div class="dropdown">
+                                <div className="user-action">
+                                  <div className="dropdown">
                                     <a
-                                      class="btn btn-icon btn-trigger me-n2"
+                                      className="btn btn-icon btn-trigger me-n2"
                                       data-bs-toggle="dropdown"
                                       href="#"
                                     >
-                                      <em class="icon ni ni-more-v"></em>
+                                      <em className="icon ni ni-more-v"></em>
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-end">
-                                      <ul class="link-list-opt no-bdr">
+                                    <div className="dropdown-menu dropdown-menu-end">
+                                      <ul className="link-list-opt no-bdr">
                                         <li>
                                           <a href="#">
-                                            <em class="icon ni ni-camera-fill"></em>
+                                            <em className="icon ni ni-camera-fill"></em>
                                             <span>Change Photo</span>
                                           </a>
                                         </li>
                                         <li>
                                           <a href="#">
-                                            <em class="icon ni ni-edit-fill"></em>
+                                            <em className="icon ni ni-edit-fill"></em>
                                             <span>Update Profile</span>
                                           </a>
                                         </li>
@@ -309,30 +309,30 @@ const Loginactivity = () => {
                                 </div>
                               </div>
                             </div>
-                            <div class="card-inner">
-                              <div class="user-account-info py-0">
-                                <h6 class="overline-title-alt">
+                            <div className="card-inner">
+                              <div className="user-account-info py-0">
+                                <h6 className="overline-title-alt">
                                   Nio Wallet Account
                                 </h6>
-                                <div class="user-balance">
+                                <div className="user-balance">
                                   12.395769
-                                  <small class="currency currency-btc">
+                                  <small className="currency currency-btc">
                                     BTC
                                   </small>
                                 </div>
-                                <div class="user-balance-sub">
+                                <div className="user-balance-sub">
                                   Locked
                                   <span>
                                     0.344939
-                                    <span class="currency currency-btc">
+                                    <span className="currency currency-btc">
                                       BTC
                                     </span>
                                   </span>
                                 </div>
                               </div>
                             </div>
-                            <div class="card-inner p-0">
-                              <ul class="link-list-menu">
+                            <div className="card-inner p-0">
+                              <ul className="link-list-menu">
                                 <li>
                                   <Link
                                     to="#"
@@ -342,19 +342,19 @@ const Loginactivity = () => {
                                       setSecuritySettings(false);
                                     }}
                                   >
-                                    <em class="icon ni ni-user-fill-c"></em>
+                                    <em className="icon ni ni-user-fill-c"></em>
                                     <span>Personal Infomation</span>
                                   </Link>
                                 </li>
                                 <li>
                                   <a href="/demo5/user-profile-notification.html">
-                                    <em class="icon ni ni-bell-fill"></em>
+                                    <em className="icon ni ni-bell-fill"></em>
                                     <span>Notifications</span>
                                   </a>
                                 </li>
                                 <li>
-                                  <Link class="active" to="#">
-                                    <em class="icon ni ni-activity-round-fill"></em>
+                                  <Link className="active" to="#">
+                                    <em className="icon ni ni-activity-round-fill"></em>
                                     <span
                                       onClick={() => {
                                         setActivity(true);
@@ -372,7 +372,7 @@ const Loginactivity = () => {
                                     setActivity(false);
                                     setPersonalInfo(false);
                                   }}>
-                                    <em class="icon ni ni-lock-alt-fill"></em>
+                                    <em className="icon ni ni-lock-alt-fill"></em>
                                     <span>Security Settings</span>
                                   </Link>
                                 </li>

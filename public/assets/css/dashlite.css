@@ -10167,7 +10167,7 @@ body.nav-shown { overflow: hidden; }
 
 .nk-main { position: relative; }
 
-.nk-wrap { display: flex; flex-direction: column; min-height: 100vh; }
+.nk-wrap { display: flex; flex-direction: column;}
 
 .nk-content { padding: 24px 4px; }
 
@@ -10376,6 +10376,7 @@ body.nav-shown { overflow: hidden; }
 @media (min-width: 1200px) { .nk-sidebar { transform: translateX(0); } }
 
 @media (min-width: 1200px) { .nk-sidebar { transform: translateX(0); width: 340px; }
+
   .nk-sidebar .nk-sidebar-content .nk-sidebar-menu { padding-top: 2.5rem; }
   .nk-sidebar + .nk-wrap { padding-left: 340px; }
   .nk-sidebar + .nk-wrap > .nk-header-fixed { left: 340px; }
