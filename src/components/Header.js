@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 class Header extends React.Component {
   render() {
     return (
       <>
-        <div class="nk-header nk-header-fluid nk-header-fixed is-light">
+        <div class="nk-header nk-header-fluid is-light">
           <div class="container-fluid">
             <div class="nk-header-wrap">
               <div class="nk-menu-trigger d-xl-none ml-n1">
@@ -70,11 +71,10 @@ class Header extends React.Component {
                           </div> */}
                         </div>
 
-                        {/* Energy */}
-                        {/* <div class="energy">
+                        <div class="energy">
                           <div class="nk-block-head-content">
                             <ul class="nk-block-tools gx-3">
-                              <divx></divx>
+                              <divx></divx> 
                               <divx></divx>
                               <divx></divx>
                               <divx></divx>
@@ -100,7 +100,7 @@ class Header extends React.Component {
                               {"  "} J]
                             </div>
                           </div>
-                        </div> */}
+                        </div>
                       </div>
                     </div>
                   </li>
@@ -213,7 +213,7 @@ class Header extends React.Component {
                       </div>
                     </a>
 
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    {/* <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       <div class="user-toggle">
                         <div class="user-avatar sm">
                           <em class="icon ni ni-user-alt"></em>
@@ -228,10 +228,8 @@ class Header extends React.Component {
                         </div>
                       </div>
                     </a>
-
-
-
-                        {/* Vipin */}
+ */}
+                    {/* Vipin */}
                     {/* <div class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1">
                       <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                         <div class="user-card">
@@ -302,10 +300,9 @@ class Header extends React.Component {
                       </div>
                     </div> */}
 
+                    {/* Amit */}
 
-                        {/* Amit */}
-
-                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1">
+                    <div class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1">
                       <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                         <div class="user-card">
                           <div class="user-avatar">
@@ -352,10 +349,10 @@ class Header extends React.Component {
                             </a>
                           </li>
                           <li>
-                            <a href="html/crypto/profile-activity.html">
+                            <Link to="/loginactivity">
                               <em class="icon ni ni-activity-alt"></em>
                               <span>Login Activity</span>
-                            </a>
+                            </Link>
                           </li>
                           <li>
                             <a class="dark-switch" href="#">
@@ -376,10 +373,6 @@ class Header extends React.Component {
                         </ul>
                       </div>
                     </div>
-
-
-
-
                   </li>
                   {/* Remove */}
                 </ul>
