@@ -100,12 +100,7 @@ const Loginactivity = () => {
                                 <tbody>
                                   {
                                       logData.map((element, index)=>{
-
                                         const a = new Date(element.createdAt)
-                                      
-
-
-                                       
                                         return(
                                           <tr>
                                           <td className="tb-col-os">{element.browser_name}</td>

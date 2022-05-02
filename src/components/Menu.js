@@ -207,7 +207,7 @@ class Menu extends React.Component {
                       <h6 className="overline-title">Inceptive</h6>
                     </li>
                     <li className="nk-menu-item">
-                      <Link to="/" className="nk-menu-link">
+                      <Link to="/home" className="nk-menu-link">
                         <span className="nk-menu-icon">
                           <em className="icon ni ni-dashboard"></em>
                         </span>
