@@ -28,10 +28,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route
-            path="home"
-            element={email && token ? <Home /> : <Navigate to="/login" />}
-          />
+          <Route path="/home" element={email && token ? <Home /> : <Navigate to='/Login'/>} />
           <Route path="/Psecurity" element={<Psecurity />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path="/Login" element={<Login />} />
@@ -50,7 +47,7 @@ function App() {
             element={email && token ? <Wallet /> : <Navigate to="/login" />}
           />
           <Route path="/loginactivity" element={<Loginactivity />} />
-          <Route path="/cryptoTransaction" element={<CryptoTransaction />} />
+          <Route path="/cryptoTransaction/:title" element={<CryptoTransaction />} />
           <Route path="/userlist" element={<UserList />} />
         </Routes>
       </BrowserRouter>
