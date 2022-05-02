@@ -10,6 +10,7 @@ const Wallet = (props) => {
   const [coinData, setCoinData] = useState([]);
   const [walletDetails, setWalletDetails] = useState([]);
   const [coinWW, setCoinWW] = useState([]);
+
   const userInfo = localStorage.getItem("email");
 
   const getData = async () => {
@@ -20,7 +21,6 @@ const Wallet = (props) => {
         //console.log(coin);
         cd.push(coin[1]);
       }
-
       //console.log(cd, "coin data");
       setCoinData([...cd]);
     } catch (error) {
@@ -28,23 +28,27 @@ const Wallet = (props) => {
     }
   };
 
-  const email = localStorage.getItem("email")
-
-  
-
   async function getWalletDetails() {
     const walletAddress = await axios.post(
       "http://localhost:3001/api/getwalletdata",
-      { email: email }
+      { email: userInfo }
     );
     // console.log(walletAddress.data);
     setWalletDetails([...walletAddress.data]);
   }
-  const a = localStorage.getItem("token");
-  console.log(a, "fdjj");
+
+  const updateWallet = async()=>{
+      try {
+          const data = await axios.post('http://localhost:3001/api//transaction_update', {email: userInfo})
+      } catch (error) {
+        console.log(error);
+      }
+  }
+  
   useEffect(() => {
     getData();
     getWalletDetails();
+    updateWallet()
   }, []);
 
   useEffect(() => {

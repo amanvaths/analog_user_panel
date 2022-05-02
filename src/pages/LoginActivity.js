@@ -11,6 +11,7 @@ const Loginactivity = () => {
   const [personaInfo, setPersonalInfo] = useState(false);
   const [securitySettings, setSecuritySettings] = useState(false)
   const [logData, setLogData] = useState([])
+  const [dt, setDt] = useState('')
   const email = localStorage.getItem("email")
 
   const getLoginLog = async()=>{
@@ -22,6 +23,8 @@ const Loginactivity = () => {
       console.log(error);
     }
   }
+  
+   
 
   useEffect(()=>{
     getLoginLog()
@@ -97,6 +100,12 @@ const Loginactivity = () => {
                                 <tbody>
                                   {
                                       logData.map((element, index)=>{
+
+                                        const a = new Date(element.createdAt)
+                                      
+
+
+                                       
                                         return(
                                           <tr>
                                           <td className="tb-col-os">{element.browser_name}</td>
@@ -107,9 +116,9 @@ const Loginactivity = () => {
                                             </span>
                                           </td>
                                           <td className="tb-col-time">
-                                            <span className="sub-text">11:34 PM</span>
+                                            <span className="sub-text">{a.toDateString() } {a.toLocaleTimeString()}</span>
                                           </td>
-                                          <td className="tb-col-action"></td>
+                                          <td className="tb-col-action">{}</td>
                                         </tr>
                                         )
                                       })
