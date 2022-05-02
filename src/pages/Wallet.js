@@ -39,7 +39,7 @@ const Wallet = (props) => {
 
   const updateWallet = async()=>{
       try {
-          const data = await axios.post('http://localhost:3001/api//transaction_update', {email: userInfo})
+          const data = await axios.post('http://localhost:3001/api/transaction_update', {email: userInfo})
       } catch (error) {
         console.log(error);
       }

@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useEffect, useState} from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Menu from "../components/Menu";
 import { useParams } from "react-router-dom";
+import axios from  'axios'
 
 const CryptoTransaction = ()=>{
+  const {title} = useParams();
+  const email = localStorage.getItem('email');
+  const [history, setHistory] = useState([]);
 
-  const {title} = useParams()
+  const getTrnsaction = async()=>{
+   try {
+     console.log(email, title,"::Parameter");
+     const data = await axios.post('http://localhost:3001/api/transaction_history', {email: email, symbol: title})
+     console.log(data.data, ":: response from tranction api");
+     setHistory(data.data)
+   } catch (error) {
+      console.log(error);
+   }
+  }
+
+  useEffect(()=>{
+    getTrnsaction()
+  },[])
     return(
         <>
         <div>
@@ -315,9 +332,7 @@ const CryptoTransaction = ()=>{
                         <div className="nk-tb-list nk-tb-tnx">
                           <div className="nk-tb-item nk-tb-head">
                             <div className="nk-tb-col"><span>Details</span></div>
-                            <div className="nk-tb-col tb-col-xxl">
-                              <span>Source</span>
-                            </div>
+                           
                             <div className="nk-tb-col tb-col-lg">
                               <span>Order</span>
                             </div>
@@ -334,7 +349,123 @@ const CryptoTransaction = ()=>{
                             </div>
                             <div className="nk-tb-col nk-tb-col-tools"></div>
                           </div>
-                          <div className="nk-tb-item">
+                          {
+                              history.map((element, index)=>{
+                                return(
+                                  <div className="nk-tb-item">
+                            <div className="nk-tb-col">
+                              <div className="nk-tnx-type">
+                                <div
+                                  className="nk-tnx-type-icon bg-success-dim text-success"
+                                >
+                                  <em className="icon ni ni-arrow-up-right"></em>
+                                </div>
+                                <div className="nk-tnx-type-text">
+                                  <span className="tb-lead">Deposited Funds</span
+                                  ><span className="tb-date"
+                                    >18/10/2019 12:04 PM</span
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                           
+                            <div className="nk-tb-col tb-col-lg">
+                              <span className="tb-lead-sub">YWLX52JG73</span
+                              ><span className="badge badge-dot bg-success"
+                                >Deposit</span
+                              >
+                            </div>
+                            <div className="nk-tb-col text-end">
+                              <span className="tb-amount"
+                                >
+                                  {element.amount}
+                                  <span>{element.symbol}</span></span
+                              ><span className="tb-amount-sm">1290.49 USD</span>
+                            </div>
+                            <div className="nk-tb-col text-end tb-col-sm">
+                              <span className="tb-amount"
+                                >{element.balance} <span>BTC</span></span
+                              ><span className="tb-amount-sm">101290.49 USD</span>
+                            </div>
+                            <div className="nk-tb-col nk-tb-col-status">
+                              <div className="dot dot-success d-md-none"></div>
+                              <span
+                                className="badge badge-sm badge-dim bg-outline-success d-none d-md-inline-flex"
+                                >Completed</span
+                              >
+                            </div>
+                            <div className="nk-tb-col nk-tb-col-tools">
+                              <ul className="nk-tb-actions gx-2">
+                                <li className="nk-tb-action-hidden">
+                                  <a
+                                    href="#"
+                                    className="bg-white btn btn-sm btn-outline-light btn-icon"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="Approve"
+                                    ><em className="icon ni ni-done"></em
+                                  ></a>
+                                </li>
+                                <li className="nk-tb-action-hidden">
+                                  <a
+                                    href="#tranxDetails"
+                                    data-bs-toggle="modal"
+                                    className="bg-white btn btn-sm btn-outline-light btn-icon btn-tooltip"
+                                    title="Details"
+                                    ><em className="icon ni ni-eye"></em
+                                  ></a>
+                                </li>
+                                <li>
+                                  <div className="dropdown">
+                                    <a
+                                      href="#"
+                                      className="dropdown-toggle bg-white btn btn-sm btn-outline-light btn-icon"
+                                      data-bs-toggle="dropdown"
+                                      ><em className="icon ni ni-more-h"></em
+                                    ></a>
+                                    <div
+                                      className="dropdown-menu dropdown-menu-end"
+                                    >
+                                      <ul className="link-list-opt">
+                                        <li>
+                                          <a href="#"
+                                            ><em className="icon ni ni-done"></em
+                                            ><span>Approve</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a href="#"
+                                            ><em
+                                              className="icon ni ni-cross-round"
+                                            ></em
+                                            ><span>Reject</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a href="#"
+                                            ><em className="icon ni ni-repeat"></em
+                                            ><span>Check</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a
+                                            href="#tranxDetails"
+                                            data-bs-toggle="modal"
+                                            ><em className="icon ni ni-eye"></em
+                                            ><span>View Details</span></a
+                                          >
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                                )
+                              })
+                          }
+                          {/* <div className="nk-tb-item">
                             <div className="nk-tb-col">
                               <div className="nk-tnx-type">
                                 <div
@@ -445,7 +576,7 @@ const CryptoTransaction = ()=>{
                                 </li>
                               </ul>
                             </div>
-                          </div>
+                          </div> */}
                           <div className="nk-tb-item">
                             <div className="nk-tb-col">
                               <div className="nk-tnx-type">
@@ -475,7 +606,7 @@ const CryptoTransaction = ()=>{
                             </div>
                             <div className="nk-tb-col text-end">
                               <span className="tb-amount"
-                                >+ 0.010201 <span>BTC</span></span
+                                ><span>BTC</span></span
                               ><span className="tb-amount-sm">1290.49 USD</span>
                             </div>
                             <div className="nk-tb-col text-end tb-col-sm">
