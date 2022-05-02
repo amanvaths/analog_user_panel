@@ -1,14 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Menu from "../components/Menu";
 import PersonalInfo from "../components/PersonalInfo";
 import SecuritySettings from "../components/SecuritySettings";
 import { Link } from "react-router-dom";
+import axios from "axios";
 const Loginactivity = () => {
   const [activity, setActivity] = useState(true);
   const [personaInfo, setPersonalInfo] = useState(false);
   const [securitySettings, setSecuritySettings] = useState(false)
+  const [logData, setLogData] = useState([])
+  const email = localStorage.getItem("email")
+
+  const getLoginLog = async()=>{
+
+    try {
+      const data = await axios.post('http://localhost:3001/api/loginhistory',{email: email})
+      setLogData(data.data.login_record)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(()=>{
+    getLoginLog()
+  },[])
   return (
     <>
       <div>
@@ -34,8 +51,8 @@ const Loginactivity = () => {
                                 <div className="nk-block-head-content">
                                   <h4 className="nk-block-title">Login Activity</h4>
                                   <div className="nk-block-des">
-                                    <p>
-                                      Here is your last 20 login activities log.
+                                    <p> {` Here is your last ${logData.length} login activities log.`}
+                                     
                                       <span className="text-soft">
                                         <em className="icon ni ni-info"></em>
                                       </span>
@@ -64,6 +81,9 @@ const Loginactivity = () => {
                                       </span>
                                     </th>
                                     <th className="tb-col-ip">
+                                      <span className="overline-title">Device</span>
+                                    </th>
+                                    <th className="tb-col-ip">
                                       <span className="overline-title">IP</span>
                                     </th>
                                     <th className="tb-col-time">
@@ -75,186 +95,27 @@ const Loginactivity = () => {
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <td className="tb-col-os">Chrome on Window</td>
-                                    <td className="tb-col-ip">
-                                      <span className="sub-text">
-                                        192.149.122.128
-                                      </span>
-                                    </td>
-                                    <td className="tb-col-time">
-                                      <span className="sub-text">11:34 PM</span>
-                                    </td>
-                                    <td className="tb-col-action"></td>
-                                  </tr>
-                                  <tr>
-                                    <td className="tb-col-os">Mozilla on Window</td>
-                                    <td className="tb-col-ip">
-                                      <span className="sub-text">
-                                        86.188.154.225
-                                      </span>
-                                    </td>
-                                    <td className="tb-col-time">
-                                      <span className="sub-text">
-                                        Nov 20, 2019
-                                        <span className="d-none d-sm-inline-block">
-                                          10:34 PM
-                                        </span>
-                                      </span>
-                                    </td>
-                                    <td className="tb-col-action">
-                                      <a href="#" className="link-cross me-sm-n1">
-                                        <em className="icon ni ni-cross"></em>
-                                      </a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td className="tb-col-os">Chrome on iMac</td>
-                                    <td className="tb-col-ip">
-                                      <span className="sub-text">
-                                        192.149.122.128
-                                      </span>
-                                    </td>
-                                    <td className="tb-col-time">
-                                      <span className="sub-text">
-                                        Nov 12, 2019
-                                        <span className="d-none d-sm-inline-block">
-                                          08:56 PM
-                                        </span>
-                                      </span>
-                                    </td>
-                                    <td className="tb-col-action">
-                                      <a href="#" className="link-cross me-sm-n1">
-                                        <em className="icon ni ni-cross"></em>
-                                      </a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td className="tb-col-os">Chrome on Window</td>
-                                    <td className="tb-col-ip">
-                                      <span className="sub-text">
-                                        192.149.122.128
-                                      </span>
-                                    </td>
-                                    <td className="tb-col-time">
-                                      <span className="sub-text">
-                                        Nov 03, 2019
-                                        <span className="d-none d-sm-inline-block">
-                                          04:29 PM
-                                        </span>
-                                      </span>
-                                    </td>
-                                    <td className="tb-col-action">
-                                      <a href="#" className="link-cross me-sm-n1">
-                                        <em className="icon ni ni-cross"></em>
-                                      </a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td className="tb-col-os">Mozilla on Window</td>
-                                    <td className="tb-col-ip">
-                                      <span className="sub-text">
-                                        86.188.154.225
-                                      </span>
-                                    </td>
-                                    <td className="tb-col-time">
-                                      <span className="sub-text">
-                                        Oct 29, 2019
-                                        <span className="d-none d-sm-inline-block">
-                                          09:38 AM
-                                        </span>
-                                      </span>
-                                    </td>
-                                    <td className="tb-col-action">
-                                      <a href="#" className="link-cross me-sm-n1">
-                                        <em className="icon ni ni-cross"></em>
-                                      </a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td className="tb-col-os">Chrome on iMac</td>
-                                    <td className="tb-col-ip">
-                                      <span className="sub-text">
-                                        192.149.122.128
-                                      </span>
-                                    </td>
-                                    <td className="tb-col-time">
-                                      <span className="sub-text">
-                                        Oct 23, 2019
-                                        <span className="d-none d-sm-inline-block">
-                                          04:16 PM
-                                        </span>
-                                      </span>
-                                    </td>
-                                    <td className="tb-col-action">
-                                      <a href="#" className="link-cross me-sm-n1">
-                                        <em className="icon ni ni-cross"></em>
-                                      </a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td className="tb-col-os">Chrome on Window</td>
-                                    <td className="tb-col-ip">
-                                      <span className="sub-text">
-                                        192.149.122.128
-                                      </span>
-                                    </td>
-                                    <td className="tb-col-time">
-                                      <span className="sub-text">
-                                        Oct 15, 2019
-                                        <span className="d-none d-sm-inline-block">
-                                          11:41 PM
-                                        </span>
-                                      </span>
-                                    </td>
-                                    <td className="tb-col-action">
-                                      <a href="#" className="link-cross me-sm-n1">
-                                        <em className="icon ni ni-cross"></em>
-                                      </a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td className="tb-col-os">Mozilla on Window</td>
-                                    <td className="tb-col-ip">
-                                      <span className="sub-text">
-                                        86.188.154.225
-                                      </span>
-                                    </td>
-                                    <td className="tb-col-time">
-                                      <span className="sub-text">
-                                        Oct 13, 2019
-                                        <span className="d-none d-sm-inline-block">
-                                          05:43 AM
-                                        </span>
-                                      </span>
-                                    </td>
-                                    <td className="tb-col-action">
-                                      <a href="#" className="link-cross me-sm-n1">
-                                        <em className="icon ni ni-cross"></em>
-                                      </a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td className="tb-col-os">Chrome on iMac</td>
-                                    <td className="tb-col-ip">
-                                      <span className="sub-text">
-                                        192.149.122.128
-                                      </span>
-                                    </td>
-                                    <td className="tb-col-time">
-                                      <span className="sub-text">
-                                        Oct 03, 2019
-                                        <span className="d-none d-sm-inline-block">
-                                          04:12 AM
-                                        </span>
-                                      </span>
-                                    </td>
-                                    <td className="tb-col-action">
-                                      <a href="#" className="link-cross me-sm-n1">
-                                        <em className="icon ni ni-cross"></em>
-                                      </a>
-                                    </td>
-                                  </tr>
+                                  {
+                                      logData.map((element, index)=>{
+                                        return(
+                                          <tr>
+                                          <td className="tb-col-os">{element.browser_name}</td>
+                                          <td className="tb-col-os">{element.request_device}</td>
+                                          <td className="tb-col-ip">
+                                            <span className="sub-text">
+                                              {element.request_address}
+                                            </span>
+                                          </td>
+                                          <td className="tb-col-time">
+                                            <span className="sub-text">11:34 PM</span>
+                                          </td>
+                                          <td className="tb-col-action"></td>
+                                        </tr>
+                                        )
+                                      })
+                                  }
+
+                                  
                                 </tbody>
                               </table>
                             </div>

@@ -3,19 +3,12 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import {MdOutlineContentCopy} from 'react-icons/md'
+import { Link } from "react-router-dom";
 
 const Card1 = (props) => {
   const walletInfo = props.wallet;
-
-  // const [text, setText] = useState("");
   const [copied, setCopied] = useState(false);
 
-  // const onCopyText = () => {
-  //   setIsCopied(true);
-  //   setTimeout(() => {
-  //     setIsCopied(false);
-  //   }, 1000);
-  // };
   
    const addString = props.address;
   const first = addString?.substring(0, 20);
@@ -32,9 +25,9 @@ const Card1 = (props) => {
                 <div className="nk-wgw-inner">
                   <div className="row">
                     <div className="col-6">
-                      <a
+                      <Link
                         className="nk-wgw-name"
-                        href="/demo5/crypto/wallet-bitcoin.html"
+                        to={`/cryptoTransaction/${props.lable}`}
                       >
                         <div className="nk-wgw-icon is-default">
                           <img
@@ -45,7 +38,7 @@ const Card1 = (props) => {
                           {/* <em className="icon ni ni-sign-kobo"></em> */}
                         </div>
                         <h5 className="nk-wgw-title title ml-2">{props.title}</h5>
-                      </a>
+                      </Link>
                       <div className="nk-wgw-balance">
                         <div className="amount">
                           {props.price}
