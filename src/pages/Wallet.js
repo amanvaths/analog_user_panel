@@ -12,7 +12,6 @@ const Wallet = (props) => {
   const [coinWW, setCoinWW] = useState([]);
   const userInfo = localStorage.getItem("email");
 
- 
   const getData = async () => {
     try {
       const res = await axios.get("http://localhost:3001/api/getCoinData");
@@ -31,10 +30,7 @@ const Wallet = (props) => {
 
   const email = localStorage.getItem("email")
 
-    
-  // useEffect(async()=>{
-  //   window.location.reload(axios.get("http://localhost:3001/api/transaction_history"))
-  // },[coinWW])
+  
 
   async function getWalletDetails() {
     const walletAddress = await axios.post(
@@ -54,9 +50,7 @@ const Wallet = (props) => {
   useEffect(() => {
     // console.log("", coinData);
     if (coinData.length > 0 && walletDetails.length > 0) {
-      const cd = [{
-        
-      }];
+      const cd = [];
       for (let coind of coinData) {
         const w = walletDetails.filter((w) => w.symbol == coind.symbol);
         cd.push({ ...coind, wallet: w[0] });
