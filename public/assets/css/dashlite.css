@@ -2810,7 +2810,7 @@ a.bg-lighter:hover, a.bg-lighter:focus, button.bg-lighter:hover, button.bg-light
 
 .min-vw-100 { min-width: 100vw !important; }
 
-.min-vh-100 { min-height: 100vh !important; }
+/* .min-vh-100 { min-height: 100vh !important; } */
 
 .vw-100 { width: 100vw !important; }
 
@@ -10186,7 +10186,7 @@ body.nav-shown { overflow: hidden; }
 
 .nk-content-body { flex-grow: 1; }
 
-.nk-wrap-nosidebar .nk-content { padding: 0 !important; min-height: 100vh; display: flex; flex-direction: column; }
+.nk-wrap-nosidebar .nk-content { padding: 0 !important; min-height: 80%; display: flex; flex-direction: column; }
 
 .logo-link { position: relative; display: inline-block; align-items: center; }
 
@@ -13372,7 +13372,7 @@ p > span > .icon.ni { vertical-align: middle; }
   .nk-wgw-actions { padding-left: 1.5em; padding-right: 1.5rem; }
   .nk-wgw-actions a { font-size: 13px; } }
 
-.nk-wgw.sm .nk-wgw-icon { height: 24px; width: 24px; font-size: 14px; margin-right: 0.5rem; }
+.nk-wgw.sm .nk-wgw-icon {  font-size: 14px; margin-right: 0.5rem; }
 
 .nk-wgw.sm .nk-wgw-icon.is-default:after { bottom: -8px; right: -8px; height: 20px; width: 20px; font-size: 13px; }
 
@@ -42091,7 +42091,7 @@ body.nav-shown {
 .nk-wrap {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 80%;
 }
 .nk-content {
   padding: 24px 4px;
@@ -49957,8 +49957,8 @@ button.close {
 }
 .nk-wgw-icon {
   position: relative;
-  height: 32px;
-  width: 32px;
+  /* height: 32px;
+  width: 32px; */
   font-size: 20px;
   border-radius: 50%;
   background: #8094ae;
@@ -83347,7 +83347,7 @@ body.nav-shown {
 .nk-wrap {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 80%;
 }
 .nk-content {
   padding: 24px 4px;
@@ -91213,8 +91213,8 @@ button.close {
 }
 .nk-wgw-icon {
   position: relative;
-  height: 32px;
-  width: 32px;
+ /*  height: 32px;
+  width: 32px; */
   font-size: 20px;
   border-radius: 50%;
   background: #8094ae;
