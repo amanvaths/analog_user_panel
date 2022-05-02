@@ -29,7 +29,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route
-            path="Home"
+            path="home"
             element={email && token ? <Home /> : <Navigate to="/login" />}
           />
           <Route path="/Psecurity" element={<Psecurity />} />

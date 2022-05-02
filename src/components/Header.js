@@ -11,7 +11,7 @@ const Header = () => {
   };
   return (
     <>
-      <div className="nk-header nk-header-fluid is-light">
+      <div className="nk-header nk-header-fluid is-light ">
         <div className="container-fluid">
           <div className="nk-header-wrap">
             <div className="nk-menu-trigger d-xl-none ml-n1">
@@ -120,7 +120,10 @@ const Header = () => {
                       <em className="icon ni ni-bell"></em>
                     </div>
                   </a>
-                  <div className="dropdown-menu dropdown-menu-xl dropdown-menu-right dropdown-menu-s2">
+                  <div
+                    className="dropdown-menu dropdown-menu-xl dropdown-menu-right dropdown-menu-s2"
+                    style={{ width: 305 }}
+                  >
                     <div className="dropdown-head">
                       <span className="sub-title nk-dropdown-title">
                         Notifications
@@ -234,7 +237,10 @@ const Header = () => {
                         </div> */}
                     </div>
                   </a>
-                  <div class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1">
+                  <div
+                    class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1"
+                    style={{ padding: 11 }}
+                  >
                     <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                       <div class="user-card">
                         <div class="user-avatar">
@@ -249,7 +255,12 @@ const Header = () => {
                       </div>
                     </div>
                     <div className="dropdown-inner user-account-info">
-                      <h6 className="overline-title-alt">Nio Wallet Account</h6>
+                      <h6
+                        className="overline-title-alt"
+                        style={{ marginBottom: 10, marginTop: -20 }}
+                      >
+                        Nio Wallet Account
+                      </h6>
                       <div className="user-balance">
                         12.395769{" "}
                         <small className="currency currency-btc">BTC</small>
@@ -281,10 +292,10 @@ const Header = () => {
                           </a>
                         </li>
                         <li>
-                          <a href="html/crypto/profile-activity.html">
+                          <Link to="/loginactivity">
                             <em className="icon ni ni-activity-alt"></em>
                             <span>Login Activity</span>
-                          </a>
+                          </Link>
                         </li>
                         <li>
                           <a className="dark-switch" href="#">

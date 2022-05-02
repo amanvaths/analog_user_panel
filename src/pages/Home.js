@@ -36,8 +36,11 @@ class Home extends React.Component {
     axios.get("http://localhost:3001/api/getpresale").then((res) => {
       console.log(res.data.user_data, "res frefdfd");
       this.setState({ res: res.data.user_data });
+      console.log(this.state.res, 
+        '::data')
     });
   }
+
   
 
   render() {
@@ -100,9 +103,13 @@ class Home extends React.Component {
                 arrows={false}
                 itemclassName="carousel-item-padding-80-px"
                 containerclassName="carousel-container"
-                className="position-absolute top-50 start-50 translate-middle"
+                // className="position-absolute top-50 start-50 translate-middle"
               >
-                {this.state.res.map((data) => {
+                {
+              
+
+                this.state.res.map((data) => {
+                  console.log(data.levelname, "level name");
                   return (
                     <Getpresale
                       levelname={data.levelname}
@@ -111,7 +118,8 @@ class Home extends React.Component {
                       duration={data.duration}
                     />
                   );
-                })}
+                })
+                }
               </Carousel>
 
               <div className="nk-content nk-content-fluid">

@@ -45,7 +45,7 @@ class Menu extends React.Component {
                 <div className="nk-sidebar-widget d-none d-xl-block">
                   <div className="user-account-info between-center">
                     <div className="user-account-main">
-                      <h6 className="overline-title-alt">Available Balance</h6>
+                      <h6 className="overline-title-alt " style={{paddingBottom:14}}>Available Balance</h6>
                       <div className="user-balance">
                         2.014095{" "}
                         <small className="currency currency-btc">ANA</small>
@@ -215,7 +215,7 @@ class Menu extends React.Component {
                       <h6 className="overline-title">Inceptive</h6>
                     </li>
                     <li className="nk-menu-item">
-                      <Link to="/" className="nk-menu-link">
+                      <Link to="/home" className="nk-menu-link">
                         <span className="nk-menu-icon">
                           <em className="icon ni ni-dashboard"></em>
                         </span>

@@ -100,6 +100,9 @@ h6 {
     position: relative;
     right: 40px;
   }
+  .dropMenu{
+    right: 0px !important;
+  }
   .energy {
     /* margin-top: 15px; */
     padding-top: -20px;
@@ -128,6 +131,9 @@ h6 {
 @media (max-width: 380px) {
   .dropdown {
     right: 100px;
+  }
+  .dropMenu{
+    right: 0px !important;
   }
   .nk-block-head-content {
     right: 150px;
@@ -192,6 +198,17 @@ h6 {
   .react-multiple-carousel__arrow {
     display: none;
   }
+  .input-group{
+    margin-left: 33px;
+  }
+  .affiliates{
+    direction: rtl;
+   margin-right: -33px;
+  }
+  .dropMenu{
+    right: -10px !important;
+  }
+  
 }
 @media (max-width: 377px) {
   .nk-quick-nav > li {
@@ -326,4 +343,12 @@ h6 {
 .btn-outline-light {
   color: black;
   border-color: black;
+}
+
+.ni-more-h{
+  padding: 0px 0px  ;
+}
+
+.btn-trigger{
+  padding: 0px 4px !important;
 }
