@@ -16,7 +16,7 @@ import ForgetPassword from "./pages/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword";
 import ResendOtp from "./pages/ResendOtp";
 import Wallet from "./pages/Wallet";
-import Loginactivity from "./pages/LoginActivity";
+import AccountSettings from "./pages/AccountSettings";
 import CryptoTransaction from "./pages/CryptoTransaction";
 import UserList from "./pages/UserList";
 function App() {
@@ -46,7 +46,7 @@ function App() {
             path="/wallet"
             element={email && token ? <Wallet /> : <Navigate to="/login" />}
           />
-          <Route path="/loginactivity" element={<Loginactivity />} />
+          <Route path="/accountSettings" element={<AccountSettings />} />
           <Route path="/cryptoTransaction/:title" element={<CryptoTransaction />} />
           <Route path="/userlist" element={<UserList />} />
         </Routes>

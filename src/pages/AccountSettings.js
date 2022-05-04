@@ -6,29 +6,30 @@ import PersonalInfo from "../components/PersonalInfo";
 import SecuritySettings from "../components/SecuritySettings";
 import { Link } from "react-router-dom";
 import axios from "axios";
-const Loginactivity = () => {
-  const [activity, setActivity] = useState(true);
-  const [personaInfo, setPersonalInfo] = useState(false);
+
+const AccountSettings = () => {
+  const [activity, setActivity] = useState(false);
+  const [personaInfo, setPersonalInfo] = useState(true);
   const [securitySettings, setSecuritySettings] = useState(false)
   const [logData, setLogData] = useState([])
   const [dt, setDt] = useState('')
   const email = localStorage.getItem("email")
 
-  const getLoginLog = async()=>{
+  const getLoginLog = async () => {
 
     try {
-      const data = await axios.post('http://localhost:3001/api/loginhistory',{email: email})
+      const data = await axios.post('http://localhost:3001/api/loginhistory', { email: email })
       setLogData(data.data.login_record)
     } catch (error) {
       console.log(error);
     }
   }
-  
-   
 
-  useEffect(()=>{
+
+
+  useEffect(() => {
     getLoginLog()
-  },[])
+  }, [])
   return (
     <>
       <div>
@@ -43,8 +44,8 @@ const Loginactivity = () => {
                   <div className="nk-block">
                     <div className="card card-bordered">
                       <div className="card-aside-wrap">
-                          {securitySettings == true ? <SecuritySettings/> : null}
-                        
+                        {securitySettings == true ? <SecuritySettings /> : null}
+
                         {personaInfo == true && <PersonalInfo />}
 
                         {activity == true ? (
@@ -55,7 +56,7 @@ const Loginactivity = () => {
                                   <h4 className="nk-block-title">Login Activity</h4>
                                   <div className="nk-block-des">
                                     <p> {` Here is your last ${logData.length} login activities log.`}
-                                     
+
                                       <span className="text-soft">
                                         <em className="icon ni ni-info"></em>
                                       </span>
@@ -99,10 +100,10 @@ const Loginactivity = () => {
                                 </thead>
                                 <tbody>
                                   {
-                                      logData.map((element, index)=>{
-                                        const a = new Date(element.createdAt)
-                                        return(
-                                          <tr>
+                                    logData.map((element, index) => {
+                                      const a = new Date(element.createdAt)
+                                      return (
+                                        <tr>
                                           <td className="tb-col-os">{element.browser_name}</td>
                                           <td className="tb-col-os">{element.request_device}</td>
                                           <td className="tb-col-ip">
@@ -111,15 +112,15 @@ const Loginactivity = () => {
                                             </span>
                                           </td>
                                           <td className="tb-col-time">
-                                            <span className="sub-text">{a.toDateString() } {a.toLocaleTimeString()}</span>
+                                            <span className="sub-text">{a.toDateString()} {a.toLocaleTimeString()}</span>
                                           </td>
-                                          <td className="tb-col-action">{}</td>
+                                          <td className="tb-col-action">{ }</td>
                                         </tr>
-                                        )
-                                      })
+                                      )
+                                    })
                                   }
 
-                                  
+
                                 </tbody>
                               </table>
                             </div>
@@ -232,7 +233,7 @@ const Loginactivity = () => {
                                   </Link>
                                 </li>
                                 <li>
-                                  <Link to="#" onClick={()=> {
+                                  <Link to="#" onClick={() => {
                                     setSecuritySettings(true);
                                     setActivity(false);
                                     setPersonalInfo(false);
@@ -260,4 +261,4 @@ const Loginactivity = () => {
   );
 };
 
-export default Loginactivity;
+export default AccountSettings;

@@ -237,85 +237,7 @@ const Header = () => {
                         </div> */}
                     </div>
                   </a>
-                  <div
-                    class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1"
-                    style={{ padding: 11 }}
-                  >
-                    <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
-                      <div class="user-card">
-                        <div class="user-avatar">
-                          <span>AB</span>
-                        </div>
-                        <div className="user-info">
-                          <span className="lead-text">Nadcab Technology</span>
-                          <span className="sub-text">
-                            user@inrx.network.com
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="dropdown-inner user-account-info">
-                      <h6
-                        className="overline-title-alt"
-                        style={{ marginBottom: 10, marginTop: -20 }}
-                      >
-                        Nio Wallet Account
-                      </h6>
-                      <div className="user-balance">
-                        12.395769{" "}
-                        <small className="currency currency-btc">BTC</small>
-                      </div>
-                      <div className="user-balance-sub">
-                        Locked{" "}
-                        <span>
-                          0.344939{" "}
-                          <span className="currency currency-btc">BTC</span>
-                        </span>
-                      </div>
-                      <a href="#" className="link">
-                        <span>Withdraw Funds</span>{" "}
-                        <em className="icon ni ni-wallet-out"></em>
-                      </a>
-                    </div>
-                    <div className="dropdown-inner">
-                      <ul className="link-list">
-                        <li>
-                          <a href="html/crypto/profile.html">
-                            <em className="icon ni ni-user-alt"></em>
-                            <span>View Profile</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="html/crypto/profile-security.html">
-                            <em className="icon ni ni-setting-alt"></em>
-                            <span>Account Setting</span>
-                          </a>
-                        </li>
-                        <li>
-                          <Link to="/loginactivity">
-                            <em className="icon ni ni-activity-alt"></em>
-                            <span>Login Activity</span>
-                          </Link>
-                        </li>
-                        <li>
-                          <a className="dark-switch" href="#">
-                            <em className="icon ni ni-moon"></em>
-                            <span>Dark Mode</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="dropdown-inner">
-                      <ul className="link-list">
-                        <li>
-                          <a href="#">
-                            <em className="icon ni ni-signout"></em>
-                            <span>Sign out</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+                 
 
                   {/* Amit */}
 
@@ -362,17 +284,17 @@ const Header = () => {
                           </a>
                         </li>
                         <li>
-                          <a href="html/crypto/profile-security.html">
+                          <Link to="/accountSettings">
                             <em className="icon ni ni-setting-alt"></em>
                             <span>Account Setting</span>
-                          </a>
+                          </Link>
                         </li>
-                        <li>
-                          <Link to="/loginactivity">
+                        {/* <li>
+                          <Link to="/login">
                             <em className="icon ni ni-activity-alt"></em>
                             <span>Login Activity</span>
                           </Link>
-                        </li>
+                        </li> */}
                         <li>
                           <a className="dark-switch" href="#">
                             <em className="icon ni ni-moon"></em>

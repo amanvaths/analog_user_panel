@@ -98081,3 +98081,10 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode input,
 .dark-mode .nk-demo-image {
   border-color: #1d2d40;
 } /*! END @iO */
+
+
+.custom_Input{
+  border: 0;
+  border-radius: 0;
+  border-bottom: 2px soild black;
+}

@@ -352,3 +352,13 @@ h6 {
 .btn-trigger{
   padding: 0px 4px !important;
 }
+
+.custom_Input{
+  border: 0;
+  border-radius: 0;
+  border-bottom: 2px soild black;
+}
+
+
+
+
