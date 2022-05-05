@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useDeferredValue, useEffect, useState } from "react";
 import { AiFillEdit } from 'react-icons/ai'
+import { useDispatch } from "react-redux";
 import axios from "axios";
+import { setCurrencyPrefrence } from "../redux/currency";
 
 const PersonalInfo = () => {
   const email = localStorage.getItem("email")
@@ -11,6 +13,9 @@ const PersonalInfo = () => {
   const [myCurrency, setMyCurrency] = useState('');
   const [updatedUserName, setUpdatedUserName] = useState('')
   const [updatedPhone, setUpdatedPhone] = useState('')
+  const dispatch = useDispatch()
+
+
 
   const updateData = async (myCurrency) => {
     const task = value ? "username" : phone ? "contact" : myCurrency ? "currency" : '';
@@ -44,10 +49,10 @@ const PersonalInfo = () => {
     setUpdatedPhone(data1.data.contact_no)
     // setMyCurrency(data1.data.currency)
 
-    if (data1.data.username.length > 0) {
+    if (data1?.data?.username?.length > 0) {
       setShowUser(false);
     }
-    if (data1.data.username.length > 0) {
+    if (data1?.data?.username?.length > 0) {
       setShowUser1(false)
     }
 
@@ -57,6 +62,7 @@ const PersonalInfo = () => {
     if (data1.data.currency == 'INRX') {
       setMyCurrency("INRX");
     }
+    dispatch(setCurrencyPrefrence(data1.data.currency))
   }
 
   useEffect(async () => {
@@ -217,6 +223,7 @@ const PersonalInfo = () => {
                     checked={myCurrency === "INRX"}
                     onChange={(e) => {
                       updateData("INRX")
+                      dispatch(setCurrencyPrefrence("INRX"))
                     }}
                   />
                   <label class="custom-control-label" for="inrx" ></label>
@@ -240,7 +247,9 @@ const PersonalInfo = () => {
                     value="USDT"
                     checked={myCurrency === "USDT"}
                     onChange={(e) => {
+
                       updateData("USDT")
+                      dispatch(setCurrencyPrefrence("USDT"))
                     }}
                   /><label class="custom-control-label" for="usdt" ></label>
                 </div>

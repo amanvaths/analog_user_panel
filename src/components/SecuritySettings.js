@@ -1,6 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const SecuritySettings = () => {
+  const email = localStorage.getItem("email")
+  const [checked, setChecked] = useState(1)
+
+const handelLog = async()=>{
+   try {
+    console.log(checked, "::Data befor API Call");
+    const data = await axios.post('http://localhost:3001/api/login_activity',{email: email, login_activity: checked})
+    console.log(data, "response from api");
+  } catch (error) {
+      console.log(error);
+  } 
+}
+
+console.log(checked, "checked Data");
   return (
     <>
       <div className="card-inner card-inner-lg">
@@ -49,9 +64,15 @@ const SecuritySettings = () => {
                             type="checkbox"
                             class="custom-control-input"
                             id="usdt"
-                            
-                            value="USDT"
-
+                            checked={checked}
+                            onChange={()=>{
+                              if(checked){
+                                setChecked(1)
+                              }else{
+                                setChecked(0)
+                              }
+                              handelLog()
+                            }}
                           /><label class="custom-control-label" for="usdt" ></label>
                         </div>
                       </li>
