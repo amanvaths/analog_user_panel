@@ -16,6 +16,7 @@ import ForgetPassword from "./pages/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword";
 import ResendOtp from "./pages/ResendOtp";
 import Wallet from "./pages/Wallet";
+import Loginactivity from "./pages/LoginActivity";
 // import UserList from "./pages/UserList";
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path="/ResetPassword" element={<ResetPassword />} />
           <Route path="/ResendOtp" element={<ResendOtp />} />
           <Route path="/wallet" element={<Wallet />} />
+          <Route path="/loginactivity" element={<Loginactivity />} />
           {/* <Route path="/userlist" element={<UserList />} /> */}
         </Routes>
       </BrowserRouter>

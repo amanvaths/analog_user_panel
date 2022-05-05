@@ -2,26 +2,26 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import {MdOutlineContentCopy} from 'react-icons/md'
 
 const Card1 = (props) => {
   const walletInfo = props.wallet;
 
   const [text, setText] = useState("");
-  const [isCopied, setIsCopied] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-  const onCopyText = () => {
-   
-    setIsCopied(true);
-    setTimeout(() => {
-      setIsCopied(false);
-    }, 1000);
-  };
-
-  /* const addString = props.address;
+  // const onCopyText = () => {
+  //   setIsCopied(true);
+  //   setTimeout(() => {
+  //     setIsCopied(false);
+  //   }, 1000);
+  // };
+  
+   const addString = props.address;
   const first = addString?.substring(0, 20);
-  const second = addString?.substring(22, addString.length);
+  const second = addString?.substring(32, addString.length);
   const address = first + "...." + second;
- */
+ 
   return (
     <>
       <div className="container mt-1">
@@ -38,7 +38,7 @@ const Card1 = (props) => {
                       >
                         <div class="nk-wgw-icon is-default">
                           <img
-                            className="img-rounded"
+                            className=""
                             src={props.logo}
                             style={{ width: "30px" }}
                           />
@@ -67,7 +67,7 @@ const Card1 = (props) => {
                     </div>
                   </div>
                   <div className="row d-flex align-items-around">
-                    <div className="col-12">
+                    <div className="col-12 d-flex ">
                       <span
                         class="amount-sm"
                         style={{
@@ -77,31 +77,25 @@ const Card1 = (props) => {
                           fontSize: "14px",
                         }}
                       >
-                        {props.address}
-                        {/* {setText(props.address)} */}
-                        {/* <span class="currency currency-usd">USD</span> */}
+                        {address}
+                        
                       </span>
+                     
                       <div className="container">
-                        {/* <input
-                          type="text"
-                          value={text}
-                          placeholder="Type some text here"
-                          // onChange={(event) => setText(event.target.value)}
-                        /> */}
-                        <CopyToClipboard text={text} onCopy={onCopyText}>
-                          <div className="copy-area">
-                            <button onClick={() => setText(props.address)}>
-                              Copy to Clipboard
-                            </button>
-                            <span
-                              className={`copy-feedback ${
-                                isCopied ? "active" : ""
-                              }`}
-                            >
-                              Copied!
-                            </span>
-                          </div>
-                        </CopyToClipboard>
+                        
+                         <CopyToClipboard text={props.address}
+                          onCopy={() => {
+                            setCopied(true)
+                            setTimeout(() => {
+                                 setCopied(false);
+                            }, 800);
+                            }}>
+                            <div>
+                         <MdOutlineContentCopy color="white"/>
+                         {copied?<span className="text-success bg-light px-3 py-1">copied</span>:null}
+                            </div>
+                          </CopyToClipboard>
+                         
                       </div>
                     </div>
                   </div>
