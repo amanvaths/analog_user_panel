@@ -1,39 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { AiFillEdit } from 'react-icons/ai'
 import axios from "axios";
-import { accountTasks } from "../Api_connection/config";
 
 const PersonalInfo = () => {
   const email = localStorage.getItem("email")
   const [showUser, setShowUser] = useState(true)
   const [showUser1, setShowUser1] = useState(false)
-  const [showEditIcon, setShowEditIcon] = useState(1)
-  const [showPhoneEdiotButton, setShowPhoneEditButton] = useState(1)
-  const [showUpdateButton, setShowUpdateButton] = useState(false)
-  const [showLock, setShowLock] = useState(false)
   const [value, setValue] = useState('')
   const [phone, setPhone] = useState('')
-  const [myCurrency, setMyCurrency] = useState("USDT");
+  const [myCurrency, setMyCurrency] = useState('');
   const [updatedUserName, setUpdatedUserName] = useState('')
   const [updatedPhone, setUpdatedPhone] = useState('')
-  const [currency, setCurrency] = useState('')
-  // if(value.length <= 0){
-  //   setShowEditIcon(1)
-  // }
-  // if(phone.length <= 0){
-  //   setShowPhoneEditButton(1)
-  // }
 
-  console.log(currency, "currency");
-
-  const updateData = async () => {
+  const updateData = async (myCurrency) => {
     const task = value ? "username" : phone ? "contact" : myCurrency ? "currency" : '';
     const apidata = {
       email: email,
       task: task,
     };
     apidata[task] = task === "username" ? value : task === "currency" ? myCurrency : task === "contact" ? phone : '';
-
+    console.log(myCurrency, "data befor api call");
     console.log("mpobj::", apidata);
 
     if (apidata.email && apidata.task && apidata[task]) {
@@ -41,8 +27,9 @@ const PersonalInfo = () => {
         const data = await axios.post('http://localhost:3001/api/settings', apidata)
         setUpdatedUserName(apidata['username']);
         setUpdatedPhone(apidata['contact'])
-
+        // setMyCurrency(apidata['currency'])
         console.log(data, "::settings APi response");
+        setMyCurrency(myCurrency);
       } catch (error) {
         console.log(error);
       }
@@ -50,24 +37,36 @@ const PersonalInfo = () => {
       alert("please fill all the required data!")
     }
   }
-  let result = '';
-  useEffect(async () => {
+
+  async function getData() {
     const data1 = await axios.post('http://localhost:3001/api/settings', { email: email, task: "personal_information" })
-    // console.log(":response from  personal details", data1.data);
-    //  result = Object.values(data1)
     setUpdatedUserName(data1.data.username)
     setUpdatedPhone(data1.data.contact_no)
+    // setMyCurrency(data1.data.currency)
+
     if (data1.data.username.length > 0) {
       setShowUser(false);
     }
+    if (data1.data.username.length > 0) {
+      setShowUser1(false)
+    }
 
+    if (data1.data.currency == 'USDT') {
+      setMyCurrency("USDT");
+    }
+    if (data1.data.currency == 'INRX') {
+      setMyCurrency("INRX");
+    }
+  }
+
+  useEffect(async () => {
+    getData();
   }, [])
 
-  console.log(updatedUserName.length, "amityadav");
-
-
-
-  // console.log(result, "df");
+  useEffect(() => {
+    getData();
+  }, [myCurrency])
+  // console.log(myCurrency, ":: selected currency");
   return (
     <>
       <div className="card-inner card-inner-lg">
@@ -117,19 +116,18 @@ const PersonalInfo = () => {
                     }} />
                 </div> : <span className="data-value">{updatedUserName}</span>}
               </div>
-              <div className="col-4">
-                <div className="data-col data-col-end">
+              <div className="col-4 d-flex justify-content-end">
+                <div className="">
 
                   <span className="">
                     {showUser ? <a href="#" class="btn btn-dim btn-primary" onClick={() => {
                       if (value) {
                         updateData();
-                        setShowEditIcon(3);
                         setShowUser(false);
                       }
-                    }}>Update</a> : <span className=" disable">
+                    }}>Update</a> :
                       <em className="icon ni ni-lock-alt"></em>
-                    </span>
+
                     }
 
                   </span>
@@ -147,8 +145,8 @@ const PersonalInfo = () => {
               <div className="col-4">
                 <span className="data-value">{email}</span>
               </div>
-              <div className="col-4 float-left">
-                <div className="data-col data-col-end">
+              <div className="col-4 d-flex justify-content-end">
+                <div className="">
                   <span className=" disable">
                     <em className="icon ni ni-lock-alt"></em>
                   </span>
@@ -157,7 +155,7 @@ const PersonalInfo = () => {
             </div>
 
             <div className="row mx-auto mt-3">
-              <div className="col-4">
+              <div className="col-4 ">
                 <div className="">
                   <span className="data-label">Phone Number</span>
 
@@ -169,6 +167,7 @@ const PersonalInfo = () => {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     maxLength={10}
+                    minLength={10}
                     style={{
                       borderRadius: "0",
                       borderTopStyle: "hidden",
@@ -178,15 +177,14 @@ const PersonalInfo = () => {
                     }} />
                 </div> : <span className="data-value">{updatedPhone}</span>}
               </div>
-              <div className="col-4 float-left">
-                <div className="data-col data-col-end">
+              <div className="col-4 d-flex justify-content-end">
+                <div className="">
 
                   <span className="">
-                    {showUser ? <a href="#" class="btn btn-dim btn-primary" onClick={() => {
-                      if (value) {
+                    {showUser1 ? <a href="#" class="btn btn-dim btn-primary" onClick={() => {
+                      if (phone) {
                         updateData();
-                        setShowEditIcon(3);
-                        setShowUser(false);
+                        setShowUser1(false);
                       }
                     }}>Update</a> : <span className=" disable">
                       <em className="icon ni ni-lock-alt"></em>
@@ -203,6 +201,7 @@ const PersonalInfo = () => {
             <div className="data-head">
               <h6 className="overline-title">Currency Preferences</h6>
             </div>
+
             <div className="data-item">
               <div className="data-col">
                 <span className="data-label">INRX</span>
@@ -215,12 +214,16 @@ const PersonalInfo = () => {
                     id="inrx"
                     name="currency"
                     value="INRX"
-                    onChange={(e) => setCurrency(e.target.checked)}
+                    checked={myCurrency === "INRX"}
+                    onChange={(e) => {
+                      updateData("INRX")
+                    }}
                   />
                   <label class="custom-control-label" for="inrx" ></label>
                 </div>
               </div>
             </div>
+
 
             <div className="data-item">
               <div className="data-col">
@@ -235,6 +238,10 @@ const PersonalInfo = () => {
                     id="usdt"
                     name="currency"
                     value="USDT"
+                    checked={myCurrency === "USDT"}
+                    onChange={(e) => {
+                      updateData("USDT")
+                    }}
                   /><label class="custom-control-label" for="usdt" ></label>
                 </div>
               </div>
