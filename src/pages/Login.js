@@ -4,6 +4,8 @@ import { BASE_URL } from "../Api_connection/config";
 import { useNavigate } from "react-router-dom";
 // import ForgetPassword from "./ForgetPassword";
 import swal from "sweetalert";
+import { useDispatch } from "react-redux";
+import { login } from "../redux/User";
 
 // import FacebookLogin from "react-facebook-login";
 
@@ -14,6 +16,7 @@ const Login = (props) => {
   const [passworderror, setPassworderror] = useState(false);
   const [response, setResponse] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const googleId =
     "28253347908-l3f5pge45v4avpv50ppksjlkvvap6t35.apps.googleusercontent.com";
@@ -54,6 +57,7 @@ const Login = (props) => {
           swal(`${resp.message}`, "Welcome", "success");
           localStorage.setItem("email", email);
           localStorage.setItem("token", resp.token);
+          dispatch(login({isLoggedIn: true, userInfo:{email:email, token: resp.token}}));
           navigate("/home");
         }
         if (resp.status == 3) {
