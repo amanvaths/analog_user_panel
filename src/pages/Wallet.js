@@ -10,62 +10,8 @@ const Wallet = (props) => {
   const [coinData, setCoinData] = useState([]);
   const [walletDetails, setWalletDetails] = useState([]);
   const [coinWW, setCoinWW] = useState([]);
-  const userInfo = localStorage.getItem("email");
 
-  const data = [
-    {
-      title: "INRX",
-      price: "200",
-      priceInUsd: "130",
-      lable: "INRX",
-      address: "0xjdfhjh4r533434jhj",
-    },
-    {
-      title: "BITCOIN",
-      price: "3100000",
-      priceInUsd: "5000",
-      lable: "BTC",
-      address: "0xjdfhjh4r533434jhj",
-    },
-    {
-      title: "Ethereum",
-      price: "50000",
-      priceInUsd: "100",
-      lable: "ETH",
-      address: "0xjdfhjh4r533434jhj",
-    },
-    {
-      title: "TRON",
-      price: "2000",
-      priceInUsd: "20",
-      lable: "TRX",
-      address: "0xjdfhjh4r533434jhj",
-    },
-    ,
-    {
-      title: "USDT",
-      price: "2000",
-      priceInUsd: "20",
-      lable: "USDT",
-      address: "0xjdfhjh4r533434jhj",
-    },
-    ,
-    {
-      title: "Binance",
-      price: "2000",
-      priceInUsd: "20",
-      lable: "BUSD",
-      address: "0xjdfhjh4r533434jhj",
-    },
-    ,
-    {
-      title: "Shiba",
-      price: "2000",
-      priceInUsd: "20",
-      lable: "",
-      address: "0xjdfhjh4r533434jhj",
-    },
-  ];
+  const userInfo = localStorage.getItem("email");
 
   const getData = async () => {
     try {
@@ -75,7 +21,6 @@ const Wallet = (props) => {
         //console.log(coin);
         cd.push(coin[1]);
       }
-
       //console.log(cd, "coin data");
       setCoinData([...cd]);
     } catch (error) {
@@ -86,16 +31,24 @@ const Wallet = (props) => {
   async function getWalletDetails() {
     const walletAddress = await axios.post(
       "http://localhost:3001/api/getwalletdata",
-      { email: "amit2@gmail.com" }
+      { email: userInfo }
     );
     // console.log(walletAddress.data);
     setWalletDetails([...walletAddress.data]);
   }
-  const a = localStorage.getItem("token");
-  console.log(a, "fdjj");
+
+  const updateWallet = async()=>{
+      try {
+          const data = await axios.post('http://localhost:3001/api/transaction_update', {email: userInfo})
+      } catch (error) {
+        console.log(error);
+      }
+  }
+  
   useEffect(() => {
     getData();
     getWalletDetails();
+    updateWallet()
   }, []);
 
   useEffect(() => {
@@ -131,10 +84,10 @@ const Wallet = (props) => {
   return (
     <>
       <div>
-        <div class="nk-app-root">
-          <div class="nk-main ">
+        <div className="nk-app-root">
+          <div className="nk-main ">
             <Menu />
-            <div class="nk-wrap">
+            <div className="nk-wrap">
               <Header />
               <div className="contianer">
                 <div className="row py-3">
@@ -154,10 +107,10 @@ const Wallet = (props) => {
                     </label>
                   </div>
                 </div>
-                <div className="row">
+                <div className="row" style={{marginBottom: "15vh"}}>
                   {coinWW.map((element, index) => {
                     return (
-                      <div className="col-md-4 col-lg-4 col-12">
+                      <div className="walletCard col-md-6 col-lg-4 col-12">
                         <Card1
                           title={element.name}
                           // price={element.quote.USD.price.toFixed(2)}

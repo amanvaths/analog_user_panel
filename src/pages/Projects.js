@@ -7,48 +7,48 @@ class Projects extends React.Component{
    render(){
        return (
            <div>
-     <div class="nk-app-root">
+     <div className="nk-app-root">
        
-       <div class="nk-main ">
+       <div className="nk-main ">
  
  
  <Menu/>
  
  
  
-           <div class="nk-wrap ">
+           <div className="nk-wrap ">
  
 
 
 <Header/>
 
-     <div class="nk-content ">
-                    <div class="container-fluid">
-                        <div class="nk-content-inner">
-                            <div class="nk-content-body">
-                                <div class="nk-block-head nk-block-head-sm">
-                                    <div class="nk-block-between">
-                                        <div class="nk-block-head-content">
-                                            <h3 class="nk-block-title page-title">Inrx Ecosystem - Project Development</h3>
-                                            <div class="nk-block-des text-soft">
+     <div className="nk-content ">
+                    <div className="container-fluid">
+                        <div className="nk-content-inner">
+                            <div className="nk-content-body">
+                                <div className="nk-block-head nk-block-head-sm">
+                                    <div className="nk-block-between">
+                                        <div className="nk-block-head-content">
+                                            <h3 className="nk-block-title page-title">Inrx Ecosystem - Project Development</h3>
+                                            <div className="nk-block-des text-soft">
                                                 <p>Project Board</p>
                                             </div>
                                         </div>
-                                        <div class="nk-block-head-content">
-                                            <div class="toggle-wrap nk-block-tools-toggle">
-                                                <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em class="icon ni ni-menu-alt-r"></em></a>
-                                                <div class="toggle-expand-content" data-content="pageMenu">
-                                                    <ul class="nk-block-tools g-3">
-                                                        <li><a href="#" class="btn btn-white btn-outline-light"><em class="icon ni ni-plus"></em><span>Add Task</span></a></li>
-                                                        <li><a href="#" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Add Board</span></a></li>
+                                        <div className="nk-block-head-content">
+                                            <div className="toggle-wrap nk-block-tools-toggle">
+                                                <a href="#" className="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em className="icon ni ni-menu-alt-r"></em></a>
+                                                <div className="toggle-expand-content" data-content="pageMenu">
+                                                    <ul className="nk-block-tools g-3">
+                                                        <li><a href="#" className="btn btn-white btn-outline-light"><em className="icon ni ni-plus"></em><span>Add Task</span></a></li>
+                                                        <li><a href="#" className="btn btn-primary"><em className="icon ni ni-plus"></em><span>Add Board</span></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="nk-block">
-                                    <div id="kanban" class="nk-kanban"></div>
+                                <div className="nk-block">
+                                    <div id="kanban" className="nk-kanban"></div>
                                 </div>
                             </div>
                         </div>

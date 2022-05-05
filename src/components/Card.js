@@ -3,23 +3,16 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import {MdOutlineContentCopy} from 'react-icons/md'
+import { Link } from "react-router-dom";
 
 const Card1 = (props) => {
   const walletInfo = props.wallet;
-
-  const [text, setText] = useState("");
   const [copied, setCopied] = useState(false);
 
-  // const onCopyText = () => {
-  //   setIsCopied(true);
-  //   setTimeout(() => {
-  //     setIsCopied(false);
-  //   }, 1000);
-  // };
   
    const addString = props.address;
   const first = addString?.substring(0, 20);
-  const second = addString?.substring(32, addString.length);
+  const second = addString?.substring(35, addString.length);
   const address = first + "...." + second;
  
   return (
@@ -27,35 +20,35 @@ const Card1 = (props) => {
       <div className="container mt-1">
         <div className="row" style={{ padding: "0px" }}>
           <div className="">
-            <div class="card card-bordered is-dark">
-              <div class="nk-wgw">
-                <div class="nk-wgw-inner">
+            <div className="card card-bordered is-dark">
+              <div className="nk-wgw">
+                <div className="nk-wgw-inner">
                   <div className="row">
                     <div className="col-6">
-                      <a
-                        class="nk-wgw-name"
-                        href="/demo5/crypto/wallet-bitcoin.html"
+                      <Link
+                        className="nk-wgw-name"
+                        to={`/cryptoTransaction/${props.lable}`}
                       >
-                        <div class="nk-wgw-icon is-default">
+                        <div className="nk-wgw-icon is-default">
                           <img
                             className=""
                             src={props.logo}
                             style={{ width: "30px" }}
                           />
-                          {/* <em class="icon ni ni-sign-kobo"></em> */}
+                          {/* <em className="icon ni ni-sign-kobo"></em> */}
                         </div>
-                        <h5 class="nk-wgw-title title ml-2">{props.title}</h5>
-                      </a>
-                      <div class="nk-wgw-balance">
-                        <div class="amount">
+                        <h5 className="nk-wgw-title title ml-2">{props.title}</h5>
+                      </Link>
+                      <div className="nk-wgw-balance">
+                        <div className="amount">
                           {props.price}
-                          <span class="currency currency-nio">
+                          <span className="currency currency-nio">
                             {props.lable}
                           </span>
                         </div>
-                        <div class="amount-sm">
+                        <div className="amount-sm">
                           {props.priceInUsd}
-                          <span class="currency currency-usd">USD</span>
+                          <span className="currency currency-usd">USD</span>
                         </div>
                       </div>
                     </div>
@@ -67,9 +60,9 @@ const Card1 = (props) => {
                     </div>
                   </div>
                   <div className="row d-flex align-items-around">
-                    <div className="col-12 d-flex ">
+                    <div className="col-10 d-flex ">
                       <span
-                        class="amount-sm"
+                        className="amount-sm"
                         style={{
                           color: "white",
                           marginTop: "5px",
@@ -80,8 +73,9 @@ const Card1 = (props) => {
                         {address}
                         
                       </span>
-                     
-                      <div className="container">
+                      </div>
+                     <div className="col-2">
+                      <div className="">
                         
                          <CopyToClipboard text={props.address}
                           onCopy={() => {
@@ -91,8 +85,9 @@ const Card1 = (props) => {
                             }, 800);
                             }}>
                             <div>
-                         <MdOutlineContentCopy color="white"/>
-                         {copied?<span className="text-success bg-light px-3 py-1">copied</span>:null}
+                         <MdOutlineContentCopy color="white" />
+                         {copied?
+                         <p className="text-light position-absolute" style={{fontSize:"14px", top:"3px",left:"25px", padding:"0px 5px", backgroundColor:"transparent"}}>copied!</p>:null}
                             </div>
                           </CopyToClipboard>
                          
