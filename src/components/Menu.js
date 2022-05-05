@@ -239,15 +239,15 @@ class Menu extends React.Component {
                       </Link>
                     </li>
                     <li className="nk-menu-item">
-                      <a
-                        href="html/crypto/buy-sell.html"
+                      <Link
+                        to="/buysell"
                         className="nk-menu-link"
                       >
                         <span className="nk-menu-icon">
                           <em className="icon ni ni-coins"></em>
                         </span>
                         <span className="nk-menu-text">Buy / Sell</span>
-                      </a>
+                      </Link>
                     </li>
                     <li className="nk-menu-item">
                       <a

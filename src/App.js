@@ -19,6 +19,9 @@ import Wallet from "./pages/Wallet";
 import Loginactivity from "./pages/LoginActivity";
 import CryptoTransaction from "./pages/CryptoTransaction";
 import UserList from "./pages/UserList";
+import BuySell from "./pages/BuySell";
+import CandleGraph from "./components/CandleGraph";
+
 function App() {
   const email = localStorage.getItem("email");
   const token = localStorage.getItem("token");
@@ -49,6 +52,8 @@ function App() {
           <Route path="/loginactivity" element={<Loginactivity />} />
           <Route path="/cryptoTransaction/:title" element={<CryptoTransaction />} />
           <Route path="/userlist" element={<UserList />} />
+          <Route path="/buysell" element={< BuySell/>} />
+          <Route path="/candlegraph" element={<CandleGraph />} />
         </Routes>
       </BrowserRouter>
     </div>
