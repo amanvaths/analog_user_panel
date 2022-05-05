@@ -16,12 +16,15 @@ const PersonalInfo = () => {
   const [myCurrency, setMyCurrency] = useState("USDT");
   const [updatedUserName, setUpdatedUserName] = useState('')
   const [updatedPhone, setUpdatedPhone] = useState('')
+  const [currency, setCurrency] = useState('')
   // if(value.length <= 0){
   //   setShowEditIcon(1)
   // }
   // if(phone.length <= 0){
   //   setShowPhoneEditButton(1)
   // }
+
+  console.log(currency, "currency");
 
   const updateData = async () => {
     const task = value ? "username" : phone ? "contact" : myCurrency ? "currency" : '';
@@ -195,7 +198,7 @@ const PersonalInfo = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="nk-data data-list">
             <div className="data-head">
               <h6 className="overline-title">Currency Preferences</h6>
@@ -205,9 +208,16 @@ const PersonalInfo = () => {
                 <span className="data-label">INRX</span>
               </div>
               <div class="nk-block-actions">
-                <div class="custom-control custom-switch me-n2"><input
-                  type="radio" class="custom-control-input"
-                  id="inrx" name="currency" /><label class="custom-control-label" for="inrx" ></label>
+                <div class="custom-control custom-switch me-n2">
+                  <input
+                    type="radio"
+                    class="custom-control-input"
+                    id="inrx"
+                    name="currency"
+                    value="INRX"
+                    onChange={(e) => setCurrency(e.target.checked)}
+                  />
+                  <label class="custom-control-label" for="inrx" ></label>
                 </div>
               </div>
             </div>
@@ -218,9 +228,14 @@ const PersonalInfo = () => {
 
               </div>
               <div class="nk-block-actions">
-                <div class="custom-control custom-switch me-n2"><input
-                  type="radio" class="custom-control-input"
-                  id="usdt" name="currency" checked="checked" /><label class="custom-control-label" for="usdt" ></label>
+                <div class="custom-control custom-switch me-n2">
+                  <input
+                    type="radio"
+                    class="custom-control-input"
+                    id="usdt"
+                    name="currency"
+                    value="USDT"
+                  /><label class="custom-control-label" for="usdt" ></label>
                 </div>
               </div>
             </div>
