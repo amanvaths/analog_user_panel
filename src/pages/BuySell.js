@@ -15,20 +15,24 @@ const UserList = () => {
 
           <div class="nk-wrap ">
             <Header />
-            <div className="row"  >
-              <div className="col-lg-9" style={{top:"10px"}}>
+            <div className="row" style={{margin:"20px 10px 0px"}} >
+              <div className="col-lg-8" style={{top:"10px"}}>
                 <CandleGraph />
               </div>
-              <div className="col-lg-3">
+             
+              <div className="col-lg-4 order" 
+              style={{background: "rgb(241, 241, 241)"}}
+              >
                 <Orders/>
               </div>
+           
               <div className="column">
               
-              <div className="col-lg-3 "
+              {/* <div className="col-lg-3 "
                style={{marginTop:"360px"}}
               >
                 Buy Sell Section
-              </div>
+              </div> */}
             </div>
             </div>
 
