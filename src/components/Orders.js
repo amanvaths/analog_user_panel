@@ -181,6 +181,9 @@ export default function Orders() {
             </a>
           </div>
         </nav>
+
+        {/* Buy */}
+
         {buy && (
           <div
             className=" tab-content orders"
@@ -353,6 +356,8 @@ export default function Orders() {
           </div>
         )}
 
+         {/* Sell */}
+
         {sell && (
           <div
             className=" tab-content orders"
@@ -375,7 +380,7 @@ export default function Orders() {
               >
                 {/* Sell Btex Option  */}
 
-                <div class="p-3">
+                <div class="p-3 " style={{marginTop:"100px"}} >
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span
@@ -388,7 +393,7 @@ export default function Orders() {
                         padding: "10px",}}
                       
                       >
-                        AT PRICE
+                        ANA PRICE
                         <br />
                         INR
                       </span>
@@ -396,7 +401,8 @@ export default function Orders() {
                     <input
                       type="text"
                       class="form-control"
-                      value="10.42000000"
+                      value="10"
+                      readOnly
                       style={{borderRight: "none", borderBlock:" 1px solid rgb(202, 202, 204)", height: "56px"}}
                     />
                     <div class="">
@@ -422,24 +428,26 @@ export default function Orders() {
                         class="input-group-text buy-sell-form-bg buy-sell-theme"
                         style=
                         {{  fontSize: "10px",
-                          backgroundColor: "white",
+                          // backgroundColor: "white",
                           borderColor: "rgb(202, 202, 204)",
                         }}
                       >
                         AMOUNT
                         <br />
-                        BTEX
+                        QTY
                       </span>
                     </div>
                     <input
                       type="text"
                       class="form-control buy-sell-form-bg buy-sell-theme"
-                      value="10"
+                      // value="10"
                       style=
                        {{ borderTopColor: "rgb(202, 202, 204)",
                         borderRight: "none",
                         borderBottomColor: "rgb(202, 202, 204)",
-                        borderLeftColor: "rgb(202, 202, 204)",}}
+                        borderLeftColor: "rgb(202, 202, 204)",
+                        height: "56px",
+                      }}
                       
                     />
                   </div>
@@ -455,14 +463,14 @@ export default function Orders() {
                       >
                         TOTAL
                         <br />
-                        INR
+                        TRX
                       </span>
                     </div>
                     <input
                       type="text"
                       class="form-control buy-sell-form-bg buy-sell-theme"
-                      value="465.0610118"
-                      style={{borderColor: "rgb(202, 202, 204)"}}
+                      // value="465.0610118"
+                      style={{borderColor: "rgb(202, 202, 204)", height: "56px",}}
                     />
                   </div>
 

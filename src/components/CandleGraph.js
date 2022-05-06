@@ -83,7 +83,11 @@ export default function CandleGraph(props) {
         mode: CrosshairMode.Normal,
       },
       layout: {
+
+        // Grapf Thema Changes
+
         textColor: "#d1d4dc",
+        // textColor:"black"
         backgroundColor: "light-theme-color",
       },
       grid: {
