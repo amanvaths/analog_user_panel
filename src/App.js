@@ -21,6 +21,7 @@ import CryptoTransaction from "./pages/CryptoTransaction";
 import UserList from "./pages/UserList";
 import BuySell from "./pages/BuySell";
 import CandleGraph from "./components/CandleGraph";
+import ChangePassword from "./components/ChangePassword";
 
 function App() {
   const email = localStorage.getItem("email");
@@ -54,6 +55,7 @@ function App() {
           <Route path="/userlist" element={<UserList />} />
           <Route path="/buysell" element={< BuySell/>} />
           <Route path="/candlegraph" element={<CandleGraph />} />
+          <Route path="/changepassword" element={<ChangePassword />} />
         </Routes>
       </BrowserRouter>
     </div>

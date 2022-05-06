@@ -5,8 +5,12 @@ import Footer from "../components/Footer";
 import Card1 from "../components/Card";
 import { Button } from "react-bootstrap";
 import axios from "axios";
+import { useSelector } from 'react-redux'
+
 
 const Wallet = (props) => {
+  const {currency_prefrence} = useSelector((state) => state.currency.value)
+  console.log(currency_prefrence, "::Data");
   const [coinData, setCoinData] = useState([]);
   const [walletDetails, setWalletDetails] = useState([]);
   const [coinWW, setCoinWW] = useState([]);

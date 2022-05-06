@@ -4,13 +4,20 @@ import Footer from "../components/Footer";
 import Menu from "../components/Menu";
 import PersonalInfo from "../components/PersonalInfo";
 import SecuritySettings from "../components/SecuritySettings";
+import Notification from "../components/Notification";
+import ChangePassword from "../components/ChangePassword";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
 
 const AccountSettings = () => {
+  const dispatch = useDispatch()
   const [activity, setActivity] = useState(false);
-  const [personaInfo, setPersonalInfo] = useState(true);
+
+  const [personaInfo, setPersonalInfo] = useState(false);
   const [securitySettings, setSecuritySettings] = useState(false)
+  const [notification, setNotification] = useState(false)
+  // const [changePassword, setChangePassword] = useState(false)
   const [logData, setLogData] = useState([])
   const [dt, setDt] = useState('')
   const email = localStorage.getItem("email")
@@ -44,6 +51,9 @@ const AccountSettings = () => {
                   <div className="nk-block">
                     <div className="card card-bordered">
                       <div className="card-aside-wrap">
+                        {/* {changePassword == true ? <ChangePassword/> : null } */}
+                        <ChangePassword/>
+                        {notification == true ? <Notification/> : null}
                         {securitySettings == true ? <SecuritySettings /> : null}
 
                         {personaInfo == true && <PersonalInfo />}
@@ -58,7 +68,7 @@ const AccountSettings = () => {
                                     <p> {` Here is your last ${logData.length} login activities log.`}
 
                                       <span className="text-soft">
-                                        <em className="icon ni ni-info"></em>
+                                       
                                       </span>
                                     </p>
                                   </div>
@@ -177,20 +187,20 @@ const AccountSettings = () => {
                             </div>
                             <div className="card-inner">
                               <div className="user-account-info py-0">
-                                <h6 className="overline-title-alt">
+                                <h6 className="overline-title-alt p-2">
                                   Nio Wallet Account
                                 </h6>
-                                <div className="user-balance">
+                                <div className="user-balance p-2">
                                   12.395769
-                                  <small className="currency currency-btc">
+                                  <small className="currency currency-btc p-2">
                                     BTC
                                   </small>
                                 </div>
                                 <div className="user-balance-sub">
                                   Locked
-                                  <span>
+                                  <span className="p-2">
                                     0.344939
-                                    <span className="currency currency-btc">
+                                    <span className="currency currency-btc p-2">
                                       BTC
                                     </span>
                                   </span>
@@ -202,10 +212,12 @@ const AccountSettings = () => {
                                 <li>
                                   <Link
                                     to="#"
+                                    className={personaInfo ? "active" : " "}
                                     onClick={() => {
                                       setPersonalInfo(true);
-                                      setActivity(false);
+                                    //  dispatch(act)
                                       setSecuritySettings(false);
+                                      setNotification(false)
                                     }}
                                   >
                                     <em className="icon ni ni-user-fill-c"></em>
@@ -213,19 +225,26 @@ const AccountSettings = () => {
                                   </Link>
                                 </li>
                                 <li>
-                                  <a href="/demo5/user-profile-notification.html">
+                                  <Link to="#"
+                                  onClick={()=>{
+                                    setNotification(true)
+                                    setPersonalInfo(false);
+                                    setActivity(false);
+                                    setSecuritySettings(false);
+                                  }}>
                                     <em className="icon ni ni-bell-fill"></em>
                                     <span>Notifications</span>
-                                  </a>
+                                  </Link>
                                 </li>
                                 <li>
-                                  <Link className="active" to="#">
+                                  <Link className={activity? "active" : " "} to="#">
                                     <em className="icon ni ni-activity-round-fill"></em>
                                     <span
                                       onClick={() => {
                                         setActivity(true);
                                         setPersonalInfo(false);
-                                        setSecuritySettings(false);
+                                          setSecuritySettings(false);
+                                          setNotification(false)
                                       }}
                                     >
                                       Account Activity
@@ -233,10 +252,13 @@ const AccountSettings = () => {
                                   </Link>
                                 </li>
                                 <li>
-                                  <Link to="#" onClick={() => {
+                                  <Link to="#" 
+                                  className={securitySettings ? "active" : " "}
+                                  onClick={() => {
                                     setSecuritySettings(true);
                                     setActivity(false);
                                     setPersonalInfo(false);
+                                    setNotification(false)
                                   }}>
                                     <em className="icon ni ni-lock-alt-fill"></em>
                                     <span>Security Settings</span>
