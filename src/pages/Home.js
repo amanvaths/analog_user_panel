@@ -54,8 +54,12 @@ class Home extends React.Component {
         breakpoint: { max: 3000, min: 1024 },
         items: 3,
       },
+      smlap: {
+        breakpoint: { max: 1024, min: 768 },
+        items: 2,
+      },
       tablet: {
-        breakpoint: { max: 1024, min: 464 },
+        breakpoint: { max: 768, min: 464 },
         items: 1,
       },
       mobile: {

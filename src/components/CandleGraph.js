@@ -243,11 +243,11 @@ export default function CandleGraph(props) {
       </div>
 
       <div className="sc-bdVaJa sc-kUaPvJ kZeBBS row coinsfather-theme-color "
-      style={{fontSize:"12px", height:"30px" , alignContent:"center"}}
+      // style={{fontSize:"12px", height:"30px" , alignContent:"center"}}
       >
         <div
           className="sc-bdVaJa sc-giadOv iIMfMq col-12 col-md-7 col-lg-7"
-          style={{ display: "flex", left: "200px" }}
+          // style={{ display: "flex", left: "200px" }}
         >
           <div className="sc-bdVaJa bmTiOt">
             <span color="#929292" class="sc-bwzfXH yjNnZ font-weight-bold">

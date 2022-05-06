@@ -260,16 +260,16 @@ class Menu extends React.Component {
                         <span className="nk-menu-text">Orders</span>
                       </a>
                     </li>
-                    <li className="nk-menu-item">
+                    {/* <li className="nk-menu-item">
                       <a href="html/crypto/chats.html" className="nk-menu-link">
                         <span className="nk-menu-icon">
                           <em className="icon ni ni-chat-circle"></em>
                         </span>
                         <span className="nk-menu-text">Chats</span>
                       </a>
-                    </li>
+                    </li> */}
 
-                    <li className="nk-menu-item has-sub">
+                    {/* <li className="nk-menu-item has-sub">
                       <a href="#" className="nk-menu-link nk-menu-toggle">
                         <span className="nk-menu-icon">
                           <em className="icon ni ni-files"></em>
@@ -306,7 +306,9 @@ class Menu extends React.Component {
                           </a>
                         </li>
                       </ul>
-                    </li>
+                    </li> */}
+
+
                     {/* Add Line */}
 
                     <li class="nk-menu-item">
@@ -317,7 +319,7 @@ class Menu extends React.Component {
                         <span class="nk-menu-text">Affiliate</span>
                       </Link>
                     </li>
-                    <li className="nk-menu-heading">
+                    {/* <li className="nk-menu-heading">
                       <h6 className="overline-title">Fundamentals</h6>
                     </li>
                     <li className="nk-menu-item">
@@ -367,7 +369,7 @@ class Menu extends React.Component {
                         </span>
                         <span className="nk-menu-text">Plebiscite</span>
                       </a>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
                 <div className="nk-sidebar-widget">

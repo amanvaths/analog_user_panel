@@ -53,14 +53,15 @@ const Getpresale = (props) => {
                 <div className="number-lg text-success coinqty">{coinQty}</div>
               </div>
               <div
-                className="nk-wg7-stats w-50  duration"
-                style={{ paddingLeft: 110 }}
+                className="nk-wg7-stats w-50  duration duration2"
+                style={{ marginLeft: 150 }}
               >
                 <div className="nk-wg7-title text-body ">Duration</div>
-                <div className="number text-success ">{duration}</div>
+                <div className="number text-success ">{duration} days</div>
               </div>
             </div>
-            <div style={{ paddingTop: 11 }}>
+            <div
+             style={{ paddingTop: 11 }}>
               <ProgressBar
                 striped
                 now={coinPrice}
@@ -69,7 +70,8 @@ const Getpresale = (props) => {
                 aria-valuemin={1000000}
               />
             </div>
-            <div className="number text-dark countdown">
+               
+            <div className="number text-dark countdown"   style={{ marginLeft: 270 }}>
               {timer.days}:{timer.hour}:{timer.minute}:{timer.second}
             </div>
           </div>
