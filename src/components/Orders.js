@@ -3,18 +3,20 @@ import "./order.css";
 import axios from "axios";
 
 export default function Orders() {
-  const email = localStorage.getItem("email")
+  const email = localStorage.getItem("email");
   const [activeTab, setActiveTab] = useState(0);
   const [buy, setBuy] = useState(true);
   const [sell, setSell] = useState(false);
   const [coinData, setCoinData] = useState([]);
 
-  const[atprice ,setAtprice]=useState(10);
-  const[ammount ,setAmmount]=useState("");
+  const [atprice, setAtprice] = useState(10);
+  const [ammount, setAmmount] = useState("");
 
   const getData = async () => {
     try {
-      const res = await axios.post("http://localhost:3001/api/getCoinData",{currency: "inr"});
+      const res = await axios.post("http://localhost:3001/api/getCoinData", {
+        currency: "inr",
+      });
       const cd = [];
       for (let coin of Object.entries(res.data)) {
         //console.log(coin);
@@ -27,38 +29,40 @@ export default function Orders() {
     }
   };
 
-  
-  useEffect(()=>{
-    getData()
-  },[])
-  console.log(coinData[7]?.quote?.INR?.price,":: Coin Data");
-  const trxInAna = atprice/coinData[7]?.quote?.INR?.price
+  useEffect(() => {
+    getData();
+  }, []);
+  console.log(coinData[7]?.quote?.INR?.price, ":: Coin Data");
+  const trxInAna = atprice / coinData[7]?.quote?.INR?.price;
 
   console.log(trxInAna, "1trx in 1 ana");
 
-  const inTrx = ammount * trxInAna
+  const inTrx = ammount * trxInAna;
 
   console.log(inTrx, "Total Trx");
 
-
-  function TotalAmt(){
-     var Total=atprice*ammount
-     console.log(atprice)
-     console.log(ammount)
-     let params = {
-      amount: atprice, 
-      raw_price: ammount,  
-      currencyType: 'btc', 
-      compairCurrency: 'trx', 
-      email: email 
-     }
-     axios.post('http://localhost:3001/api/order',params).then((res)=>{
-       console.log(res.data)
-     }).catch((error)=>{
-       console.log(error.message);
-     })
+  function TotalAmt() {
+    var Total = atprice * ammount;
+    console.log(atprice);
+    console.log(ammount);
+    let params = {
+      amount: atprice,
+      raw_price: ammount,
+      currencyType: "TRX",
+      compairCurrency: "INRX",
+      TotalTrx: inTrx,
+      email: email,
+    };
+   
+    axios
+      .post("http://localhost:3001/api/order", params)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   }
-  
   return (
     <div className="order">
       <div style={{ background: "white" }}>
@@ -195,11 +199,9 @@ export default function Orders() {
                   alignItems: "center",
                   display: " flex",
                   flexDirection: "column",
-                }}>
-
-
-                   {/* Buy Sell Option  */}
-
+                }}
+              >
+                {/* Buy Btex Option  */}
 
                 <div class="p-3">
                   <div class="input-group mb-3">
@@ -221,9 +223,12 @@ export default function Orders() {
                       type="text"
                       class="form-control buy-sell-form-bg"
                       value={atprice}
-                      style={{ borderRight: "none" ,height:"54px"}}
-                      onChange={(e)=>{setAtprice(e.target.value)}}
-                    readOnly/>
+                      style={{ borderRight: "none", height: "54px" }}
+                      onChange={(e) => {
+                        setAtprice(e.target.value);
+                      }}
+                      readOnly
+                    />
                     <div class="">
                       <button
                         class="bg-white text-success p-3"
@@ -257,9 +262,13 @@ export default function Orders() {
                       type="text"
                       class="form-control buy-sell-form-bg buy-sell-theme"
                       // value="10"
-                      style={{ borderColor: "rgb(202, 202, 204)",height:"54px" }}
-                      onChange={(e)=>{setAmmount(e.target.value)}}
-
+                      style={{
+                        borderColor: "rgb(202, 202, 204)",
+                        height: "54px",
+                      }}
+                      onChange={(e) => {
+                        setAmmount(e.target.value);
+                      }}
                     />
                   </div>
                   <div class="input-group">
@@ -281,7 +290,10 @@ export default function Orders() {
                       type="text"
                       class="form-control buy-sell-form-bg buy-sell-theme"
                       value={inTrx}
-                      style={{ borderColor: "rgb(202, 202, 204)",height:"54px" }}
+                      style={{
+                        borderColor: "rgb(202, 202, 204)",
+                        height: "54px",
+                      }}
                     />
                   </div>
                   {/* <div class="row mb-4 px-3">
@@ -328,7 +340,7 @@ export default function Orders() {
                   <button
                     class="btn text-light btn-block my-2"
                     style={{ background: "rgb(108, 183, 125)" }}
-                   onClick={TotalAmt}
+                    onClick={TotalAmt}
                   >
                     BUY BTEX
                   </button>
@@ -336,7 +348,6 @@ export default function Orders() {
                     Fee: Maker fee: 0.1%| Taker fee: 0.1%
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -362,6 +373,154 @@ export default function Orders() {
                   flexDirection: "column",
                 }}
               >
+                {/* Sell Btex Option  */}
+
+                <div class="p-3">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span
+                        class="input-group-text buy-sell-form-bg buy-sell-theme"
+                        style=
+                       {{ fontSize: "10px",
+                        backgroundColor:" white",
+                        color: "rgb(162, 162, 162)",
+                        border:" 1px solid rgb(202, 202, 204)",
+                        padding: "10px",}}
+                      
+                      >
+                        AT PRICE
+                        <br />
+                        INR
+                      </span>
+                    </div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      value="10.42000000"
+                      style={{borderRight: "none", borderBlock:" 1px solid rgb(202, 202, 204)", height: "56px"}}
+                    />
+                    <div class="">
+                      <button
+                        class="text-danger bg-white p-3"
+                        type="button"
+                        style=
+                      {{  borderTopColor: "rgb(202, 202, 204)",
+                        bordeRightColor: "rgb(202, 202, 204)",
+                        borderBottomColor: "rgb(202, 202, 204)",
+                        borderLeft: "none",
+                        borderBlock: "1px solid rgb(206, 212, 218)",
+                        fontSize: "15px"}}
+                      
+                      >
+                        HIGHEST PRICE
+                      </button>
+                    </div>
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span
+                        class="input-group-text buy-sell-form-bg buy-sell-theme"
+                        style=
+                        {{  fontSize: "10px",
+                          backgroundColor: "white",
+                          borderColor: "rgb(202, 202, 204)",
+                        }}
+                      >
+                        AMOUNT
+                        <br />
+                        BTEX
+                      </span>
+                    </div>
+                    <input
+                      type="text"
+                      class="form-control buy-sell-form-bg buy-sell-theme"
+                      value="10"
+                      style=
+                       {{ borderTopColor: "rgb(202, 202, 204)",
+                        borderRight: "none",
+                        borderBottomColor: "rgb(202, 202, 204)",
+                        borderLeftColor: "rgb(202, 202, 204)",}}
+                      
+                    />
+                  </div>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span
+                        class="input-group-text buy-sell-form-bg buy-sell-theme"
+                        style=
+                         {{ fontSize:" 10px",
+                          borderColor: "rgb(202, 202, 204)",
+                          paddingInline: "15px",
+                        }}
+                      >
+                        TOTAL
+                        <br />
+                        INR
+                      </span>
+                    </div>
+                    <input
+                      type="text"
+                      class="form-control buy-sell-form-bg buy-sell-theme"
+                      value="465.0610118"
+                      style={{borderColor: "rgb(202, 202, 204)"}}
+                    />
+                  </div>
+
+
+                  {/* <div class="row px-3 mb-4">
+                    <div
+                      class="col-6 pl-1"
+                      style="
+                      display: flex;
+                      flex-direction: row;
+                      align-items: center;
+                      border-inline: 1px solid rgb(206, 212, 218);
+                      border-bottom: 1px solid rgb(206, 212, 218);
+                      border-radius: 5px;
+                    "
+                    >
+                      <span class="mx-2" title="wallet">
+                        <svg
+                          stroke="currentColor"
+                          fill="currentColor"
+                          stroke-width="0"
+                          viewBox="0 0 512 512"
+                          class="text-secondary"
+                          height="24"
+                          width="24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M200.4 27.39L180.9 183h42.8l49.1-146.57-72.4-9.04zm91.7 8L242.7 183l149.7.1 34.3-102.61-134.6-45.1zM180 46.03l-71.9 7.84L122.2 183h40.7L180 46.03zM64 153c-11.5 0-19.18 8.8-21.27 17.2-1.04 4.2-.45 7.6.73 9.5 1.17 1.8 2.79 3.3 8.54 3.3h52.1l-3.3-30H64zm357.4 0l-10 30h47.5c-2.6-5-3.7-10.3-3-15.6.7-5.2 2.7-9.9 5.3-14.4h-39.8zM41 201v246.9c0 5.1 2.79 11.1 7.37 15.7C52.96 468.2 59 471 64 471l384 .1c5 0 11-2.8 15.6-7.4 4.6-4.6 7.4-10.6 7.4-15.7v-71h-87c-44 0-44-82 0-82h87v-93.9L41 201zm343 112c-20 0-20 46 0 46h22.3c-9-3.8-15.3-12.7-15.3-23s6.3-19.2 15.3-23H384zm41.7 0c9 3.8 15.3 12.7 15.3 23s-6.3 19.2-15.3 23H487v-46h-61.3zm-9.7 16c-4 0-7 3-7 7s3 7 7 7 7-3 7-7-3-7-7-7z"></path>
+                        </svg>
+                      </span>
+                      477573.7914 BTEX
+                    </div>
+                    <div
+                      class="col-6 d-flex justify-content-between"
+                        style="
+                        border-right: 1px solid rgb(206, 212, 218);
+                        border-bottom: 1px solid rgb(206, 212, 218);
+                      "
+                    >
+                      <span class="cursor">25%</span>
+                      <span class="px-1 cursor">50%</span>
+                      <span class="pl-1 cursor">75%</span>
+                      <span class="pl-1 cursor">100%</span>
+                    </div>
+                  </div> */}
+
+
+                  <button
+                    class="btn btn-block text-light my-2"
+                    style={{background: "rgb(251, 110, 123)"}}
+                  >
+                    SELL BTEX
+                  </button>
+                  <div class="px-3 m-0">
+                    Fee: Maker fee: 0.1%| Taker fee: 0.1%
+                  </div>
+                </div>
+
                 <div class="offset-7 col-5 py-5">
                   <select
                     class="custom-select bg-light text-secondary border buy-sell-form-bg buy-sell-theme d-none"
@@ -372,16 +531,12 @@ export default function Orders() {
                   </select>
                 </div>
 
-               
-
-                <button
+                {/* <button
                   class="btn btn-block text-light my-2"
                   style={{ background: "rgb(251, 110, 123)" }}
                 >
                   SELL BTC
-                </button>
-
-               
+                </button> */}
               </div>
             </div>
           </div>
