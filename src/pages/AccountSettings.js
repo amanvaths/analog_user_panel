@@ -5,14 +5,19 @@ import Menu from "../components/Menu";
 import PersonalInfo from "../components/PersonalInfo";
 import SecuritySettings from "../components/SecuritySettings";
 import Notification from "../components/Notification";
+import ChangePassword from "../components/ChangePassword";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
 
 const AccountSettings = () => {
+  const dispatch = useDispatch()
   const [activity, setActivity] = useState(false);
-  const [personaInfo, setPersonalInfo] = useState(true);
+
+  const [personaInfo, setPersonalInfo] = useState(false);
   const [securitySettings, setSecuritySettings] = useState(false)
   const [notification, setNotification] = useState(false)
+  // const [changePassword, setChangePassword] = useState(false)
   const [logData, setLogData] = useState([])
   const [dt, setDt] = useState('')
   const email = localStorage.getItem("email")
@@ -46,6 +51,8 @@ const AccountSettings = () => {
                   <div className="nk-block">
                     <div className="card card-bordered">
                       <div className="card-aside-wrap">
+                        {/* {changePassword == true ? <ChangePassword/> : null } */}
+                        <ChangePassword/>
                         {notification == true ? <Notification/> : null}
                         {securitySettings == true ? <SecuritySettings /> : null}
 
@@ -61,7 +68,7 @@ const AccountSettings = () => {
                                     <p> {` Here is your last ${logData.length} login activities log.`}
 
                                       <span className="text-soft">
-                                        <em className="icon ni ni-info"></em>
+                                       
                                       </span>
                                     </p>
                                   </div>
@@ -208,7 +215,7 @@ const AccountSettings = () => {
                                     className={personaInfo ? "active" : " "}
                                     onClick={() => {
                                       setPersonalInfo(true);
-                                      setActivity(false);
+                                    //  dispatch(act)
                                       setSecuritySettings(false);
                                       setNotification(false)
                                     }}

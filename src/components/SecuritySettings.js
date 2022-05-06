@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom'
+
 
 const SecuritySettings = () => {
   const email = localStorage.getItem("email")
@@ -67,9 +69,9 @@ console.log(checked, "checked Data");
                             checked={checked}
                             onChange={()=>{
                               if(checked){
-                                setChecked(1)
-                              }else{
                                 setChecked(0)
+                              }else{
+                                setChecked(1)
                               }
                               handelLog()
                             }}
@@ -96,9 +98,8 @@ console.log(checked, "checked Data");
                       className="align-center flex-wrap flex-sm-nowrap gx-3 gy-2"
                     >
                       <li className="order-md-last">
-                        <a href="#" className="btn btn-primary"
-                        >Change Password</a
-                        >
+                        <Link to="#" className="btn btn-primary"
+                        >Change Password</Link>
                       </li>
                       <li>
                         <em className="text-soft text-date fs-12px"
