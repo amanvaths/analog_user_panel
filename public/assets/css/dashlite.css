@@ -15,6 +15,10 @@
 a{
   text-decoration: none !important
 }
+
+.confirmPassword {
+  border: 1px solid green
+}
 @font-face { font-family: 'Roboto'; src: url("../fonts/Roboto-Light.eot"); src: local("Roboto Light"), local("Roboto-Light"), url("../fonts/Roboto-Light.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto-Light.woff2") format("woff2"), url("../fonts/Roboto-Light.woff") format("woff"), url("../fonts/Roboto-Light.ttf") format("truetype"); font-weight: 300; font-style: normal; }
 
 @font-face { font-family: 'Roboto'; src: url("../fonts/Roboto-Regular.eot"); src: local("Roboto"), local("Roboto-Regular"), url("../fonts/Roboto-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto-Regular.woff2") format("woff2"), url("../fonts/Roboto-Regular.woff") format("woff"), url("../fonts/Roboto-Regular.ttf") format("truetype"); font-weight: normal; font-style: normal; }
@@ -29531,7 +29535,7 @@ a:hover .btn-trigger:before {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  top: 0;
+  top: 22;
   width: calc(1rem + 24px);
   height: calc(2.125rem + 2px);
 }
@@ -70787,7 +70791,7 @@ a:hover .btn-trigger:before {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  top: 0;
+  top: 22;
   width: calc(1rem + 24px);
   height: calc(2.125rem + 2px);
 }
