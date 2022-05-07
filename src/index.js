@@ -8,12 +8,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./redux/User";
 import currencyReducer from './redux/currency'
 import settingReducer from './redux/settings'
+import  buySellReducer  from "./redux/buySell";
 
 const store = configureStore({
   reducer: {
     user: userReducer,
     currency: currencyReducer,
-    setting: settingReducer
+    setting: settingReducer,
+    buySell: buySellReducer
   },
 });
 
