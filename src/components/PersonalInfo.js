@@ -56,11 +56,11 @@ const PersonalInfo = () => {
       setShowUser1(false)
     }
 
-    if (data1.data.currency == 'USDT') {
-      setMyCurrency("USDT");
+    if (data1.data.currency == 'usd') {
+      setMyCurrency("usd");
     }
-    if (data1.data.currency == 'INRX') {
-      setMyCurrency("INRX");
+    if (data1.data.currency == 'inr') {
+      setMyCurrency("inr");
     }
     dispatch(setCurrencyPrefrence(data1.data.currency))
   }
@@ -219,11 +219,11 @@ const PersonalInfo = () => {
                     class="custom-control-input"
                     id="inrx"
                     name="currency"
-                    value="INRX"
-                    checked={myCurrency === "INRX"}
+                    value="inr"
+                    checked={myCurrency === "inr"}
                     onChange={(e) => {
-                      updateData("INRX")
-                      dispatch(setCurrencyPrefrence("INRX"))
+                      updateData("inr")
+                      dispatch(setCurrencyPrefrence("inr"))
                     }}
                   />
                   <label class="custom-control-label" for="inrx" ></label>
@@ -244,12 +244,12 @@ const PersonalInfo = () => {
                     class="custom-control-input"
                     id="usdt"
                     name="currency"
-                    value="USDT"
-                    checked={myCurrency === "USDT"}
+                    value="usd"
+                    checked={myCurrency === "usd"}
                     onChange={(e) => {
 
-                      updateData("USDT")
-                      dispatch(setCurrencyPrefrence("USDT"))
+                      updateData("usd")
+                      dispatch(setCurrencyPrefrence("usd"))
                     }}
                   /><label class="custom-control-label" for="usdt" ></label>
                 </div>

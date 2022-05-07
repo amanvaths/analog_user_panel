@@ -5,6 +5,11 @@ const initialValue = {
     securitySettings: false,
     notification: false,
     changePassword: false,
+    ipWhiteListing: false,
+    isLoginActivityOn: true,
+    isTwoFactOn: false,
+
+
 };
 
 export const settingSlice = createSlice({
@@ -27,9 +32,18 @@ export const settingSlice = createSlice({
         },
         setChangePassword: (state, action) => {
             state.value.changePassword = action.payload.changePassword
-        }
+        },
+         setIpWhiteListing: (state, action) => {
+            state.value.ipWhiteListing = action.payload.ipWhiteListing
+        },
+        setIsLoginActivityOn:(state, action)=>{
+            state.value.isLoginActivityOn = action.payload.isLoginActivityOn
+        },
+        setIpWhiteListing: (state, action) => {
+            state.value.ipWhiteListing = action.payload.ipWhiteListing
+        },
     },
 });
 
-export const { setActivity, setPersonalInfo, setSecuritySettings, setNotification, setChangePassword } = settingSlice.actions;
+export const { setActivity, setPersonalInfo, setSecuritySettings, setNotification, setChangePassword, setIpWhiteListing } = settingSlice.actions;
 export default settingSlice.reducer;

@@ -19,8 +19,8 @@ const Wallet = (props) => {
   const getData = async () => {
     try {
       // currency_prefrence == "INRX" ?  currency_prefrence = "inr" : currency_prefrence = "usd";
-      // console.log(currency_prefrence, "updated");
-      const res = await axios.post("http://localhost:3001/api/getCoinData");
+      console.log(currency_prefrence, "updated");
+      const res = await axios.post("http://localhost:3001/api/getCoinData", {currency: currency_prefrence});
       const cd = [];
       console.log(res.data, "::res.data");
       for (let coin of Object.entries(res.data)) {
@@ -120,7 +120,7 @@ const Wallet = (props) => {
                         <Card1
                           title={element.name}
                           // price={element.quote.USD.price.toFixed(2)}
-                          priceInUsd={element?.quote?.USD?.price.toFixed(2)}
+                          priceInUsd={element?.quote?.[currency_prefrence.toUpperCase()]?.price.toFixed(2)}
                           price={element?.wallet?.balance}
                           lable={element?.symbol}
                           wallet={element?.wallet}

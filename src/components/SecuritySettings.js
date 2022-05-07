@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux";
-import { setActivity, setNotification, setChangePassword, setPersonalInfo, setSecuritySettings } from "../redux/settings";
+import { setActivity, setNotification, setChangePassword, setPersonalInfo, setSecuritySettings, setIpWhiteListing } from "../redux/settings";
 
 
 const SecuritySettings = () => {
   const dispatch = useDispatch()
-  const { activity, personalInfo, securitySettings, notification, changePassword } = useSelector((state) => state.setting.value)
+  const { activity, personalInfo, securitySettings, notification, changePassword, ipWhiteListing } = useSelector((state) => state.setting.value)
   const email = localStorage.getItem("email")
   const [checked, setChecked] = useState(1)
 
@@ -111,6 +111,7 @@ console.log(checked, "checked Data");
                           dispatch(setSecuritySettings({ securitySettings: false }))
                           dispatch(setNotification({ notification: false }))
                           dispatch(setChangePassword({ changePassword: true }))
+                          dispatch(setIpWhiteListing({ipWhiteListing: false}))
                         }}>Change Password</Link>
                       </li>
                       <li>
