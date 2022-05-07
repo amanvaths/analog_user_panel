@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CandleGraph from "../components/CandleGraph";
 import Orders from "../components/Orders";
+import TradeHistory from "../components/TradeHistory";
 
 const UserList = () => {
   const [dropdown, setDropdown] = useState(false);
@@ -15,32 +16,24 @@ const UserList = () => {
 
           <div class="nk-wrap ">
             <Header />
-            <div className="row" style={{margin:"20px 10px 0px"}} >
-              <div className="col-lg-8" style={{top:"10px"}}>
+            <div className="row" style={{ margin: "20px 10px 0px" }}>
+              <div className="col-lg-8" style={{ top: "10px", height: "100%" }}>
                 <CandleGraph />
+                <div className="">
+                  <TradeHistory />
+                </div>
               </div>
-             
-              <div className="col-lg-4 order" 
-              style={{background: "rgb(241, 241, 241)"}}
+
+              <div
+                className="col-lg-4 order"
+                style={{ background: "rgb(241, 241, 241)" }}
               >
-                <Orders/>
+                <Orders />
               </div>
-           
-              <div className="column">
-              
-              {/* <div className="col-lg-3 "
-               style={{marginTop:"360px"}}
-              >
-                Buy Sell Section
-              </div> */}
             </div>
-            </div>
-
-
           </div>
-         
+
           <Footer />
-         
         </div>
       </div>
     </div>
