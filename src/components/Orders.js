@@ -7,23 +7,50 @@ export default function Orders() {
   const [activeTab, setActiveTab] = useState(0);
   const [buy, setBuy] = useState(true);
   const [sell, setSell] = useState(false);
-  const [coinData, setCoinData] = useState([]);
+  const [coinData, setCoinData] = useState({});
 
   const [atprice, setAtprice] = useState(10);
   const [ammount, setAmmount] = useState("");
+  const [history, setHistory] = useState("");
+  const [wallets, setWallets] = useState([]);
+  const [calculatedPrice, setCalculatedPrice] = useState(0);
 
   const getData = async () => {
     try {
       const res = await axios.post("http://localhost:3001/api/getCoinData", {
         currency: "inr",
       });
-      const cd = [];
+      console.log(res.data);
+      setCoinData({...res.data});
+
+     /*  const cd = [];
       for (let coin of Object.entries(res.data)) {
         //console.log(coin);
         cd.push(coin[1]);
       }
       //console.log(cd, "coin data");
-      setCoinData([...cd]);
+      setCoinData([...cd]); */
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getWalletData = async () => {
+    try {
+      const res = await axios.post("http://localhost:3001/api/getWalletData", {
+        email: email,
+      });
+      let walletData = res.data;
+      walletData = walletData.filter((wallet) => wallet.balance > 0);
+      setWallets([...walletData]);
+      console.log("WalletData::", walletData);
+      const cd = [];
+      /* for (let coin of Object.entries(res.data)) {
+        //console.log(coin);
+        cd.push(coin[1]);
+      }
+      //console.log(cd, "coin data");
+      setCoinData([...cd]); */
     } catch (error) {
       console.log(error);
     }
@@ -31,9 +58,10 @@ export default function Orders() {
 
   useEffect(() => {
     getData();
+    getWalletData();
   }, []);
-  console.log(coinData[7]?.quote?.INR?.price, ":: Coin Data");
-  const trxInAna = atprice / coinData[7]?.quote?.INR?.price;
+  console.log(coinData[9]?.quote?.INR?.price, ":: Coin Data");
+  const trxInAna = atprice / coinData[9]?.quote?.INR?.price;
 
   console.log(trxInAna, "1trx in 1 ana");
 
@@ -41,19 +69,30 @@ export default function Orders() {
 
   console.log(inTrx, "Total Trx");
 
+  function calculatePrice(coinPrice) {
+    console.log(coinPrice, ":: Coin Data");
+    const trxInAna = atprice / coinPrice;
+    console.log(trxInAna, "1trx in 1 ana");
+    const inTrx = ammount * trxInAna;
+    console.log(inTrx, "Total Trx");
+    setCalculatedPrice(inTrx);
+  }
+
   function TotalAmt() {
     var Total = atprice * ammount;
     console.log(atprice);
     console.log(ammount);
     let params = {
-      amount: atprice,
-      raw_price: ammount,
+      amount: ammount,
+      raw_price: trxInAna,
       currencyType: "TRX",
       compairCurrency: "INRX",
       TotalTrx: inTrx,
       email: email,
     };
-   
+
+    
+
     axios
       .post("http://localhost:3001/api/order", params)
       .then((res) => {
@@ -63,6 +102,70 @@ export default function Orders() {
         console.log(error.message);
       });
   }
+  useEffect(() => {
+    if (email) {
+      axios
+        .get("http://localhost:3001/api/getAllOrder")
+        .then((res) => {
+          console.log(res.data, "All Order");
+          setHistory(res.data.order);
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
+  }, []);
+
+  const hist =
+    history &&
+    history.map((data, index) => {
+      return (
+        <>
+          <div class="order_cont">
+            <div
+              class="row m-0 p-0 py-1 align-items-center order"
+              style={{
+                borderLeft: "5px solid green",
+                height: "40px",
+                // overflow: "scroll",
+              }}
+            >
+              <div
+                style={{
+                  width: "100%",
+                  height: " 100%",
+                  background: " rgba(35, 172, 80, 0.4)",
+                  position: "absolute",
+                  left: " 0px",
+                  top: "0px",
+                  zIndex: "-1",
+                }}
+              ></div>
+
+              <div class="col-3 text-center" style={{ fontSize: "10px" }}>
+                <div class="font-weight-bold">
+                  {data.currency_type} /{data.compair_currency}
+                </div>
+              </div>
+              <div class="col-3 text-center" style={{ fontSize: "10px" }}>
+                <div class="font-weight-bold"></div>
+                <div>{data.raw_price}</div>
+              </div>
+              <div class="col-3 text-center" style={{ fontSize: "10px" }}>
+                {data.raw_price}
+              </div>
+              <div class="col-3 text-center" style={{ fontSize: "10px" }}>
+                {data.cVolume}
+              </div>
+              {/* <div class="orderrow-hover">
+          <span class="">2/8/2022, 11:41:35 AM</span><span>Executed</span>
+        </div> */}
+            </div>
+          </div>
+        </>
+      );
+    });
+
   return (
     <div className="order">
       <div style={{ background: "white" }}>
@@ -101,31 +204,17 @@ export default function Orders() {
               TOTAL
             </div>
           </div>
-
           <div className="nav nav-tabs d-flex"></div>
 
-          <div
+          {/* order History */}
+          <div style={{ height: "400px", overflow: "scroll" }}>{hist}</div>
+
+          {/* <div
             className=" tab-content orders"
             style={{ borderColor: "rgba(25, 32, 87, 0.2)" }}
           >
-            <div className="d-flex justify-content-center align-items-center">
-              <div
-                className="sing-up-button"
-                style={{
-                  textAlign: "center",
-                  height: "350px",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  display: " flex",
-                  flexDirection: "column",
-                }}
-              >
-                <a className="btn-theme-color " href="#">
-                  No Open Order
-                </a>
-              </div>
-            </div>
-          </div>
+          
+          </div> */}
         </div>
       </div>
 
@@ -274,6 +363,26 @@ export default function Orders() {
                       }}
                     />
                   </div>
+
+
+                  {/* WalletCoins */}
+                  {wallets.map((wallet) => (
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="sCurrency"
+                          value={coinData[wallet.symbol]?.quote?.INR?.price}
+                          id={wallet.symbol}
+                          onChange={(e)=>{calculatePrice(e.target.value)}}
+                        />
+                        <label class="form-check-label" for={wallet.symbol}>
+                         {wallet.symbol}
+                        </label>
+                      </div>
+                    ))}
+
+
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <span
@@ -292,14 +401,16 @@ export default function Orders() {
                     <input
                       type="text"
                       class="form-control buy-sell-form-bg buy-sell-theme"
-                      value={inTrx}
+                      value={calculatedPrice}
                       style={{
                         borderColor: "rgb(202, 202, 204)",
                         height: "54px",
                       }}
                     />
                   </div>
-                  {/* <div class="row mb-4 px-3">
+
+
+                   <div class="row  px-3" >
                     <div
                       class="col-6 pl-1"
                       style={{
@@ -339,7 +450,9 @@ export default function Orders() {
                       <div class="px-1 cursor">75%</div>
                       <div class="cursor">100%</div>
                     </div> 
-                  </div> */}
+                  </div> 
+
+                  
                   <button
                     class="btn text-light btn-block my-2"
                     style={{ background: "rgb(108, 183, 125)" }}
@@ -347,16 +460,16 @@ export default function Orders() {
                   >
                     BUY BTEX
                   </button>
-                  <div class="px-3 m-0">
+                  {/* <div class="px-3 m-0">
                     Fee: Maker fee: 0.1%| Taker fee: 0.1%
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
           </div>
         )}
 
-         {/* Sell */}
+        {/* Sell */}
 
         {sell && (
           <div
@@ -380,18 +493,18 @@ export default function Orders() {
               >
                 {/* Sell Btex Option  */}
 
-                <div class="p-3 " style={{marginTop:"100px"}} >
+                <div class="p-3 " style={{ marginTop: "100px" }}>
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span
                         class="input-group-text buy-sell-form-bg buy-sell-theme"
-                        style=
-                       {{ fontSize: "10px",
-                        backgroundColor:" white",
-                        color: "rgb(162, 162, 162)",
-                        border:" 1px solid rgb(202, 202, 204)",
-                        padding: "10px",}}
-                      
+                        style={{
+                          fontSize: "10px",
+                          backgroundColor: " white",
+                          color: "rgb(162, 162, 162)",
+                          border: " 1px solid rgb(202, 202, 204)",
+                          padding: "10px",
+                        }}
                       >
                         ANA PRICE
                         <br />
@@ -403,20 +516,24 @@ export default function Orders() {
                       class="form-control"
                       value="10"
                       readOnly
-                      style={{borderRight: "none", borderBlock:" 1px solid rgb(202, 202, 204)", height: "56px"}}
+                      style={{
+                        borderRight: "none",
+                        borderBlock: " 1px solid rgb(202, 202, 204)",
+                        height: "56px",
+                      }}
                     />
                     <div class="">
                       <button
                         class="text-danger bg-white p-3"
                         type="button"
-                        style=
-                      {{  borderTopColor: "rgb(202, 202, 204)",
-                        bordeRightColor: "rgb(202, 202, 204)",
-                        borderBottomColor: "rgb(202, 202, 204)",
-                        borderLeft: "none",
-                        borderBlock: "1px solid rgb(206, 212, 218)",
-                        fontSize: "15px"}}
-                      
+                        style={{
+                          borderTopColor: "rgb(202, 202, 204)",
+                          bordeRightColor: "rgb(202, 202, 204)",
+                          borderBottomColor: "rgb(202, 202, 204)",
+                          borderLeft: "none",
+                          borderBlock: "1px solid rgb(206, 212, 218)",
+                          fontSize: "15px",
+                        }}
                       >
                         HIGHEST PRICE
                       </button>
@@ -426,8 +543,8 @@ export default function Orders() {
                     <div class="input-group-prepend">
                       <span
                         class="input-group-text buy-sell-form-bg buy-sell-theme"
-                        style=
-                        {{  fontSize: "10px",
+                        style={{
+                          fontSize: "10px",
                           // backgroundColor: "white",
                           borderColor: "rgb(202, 202, 204)",
                         }}
@@ -441,22 +558,21 @@ export default function Orders() {
                       type="text"
                       class="form-control buy-sell-form-bg buy-sell-theme"
                       // value="10"
-                      style=
-                       {{ borderTopColor: "rgb(202, 202, 204)",
+                      style={{
+                        borderTopColor: "rgb(202, 202, 204)",
                         borderRight: "none",
                         borderBottomColor: "rgb(202, 202, 204)",
                         borderLeftColor: "rgb(202, 202, 204)",
                         height: "56px",
                       }}
-                      
                     />
                   </div>
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <span
                         class="input-group-text buy-sell-form-bg buy-sell-theme"
-                        style=
-                         {{ fontSize:" 10px",
+                        style={{
+                          fontSize: " 10px",
                           borderColor: "rgb(202, 202, 204)",
                           paddingInline: "15px",
                         }}
@@ -470,10 +586,12 @@ export default function Orders() {
                       type="text"
                       class="form-control buy-sell-form-bg buy-sell-theme"
                       // value="465.0610118"
-                      style={{borderColor: "rgb(202, 202, 204)", height: "56px",}}
+                      style={{
+                        borderColor: "rgb(202, 202, 204)",
+                        height: "56px",
+                      }}
                     />
                   </div>
-
 
                   {/* <div class="row px-3 mb-4">
                     <div
@@ -517,10 +635,9 @@ export default function Orders() {
                     </div>
                   </div> */}
 
-
                   <button
                     class="btn btn-block text-light my-2"
-                    style={{background: "rgb(251, 110, 123)"}}
+                    style={{ background: "rgb(251, 110, 123)" }}
                   >
                     SELL BTEX
                   </button>
