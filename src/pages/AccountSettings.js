@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Menu from "../components/Menu";
@@ -6,14 +7,17 @@ import PersonalInfo from "../components/PersonalInfo";
 import SecuritySettings from "../components/SecuritySettings";
 import Notification from "../components/Notification";
 import ChangePassword from "../components/ChangePassword";
+import IPwhiteListing from "../components/IPwhiteListing";
+
 import { Link } from "react-router-dom";
 import axios from "axios";
+import {IoLocation} from 'react-icons/io5'
 import { useSelector, useDispatch } from "react-redux";
-import { setActivity, setNotification, setChangePassword, setPersonalInfo, setSecuritySettings } from "../redux/settings";
+import { setActivity, setNotification, setChangePassword, setPersonalInfo, setSecuritySettings, setIpWhiteListing } from "../redux/settings";
 
 const AccountSettings = () => {
   const dispatch = useDispatch()
-  const { activity, personalInfo, securitySettings, notification, changePassword } = useSelector((state) => state.setting.value)
+  const { activity, personalInfo, securitySettings, notification, changePassword, ipWhiteListing } = useSelector((state) => state.setting.value)
   const [logData, setLogData] = useState([])
 
   const email = localStorage.getItem("email")
@@ -44,6 +48,7 @@ const AccountSettings = () => {
                   <div className="nk-block">
                     <div className="card card-bordered">
                       <div className="card-aside-wrap">
+                        {ipWhiteListing == true ? <IPwhiteListing/> : null}
                         {changePassword == true ? <ChangePassword/> : null }
                         {/* <ChangePassword/> */}
                         {notification == true ? <Notification /> : null}
@@ -211,6 +216,7 @@ const AccountSettings = () => {
                                       dispatch(setSecuritySettings({ securitySettings: false }))
                                       dispatch(setNotification({ notification: false }))
                                       dispatch(setChangePassword({ changePassword: false }))
+                                      dispatch(setIpWhiteListing({ ipWhiteListing: false }))
                                     }}
                                   >
                                     <em className="icon ni ni-user-fill-c"></em>
@@ -225,6 +231,7 @@ const AccountSettings = () => {
                                       dispatch(setSecuritySettings({ securitySettings: false }))
                                       dispatch(setNotification({ notification: true }))
                                       dispatch(setChangePassword({ changePassword: false }))
+                                      dispatch(setIpWhiteListing({ ipWhiteListing: false }))
                                     }}>
                                     <em className="icon ni ni-bell-fill"></em>
                                     <span>Notifications</span>
@@ -240,6 +247,7 @@ const AccountSettings = () => {
                                         dispatch(setSecuritySettings({ securitySettings: false }))
                                         dispatch(setNotification({ notification: false }))
                                         dispatch(setChangePassword({ changePassword: false }))
+                                        dispatch(setIpWhiteListing({ ipWhiteListing: false }))
                                       }}
                                     >
                                       Account Activity
@@ -255,9 +263,25 @@ const AccountSettings = () => {
                                       dispatch(setSecuritySettings({ securitySettings: true }))
                                       dispatch(setNotification({ notification: false }))
                                       dispatch(setChangePassword({ changePassword: false }))
+                                      dispatch(setIpWhiteListing({ ipWhiteListing: false }))
                                     }}>
                                     <em className="icon ni ni-lock-alt-fill"></em>
                                     <span>Security Settings</span>
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link to="#"
+                                    className={securitySettings ? "active" : " "}
+                                    onClick={() => {
+                                      dispatch(setIpWhiteListing({ ipWhiteListing: true }))
+                                      dispatch(setPersonalInfo({ personalInfo: false }))
+                                      dispatch(setActivity({ activity: false }))
+                                      dispatch(setSecuritySettings({ securitySettings: false }))
+                                      dispatch(setNotification({ notification: false }))
+                                      dispatch(setChangePassword({ changePassword: false }))
+                                    }}>
+                                    <IoLocation />&nbsp; &nbsp;
+                                    <span>IP Whitelisting</span>
                                   </Link>
                                 </li>
                               </ul>

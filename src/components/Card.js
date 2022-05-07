@@ -4,11 +4,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import {MdOutlineContentCopy} from 'react-icons/md'
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Card1 = (props) => {
+  const {currency_prefrence} = useSelector((state) => state.currency.value)
+  const [unit, setUnit] = useState('')
+  // setUnit(currency_prefrence == 'inr' ? currency_prefrence == 'INR' : currency_prefrence == "USD")
   const walletInfo = props.wallet;
   const [copied, setCopied] = useState(false);
 
+  useEffect(()=>{
+    setUnit(currency_prefrence == 'inr' ? 'INR' : "USD")
+  },[])
   
    const addString = props.address;
   const first = addString?.substring(0, 20);
@@ -48,7 +55,7 @@ const Card1 = (props) => {
                         </div>
                         <div className="amount-sm">
                           {props.priceInUsd}
-                          <span className="currency currency-usd">USD</span>
+                          <span className="currency currency-usd">{unit}</span>
                         </div>
                       </div>
                     </div>
