@@ -9,21 +9,16 @@ import ChangePassword from "../components/ChangePassword";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
+import { setActivity, setNotification, setChangePassword, setPersonalInfo, setSecuritySettings } from "../redux/settings";
 
 const AccountSettings = () => {
   const dispatch = useDispatch()
-  const [activity, setActivity] = useState(false);
-
-  const [personaInfo, setPersonalInfo] = useState(false);
-  const [securitySettings, setSecuritySettings] = useState(false)
-  const [notification, setNotification] = useState(false)
-  // const [changePassword, setChangePassword] = useState(false)
+  const { activity, personalInfo, securitySettings, notification, changePassword } = useSelector((state) => state.setting.value)
   const [logData, setLogData] = useState([])
-  const [dt, setDt] = useState('')
+
   const email = localStorage.getItem("email")
 
   const getLoginLog = async () => {
-
     try {
       const data = await axios.post('http://localhost:3001/api/loginhistory', { email: email })
       setLogData(data.data.login_record)
@@ -31,8 +26,6 @@ const AccountSettings = () => {
       console.log(error);
     }
   }
-
-
 
   useEffect(() => {
     getLoginLog()
@@ -51,12 +44,12 @@ const AccountSettings = () => {
                   <div className="nk-block">
                     <div className="card card-bordered">
                       <div className="card-aside-wrap">
-                        {/* {changePassword == true ? <ChangePassword/> : null } */}
-                        <ChangePassword/>
-                        {notification == true ? <Notification/> : null}
+                        {changePassword == true ? <ChangePassword/> : null }
+                        {/* <ChangePassword/> */}
+                        {notification == true ? <Notification /> : null}
                         {securitySettings == true ? <SecuritySettings /> : null}
 
-                        {personaInfo == true && <PersonalInfo />}
+                        {personalInfo == true && <PersonalInfo />}
 
                         {activity == true ? (
                           <div className="card-inner card-inner-lg">
@@ -68,7 +61,7 @@ const AccountSettings = () => {
                                     <p> {` Here is your last ${logData.length} login activities log.`}
 
                                       <span className="text-soft">
-                                       
+
                                       </span>
                                     </p>
                                   </div>
@@ -129,7 +122,6 @@ const AccountSettings = () => {
                                       )
                                     })
                                   }
-
 
                                 </tbody>
                               </table>
@@ -212,12 +204,13 @@ const AccountSettings = () => {
                                 <li>
                                   <Link
                                     to="#"
-                                    className={personaInfo ? "active" : " "}
+                                    className={personalInfo ? "active" : " "}
                                     onClick={() => {
-                                      setPersonalInfo(true);
-                                    //  dispatch(act)
-                                      setSecuritySettings(false);
-                                      setNotification(false)
+                                      dispatch(setPersonalInfo({ personalInfo: true }))
+                                      dispatch(setActivity({ activity: false }))
+                                      dispatch(setSecuritySettings({ securitySettings: false }))
+                                      dispatch(setNotification({ notification: false }))
+                                      dispatch(setChangePassword({ changePassword: false }))
                                     }}
                                   >
                                     <em className="icon ni ni-user-fill-c"></em>
@@ -226,25 +219,27 @@ const AccountSettings = () => {
                                 </li>
                                 <li>
                                   <Link to="#"
-                                  onClick={()=>{
-                                    setNotification(true)
-                                    setPersonalInfo(false);
-                                    setActivity(false);
-                                    setSecuritySettings(false);
-                                  }}>
+                                    onClick={() => {
+                                      dispatch(setPersonalInfo({ personalInfo: false }))
+                                      dispatch(setActivity({ activity: false }))
+                                      dispatch(setSecuritySettings({ securitySettings: false }))
+                                      dispatch(setNotification({ notification: true }))
+                                      dispatch(setChangePassword({ changePassword: false }))
+                                    }}>
                                     <em className="icon ni ni-bell-fill"></em>
                                     <span>Notifications</span>
                                   </Link>
                                 </li>
                                 <li>
-                                  <Link className={activity? "active" : " "} to="#">
+                                  <Link className={activity ? "active" : " "} to="#">
                                     <em className="icon ni ni-activity-round-fill"></em>
                                     <span
                                       onClick={() => {
-                                        setActivity(true);
-                                        setPersonalInfo(false);
-                                          setSecuritySettings(false);
-                                          setNotification(false)
+                                        dispatch(setPersonalInfo({ personalInfo: false }))
+                                        dispatch(setActivity({ activity: true }))
+                                        dispatch(setSecuritySettings({ securitySettings: false }))
+                                        dispatch(setNotification({ notification: false }))
+                                        dispatch(setChangePassword({ changePassword: false }))
                                       }}
                                     >
                                       Account Activity
@@ -252,14 +247,15 @@ const AccountSettings = () => {
                                   </Link>
                                 </li>
                                 <li>
-                                  <Link to="#" 
-                                  className={securitySettings ? "active" : " "}
-                                  onClick={() => {
-                                    setSecuritySettings(true);
-                                    setActivity(false);
-                                    setPersonalInfo(false);
-                                    setNotification(false)
-                                  }}>
+                                  <Link to="#"
+                                    className={securitySettings ? "active" : " "}
+                                    onClick={() => {
+                                      dispatch(setPersonalInfo({ personalInfo: false }))
+                                      dispatch(setActivity({ activity: false }))
+                                      dispatch(setSecuritySettings({ securitySettings: true }))
+                                      dispatch(setNotification({ notification: false }))
+                                      dispatch(setChangePassword({ changePassword: false }))
+                                    }}>
                                     <em className="icon ni ni-lock-alt-fill"></em>
                                     <span>Security Settings</span>
                                   </Link>

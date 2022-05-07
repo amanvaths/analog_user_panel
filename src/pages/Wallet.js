@@ -3,7 +3,6 @@ import Menu from "../components/Menu";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Card1 from "../components/Card";
-import { Button } from "react-bootstrap";
 import axios from "axios";
 import { useSelector } from 'react-redux'
 
@@ -19,8 +18,11 @@ const Wallet = (props) => {
 
   const getData = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/api/getCoinData");
+      // currency_prefrence == "INRX" ?  currency_prefrence = "inr" : currency_prefrence = "usd";
+      // console.log(currency_prefrence, "updated");
+      const res = await axios.post("http://localhost:3001/api/getCoinData");
       const cd = [];
+      console.log(res.data, "::res.data");
       for (let coin of Object.entries(res.data)) {
         //console.log(coin);
         cd.push(coin[1]);

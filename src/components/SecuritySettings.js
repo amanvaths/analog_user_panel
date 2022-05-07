@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom'
+import { useSelector, useDispatch } from "react-redux";
+import { setActivity, setNotification, setChangePassword, setPersonalInfo, setSecuritySettings } from "../redux/settings";
 
 
 const SecuritySettings = () => {
+  const dispatch = useDispatch()
+  const { activity, personalInfo, securitySettings, notification, changePassword } = useSelector((state) => state.setting.value)
   const email = localStorage.getItem("email")
   const [checked, setChecked] = useState(1)
 
-const handelLog = async()=>{
+const handelLog = async(e)=>{
    try {
     console.log(checked, "::Data befor API Call");
-    const data = await axios.post('http://localhost:3001/api/login_activity',{email: email, login_activity: checked})
+   const state =  e.target.checked
+    console.log(state ? 1: 0, "::State");
+    const data = await axios.post('http://localhost:3001/api/login_activity',{email: email, login_activity: state})
     console.log(data, "response from api");
   } catch (error) {
       console.log(error);
@@ -67,13 +73,13 @@ console.log(checked, "checked Data");
                             class="custom-control-input"
                             id="usdt"
                             checked={checked}
-                            onChange={()=>{
+                            onChange={(e)=>{
                               if(checked){
                                 setChecked(0)
                               }else{
                                 setChecked(1)
                               }
-                              handelLog()
+                              handelLog(e)
                             }}
                           /><label class="custom-control-label" for="usdt" ></label>
                         </div>
@@ -99,7 +105,13 @@ console.log(checked, "checked Data");
                     >
                       <li className="order-md-last">
                         <Link to="#" className="btn btn-primary"
-                        >Change Password</Link>
+                        onClick={()=>{
+                          dispatch(setPersonalInfo({ personalInfo: false }))
+                          dispatch(setActivity({ activity: false }))
+                          dispatch(setSecuritySettings({ securitySettings: false }))
+                          dispatch(setNotification({ notification: false }))
+                          dispatch(setChangePassword({ changePassword: true }))
+                        }}>Change Password</Link>
                       </li>
                       <li>
                         <em className="text-soft text-date fs-12px"

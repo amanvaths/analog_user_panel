@@ -14,19 +14,19 @@ export const settingSlice = createSlice({
     },
     reducers: {
         setActivity: (state, action) => {
-            state.value.activity = action.payload;
+            state.value.activity = action.payload.activity;
         },
         setPersonalInfo: (state, action) => {
-            state.value.personalInfo = action.payload;
+            state.value.personalInfo = action.payload.personalInfo;
         },
         setSecuritySettings: (state, action) => {
-            state.value.securitySettings = action.payload
+            state.value.securitySettings = action.payload.securitySettings
         },
         setNotification: (state, action) => {
-            state.value.notification = action.payload
+            state.value.notification = action.payload.notification
         },
         setChangePassword: (state, action) => {
-            state.value.changePassword = action.payload
+            state.value.changePassword = action.payload.changePassword
         }
     },
 });
