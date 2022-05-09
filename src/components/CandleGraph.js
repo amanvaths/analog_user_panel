@@ -1,14 +1,23 @@
 import React, { useEffect } from "react";
 import { createChart, CrosshairMode, isBusinessDay } from "lightweight-charts";
-//import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "./chart.css";
-// import {  toggleFav } from "../redux/actions/coinDBAction";
-// import { getChartData } from "../redux/helpers/api_functions";
+
+import { setCurrency_type } from "../redux/buySell";
 export default function CandleGraph(props) {
-  //const dispatch = useDispatch();
-  // const url = "https://kingvrx.com/api";
+
+  const {currency_type} = useSelector((state)=> state.buySell.value)
+  console.log(currency_type,"CTYPE");
+  const dispatch = useDispatch();
+  dispatch(setCurrency_type({currency_type: "amit"}))
+
+  console.log(currency_type, "after");
+
+
   const url = "https://bullsiex.io/api";
   const [fullexe, setFUllexw] = React.useState(false);
+
+  
   /* const { coins, currency_graph, user_fav_pairing } = useSelector(
     (state) => state.coinDBReducer
   ); */
