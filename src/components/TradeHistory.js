@@ -1,6 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+// import axios from "axios";
+// import { BASE_URL } from "../Api_connection/config";
+
+
+
+
 
 export default function TradeHistory() {
+  const email = localStorage.getItem("email");
+  // const [history, setHistory] = useState("");
+
+  // useEffect(() => {
+  //   if (email) {
+  //     axios
+  //       .get(`${BASE_URL}/getAllOrder`)
+  //       .then((res) => {
+  //         console.log(res.data, "All Order");
+  //         setHistory(res.data.order);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error.message);
+  //       });
+  //   }
+  // }, []);
+
+  // const hist =
+  //   history &&
+  //   history.map((data, index) => {
+  //     return (
+  //       <>
+         
+  //       </>
+  //     );
+  //   });
+
+
   return (
     <div>
       <div class="overflow-hidden">
@@ -37,7 +72,7 @@ export default function TradeHistory() {
             >
               <div class="col-3 text-center" style={{fontSize: "10px;"}}>
                 {/* <i class="fas fa-arrow-down"></i> */}
-                3099836.233828
+              {email}
               </div>
               <div class="col-3 text-center text-dark" style={{fontSize: "10px"}}>
                 ANA
