@@ -1,20 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux";
-import { setActivity, setNotification, setChangePassword, setPersonalInfo, setSecuritySettings, setIpWhiteListing, setIsLoginActivityOn } from "../redux/settings";
+import { setActivity, setNotification, setChangePassword, setPersonalInfo, setSecuritySettings, setIpWhiteListing, setIsLoginActivityOn, setIsTwoFactOn } from "../redux/settings";
+import { Button } from 'bootstrap';
 
 
 const SecuritySettings = () => {
   const dispatch = useDispatch()
-  const { activity, personalInfo, securitySettings, notification, changePassword, ipWhiteListing, isLoginActivityOn } = useSelector((state) => state.setting.value)
+  const { isLoginActivityOn, isTwoFactOn } = useSelector((state) => state.setting.value)
+  console.log(isTwoFactOn, "state::::");
   const email = localStorage.getItem("email")
-  const [checked, setChecked] = useState(1)
+  const [lable, setLable] = useState(false)
 
+  const onAuth = () => {
+    setLable(!lable)
+    console.log(!isTwoFactOn, "reverse 1");
+    dispatch(setIsTwoFactOn({isTwoFactOn: !isTwoFactOn}))
+    console.log(!isTwoFactOn, "reverse 2");
+  }
+
+  console.log(isTwoFactOn, "reverse out ");
   const handelLog = async (e) => {
     try {
-      console.log(checked, "::Data befor API Call");
       const state = e.target.checked
+      dispatch(setIsLoginActivityOn({ isLoginActivityOn: state }))
       console.log(state ? 1 : 0, "::State");
       const data = await axios.post('http://localhost:3001/api/login_activity', { email: email, login_activity: state })
       console.log(data, "response from api");
@@ -23,7 +33,6 @@ const SecuritySettings = () => {
     }
   }
 
-  console.log(checked, "checked Data");
   return (
     <>
       <div className="card-inner card-inner-lg">
@@ -72,12 +81,12 @@ const SecuritySettings = () => {
                             type="checkbox"
                             class="custom-control-input"
                             id="usdt"
-                            checked={checked}
+                            checked={isLoginActivityOn}
                             onChange={(e) => {
-                              if (checked) {
-                                setChecked(0)
+                              if (isLoginActivityOn) {
+                                dispatch(setIsLoginActivityOn({ isLoginActivityOn: 0 }))
                               } else {
-                                setChecked(1)
+                                dispatch(setIsLoginActivityOn({ isLoginActivityOn: 1 }))
                               }
                               handelLog(e)
                             }}
@@ -131,9 +140,11 @@ const SecuritySettings = () => {
                   <div className="nk-block-text">
                     <h6 className='p-1'>
                       2 Factor Auth &nbsp;
-                      <span className="badge badge-success ms-0"
-                      >Enabled</span
-                      >
+                      {
+                        lable ? <span className="badge badge-danger ms-0">disabled</span> : <span className="badge badge-success ms-0"
+                        >enabled</span>
+                      }
+
                     </h6>
                     <p className='p-1'>
                       Secure your account with 2FA security.
@@ -143,11 +154,17 @@ const SecuritySettings = () => {
                       this code by in mobile app.
                     </p>
                   </div>
-                  <div className="nk-block-actions">
-                    <a href="#" className="btn btn-primary"
-                    >Disable</a
-                    >
-                  </div>
+                  {
+                    setIsTwoFactOn == true ?
+                    ( <div className="nk-block-actions">
+                    <button onClick={() => onAuth()} className="btn btn-primary">Disable</button>
+                    </div>) :
+                      ( <div className="nk-block-actions">
+                        <button onClick={() => onAuth()} className="btn btn-primary">Enable</button>
+                      </div>)
+                  }
+
+
                 </div>
               </div>
             </div>
