@@ -16,7 +16,7 @@ export default function Orders() {
   const [calculatedPrice, setCalculatedPrice] = useState(0);
   const [walletbalance, setWalletBalance] = useState('')
   const [walletsymbol,setWalletsymbol]=useState("")
-  const[totalTrxqty,setTotalTrxQty]=useState("")
+  // const[totalTrxqty,setTotalTrxQty]=useState("")
   
 
   const getData = async () => {
@@ -68,9 +68,9 @@ export default function Orders() {
         
       });
       let Anadata = res.data;
-      console.log(res.data,"ana Price")  
+      console.log(res.data._data.price,"ana Price")  
       // setAnaprice(res.data.price)
-      setAtprice(res.data.price)
+      setAtprice(res.data._data.price)
     } catch (error) {
       console.log(error);
     }
