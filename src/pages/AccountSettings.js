@@ -271,7 +271,7 @@ const AccountSettings = () => {
                                 </li>
                                 <li>
                                   <Link to="#"
-                                    className={securitySettings ? "active" : " "}
+                                    className={ipWhiteListing ? "active" : " "}
                                     onClick={() => {
                                       dispatch(setIpWhiteListing({ ipWhiteListing: true }))
                                       dispatch(setPersonalInfo({ personalInfo: false }))
