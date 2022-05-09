@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialValue = {
-  currency_prefrence: "USDT",
+  currency_prefrence: "usd",
 };
 
 export const currencySlice = createSlice({
@@ -10,7 +10,7 @@ export const currencySlice = createSlice({
   },
   reducers: {
     setCurrencyPrefrence: (state, action) => {
-      state.value.currency_prefrence = action.payload;
+      state.value.currency_prefrence = action.payload.currency_prefrence;
     },
   },
 });

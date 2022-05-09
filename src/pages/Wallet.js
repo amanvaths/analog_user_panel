@@ -3,25 +3,29 @@ import Menu from "../components/Menu";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Card1 from "../components/Card";
-import axios from "axios";
-import { useSelector } from 'react-redux'
-import { Triangle } from 'react-loader-spinner'
 
+import axios from "axios";
+import { Triangle } from 'react-loader-spinner'
+import { useSelector, useDispatch } from 'react-redux';
+import { setCurrencyPrefrence } from "../redux/currency";
+// import { setTotalBalance } from "../redux/User";
 
 const Wallet = (props) => {
-  const { currency_prefrence } = useSelector((state) => state.currency.value)
-  console.log(currency_prefrence, "::Data");
+  const { currency_prefrence} = useSelector((state) => state.currency.value)
+  // const {totalBalance } = useSelector((state)=> state.user.value)
+  const dispatch = useDispatch()
   const [coinData, setCoinData] = useState([]);
   const [walletDetails, setWalletDetails] = useState([]);
   const [coinWW, setCoinWW] = useState([]);
   const [loader, setLoader] = useState(true)
 
   const userInfo = localStorage.getItem("email");
-
+  console.log(currency_prefrence, "updated");
   const getData = async () => {
     try {
       // currency_prefrence == "INRX" ?  currency_prefrence = "inr" : currency_prefrence = "usd";
       console.log(currency_prefrence, "updated");
+      // dispatch(setCurrencyPrefrence({currency_prefrence: }))
       const res = await axios.post("http://localhost:3001/api/getCoinData", { currency: currency_prefrence });
       const cd = [];
       console.log(res.data, "::res.data");
@@ -45,18 +49,18 @@ const Wallet = (props) => {
     setWalletDetails([...walletAddress.data]);
   }
 
-  const updateWallet = async () => {
-    try {
-      const data = await axios.post('http://localhost:3001/api/transaction_update', { email: userInfo })
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  // const updateWallet = async () => {
+  //   try {
+  //     const data = await axios.post('http://localhost:3001/api/transaction_update', { email: userInfo })
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   useEffect(() => {
     getData();
     getWalletDetails();
-    updateWallet()
+    // updateWallet()
   }, []);
 
   useEffect(() => {
@@ -73,22 +77,27 @@ const Wallet = (props) => {
     }
   }, [walletDetails, coinData]);
 
-  const totalBalance = coinWW[0]?.wallet?.balance;
+  console.log(coinWW,":: coinWW");
   var individualBalance = 0;
   var individualPriceInUsd = 0;
   var totalPriceInUsd = 0;
   var allFundValue = 0;
-  // var tb = 0;
+  
   for (let balance of coinWW) {
     individualBalance = balance?.wallet?.balance;
-    individualPriceInUsd = balance?.quote?.USD?.price;
+    individualPriceInUsd = balance?.quote?.[currency_prefrence.toUpperCase()]?.price;
     totalPriceInUsd = individualBalance * individualPriceInUsd;
     allFundValue = parseFloat(totalPriceInUsd) + allFundValue;
+    console.log(allFundValue, ":: total balance in loop");
+    // dispatch(setTotalBalance({totalBalance: allFundValue}))
+    
   }
   console.log(allFundValue, ":: total balance");
-  // console.log(tb, "::Total Balance");
+  // dispatch(setTotalBalance({totalBalance: allFundValue}))
+  
+ 
 
-  console.log(coinWW, "amitWW");
+  // console.log(totalBalance, "amitWW");
 
   return (
     <>
@@ -115,8 +124,9 @@ const Wallet = (props) => {
                     style={{ padding: "0 30px" }}
                   >
                     <h6>
-                      {" "}
-                      <b></b> Total Balance: &nbsp;&nbsp;&nbsp;$
+                      Total Balance: 
+                      {/* {currency_prefrence === "usd" ? <span>&#36;</span>  : currency_prefrence === "inr" ? <span>&#8377;</span> : null} */}
+                      &nbsp;&nbsp;
                       {allFundValue}
                     </h6>
                   </label>
@@ -129,7 +139,7 @@ const Wallet = (props) => {
                       <Card1
                         title={element.name}
                         // price={element.quote.USD.price.toFixed(2)}
-                        priceInUsd={element?.quote?.[currency_prefrence.toUpperCase()]?.price.toFixed(2)}
+                        priceInUsd={element?.quote?.[currency_prefrence?.toUpperCase()]?.price.toFixed(2)}
                         price={element?.wallet?.balance}
                         lable={element?.symbol}
                         wallet={element?.wallet}

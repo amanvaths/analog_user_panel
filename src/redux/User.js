@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { act } from "@testing-library/react";
 const initialValue = {
   isLoggedIn: false,
   userInfo: {},
-
+  totalBalance: ''
 };
 
 export const userSlice = createSlice({
@@ -12,16 +13,16 @@ export const userSlice = createSlice({
   },
   reducers: {
     login: (state, action) => {
-      console.log("Login Payload", action.payload);
       state.value = action.payload;
     },
     logout: (state, action) => {
       state.value = initialValue;
     },
-   
-    
+    setTotalBalance: (state, action)=>{
+      state.value.totalBalance = action.payload.totalBalance
+    }
   },
 });
 
-export const { logout, login } = userSlice.actions;
+export const { logout, login, setTotalBalance} = userSlice.actions;
 export default userSlice.reducer;
