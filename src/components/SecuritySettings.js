@@ -1,29 +1,29 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux";
-import { setActivity, setNotification, setChangePassword, setPersonalInfo, setSecuritySettings, setIpWhiteListing } from "../redux/settings";
+import { setActivity, setNotification, setChangePassword, setPersonalInfo, setSecuritySettings, setIpWhiteListing, setIsLoginActivityOn } from "../redux/settings";
 
 
 const SecuritySettings = () => {
   const dispatch = useDispatch()
-  const { activity, personalInfo, securitySettings, notification, changePassword, ipWhiteListing } = useSelector((state) => state.setting.value)
+  const { activity, personalInfo, securitySettings, notification, changePassword, ipWhiteListing, isLoginActivityOn } = useSelector((state) => state.setting.value)
   const email = localStorage.getItem("email")
   const [checked, setChecked] = useState(1)
 
-const handelLog = async(e)=>{
-   try {
-    console.log(checked, "::Data befor API Call");
-   const state =  e.target.checked
-    console.log(state ? 1: 0, "::State");
-    const data = await axios.post('http://localhost:3001/api/login_activity',{email: email, login_activity: state})
-    console.log(data, "response from api");
-  } catch (error) {
+  const handelLog = async (e) => {
+    try {
+      console.log(checked, "::Data befor API Call");
+      const state = e.target.checked
+      console.log(state ? 1 : 0, "::State");
+      const data = await axios.post('http://localhost:3001/api/login_activity', { email: email, login_activity: state })
+      console.log(data, "response from api");
+    } catch (error) {
       console.log(error);
-  } 
-}
+    }
+  }
 
-console.log(checked, "checked Data");
+  console.log(checked, "checked Data");
   return (
     <>
       <div className="card-inner card-inner-lg">
@@ -73,10 +73,10 @@ console.log(checked, "checked Data");
                             class="custom-control-input"
                             id="usdt"
                             checked={checked}
-                            onChange={(e)=>{
-                              if(checked){
+                            onChange={(e) => {
+                              if (checked) {
                                 setChecked(0)
-                              }else{
+                              } else {
                                 setChecked(1)
                               }
                               handelLog(e)
@@ -105,14 +105,14 @@ console.log(checked, "checked Data");
                     >
                       <li className="order-md-last">
                         <Link to="#" className="btn btn-primary"
-                        onClick={()=>{
-                          dispatch(setPersonalInfo({ personalInfo: false }))
-                          dispatch(setActivity({ activity: false }))
-                          dispatch(setSecuritySettings({ securitySettings: false }))
-                          dispatch(setNotification({ notification: false }))
-                          dispatch(setChangePassword({ changePassword: true }))
-                          dispatch(setIpWhiteListing({ipWhiteListing: false}))
-                        }}>Change Password</Link>
+                          onClick={() => {
+                            dispatch(setPersonalInfo({ personalInfo: false }))
+                            dispatch(setActivity({ activity: false }))
+                            dispatch(setSecuritySettings({ securitySettings: false }))
+                            dispatch(setNotification({ notification: false }))
+                            dispatch(setChangePassword({ changePassword: true }))
+                            dispatch(setIpWhiteListing({ ipWhiteListing: false }))
+                          }}>Change Password</Link>
                       </li>
                       <li>
                         <em className="text-soft text-date fs-12px"

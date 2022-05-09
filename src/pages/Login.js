@@ -14,15 +14,12 @@ const Login = (props) => {
   const [password, setPassword] = useState("");
   const [emailerror, setEmailerror] = useState(false);
   const [passworderror, setPassworderror] = useState(false);
-  const [response, setResponse] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const googleId =
-    "28253347908-l3f5pge45v4avpv50ppksjlkvvap6t35.apps.googleusercontent.com";
+  const googleId = "28253347908-l3f5pge45v4avpv50ppksjlkvvap6t35.apps.googleusercontent.com";
   const onLoginSuccess = (res) => {
     console.log(res.profileObj);
-    // window.location.replace('/')
   };
   const onLoginFailure = (res) => {
     console.log(res);
@@ -67,12 +64,7 @@ const Login = (props) => {
         }
         if (resp.status == 4) {
           swal("Email not Registered", "Please signup", "error");
-          // localStorage.setItem("token", resp.token);
         }
-        /*  else {
-          setResponse(resp);
-          swal(`${resp.message}`, "Try with new email ID", "error");
-        } */
       });
   }
   const handelFormSubmit = (email, password) => {
