@@ -13,20 +13,20 @@ import { setCurrencyPrefrence } from "../redux/currency";
 const Wallet = (props) => {
   const { currency_prefrence} = useSelector((state) => state.currency.value)
   // const {totalBalance } = useSelector((state)=> state.user.value)
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const [coinData, setCoinData] = useState([]);
   const [walletDetails, setWalletDetails] = useState([]);
   const [coinWW, setCoinWW] = useState([]);
   const [loader, setLoader] = useState(true)
 
-  const userInfo = localStorage.getItem("email");
-  console.log(currency_prefrence, "updated");
+  const email = localStorage.getItem("email");
+  
   const getData = async () => {
     try {
       // currency_prefrence == "INRX" ?  currency_prefrence = "inr" : currency_prefrence = "usd";
       console.log(currency_prefrence, "updated");
       // dispatch(setCurrencyPrefrence({currency_prefrence: }))
-      const res = await axios.post("http://localhost:3001/api/getCoinData", { currency: currency_prefrence });
+      const res = await axios.post("http://localhost:3001/api/getCoinData", { currency: "usd" });
       const cd = [];
       console.log(res.data, "::res.data");
       for (let coin of Object.entries(res.data)) {
@@ -42,25 +42,23 @@ const Wallet = (props) => {
 
   async function getWalletDetails() {
     const walletAddress = await axios.post(
-      "http://localhost:3001/api/getwalletdata",
-      { email: userInfo }
-    );
-    // console.log(walletAddress.data);
+      "http://localhost:3001/api/getwalletdata",{ email: email });
+      console.log(walletAddress, "wallet address")
     setWalletDetails([...walletAddress.data]);
   }
 
-  // const updateWallet = async () => {
-  //   try {
-  //     const data = await axios.post('http://localhost:3001/api/transaction_update', { email: userInfo })
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+  const updateWallet = async () => {
+    try {
+      const data = await axios.post('http://localhost:3001/api/transaction_update', { email: email })
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
     getData();
     getWalletDetails();
-    // updateWallet()
+    updateWallet()
   }, []);
 
   useEffect(() => {
@@ -71,7 +69,7 @@ const Wallet = (props) => {
         const w = walletDetails.filter((w) => w.symbol == coind.symbol);
         cd.push({ ...coind, wallet: w[0] });
       }
-      console.log(cd);
+      console.log(cd, "cdcdddcdcdcdcdcdccddd");
       setCoinWW([...cd]);
       setLoader(false)
     }
