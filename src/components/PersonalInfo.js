@@ -32,9 +32,11 @@ const PersonalInfo = () => {
         const data = await axios.post('http://localhost:3001/api/settings', apidata)
         setUpdatedUserName(apidata['username']);
         setUpdatedPhone(apidata['contact'])
+        // dispatch(setCurrencyPrefrence())
         // setMyCurrency(apidata['currency'])
         console.log(data, "::settings APi response");
         setMyCurrency(myCurrency);
+        
       } catch (error) {
         console.log(error);
       }
@@ -62,7 +64,7 @@ const PersonalInfo = () => {
     if (data1.data.currency == 'inr') {
       setMyCurrency("inr");
     }
-    dispatch(setCurrencyPrefrence(data1.data.currency))
+    dispatch(setCurrencyPrefrence({currency_prefrence: data1.data.currency}))
   }
 
   useEffect(async () => {
@@ -255,6 +257,48 @@ const PersonalInfo = () => {
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="nk-data data-list">
+            <div className="data-head">
+              <h6 className="overline-title">Referral</h6>
+            </div>
+
+           
+            <div className="row mx-auto mt-3">
+              <div className="col-4 ">
+                <div className="">
+                  <span className="data-label">Referral Link</span>
+
+                </div>
+              </div>
+              <div className="col-4">
+                {showUser1 == false ? <div class="input-group-sm">
+                  <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1"
+                    // value={phone}
+                    placeholder="Enter Referral Link"
+                    onChange={(e) => setPhone(e.target.value)}
+                    maxLength={10}
+                    minLength={10}
+                     />
+                </div> : <span className="data-value">{updatedPhone}</span>}
+              </div>
+              <div className="col-4 d-flex justify-content-end">
+                <div className="">
+
+                  <span className="">
+                    
+                    <a href="#" class="btn btn-dim btn-primary" onClick={() => {
+                     
+                    }}>Update</a> 
+                    
+
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            
           </div>
 
         </div>

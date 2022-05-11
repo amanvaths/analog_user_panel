@@ -1,6 +1,28 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+    setIsNewBrowserOn,
+    setIsUnusualActivityOn,
+    setIsSalesOn,
+    setIsFeaturesOn,
+    setIsTipsOn
+} from "../redux/settings";
 
 const Notification = () => {
+    const dispatch = useDispatch()
+    const {
+        isNewBrowserOn,
+        isUnusualActivityOn,
+        isSalesOn,
+        isNewFeaturesOn,
+        isTipsOn
+    } = useSelector((state) => state.setting.value)
+
+    console.log(isNewBrowserOn,
+        isUnusualActivityOn,
+        isSalesOn,
+        isNewFeaturesOn,
+        isTipsOn, "sduilsdjlksdjfsdlfjsdlfjsdklfhsdjklfhsdjkfhsdjkfsdjkfsdfhsf");
     return (
         <>
             <div class="card-inner card-inner-lg">
@@ -28,9 +50,19 @@ const Notification = () => {
                     <div class="gy-3">
                         <div class="g-item">
                             <div class="custom-control custom-switch">
-                                <input type="checkbox"
+                                <input
+                                    type="checkbox"
                                     class="custom-control-input"
-                                    id="unusual-activity" />
+                                    id="unusual-activity"
+                                    checked={isUnusualActivityOn}
+                                    onChange={() => {
+                                        if (isUnusualActivityOn) {
+                                            dispatch(setIsUnusualActivityOn({ isUnusualActivityOn: 1 }))
+                                        } else {
+                                            dispatch(setIsUnusualActivityOn({ isUnusualActivityOn: 0 }))
+                                        }
+                                    }}
+                                />
                                 <label
                                     class="custom-control-label"
                                     for="unusual-activity">
@@ -40,8 +72,19 @@ const Notification = () => {
                         <div class="g-item">
                             <div class="custom-control custom-switch">
                                 <input type="checkbox"
-                                    class="custom-control-input" id="new-browser" /><label
-                                        class="custom-control-label" for="new-browser">Email me
+                                    class="custom-control-input"
+                                    id="new-browser"
+                                    checked={isNewBrowserOn}
+                                    onChange={() => {
+                                        if (isNewBrowserOn) {
+                                            dispatch(setIsNewBrowserOn({ isNewBrowserOn: 1 }))
+                                        } else {
+                                            dispatch(setIsNewBrowserOn({ isNewBrowserOn: 0 }))
+                                        }
+                                    }}
+                                />
+                                <label
+                                    class="custom-control-label" for="new-browser">Email me
                                     if new browser is used to sign in</label></div>
                         </div>
                     </div>
@@ -56,26 +99,59 @@ const Notification = () => {
                     <div class="gy-3">
                         <div class="g-item">
                             <div class="custom-control custom-switch">
-                                <input type="checkbox"
+                                <input
+                                    type="checkbox"
                                     class="custom-control-input"
-                                    id="latest-sale" />
+                                    id="latest-sale"
+                                    name="amit"
+                                    checked={isSalesOn}
+                                    onChange={(e) => {
+                                        if (isSalesOn) {
+                                            dispatch(setIsSalesOn({ isSalesOn: 1 }))
+                                        } else {
+                                            dispatch(setIsSalesOn({ isSalesOn: 0 }))
+                                        }
+                                    }}
+                                />
                                 <label class="custom-control-label"
                                     for="latest-sale">
                                     Notify me by email about sales and latest news</label></div>
                         </div>
                         <div class="g-item">
                             <div class="custom-control custom-switch">
-                                <input type="checkbox"
-                                    class="custom-control-input" id="feature-update" /><label
-                                        class="custom-control-label" for="feature-update">Email
+                                <input
+                                    type="checkbox"
+                                    class="custom-control-input"
+                                    id="feature-update"
+                                    checked={isNewFeaturesOn}
+                                    onChange={() => {
+                                        if (isNewFeaturesOn) {
+                                            dispatch(setIsFeaturesOn({ isNewFeaturesOn: 1 }))
+                                        } else {
+                                            dispatch(setIsFeaturesOn({ isNewFeaturesOn: 0 }))
+                                        }
+                                    }}
+                                />
+                                <label
+                                    class="custom-control-label" for="feature-update">Email
                                     me about new features and updates</label></div>
                         </div>
                         <div class="g-item">
                             <div class="custom-control custom-switch">
-                                <input type="checkbox"
+                                <input
+                                    type="checkbox"
                                     class="custom-control-input"
-                                    id="account-tips" /><label class="custom-control-label"
-                                        for="account-tips">Email me about tips on using
+                                    id="account-tips"
+                                    checked={isTipsOn}
+                                    onChange={() => {
+                                        if (isTipsOn) {
+                                            dispatch(setIsTipsOn({ isTipsOn: 1 }))
+                                        } else {
+                                            dispatch(setIsTipsOn({ isTipsOn: 0 }))
+                                        }
+                                    }}
+                                /><label class="custom-control-label"
+                                    for="account-tips">Email me about tips on using
                                     account</label></div>
                         </div>
                     </div>

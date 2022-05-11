@@ -1,29 +1,47 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { BASE_URL } from '../Api_connection/config';
 import axios from 'axios';
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Modal, Button } from "react-bootstrap"
 import { useSelector, useDispatch } from "react-redux";
-import { setActivity, setNotification, setChangePassword, setPersonalInfo, setSecuritySettings, setIpWhiteListing, setIsLoginActivityOn } from "../redux/settings";
+import { setActivity, setNotification, setChangePassword, setPersonalInfo, setSecuritySettings, setIpWhiteListing, setIsLoginActivityOn, setIsTwoFactOn } from "../redux/settings";
+import swal from 'sweetalert'
+
 
 
 const SecuritySettings = () => {
-  const dispatch = useDispatch()
-  const { activity, personalInfo, securitySettings, notification, changePassword, ipWhiteListing, isLoginActivityOn } = useSelector((state) => state.setting.value)
+  console.log();
+  const [otp, setOtp] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isLoginActivityOn, isTwoFactOn } = useSelector((state) => state.setting.value)
+  console.log(isTwoFactOn, "state:::::::::");
   const email = localStorage.getItem("email")
-  const [checked, setChecked] = useState(1)
+  const [lable, setLable] = useState(false);
+  const [security, setSecurityKey] = useState("")
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const onAuth = () => {
+    // setLable(!lable)
+    dispatch(setIsTwoFactOn({ isTwoFactOn: !isTwoFactOn }))
+
+  }
 
   const handelLog = async (e) => {
     try {
-      console.log(checked, "::Data befor API Call");
       const state = e.target.checked
+      dispatch(setIsLoginActivityOn({ isLoginActivityOn: state }))
       console.log(state ? 1 : 0, "::State");
       const data = await axios.post('http://localhost:3001/api/login_activity', { email: email, login_activity: state })
-      console.log(data, "response from api");
+      console.log(data, "response from loginActivity api");
     } catch (error) {
       console.log(error);
     }
   }
 
-  console.log(checked, "checked Data");
   return (
     <>
       <div className="card-inner card-inner-lg">
@@ -72,12 +90,12 @@ const SecuritySettings = () => {
                             type="checkbox"
                             class="custom-control-input"
                             id="usdt"
-                            checked={checked}
+                            checked={isLoginActivityOn}
                             onChange={(e) => {
-                              if (checked) {
-                                setChecked(0)
+                              if (isLoginActivityOn) {
+                                dispatch(setIsLoginActivityOn({ isLoginActivityOn: 0 }))
                               } else {
-                                setChecked(1)
+                                dispatch(setIsLoginActivityOn({ isLoginActivityOn: 1 }))
                               }
                               handelLog(e)
                             }}
@@ -131,23 +149,101 @@ const SecuritySettings = () => {
                   <div className="nk-block-text">
                     <h6 className='p-1'>
                       2 Factor Auth &nbsp;
-                      <span className="badge badge-success ms-0"
-                      >Enabled</span
-                      >
+                      {
+                        !isTwoFactOn ? <span className="badge badge-danger ms-0">disabled</span> : <span className="badge badge-success ms-0"
+                        >enabled</span>
+                      }
+
                     </h6>
                     <p className='p-1'>
                       Secure your account with 2FA security.
-                      When it is activated you will need to
-                      enter not only your password, but also a
-                      special code using app. You can receive
-                      this code by in mobile app.
+                      <p>When it is activated you will need to
+                        enter not only your password, but also a
+                        special code using app.
+                        <p>You can receive
+                          this code by in mobile app.</p>
+                      </p>
+
                     </p>
                   </div>
-                  <div className="nk-block-actions">
-                    <a href="#" className="btn btn-primary"
-                    >Disable</a
-                    >
-                  </div>
+                  {
+                    isTwoFactOn ?
+                      (
+
+                        <div className="nk-block-actions">
+                          <button onClick={() => {
+                            onAuth()
+                            axios.post(`${BASE_URL}/generateauthtoken`, { email: email})
+                          }} className="btn btn-primary">Disable</button>
+                        </div>
+
+                      ) :
+                      (
+                        <div className="nk-block-actions">
+                          <button onClick={() => {
+                            onAuth();
+                            handleShow();
+                            axios.post('http://localhost:3001/api/generateauthtoken', { email: email, google_auth: true }).then((res) => { setSecurityKey(res.data); console.log(res.data, "datat"); })
+                          }} className="btn btn-primary">Enable</button>
+                        </div>
+                      )
+                  }
+                  <Modal show={show} onHide={() => {
+                    handleClose()
+                    dispatch(setIsTwoFactOn({ isTwoFactOn: !isTwoFactOn }))
+                  }}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>Google Authentication</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <div className='row d-flex justify-content-around flex-row align-items-center py-2'>
+                        <div className='col-6'>
+                          <div className=''>
+                            <img
+                              src={security.qr_url}
+                              style={{ height: "150px" }}
+                            />
+                          </div>
+                        </div>
+                        <div className='col-6'>
+                          <form action="" style={{}}>
+                            <div class="form-group">
+                              <div class="form-group">
+                                <label for="inputOtp">Enter OTP:</label>
+                                <input type="text" class="form-control" id="inputOtp" placeholder="Enter Otp" onChange={(e) => setOtp(e.target.value)} />
+                              </div>
+                              <button type="button" class="btn btn-primary px-2" style={{ width: "150px" }} onClick={() => {
+                                axios.post('http://localhost:3001/api/generateauthtoken', { email: email, token: otp }).then((resp) => {
+                                  if (resp.data.status == 1) {
+
+                                    swal(`Verified Succesfully.`, "Welcome", "success");
+                                    navigate("/home")
+                                  } else {
+                                    swal(
+                                      "Incorrect Credentials",
+                                      "Please Enter Right Credentials",
+                                      "error"
+                                    );
+                                  }
+                                })
+                              }}>Verify</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={() => {
+                        handleClose()
+                        dispatch(setIsTwoFactOn({ isTwoFactOn: !isTwoFactOn }))
+                      }}>
+                        Close
+                      </Button>
+                    </Modal.Footer>
+
+                  </Modal>
+
+
                 </div>
               </div>
             </div>

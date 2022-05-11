@@ -1,7 +1,8 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import { BASE_URL } from "../Api_connection/config";
 import { useNavigate } from "react-router-dom";
+import {AiOutlineEyeInvisible, AiOutlineEye} from 'react-icons/ai'
 // import ForgetPassword from "./ForgetPassword";
 import swal from "sweetalert";
 import { useDispatch } from "react-redux";
@@ -14,6 +15,7 @@ const Login = (props) => {
   const [password, setPassword] = useState("");
   const [emailerror, setEmailerror] = useState(false);
   const [passworderror, setPassworderror] = useState(false);
+  const [shown, setShown] = useState(false)
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -24,9 +26,13 @@ const Login = (props) => {
   const onLoginFailure = (res) => {
     console.log(res);
   };
- 
+
+  const togglePassword1 = () => {
+    setShown(!shown)
+   
+  };
   async function Login() {
-    
+
     await fetch(BASE_URL + "/signin", {
       method: "POST",
       headers: {
@@ -41,7 +47,7 @@ const Login = (props) => {
       .then((res) => res.json())
       .then((resp) => {
         console.log(resp);
-       
+
 
         if (resp.status == 0) {
           swal(
@@ -54,8 +60,8 @@ const Login = (props) => {
           swal(`${resp.message}`, "Welcome", "success");
           localStorage.setItem("email", email);
           localStorage.setItem("token", resp.token);
-          dispatch(login({isLoggedIn: true, userInfo:{email:email, token: resp.token}}));
-          localStorage.setItem("analoguser", {isLoggedIn: true, userInfo:{email:email, token: resp.token}});
+          dispatch(login({ isLoggedIn: true, userInfo: { email: email, token: resp.token } }));
+          localStorage.setItem("analoguser", { isLoggedIn: true, userInfo: { email: email, token: resp.token } });
           navigate("/home");
         }
         if (resp.status == 3) {
@@ -154,7 +160,7 @@ const Login = (props) => {
                       setEmail(e.target.value.toLowerCase());
                       setEmailerror(false);
                     }}
-                  style={{fontSize: "15px"}}/>
+                    style={{ fontSize: "15px" }} />
                 </div>
                 {emailerror == true ? (
                   <p style={{ color: "red", marginTop: -20 }}>
@@ -176,11 +182,12 @@ const Login = (props) => {
                       className="form-icon form-icon-right passcode-switch"
                       data-target="password"
                     >
-                      <em className="passcode-icon icon-show icon ni ni-eye"></em>
-                      <em className="passcode-icon icon-hide icon ni ni-eye-off"></em>
+                      {
+                        shown == false ? <AiOutlineEyeInvisible onClick={togglePassword1} /> : <AiOutlineEye onClick={togglePassword1} />
+                      }
                     </a>
                     <input
-                      type="password"
+                      type={shown ? "text" : 'password'}
                       className="form-control form-control-lg"
                       id="password"
                       placeholder="Enter password"
@@ -189,7 +196,7 @@ const Login = (props) => {
                         setPassword(e.target.value);
                         setPassworderror(false);
                       }}
-                      style={{fontSize: "15px"}}/>
+                      style={{ fontSize: "15px" }} />
                   </div>
                 </div>
                 {passworderror == true ? (
@@ -200,8 +207,8 @@ const Login = (props) => {
                 <div className="form-group">
                   <button
                     className="btn btn-lg btn-primary btn-block"
-                    // onClick={() => (window.location.href = "/faq")}
-                    // onClick={Login}
+                  // onClick={() => (window.location.href = "/faq")}
+                  // onClick={Login}
                   >
                     Sign in
                   </button>

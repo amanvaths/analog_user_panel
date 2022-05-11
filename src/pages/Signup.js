@@ -232,7 +232,7 @@ const Signup = (props) => {
                       if (email === "") {
                         setEmailerror(true);
                       }
-                    }}
+                    }} 
                     style={{fontSize: "15px"}}/>
                 </div>
                 {emailerror == true ? (
