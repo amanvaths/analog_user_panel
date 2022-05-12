@@ -745,7 +745,7 @@ class Home extends React.Component {
                                 fill="none"
                                 stroke="#6576ff"
                                 stroke-miterlimit="10"
-                                stroke-width="2"
+                                strokeWidth="2"
                               />
                               <line
                                 x1="40"
@@ -756,7 +756,7 @@ class Home extends React.Component {
                                 stroke="#fffffe"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                stroke-width="2"
+                                strokeWidth="2"
                               />
                               <line
                                 x1="40"
@@ -767,7 +767,7 @@ class Home extends React.Component {
                                 stroke="#fffffe"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                stroke-width="2"
+                                strokeWidth="2"
                               />
                               <line
                                 x1="40"
@@ -778,7 +778,7 @@ class Home extends React.Component {
                                 stroke="#fffffe"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                stroke-width="2"
+                                strokeWidth="2"
                               />
                               <line
                                 x1="30.5"
