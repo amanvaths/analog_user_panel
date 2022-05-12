@@ -217,7 +217,7 @@ const ResetPassword = (props) => {
                   </div>
                   <div className="form-control-wrap">
                     <a
-                      tabindex="-1"
+                      tabIndex="-1"
                       href="#"
                       className="form-icon form-icon-right passcode-switch"
                       data-target="password"
@@ -290,7 +290,7 @@ const ResetPassword = (props) => {
                   </div>
                   <div className="form-control-wrap">
                     <a
-                      tabindex="-1"
+                      tabIndex="-1"
                       href="#"
                       className="form-icon form-icon-right passcode-switch"
                       data-target="confirm-password"

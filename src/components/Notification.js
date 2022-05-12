@@ -1,4 +1,6 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
+import axios from "axios";
+import { BASE_URL } from "../Api_connection/config";
 import { useSelector, useDispatch } from "react-redux";
 import {
     setIsNewBrowserOn,
@@ -9,6 +11,9 @@ import {
 } from "../redux/settings";
 
 const Notification = () => {
+    const email = localStorage.getItem("email");
+    const [reflect,setReflect] = useState(true);
+    const [isInit,setInit] = useState(false);
     const dispatch = useDispatch()
     const {
         isNewBrowserOn,
@@ -18,11 +23,43 @@ const Notification = () => {
         isTipsOn
     } = useSelector((state) => state.setting.value)
 
-    console.log(isNewBrowserOn,
-        isUnusualActivityOn,
-        isSalesOn,
-        isNewFeaturesOn,
-        isTipsOn, "sduilsdjlksdjfsdlfjsdlfjsdklfhsdjklfhsdjkfhsdjkfsdjkfsdfhsf");
+    const setNotification = async(e)=>{
+        try{
+            // console.log(e.target.);
+            console.log(isNewBrowserOn,
+                isUnusualActivityOn,
+                isSalesOn,
+                isNewFeaturesOn,
+                isTipsOn, "::data before API ");
+            const data = await axios.post(`${BASE_URL}/notificationSettings`, {
+                email: email,
+                unusual_activity: isUnusualActivityOn,
+                new_browser: isNewBrowserOn,
+                sales:  isSalesOn,
+                new_features: isNewFeaturesOn,
+                tips: isTipsOn
+            })
+            console.log(data.data, "response from notification api");
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(()=>{
+        if(isInit){
+        console.log("reflect called");
+        setNotification();
+        }
+        else {
+            setInit(true);
+        }
+    },[reflect]);
+
+    console.table("browser",isNewBrowserOn, 
+    "unusual",isUnusualActivityOn, 
+    "sales",  isSalesOn, 
+    "features",  isNewFeaturesOn, 
+    "tips",  isTipsOn, );
     return (
         <>
             <div class="card-inner card-inner-lg">
@@ -55,12 +92,14 @@ const Notification = () => {
                                     class="custom-control-input"
                                     id="unusual-activity"
                                     checked={isUnusualActivityOn}
-                                    onChange={() => {
+                                    onChange={(e) => {
                                         if (isUnusualActivityOn) {
-                                            dispatch(setIsUnusualActivityOn({ isUnusualActivityOn: 1 }))
-                                        } else {
                                             dispatch(setIsUnusualActivityOn({ isUnusualActivityOn: 0 }))
+                                        } else {
+                                            dispatch(setIsUnusualActivityOn({ isUnusualActivityOn: 1 }))
                                         }
+                                        setReflect(!reflect);
+                                       
                                     }}
                                 />
                                 <label
@@ -77,10 +116,11 @@ const Notification = () => {
                                     checked={isNewBrowserOn}
                                     onChange={() => {
                                         if (isNewBrowserOn) {
-                                            dispatch(setIsNewBrowserOn({ isNewBrowserOn: 1 }))
-                                        } else {
                                             dispatch(setIsNewBrowserOn({ isNewBrowserOn: 0 }))
+                                        } else {
+                                            dispatch(setIsNewBrowserOn({ isNewBrowserOn: 1 }))
                                         }
+                                        setReflect(!reflect);
                                     }}
                                 />
                                 <label
@@ -107,10 +147,11 @@ const Notification = () => {
                                     checked={isSalesOn}
                                     onChange={(e) => {
                                         if (isSalesOn) {
-                                            dispatch(setIsSalesOn({ isSalesOn: 1 }))
-                                        } else {
                                             dispatch(setIsSalesOn({ isSalesOn: 0 }))
+                                        } else {
+                                            dispatch(setIsSalesOn({ isSalesOn: 1 }))
                                         }
+                                        setReflect(!reflect);
                                     }}
                                 />
                                 <label class="custom-control-label"
@@ -126,10 +167,11 @@ const Notification = () => {
                                     checked={isNewFeaturesOn}
                                     onChange={() => {
                                         if (isNewFeaturesOn) {
-                                            dispatch(setIsFeaturesOn({ isNewFeaturesOn: 1 }))
-                                        } else {
                                             dispatch(setIsFeaturesOn({ isNewFeaturesOn: 0 }))
+                                        } else {
+                                            dispatch(setIsFeaturesOn({ isNewFeaturesOn: 1 }))
                                         }
+                                        setReflect(!reflect);
                                     }}
                                 />
                                 <label
@@ -145,10 +187,11 @@ const Notification = () => {
                                     checked={isTipsOn}
                                     onChange={() => {
                                         if (isTipsOn) {
-                                            dispatch(setIsTipsOn({ isTipsOn: 1 }))
-                                        } else {
                                             dispatch(setIsTipsOn({ isTipsOn: 0 }))
+                                        } else {
+                                            dispatch(setIsTipsOn({ isTipsOn: 1 }))
                                         }
+                                        setReflect(!reflect);
                                     }}
                                 /><label class="custom-control-label"
                                     for="account-tips">Email me about tips on using

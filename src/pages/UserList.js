@@ -80,7 +80,7 @@ const UserList = () => {
                                   data-search="off"
                                   data-placeholder="Level"
                                   data-select2-id="1"
-                                  tabindex="-1"
+                                  tabIndex="-1"
                                   aria-hidden="true"
                                   style={{ border: "0.1px solid grey" }}
                                 >

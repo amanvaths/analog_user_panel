@@ -20,6 +20,7 @@ const Wallet = (props) => {
   const [loader, setLoader] = useState(true)
 
   const email = localStorage.getItem("email");
+  const token = localStorage.getItem("token");
   
   const getData = async () => {
     try {
@@ -42,7 +43,7 @@ const Wallet = (props) => {
 
   async function getWalletDetails() {
     const walletAddress = await axios.post(
-      "http://localhost:3001/api/getwalletdata",{ email: email });
+      "http://localhost:3001/api/getwalletdata",{ email: email});
       console.log(walletAddress, "wallet address")
     setWalletDetails([...walletAddress.data]);
   }

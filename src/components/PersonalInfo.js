@@ -1,21 +1,32 @@
 import React, { useDeferredValue, useEffect, useState } from "react";
-import { AiFillEdit } from 'react-icons/ai'
-import { useDispatch } from "react-redux";
+import { BASE_URL } from "../Api_connection/config";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setCurrencyPrefrence } from "../redux/currency";
+import { setReferralCode } from '../redux/User'
+
+
 
 const PersonalInfo = () => {
   const email = localStorage.getItem("email")
+  const dispatch = useDispatch()
+  const { referralCode } = useSelector((state) => state.user.value)
+  const [load, setLoad] = useState({})
   const [showUser, setShowUser] = useState(true)
-  const [showUser1, setShowUser1] = useState(false)
+  const [showUser1, setShowUser1] = useState(true)
+  const [showUser3, setShowUser3] = useState(referralCode.length == 0 ? true : false);
   const [value, setValue] = useState('')
   const [phone, setPhone] = useState('')
   const [myCurrency, setMyCurrency] = useState('');
   const [updatedUserName, setUpdatedUserName] = useState('')
   const [updatedPhone, setUpdatedPhone] = useState('')
-  const dispatch = useDispatch()
+
+  console.log(referralCode, "ref code");
 
 
+  const handelRefupdate = (e)=>{
+    dispatch(setReferralCode({referralCode: e.target.value}))
+  }
 
   const updateData = async (myCurrency) => {
     const task = value ? "username" : phone ? "contact" : myCurrency ? "currency" : '';
@@ -29,14 +40,13 @@ const PersonalInfo = () => {
 
     if (apidata.email && apidata.task && apidata[task]) {
       try {
-        const data = await axios.post('http://localhost:3001/api/settings', apidata)
+        const data = await axios.post(`${BASE_URL}/settings`, apidata)
         setUpdatedUserName(apidata['username']);
         setUpdatedPhone(apidata['contact'])
         // dispatch(setCurrencyPrefrence())
         // setMyCurrency(apidata['currency'])
         console.log(data, "::settings APi response");
         setMyCurrency(myCurrency);
-        
       } catch (error) {
         console.log(error);
       }
@@ -57,24 +67,49 @@ const PersonalInfo = () => {
     if (data1?.data?.username?.length > 0) {
       setShowUser1(false)
     }
-
     if (data1.data.currency == 'usd') {
       setMyCurrency("usd");
     }
     if (data1.data.currency == 'inr') {
       setMyCurrency("inr");
     }
-    dispatch(setCurrencyPrefrence({currency_prefrence: data1.data.currency}))
+
+    dispatch(setCurrencyPrefrence({ currency_prefrence: data1.data.currency }))
   }
 
-  useEffect(async () => {
+  // console.log(referralCode, "red code");
+  const updateReferral = async () => {
+    
+    try {
+      setShowUser3(false);
+      const data = await axios.post(`${BASE_URL}/update_refferal`, { email: email, refferalCode: referralCode })
+      setLoad(data)
+      console.log(data.data.status, ":: response from update Referaal API ");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  console.log(showUser3);
+  
+  // useEffect(() => {
+  //   console.log(referralCode, "refcode");
+  //   if (referralCode.length == 0) {
+  //     setShowUser3(true)
+  //   }
+  //   else {
+  //     setShowUser3(false)
+  //   }
+  // }, [load])
+
+  useEffect(() => {
     getData();
   }, [])
 
   useEffect(() => {
     getData();
   }, [myCurrency])
-  // console.log(myCurrency, ":: selected currency");
+
   return (
     <>
       <div className="card-inner card-inner-lg">
@@ -187,7 +222,6 @@ const PersonalInfo = () => {
               </div>
               <div className="col-4 d-flex justify-content-end">
                 <div className="">
-
                   <span className="">
                     {showUser1 ? <a href="#" class="btn btn-dim btn-primary" onClick={() => {
                       if (phone) {
@@ -263,42 +297,50 @@ const PersonalInfo = () => {
             <div className="data-head">
               <h6 className="overline-title">Referral</h6>
             </div>
-
-           
             <div className="row mx-auto mt-3">
               <div className="col-4 ">
                 <div className="">
-                  <span className="data-label">Referral Link</span>
+                  <span className="data-label">Referral Code</span>
 
                 </div>
               </div>
               <div className="col-4">
-                {showUser1 == false ? <div class="input-group-sm">
-                  <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1"
-                    // value={phone}
-                    placeholder="Enter Referral Link"
-                    onChange={(e) => setPhone(e.target.value)}
-                    maxLength={10}
-                    minLength={10}
-                     />
-                </div> : <span className="data-value">{updatedPhone}</span>}
+                {showUser3 ?
+                  <div class="input-group-sm">
+                    <input type="text"
+                      class="form-control"
+                      aria-label="Username"
+                      aria-describedby="basic-addon1"
+                      value={referralCode}
+                      placeholder="Enter Referral Code"
+                      onChange={(e) => {
+                        handelRefupdate(e)
+                      }}
+                      maxLength={10}
+                      minLength={10}
+                    />
+                  </div> :
+                  <span className="data-value">{referralCode}</span>}
               </div>
               <div className="col-4 d-flex justify-content-end">
                 <div className="">
-
                   <span className="">
-                    
-                    <a href="#" class="btn btn-dim btn-primary" onClick={() => {
-                     
-                    }}>Update</a> 
-                    
+                    {showUser3 ? <button class="btn btn-dim btn-primary" onClick={() => {
 
+                      updateReferral();
+                      
+
+                    }}>Update</button> :
+                      <span className=" disable">
+                        <em className="icon ni ni-lock-alt"></em>
+                      </span>
+                    }
                   </span>
                 </div>
               </div>
             </div>
 
-            
+
           </div>
 
         </div>
