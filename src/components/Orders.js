@@ -4,16 +4,14 @@ import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrency_type } from "../redux/buySell";
+import { setCurrencyPrefrence } from "../redux/buySell";
+
 
 export default function Orders() {
   const dispatch = useDispatch();
   const email = localStorage.getItem("email");
   const [buy, setBuy] = useState(true);
-  const [sell, setSell] = useState(false);
   const [coinData, setCoinData] = useState({});
-
-  const [anaprice, setAnaprice] = useState("");
-
   const [atprice, setAtprice] = useState(0);
   const [ammount, setAmmount] = useState(0);
   const [total, setTotal] = useState(0);
@@ -22,33 +20,39 @@ export default function Orders() {
   const [wallets, setWallets] = useState([]);
   const [walletbalance, setWalletBalance] = useState("");
   const [walletsymbol, setWalletsymbol] = useState("");
-  const [totalTrxqty, setTotalTrxQty] = useState("");
+
   const [quantity, setQuantity] = useState(0);
 
-  function toFixed(x) {
-    if (Math.abs(x) < 1.0) {
-      var e = parseInt(x.toString().split('e-')[1]);
-      if (e) {
-          x *= Math.pow(10,e-1);
-          x = '0.' + (new Array(e)).join('0') + x.toString().substring(2);
-      }
-    } else {
-      var e = parseInt(x.toString().split('+')[1]);
-      if (e > 20) {
-          e -= 20;
-          x /= Math.pow(10,e);
-          x += (new Array(e+1)).join('0');
-      }
-    }
-    return x;
-  }
+// dispatch 
 
-  // const [total, setTotal] = useState(0);
-  // const [amount, setAmount] = useState(0);
+const {currency_prefrence} = useSelector((state)=> state.currency.value)
+  console.log(currency_prefrence,"CTYPE type");
+  const symbolState = useSelector((store)=>store);
+  console.log(symbolState,"symbolState");
+  console.log(currency_prefrence, "vipin");
 
-  // if(calculatedPrice==""){
-  //      return setCalculatedPrice==""
+
+
+
+  // function toFixed(x) {
+  //   if (Math.abs(x) < 1.0) {
+  //     var e = parseInt(x.toString().split('e-')[1]);
+  //     if (e) {
+  //         x *= Math.pow(10,e-1);
+  //         x = '0.' + (new Array(e)).join('0') + x.toString().substring(2);
+  //     }
+  //   } else {
+  //     var e = parseInt(x.toString().split('+')[1]);
+  //     if (e > 20) {
+  //         e -= 20;
+  //         x /= Math.pow(10,e);
+  //         x += (new Array(e+1)).join('0');
+  //     }
+  //   }
+  //   return x;
   // }
+
+ 
 
   const getData = async () => {
     try {
@@ -132,7 +136,7 @@ export default function Orders() {
     console.log(inTrx, "Total Trx value");
     // setCalculatedPrice(inTrx);
     setTotal(inTrx);
-    setAtprice(inTrx.toFixed(10));
+    setAtprice(inTrx);
   }
 
   function selectedCoin() {
@@ -147,11 +151,13 @@ export default function Orders() {
     let params = {
       amount: ammount,
       raw_price: trxInAna,
-      currencyType: "TRX",
-      compairCurrency: "INRX",
+      currencyType: walletsymbol,
+      compairCurrency: currency_prefrence,
+      
       TotalTrx: inTrx,
       email: email,
     };
+  
     axios
       .post(`${BASE_URL}/order`, params)
       .then((res) => {
@@ -460,12 +466,17 @@ export default function Orders() {
                             // defaultChecked={wallet.symbol == 'BUSD'}
                             onChange={(e) => {
                               setAtprice(
-                                toFixed(atprice /
-                                  coinData[wallet.symbol]?.quote?.INR?.price)
+                              atprice /
+                                  coinData[wallet.symbol]?.quote?.INR?.price
                               );
 
                               // setCalculatedPrice((st) => coinData[wallet.symbol]?.quote?.INR?.price * quantity);
                               setTotal(
+                                (st) =>
+                                  coinData[wallet.symbol]?.quote?.INR?.price *
+                                  quantity
+                              );
+                              setAmmount(
                                 (st) =>
                                   coinData[wallet.symbol]?.quote?.INR?.price *
                                   quantity
@@ -554,7 +565,7 @@ export default function Orders() {
                         <svg
                           stroke="currentColor"
                           fill="currentColor"
-                          stroke-width="0"
+                          strokeWidth="0"
                           viewBox="0 0 512 512"
                           class="text-secondary"
                           height="24"

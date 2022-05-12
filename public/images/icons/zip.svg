@@ -2,10 +2,10 @@
 <g>
 	<g>
 		
-			<path fill="#FFFFFF" stroke="#4D617B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			<path fill="#FFFFFF" stroke="#4D617B" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
 			M49.8,60H22.2c-2.3,0-4.2-2-4.2-4.4V16.4c0-2.4,1.9-4.4,4.2-4.4h20.5L54,23.4v32.2C54,58,52.1,60,49.8,60z"/>
 		
-			<polyline fill="none" stroke="#4D617B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			<polyline fill="none" stroke="#4D617B" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
 			42.9,12.8 42.9,23.8 53.3,23.8 		"/>
 	</g>
 	<g>
