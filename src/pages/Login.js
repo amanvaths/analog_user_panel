@@ -5,12 +5,14 @@ import { useNavigate } from "react-router-dom";
 import {AiOutlineEyeInvisible, AiOutlineEye} from 'react-icons/ai'
 // import ForgetPassword from "./ForgetPassword";
 import swal from "sweetalert";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/User";
+
 
 // import FacebookLogin from "react-facebook-login";
 
 const Login = (props) => {
+  const {settings} = useSelector((state)=> state.setting.value)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailerror, setEmailerror] = useState(false);
@@ -18,6 +20,8 @@ const Login = (props) => {
   const [shown, setShown] = useState(false)
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  console.log(settings.google_authenticator, " In Login apge");
 
   const googleId = "28253347908-l3f5pge45v4avpv50ppksjlkvvap6t35.apps.googleusercontent.com";
   const onLoginSuccess = (res) => {
@@ -58,11 +62,15 @@ const Login = (props) => {
         }
         if (resp.status == 1) {
           swal(`${resp.message}`, "Welcome", "success");
-          localStorage.setItem("email", email);
-          localStorage.setItem("token", resp.token);
-          dispatch(login({ isLoggedIn: true, userInfo: { email: email, token: resp.token } }));
-          localStorage.setItem("analoguser", { isLoggedIn: true, userInfo: { email: email, token: resp.token } });
-          navigate("/home");
+          console.log(settings.google_authenticator, "fjkfjsdkljkjsdkljsdfklasdjfklsdjfkljsdfl");
+          if(settings.google_authenticator == 1){
+            navigate('/2faAuthentication', {state:{email: email, token: resp.token}})
+          }else{
+            localStorage.setItem("email", email);
+            localStorage.setItem("token", resp.token);
+            dispatch(login({ isLoggedIn: true, userInfo: { email: email, token: resp.token } }));
+            // localStorage.setItem("analoguser", { isLoggedIn: true, userInfo: { email: email, token: resp.token } });
+          }
         }
         if (resp.status == 3) {
           swal("Email is not varified", "Verify Email before Login", "error");

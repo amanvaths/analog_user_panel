@@ -4,16 +4,29 @@ import Footer from "../components/Footer";
 import Menu from "../components/Menu";
 import { useParams } from "react-router-dom";
 import axios from  'axios'
+import { useSelector } from "react-redux";
+import { getSettings } from "../Api_connection/ApiFunction";
+import { setSettings } from "../redux/settings";
 
 const CryptoTransaction = ()=>{
+ 
+ const {settings} = useSelector((state)=> state.setting.value)
   const {title} = useParams();
   const email = localStorage.getItem('email');
   const [history, setHistory] = useState([]);
+  const [totalOrder, setTotalOrder] = useState('')
+  const [coinData,setCoinData] = useState('')
+  const [load, setLoad] = useState(false)
 
   const getTrnsaction = async()=>{
    try {
      console.log(email, title,"::Parameter");
      const data = await axios.post('http://localhost:3001/api/transaction_history', {email: email, symbol: title})
+     if(data){
+       getSettings(email).then((res)=>{
+         setSettings({settings: res.data})
+       })
+     }
      console.log(data.data, ":: response from tranction api");
      setHistory(data.data)
    } catch (error) {
@@ -21,7 +34,35 @@ const CryptoTransaction = ()=>{
    }
   }
 
+  // console.log(, "::currencyPrefrence in transaction");
+  const cp = settings.currency_preference;
+  const getData = async (cp) => {
+    try {
+      console.log(cp, "updated");
+      const res = await axios.post("http://localhost:3001/api/getCoinData", { currency: cp, base_currency: title });
+      setLoad(res)
+      const cd = [];
+      console.log(res.data, "::res.data");
+      for (let coin of Object.entries(res.data)) {
+        //console.log(coin);
+        cd.push(coin[1]);
+      }
+      //console.log(cd, "coin data");
+      setCoinData([...cd]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  console.log(coinData, "::CoinData in crypto trnasaction");
+  console.log(settings.currency_preference);
+  // const cpInCapital = settings.currency_preference.toUpperCase()
+  // console.log(cpInCapital, "::capital");
+  // const priceofOneCoinInPreferedCoin = coinData[0].quote[cpInCapital].price;
+  // const totalPriceInPreferedCoin = priceofOneCoinInPreferedCoin * 
+
   useEffect(()=>{
+    getData(cp)
     getTrnsaction()
   },[])
     return(
@@ -42,7 +83,7 @@ const CryptoTransaction = ()=>{
                         Crypto Transaction
                       </h3>
                       <div className="nk-block-des text-soft">
-                        <p>You have total 12,835 orders.</p>
+                        <p>{`You have total ${totalOrder} orders.`}</p>
                       </div>
                     </div>
                     <div className="nk-block-head-content">
@@ -333,9 +374,9 @@ const CryptoTransaction = ()=>{
                           <div className="nk-tb-item nk-tb-head">
                             <div className="nk-tb-col"><span>Details</span></div>
                            
-                            <div className="nk-tb-col tb-col-lg">
+                            {/* <div className="nk-tb-col tb-col-lg">
                               <span>Order</span>
-                            </div>
+                            </div> */}
                             <div className="nk-tb-col text-end">
                               <span>Amount</span>
                             </div>
@@ -351,7 +392,9 @@ const CryptoTransaction = ()=>{
                           </div>
                           {
                               history.map((element, index)=>{
+                                const a = new Date(element.createdAt)
                                 return(
+                                  
                                   <div className="nk-tb-item">
                             <div className="nk-tb-col">
                               <div className="nk-tnx-type">
@@ -361,30 +404,30 @@ const CryptoTransaction = ()=>{
                                   <em className="icon ni ni-arrow-up-right"></em>
                                 </div>
                                 <div className="nk-tnx-type-text">
-                                  <span className="tb-lead">Deposited Funds</span
-                                  ><span className="tb-date"
-                                    >18/10/2019 12:04 PM</span
+                                  <span className="tb-lead">{element.type == 'deposit' ? "Deposit" : null}</span><span className="tb-date">
+                                    {a.toLocaleDateString()} {a.toLocaleTimeString()}
+                                    </span
                                   >
                                 </div>
                               </div>
                             </div>
-                           
+{/*                            
                             <div className="nk-tb-col tb-col-lg">
                               <span className="tb-lead-sub">YWLX52JG73</span
                               ><span className="badge badge-dot bg-success"
                                 >Deposit</span
                               >
-                            </div>
+                            </div> */}
                             <div className="nk-tb-col text-end">
                               <span className="tb-amount"
                                 >
-                                  {element.amount}
+                                  {element.amount.toFixed(2)}
                                   <span>{element.symbol}</span></span
-                              ><span className="tb-amount-sm">1290.49 USD</span>
+                              >
+                              {/* <span className="tb-amount-sm">{(element.amount * priceofOneCoinInPreferedCoin).toFixed(2)} {cpInCapital}</span> */}
                             </div>
                             <div className="nk-tb-col text-end tb-col-sm">
-                              <span className="tb-amount"
-                                >{element.balance} <span>BTC</span></span
+                              <span className="tb-amount">{element.balance} <span>{element.symbol}</span></span
                               ><span className="tb-amount-sm">101290.49 USD</span>
                             </div>
                             <div className="nk-tb-col nk-tb-col-status">
@@ -465,7 +508,7 @@ const CryptoTransaction = ()=>{
                                 )
                               })
                           }
-                          {/* <div className="nk-tb-item">
+                           <div className="nk-tb-item">
                             <div className="nk-tb-col">
                               <div className="nk-tnx-type">
                                 <div
@@ -576,8 +619,8 @@ const CryptoTransaction = ()=>{
                                 </li>
                               </ul>
                             </div>
-                          </div> */}
-                          <div className="nk-tb-item">
+                          </div> 
+                          {/* <div className="nk-tb-item">
                             <div className="nk-tb-col">
                               <div className="nk-tnx-type">
                                 <div
@@ -688,8 +731,8 @@ const CryptoTransaction = ()=>{
                                 </li>
                               </ul>
                             </div>
-                          </div>
-                          <div className="nk-tb-item">
+                          </div> */}
+                          {/* <div className="nk-tb-item">
                             <div className="nk-tb-col">
                               <div className="nk-tnx-type">
                                 <div
@@ -800,8 +843,8 @@ const CryptoTransaction = ()=>{
                                 </li>
                               </ul>
                             </div>
-                          </div>
-                          <div className="nk-tb-item">
+                          </div> */}
+                         {/*  <div className="nk-tb-item">
                             <div className="nk-tb-col">
                               <div className="nk-tnx-type">
                                 <div
@@ -1472,7 +1515,7 @@ const CryptoTransaction = ()=>{
                                 </li>
                               </ul>
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                       <div className="card-inner">

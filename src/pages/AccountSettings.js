@@ -17,7 +17,7 @@ import { setActivity, setNotification, setChangePassword, setPersonalInfo, setSe
 
 const AccountSettings = () => {
   const dispatch = useDispatch()
-  const { activity, personalInfo, securitySettings, notification, changePassword, ipWhiteListing } = useSelector((state) => state.setting.value)
+  const { activity, personalInfo, securitySettings, notification, changePassword, ipWhiteListing, settings } = useSelector((state) => state.setting.value)
   const [logData, setLogData] = useState([])
 
   const email = localStorage.getItem("email")

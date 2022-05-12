@@ -1,4 +1,5 @@
 import { BASE_URL } from "./config";
+import axios from "axios";
 
 export function Signupn(data) {
   return fetch(BASE_URL + "signup", {
@@ -18,4 +19,8 @@ export function Signupn(data) {
     .catch((error) => {
       console.log(error);
     });
+}
+
+export function getSettings(email) {
+  return axios.post(`${BASE_URL}/configSettings`, { email: email }).then((res) => res).catch((error) => { console.log(error) });
 }
