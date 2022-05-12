@@ -151,7 +151,7 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
     let params = {
       amount: ammount,
       raw_price: trxInAna,
-      currencyType: walletsymbol.toLocaleUpperCase,
+      currencyType: walletsymbol,
       compairCurrency: currency_prefrence,
       
       TotalTrx: inTrx,
