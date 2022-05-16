@@ -1,8 +1,15 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch ,useSelector} from "react-redux";
+import { navsetter } from "../redux/actions/websiteDBAction";
 
 const Header = () => {
   const navigate = useNavigate();
+  // const [but, setbutton]=useState(false);
+  const btn = useSelector((store)=>store.navsetter);
+  console.log("btn123",btn)
+
+  const dispatch = useDispatch();
   const signOut = () => {
     console.log("beforer clear");
     window.localStorage.clear();
@@ -17,7 +24,8 @@ const Header = () => {
             <div className="nk-menu-trigger d-xl-none ml-n1">
               <a
                 href="#"
-                className="nk-nav-toggle nk-quick-nav-icon"
+                onClick={()=>dispatch(navsetter())}
+                className={btn?"nk-nav-toggle nk-quick-nav-icon toggle-active":"nk-nav-toggle nk-quick-nav-icon"}
                 data-target="sidebarMenu"
               >
                 <em className="icon ni ni-menu"></em>

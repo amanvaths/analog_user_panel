@@ -9,13 +9,17 @@ import userReducer from "./redux/User";
 import currencyReducer from './redux/currency'
 import settingReducer from './redux/settings'
 import  buySellReducer  from "./redux/buySell";
+import { navsetterreducer } from "./redux/reducers/websiteDBReducer";
+import { navsettersreducer } from "./redux/reducers/websiteDBReducer";
 
 const store = configureStore({
   reducer: {
     user: userReducer,
     currency: currencyReducer,
     setting: settingReducer,
-    buySell: buySellReducer
+    buySell: buySellReducer,
+    navsetter: navsetterreducer,
+    navsetters: navsettersreducer
   },
 });
 

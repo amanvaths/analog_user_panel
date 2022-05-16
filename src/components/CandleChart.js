@@ -1,6 +1,6 @@
 // import * as React from 'react';
 // import { connect, useDispatch, useSelector } from 'react-redux';
-// import { widget } from '../../charting_library';
+// import { widget } from '../charting_library';
 // import { switchTheme } from '../redux/actions/coinDBAction';
 // import Header from './Header';
 

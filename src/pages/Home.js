@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import Particles from "react-particles-js";
 import Menu from "../components/Menu";
 import Header from "../components/Header";
@@ -9,6 +9,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Getpresale from "../components/Getpresale";
 import axios from "axios";
+import { BASE_URL } from "../Api_connection/config";
 
 // import { Carousel } from "react-responsive-carousel";
 // import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -28,23 +29,61 @@ const slideImages = [
   },
 ];
 
-class Home extends React.Component {
-  state = {
-    res: [],
-  };
-  componentDidMount() {
-    axios.get("http://localhost:3001/api/getpresale").then((res) => {
-      console.log(res.data.user_data, "res frefdfd");
-      this.setState({ res: res.data.user_data });
-      console.log(this.state.res, 
-        '::data')
-    });
-  }
+const  Home = ()=>{
 
-  
+  const [totalAnalogBuy, setTotalAnalogBuy] = useState(0)
+  const [inceptive, setInceptive] = useState(0)
+  const [airdrop, setAirDrop] = useState(0)
+  const [affiliates, setffiliates] = useState(0)
+  const [inherited, setInherited] = useState(0)
+  const [bounty, setBounty] = useState(0)
+  const [handOut, setHandOut] = useState(0)
+  const [totalWallet, setTotalwallet] = useState(0)
+  const [totalTransaction, setTransaction] = useState(0)
+  const [lastActivity, setLastActivity] = useState(0)
 
-  render() {
-    console.log(this.state.res[0]?.levelname, "Respons ");
+  const [data, setData] = useState([])
+  const email = localStorage.getItem("email")
+ 
+    const getPreSale = async()=>{
+        try {
+          const res = axios.get(`${BASE_URL}/getpresale`)
+          setData((await res).data.user_data)
+        } catch (error) {
+          console.log(error);
+        }
+    }
+
+    const getUserWalletData = async()=>{
+      try {
+        const res = await axios.post(`${BASE_URL}/userWalletData`, {email: email})
+        setTotalAnalogBuy(res.data.token_balance)
+        setInceptive(res.data.inceptive_wallet)
+        setAirDrop(res.data.airdrop_wallet)
+        setffiliates(res.data.affilites_wallet)
+        setInherited(res.data.affilites_wallet)
+        setBounty(res.data.bounty_wallet)
+        setHandOut(res.data.handout_wallet)
+        setTotalwallet(res.data.total_wallet)
+        setTransaction(res.data.total_transaction)
+        setLastActivity(res.data.last_activity)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    const a = new Date(lastActivity)
+    const date = a.toDateString()
+    const time = a.toLocaleTimeString()
+
+useEffect(()=>{
+  getUserWalletData()
+  getPreSale()
+},[])
+
+
+ 
+
     const responsive = {
       superLargeDesktop: {
         breakpoint: { max: 4000, min: 3000 },
@@ -67,6 +106,7 @@ class Home extends React.Component {
         items: 1,
       },
     };
+
     return (
       <div>
         <div className="nk-app-root">
@@ -110,9 +150,7 @@ class Home extends React.Component {
                 // className="position-absolute top-50 start-50 translate-middle"
               >
                 {
-              
-
-                this.state.res.map((data) => {
+                data.map((data) => {
                   console.log(data.levelname, "level name");
                   return (
                     <Getpresale
@@ -152,24 +190,24 @@ class Home extends React.Component {
                                       TOTAL ANOLOG BUY
                                     </div>
                                     <div className="number-lg amount">
-                                      179,850.950
+                                      {totalAnalogBuy.toFixed(2)}
                                     </div>
                                   </div>
                                   <div className="nk-wg7-stats-group">
                                     <div className="nk-wg7-stats w-50">
                                       <div className="nk-wg7-title">Wallets</div>
-                                      <div className="number-lg">5</div>
+                                      <div className="number-lg">{totalWallet}</div>
                                     </div>
                                     <div className="nk-wg7-stats w-50">
                                       <div className="nk-wg7-title">
                                         Transactions
                                       </div>
-                                      <div className="number">34,405</div>
+                                      <div className="number">{totalTransaction}</div>
                                     </div>
                                   </div>
                                   <div className="nk-wg7-foot">
                                     <span className="nk-wg7-note">
-                                      Last activity at <span>19 Nov, 2019</span>
+                                      Last activity at <span>{date} {time}</span>
                                     </span>
                                   </div>
                                 </div>
@@ -208,7 +246,7 @@ class Home extends React.Component {
                                     </div>
                                     <div className="nk-wgw-balance">
                                       <div className="amount">
-                                        4.434953
+                                        {inceptive}
                                         <span className="currency currency-nio">
                                           INRX
                                         </span>
@@ -235,7 +273,7 @@ class Home extends React.Component {
                                     </div>
                                     <div className="nk-wgw-balance">
                                       <div className="amount">
-                                        4.434953
+                                        {airdrop}
                                         <span className="currency currency-btc">
                                           INRX
                                         </span>
@@ -259,7 +297,7 @@ class Home extends React.Component {
                                     </div>
                                     <div className="nk-wgw-balance">
                                       <div className="amount">
-                                        0.000560
+                                        {affiliates}
                                         <span className="currency currency-eth">
                                           INRX
                                         </span>
@@ -295,7 +333,7 @@ class Home extends React.Component {
                                     </div>
                                     <div className="nk-wgw-balance">
                                       <div className="amount">
-                                        1.5%
+                                        {inherited}
                                         <span className="currency currency-nio">
                                           INRX
                                         </span>
@@ -327,7 +365,7 @@ class Home extends React.Component {
                                       >
                                         {/* [L<sup>1</sup> / L<sup>2</sup> / L
                                         <sup>3</sup>][1% / 0.5% / 0.2% ] */}
-                                        4.434953
+                                        {bounty}
                                         <span className="currency currency-btc">
                                           INRX
                                         </span>
@@ -354,7 +392,7 @@ class Home extends React.Component {
                                     </div>
                                     <div className="nk-wgw-balance">
                                       <div className="amount">
-                                        0.5%
+                                        {handOut}
                                         <span className="currency currency-eth">
                                           INRX
                                         </span>
@@ -867,6 +905,5 @@ class Home extends React.Component {
       </div>
       // </div>
     );
-  }
 }
 export default Home;

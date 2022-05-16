@@ -9,6 +9,9 @@ import Notification from "../components/Notification";
 import ChangePassword from "../components/ChangePassword";
 import IPwhiteListing from "../components/IPwhiteListing";
 
+import { navsetters } from "../redux/actions/websiteDBAction";
+
+
 import { Link } from "react-router-dom";
 import axios from "axios";
 import {IoLocation} from 'react-icons/io5'
@@ -19,7 +22,11 @@ const AccountSettings = () => {
   const dispatch = useDispatch()
   const { activity, personalInfo, securitySettings, notification, changePassword, ipWhiteListing } = useSelector((state) => state.setting.value)
   const [logData, setLogData] = useState([])
+  
 
+  const btn1 = useSelector((store)=>store.navsetters);
+  console.log("uyftyf",btn1)
+  
   const email = localStorage.getItem("email")
 
   const getLoginLog = async () => {
@@ -71,10 +78,11 @@ const AccountSettings = () => {
                                     </p>
                                   </div>
                                 </div>
-                                <div className="nk-block-head-content align-self-start d-lg-none">
+                                <div onClick={()=>dispatch(navsetters())} className="nk-block-head-content align-self-start d-lg-none">
                                   <a
                                     href="#"
-                                    className="toggle btn btn-icon btn-trigger mt-n1"
+                                    
+                                    className={btn1?"toggle btn btn-icon btn-trigger mt-n1 active":"toggle btn btn-icon btn-trigger mt-n1"}
                                     data-target="userAside"
                                   >
                                     <em className="icon ni ni-menu-alt-r"></em>
@@ -135,7 +143,7 @@ const AccountSettings = () => {
                         ) : null}
 
                         <div
-                          className="card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg"
+                          className={btn1?"card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg content-active":"card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg"}
                           data-toggle-body="true"
                           data-content="userAside"
                           data-toggle-screen="lg"
