@@ -16,17 +16,57 @@ import { BASE_URL } from "../Api_connection/config";
 
 const slideImages = [
   {
-    url: "https://wallpapercave.com/wp/wp2623839.jpg",
+    url: "http://localhost:3000/images/slides/2.png",
     caption: "",
   },
   {
-    url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKV5XdFI6TRWC8i70IfDJ4OqMG5s2JUonVvms3PQkmXcLMvd3RFHCWhyGqoRbfHESHhfc&usqp=CAU",
+    url: "http://localhost:3000/images/slides/3.png",
     caption: "",
   },
   {
-    url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREJ7DJ1_P2Cwa7MpAwaGx20UQ9acGTy3irShNRat3Wx01RxGDXXkZk9l-2aqLcL8BVmXo&usqp=CAU",
+    url: "http://localhost:3000/images/slides/4.png",
     caption: "",
   },
+  {
+    url: "http://localhost:3000/images/slides/5.png",
+    caption: "",
+  },
+  {
+    url: "http://localhost:3000/images/slides/6.png",
+    caption: "",
+  },
+  {
+    url: "http://localhost:3000/images/slides/7.png",
+    caption: "",
+  },
+  {
+    url: "http://localhost:3000/images/slides/8.png",
+    caption: "",
+  },
+  {
+    url: "http://localhost:3000/images/slides/9.png",
+    caption: "",
+  },
+  {
+    url: "http://localhost:3000/images/slides/10.png",
+    caption: "",
+  },
+  {
+    url: "http://localhost:3000/images/slides/11.png",
+    caption: "",
+  },
+  {
+    url: "http://localhost:3000/images/slides/12.png",
+    caption: "",
+  },
+  {
+    url: "http://localhost:3000/images/slides/13.png",
+    caption: "",
+  },
+  {
+    url: "http://localhost:3000/images/slides/14.png",
+    caption: "",
+  }
 ];
 
 const  Home = ()=>{
@@ -42,7 +82,8 @@ const  Home = ()=>{
   const [totalTransaction, setTransaction] = useState(0)
   const [lastActivity, setLastActivity] = useState(0)
   const [recentActivities, setRecentActivities] = useState([]);
- 
+  const [totalRefferal, setTotalRefferal] = useState(0);
+  const [totalReffEarn, setTotalReffEarn] = useState(0);
 
   const [data, setData] = useState([])
   const email = localStorage.getItem("email")
@@ -83,18 +124,28 @@ const  Home = ()=>{
       }
     }
 
+    const refferalData =async() => {
+      try{
+        const res = await axios.get(`${BASE_URL}/userAllRecords?email=${ email }&bonus_type=Level`)
+        //console.warn(res.data +"Reff data ");
+       setTotalRefferal(res.data.totalUser);
+       setTotalReffEarn(res.data.income[0].total_bonus);
+       console.log(totalReffEarn, "Total reff earn");
+      }catch(error){
+        console.log("Error in refferal Data API " + error);
+      }
+    }
+
 
     const a = new Date(lastActivity)
     const date = a.toDateString()
     const time = a.toLocaleTimeString()
 
-
-
-
 useEffect(()=>{
   getUserWalletData()
   getPreSale()
   recentActivity()
+  refferalData();
 },[])
 
 
@@ -141,6 +192,9 @@ useEffect(()=>{
                           backgroundImage: `url(${slideImage.url})`,
                           height: "250px",
                           width: "100%",
+                          backgroundSize: "cover",
+                          backgroundRepeat: "no-repeat",
+                          backgroundAttachment: "fixed"                      
                         }}
                       >
                         <span
@@ -602,11 +656,11 @@ useEffect(()=>{
                             </div>
                             <div className="nk-refwg-info g-3">
                               <div className="nk-refwg-sub">
-                                <div className="title">394</div>
+                                <div className="title">{ totalRefferal }</div>
                                 <div className="sub-text">Total Joined</div>
                               </div>
                               <div className="nk-refwg-sub">
-                                <div className="title">548.49</div>
+                                <div className="title">{ totalReffEarn.toFixed(2) }</div>
                                 <div className="sub-text">Referral Earn</div>
                               </div>
                             </div>
@@ -618,7 +672,7 @@ useEffect(()=>{
                               >
                                 <em className="icon ni ni-more-h"></em>
                               </a>
-                              <div className="dropdown-menu dropdown-menu-xs dropdown-menu-right">
+                              {/* <div className="dropdown-menu dropdown-menu-xs dropdown-menu-right">
                                 <ul className="link-list-plain sm">
                                   <li>
                                     <a href="#">7 days</a>
@@ -630,7 +684,7 @@ useEffect(()=>{
                                     <a href="#">30 Days</a>
                                   </li>
                                 </ul>
-                              </div>
+                              </div> */}
                             </div>
                           </div>
                           <div className="nk-refwg-ck">
