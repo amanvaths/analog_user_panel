@@ -69,6 +69,7 @@ const Login = (props) => {
             localStorage.setItem("email", email);
             localStorage.setItem("token", resp.token);
             dispatch(login({ isLoggedIn: true, userInfo: { email: email, token: resp.token } }));
+            navigate('/home')
             // localStorage.setItem("analoguser", { isLoggedIn: true, userInfo: { email: email, token: resp.token } });
           }
         }

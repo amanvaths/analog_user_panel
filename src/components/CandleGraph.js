@@ -17,6 +17,7 @@ export default function CandleGraph(props) {
 
   console.log(currency_type, "vipin");
   
+ 
 
   const url = "https://bullsiex.io/api";
   const [fullexe, setFUllexw] = React.useState(false);
@@ -217,7 +218,684 @@ export default function CandleGraph(props) {
             1W
           </span>
         </div>
+
+
       {/* Add Line  */}
+
+
+<div
+  class="layout__area--top"
+  style={{position: "absolute", top: "0px", left: "56px" ,width: "1416px", height: "38px"}}>
+  <div class="toolbar-LZaMRgb9">
+    <div class="overflowWrap-LZaMRgb9">
+      <div class="inner-pzOKvpP8">
+        <div class="wrapOverflow-3obNZqvj">
+          <div class="wrap-3obNZqvj">
+            <div class="scrollWrap-3obNZqvj noScrollBar-3obNZqvj">
+              <div class="content-pzOKvpP8">
+                <div class="wrap-1ETeWwz2">
+                  <div class="group-3uonVBsm">
+                    <div
+                      id="header-toolbar-symbol-search"
+                      data-role="button"
+                      class="uppercase-1n0tF4SR button-2Vpz_LXc button-1n0tF4SR apply-common-tooltip isInteractive-2Vpz_LXc"
+                    >
+                      <div class="js-button-text text-2Vpz_LXc text-1n0tF4SR">
+                        BITFLASH
+                      </div>
+                    </div>
+                  </div>
+                  <div class="group-3uonVBsm">
+                    <div class="wrap-3jbioG5e" id="header-toolbar-intervals">
+                      <div
+                        data-value="60"
+                        data-role="button"
+                        class="button-2R6OKuTS first-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isActive-2Vpz_LXc isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">1h</div>
+                        </div>
+                      </div>
+                      <div
+                        data-value="120"
+                        data-role="button"
+                        class="button-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">2h</div>
+                        </div>
+                      </div>
+                      <div
+                        data-value="240"
+                        data-role="button"
+                        class="button-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">4h</div>
+                        </div>
+                      </div>
+                      <div
+                        data-value="360"
+                        data-role="button"
+                        class="button-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">6h</div>
+                        </div>
+                      </div>
+                      <div
+                        data-value="720"
+                        data-role="button"
+                        class="button-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">12h</div>
+                        </div>
+                      </div>
+                      <div
+                        data-value="1D"
+                        data-role="button"
+                        class="button-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">D</div>
+                        </div>
+                      </div>
+                      <div
+                        data-value="2D"
+                        data-role="button"
+                        class="button-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">2D</div>
+                        </div>
+                      </div>
+                      <div
+                        data-value="3D"
+                        data-role="button"
+                        class="button-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">3D</div>
+                        </div>
+                      </div>
+                      <div
+                        data-value="1W"
+                        data-role="button"
+                        class="button-2R6OKuTS last-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                        title="1 week"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">W</div>
+                        </div>
+                      </div>
+                      <div
+                        class="menu-2R6OKuTS button-1SoiPS-f apply-common-tooltip"
+                        data-tooltip-hotkey="{&amp;quot;keys&amp;quot;:[&amp;quot;,&amp;quot;],&amp;quot;text&amp;quot;:&amp;quot;Number or {0}&amp;quot;}"
+                        data-role="button"
+                      >
+                        <div class="arrow-1SoiPS-f">
+                          <div class="arrowWrap-1SoiPS-f">
+                            <span class="icon-19OjtB6A"
+                              ><svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 16 8"
+                                width="16"
+                                height="8"
+                              >
+                                <path
+                                  fill="currentColor"
+                                  d="M0 1.475l7.396 6.04.596.485.593-.49L16 1.39 14.807 0 7.393 6.122 8.58 6.12 1.186.08z"
+                                ></path></svg
+                            ></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="group-3uonVBsm">
+                    <div class="wrap-3jbioG5e" id="header-toolbar-chart-styles">
+                      <div
+                        data-role="button"
+                        class="button-3HNCAKoZ button-2eVMAgh- first-2eVMAgh- button-2Vpz_LXc isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                      ></div>
+                      <div
+                        data-value="candle"
+                        data-role="button"
+                        class="button-3HNCAKoZ button-2eVMAgh- last-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isActive-2Vpz_LXc isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                        title="Candles"
+                      >
+                        <span class="icon-2Vpz_LXc"
+                          ><svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 28 28"
+                            width="28"
+                            height="28"
+                            fill="currentColor"
+                          >
+                            <path
+                              d="M17 11v6h3v-6h-3zm-.5-1h4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-4a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .5-.5z"
+                            ></path>
+                            <path d="M18 7h1v3.5h-1zm0 10.5h1V21h-1z"></path>
+                            <path
+                              d="M9 8v12h3V8H9zm-.5-1h4a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-.5.5h-4a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 .5-.5z"
+                            ></path>
+                            <path
+                              d="M10 4h1v3.5h-1zm0 16.5h1V24h-1z"
+                            ></path></svg
+                        ></span>
+                      </div>
+                      <div
+                        class="menu-3HNCAKoZ button-1SoiPS-f apply-common-tooltip"
+                        data-role="button"
+                      >
+                        <div class="arrow-1SoiPS-f">
+                          <div class="arrowWrap-1SoiPS-f">
+                            <span class="icon-19OjtB6A"
+                              ><svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 16 8"
+                                width="16"
+                                height="8"
+                              >
+                                <path
+                                  fill="currentColor"
+                                  d="M0 1.475l7.396 6.04.596.485.593-.49L16 1.39 14.807 0 7.393 6.122 8.58 6.12 1.186.08z"
+                                ></path></svg
+                            ></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="group-3uonVBsm">
+                    <div class="wrap-3jbioG5e" id="header-toolbar-indicators">
+                      <div
+                        data-role="button"
+                        data-tooltip-hotkey="{&amp;quot;keys&amp;quot;:[&amp;quot;/&amp;quot;],&amp;quot;text&amp;quot;:&amp;quot;{0}&amp;quot;}"
+                        class="button-pzOKvpP8 button-mPM2q3lb withText-mPM2q3lb button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc"
+                        data-name="open-indicators-dialog"
+                      >
+                        <span class="icon-2Vpz_LXc"
+                          ><svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 28 28"
+                            width="28"
+                            height="28"
+                            fill="none"
+                          >
+                            <path
+                              stroke="currentColor"
+                              d="M20 17l-5 5M15 17l5 5M9 11.5h7M17.5 8a2.5 2.5 0 0 0-5 0v11a2.5 2.5 0 0 1-5 0"
+                            ></path></svg
+                        ></span>
+                        <div class="js-button-text text-2Vpz_LXc">
+                          Indicators
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="fill-pzOKvpP8 group-3uonVBsm"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="inner-pzOKvpP8 fake-pzOKvpP8">
+        <div class="wrapOverflow-3obNZqvj">
+          <div class="wrap-3obNZqvj">
+            <div class="scrollWrap-3obNZqvj noScrollBar-3obNZqvj">
+              <div class="content-pzOKvpP8">
+                <div class="wrap-1ETeWwz2">
+                  <div class="group-3uonVBsm">
+                    <div
+                      data-role="button"
+                      class="uppercase-1n0tF4SR button-2Vpz_LXc button-1n0tF4SR apply-common-tooltip isInteractive-2Vpz_LXc"
+                      title="Symbol Search"
+                    >
+                      <div class="js-button-text text-2Vpz_LXc text-1n0tF4SR">
+                        BITFLASH
+                      </div>
+                    </div>
+                  </div>
+                  <div class="group-3uonVBsm">
+                    <div class="wrap-3jbioG5e">
+                      <div
+                        data-value="60"
+                        data-role="button"
+                        class="button-2R6OKuTS first-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isActive-2Vpz_LXc isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                        title="1 hour"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">1h</div>
+                        </div>
+                      </div>
+                      <div
+                        data-value="120"
+                        data-role="button"
+                        class="button-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                        title="2 hours"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">2h</div>
+                        </div>
+                      </div>
+                      <div
+                        data-value="240"
+                        data-role="button"
+                        class="button-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                        title="4 hours"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">4h</div>
+                        </div>
+                      </div>
+                      <div
+                        data-value="360"
+                        data-role="button"
+                        class="button-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                        title="6 hours"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">6h</div>
+                        </div>
+                      </div>
+                      <div
+                        data-value="720"
+                        data-role="button"
+                        class="button-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                        title="12 hours"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">12h</div>
+                        </div>
+                      </div>
+                      <div
+                        data-value="1D"
+                        data-role="button"
+                        class="button-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                        title="1 day"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">D</div>
+                        </div>
+                      </div>
+                      <div
+                        data-value="2D"
+                        data-role="button"
+                        class="button-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                        title="2 days"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">2D</div>
+                        </div>
+                      </div>
+                      <div
+                        data-value="3D"
+                        data-role="button"
+                        class="button-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                        title="3 days"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">3D</div>
+                        </div>
+                      </div>
+                      <div
+                        data-value="1W"
+                        data-role="button"
+                        class="button-2R6OKuTS last-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                        title="1 week"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">W</div>
+                        </div>
+                      </div>
+                      <div
+                        class="menu-2R6OKuTS button-1SoiPS-f apply-common-tooltip"
+                        title="Time Interval"
+                        data-tooltip-hotkey="{&amp;quot;keys&amp;quot;:[&amp;quot;,&amp;quot;],&amp;quot;text&amp;quot;:&amp;quot;Number or {0}&amp;quot;}"
+                        data-role="button"
+                      >
+                        <div class="arrow-1SoiPS-f">
+                          <div class="arrowWrap-1SoiPS-f">
+                            <span class="icon-19OjtB6A"
+                              ><svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 16 8"
+                                width="16"
+                                height="8"
+                              >
+                                <path
+                                  fill="currentColor"
+                                  d="M0 1.475l7.396 6.04.596.485.593-.49L16 1.39 14.807 0 7.393 6.122 8.58 6.12 1.186.08z"
+                                ></path></svg
+                            ></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="group-3uonVBsm">
+                    <div class="wrap-3jbioG5e">
+                      <div
+                        data-role="button"
+                        class="button-3HNCAKoZ button-2eVMAgh- first-2eVMAgh- button-2Vpz_LXc isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                      ></div>
+                      <div
+                        data-value="candle"
+                        data-role="button"
+                        class="button-3HNCAKoZ button-2eVMAgh- last-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isActive-2Vpz_LXc isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                        title="Candles"
+                      >
+                        <span class="icon-2Vpz_LXc"
+                          ><svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 28 28"
+                            width="28"
+                            height="28"
+                            fill="currentColor"
+                          >
+                            <path
+                              d="M17 11v6h3v-6h-3zm-.5-1h4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-4a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .5-.5z"
+                            ></path>
+                            <path d="M18 7h1v3.5h-1zm0 10.5h1V21h-1z"></path>
+                            <path
+                              d="M9 8v12h3V8H9zm-.5-1h4a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-.5.5h-4a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 .5-.5z"
+                            ></path>
+                            <path
+                              d="M10 4h1v3.5h-1zm0 16.5h1V24h-1z"
+                            ></path></svg
+                        ></span>
+                      </div>
+                      <div
+                        class="menu-3HNCAKoZ button-1SoiPS-f apply-common-tooltip"
+                        title="Bar's Style"
+                        data-role="button"
+                      >
+                        <div class="arrow-1SoiPS-f">
+                          <div class="arrowWrap-1SoiPS-f">
+                            <span class="icon-19OjtB6A"
+                              ><svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 16 8"
+                                width="16"
+                                height="8"
+                              >
+                                <path
+                                  fill="currentColor"
+                                  d="M0 1.475l7.396 6.04.596.485.593-.49L16 1.39 14.807 0 7.393 6.122 8.58 6.12 1.186.08z"
+                                ></path></svg
+                            ></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="group-3uonVBsm">
+                    <div class="wrap-3jbioG5e">
+                      <div
+                        data-role="button"
+                        data-tooltip-hotkey="{&amp;quot;keys&amp;quot;:[&amp;quot;/&amp;quot;],&amp;quot;text&amp;quot;:&amp;quot;{0}&amp;quot;}"
+                        class="button-pzOKvpP8 button-mPM2q3lb withText-mPM2q3lb button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc"
+                        title="Indicators"
+                        data-name="open-indicators-dialog"
+                      >
+                        <span class="icon-2Vpz_LXc"
+                          ><svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 28 28"
+                            width="28"
+                            height="28"
+                            fill="none"
+                          >
+                            <path
+                              stroke="currentColor"
+                              d="M20 17l-5 5M15 17l5 5M9 11.5h7M17.5 8a2.5 2.5 0 0 0-5 0v11a2.5 2.5 0 0 1-5 0"
+                            ></path></svg
+                        ></span>
+                        <div class="js-button-text text-2Vpz_LXc">
+                          Indicators
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="fill-pzOKvpP8 collapse-pzOKvpP8 group-3uonVBsm"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="inner-pzOKvpP8 fake-pzOKvpP8">
+        <div class="wrapOverflow-3obNZqvj">
+          <div class="wrap-3obNZqvj">
+            <div class="scrollWrap-3obNZqvj noScrollBar-3obNZqvj">
+              <div class="content-pzOKvpP8">
+                <div class="wrap-1ETeWwz2">
+                  <div class="group-3uonVBsm">
+                    <div
+                      data-role="button"
+                      class="uppercase-1n0tF4SR button-2Vpz_LXc button-1n0tF4SR apply-common-tooltip isInteractive-2Vpz_LXc"
+                      title="Symbol Search"
+                    >
+                      <div class="js-button-text text-2Vpz_LXc text-1n0tF4SR">
+                        BITFLASH
+                      </div>
+                    </div>
+                  </div>
+                  <div class="group-3uonVBsm">
+                    <div class="wrap-3jbioG5e">
+                      <div
+                        data-value="60"
+                        data-role="button"
+                        class="button-2R6OKuTS first-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isActive-2Vpz_LXc isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                        title="1 hour"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">1h</div>
+                        </div>
+                      </div>
+                      <div
+                        data-value="120"
+                        data-role="button"
+                        class="button-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                        title="2 hours"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">2h</div>
+                        </div>
+                      </div>
+                      <div
+                        data-value="240"
+                        data-role="button"
+                        class="button-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                        title="4 hours"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">4h</div>
+                        </div>
+                      </div>
+                      <div
+                        data-value="360"
+                        data-role="button"
+                        class="button-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                        title="6 hours"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">6h</div>
+                        </div>
+                      </div>
+                      <div
+                        data-value="720"
+                        data-role="button"
+                        class="button-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                        title="12 hours"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">12h</div>
+                        </div>
+                      </div>
+                      <div
+                        data-value="1D"
+                        data-role="button"
+                        class="button-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                        title="1 day"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">D</div>
+                        </div>
+                      </div>
+                      <div
+                        data-value="2D"
+                        data-role="button"
+                        class="button-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                        title="2 days"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">2D</div>
+                        </div>
+                      </div>
+                      <div
+                        data-value="3D"
+                        data-role="button"
+                        class="button-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                        title="3 days"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">3D</div>
+                        </div>
+                      </div>
+                      <div
+                        data-value="1W"
+                        data-role="button"
+                        class="button-2R6OKuTS last-2R6OKuTS button-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                        title="1 week"
+                      >
+                        <div class="js-button-text text-2Vpz_LXc">
+                          <div class="value-2y-wa9jT">W</div>
+                        </div>
+                      </div>
+                      <div
+                        class="menu-2R6OKuTS button-1SoiPS-f apply-common-tooltip"
+                        title="Time Interval"
+                        data-tooltip-hotkey="{&amp;quot;keys&amp;quot;:[&amp;quot;,&amp;quot;],&amp;quot;text&amp;quot;:&amp;quot;Number or {0}&amp;quot;}"
+                        data-role="button"
+                      >
+                        <div class="arrow-1SoiPS-f">
+                          <div class="arrowWrap-1SoiPS-f">
+                            <span class="icon-19OjtB6A"
+                              ><svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 16 8"
+                                width="16"
+                                height="8"
+                              >
+                                <path
+                                  fill="currentColor"
+                                  d="M0 1.475l7.396 6.04.596.485.593-.49L16 1.39 14.807 0 7.393 6.122 8.58 6.12 1.186.08z"
+                                ></path></svg
+                            ></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="group-3uonVBsm">
+                    <div class="wrap-3jbioG5e">
+                      <div
+                        data-role="button"
+                        class="button-3HNCAKoZ button-2eVMAgh- first-2eVMAgh- button-2Vpz_LXc isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                      ></div>
+                      <div
+                        data-value="candle"
+                        data-role="button"
+                        class="button-3HNCAKoZ button-2eVMAgh- last-2eVMAgh- button-2Vpz_LXc apply-common-tooltip isActive-2Vpz_LXc isInteractive-2Vpz_LXc isGrouped-2Vpz_LXc"
+                        title="Candles"
+                      >
+                        <span class="icon-2Vpz_LXc"
+                          ><svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 28 28"
+                            width="28"
+                            height="28"
+                            fill="currentColor"
+                          >
+                            <path
+                              d="M17 11v6h3v-6h-3zm-.5-1h4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-4a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .5-.5z"
+                            ></path>
+                            <path d="M18 7h1v3.5h-1zm0 10.5h1V21h-1z"></path>
+                            <path
+                              d="M9 8v12h3V8H9zm-.5-1h4a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-.5.5h-4a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 .5-.5z"
+                            ></path>
+                            <path
+                              d="M10 4h1v3.5h-1zm0 16.5h1V24h-1z"
+                            ></path></svg
+                        ></span>
+                      </div>
+                      <div
+                        class="menu-3HNCAKoZ button-1SoiPS-f apply-common-tooltip"
+                        title="Bar's Style"
+                        data-role="button"
+                      >
+                        <div class="arrow-1SoiPS-f">
+                          <div class="arrowWrap-1SoiPS-f">
+                            <span class="icon-19OjtB6A"
+                              ><svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 16 8"
+                                width="16"
+                                height="8"
+                              >
+                                <path
+                                  fill="currentColor"
+                                  d="M0 1.475l7.396 6.04.596.485.593-.49L16 1.39 14.807 0 7.393 6.122 8.58 6.12 1.186.08z"
+                                ></path></svg
+                            ></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="group-3uonVBsm">
+                    <div class="wrap-3jbioG5e">
+                      <div
+                        data-role="button"
+                        data-tooltip-hotkey="{&amp;quot;keys&amp;quot;:[&amp;quot;/&amp;quot;],&amp;quot;text&amp;quot;:&amp;quot;{0}&amp;quot;}"
+                        class="button-pzOKvpP8 button-mPM2q3lb withoutText-mPM2q3lb button-2Vpz_LXc apply-common-tooltip isInteractive-2Vpz_LXc"
+                        title="Indicators"
+                        data-name="open-indicators-dialog"
+                      >
+                        <span class="icon-2Vpz_LXc"
+                          ><svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 28 28"
+                            width="28"
+                            height="28"
+                            fill="none"
+                          >
+                            <path
+                              stroke="currentColor"
+                              d="M20 17l-5 5M15 17l5 5M9 11.5h7M17.5 8a2.5 2.5 0 0 0-5 0v11a2.5 2.5 0 0 1-5 0"
+                            ></path></svg
+                        ></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="fill-pzOKvpP8 collapse-pzOKvpP8 group-3uonVBsm"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
       
@@ -229,161 +907,4 @@ export default function CandleGraph(props) {
   );
 }
 
-
-
-
-// import React, { useEffect } from "react";
-// import { useSelector, useDispatch } from "react-redux";
-// import "./chart.css";
-// // import { toggleFav } from "../redux/actions/coinDBAction";
-// import TVChartContainer  from "./CandleChart";
-
-// export default function CandleGraph(props) {
-//   const dispatch = useDispatch();
-//   const url = "https://api.bitflash.io/api";
-//   // const [fullexe, setFUllexw] = React.useState(false);
-//   const { coins, currency_graph, user_fav_pairing,paired_curency_price } = useSelector(
-//     (state) => state.coinDBReducer
-//   );
-//   console.log(coins,"vipin kjjhguyhgg ")
-//   const [isFav, setIsFav] = React.useState(false);
-//   const [current_price, currentPrice] = React.useState(0);
-//   const [newgetchart, NewGetChart] = React.useState(false);
-//   const { user } = useSelector((state) => state.AuthReducer);
-//   const { isLoggedIn } = useSelector(
-//     (state) => state.AuthReducer
-//   );
-//   const filter = "1h"
-//   const [prev_symbol, prevSymbol] = React.useState("");
-
-//   const coin = props.match.params.id.split("-");
-
-//   const SelCurency = coin && coin[1] ? coin[1].toUpperCase() : '';
-//   const { webData } = useSelector((state) => state.websiteDBReducer);
-//   const data = Object.values(coins).find((d) => {
-//     if (d.symbol === coin[0].toUpperCase()) {
-//       return d;
-//     }
-//   });
-//   // console.log("paired_currency_price: ",data)
-//   useEffect(() => {
-//     let match = user_fav_pairing.find(
-//       (d) =>
-//         d === data.symbol.toUpperCase()
-//     );
-//     setIsFav(match ? true : false);
-//   }, [...user_fav_pairing, ...coin]);
-
-  
-//   function getChart(symbol, symbol2) {
-//     prevSymbol(symbol);
-//     // console.log("getChart1: ", symbol, symbol2);
-//     return (
-//       <>
-//         <TVChartContainer symbols={symbol} pre_symbols={symbol2} />
-//       </>
-//     );
-//   }
-//   useEffect(() => {
-//     let coinsym = coin[0] + "-" + coin[1];
-//     if(paired_curency_price && data && SelCurency){
-//       let inrPrice = data.current_price_inr ? data.current_price_inr : 1; 
-//       let selPrice = (SelCurency == 'INR') ? 1 : paired_curency_price[SelCurency] ? paired_curency_price[SelCurency] : 1; 
-//       let fPrice = inrPrice*selPrice ? inrPrice/selPrice : 1;
-//       currentPrice(fPrice)
-//     }
-//     NewGetChart(getChart(coinsym, prev_symbol));
-//   }, [...coin, filter,currency_graph]);
-//   return (
-//     <>
-//       <div
-//         className="sc-dTdPqK coinsfather-theme-color p-0"
-//         style={{ backgroundColor: webData.bg_color_code }}
-//       >
-//         <div className="sc-bdVaJa rSmgz py-0 px-0 graph-head">
-//           <div height="24px" width="12px" className="sc-bdVaJa gSxurx"></div>
-//           <div className="sc-bdVaJa lmEScu p-0">
-//             <div className="sc-bdVaJa dveUWY p-0">
-//               <h1 color="#1C1B21" className="sc-bwzfXH iHECUo p-0">
-//                 {props.match.params.id.toUpperCase().replace("-", "/")}
-//               </h1>
-//               <span color="#9b9b9b" className="sc-bwzfXH ksDqJJ p-0 px-2">
-//                 {data?.name}
-//               </span>
-//             </div>
-//             <div className="sc-bdVaJa sc-dliRfk iUXzPH p-0">
-//               <span color="#929292" className="sc-bwzfXH kgoTtc p-0">
-//                 Last Price
-//               </span>
-//               <span
-//                 cursor="pointer"
-//                 color="#1C1B21"
-//                 className="sc-bwzfXH jaArUU"
-//               >
-//                 {current_price}
-//               </span>
-//               <span
-//                 // onClick={() => {
-//                 //   dispatch(toggleFav(user?.params ? user.params.user_id : user.user_id, (data?.symbol).toUpperCase()));
-//                 //   if (isLoggedIn) setIsFav(!isFav);
-//                 // }}
-//               >
-//                 <i
-//                   className={`fas ${
-//                     isFav ? "fa-star" : "fa-star-o"
-//                   } text-warning`}
-//                 ></i>
-//               </span>
-//               <div className="sc-bdVaJa sc-jVODtj jZzDMB p-0">
-//                 <i className="mdi mdi-star-outline mdi-18px"></i>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//       <div
-//         className="sc-bdVaJa sc-kUaPvJ kZeBBS row coinsfather-theme-color "
-//         style={{ backgroundColor: webData.bg_color_code }}
-//       >
-//         <div className="sc-bdVaJa sc-giadOv iIMfMq col-12 col-md-8 col-lg-8">
-//           <div className="sc-bdVaJa bmTiOt">
-//             <span color="#929292" className="sc-bwzfXH yjNnZ font-weight-bold">
-//               Volume
-//             </span>
-//             <span color="#1C1B21" className="sc-bwzfXH izvMda">
-//               {data?.volume_24h}
-//             </span>
-//           </div>
-//           <div className="sc-bdVaJa bmTiOt">
-//             <span color="#929292" className="sc-bwzfXH yjNnZ font-weight-bold">
-//               High
-//             </span>
-//             <span color="#1C1B21" className="text-success sc-bwzfXH izvMda">
-//             <span class="high_24h">{data?.high_24h}</span>
-//               <i className="fa fa-caret-up align-top"></i>
-//             </span>
-//           </div>
-//           <div className="sc-bdVaJa bmTiOt">
-//             <span color="#929292" className="sc-bwzfXH yjNnZ font-weight-bold">
-//               Low
-//             </span>
-//             <span color="#1C1B21" className="text-danger sc-bwzfXH izvMda">
-//               <span class="low_24h">{data?.low_24h}</span>
-//               <i className="fa fa-caret-down align-top"></i>
-//             </span>
-//           </div>
-//           <div className="sc-bdVaJa bmTiOt">
-//             <span color="#929292" className="sc-bwzfXH yjNnZ font-weight-bold">
-//               AVG
-//             </span>
-//             <span color="#1C1B21" className=" sc-bwzfXH izvMda">
-//               {data?.price_change_percentage_1h_inr} %
-//             </span>
-//           </div>
-//         </div>
-//       </div>
-//       <div id="candleCart1">{newgetchart}</div>
-//     </>
-//   );
-// }
 
