@@ -41,6 +41,8 @@ const  Home = ()=>{
   const [totalWallet, setTotalwallet] = useState(0)
   const [totalTransaction, setTransaction] = useState(0)
   const [lastActivity, setLastActivity] = useState(0)
+  const [recentActivities, setRecentActivities] = useState([]);
+ 
 
   const [data, setData] = useState([])
   const email = localStorage.getItem("email")
@@ -68,17 +70,31 @@ const  Home = ()=>{
         setTransaction(res.data.total_transaction)
         setLastActivity(res.data.last_activity)
       } catch (error) {
-        console.log(error);
+        console.log(" Error in user Wallet data " +error);
       }
     }
+
+    const recentActivity = async() => {
+      try{
+        const res = await axios.post(`${BASE_URL}/recentActivities`, { email: email, limit : 4 });      
+        setRecentActivities(res.data);
+      }catch(error){
+        console.log(" Error in recent Activity API " + error);
+      }
+    }
+
 
     const a = new Date(lastActivity)
     const date = a.toDateString()
     const time = a.toLocaleTimeString()
 
+
+
+
 useEffect(()=>{
   getUserWalletData()
   getPreSale()
+  recentActivity()
 },[])
 
 
@@ -234,7 +250,7 @@ useEffect(()=>{
                                 <div className="nk-wgw sm">
                                   <a
                                     className="nk-wgw-inner"
-                                    href="html/crypto/wallet-bitcoin.html"
+                                    href="#"
                                   >
                                     <div className="nk-wgw-name">
                                       <div className="nk-wgw-icon">
@@ -261,7 +277,7 @@ useEffect(()=>{
                                 <div className="nk-wgw sm">
                                   <a
                                     className="nk-wgw-inner"
-                                    href="html/crypto/wallet-bitcoin.html"
+                                    href="#"
                                   >
                                     <div className="nk-wgw-name">
                                       <div className="nk-wgw-icon">
@@ -348,7 +364,7 @@ useEffect(()=>{
                                 <div className="nk-wgw sm">
                                   <a
                                     className="nk-wgw-inner"
-                                    href="html/crypto/wallet-bitcoin.html"
+                                    href="#"
                                   >
                                     <div className="nk-wgw-name">
                                       <div className="nk-wgw-icon">
@@ -380,7 +396,7 @@ useEffect(()=>{
                                 <div className="nk-wgw sm">
                                   <a
                                     className="nk-wgw-inner"
-                                    href="html/crypto/wallet-bitcoin.html"
+                                    href="#"
                                   >
                                     <div className="nk-wgw-name">
                                       <div className="nk-wgw-icon">
@@ -414,7 +430,7 @@ useEffect(()=>{
                           <div className="card-title  mb-0">
                             <h5 className="title">Recent Activities</h5>
                           </div>
-                          <div className="card-tools">
+                          {/* <div className="card-tools">
                             <ul className="card-tools-nav">
                               <li>
                                 <a href="#">Buy</a>
@@ -426,121 +442,49 @@ useEffect(()=>{
                                 <a href="#">All</a>
                               </li>
                             </ul>
-                          </div>
+                          </div> */}
                         </div>
+
+                      
+
                         <div className="tranx-list card card-bordered">
-                          <div className="tranx-item">
-                            <div className="tranx-col">
-                              <div className="tranx-info">
-                                <div className="tranx-data">
-                                  <div className="tranx-label">
-                                    Buy ANA{" "}
-                                    <em className="tranx-icon sm icon ni ni-sign-btc"></em>
-                                  </div>
-                                  <div className="tranx-date">
-                                    Nov 12, 2019 11:34 PM
+
+                        {
+                            recentActivities.map((data) => {
+                              const d = new Date(data.createdAt);
+                              return (                              
+                                <div className="tranx-item">
+                                <div className="tranx-col">
+                                  <div className="tranx-info">
+                                    <div className="tranx-data">
+                                      <div className="tranx-label">
+                                        Buy { data.currency_type }
+                                        <em className="tranx-icon sm icon ni ni-sign-btc"></em>
+                                      </div>
+                                      <div className="tranx-date">
+                                         { d.toLocaleDateString() } { d.toLocaleTimeString() }
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            </div>
-                            <div className="tranx-col">
-                              <div className="tranx-amount">
-                                <div className="number">
-                                  5384{" "}
-                                  <span className="currency currency-btc">ANA</span>
-                                </div>
-                                <div className="number-sm">
-                                  3,980.93{" "}
-                                  <span className="currency currency-usd">USD</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="tranx-item">
-                            <div className="tranx-col">
-                              <div className="tranx-info">
-                                <div className="tranx-data">
-                                  <div className="tranx-label">
-                                    Buy Shield{" "}
-                                    <span className="tranx-icon sm">
-                                      <img src="images/coins/eth.svg" alt="" />
-                                    </span>
-                                  </div>
-                                  <div className="tranx-date">
-                                    Nov 12, 2019 11:34 PM
+                                <div className="tranx-col">
+                                  <div className="tranx-amount">
+                                    <div className="number">
+                                      { data.cVolume } 
+                                      <span className="currency currency-btc">ANA</span>
+                                    </div>
+                                    <div className="number-sm">
+                                    { data.cVolume }  
+                                      <span className="currency currency-usd"> { data.currency_type } </span>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                            <div className="tranx-col">
-                              <div className="tranx-amount">
-                                <div className="number">
-                                  17.6{" "}
-                                  <span className="currency currency-btc">ANA</span>
-                                </div>
-                                <div className="number-sm">
-                                  1,176.34{" "}
-                                  <span className="currency currency-usd">USD</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="tranx-item">
-                            <div className="tranx-col">
-                              <div className="tranx-info">
-                                <div className="tranx-data">
-                                  <div className="tranx-label">
-                                    Buy ET{" "}
-                                    <em className="tranx-icon sm icon ni ni-sign-btc"></em>
-                                  </div>
-                                  <div className="tranx-date">
-                                    Nov 12, 2019 11:34 PM
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="tranx-col">
-                              <div className="tranx-amount">
-                                <div className="number">
-                                  1000{" "}
-                                  <span className="currency currency-btc">ANA</span>
-                                </div>
-                                <div className="number-sm">
-                                  3,980.93{" "}
-                                  <span className="currency currency-usd">USD</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="tranx-item">
-                            <div className="tranx-col">
-                              <div className="tranx-info">
-                                <div className="tranx-data">
-                                  <div className="tranx-label">
-                                    Sell ANA{" "}
-                                    <span className="tranx-icon sm">
-                                      <img src="images/coins/eth.svg" alt="" />
-                                    </span>
-                                  </div>
-                                  <div className="tranx-date">
-                                    Nov 12, 2019 11:34 PM
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="tranx-col">
-                              <div className="tranx-amount">
-                                <div className="number">
-                                  1.538405{" "}
-                                  <span className="currency currency-btc">ANA</span>
-                                </div>
-                                <div className="number-sm">
-                                  1,176.34{" "}
-                                  <span className="currency currency-usd">USD</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                      
+                              )
+                            }) 
+                          }                        
+                     
                         </div>
                       </div>
                       <div className="col-md-6">
@@ -548,7 +492,7 @@ useEffect(()=>{
                           <div className="card-title mb-0">
                             <h5 className="title">Balance Flow</h5>
                           </div>
-                          <div className="card-tools">
+                          {/* <div className="card-tools">
                             <ul className="card-tools-nav">
                               <li>
                                 <a href="#">This Month</a>
@@ -557,7 +501,7 @@ useEffect(()=>{
                                 <a href="#">This Years</a>
                               </li>
                             </ul>
-                          </div>
+                          </div> */}
                         </div>
                         <div className="card card-bordered">
                           <div className="card-inner">

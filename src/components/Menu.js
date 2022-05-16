@@ -224,7 +224,7 @@ function Menu (){
                       </Link>
                     </li>
                     <li class="nk-menu-item">
-                      <a href="html/crypto/wallets.html" class="nk-menu-link">
+                      <a href="/accountSettings" class="nk-menu-link">
                         <span class="nk-menu-icon">
                           <em class="icon ni ni-user-c"></em>
                         </span>
@@ -376,7 +376,8 @@ function Menu (){
                 <div className="nk-sidebar-widget">
                   <div className="widget-title">
                     <h6 className="overline-title">
-                      Crypto Accounts <span>(4)</span>
+                      Crypto Accounts 
+                      {/* <span>(4)</span> */}
                     </h6>
                     <a href="#" className="link">
                       View All
@@ -397,7 +398,7 @@ function Menu (){
                         </div>
                       </a>
                     </li>
-                    <li className="wallet-item">
+                    {/* <li className="wallet-item">
                       <a href="#">
                         <div className="wallet-icon">
                           <em className="icon ni ni-sign-btc"></em>
@@ -420,7 +421,7 @@ function Menu (){
                           <h6 className="wallet-name">Add another wallet</h6>
                         </div>
                       </a>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
                 <div className="nk-sidebar-footer">
