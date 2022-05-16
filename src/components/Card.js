@@ -55,7 +55,7 @@ const Card1 = (props) => {
                         </div>
                         <div className="amount-sm">
                           {props.priceInUsd}
-                          <span className="currency currency-usd">{unit}</span>
+                          <span className="currency currency-usd">{props.cp}</span>
                         </div>
                       </div>
                     </div>

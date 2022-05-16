@@ -3,11 +3,16 @@ import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../Api_connection/config";
 import { Signupn } from "../Api_connection/ApiFunction";
 import { GoogleLogin } from "react-google-login";
+import { useSelector, useDispatch } from "react-redux";
+import { setReferralCode } from "../redux/User";
 // import { FacebookLogin } from "react-facebook-login";
 import swal from "sweetalert";
+import {AiOutlineEyeInvisible, AiOutlineEye} from 'react-icons/ai'
 
 // import FacebookLogin from "react-facebook-login";
 const Signup = (props) => {
+  const dispatch = useDispatch();
+  const { referralCode } = useSelector((state) => state.user.value)
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,6 +22,9 @@ const Signup = (props) => {
   const [emailerror, setEmailerror] = useState(false);
   const [passworderror, setPassworderror] = useState(false);
   const [confirmPassworderror, setConfirmPassworderror] = useState(false);
+
+  const [passwordShone, setPasswordShone] = useState(false)
+  const [confirmPasswordShown, setConfirmPasswordShown] = useState(false)
 
   // const [showOtp, setShowOtp] = useState(false);
   // const [otp, setOTP] = useState("");
@@ -34,7 +42,7 @@ const Signup = (props) => {
         email: email,
         password: password,
         confirm_password: confirmPassword,
-        referral_code: referal,
+        referral_code: referralCode,
       }),
     })
       .then((res) => res.json())
@@ -63,6 +71,14 @@ const Signup = (props) => {
         } */
       });
   }
+
+  const togglePassword1 = () => {
+    setPasswordShone(!passwordShone)
+  };
+
+  const togglePassword2 = () => {
+    setConfirmPasswordShown(!confirmPasswordShown)
+  };
 
   //Login With Google
 
@@ -232,8 +248,8 @@ const Signup = (props) => {
                       if (email === "") {
                         setEmailerror(true);
                       }
-                    }} 
-                    style={{fontSize: "15px"}}/>
+                    }}
+                    style={{ fontSize: "15px" }} />
                 </div>
                 {emailerror == true ? (
                   <p style={{ color: "red", marginTop: -20 }}>
@@ -254,11 +270,12 @@ const Signup = (props) => {
                       className="form-icon form-icon-right passcode-switch"
                       data-target="password"
                     >
-                      <em className="passcode-icon icon-show icon ni ni-eye"></em>
-                      <em className="passcode-icon icon-hide icon ni ni-eye-off"></em>
+                      {
+                        passwordShone == false ? <AiOutlineEyeInvisible onClick={togglePassword1} /> : <AiOutlineEye onClick={togglePassword1} />
+                      }
                     </a>
                     <input
-                      type="password"
+                      type={passwordShone ? "text" : "password"}
                       className="form-control form-control-lg"
                       id="password"
                       placeholder="Enter your password"
@@ -278,22 +295,7 @@ const Signup = (props) => {
                         }
                       }}
                       onKeyUp={() => _onkeyup()}
-                      style={{fontSize: "15px"}}/>
-                  </div>
-
-                  <div id="validation-box">
-                    <h6 className="passvalid" id="capital">
-                      1 Uppercase Character
-                    </h6>
-                    <h6 className="passvalid" id="number">
-                      1 Numeric Value
-                    </h6>
-                    <h6 className="passvalid" id="letter">
-                      1 Special Symbol eg:@#
-                    </h6>
-                    <h6 className="passvalid" id="length">
-                      length should be greater than 8
-                    </h6>
+                      style={{ fontSize: "15px" }} />
                   </div>
 
                   <div id="validation-box">
@@ -330,11 +332,12 @@ const Signup = (props) => {
                       className="form-icon form-icon-right passcode-switch"
                       data-target="confirm-password"
                     >
-                      <em className="passcode-icon icon-show icon ni ni-eye"></em>
-                      <em className="passcode-icon icon-hide icon ni ni-eye-off"></em>
+                      {
+                        confirmPasswordShown == false ? <AiOutlineEyeInvisible onClick={togglePassword2} /> : <AiOutlineEye onClick={togglePassword2} />
+                      }
                     </a>
                     <input
-                      type="password"
+                      type={confirmPasswordShown ? "text" : "password"}
                       className="form-control form-control-lg"
                       id="confirm-password"
                       placeholder="Confirm your password"
@@ -348,7 +351,7 @@ const Signup = (props) => {
                           setConfirmPassworderror(true);
                         }
                       }}
-                      style={{fontSize: "15px"}}/>
+                      style={{ fontSize: "15px" }} />
                   </div>
                 </div>
                 {confirmPassworderror == true ? (
@@ -368,17 +371,17 @@ const Signup = (props) => {
                     className="form-control form-control-lg"
                     id="referal-code"
                     placeholder="Enter Referal Code"
-                    value={referal}
+                    value={referralCode}
                     onChange={(e) => {
-                      setReferel(e.target.value);
+                      dispatch(setReferralCode({ referralCode: e.target.value }))
                     }}
-                    style={{fontSize: "15px"}}/>
+                    style={{ fontSize: "15px" }} />
                 </div>
 
                 <div className="form-group">
                   <button
                     className="btn btn-lg btn-primary btn-block"
-                    // onClick={Signup}
+                  // onClick={Signup}
                   >
                     Sign up
                   </button>

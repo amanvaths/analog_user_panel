@@ -4,13 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setCurrencyPrefrence } from "../redux/currency";
 import { setReferralCode } from '../redux/User'
-
+import { getSettings } from "../Api_connection/ApiFunction";
+import { setSettings } from "../redux/settings";
 
 
 const PersonalInfo = () => {
   const email = localStorage.getItem("email")
   const dispatch = useDispatch()
   const { referralCode } = useSelector((state) => state.user.value)
+  const { settings } = useSelector((state) => state.setting.value)
   const [load, setLoad] = useState({})
   const [showUser, setShowUser] = useState(true)
   const [showUser1, setShowUser1] = useState(true)
@@ -24,8 +26,14 @@ const PersonalInfo = () => {
   console.log(referralCode, "ref code");
 
 
-  const handelRefupdate = (e)=>{
-    dispatch(setReferralCode({referralCode: e.target.value}))
+  const handelRefupdate = (e) => {
+    dispatch(setReferralCode({ referralCode: e.target.value }))
+  }
+
+  function updateSetting() {
+    getSettings(email).then((res) => {
+      dispatch(setSettings({ settings: res.data }));
+    }).catch((er) => { console.log(er) })
   }
 
   const updateData = async (myCurrency) => {
@@ -47,6 +55,7 @@ const PersonalInfo = () => {
         // setMyCurrency(apidata['currency'])
         console.log(data, "::settings APi response");
         setMyCurrency(myCurrency);
+        updateSetting();
       } catch (error) {
         console.log(error);
       }
@@ -79,10 +88,17 @@ const PersonalInfo = () => {
 
   // console.log(referralCode, "red code");
   const updateReferral = async () => {
-    
     try {
       setShowUser3(false);
       const data = await axios.post(`${BASE_URL}/update_refferal`, { email: email, refferalCode: referralCode })
+        if (data) {
+          getSettings(email).then((res) => {
+            dispatch(setSettings({ settings: res.data }));
+          }).catch((e) => {
+            console.log(e);
+          })
+        }
+      
       setLoad(data)
       console.log(data.data.status, ":: response from update Referaal API ");
     } catch (error) {
@@ -91,7 +107,7 @@ const PersonalInfo = () => {
   }
 
   console.log(showUser3);
-  
+
   // useEffect(() => {
   //   console.log(referralCode, "refcode");
   //   if (referralCode.length == 0) {
@@ -305,7 +321,7 @@ const PersonalInfo = () => {
                 </div>
               </div>
               <div className="col-4">
-                {showUser3 ?
+                {Object.values(settings).length > 0 ? !settings.refferal.length > 0 ?
                   <div class="input-group-sm">
                     <input type="text"
                       class="form-control"
@@ -320,21 +336,21 @@ const PersonalInfo = () => {
                       minLength={10}
                     />
                   </div> :
-                  <span className="data-value">{referralCode}</span>}
+                  <span className="data-value">{settings.refferal}</span> : null}
               </div>
               <div className="col-4 d-flex justify-content-end">
                 <div className="">
                   <span className="">
-                    {showUser3 ? <button class="btn btn-dim btn-primary" onClick={() => {
+                    {Object.values(settings).length > 0 ? !settings.refferal.length > 0 ? <button class="btn btn-dim btn-primary" onClick={() => {
 
                       updateReferral();
-                      
+
 
                     }}>Update</button> :
                       <span className=" disable">
                         <em className="icon ni ni-lock-alt"></em>
                       </span>
-                    }
+                      : null}
                   </span>
                 </div>
               </div>

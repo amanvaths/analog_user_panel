@@ -1,19 +1,37 @@
 import React, { useState } from "react";
 import { BASE_URL } from "../Api_connection/config";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import swal from "sweetalert";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const OtpTFA = (props) => {
-
+  const location = useLocation()
+  const {userInfo} = useSelector((state)=> state.user.value)
+  const navigate = useNavigate()
   const email = localStorage.getItem("email");
   const [otp, setOtp] = useState('')
+  const [otpError, setOtpError] = useState(false)
+
+  console.log(location.state.email, "userinfo in 2fa ", location.state.token);
 
   const verifyOTP = async(e)=>{
       try {
         e.preventDefault();
-        const data = await axios.post(`${BASE_URL}/verifyauthtoken`,{email: email, token: otp})
-        console.log(data);
+        if(otp == ''){
+          setOtpError(true)
+        }
+        else{
+          const data = await axios.post(`${BASE_URL}/verifyauthtoken`,{email: email, token: otp})
+          console.log(data.data.status, ":::data");
+          if(data.data.status == 1){
+            swal("OTP Verified", "", "success");
+            navigate('/home')
+          }else if(data.data.status == 0){
+            swal("Invalid OTP", "", "error");
+          }
+        }
+        
       } catch (error) {
         console.log(error);
       }
@@ -86,9 +104,14 @@ const OtpTFA = (props) => {
                     value={otp}
                     onChange={(e) => {
                       setOtp(e.target.value);
+                      setOtpError(false)
                     }}
                   />
+                   {
+                  otpError == true ? <div style={{color: "red", fontSize: '14px '}}> OTP is required*</div> : null
+                }
                 </div>
+               
 
                 <div className="form-group">
                   <button

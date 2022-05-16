@@ -5,18 +5,18 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Modal, Button } from "react-bootstrap"
 import { useSelector, useDispatch } from "react-redux";
-import { setActivity, setNotification, setChangePassword, setPersonalInfo, setSecuritySettings, setIpWhiteListing, setIsLoginActivityOn, setIsTwoFactOn } from "../redux/settings";
+import { setActivity, setNotification, setChangePassword, setPersonalInfo, setSecuritySettings, setIpWhiteListing, setIsLoginActivityOn, setIsTwoFactOn, setSettings } from "../redux/settings";
 import swal from 'sweetalert'
+import { getSettings } from '../Api_connection/ApiFunction';
 
 
 
 const SecuritySettings = () => {
-  console.log();
   const [otp, setOtp] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoginActivityOn, isTwoFactOn } = useSelector((state) => state.setting.value)
-  console.log(isTwoFactOn, "state:::::::::");
+  const { isTwoFactOn, settings } = useSelector((state) => state.setting.value)
+  // console.log(isTwoFactOn, "state:::::::::");
   const email = localStorage.getItem("email")
   const [lable, setLable] = useState(false);
   const [security, setSecurityKey] = useState("")
@@ -33,9 +33,15 @@ const SecuritySettings = () => {
   const handelLog = async (e) => {
     try {
       const state = e.target.checked
-      dispatch(setIsLoginActivityOn({ isLoginActivityOn: state }))
-      console.log(state ? 1 : 0, "::State");
+      // console.log(state ? 1 : 0, "::State");
       const data = await axios.post('http://localhost:3001/api/login_activity', { email: email, login_activity: state })
+      if (data) {
+        getSettings(email).then((res) => {
+          dispatch(setSettings({ settings: res.data }));
+        }).catch((e) => {
+          console.log(e);
+        })
+      }
       console.log(data, "response from loginActivity api");
     } catch (error) {
       console.log(error);
@@ -90,13 +96,8 @@ const SecuritySettings = () => {
                             type="checkbox"
                             class="custom-control-input"
                             id="usdt"
-                            checked={isLoginActivityOn}
+                            checked={Object.values(settings).length > 0 ? settings.login_activity : false}
                             onChange={(e) => {
-                              if (isLoginActivityOn) {
-                                dispatch(setIsLoginActivityOn({ isLoginActivityOn: 0 }))
-                              } else {
-                                dispatch(setIsLoginActivityOn({ isLoginActivityOn: 1 }))
-                              }
                               handelLog(e)
                             }}
                           /><label class="custom-control-label" for="usdt" ></label>
@@ -173,7 +174,7 @@ const SecuritySettings = () => {
                         <div className="nk-block-actions">
                           <button onClick={() => {
                             onAuth()
-                            axios.post(`${BASE_URL}/generateauthtoken`, { email: email})
+                            axios.post(`${BASE_URL}/generateauthtoken`, { email: email })
                           }} className="btn btn-primary">Disable</button>
                         </div>
 
