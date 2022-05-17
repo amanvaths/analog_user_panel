@@ -58,6 +58,7 @@ function App() {
           <Route path="/candlegraph" element={<CandleGraph />} />
           <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="/2faAuthentication" element={<OtpTFA />} />
+          {/* <Route path="/orders" element={<Orders />} /> */}
         </Routes>
       </BrowserRouter>
     </div >
