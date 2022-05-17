@@ -5,18 +5,18 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Modal, Button } from "react-bootstrap"
 import { useSelector, useDispatch } from "react-redux";
-import { setActivity, setNotification, setChangePassword, setPersonalInfo, setSecuritySettings, setIpWhiteListing, setIsLoginActivityOn, setIsTwoFactOn, setSettings } from "../redux/settings";
+import { setUserInfo, setSettingPage } from "../redux/reducer/user";
 import swal from 'sweetalert'
-import { getSettings } from '../Api_connection/ApiFunction';
-
 
 
 const SecuritySettings = () => {
+  const { userInfo, settingPages } = useSelector((state) => state.user.value)
+  console.log(":: USER INFO::::", userInfo);
   const [otp, setOtp] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isTwoFactOn, settings } = useSelector((state) => state.setting.value)
-  // console.log(isTwoFactOn, "state:::::::::");
+  
+
   const email = localStorage.getItem("email")
   const [lable, setLable] = useState(false);
   const [security, setSecurityKey] = useState("")
@@ -24,29 +24,24 @@ const SecuritySettings = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const onAuth = () => {
-    // setLable(!lable)
-    dispatch(setIsTwoFactOn({ isTwoFactOn: !isTwoFactOn }))
-
-  }
+ 
 
   const handelLog = async (e) => {
     try {
       const state = e.target.checked
-      // console.log(state ? 1 : 0, "::State");
-      const data = await axios.post('http://localhost:3001/api/login_activity', { email: email, login_activity: state })
-      if (data) {
-        getSettings(email).then((res) => {
-          dispatch(setSettings({ settings: res.data }));
-        }).catch((e) => {
-          console.log(e);
-        })
-      }
+      const data = await axios.post(`${BASE_URL}/login_activity`, { email: email, login_activity: state })
       console.log(data, "response from loginActivity api");
     } catch (error) {
       console.log(error);
     }
   }
+
+  useEffect(async()=>{
+    const data = await axios.post(`${BASE_URL}/configSettings`, {email: email})
+    if(data){
+      dispatch(setUserInfo({userInfo: data.data}))
+    }
+  },[])
 
   return (
     <>
@@ -95,12 +90,18 @@ const SecuritySettings = () => {
                           <input
                             type="checkbox"
                             class="custom-control-input"
-                            id="usdt"
-                            checked={Object.values(settings).length > 0 ? settings.login_activity : false}
+                            id="log"
+                            checked={userInfo?.login_activity}
+                            // name='log'
+                            // value={"a"}
                             onChange={(e) => {
+                              const obj = {userInfo}
+                              obj['login_activity'] = e.target.checked
+                             dispatch(setUserInfo({userInfo: obj}))
                               handelLog(e)
                             }}
-                          /><label class="custom-control-label" for="usdt" ></label>
+                          />
+                          <label class="custom-control-label" for="log" ></label>
                         </div>
                       </li>
                     </ul>
@@ -125,12 +126,21 @@ const SecuritySettings = () => {
                       <li className="order-md-last">
                         <Link to="#" className="btn btn-primary"
                           onClick={() => {
-                            dispatch(setPersonalInfo({ personalInfo: false }))
-                            dispatch(setActivity({ activity: false }))
-                            dispatch(setSecuritySettings({ securitySettings: false }))
-                            dispatch(setNotification({ notification: false }))
-                            dispatch(setChangePassword({ changePassword: true }))
-                            dispatch(setIpWhiteListing({ ipWhiteListing: false }))
+                            const obj = {
+                              personalInfo: false,
+                              activity: false,
+                              securitySettings: false,
+                              notification: false,
+                              changePassword: true,
+                              ipWhiteListing: false
+                            }
+                            dispatch(setSettingPage({settingPages: obj }))
+                            // dispatch(setPersonalInfo({ personalInfo: false }))
+                            // dispatch(setActivity({ activity: false }))
+                            // dispatch(setSecuritySettings({ securitySettings: false }))
+                            // dispatch(setNotification({ notification: false }))
+                            // dispatch(setChangePassword({ changePassword: true }))
+                            // dispatch(setIpWhiteListing({ ipWhiteListing: false }))
                           }}>Change Password</Link>
                       </li>
                       <li>
@@ -151,8 +161,10 @@ const SecuritySettings = () => {
                     <h6 className='p-1'>
                       2 Factor Auth &nbsp;
                       {
-                        !isTwoFactOn ? <span className="badge badge-danger ms-0">disabled</span> : <span className="badge badge-success ms-0"
-                        >enabled</span>
+                    Object?.values(userInfo)?.length > 0 ?
+                        !userInfo.googleAuth ? <span className="badge badge-danger ms-0">disabled</span>
+                          : <span className="badge badge-success ms-0">enabled</span>
+                        : null
                       }
 
                     </h6>
@@ -167,14 +179,13 @@ const SecuritySettings = () => {
 
                     </p>
                   </div>
-                  {
-                    isTwoFactOn ?
+                  {Object?.values(userInfo)?.length > 0 ?
+                    userInfo.googleAuth ?
                       (
 
                         <div className="nk-block-actions">
-                          <button onClick={() => {
-                            onAuth()
-                            axios.post(`${BASE_URL}/generateauthtoken`, { email: email })
+                          <button onClick={async() => {
+                            await axios.post(`${BASE_URL}/generateauthtoken`, { email: email })
                           }} className="btn btn-primary">Disable</button>
                         </div>
 
@@ -182,16 +193,23 @@ const SecuritySettings = () => {
                       (
                         <div className="nk-block-actions">
                           <button onClick={() => {
-                            onAuth();
                             handleShow();
-                            axios.post('http://localhost:3001/api/generateauthtoken', { email: email, google_auth: true }).then((res) => { setSecurityKey(res.data); console.log(res.data, "datat"); })
+                            axios.post(`${BASE_URL}/generateauthtoken`, { email: email, google_auth: true }).then((res) => { setSecurityKey(res.data); console.log(res.data, "datat"); })
+                            const obj = {userInfo}
+                            obj['googleAuth'] = !obj.userInfo.googleAuth
+                            dispatch(setUserInfo({userInfo: obj}))
                           }} className="btn btn-primary">Enable</button>
                         </div>
-                      )
+                      ) : null
                   }
                   <Modal show={show} onHide={() => {
-                    handleClose()
-                    dispatch(setIsTwoFactOn({ isTwoFactOn: !isTwoFactOn }))
+                    if (Object?.values(userInfo)?.length > 0) {
+                            const obj = {userInfo}
+                            obj['googleAuth'] = !obj.userInfo.googleAuth
+                            dispatch(setUserInfo({userInfo: obj}))
+                      handleClose()
+                      
+                    }
                   }}>
                     <Modal.Header closeButton>
                       <Modal.Title>Google Authentication</Modal.Title>
@@ -214,7 +232,7 @@ const SecuritySettings = () => {
                                 <input type="text" class="form-control" id="inputOtp" placeholder="Enter Otp" onChange={(e) => setOtp(e.target.value)} />
                               </div>
                               <button type="button" class="btn btn-primary px-2" style={{ width: "150px" }} onClick={() => {
-                                axios.post('http://localhost:3001/api/generateauthtoken', { email: email, token: otp }).then((resp) => {
+                                axios.post(`${BASE_URL}/generateauthtoken`, { email: email, token: otp }).then((resp) => {
                                   if (resp.data.status == 1) {
 
                                     swal(`Verified Succesfully.`, "Welcome", "success");
@@ -235,8 +253,12 @@ const SecuritySettings = () => {
                     </Modal.Body>
                     <Modal.Footer>
                       <Button variant="secondary" onClick={() => {
-                        handleClose()
-                        dispatch(setIsTwoFactOn({ isTwoFactOn: !isTwoFactOn }))
+                        if (Object?.values(userInfo)?.length > 0) {
+                          handleClose()
+                          const obj = {userInfo}
+                          obj['googleAuth'] = !obj.userInfo.googleAuth
+                          dispatch(setUserInfo({userInfo: obj }))
+                        }
                       }}>
                         Close
                       </Button>

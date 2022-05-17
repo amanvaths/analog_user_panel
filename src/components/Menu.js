@@ -55,11 +55,11 @@ class Menu extends React.Component {
                         <span className="currency currency-btc">USD</span>
                       </div>
                     </div>
-                    <a href="#" className="btn btn-white btn-icon btn-light">
+                    {/* <a href="#" className="btn btn-white btn-icon btn-light">
                       <em className="icon ni ni-line-chart"></em>
-                    </a>
+                    </a> */}
                   </div>
-                  <ul className="user-account-data gy-1">
+                  {/* <ul className="user-account-data gy-1">
                     <li>
                       <div className="user-account-label">
                         <span className="sub-text">Profits (7d)</span>
@@ -85,7 +85,7 @@ class Menu extends React.Component {
                         </span>
                       </div>
                     </li>
-                  </ul>
+                  </ul> */}
                   {/* <div className="user-account-actions">
                                 <ul className="g-3">
                                     <li><a href="#" className="btn btn-lg btn-primary"><span>Deposit</span></a></li>
@@ -134,9 +134,7 @@ class Menu extends React.Component {
                           <span className="currency currency-btc">USD</span>
                         </div>
                       </div>
-                      <a href="#" className="btn btn-icon btn-light">
-                        <em className="icon ni ni-line-chart"></em>
-                      </a>
+                      
                     </div>
                     <ul className="user-account-data">
                       <li>
@@ -223,12 +221,12 @@ class Menu extends React.Component {
                       </Link>
                     </li>
                     <li class="nk-menu-item">
-                      <a href="html/crypto/wallets.html" class="nk-menu-link">
+                      <Link to="/accountsettings" class="nk-menu-link">
                         <span class="nk-menu-icon">
                           <em class="icon ni ni-user-c"></em>
                         </span>
                         <span className="nk-menu-text">My Account</span>
-                      </a>
+                      </Link>
                     </li>
                     <li className="nk-menu-item">
                       <Link to="/wallet" className="nk-menu-link">
@@ -249,7 +247,7 @@ class Menu extends React.Component {
                         <span className="nk-menu-text">Buy / Sell</span>
                       </Link>
                     </li>
-                    <li className="nk-menu-item">
+                    {/* <li className="nk-menu-item">
                       <a
                         href="html/crypto/order-history.html"
                         className="nk-menu-link"
@@ -259,7 +257,7 @@ class Menu extends React.Component {
                         </span>
                         <span className="nk-menu-text">Orders</span>
                       </a>
-                    </li>
+                    </li> */}
                     {/* <li className="nk-menu-item">
                       <a href="html/crypto/chats.html" className="nk-menu-link">
                         <span className="nk-menu-icon">
@@ -375,11 +373,11 @@ class Menu extends React.Component {
                 <div className="nk-sidebar-widget">
                   <div className="widget-title">
                     <h6 className="overline-title">
-                      Crypto Accounts <span>(4)</span>
+                      Crypto Accounts <span></span>
                     </h6>
-                    <a href="#" className="link">
+                    {/* <a href="#" className="link">
                       View All
-                    </a>
+                    </a> */}
                   </div>
                   <ul className="wallet-list">
                     <li className="wallet-item">
@@ -396,7 +394,7 @@ class Menu extends React.Component {
                         </div>
                       </a>
                     </li>
-                    <li className="wallet-item">
+                    {/* <li className="wallet-item">
                       <a href="#">
                         <div className="wallet-icon">
                           <em className="icon ni ni-sign-btc"></em>
@@ -409,8 +407,8 @@ class Menu extends React.Component {
                           </span>
                         </div>
                       </a>
-                    </li>
-                    <li className="wallet-item wallet-item-add">
+                    </li> */}
+                    {/* <li className="wallet-item wallet-item-add">
                       <a href="#">
                         <div className="wallet-icon">
                           <em className="icon ni ni-plus"></em>
@@ -419,7 +417,7 @@ class Menu extends React.Component {
                           <h6 className="wallet-name">Add another wallet</h6>
                         </div>
                       </a>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
                 <div className="nk-sidebar-footer">

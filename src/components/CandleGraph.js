@@ -3,7 +3,7 @@ import { createChart, CrosshairMode, isBusinessDay } from "lightweight-charts";
 import { useSelector, useDispatch } from "react-redux";
 import "./chart.css";
 
-import { setCurrency_type } from "../redux/buySell";
+import { setCurrency_type } from "../redux/reducer/buySell";
 
 
 export default function CandleGraph(props) {

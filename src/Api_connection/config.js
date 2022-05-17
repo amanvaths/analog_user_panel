@@ -5,3 +5,5 @@ export const accountTasks = {
     currencytask: "currency",
     personalinfotask: "personal_information",
 }
+
+export const GOOGLE_ID= "28253347908-l3f5pge45v4avpv50ppksjlkvvap6t35.apps.googleusercontent.com";

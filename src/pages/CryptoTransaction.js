@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import axios from  'axios'
 import { useSelector } from "react-redux";
 import { getSettings } from "../Api_connection/ApiFunction";
-import { setSettings } from "../redux/settings";
+import { setSettings } from "../redux/reducer/settings";
 
 const CryptoTransaction = ()=>{
  

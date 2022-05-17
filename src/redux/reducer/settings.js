@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 const initialValue = {
     settings:{},
     activity: false,
@@ -7,13 +8,17 @@ const initialValue = {
     notification: false,
     changePassword: false,
     ipWhiteListing: false,
-    isLoginActivityOn: true,
-    isTwoFactOn: false,
-    isNewBrowserOn: true,
-    isUnusualActivityOn: true,
-    isSalesOn: true,  
+
+    userID: "",
+    userName: "",
+    isTipsOn: true,
     isNewFeaturesOn: true,
-    isTipsOn: true
+    isSalesOn: true,
+    isUnusualActivityOn: true,
+    isNewBrowserOn: true,
+    isTwoFactOn: false,
+    isLoginActivityOn: true,
+
 };
 
 // anaPrice: 0.5
@@ -74,8 +79,13 @@ export const settingSlice = createSlice({
         setIsTipsOn: (state, action) => {
             state.value.isTipsOn = action.payload.isTipsOn
         },
+        setUserName: (state, action) => {
+            state.value.userName = action.payload.userName
+        },
+        setUserID: (state, action) => {
+            state.value.userID = action.payload.userID
+        },
         setSettings: (state, action) => {
-      console.log("actionpayloadmnp::",action.payload);
             state.value.settings = action.payload.settings
         },
     },
@@ -95,6 +105,8 @@ export const {
     setIsFeaturesOn,
     setIsTipsOn,
     setIsNewBrowserOn,
+    setUserName,
+    setUserID,
     setSettings
 } = settingSlice.actions;
 export default settingSlice.reducer;
