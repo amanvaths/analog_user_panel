@@ -11,7 +11,6 @@ const Header = () => {
   const {userInfo} = useSelector((state)=> state.user.value)
   const dispatch = useDispatch()
   const navigate = useNavigate();
-
   const signOut = () => {
     window.localStorage.clear();
     navigate("/login");
@@ -34,7 +33,9 @@ const Header = () => {
             <div className="nk-menu-trigger d-xl-none ml-n1">
               <a
                 href="#"
-                className="nk-nav-toggle nk-quick-nav-icon"
+                // onClick={()=>dispatch(navsetter())}
+                className= "nk-nav-toggle nk-quick-nav-icon toggle-active"
+                // className={btn?"nk-nav-toggle nk-quick-nav-icon toggle-active":"nk-nav-toggle nk-quick-nav-icon"}
                 data-target="sidebarMenu"
               >
                 <em className="icon ni ni-menu"></em>

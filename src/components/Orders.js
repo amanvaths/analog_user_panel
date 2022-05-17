@@ -298,28 +298,7 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
           >
             BUY
           </div>
-          {/* <div class="nav nav-tabs d-flex" id="nav-tab" role="tablist">
-            <a
-              class="nav-item nav-link p-0  active"
-              id="nav-home-tab"
-              data-toggle="tab"
-              role="tab"
-              aria-controls="nav-home"
-              aria-selected="true"
-              onClick={() => {
-                setBuy(true);
-                setSell(false);
-              }}
-              style={{
-                flex: "0.5 1 0%",
-                height: " 30px",
-                lineHeight: "30px",
-                cursor: "pointer",
-              }}
-            >
-              Buy
-            </a>
-          </div> */}
+         
         </nav>
 
         {/* Buy */}
@@ -398,6 +377,8 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
                       </button>
                     </div> */}
                   </div>
+
+                  
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span

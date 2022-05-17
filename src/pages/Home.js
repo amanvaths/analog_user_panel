@@ -20,17 +20,57 @@ import {useSelector } from "react-redux";
 
 const slideImages = [
   {
-    url: "https://wallpapercave.com/wp/wp2623839.jpg",
+    url: "http://localhost:3000/images/slides/2.png",
     caption: "",
   },
   {
-    url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKV5XdFI6TRWC8i70IfDJ4OqMG5s2JUonVvms3PQkmXcLMvd3RFHCWhyGqoRbfHESHhfc&usqp=CAU",
+    url: "http://localhost:3000/images/slides/3.png",
     caption: "",
   },
   {
-    url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREJ7DJ1_P2Cwa7MpAwaGx20UQ9acGTy3irShNRat3Wx01RxGDXXkZk9l-2aqLcL8BVmXo&usqp=CAU",
+    url: "http://localhost:3000/images/slides/4.png",
     caption: "",
   },
+  {
+    url: "http://localhost:3000/images/slides/5.png",
+    caption: "",
+  },
+  {
+    url: "http://localhost:3000/images/slides/6.png",
+    caption: "",
+  },
+  {
+    url: "http://localhost:3000/images/slides/7.png",
+    caption: "",
+  },
+  {
+    url: "http://localhost:3000/images/slides/8.png",
+    caption: "",
+  },
+  {
+    url: "http://localhost:3000/images/slides/9.png",
+    caption: "",
+  },
+  {
+    url: "http://localhost:3000/images/slides/10.png",
+    caption: "",
+  },
+  {
+    url: "http://localhost:3000/images/slides/11.png",
+    caption: "",
+  },
+  {
+    url: "http://localhost:3000/images/slides/12.png",
+    caption: "",
+  },
+  {
+    url: "http://localhost:3000/images/slides/13.png",
+    caption: "",
+  },
+  {
+    url: "http://localhost:3000/images/slides/14.png",
+    caption: "",
+  }
 ];
 
 const  Home = ()=>{
@@ -52,6 +92,10 @@ const  Home = ()=>{
   const [data, setData] = useState([])
   const email = localStorage.getItem("email")
   console.log("::EMAIL", email);
+  const [recentActivities, setRecentActivities] = useState([]);
+  const [totalRefferal, setTotalRefferal] = useState(0);
+  const [totalReffEarn, setTotalReffEarn] = useState(0);
+
  
     const getPreSale = async()=>{
         try {
@@ -79,6 +123,28 @@ const  Home = ()=>{
         console.log(error);
       }
     }
+
+    const recentActivity = async() => {
+      try{
+        const res = await axios.post(`${BASE_URL}/recentActivities`, { email: email, limit : 4 });      
+        setRecentActivities(res.data);
+      }catch(error){
+        console.log(" Error in recent Activity API " + error);
+      }
+    }
+
+    const refferalData =async() => {
+      try{
+        const res = await axios.get(`${BASE_URL}/userAllRecords?email=${ email }&bonus_type=Level`)
+        //console.warn(res.data +"Reff data ");
+       setTotalRefferal(res.data.totalUser);
+       setTotalReffEarn(res.data.income[0].total_bonus);
+       console.log(totalReffEarn, "Total reff earn");
+      }catch(error){
+        console.log("Error in refferal Data API " + error);
+      }
+    }
+
 
     const a = new Date(lastActivity)
     const date = a.toDateString()
@@ -133,6 +199,9 @@ useEffect(()=>{
                           backgroundImage: `url(${slideImage.url})`,
                           height: "250px",
                           width: "100%",
+                          backgroundSize: "cover",
+                          backgroundRepeat: "no-repeat",
+                          backgroundAttachment: "fixed"                      
                         }}
                       >
                         <span
@@ -242,7 +311,7 @@ useEffect(()=>{
                                 <div className="nk-wgw sm">
                                   <a
                                     className="nk-wgw-inner"
-                                    href="html/crypto/wallet-bitcoin.html"
+                                    href="#"
                                   >
                                     <div className="nk-wgw-name">
                                       <div className="nk-wgw-icon">
@@ -269,7 +338,7 @@ useEffect(()=>{
                                 <div className="nk-wgw sm">
                                   <a
                                     className="nk-wgw-inner"
-                                    href="html/crypto/wallet-bitcoin.html"
+                                    href="#"
                                   >
                                     <div className="nk-wgw-name">
                                       <div className="nk-wgw-icon">
@@ -356,7 +425,7 @@ useEffect(()=>{
                                 <div className="nk-wgw sm">
                                   <a
                                     className="nk-wgw-inner"
-                                    href="html/crypto/wallet-bitcoin.html"
+                                    href="#"
                                   >
                                     <div className="nk-wgw-name">
                                       <div className="nk-wgw-icon">
@@ -388,7 +457,7 @@ useEffect(()=>{
                                 <div className="nk-wgw sm">
                                   <a
                                     className="nk-wgw-inner"
-                                    href="html/crypto/wallet-bitcoin.html"
+                                    href="#"
                                   >
                                     <div className="nk-wgw-name">
                                       <div className="nk-wgw-icon">
@@ -422,7 +491,7 @@ useEffect(()=>{
                           <div className="card-title  mb-0">
                             <h5 className="title">Recent Activities</h5>
                           </div>
-                          <div className="card-tools">
+                          {/* <div className="card-tools">
                             <ul className="card-tools-nav">
                               <li>
                                 <a href="#">Buy</a>
@@ -434,121 +503,49 @@ useEffect(()=>{
                                 <a href="#">All</a>
                               </li>
                             </ul>
-                          </div>
+                          </div> */}
                         </div>
+
+                      
+
                         <div className="tranx-list card card-bordered">
-                          <div className="tranx-item">
-                            <div className="tranx-col">
-                              <div className="tranx-info">
-                                <div className="tranx-data">
-                                  <div className="tranx-label">
-                                    Buy ANA{" "}
-                                    <em className="tranx-icon sm icon ni ni-sign-btc"></em>
-                                  </div>
-                                  <div className="tranx-date">
-                                    Nov 12, 2019 11:34 PM
+
+                        {
+                            recentActivities.map((data) => {
+                              const d = new Date(data.createdAt);
+                              return (                              
+                                <div className="tranx-item">
+                                <div className="tranx-col">
+                                  <div className="tranx-info">
+                                    <div className="tranx-data">
+                                      <div className="tranx-label">
+                                        Buy { data.currency_type }
+                                        <em className="tranx-icon sm icon ni ni-sign-btc"></em>
+                                      </div>
+                                      <div className="tranx-date">
+                                         { d.toLocaleDateString() } { d.toLocaleTimeString() }
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            </div>
-                            <div className="tranx-col">
-                              <div className="tranx-amount">
-                                <div className="number">
-                                  5384{" "}
-                                  <span className="currency currency-btc">ANA</span>
-                                </div>
-                                <div className="number-sm">
-                                  3,980.93{" "}
-                                  <span className="currency currency-usd">USD</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="tranx-item">
-                            <div className="tranx-col">
-                              <div className="tranx-info">
-                                <div className="tranx-data">
-                                  <div className="tranx-label">
-                                    Buy Shield{" "}
-                                    <span className="tranx-icon sm">
-                                      <img src="images/coins/eth.svg" alt="" />
-                                    </span>
-                                  </div>
-                                  <div className="tranx-date">
-                                    Nov 12, 2019 11:34 PM
+                                <div className="tranx-col">
+                                  <div className="tranx-amount">
+                                    <div className="number">
+                                      { data.cVolume } 
+                                      <span className="currency currency-btc">ANA</span>
+                                    </div>
+                                    <div className="number-sm">
+                                    { data.cVolume }  
+                                      <span className="currency currency-usd"> { data.currency_type } </span>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                            <div className="tranx-col">
-                              <div className="tranx-amount">
-                                <div className="number">
-                                  17.6{" "}
-                                  <span className="currency currency-btc">ANA</span>
-                                </div>
-                                <div className="number-sm">
-                                  1,176.34{" "}
-                                  <span className="currency currency-usd">USD</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="tranx-item">
-                            <div className="tranx-col">
-                              <div className="tranx-info">
-                                <div className="tranx-data">
-                                  <div className="tranx-label">
-                                    Buy ET{" "}
-                                    <em className="tranx-icon sm icon ni ni-sign-btc"></em>
-                                  </div>
-                                  <div className="tranx-date">
-                                    Nov 12, 2019 11:34 PM
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="tranx-col">
-                              <div className="tranx-amount">
-                                <div className="number">
-                                  1000{" "}
-                                  <span className="currency currency-btc">ANA</span>
-                                </div>
-                                <div className="number-sm">
-                                  3,980.93{" "}
-                                  <span className="currency currency-usd">USD</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="tranx-item">
-                            <div className="tranx-col">
-                              <div className="tranx-info">
-                                <div className="tranx-data">
-                                  <div className="tranx-label">
-                                    Sell ANA{" "}
-                                    <span className="tranx-icon sm">
-                                      <img src="images/coins/eth.svg" alt="" />
-                                    </span>
-                                  </div>
-                                  <div className="tranx-date">
-                                    Nov 12, 2019 11:34 PM
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="tranx-col">
-                              <div className="tranx-amount">
-                                <div className="number">
-                                  1.538405{" "}
-                                  <span className="currency currency-btc">ANA</span>
-                                </div>
-                                <div className="number-sm">
-                                  1,176.34{" "}
-                                  <span className="currency currency-usd">USD</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                      
+                              )
+                            }) 
+                          }                        
+                     
                         </div>
                       </div>
                       <div className="col-md-6">
@@ -556,7 +553,7 @@ useEffect(()=>{
                           <div className="card-title mb-0">
                             <h5 className="title">Balance Flow</h5>
                           </div>
-                          <div className="card-tools">
+                          {/* <div className="card-tools">
                             <ul className="card-tools-nav">
                               <li>
                                 <a href="#">This Month</a>
@@ -565,7 +562,7 @@ useEffect(()=>{
                                 <a href="#">This Years</a>
                               </li>
                             </ul>
-                          </div>
+                          </div> */}
                         </div>
                         <div className="card card-bordered">
                           <div className="card-inner">
@@ -666,11 +663,11 @@ useEffect(()=>{
                             </div>
                             <div className="nk-refwg-info g-3">
                               <div className="nk-refwg-sub">
-                                <div className="title">394</div>
+                                <div className="title">{ totalRefferal }</div>
                                 <div className="sub-text">Total Joined</div>
                               </div>
                               <div className="nk-refwg-sub">
-                                <div className="title">548.49</div>
+                                <div className="title">{ totalReffEarn.toFixed(2) }</div>
                                 <div className="sub-text">Referral Earn</div>
                               </div>
                             </div>
@@ -682,7 +679,7 @@ useEffect(()=>{
                               >
                                 <em className="icon ni ni-more-h"></em>
                               </a>
-                              <div className="dropdown-menu dropdown-menu-xs dropdown-menu-right">
+                              {/* <div className="dropdown-menu dropdown-menu-xs dropdown-menu-right">
                                 <ul className="link-list-plain sm">
                                   <li>
                                     <a href="#">7 days</a>
@@ -694,7 +691,7 @@ useEffect(()=>{
                                     <a href="#">30 Days</a>
                                   </li>
                                 </ul>
-                              </div>
+                              </div> */}
                             </div>
                           </div>
                           <div className="nk-refwg-ck">

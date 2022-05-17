@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-class Menu extends React.Component {
-  render() {
+import {useSelector} from "react-redux";
+function Menu (){
+   const btn = useSelector(store=>store.navsetter);
     return (
       <>
         <div
-          className="nk-sidebar nk-sidebar-fixed "
+          className={btn?"nk-sidebar nk-sidebar-fixed nk-sidebar-mobile nk-sidebar-active":"nk-sidebar nk-sidebar-fixed nk-sidebar-mobile"}
           data-content="sidebarMenu"
         >
           <div className="nk-sidebar-element nk-sidebar-head">
@@ -249,7 +250,7 @@ class Menu extends React.Component {
                     </li>
                     {/* <li className="nk-menu-item">
                       <a
-                        href="html/crypto/order-history.html"
+                        href="#"
                         className="nk-menu-link"
                       >
                         <span className="nk-menu-icon">
@@ -499,5 +500,5 @@ class Menu extends React.Component {
       </>
     );
   }
-}
+
 export default Menu;

@@ -1,10 +1,12 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import Particles from "react-particles-js";
 import Menu from "../components/Menu";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-class Affiliate extends React.Component {
-  render() {
+import axios from "axios";
+
+const Affiliate = () => {
+  
     return (
       <div>
         <div className="nk-app-root">
@@ -2610,6 +2612,6 @@ class Affiliate extends React.Component {
         </div>
       </div>
     );
-  }
+ 
 }
 export default Affiliate;
