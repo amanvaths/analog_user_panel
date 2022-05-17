@@ -27,19 +27,19 @@ import ChangePassword from "./components/ChangePassword";
 import OtpTFA from "./pages/OtpTFA";
 
 function App() {
-  
+
   const email = localStorage.getItem("email");
   const token = localStorage.getItem("token");
-  // console.log(email, token);
+  console.log(email, token);
   return (
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={email && token?<Home />:<Login />} />
-          <Route path="/home" element={email && token ? <Home /> : <Navigate to='/Login' />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home /> } />
           <Route path="/Psecurity" element={<Psecurity />} />
           <Route path="/Profile" element={<Profile />} />
-          <Route path="/Login" element={email && token?<Home />:<Login />} />
+          <Route path="/Login" element={<Login />} />
           <Route path="/Signup" element={<Signup />} />
           <Route path="/Terms" element={<Terms />} />
           <Route path="/Faq" element={<Faq />} />
@@ -52,7 +52,7 @@ function App() {
           <Route path="/ResendOtp" element={<ResendOtp />} />
           <Route path="/wallet" element={email && token ? <Wallet /> : <Navigate to="/login" />} />
           <Route path="/accountSettings" element={<AccountSettings />} />
-          <Route path="/cryptoTransaction/:title" element={<CryptoTransaction />} />
+          <Route path="/cryptoTransaction" element={<CryptoTransaction />} />
           <Route path="/userlist" element={<UserList />} />
           <Route path="/buysell" element={< BuySell />} />
           <Route path="/candlegraph" element={<CandleGraph />} />
@@ -60,7 +60,7 @@ function App() {
           <Route path="/2faAuthentication" element={<OtpTFA />} />
         </Routes>
       </BrowserRouter>
-    </div>
+    </div >
   );
 }
 

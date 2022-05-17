@@ -9,11 +9,14 @@ import { BASE_URL } from "../Api_connection/config";
 const Header = () => {
   const email = localStorage.getItem("email")
   const {userInfo} = useSelector((state)=> state.user.value)
+  const btn = useSelector((store)=> store.navsetter)
   const dispatch = useDispatch()
   const navigate = useNavigate();
+
   const signOut = () => {
-    window.localStorage.clear();
-    navigate("/login");
+    // navigate("/", { replace: true });
+    localStorage.clear();
+    navigate("/")    
   };
 
   useEffect( async() => {
@@ -34,8 +37,8 @@ const Header = () => {
               <a
                 href="#"
                 // onClick={()=>dispatch(navsetter())}
-                className= "nk-nav-toggle nk-quick-nav-icon toggle-active"
-                // className={btn?"nk-nav-toggle nk-quick-nav-icon toggle-active":"nk-nav-toggle nk-quick-nav-icon"}
+                // className= "nk-nav-toggle nk-quick-nav-icon toggle-active"
+                className={btn?"nk-nav-toggle nk-quick-nav-icon toggle-active":"nk-nav-toggle nk-quick-nav-icon"}
                 data-target="sidebarMenu"
               >
                 <em className="icon ni ni-menu"></em>
@@ -259,7 +262,7 @@ const Header = () => {
 
                   {/* Amit */}
 
-                  <div className="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1">
+                  <div className="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1" style={{width: "210px"}}>
                     <div className="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                       <div className="user-card">
                         <div className="user-avatar">
@@ -275,7 +278,7 @@ const Header = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="dropdown-inner user-account-info">
+                    {/* <div className="dropdown-inner user-account-info">
                       <h6 className="overline-title-alt">Analog Wallet Account</h6>
                       <div className="user-balance m-2">
                         12.395769{" "}
@@ -288,19 +291,19 @@ const Header = () => {
                           <span className="currency currency-btc">BTC</span>
                         </span>
                       </div>
-                      {/* <a href="#" className="link">
+                       <a href="#" className="link">
                         <span>Withdraw Funds</span>{" "}
                         <em className="icon ni ni-wallet-out"></em>
-                      </a> */}
-                    </div>
+                      </a> 
+                    </div> */}
                     <div className="dropdown-inner">
                       <ul className="link-list">
-                        <li>
+                        {/* <li>
                           <a href="html/crypto/profile.html">
                             <em className="icon ni ni-user-alt"></em>
                             <span>View Profile</span>
                           </a>
-                        </li>
+                        </li> */}
                         <li>
                           <Link to="/accountSettings">
                             <em className="icon ni ni-setting-alt"></em>
@@ -314,10 +317,27 @@ const Header = () => {
                           </Link>
                         </li> */}
                         <li>
-                          <a className="dark-switch" href="#">
-                            <em className="icon ni ni-moon"></em>
-                            <span>Dark Mode</span>
-                          </a>
+                        {/* <div class="nk-block-actions">
+                <div class="custom-control custom-switch me-n2">
+                  <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    id="in"
+                    name="cu"
+                    value="in"
+                    // checked={myCurrency === "inr"}
+                    // onChange={(e) => {
+                    //   updateData("inr")
+                    //   dispatch(setUserInfo({ currency_prefrence: "inr" }))
+                    // }}
+                  />
+                  <label class="custom-control-label" for="inrx" >DARK</label>
+                </div>
+              </div> */}
+                            <a className="dark-switch" href="#">
+                            <em className="icon ni ni-moon mr-1"></em>
+                            <span className="mr-1">Dark Mode</span>
+                          </a>  
                         </li>
                       </ul>
                     </div>

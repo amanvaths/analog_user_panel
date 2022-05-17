@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import {useSelector} from "react-redux";
 function Menu (){
    const btn = useSelector(store=>store.navsetter);
+   const {userInfo} = useSelector((state)=> state.user.value)
     return (
       <>
         <div
@@ -12,7 +13,7 @@ function Menu (){
           <div className="nk-sidebar-element nk-sidebar-head">
             <div className="nk-sidebar-brand">
               <a
-                href="html/crypto/index.html"
+                href="/"
                 className="logo-link nk-sidebar-logo"
               >
                 <img
@@ -387,7 +388,7 @@ function Menu (){
                           <em className="icon ni ni-sign-kobo"></em>
                         </div>
                         <div className="wallet-text">
-                          <h6 className="wallet-name">INRX Wallet</h6>
+                          <h6 className="wallet-name">{userInfo?.currency_preference?.toUpperCase()} Wallet</h6>
                           <span className="wallet-balance">
                             30.959040{" "}
                             <span className="currency currency-nio">ANA</span>

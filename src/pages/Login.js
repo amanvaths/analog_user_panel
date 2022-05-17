@@ -15,17 +15,18 @@ import { setUserInfo, setIsLoggedIn, setSettingPage } from "../redux/reducer/use
 // import FacebookLogin from "react-facebook-login";
 
 const Login = (props) => {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const lemail = localStorage.getItem("email");
+  const token = localStorage.getItem("token");
+  if (lemail && token) {
+    navigate("/home");
+  }
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailerror, setEmailerror] = useState(false);
   const [passworderror, setPassworderror] = useState(false);
   const [shown, setShown] = useState(false)
-
-  const {userInfo} = useSelector((state)=> state.user.value)
 
 
   // console.log(settings.google_authenticator, " In Login apge");
@@ -55,7 +56,7 @@ const Login = (props) => {
       }),
     })
       .then((res) => res.json())
-      .then(async(resp) => {
+      .then(async (resp) => {
         console.log(resp, "rerere");
         if (resp.status == 0) {
           swal(
@@ -65,16 +66,16 @@ const Login = (props) => {
           );
         }
         if (resp.status == 1) {
-          if ( resp.googleAuth == 1) {
+          if (resp.googleAuth == 1) {
             navigate('/2faAuthentication', { state: { email: email, token: resp.token } })
-          } else { 
+          } else {
             localStorage.setItem("email", email);
             localStorage.setItem("token", resp.token);
-         
-            const data = await axios.post(`${BASE_URL}/configSettings`, {email: email})
-            if(data){
+
+            const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
+            if (data) {
               swal(`${resp.message}`, "Welcome", "success");
-              dispatch(setUserInfo({userInfo: data.data}))
+              dispatch(setUserInfo({ userInfo: data.data }))
               navigate('/home')
             }
           }

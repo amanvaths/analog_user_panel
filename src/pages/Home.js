@@ -12,7 +12,9 @@ import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
 import swal from "sweetalert";
 
-import {useSelector } from "react-redux";
+import {useSelector, useDispatch } from "react-redux";
+import { setBalance } from "../redux/reducer/user";
+import { useNavigate } from "react-router-dom";
 // import { setUserInfo, setIsLoggedIn, setSettingPage } from "../redux/reducer/user";
 
 // import { Carousel } from "react-responsive-carousel";
@@ -74,9 +76,16 @@ const slideImages = [
 ];
 
 const  Home = ()=>{
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const lemail = localStorage.getItem("email");
+  const token = localStorage.getItem("token");
+  if (!lemail && !token) {
+    navigate("/Login");
+  }
 
   const {userInfo} = useSelector((state)=> state.user.value)
-  console.log(userInfo, "************************************************************");
+
 
   const [totalAnalogBuy, setTotalAnalogBuy] = useState(0)
   const [inceptive, setInceptive] = useState(0)
@@ -109,21 +118,26 @@ const  Home = ()=>{
     const getUserWalletData = async()=>{
       try {
         const res = await axios.post(`${BASE_URL}/userWalletData`, {email: email})
-        setTotalAnalogBuy(res.data.token_balance)
-        setInceptive(res.data.inceptive_wallet)
-        setAirDrop(res.data.airdrop_wallet)
-        setffiliates(res.data.affilites_wallet)
-        setInherited(res.data.affilites_wallet)
-        setBounty(res.data.bounty_wallet)
-        setHandOut(res.data.handout_wallet)
-        setTotalwallet(res.data.total_wallet)
-        setTransaction(res.data.total_transaction)
-        setLastActivity(res.data.last_activity)
+        
+          // dispatch(setBalance({balance: res.data}),
+          setTotalAnalogBuy(res.data.token_balance)
+
+          setInceptive(res.data.inceptive_wallet)
+          setAirDrop(res.data.airdrop_wallet)
+          setffiliates(res.data.affilites_wallet)
+          setInherited(res.data.affilites_wallet)
+          setBounty(res.data.bounty_wallet)
+          setHandOut(res.data.handout_wallet)
+          setTotalwallet(res.data.total_wallet)
+          setTransaction(res.data.total_transaction)
+          setLastActivity(res.data.last_activity)
+        
+
       } catch (error) {
         console.log(error);
       }
     }
-
+    
     const recentActivity = async() => {
       try{
         const res = await axios.post(`${BASE_URL}/recentActivities`, { email: email, limit : 4 });      
@@ -151,6 +165,8 @@ const  Home = ()=>{
     const time = a.toLocaleTimeString()
 
 useEffect(()=>{
+  refferalData()
+  recentActivity()
   getUserWalletData()
   getPreSale()
 },[])
@@ -531,7 +547,7 @@ useEffect(()=>{
                                 <div className="tranx-col">
                                   <div className="tranx-amount">
                                     <div className="number">
-                                      { data.cVolume } 
+                                      { data.amount } 
                                       <span className="currency currency-btc">ANA</span>
                                     </div>
                                     <div className="number-sm">
@@ -643,7 +659,7 @@ useEffect(()=>{
                                 type="text"
                                 className="form-control copy-text"
                                 id="refUrl"
-                                value="https://inceptive.network/?ref=Ia5ghTL2paqchJTR65nBKvZ"
+                                value={`http://localhost:3000/signup?ref=${userInfo?.refferal}`}
                               />
                             </div>
                           </div>
