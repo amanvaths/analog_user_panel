@@ -154,6 +154,7 @@ useEffect(()=>{
   getUserWalletData()
   getPreSale()
   recentActivity()
+  refferalData()
 },[])
 
 
