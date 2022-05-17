@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { BASE_URL } from "../Api_connection/config";
 import { Signupn } from "../Api_connection/ApiFunction";
 import { GoogleLogin } from "react-google-login";
@@ -12,13 +12,16 @@ import {AiOutlineEyeInvisible, AiOutlineEye} from 'react-icons/ai'
 // import FacebookLogin from "react-facebook-login";
 const Signup = (props) => {
   const dispatch = useDispatch();
-  const { referralCode } = useSelector((state) => state.user.value)
+  const queryParams = new URLSearchParams(window.location.search);
+  const reff = queryParams.get('ref');
+
+  const { userInfo } = useSelector((state) => state.user.value)
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [referal, setReferel] = useState("");
-  const [response, setResponse] = useState("");
+  const [ref, setRef] = useState(reff)
+
   const [emailerror, setEmailerror] = useState(false);
   const [passworderror, setPassworderror] = useState(false);
   const [confirmPassworderror, setConfirmPassworderror] = useState(false);
@@ -42,7 +45,7 @@ const Signup = (props) => {
         email: email,
         password: password,
         confirm_password: confirmPassword,
-        referral_code: referralCode,
+        referral_code: ref,
       }),
     })
       .then((res) => res.json())
@@ -371,11 +374,14 @@ const Signup = (props) => {
                     className="form-control form-control-lg"
                     id="referal-code"
                     placeholder="Enter Referal Code"
-                    value={referralCode}
+                    value={ref}
+                    readOnly={reff ? true: false}
                     onChange={(e) => {
+                     setRef(e.target.value)
                       // dispatch(setReferralCode({ referralCode: e.target.value }))
                     }}
-                    style={{ fontSize: "15px" }} />
+                    style={{ fontSize: "15px" }} 
+                    />
                 </div>
 
                 <div className="form-group">
@@ -504,7 +510,7 @@ const Signup = (props) => {
                 </ul>
               </div>
               <div className="mt-3">
-                <p>&copy; 2021 INRX ECOSYSTEM. All Rights Reserved.</p>
+                <p>&copy; 2022 INRX ECOSYSTEM. All Rights Reserved.</p>
               </div>
             </div>
           </div>

@@ -1,7 +1,45 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {useSelector} from "react-redux";
+import axios from "axios";
+import { BASE_URL } from "../Api_connection/config";
+
 function Menu (){
+  const email = localStorage.getItem("email")
+  const [anaBalancce, setAnaBalance] = useState('')
+  const [usdPrice, setUsdPrice] = useState([])
+
+  const getData = async()=>{
+    try {
+        const data = await axios.post(`${BASE_URL}/userWalletData`, {email: email})
+        setAnaBalance(data.data.token_balance)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const getUsdPrice = async () => {
+    try {
+      
+      const res = await axios.post(`${BASE_URL}/getCoinData`, { currency: "inr"});
+      const cd = [];
+      console.log(res.data, "::res.data");
+      for (let coin of Object.entries(res.data)) {  
+        cd.push(coin[1]);
+      }
+      setUsdPrice([...cd]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const oneUsdPrice = usdPrice[8]?.quote?.INR?.price;
+  console.log(":: USD PRice",usdPrice[8]?.quote?.INR?.price);
+
+  useEffect(()=>{
+    getUsdPrice()
+    getData()
+  },[])
    const btn = useSelector(store=>store.navsetter);
    const {userInfo} = useSelector((state)=> state.user.value)
     return (
@@ -49,12 +87,17 @@ function Menu (){
                     <div className="user-account-main">
                       <h6 className="overline-title-alt " style={{paddingBottom:14}}>Available Balance</h6>
                       <div className="user-balance">
-                        2.014095{" "}
+                      { Number(anaBalancce)?.toFixed(2)}{" "}
                         <small className="currency currency-btc">ANA</small>
                       </div>
                       <div className="user-balance-alt">
-                        18,934.84{" "}
-                        <span className="currency currency-btc">USD</span>
+                        {userInfo?.currency_preference == "inr" ? userInfo?.anaPrice * Number(anaBalancce)?.toFixed(2) : 
+                          ((userInfo?.anaPrice / oneUsdPrice) * Number(anaBalancce)?.toFixed(2))?.toFixed(2)
+                        }
+                        {" "}
+                        <span className="currency currency-btc">
+                          {userInfo?.currency_preference == "inr" ?  "INRX" : "USDT"}
+                          </span>
                       </div>
                     </div>
                     {/* <a href="#" className="btn btn-white btn-icon btn-light">
