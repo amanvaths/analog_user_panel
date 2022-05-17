@@ -3,8 +3,8 @@ import "./order.css";
 import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
 import { useSelector, useDispatch } from "react-redux";
-import { setCurrency_type } from "../redux/buySell";
-import { setCurrencyPrefrence } from "../redux/buySell";
+import { setCurrency_type } from "../redux/reducer/buySell";
+import { setCurrencyPrefrence } from "../redux/reducer/buySell";
 
 
 export default function Orders() {
@@ -171,7 +171,7 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
   useEffect(() => {
     if (email) {
       axios
-        .get(`${BASE_URL}/getAllOrder`)
+        .post(`${BASE_URL}/getAllOrder`, {email: email})
         .then((res) => {
           console.log(res.data, "All Order");
           console.log(res.data.currency_type," currency type jhrefhreu");

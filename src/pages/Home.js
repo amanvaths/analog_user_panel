@@ -10,6 +10,10 @@ import "react-multi-carousel/lib/styles.css";
 import Getpresale from "../components/Getpresale";
 import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
+import swal from "sweetalert";
+
+import {useSelector } from "react-redux";
+// import { setUserInfo, setIsLoggedIn, setSettingPage } from "../redux/reducer/user";
 
 // import { Carousel } from "react-responsive-carousel";
 // import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -71,6 +75,9 @@ const slideImages = [
 
 const  Home = ()=>{
 
+  const {userInfo} = useSelector((state)=> state.user.value)
+  console.log(userInfo, "************************************************************");
+
   const [totalAnalogBuy, setTotalAnalogBuy] = useState(0)
   const [inceptive, setInceptive] = useState(0)
   const [airdrop, setAirDrop] = useState(0)
@@ -81,12 +88,14 @@ const  Home = ()=>{
   const [totalWallet, setTotalwallet] = useState(0)
   const [totalTransaction, setTransaction] = useState(0)
   const [lastActivity, setLastActivity] = useState(0)
+
+  const [data, setData] = useState([])
+  const email = localStorage.getItem("email")
+  console.log("::EMAIL", email);
   const [recentActivities, setRecentActivities] = useState([]);
   const [totalRefferal, setTotalRefferal] = useState(0);
   const [totalReffEarn, setTotalReffEarn] = useState(0);
 
-  const [data, setData] = useState([])
-  const email = localStorage.getItem("email")
  
     const getPreSale = async()=>{
         try {
@@ -111,7 +120,7 @@ const  Home = ()=>{
         setTransaction(res.data.total_transaction)
         setLastActivity(res.data.last_activity)
       } catch (error) {
-        console.log(" Error in user Wallet data " +error);
+        console.log(error);
       }
     }
 
@@ -144,8 +153,6 @@ const  Home = ()=>{
 useEffect(()=>{
   getUserWalletData()
   getPreSale()
-  recentActivity()
-  refferalData();
 },[])
 
 

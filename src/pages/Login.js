@@ -1,29 +1,35 @@
 import React, { useState } from "react";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
-import { BASE_URL } from "../Api_connection/config";
-import { useNavigate } from "react-router-dom";
-import {AiOutlineEyeInvisible, AiOutlineEye} from 'react-icons/ai'
+import { BASE_URL, GOOGLE_ID } from "../Api_connection/config";
+
 // import ForgetPassword from "./ForgetPassword";
+import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
 import swal from "sweetalert";
+import axios from "axios";
+
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../redux/User";
+import { setUserInfo, setIsLoggedIn, setSettingPage } from "../redux/reducer/user";
 
 
 // import FacebookLogin from "react-facebook-login";
 
 const Login = (props) => {
-  const {settings} = useSelector((state)=> state.setting.value)
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailerror, setEmailerror] = useState(false);
   const [passworderror, setPassworderror] = useState(false);
   const [shown, setShown] = useState(false)
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  console.log(settings.google_authenticator, " In Login apge");
+  const {userInfo} = useSelector((state)=> state.user.value)
 
-  const googleId = "28253347908-l3f5pge45v4avpv50ppksjlkvvap6t35.apps.googleusercontent.com";
+
+  // console.log(settings.google_authenticator, " In Login apge");
+
   const onLoginSuccess = (res) => {
     console.log(res.profileObj);
   };
@@ -33,7 +39,7 @@ const Login = (props) => {
 
   const togglePassword1 = () => {
     setShown(!shown)
-   
+
   };
   async function Login() {
 
@@ -49,10 +55,8 @@ const Login = (props) => {
       }),
     })
       .then((res) => res.json())
-      .then((resp) => {
-        console.log(resp);
-
-
+      .then(async(resp) => {
+        console.log(resp, "rerere");
         if (resp.status == 0) {
           swal(
             "Incorrect Credentials",
@@ -61,16 +65,18 @@ const Login = (props) => {
           );
         }
         if (resp.status == 1) {
-          swal(`${resp.message}`, "Welcome", "success");
-          console.log(settings.google_authenticator, "fjkfjsdkljkjsdkljsdfklasdjfklsdjfkljsdfl");
-          if(settings.google_authenticator == 1){
-            navigate('/2faAuthentication', {state:{email: email, token: resp.token}})
-          }else{
+          if ( resp.googleAuth == 1) {
+            navigate('/2faAuthentication', { state: { email: email, token: resp.token } })
+          } else { 
             localStorage.setItem("email", email);
             localStorage.setItem("token", resp.token);
-            dispatch(login({ isLoggedIn: true, userInfo: { email: email, token: resp.token } }));
-            navigate('/home')
-            // localStorage.setItem("analoguser", { isLoggedIn: true, userInfo: { email: email, token: resp.token } });
+         
+            const data = await axios.post(`${BASE_URL}/configSettings`, {email: email})
+            if(data){
+              swal(`${resp.message}`, "Welcome", "success");
+              dispatch(setUserInfo({userInfo: data.data}))
+              navigate('/home')
+            }
           }
         }
         if (resp.status == 3) {
@@ -246,7 +252,7 @@ const Login = (props) => {
                 </li>
                 <li className="nav-item">
                   <GoogleLogin
-                    clientId={googleId}
+                    clientId={GOOGLE_ID}
                     buttonText="Sign in with Google"
                     onSuccess={onLoginSuccess}
                     onFailure={onLoginFailure}

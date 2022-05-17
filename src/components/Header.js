@@ -1,21 +1,30 @@
-import React, { Component, useState } from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch ,useSelector} from "react-redux";
-import { navsetter } from "../redux/actions/websiteDBAction";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserInfo } from "../redux/reducer/user";
+import axios from "axios";
+import { BASE_URL } from "../Api_connection/config";
+
 
 const Header = () => {
+  const email = localStorage.getItem("email")
+  const {userInfo} = useSelector((state)=> state.user.value)
+  const dispatch = useDispatch()
   const navigate = useNavigate();
-  // const [but, setbutton]=useState(false);
-  const btn = useSelector((store)=>store.navsetter);
-  console.log("btn123",btn)
-
-  const dispatch = useDispatch();
   const signOut = () => {
-    console.log("beforer clear");
     window.localStorage.clear();
-    console.log("after clear");
     navigate("/login");
   };
+
+  useEffect( async() => {
+    const data = await axios.post(`${BASE_URL}/configSettings`, {email: email})
+            if(data){
+              dispatch(setUserInfo({userInfo: data.data}))
+            }
+  }, [])
+            
+
+
   return (
     <>
       <div className="nk-header nk-header-fluid is-light ">
@@ -24,8 +33,9 @@ const Header = () => {
             <div className="nk-menu-trigger d-xl-none ml-n1">
               <a
                 href="#"
-                onClick={()=>dispatch(navsetter())}
-                className={btn?"nk-nav-toggle nk-quick-nav-icon toggle-active":"nk-nav-toggle nk-quick-nav-icon"}
+                // onClick={()=>dispatch(navsetter())}
+                className= "nk-nav-toggle nk-quick-nav-icon toggle-active"
+                // className={btn?"nk-nav-toggle nk-quick-nav-icon toggle-active":"nk-nav-toggle nk-quick-nav-icon"}
                 data-target="sidebarMenu"
               >
                 <em className="icon ni ni-menu"></em>
@@ -253,21 +263,21 @@ const Header = () => {
                     <div className="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                       <div className="user-card">
                         <div className="user-avatar">
-                          <span>AB</span>
+                          <span>{(userInfo?.username)?.charAt(0)?.toUpperCase()}</span>
                         </div>
                         <div className="user-info">
                           <span className="lead-text">
-                            Ia5ghTL2paqchJTR65nBKvZ
+                            {userInfo?.username}
                           </span>
                           <span className="sub-text">
-                            user@inrx.network.com
+                           {userInfo?.user_id}
                           </span>
                         </div>
                       </div>
                     </div>
                     <div className="dropdown-inner user-account-info">
-                      <h6 className="overline-title-alt">Nio Wallet Account</h6>
-                      <div className="user-balance">
+                      <h6 className="overline-title-alt">Analog Wallet Account</h6>
+                      <div className="user-balance m-2">
                         12.395769{" "}
                         <small className="currency currency-btc">BTC</small>
                       </div>
@@ -278,10 +288,10 @@ const Header = () => {
                           <span className="currency currency-btc">BTC</span>
                         </span>
                       </div>
-                      <a href="#" className="link">
+                      {/* <a href="#" className="link">
                         <span>Withdraw Funds</span>{" "}
                         <em className="icon ni ni-wallet-out"></em>
-                      </a>
+                      </a> */}
                     </div>
                     <div className="dropdown-inner">
                       <ul className="link-list">

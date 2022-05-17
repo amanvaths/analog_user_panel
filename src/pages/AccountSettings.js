@@ -14,32 +14,33 @@ import { navsetters } from "../redux/actions/websiteDBAction";
 
 import { Link } from "react-router-dom";
 import axios from "axios";
-import {IoLocation} from 'react-icons/io5'
+import { IoLocation } from 'react-icons/io5'
 import { useSelector, useDispatch } from "react-redux";
-import { setActivity, setNotification, setChangePassword, setPersonalInfo, setSecuritySettings, setIpWhiteListing } from "../redux/settings";
+import { setUserInfo, setSettingPage } from "../redux/reducer/user";
+import { BASE_URL } from "../Api_connection/config";
 
 const AccountSettings = () => {
   const dispatch = useDispatch()
-  const { activity, personalInfo, securitySettings, notification, changePassword, ipWhiteListing, settings } = useSelector((state) => state.setting.value)
+  const { userInfo, settingPages } = useSelector((state) => state.user.value)
   const [logData, setLogData] = useState([])
-  
-
-  const btn1 = useSelector((store)=>store.navsetters);
-  console.log("uyftyf",btn1)
-  
   const email = localStorage.getItem("email")
 
   const getLoginLog = async () => {
     try {
-      const data = await axios.post('http://localhost:3001/api/loginhistory', { email: email })
+      const data = await axios.post(`${BASE_URL}/loginhistory`, { email: email })
       setLogData(data.data.login_record)
     } catch (error) {
       console.log(error);
     }
   }
 
-  useEffect(() => {
-    getLoginLog()
+  useEffect(async () => {
+    const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
+    if (data) {
+      dispatch(setUserInfo({ userInfo: data.data }))
+      getLoginLog()
+    }
+
   }, [])
   return (
     <>
@@ -55,15 +56,14 @@ const AccountSettings = () => {
                   <div className="nk-block">
                     <div className="card card-bordered">
                       <div className="card-aside-wrap">
-                        {ipWhiteListing == true ? <IPwhiteListing/> : null}
-                        {changePassword == true ? <ChangePassword/> : null }
-                        {/* <ChangePassword/> */}
-                        {notification == true ? <Notification /> : null}
-                        {securitySettings == true ? <SecuritySettings /> : null}
+                        {settingPages.ipWhiteListing == true ? <IPwhiteListing /> : null}
+                        {settingPages.changePassword == true ? <ChangePassword /> : null}
+                        {settingPages.notification == true ? <Notification /> : null}
+                        {settingPages.securitySettings == true ? <SecuritySettings /> : null}
 
-                        {personalInfo == true && <PersonalInfo />}
+                        {settingPages.personalInfo == true && <PersonalInfo />}
 
-                        {activity == true ? (
+                        {settingPages.activity == true ? (
                           <div className="card-inner card-inner-lg">
                             <div className="nk-block-head nk-block-head-lg">
                               <div className="nk-block-between">
@@ -81,8 +81,8 @@ const AccountSettings = () => {
                                 <div onClick={()=>dispatch(navsetters())} className="nk-block-head-content align-self-start d-lg-none">
                                   <a
                                     href="#"
-                                    
-                                    className={btn1?"toggle btn btn-icon btn-trigger mt-n1 active":"toggle btn btn-icon btn-trigger mt-n1"}
+                                    className="toggle btn btn-icon btn-trigger mt-n1 active"
+                                    // className={btn1?"toggle btn btn-icon btn-trigger mt-n1 active":"toggle btn btn-icon btn-trigger mt-n1"}
                                     data-target="userAside"
                                   >
                                     <em className="icon ni ni-menu-alt-r"></em>
@@ -143,7 +143,8 @@ const AccountSettings = () => {
                         ) : null}
 
                         <div
-                          className={btn1?"card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg content-active":"card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg"}
+                        className="card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg content-active"
+                          // className={btn1?"card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg content-active":"card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg"}
                           data-toggle-body="true"
                           data-content="userAside"
                           data-toggle-screen="lg"
@@ -153,13 +154,13 @@ const AccountSettings = () => {
                             <div className="card-inner">
                               <div className="user-card">
                                 <div className="user-avatar bg-primary">
-                                  <span>AB</span>
+                                  <span>{userInfo?.username?.charAt(0)?.toUpperCase()}</span>
                                 </div>
                                 <div className="user-info">
                                   <span className="lead-text">
-                                    Abu Bin Ishtiyak
+                                    {userInfo?.username}
                                   </span>
-                                  <span className="sub-text">info@softnio.com</span>
+                                  <span className="sub-text">{userInfo?.user_id}</span>
                                 </div>
                                 <div className="user-action">
                                   <div className="dropdown">
@@ -217,14 +218,17 @@ const AccountSettings = () => {
                                 <li>
                                   <Link
                                     to="#"
-                                    className={personalInfo ? "active" : " "}
+                                    className={settingPages.personalInfo ? "active" : " "}
                                     onClick={() => {
-                                      dispatch(setPersonalInfo({ personalInfo: true }))
-                                      dispatch(setActivity({ activity: false }))
-                                      dispatch(setSecuritySettings({ securitySettings: false }))
-                                      dispatch(setNotification({ notification: false }))
-                                      dispatch(setChangePassword({ changePassword: false }))
-                                      dispatch(setIpWhiteListing({ ipWhiteListing: false }))
+                                      const obj5 = {
+                                        personalInfo: true,
+                                        activity: false,
+                                        securitySettings: false,
+                                        notification: false,
+                                        changePassword: false,
+                                        ipWhiteListing: false
+                                      }
+                                      dispatch(setSettingPage({settingPages: obj5}))
                                     }}
                                   >
                                     <em className="icon ni ni-user-fill-c"></em>
@@ -234,28 +238,34 @@ const AccountSettings = () => {
                                 <li>
                                   <Link to="#"
                                     onClick={() => {
-                                      dispatch(setPersonalInfo({ personalInfo: false }))
-                                      dispatch(setActivity({ activity: false }))
-                                      dispatch(setSecuritySettings({ securitySettings: false }))
-                                      dispatch(setNotification({ notification: true }))
-                                      dispatch(setChangePassword({ changePassword: false }))
-                                      dispatch(setIpWhiteListing({ ipWhiteListing: false }))
+                                      const obj4 = {
+                                        personalInfo: false,
+                                        activity: false,
+                                        securitySettings: false,
+                                        notification: true,
+                                        changePassword: false,
+                                        ipWhiteListing: false
+                                      }
+                                      dispatch(setSettingPage({ settingPages: obj4 }));
                                     }}>
                                     <em className="icon ni ni-bell-fill"></em>
                                     <span>Notifications</span>
                                   </Link>
                                 </li>
                                 <li>
-                                  <Link className={activity ? "active" : " "} to="#">
+                                  <Link className={settingPages.activity ? "active" : " "} to="#">
                                     <em className="icon ni ni-activity-round-fill"></em>
                                     <span
                                       onClick={() => {
-                                        dispatch(setPersonalInfo({ personalInfo: false }))
-                                        dispatch(setActivity({ activity: true }))
-                                        dispatch(setSecuritySettings({ securitySettings: false }))
-                                        dispatch(setNotification({ notification: false }))
-                                        dispatch(setChangePassword({ changePassword: false }))
-                                        dispatch(setIpWhiteListing({ ipWhiteListing: false }))
+                                        const obj3 = {
+                                          personalInfo: false,
+                                          activity: true,
+                                          securitySettings: false,
+                                          notification: false,
+                                          changePassword: false,
+                                          ipWhiteListing: false
+                                        }
+                                        dispatch(setSettingPage({settingPages: obj3}))
                                       }}
                                     >
                                       Account Activity
@@ -264,14 +274,17 @@ const AccountSettings = () => {
                                 </li>
                                 <li>
                                   <Link to="#"
-                                    className={securitySettings ? "active" : " "}
+                                    className={settingPages.securitySettings ? "active" : " "}
                                     onClick={() => {
-                                      dispatch(setPersonalInfo({ personalInfo: false }))
-                                      dispatch(setActivity({ activity: false }))
-                                      dispatch(setSecuritySettings({ securitySettings: true }))
-                                      dispatch(setNotification({ notification: false }))
-                                      dispatch(setChangePassword({ changePassword: false }))
-                                      dispatch(setIpWhiteListing({ ipWhiteListing: false }))
+                                      const obj2 = {
+                                        personalInfo: false,
+                                        activity: false,
+                                        securitySettings: true,
+                                        notification: false,
+                                        changePassword: false,
+                                        ipWhiteListing: false
+                                      }
+                                      dispatch(setSettingPage({settingPages: obj2}))
                                     }}>
                                     <em className="icon ni ni-lock-alt-fill"></em>
                                     <span>Security Settings</span>
@@ -279,14 +292,17 @@ const AccountSettings = () => {
                                 </li>
                                 <li>
                                   <Link to="#"
-                                    className={ipWhiteListing ? "active" : " "}
+                                    className={settingPages.ipWhiteListing ? "active" : " "}
                                     onClick={() => {
-                                      dispatch(setIpWhiteListing({ ipWhiteListing: true }))
-                                      dispatch(setPersonalInfo({ personalInfo: false }))
-                                      dispatch(setActivity({ activity: false }))
-                                      dispatch(setSecuritySettings({ securitySettings: false }))
-                                      dispatch(setNotification({ notification: false }))
-                                      dispatch(setChangePassword({ changePassword: false }))
+                                      const obj1 = {
+                                        personalInfo: false,
+                                        activity: false,
+                                        securitySettings: false,
+                                        notification: false,
+                                        changePassword: false,
+                                        ipWhiteListing: true
+                                      }
+                                      dispatch(setSettingPage({settingPages: obj1}))
                                     }}>
                                     <IoLocation />&nbsp; &nbsp;
                                     <span>IP Whitelisting</span>

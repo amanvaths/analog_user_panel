@@ -25,112 +25,21 @@ import BuySell from "./pages/BuySell";
 import CandleGraph from "./components/CandleGraph";
 import ChangePassword from "./components/ChangePassword";
 import OtpTFA from "./pages/OtpTFA";
-import { useDispatch, useSelector } from 'react-redux'
-import Orders from "./components/Orders";
-
-import {
-  setIsTwoFactOn,
-  setIsNewBrowserOn,
-  setIsLoginActivityOn,
-  setIsUnusualActivityOn,
-  setIsSalesOn,
-  setIsFeaturesOn,
-  setIsTipsOn,
-  setSettings
-} from './redux/settings'
-
-import { setCurrencyPrefrence } from './redux/currency'
-import { setReferralCode } from './redux/User'
-
-import GoogleOtp from "./components/GoogleOtp";
-import { getSettings } from "./Api_connection/ApiFunction";
 
 function App() {
-  const dispatch = useDispatch();
-  // const [data, setData] = useState({});
-  const { referralCode } = useSelector((state) => state.user.value)
-  const {
-    activity,
-    personalInfo,
-    securitySettings,
-    notification,
-    changePassword,
-    ipWhiteListing,
-    isLoginActivityOn,
-    isTwoFactOn,
-    isNewBrowserOn,
-    isUnusualActivityOn,
-    isSalesOn,
-    isNewFeaturesOn,
-    isTipsOn } = useSelector((state) => state.setting.value)
-  console.table(referralCode, "referal code in app.js file");
-  console.table(activity,
-    personalInfo,
-    securitySettings,
-    notification,
-    changePassword,
-    ipWhiteListing,
-    isLoginActivityOn,
-    isTwoFactOn,
-    isNewBrowserOn,
-    isUnusualActivityOn,
-    isSalesOn,
-    isNewFeaturesOn,
-    isTipsOn,
-    "settings Data in app.js file"
-  );
-
+  
   const email = localStorage.getItem("email");
   const token = localStorage.getItem("token");
-
-
-  const getAllSettings = async () => {
-    getSettings(email).then((res) => {
-      // console.log("thunkcheck::", res.data)
-      dispatch(setSettings({ settings: res.data }));
-      dispatch(setIsLoginActivityOn({ isLoginActivityOn: res.data.login_activity }));
-      dispatch(setIsNewBrowserOn({ isNewBrowserOn: res.data.new_browser }));
-      dispatch(setIsTwoFactOn({ isTwoFactOn: res.data.google_authenticator }));
-      dispatch(setCurrencyPrefrence({ currency_prefrence: res.data.currency_preference }));
-      dispatch(setIsUnusualActivityOn({ isUnusualActivityOn: res.data.unusual_activity }));
-      dispatch(setIsSalesOn({ isSalesOn: res.data.sales_latest_news }));
-      dispatch(setIsFeaturesOn({ isNewFeaturesOn: res.data.new_features_updates }));
-      dispatch(setIsTipsOn({ isTipsOn: res.data.tips }));
-      dispatch(setReferralCode({ referralCode: res.data.refferal }));
-    }).catch((er) => {
-      console.log("app getsettingserror::", er);
-    })
-    // try {
-    //   const data = await axios.post(`${BASE_URL}/configSettings`, { email: email });
-
-    // } catch (error) {
-    //   console.log(error);
-    // }
-
-  }
-
-  // getAllSettings()
-
-  // useEffect(async () => {
-  //   const data = await axios.post(`${BASE_URL}/configSettings`, { email: email });
-  //   setData(data);
-  //   console.log(data.data, "response from api seetings data");
-  // }, []);
-
-  useEffect(() => {
-    getAllSettings();
-  }, []);
-
-
+  // console.log(email, token);
   return (
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={email && token?<Home />:<Login />} />
           <Route path="/home" element={email && token ? <Home /> : <Navigate to='/Login' />} />
           <Route path="/Psecurity" element={<Psecurity />} />
           <Route path="/Profile" element={<Profile />} />
-          <Route path="/Login" element={<Login />} />
+          <Route path="/Login" element={email && token?<Home />:<Login />} />
           <Route path="/Signup" element={<Signup />} />
           <Route path="/Terms" element={<Terms />} />
           <Route path="/Faq" element={<Faq />} />
@@ -148,7 +57,6 @@ function App() {
           <Route path="/buysell" element={< BuySell />} />
           <Route path="/candlegraph" element={<CandleGraph />} />
           <Route path="/changepassword" element={<ChangePassword />} />
-          <Route path="/googleotp" element={<GoogleOtp />} />
           <Route path="/2faAuthentication" element={<OtpTFA />} />
           <Route path="/orders" element={<Orders />} />
         </Routes>

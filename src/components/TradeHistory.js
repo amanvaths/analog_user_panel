@@ -9,10 +9,11 @@ export default function TradeHistory() {
   useEffect(() => {
     if (email) {
       axios
-        .get(`${BASE_URL}/getAllOrder`)
+        .post(`${BASE_URL}/getAllOrder`, {email: ''})
         .then((res) => {
           console.log(res.data, "All Order trandHistory");
           setHistory(res.data.order);
+          console.log(history, "history");
         })
         .catch((error) => {
           console.log(error.message);
@@ -49,7 +50,7 @@ export default function TradeHistory() {
             </div>
           </div>
           <div  style={{ height: "400px", overflow: "scroll" }}>
-          {history.map((h) => (
+           {history.map((h) => (
             <div>
               <div
                 class="row  m-0"
@@ -80,7 +81,7 @@ export default function TradeHistory() {
                 </div>
               </div>
             </div>
-          ))}
+          ))} 
         </div>
         </div>
       </div>

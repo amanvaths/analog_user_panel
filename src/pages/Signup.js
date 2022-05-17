@@ -4,7 +4,7 @@ import { BASE_URL } from "../Api_connection/config";
 import { Signupn } from "../Api_connection/ApiFunction";
 import { GoogleLogin } from "react-google-login";
 import { useSelector, useDispatch } from "react-redux";
-import { setReferralCode } from "../redux/User";
+// import { setReferralCode } from "../redux/reducer/user";
 // import { FacebookLogin } from "react-facebook-login";
 import swal from "sweetalert";
 import {AiOutlineEyeInvisible, AiOutlineEye} from 'react-icons/ai'
@@ -373,7 +373,7 @@ const Signup = (props) => {
                     placeholder="Enter Referal Code"
                     value={referralCode}
                     onChange={(e) => {
-                      dispatch(setReferralCode({ referralCode: e.target.value }))
+                      // dispatch(setReferralCode({ referralCode: e.target.value }))
                     }}
                     style={{ fontSize: "15px" }} />
                 </div>
