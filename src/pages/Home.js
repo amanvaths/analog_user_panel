@@ -153,6 +153,7 @@ const  Home = ()=>{
 useEffect(()=>{
   getUserWalletData()
   getPreSale()
+  recentActivity()
 },[])
 
 
