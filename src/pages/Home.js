@@ -665,13 +665,13 @@ useEffect(()=>{
                               </div>
                             </div>
                             <div className="nk-refwg-more dropdown mt-n1 mr-n1">
-                              <a
+                              {/* <a
                                 href="#"
                                 className="btn btn-icon btn-trigger"
                                 data-toggle="dropdown"
                               >
                                 <em className="icon ni ni-more-h"></em>
-                              </a>
+                              </a> */}
                               {/* <div className="dropdown-menu dropdown-menu-xs dropdown-menu-right">
                                 <ul className="link-list-plain sm">
                                   <li>

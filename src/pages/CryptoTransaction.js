@@ -27,7 +27,7 @@ const CryptoTransaction = ()=>{
          setSettings({settings: res.data})
        })
      }
-     console.log(data.data, ":: response from tranction api");
+     //console.log(data.data, ":: response from tranction api");
      setHistory(data.data)
    } catch (error) {
       console.log(error);
@@ -391,7 +391,7 @@ const CryptoTransaction = ()=>{
                             <div className="nk-tb-col nk-tb-col-tools"></div>
                           </div>
                           {
-                              history.map((element, index)=>{
+                              history?.map((element, index)=>{
                                 const a = new Date(element.createdAt)
                                 return(
                                   

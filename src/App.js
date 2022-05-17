@@ -26,6 +26,7 @@ import CandleGraph from "./components/CandleGraph";
 import ChangePassword from "./components/ChangePassword";
 import OtpTFA from "./pages/OtpTFA";
 import { useDispatch, useSelector } from 'react-redux'
+import Orders from "./components/Orders";
 
 import {
   setIsTwoFactOn,
@@ -149,6 +150,7 @@ function App() {
           <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="/googleotp" element={<GoogleOtp />} />
           <Route path="/2faAuthentication" element={<OtpTFA />} />
+          <Route path="/orders" element={<Orders />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -250,7 +250,7 @@ function Menu (){
                         <span className="nk-menu-text">Buy / Sell</span>
                       </Link>
                     </li>
-                    <li className="nk-menu-item">
+                    {/* <li className="nk-menu-item">
                       <a
                         href="#"
                         className="nk-menu-link"
@@ -260,7 +260,7 @@ function Menu (){
                         </span>
                         <span className="nk-menu-text">Orders</span>
                       </a>
-                    </li>
+                    </li> */}
                     {/* <li className="nk-menu-item">
                       <a href="html/crypto/chats.html" className="nk-menu-link">
                         <span className="nk-menu-icon">
