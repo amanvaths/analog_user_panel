@@ -1,14 +1,18 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {useSelector} from "react-redux";
+
 function Menu (){
+   const [isopen, setIsopen] = useState(0);
    const btn = useSelector(store=>store.navsetter);
    const {userInfo} = useSelector((state)=> state.user.value)
+  
+
     return (
       <>
         <div
           className={btn?"nk-sidebar nk-sidebar-fixed nk-sidebar-mobile nk-sidebar-active":"nk-sidebar nk-sidebar-fixed nk-sidebar-mobile"}
-          data-content="sidebarMenu"
+          data-content="sidebarMenu" id="nk-sidebar"
         >
           <div className="nk-sidebar-element nk-sidebar-head">
             <div className="nk-sidebar-brand">
@@ -20,24 +24,24 @@ function Menu (){
                   className="logo-light logo-img"
                   src="images/logo.png"
                   srcSet="images/logo2x.png 2x"
-                  alt="logo"
+                  alt="logo"                 
                 />
                 <img
                   className="logo-dark logo-img"
                   src="images/logo-dark.png"
                   srcSet="images/logo-dark2x.png 2x"
-                  alt="logo-dark"
+                  alt="logo-dark"                
                 />
                 {/* <span className="nio-version">ANALOG</span> */}
               </a>
             </div>
-            <div className="nk-menu-trigger mr-n2">
+            <div className="nk-menu-trigger mr-n2" >
               <a
                 href="#"
                 className="nk-nav-toggle nk-quick-nav-icon d-xl-none"
-                data-target="sidebarMenu"
+                data-target="sidebarMenu" id="nk-nav-toggle"
               >
-                <em className="icon ni ni-arrow-left"></em>
+                <em className="icon ni ni-arrow-left" ></em>
               </a>
             </div>
           </div>
@@ -47,10 +51,10 @@ function Menu (){
                 <div className="nk-sidebar-widget d-none d-xl-block">
                   <div className="user-account-info between-center">
                     <div className="user-account-main">
-                      <h6 className="overline-title-alt " style={{paddingBottom:14}}>Available Balance</h6>
+                      <h6 className="overline-title-alt " style={{paddingBottom:14}}  >Available Balance</h6>
                       <div className="user-balance">
                         2.014095{" "}
-                        <small className="currency currency-btc">ANA</small>
+                        <small className="currency currency-btc" >ANA</small>
                       </div>
                       <div className="user-balance-alt">
                         18,934.84{" "}

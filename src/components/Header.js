@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserInfo } from "../redux/reducer/user";
@@ -7,11 +7,35 @@ import { BASE_URL } from "../Api_connection/config";
 
 
 const Header = () => {
+  const [isopen, setIsopen] = useState(0);
   const email = localStorage.getItem("email")
   const {userInfo} = useSelector((state)=> state.user.value)
   const btn = useSelector((store)=> store.navsetter)
   const dispatch = useDispatch()
   const navigate = useNavigate();
+
+  const hello = async () => {
+    //alert("Hello world!"); 
+    if(isopen == 0){
+    var element = document.getElementById("myBody"); 
+    element.classList.add("nav-shown"); 
+    var element = document.getElementById("nk-sidebar"); 
+    element.classList.add("nk-sidebar-active");                                 
+    var element = document.getElementById("nk-nav-toggle"); 
+    element.classList.add("toggle-active");  
+    setIsopen(1);  
+    }else{
+      var element = document.getElementById("myBody"); 
+      element.classList.remove("nav-shown"); 
+      var element = document.getElementById("nk-sidebar"); 
+      element.classList.remove("nk-sidebar-active");                                 
+      var element = document.getElementById("nk-nav-toggle"); 
+      element.classList.remove("toggle-active");  
+      setIsopen(0);  
+    }                            
+  }
+
+
 
   const signOut = () => {
     // navigate("/", { replace: true });
@@ -41,7 +65,7 @@ const Header = () => {
                 className={btn?"nk-nav-toggle nk-quick-nav-icon toggle-active":"nk-nav-toggle nk-quick-nav-icon"}
                 data-target="sidebarMenu"
               >
-                <em className="icon ni ni-menu"></em>
+                <em className="icon ni ni-menu"  onClick={hello}></em>
               </a>
             </div>
             <div className="nk-header-brand d-xl-none">
