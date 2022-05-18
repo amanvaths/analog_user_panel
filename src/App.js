@@ -44,6 +44,8 @@ import { setReferralCode } from './redux/User'
 import GoogleOtp from "./components/GoogleOtp";
 import { getSettings } from "./Api_connection/ApiFunction";
 
+
+
 function App() {
   const dispatch = useDispatch();
   // const [data, setData] = useState({});
@@ -81,11 +83,8 @@ function App() {
 
   const email = localStorage.getItem("email");
   const token = localStorage.getItem("token");
-
-
   const getAllSettings = async () => {
     getSettings(email).then((res) => {
-      // console.log("thunkcheck::", res.data)
       dispatch(setSettings({ settings: res.data }));
       dispatch(setIsLoginActivityOn({ isLoginActivityOn: res.data.login_activity }));
       dispatch(setIsNewBrowserOn({ isNewBrowserOn: res.data.new_browser }));
@@ -119,7 +118,6 @@ function App() {
   useEffect(() => {
     getAllSettings();
   }, []);
-
 
   return (
     <div>

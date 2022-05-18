@@ -129,6 +129,7 @@ const  Home = ()=>{
         const res = await axios.get(`${BASE_URL}/userAllRecords?email=${ email }&bonus_type=Level`)
         //console.warn(res.data +"Reff data ");
        setTotalRefferal(res.data.totalUser);
+       console.log(res.data.totalUser,"User All record Amit");
        setTotalReffEarn(res.data.income[0].total_bonus);
        console.log(totalReffEarn, "Total reff earn");
       }catch(error){
@@ -228,6 +229,7 @@ useEffect(()=>{
                       coinPrice={data.price}
                       coinQty={data.coinquantity}
                       duration={data.duration}
+                      persent={data.persentsold}
                     />
                   );
                 })

@@ -12,6 +12,7 @@ import  buySellReducer  from "./redux/buySell";
 import { navsetterreducer } from "./redux/reducers/websiteDBReducer";
 import { navsettersreducer } from "./redux/reducers/websiteDBReducer";
 
+
 const store = configureStore({
   reducer: {
     user: userReducer,

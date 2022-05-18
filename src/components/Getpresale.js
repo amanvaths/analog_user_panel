@@ -4,7 +4,7 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 // import Countdown from "react-countdown";
 
 const Getpresale = (props) => {
-  const { levelname, coinQty, coinPrice, duration } = props;
+  const { levelname, coinQty, coinPrice, duration ,persent} = props;
   const [hours, setHours] = useState("");
   const [minutes, setMinutes] = useState("");
   const [seconds, setSeconds] = useState("");
@@ -64,10 +64,10 @@ const Getpresale = (props) => {
              style={{ paddingTop: 11 }}>
               <ProgressBar
                 striped
-                now={coinPrice}
-                label={`${coinPrice}%`}
+                now={persent}
+                label={`${persent}%`}
                 variant="success "
-                aria-valuemin={1000000}
+                aria-valuemin={100}
               />
             </div>
                

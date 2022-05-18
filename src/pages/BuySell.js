@@ -17,7 +17,7 @@ const UserList = () => {
           <div class="nk-wrap ">
             <Header />
             <div className="row" style={{ margin: "20px 10px 0px" }}>
-              <div className="col-lg-8" style={{ top: "10px", height: "100%" }}>
+              <div className="col-lg-8" style={{  height: "100%" }}>
                 <CandleGraph />
                 <div className="">
                   <TradeHistory />

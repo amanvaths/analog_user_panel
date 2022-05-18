@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { setCurrency_type } from "../redux/buySell";
 import { setCurrencyPrefrence } from "../redux/buySell";
 
-
 export default function Orders() {
   const dispatch = useDispatch();
   const email = localStorage.getItem("email");
@@ -20,19 +19,12 @@ export default function Orders() {
   const [wallets, setWallets] = useState([]);
   const [walletbalance, setWalletBalance] = useState("");
   const [walletsymbol, setWalletsymbol] = useState("");
+ const [quantity ,setQuantity]=useState(0);
+  // dispatch
 
-  const [quantity, setQuantity] = useState(0);
-
-// dispatch 
-
-const {currency_prefrence} = useSelector((state)=> state.currency.value)
-  console.log(currency_prefrence,"CTYPE type");
-  const symbolState = useSelector((store)=>store);
-  console.log(symbolState,"symbolState");
-  console.log(currency_prefrence, "vipin");
-
-
-
+  const { currency_prefrence } = useSelector((state) => state.currency.value);
+  const symbolState = useSelector((store) => store);
+  console.log(currency_prefrence, "vipin currency_prefrence");
 
   // function toFixed(x) {
   //   if (Math.abs(x) < 1.0) {
@@ -52,14 +44,11 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
   //   return x;
   // }
 
- 
-
   const getData = async () => {
     try {
       const res = await axios.post(`${BASE_URL}/getCoinData`, {
         currency: "inr",
       });
-      console.log(res.data);
       setCoinData({ ...res.data });
 
       /*  const cd = [];
@@ -82,7 +71,6 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
       let walletData = res.data;
       walletData = walletData.filter((wallet) => wallet.balance > 0);
       setWallets([...walletData]);
-      console.log("WalletData::", walletData);
       const cd = [];
       /* for (let coin of Object.entries(res.data)) {
         //console.log(coin);
@@ -101,7 +89,7 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
     try {
       const res = await axios.post(`${BASE_URL}/anaPrice`, {});
       let Anadata = res.data;
-      console.log(res.data._data.price, "ana Price");
+      console.log(res.data._data.price, "ana Price erefrf fgfhg gbghgfhnf");
       // setAnaprice(res.data.price)
       setAtprice(res.data._data.price);
     } catch (error) {
@@ -114,18 +102,11 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
     getWalletData();
     AnaPrice();
     selectedCoin();
-    // calculatePrice();
-    // calculatedQuntity();
-    // setTotalTrx(calculatedPrice)
   }, []);
-  console.log(coinData[walletsymbol]?.quote?.INR?.price, ":: Coin Data");
   const trxInAna = atprice / coinData[walletsymbol]?.quote?.INR?.price;
-
   console.log(trxInAna, "1trx in 1 ana");
   console.log(atprice, "AtPrice");
-
   const inTrx = ammount * trxInAna;
-
   console.log(inTrx, "Total Trx");
 
   function calculatePrice(coinPrice) {
@@ -134,18 +115,16 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
     console.log(trxInAna, "1trx value");
     const inTrx = ammount * trxInAna;
     console.log(inTrx, "Total Trx value");
-    // setCalculatedPrice(inTrx);
     setTotal(inTrx);
     setAtprice(inTrx);
   }
 
   function selectedCoin() {
     if (walletsymbol == "BUSD") {
-      console.log(atprice, "Vipin ikhu");
       return atprice;
     }
   }
-  console.log(wallets, ":: Wallets");
+  console.log(wallets, ":: All Data In Wallets ");
 
   function TotalAmt() {
     let params = {
@@ -153,11 +132,10 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
       raw_price: trxInAna,
       currencyType: walletsymbol,
       compairCurrency: currency_prefrence,
-      
       TotalTrx: inTrx,
       email: email,
     };
-  
+
     axios
       .post(`${BASE_URL}/order`, params)
       .then((res) => {
@@ -174,9 +152,7 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
         .get(`${BASE_URL}/getAllOrder`)
         .then((res) => {
           console.log(res.data, "All Order");
-          console.log(res.data.currency_type," currency type jhrefhreu");
           setHistory(res.data.order);
-         
         })
         .catch((error) => {
           console.log(error.message);
@@ -184,60 +160,98 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
     }
   }, []);
 
-  const hist =
-    history &&
-    history.map((data, index) => {
-      return (
-        <>
-          <div class="order_cont">
-            <div
-              class="row m-0 p-0 py-1 align-items-center order"
-              style={{
-                borderLeft: "5px solid green",
-                height: "40px",
-                // overflow: "scroll",
-              }}
-            >
-              <div
-                style={{
-                  width: "100%",
-                  height: " 100%",
-                  background: " rgba(35, 172, 80, 0.4)",
-                  position: "absolute",
-                  left: " 0px",
-                  top: "0px",
-                  zIndex: "-1",
-                }}
-              ></div>
+  // const hist =
+  //   history &&
+  //   history.map((data, index) => {
+  //     return (
+  //       <>
+  //         <div class="order_cont" style={{margin:"1px 0px"}}>
+  //           <div
+  //             class="row m-0 p-0 py-1 align-items-center order"
+  //             style={{
+  //               borderLeft: "5px solid green",
+  //               height: "40px",
+  //             }}
+  //           >
+  //             <div
+  //               style={{
+  //                 width: "100%",
+  //                 height: " 100%",
+  //                 background: " rgba(35, 172, 80, 0.4)",
+  //                 position: "absolute",
+  //                 left: " 0px",
+  //                 top: "0px",
+  //                 zIndex: "-1",
+  //               }}
+  //             ></div>
 
-              <div class="col-3 text-center" style={{ fontSize: "10px" }}>
-                <div class="font-weight-bold">
-                  
-                  {data.currency_type} /{data.compair_currency}
-                </div>
-              </div>
-              <div class="col-3 text-center" style={{ fontSize: "10px" }}>
-                <div class="font-weight-bold"></div>
-                <div>{data.raw_price}</div>
-              </div>
-              <div class="col-3 text-center" style={{ fontSize: "10px" }}>
-                {data.raw_price}
-              </div>
-              <div class="col-3 text-center" style={{ fontSize: "10px" }}>
-                {data.cVolume}
-              </div>
-              {/* <div class="orderrow-hover">
-          <span class="">2/8/2022, 11:41:35 AM</span><span>Executed</span>
-        </div> */}
-            </div>
-          </div>
-        </>
-      );
-    });
+  //             <div class="col-3 text-center" style={{ fontSize: "10px" }}>
+  //               <div class="font-weight-bold">
+
+  //                 {data.currency_type} /{data.compair_currency}
+  //               </div>
+  //             </div>
+  //             <div class="col-3 text-center" style={{ fontSize: "10px" }}>
+  //               <div class="font-weight-bold"></div>
+  //               <div>{data.raw_price}</div>
+  //             </div>
+  //             <div class="col-3 text-center" style={{ fontSize: "10px" }}>
+  //               {data.raw_price}
+  //             </div>
+  //             <div class="col-3 text-center" style={{ fontSize: "10px" }}>
+  //               {data.cVolume}
+  //             </div>
+
+  //           </div>
+  //         </div>
+  //       </>
+  //     );
+  //   });
 
   return (
     <div className="order">
-      <div style={{ background: "white" }}>
+      <div class="card mt-2" style={{ height: "450px" }}>
+        <div class="card-header justify-content-between align-items-center">
+          <h6 class="card-title align-items-center text-dark"> ORDER</h6>
+        </div>
+        <div class="card-body table-responsive p-0">
+          <table class="table font-w-600 mb-0">
+            <thead>
+              <tr style={{fontSize:"10px"}}>
+                <th>Total Anolog</th>
+                <th>Total Amount Pay</th>
+                <th>Buying Price</th>
+                <th>Pool</th>
+                {/* <th>Time</th> */}
+              </tr>
+            </thead>
+            <tbody>
+              {history &&
+                history.map((h) => {
+                  return (
+                    <>
+                      <tr class="zoom" style={{fontSize:"10px"}}>
+                        <td> {h.cVolume}</td>
+                        <td class="text-danger">
+                          {h.currency_type}{" "}
+                          <i class="ion ion-arrow-graph-up-right"></i>
+                        </td>
+                        <td class="text-success">
+                          3,23,55,479{" "}
+                          <i class="ion ion-arrow-graph-down-right"></i>
+                        </td>
+                        <td>{h.presalelevel}</td>
+                        {/* <td>{h.date}</td> */}
+                      </tr>
+                    </>
+                  );
+                })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* <div style={{ background: "white" }}>
         <div className="nav nav-tabs d-flex"></div>
         <div
           style={{
@@ -260,25 +274,26 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
             class="row m-0 p-0 py-1 theme-color pair-border"
             style={{ width: "100%" }}
           >
-            <div class="col-3 text-center" style={{ fontSize: "10px" }}>
+            <div class="col-3 text-center" style={{ fontSize: "11px",fontWeight:"bold" }}>
               PAIR
             </div>
-            <div class="col-3 text-center" style={{ fontSize: "10px" }}>
+            <div class="col-3 text-center" style={{ fontSize: "11px",fontWeight:"bold" }}>
               AMOUNT
             </div>
-            <div class="col-3 text-center" style={{ fontSize: "10px" }}>
+            <div class="col-3 text-center" style={{ fontSize: "11px",fontWeight:"bold" }}>
               PRICE
             </div>
-            <div class="col-3 text-center" style={{ fontSize: "10px" }}>
+            <div class="col-3 text-center" style={{ fontSize: "11px",fontWeight:"bold" }}>
               TOTAL
             </div>
           </div>
           <div className="nav nav-tabs d-flex"></div>
 
-          {/* order History */}
-          <div style={{ height: "400px", overflow: "scroll" }}>{hist}</div>
+         
+
+          <div style={{ height: "400px", overflowY: "scroll" }}>{hist}</div>
         </div>
-      </div>
+      </div> */}
 
       {/* Buy Sell */}
       <div>
@@ -298,7 +313,6 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
           >
             BUY
           </div>
-         
         </nav>
 
         {/* Buy */}
@@ -325,8 +339,8 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
               >
                 {/* Buy Btex Option  */}
 
-                <div class="p-3">
-                  <div class="input-group mb-3">
+                <div class="p-3" style={{ width: "465px" }}>
+                  {/* <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span
                         class="input-group-text buy-sell-form-bg buy-sell-theme"
@@ -345,7 +359,6 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
                       type="text"
                       class="form-control buy-sell-form-bg"
                       maxLength="6"
-                      // value={anaPriceForWallet}
                       value={atprice}
                       style={{ borderRight: "none", height: "54px" }}
                       onChange={(e) => {
@@ -362,23 +375,8 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
                       }}
                       readOnly
                     />
-                    {/* <div class="">
-                      <button
-                        class="bg-white text-success p-3"
-                        type="button"
-                        style={{
-                          borderLeft: "none",
-                          borderBlock: "1px solid rgb(206, 212, 218)",
-                          fontSize: " 13px",
-                          outline: "none",
-                        }}
-                      >
-                        LOWEST PRICE
-                      </button>
-                    </div> */}
-                  </div>
+                  </div> */}
 
-                  
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span
@@ -396,45 +394,41 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
                     <input
                       type="number"
                       class="form-control buy-sell-form-bg buy-sell-theme"
-                      // defaultValue={quantity}
-                      // value={quantity}
                       value={ammount}
                       style={{
                         borderColor: "rgb(202, 202, 204)",
                         height: "54px",
                       }}
-                      // onChange={(e) => {
-                      //   setCalculatedPrice(e.target.value * anaPriceForWallet);
-                      // }}
                       onChange={(e) => {
-                        if (walletsymbol != "") {
-                          setAmmount(
-                            e.target.value
-                              .replace(/[^0-9.]/g, "")
-                              .replace(/(\..?)\../g, "$1")
-                          );
-                          setTotal(
-                            e.target.value
-                              .replace(/[^0-9.]/g, "")
-                              .replace(/(\..?)\../g, "$1") * atprice
-                          );
-                        } else {
-                          alert("Please select any wallet");
-                        }
+                        // if (walletsymbol != "") {
+                        setAmmount(
+                          e.target.value
+                            .replace(/[^0-9.]/g, "")
+                            .replace(/(\..?)\../g, "$1")
+                        );
+                        setTotal(
+                          e.target.value
+                            .replace(/[^0-9.]/g, "")
+                            .replace(/(\..?)\../g, "$1") * atprice
+                        );
+                        // } else {
+                        //   alert("Please select any wallet");
+                        // }
                       }}
                     />
                   </div>
 
                   {/* WalletCoins */}
-                  <div
+                  {/* <div
                     style={{
                       overflowX: "scroll",
                       maxWidth: "450PX",
                       padding: "5px 0px",
                     }}
-                  >
-                    <div style={{ width: "600px" }}>
+                  > */}
+                   {/* <div style={{ width: "450px" }}> 
                       {wallets.map((wallet) => (
+                        console.log(wallets,"walleta"),
                         <div class="form-check form-check-inline">
                           <input
                             style={{ display: "inline-block" }}
@@ -442,16 +436,12 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
                             type="radio"
                             name="sCurrency"
                             value={coinData[wallet.symbol]?.quote?.INR?.price}
-                            // value={wallet.symbol}
                             id={wallet.symbol}
-                            // defaultChecked={wallet.symbol == 'BUSD'}
                             onChange={(e) => {
                               setAtprice(
                               atprice /
                                   coinData[wallet.symbol]?.quote?.INR?.price
                               );
-
-                              // setCalculatedPrice((st) => coinData[wallet.symbol]?.quote?.INR?.price * quantity);
                               setTotal(
                                 (st) =>
                                   coinData[wallet.symbol]?.quote?.INR?.price *
@@ -477,9 +467,12 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
                           </label>
                         </div>
                       ))}
-                    </div>
+                  </div>  */}
+                  <div style={{ margin: "35px 0px" }}>
+                    <h4>{currency_prefrence}</h4>
                   </div>
-                  <div class="input-group">
+
+                  {/* <div class="input-group">
                     <div class="input-group-prepend">
                       <span
                         class="input-group-text buy-sell-form-bg buy-sell-theme"
@@ -497,10 +490,9 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
                     <input
                       type="number"
                       class="form-control buy-sell-form-bg buy-sell-theme"
-                      // defaultValue={calculatedPrice}
                       value={total}
                       onChange={(e) => {
-                        if (walletsymbol != "") {
+                        // if (walletsymbol != "") {
                           setAmmount(
                             e.target.value
                               .replace(/[^0-9.]/g, "")
@@ -511,9 +503,9 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
                               .replace(/[^0-9.]/g, "")
                               .replace(/(\..?)\../g, "$1")
                           );
-                        }else {
-                          alert("Please select any wallet.")
-                        }
+                        // }else {
+                        //   alert("Please select any wallet.")
+                        // }
 
                         
                       }}
@@ -528,7 +520,7 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
                         height: "54px",
                       }}
                     />
-                  </div>
+                  </div> */}
 
                   <div class="row  px-3" style={{ margin: "0px -16px" }}>
                     <div
@@ -538,7 +530,7 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
                         flexDirection: " row",
                         alignItems: " center",
                         borderInline: "1px solid rgb(206, 212, 218)",
-                        borderBottom: " 1px solid rgb(206, 212, 218)",
+                        border: " 1px solid rgb(206, 212, 218)",
                         borderRadius: "5px",
                       }}
                     >
@@ -563,7 +555,7 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
                       class="col-6 p-2 d-flex justify-content-between"
                       style={{
                         borderRight: "1px solid rgb(206, 212, 218)",
-                        borderBottom: "1px solid rgb(206, 212, 218)",
+                        border: "1px solid rgb(206, 212, 218)",
                         borderRadius: "5px",
                       }}
                     >
@@ -625,21 +617,16 @@ const {currency_prefrence} = useSelector((state)=> state.currency.value)
 
                   <button
                     class="btn text-light btn-block my-2"
-                    style={{ background: "rgb(108, 183, 125)" }}
+                    style={{ background: "rgb(108, 183, 125)", top: "40px" }}
                     onClick={TotalAmt}
                   >
                     BUY ANA
                   </button>
-                  {/* <div class="px-3 m-0">
-                    Fee: Maker fee: 0.1%| Taker fee: 0.1%
-                  </div> */}
                 </div>
               </div>
             </div>
           </div>
         )}
-
-        {/* Sell */}
       </div>
     </div>
   );

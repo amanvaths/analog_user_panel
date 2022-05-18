@@ -22,10 +22,11 @@ const OtpTFA = (props) => {
           setOtpError(true)
         }
         else{
-          const data = await axios.post(`${BASE_URL}/verifyauthtoken`,{email: email, token: otp})
+          const data = await axios.post(`${BASE_URL}/verifyauthtoken`,{email: location.state.email, token: otp})
           console.log(data.data.status, ":::data");
           if(data.data.status == 1){
             swal("OTP Verified", "", "success");
+            
             navigate('/home')
           }else if(data.data.status == 0){
             swal("Invalid OTP", "", "error");
