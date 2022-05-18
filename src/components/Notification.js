@@ -11,7 +11,7 @@ const Notification = () => {
     const [isInit, setInit] = useState(false);
     const dispatch = useDispatch()
     const { userInfo } = useSelector((state) => state.user.value)
-
+    const [pMenu, setPMenu] = useState(0);
 
     const setNotification = async (e) => {
         try {
@@ -28,6 +28,27 @@ const Notification = () => {
             console.log(error);
         }
     }
+
+    const profileMenu = () => {  
+        // alert("hellow" )
+           if(pMenu == 0){
+           var element = document.getElementById("myBody"); 
+           element.classList.add("toggle-shown"); 
+           var element = document.getElementById("toggleBtn"); 
+           element.classList.add("active");                                 
+           var element = document.getElementById("cardAside"); 
+           element.classList.add("content-active");  
+           setPMenu(1)
+          }else{
+             var element = document.getElementById("myBody"); 
+             element.classList.remove("toggle-shown"); 
+             var element = document.getElementById("toggleBtn"); 
+             element.classList.remove("active");                                 
+             var element = document.getElementById("cardAside"); 
+             element.classList.remove("content-active");
+             setPMenu(0)
+           } 
+       }
 
     useEffect(()=>{
         if(isInit){
@@ -57,10 +78,14 @@ const Notification = () => {
                                 <p>You will get only notification what have enabled.</p>
                             </div>
                         </div>
-                        <div class="nk-block-head-content align-self-start d-lg-none"><a
+                        <div class="nk-block-head-content align-self-start d-lg-none">
+                            <a
                             href="#" class="toggle btn btn-icon btn-trigger mt-n1"
-                            data-target="userAside"><em
-                                class="icon ni ni-menu-alt-r"></em></a></div>
+                            data-target="userAside"   id = "toggleBtn">
+                                <em
+                                class="icon ni ni-menu-alt-r" onClick={ profileMenu }></em>
+                               </a>
+                               </div>
                     </div>
                 </div>
                 <div class="nk-block-head nk-block-head-sm">

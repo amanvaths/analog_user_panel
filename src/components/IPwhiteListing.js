@@ -5,7 +5,6 @@ import { BASE_URL } from '../Api_connection/config'
 import swal from "sweetalert";
 
 
-
 const IPwhiteListing = () => {
 
 
@@ -13,7 +12,7 @@ const IPwhiteListing = () => {
     const [whiteIP, setWhiteIP] = useState([])
     const [ip, setIp] = useState('')
     const [ipError, setipError] = useState(false)
-    
+    const [pMenu, setPMenu] = useState(0);
 
     const getCurrentAPI = async()=>{
         try {
@@ -59,6 +58,26 @@ const IPwhiteListing = () => {
         }
     }
 
+    const profileMenu = () => {  
+        // alert("hellow" )
+           if(pMenu == 0){
+           var element = document.getElementById("myBody"); 
+           element.classList.add("toggle-shown"); 
+           var element = document.getElementById("toggleBtn"); 
+           element.classList.add("active");                                 
+           var element = document.getElementById("cardAside"); 
+           element.classList.add("content-active");  
+           setPMenu(1)
+          }else{
+             var element = document.getElementById("myBody"); 
+             element.classList.remove("toggle-shown"); 
+             var element = document.getElementById("toggleBtn"); 
+             element.classList.remove("active");                                 
+             var element = document.getElementById("cardAside"); 
+             element.classList.remove("content-active");
+             setPMenu(0)
+           } 
+       }
 
     const handelSubmit = () => {
         setipError(!isIP(ip))
@@ -97,8 +116,9 @@ const IPwhiteListing = () => {
                                 href="#"
                                 className="toggle btn btn-icon btn-trigger mt-n1"
                                 data-target="userAside"
+                                id = "toggleBtn"
                             >
-                                <em className="icon ni ni-menu-alt-r"></em>
+                                <em className="icon ni ni-menu-alt-r" onClick={profileMenu }></em>
                             </a>
                         </div>
                     </div>

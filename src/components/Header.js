@@ -14,8 +14,7 @@ const Header = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
 
-  const hello = async () => {
-    //alert("Hello world!"); 
+  const sidebarMenu = async () => {   
     if(isopen == 0){
     var element = document.getElementById("myBody"); 
     element.classList.add("nav-shown"); 
@@ -65,7 +64,7 @@ const Header = () => {
                 className={btn?"nk-nav-toggle nk-quick-nav-icon toggle-active":"nk-nav-toggle nk-quick-nav-icon"}
                 data-target="sidebarMenu"
               >
-                <em className="icon ni ni-menu"  onClick={hello}></em>
+                <em className="icon ni ni-menu"  onClick={sidebarMenu}></em>
               </a>
             </div>
             <div className="nk-header-brand d-xl-none">

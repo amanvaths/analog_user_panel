@@ -19,11 +19,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { setUserInfo, setSettingPage } from "../redux/reducer/user";
 import { BASE_URL } from "../Api_connection/config";
 
+
 const AccountSettings = () => {
   const dispatch = useDispatch()
   const { userInfo, settingPages } = useSelector((state) => state.user.value)
   const [logData, setLogData] = useState([])
   const email = localStorage.getItem("email")
+  const [pMenu, setPMenu] = useState(0);
 
   const getLoginLog = async () => {
     try {
@@ -34,6 +36,7 @@ const AccountSettings = () => {
     }
   }
 
+
   useEffect(async () => {
     const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
     if (data) {
@@ -42,6 +45,27 @@ const AccountSettings = () => {
     }
 
   }, [])
+
+  const profileMenu = () => {  
+   // alert("hellow" )
+      if(pMenu == 0){
+      var element = document.getElementById("myBody"); 
+      element.classList.add("toggle-shown"); 
+      var element = document.getElementById("toggleBtn"); 
+      element.classList.add("active");                                 
+      var element = document.getElementById("cardAside"); 
+      element.classList.add("content-active");  
+      setPMenu(1)      
+     }else{
+        var element = document.getElementById("myBody"); 
+        element.classList.remove("toggle-shown"); 
+        var element = document.getElementById("toggleBtn"); 
+        element.classList.remove("active");                                 
+        var element = document.getElementById("cardAside"); 
+        element.classList.remove("content-active");
+        setPMenu(0)
+      } 
+  }
   return (
     <>
       <div>
@@ -68,7 +92,7 @@ const AccountSettings = () => {
                             <div className="nk-block-head nk-block-head-lg">
                               <div className="nk-block-between">
                                 <div className="nk-block-head-content">
-                                  <h4 className="nk-block-title">Login Activity</h4>
+                                  <h4 className="nk-block-title active" >Login Activity</h4>
                                   <div className="nk-block-des">
                                     <p> {` Here is your last ${logData.length} login activities log.`}
 
@@ -80,12 +104,13 @@ const AccountSettings = () => {
                                 </div>
                                 <div onClick={()=>dispatch(navsetters())} className="nk-block-head-content align-self-start d-lg-none">
                                   <a
-                                    href="#"
-                                    className="toggle btn btn-icon btn-trigger mt-n1 active"
+                                  
+                                    className="toggle btn btn-icon btn-trigger mt-n1"
+                                    id = "toggleBtn"
                                     // className={btn1?"toggle btn btn-icon btn-trigger mt-n1 active":"toggle btn btn-icon btn-trigger mt-n1"}
-                                    data-target="userAside"
+                                    data-target="userAside"                                  
                                   >
-                                    <em className="icon ni ni-menu-alt-r"></em>
+                                    <em className="icon ni ni-menu-alt-r" onClick={()=>profileMenu()}  ></em>
                                   </a>
                                 </div>
                               </div>
@@ -143,12 +168,13 @@ const AccountSettings = () => {
                         ) : null}
 
                         <div
-                        className="card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg content-active"
+                        className="card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg"
                           // className={btn1?"card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg content-active":"card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg"}
                           data-toggle-body="true"
                           data-content="userAside"
                           data-toggle-screen="lg"
                           data-toggle-overlay="true"
+                          id = "cardAside"
                         >
                           <div className="card-inner-group">
                             <div className="card-inner">
@@ -162,7 +188,7 @@ const AccountSettings = () => {
                                   </span>
                                   <span className="sub-text">{userInfo?.user_id}</span>
                                 </div>
-                                <div className="user-action">
+                                {/* <div className="user-action">
                                   <div className="dropdown">
                                     <a
                                       className="btn btn-icon btn-trigger me-n2"
@@ -170,8 +196,8 @@ const AccountSettings = () => {
                                       href="#"
                                     >
                                       <em className="icon ni ni-more-v"></em>
-                                    </a>
-                                    <div className="dropdown-menu dropdown-menu-end">
+                                    </a> */}
+                                    {/* <div className="dropdown-menu dropdown-menu-end">
                                       <ul className="link-list-opt no-bdr">
                                         <li>
                                           <a href="#">
@@ -186,9 +212,9 @@ const AccountSettings = () => {
                                           </a>
                                         </li>
                                       </ul>
-                                    </div>
-                                  </div>
-                                </div>
+                                    </div> */}
+                                  {/* </div>
+                                </div> */}
                               </div>
                             </div>
                             <div className="card-inner">
