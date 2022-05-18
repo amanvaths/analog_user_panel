@@ -8,6 +8,7 @@ import { BASE_URL } from "../Api_connection/config";
 
 const Header = () => {
   const [isopen, setIsopen] = useState(0);
+  const [dark, setDark] = useState(0)
   const email = localStorage.getItem("email")
   const {userInfo} = useSelector((state)=> state.user.value)
   const btn = useSelector((store)=> store.navsetter)
@@ -33,6 +34,16 @@ const Header = () => {
       setIsopen(0);  
     }                            
   }
+  const mode = localStorage.getItem("theme") 
+  if(mode == 1){
+    var element = document.getElementById("myBody"); 
+    element.classList.add("dark-mode")
+  }else{
+    var element = document.getElementById("myBody"); 
+    element.classList.remove("dark-mode")
+  }
+    
+  
 
 
 
@@ -91,7 +102,7 @@ const Header = () => {
                     <em className="icon ni ni-card-view"></em>
                   </div>
                   <div className="nk-news-text">
-                    <p>
+                    <p> 
                       Do you know the latest update of 2019?{" "}
                       <span>
                         {" "}
@@ -340,27 +351,33 @@ const Header = () => {
                           </Link>
                         </li> */}
                         <li>
-                        {/* <div class="nk-block-actions">
+                    
+                             <Link className="dark-switch" to=""  
+                            onClick={()=>  mode ==1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")}
+                            >
+                            <em className="icon ni ni-moon mr-1"></em>
+                            <span className="mr-1">Dark Mode</span>
+                          </Link> 
+{/* 
+                          <div className="data-item">
+              <div className="data-col">
+                <span className="data-label">INRX</span>
+              </div>
+              <div class="nk-block-actions">
                 <div class="custom-control custom-switch me-n2">
                   <input
                     type="checkbox"
                     class="custom-control-input"
-                    id="in"
-                    name="cu"
-                    value="in"
-                    // checked={myCurrency === "inr"}
-                    // onChange={(e) => {
-                    //   updateData("inr")
-                    //   dispatch(setUserInfo({ currency_prefrence: "inr" }))
-                    // }}
+                    id="mo"
+                    name="th"
+                    value="li"
+                    onClick={()=>  mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")}
+                    
                   />
-                  <label class="custom-control-label" for="inrx" >DARK</label>
+                  <label class="custom-control-label" for="mo" ></label>
                 </div>
-              </div> */}
-                            <a className="dark-switch" href="#">
-                            <em className="icon ni ni-moon mr-1"></em>
-                            <span className="mr-1">Dark Mode</span>
-                          </a>  
+              </div>
+            </div>   */}
                         </li>
                       </ul>
                     </div>

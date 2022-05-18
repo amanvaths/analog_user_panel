@@ -86,7 +86,6 @@ const  Home = ()=>{
 
   const {userInfo} = useSelector((state)=> state.user.value)
 
-
   const [totalAnalogBuy, setTotalAnalogBuy] = useState(0)
   const [inceptive, setInceptive] = useState(0)
   const [airdrop, setAirDrop] = useState(0)
@@ -100,7 +99,7 @@ const  Home = ()=>{
 
   const [data, setData] = useState([])
   const email = localStorage.getItem("email")
-  console.log("::EMAIL", email);
+
   const [recentActivities, setRecentActivities] = useState([]);
   const [totalRefferal, setTotalRefferal] = useState(0);
   const [totalReffEarn, setTotalReffEarn] = useState(0);
@@ -118,21 +117,10 @@ const  Home = ()=>{
     const getUserWalletData = async()=>{
       try {
         const res = await axios.post(`${BASE_URL}/userWalletData`, {email: email})
-        
-          // dispatch(setBalance({balance: res.data}),
           setTotalAnalogBuy(res.data.token_balance)
-
-          setInceptive(res.data.inceptive_wallet)
-          setAirDrop(res.data.airdrop_wallet)
-          setffiliates(res.data.affilites_wallet)
-          setInherited(res.data.affilites_wallet)
-          setBounty(res.data.bounty_wallet)
-          setHandOut(res.data.handout_wallet)
           setTotalwallet(res.data.total_wallet)
           setTransaction(res.data.total_transaction)
           setLastActivity(res.data.last_activity)
-        
-
       } catch (error) {
         console.log(error);
       }
@@ -147,35 +135,31 @@ const  Home = ()=>{
       }
     }
 
-    const refferalData =async() => {
+    const getUserAllWallletData =async() => {
       try{
         const res = await axios.get(`${BASE_URL}/userAllRecords?email=${ email }&bonus_type=Level`)
         //console.warn(res.data +"Reff data ");
-       setTotalRefferal(res.data.totalUser);
-       console.log(res.data.totalUser,"User All record Amit");
-       setTotalReffEarn(res.data.income[0].total_bonus);
-       console.log(totalReffEarn, "Total reff earn");
+        setInceptive(res?.data?.income[0]?.inceptive_wallet)
+        setAirDrop(res?.data?.income[0]?.airdrop_wallet)
+        setffiliates(res?.data?.income[1]?.total_bonus?.toFixed(2))
+        setInherited(res.data?.income[0].inherited_wallet)
+        setBounty(res?.data?.income[0].total_bonus)
+        setHandOut(res?.data?.income[0].handout_wallet)
       }catch(error){
         console.log("Error in refferal Data API " + error);
       }
     }
-
 
     const a = new Date(lastActivity)
     const date = a.toDateString()
     const time = a.toLocaleTimeString()
 
 useEffect(()=>{
-  refferalData()
-  recentActivity()
   getUserWalletData()
   getPreSale()
   recentActivity()
-  refferalData()
+  getUserAllWallletData()
 },[])
-
-
- 
 
     const responsive = {
       superLargeDesktop: {
@@ -199,7 +183,7 @@ useEffect(()=>{
         items: 1,
       },
     };
-
+    
     return (
       <div>
         <div className="nk-app-root">

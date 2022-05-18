@@ -24,6 +24,7 @@ import UserList from "./pages/UserList";
 import BuySell from "./pages/BuySell";
 import ChangePassword from "./components/ChangePassword";
 import OtpTFA from "./pages/OtpTFA";
+import MyAccount from "./pages/MyAccount";
 
 function App() {
 
@@ -56,6 +57,7 @@ function App() {
           <Route path="/buysell" element={< BuySell />} />
           <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="/2faAuthentication" element={<OtpTFA />} />
+          <Route path="/myAccount" element={<MyAccount />} />
           {/* <Route path="/orders" element={<Orders />} /> */}
         </Routes>
       </BrowserRouter>

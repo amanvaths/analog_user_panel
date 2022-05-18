@@ -1,13 +1,15 @@
 import React, { Component, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
+import { setOneUsdPrice } from "../redux/reducer/user";
 
 function Menu (){
+  const dispatch = useDispatch()
   const email = localStorage.getItem("email")
   const [anaBalancce, setAnaBalance] = useState('')
-  const [usdPrice, setUsdPrice] = useState([])
+  const [usdPrice, setUsdPrice] = useState('')
 
   const getData = async()=>{
     try {
@@ -20,21 +22,20 @@ function Menu (){
 
   const getUsdPrice = async () => {
     try {
-      
       const res = await axios.post(`${BASE_URL}/getCoinData`, { currency: "inr"});
-      const cd = [];
-      console.log(res.data, "::res.data");
-      for (let coin of Object.entries(res.data)) {  
-        cd.push(coin[1]);
+      if(res.data){
+        setUsdPrice(res.data.USDT.quote.INR.price)
+        dispatch(setOneUsdPrice({oneUsdPrice: res.data.USDT.quote.INR.price}))
       }
-      setUsdPrice([...cd]);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const oneUsdPrice = usdPrice[8]?.quote?.INR?.price;
-  console.log(":: USD PRice",usdPrice[8]?.quote?.INR?.price);
+  
+ 
+  // dispatch(set)
+  console.log(":: USD PRice",usdPrice);
 
   useEffect(()=>{
     getUsdPrice()
@@ -93,12 +94,12 @@ function Menu (){
                         <small className="currency currency-btc">ANA</small>
                       </div>
                       <div className="user-balance-alt">
-                        {userInfo?.currency_preference == "inr" ? userInfo?.anaPrice * Number(anaBalancce)?.toFixed(2) : 
-                          ((userInfo?.anaPrice / oneUsdPrice) * Number(anaBalancce)?.toFixed(2))?.toFixed(2)
+                        {userInfo?.currency_preference == "inr" ? (userInfo?.anaPrice * Number(anaBalancce))>0?(userInfo?.anaPrice * Number(anaBalancce)).toFixed(2):0 : 
+                          ((userInfo?.anaPrice / usdPrice) * Number(anaBalancce))>0?((userInfo?.anaPrice / usdPrice) * Number(anaBalancce)).toFixed(2):0
                         }
                         {" "}
                         <span className="currency currency-btc">
-                          {userInfo?.currency_preference == "inr" ?  "INRX" : "USDT"}
+                          {userInfo?.currency_preference?userInfo?.currency_preference=='inr'?"INRX":"USDT":''}
                           </span>
                       </div>
                     </div>
@@ -149,13 +150,13 @@ function Menu (){
                     <div className="user-card-wrap">
                       <div className="user-card">
                         <div className="user-avatar">
-                          <span>AB</span>
+                          <span>{userInfo?.username?.charAt(0)?.toUpperCase()}</span>
                         </div>
                         <div className="user-info">
                           <span className="lead-text">
-                            Ia5ghTL2paqchJTR65nBKvZ
+                            {userInfo?.username}
                           </span>
-                          <span className="sub-text">user@inrx.network</span>
+                          <span className="sub-text">{userInfo?.user_id}</span>
                         </div>
                         <div className="user-action">
                           <em className="icon ni ni-chevron-down"></em>
@@ -268,7 +269,7 @@ function Menu (){
                       </Link>
                     </li>
                     <li class="nk-menu-item">
-                      <Link to="/accountsettings" class="nk-menu-link">
+                      <Link to="/myAccount" class="nk-menu-link">
                         <span class="nk-menu-icon">
                           <em class="icon ni ni-user-c"></em>
                         </span>
@@ -435,7 +436,7 @@ function Menu (){
                         <div className="wallet-text">
                           <h6 className="wallet-name">{userInfo?.currency_preference?.toUpperCase()} Wallet</h6>
                           <span className="wallet-balance">
-                            30.959040{" "}
+                            {Number(anaBalancce)?.toFixed(2)}{" "}
                             <span className="currency currency-nio">ANA</span>
                           </span>
                         </div>
