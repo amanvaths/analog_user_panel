@@ -25,6 +25,7 @@ import BuySell from "./pages/BuySell";
 import CandleGraph from "./components/CandleGraph";
 import ChangePassword from "./components/ChangePassword";
 import OtpTFA from "./pages/OtpTFA";
+import MyAccount from "./pages/MyAccount";
 
 function App() {
 
@@ -58,6 +59,7 @@ function App() {
           <Route path="/candlegraph" element={<CandleGraph />} />
           <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="/2faAuthentication" element={<OtpTFA />} />
+          <Route path="/myAccount" element={<MyAccount />} />
           {/* <Route path="/orders" element={<Orders />} /> */}
         </Routes>
       </BrowserRouter>

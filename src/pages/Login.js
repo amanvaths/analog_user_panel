@@ -71,6 +71,7 @@ const Login = (props) => {
           } else {
             localStorage.setItem("email", email);
             localStorage.setItem("token", resp.token);
+            localStorage.setItem("theme", "0")
 
             const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
             if (data) {

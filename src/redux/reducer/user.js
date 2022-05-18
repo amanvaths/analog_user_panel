@@ -11,7 +11,7 @@ const initialValue = {
     changePassword: false,
     ipWhiteListing: false,
   } ,
-  balance: {} 
+  oneUsdPrice: ''
 };
 
 export const userSlice = createSlice({
@@ -30,11 +30,11 @@ export const userSlice = createSlice({
     setSettingPage: (state, action)=> {
       state.value.settingPages = action.payload.settingPages
     },
-    setBalance: (state, action) => {
-      state.value.balance = action.payload.balance
+    setOneUsdPrice: (state, action) => {
+      state.value.oneUsdPrice = action.payload.oneUsdPrice
     }
   },
 });
 
-export const {setIsLoggedIn, setUserInfo, setSettingPage, setBalance} = userSlice.actions;
+export const {setIsLoggedIn, setUserInfo, setSettingPage, setOneUsdPrice} = userSlice.actions;
 export default userSlice.reducer;

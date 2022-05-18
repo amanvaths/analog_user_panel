@@ -194,7 +194,7 @@ const AccountSettings = () => {
                             <div className="card-inner">
                               <div className="user-account-info py-0">
                                 <h6 className="overline-title-alt p-2">
-                                  Nio Wallet Account
+                                  Analog Wallet Balance
                                 </h6>
                                 <div className="user-balance p-2">
                                   12.395769

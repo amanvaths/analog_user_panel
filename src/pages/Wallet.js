@@ -12,19 +12,20 @@ import { setUserInfo } from "../redux/reducer/user";
 
 
 const Wallet = (props) => {
-  const { userInfo } = useSelector((state) => state.user.value)
+  const { userInfo, oneUsdPrice } = useSelector((state) => state.user.value)
   const dispatch = useDispatch();
 
   const [coinData, setCoinData] = useState([]);
   const [walletDetails, setWalletDetails] = useState([]);
   const [coinWW, setCoinWW] = useState([]);
   const [loader, setLoader] = useState(true)
+  const [usdPrice, setUsdPrice] = useState()
 
   const email = localStorage.getItem("email");
 
   const getData = async () => {
     try {
-      console.log(":: cp in ", userInfo.currency_preference);
+      console.log(":: cp in ", userInfo?.currency_preference);
       const cp  = userInfo?.currency_preference?.toUpperCase()
       const res = await axios.post(`${BASE_URL}/getCoinData`, { currency: cp });
       const cd = [];
@@ -53,17 +54,17 @@ const Wallet = (props) => {
     }
   }
 
-
   useEffect( async() => {
     const data = await axios.post(`${BASE_URL}/configSettings`, {email: email})
             if(data){
-              dispatch(setUserInfo({userInfo: data.data}))
+              dispatch(setUserInfo({userInfo: data.data})) 
               updateWallet()
               getData();
               getWalletDetails();
             }
   }, [])
 
+  
   useEffect(() => {
     if (coinData.length > 0 && walletDetails.length > 0) {
       const cd = [];
@@ -78,7 +79,7 @@ const Wallet = (props) => {
   }, [walletDetails, coinData]);
 
 
-  console.log(coinWW, ":: coin data in wallet *********#$#$#$#$#$#$#$#$#$#$#$#");
+  console.log(coinWW[8], ":: coin data in wallet *********#$#$#$#$#$#$#$#$#$#$#$#");
 
   return (
     <>
@@ -105,22 +106,22 @@ const Wallet = (props) => {
                         style={{ padding: "0 30px" }}
                       >
                         <h6>
-                          Total Balance:
-                          {/* {currency_prefrence === "usd" ? <span>&#36;</span>  : currency_prefrence === "inr" ? <span>&#8377;</span> : null} */}
-                          &nbsp;&nbsp;
-                          {/* {allFundValue} */}
+                          Total Balance:&nbsp;&nbsp; 
+                          {userInfo.currency_preference == "usd" ? `${coinWW[8]?.wallet?.usdt_balance?.toFixed(2)} USDT`: `${(oneUsdPrice * coinWW[8]?.wallet?.usdt_balance).toFixed(2)} INRX` }
+                           
+                           
                         </h6>
                       </label>
                     </div>
                   </div>
                   <div className="row" style={{ marginBottom: "15vh" }}>
                     {coinWW.map((element, index) => {
-                      // console.log(element?.quote?.[userInfo.currency_preference.toUpperCase()].price, "::balance 7878787878787", userInfo.currency_preference.toUpperCase());
+                
                       return (
                         <div className="walletCard col-md-6 col-lg-4 col-12">
                           <Card1
                             title={element.name}  
-                            priceInUsd={element?.quote?.[userInfo?.currency_preference.toUpperCase()]?.price?.toFixed(2)}
+                            priceInUsd={(element?.quote?.[userInfo?.currency_preference.toUpperCase()]?.price)?.toFixed(2)}
                             price={element?.wallet?.balance.toFixed(2)}
                             lable={element?.symbol}
                             wallet={element?.wallet}
