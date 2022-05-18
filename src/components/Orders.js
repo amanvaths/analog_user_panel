@@ -376,7 +376,7 @@ export default function Orders() {
                       readOnly
                     />
                   </div> */}
-
+                   <div><h6>ANA PRICE <div>{ atprice}</div></h6></div>
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span

@@ -22,7 +22,6 @@ import AccountSettings from "./pages/AccountSettings";
 import CryptoTransaction from "./pages/CryptoTransaction";
 import UserList from "./pages/UserList";
 import BuySell from "./pages/BuySell";
-import CandleGraph from "./components/CandleGraph";
 import ChangePassword from "./components/ChangePassword";
 import OtpTFA from "./pages/OtpTFA";
 
@@ -55,7 +54,6 @@ function App() {
           <Route path="/cryptoTransaction" element={<CryptoTransaction />} />
           <Route path="/userlist" element={<UserList />} />
           <Route path="/buysell" element={< BuySell />} />
-          <Route path="/candlegraph" element={<CandleGraph />} />
           <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="/2faAuthentication" element={<OtpTFA />} />
           {/* <Route path="/orders" element={<Orders />} /> */}
