@@ -6,9 +6,10 @@ import CandleGraph from "../components/CandleGraph";
 import Orders from "../components/Orders";
 import TradeHistory from "../components/TradeHistory";
 
-const UserList = () => {
-  const [dropdown, setDropdown] = useState(false);
+function BuySell(props) {
+  
   return (
+    <>
     <div>
       <div class="nk-app-root">
         <div class="nk-main ">
@@ -37,7 +38,8 @@ const UserList = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
-export default UserList;
+export default BuySell;

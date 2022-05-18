@@ -55,7 +55,7 @@ function App() {
           <Route path="/accountSettings" element={<AccountSettings />} />
           <Route path="/cryptoTransaction" element={<CryptoTransaction />} />
           <Route path="/userlist" element={<UserList />} />
-          <Route path="/buysell" element={< BuySell />} />
+          <Route path="/buysell" element={<BuySell />} />
           <Route path="/candlegraph" element={<CandleGraph />} />
           <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="/2faAuthentication" element={<OtpTFA />} />
