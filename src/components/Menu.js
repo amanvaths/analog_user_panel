@@ -1,42 +1,83 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {useSelector} from "react-redux";
+import axios from "axios";
+import { BASE_URL } from "../Api_connection/config";
+
 function Menu (){
+  const email = localStorage.getItem("email")
+  const [anaBalancce, setAnaBalance] = useState('')
+  const [usdPrice, setUsdPrice] = useState([])
+
+  const getData = async()=>{
+    try {
+        const data = await axios.post(`${BASE_URL}/userWalletData`, {email: email})
+        setAnaBalance(data.data.token_balance)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const getUsdPrice = async () => {
+    try {
+      
+      const res = await axios.post(`${BASE_URL}/getCoinData`, { currency: "inr"});
+      const cd = [];
+      console.log(res.data, "::res.data");
+      for (let coin of Object.entries(res.data)) {  
+        cd.push(coin[1]);
+      }
+      setUsdPrice([...cd]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const oneUsdPrice = usdPrice[8]?.quote?.INR?.price;
+  console.log(":: USD PRice",usdPrice[8]?.quote?.INR?.price);
+
+  useEffect(()=>{
+    getUsdPrice()
+    getData()
+  },[])
    const btn = useSelector(store=>store.navsetter);
+   const {userInfo} = useSelector((state)=> state.user.value)
+  
+
     return (
       <>
         <div
           className={btn?"nk-sidebar nk-sidebar-fixed nk-sidebar-mobile nk-sidebar-active":"nk-sidebar nk-sidebar-fixed nk-sidebar-mobile"}
-          data-content="sidebarMenu"
+          data-content="sidebarMenu" id="nk-sidebar"
         >
           <div className="nk-sidebar-element nk-sidebar-head">
             <div className="nk-sidebar-brand">
               <a
-                href="html/crypto/index.html"
+                href="/"
                 className="logo-link nk-sidebar-logo"
               >
                 <img
                   className="logo-light logo-img"
                   src="images/logo.png"
                   srcSet="images/logo2x.png 2x"
-                  alt="logo"
+                  alt="logo"                 
                 />
                 <img
                   className="logo-dark logo-img"
                   src="images/logo-dark.png"
                   srcSet="images/logo-dark2x.png 2x"
-                  alt="logo-dark"
+                  alt="logo-dark"                
                 />
                 {/* <span className="nio-version">ANALOG</span> */}
               </a>
             </div>
-            <div className="nk-menu-trigger mr-n2">
+            <div className="nk-menu-trigger mr-n2" >
               <a
                 href="#"
                 className="nk-nav-toggle nk-quick-nav-icon d-xl-none"
-                data-target="sidebarMenu"
+                data-target="sidebarMenu" id="nk-nav-toggle"
               >
-                <em className="icon ni ni-arrow-left"></em>
+                <em className="icon ni ni-arrow-left" ></em>
               </a>
             </div>
           </div>
@@ -46,21 +87,26 @@ function Menu (){
                 <div className="nk-sidebar-widget d-none d-xl-block">
                   <div className="user-account-info between-center">
                     <div className="user-account-main">
-                      <h6 className="overline-title-alt " style={{paddingBottom:14}}>Available Balance</h6>
+                      <h6 className="overline-title-alt " style={{paddingBottom:14}}  >Available Balance</h6>
                       <div className="user-balance">
-                        2.014095{" "}
+                      { Number(anaBalancce)?.toFixed(2)}{" "}
                         <small className="currency currency-btc">ANA</small>
                       </div>
                       <div className="user-balance-alt">
-                        18,934.84{" "}
-                        <span className="currency currency-btc">USD</span>
+                        {userInfo?.currency_preference == "inr" ? userInfo?.anaPrice * Number(anaBalancce)?.toFixed(2) : 
+                          ((userInfo?.anaPrice / oneUsdPrice) * Number(anaBalancce)?.toFixed(2))?.toFixed(2)
+                        }
+                        {" "}
+                        <span className="currency currency-btc">
+                          {userInfo?.currency_preference == "inr" ?  "INRX" : "USDT"}
+                          </span>
                       </div>
                     </div>
-                    <a href="#" className="btn btn-white btn-icon btn-light">
+                    {/* <a href="#" className="btn btn-white btn-icon btn-light">
                       <em className="icon ni ni-line-chart"></em>
-                    </a>
+                    </a> */}
                   </div>
-                  <ul className="user-account-data gy-1">
+                  {/* <ul className="user-account-data gy-1">
                     <li>
                       <div className="user-account-label">
                         <span className="sub-text">Profits (7d)</span>
@@ -86,7 +132,7 @@ function Menu (){
                         </span>
                       </div>
                     </li>
-                  </ul>
+                  </ul> */}
                   {/* <div className="user-account-actions">
                                 <ul className="g-3">
                                     <li><a href="#" className="btn btn-lg btn-primary"><span>Deposit</span></a></li>
@@ -135,9 +181,7 @@ function Menu (){
                           <span className="currency currency-btc">USD</span>
                         </div>
                       </div>
-                      <a href="#" className="btn btn-icon btn-light">
-                        <em className="icon ni ni-line-chart"></em>
-                      </a>
+                      
                     </div>
                     <ul className="user-account-data">
                       <li>
@@ -224,12 +268,12 @@ function Menu (){
                       </Link>
                     </li>
                     <li class="nk-menu-item">
-                      <a href="/accountSettings" class="nk-menu-link">
+                      <Link to="/accountsettings" class="nk-menu-link">
                         <span class="nk-menu-icon">
                           <em class="icon ni ni-user-c"></em>
                         </span>
                         <span className="nk-menu-text">My Account</span>
-                      </a>
+                      </Link>
                     </li>
                     <li className="nk-menu-item">
                       <Link to="/wallet" className="nk-menu-link">
@@ -250,7 +294,7 @@ function Menu (){
                         <span className="nk-menu-text">Buy / Sell</span>
                       </Link>
                     </li>
-                    <li className="nk-menu-item">
+                    {/* <li className="nk-menu-item">
                       <a
                         href="#"
                         className="nk-menu-link"
@@ -260,7 +304,7 @@ function Menu (){
                         </span>
                         <span className="nk-menu-text">Orders</span>
                       </a>
-                    </li>
+                    </li> */}
                     {/* <li className="nk-menu-item">
                       <a href="html/crypto/chats.html" className="nk-menu-link">
                         <span className="nk-menu-icon">
@@ -376,12 +420,11 @@ function Menu (){
                 <div className="nk-sidebar-widget">
                   <div className="widget-title">
                     <h6 className="overline-title">
-                      Crypto Accounts 
-                      {/* <span>(4)</span> */}
+                      Crypto Accounts <span></span>
                     </h6>
-                    <a href="#" className="link">
+                    {/* <a href="#" className="link">
                       View All
-                    </a>
+                    </a> */}
                   </div>
                   <ul className="wallet-list">
                     <li className="wallet-item">
@@ -390,7 +433,7 @@ function Menu (){
                           <em className="icon ni ni-sign-kobo"></em>
                         </div>
                         <div className="wallet-text">
-                          <h6 className="wallet-name">INRX Wallet</h6>
+                          <h6 className="wallet-name">{userInfo?.currency_preference?.toUpperCase()} Wallet</h6>
                           <span className="wallet-balance">
                             30.959040{" "}
                             <span className="currency currency-nio">ANA</span>
@@ -411,8 +454,8 @@ function Menu (){
                           </span>
                         </div>
                       </a>
-                    </li>
-                    <li className="wallet-item wallet-item-add">
+                    </li> */}
+                    {/* <li className="wallet-item wallet-item-add">
                       <a href="#">
                         <div className="wallet-icon">
                           <em className="icon ni ni-plus"></em>

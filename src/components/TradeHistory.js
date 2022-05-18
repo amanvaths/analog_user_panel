@@ -10,10 +10,11 @@ export default function TradeHistory() {
   useEffect(() => {
     if (email) {
       axios
-        .get(`${BASE_URL}/getAllOrder`)
+        .get(`${BASE_URL}/getAllOrder`, {email: ''})
         .then((res) => {
           console.log(res.data, "All Order trandHistory");
           setHistory(res.data.order);
+          console.log(history, "history");
         })
         .catch((error) => {
           console.log(error.message);

@@ -2,26 +2,26 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import {MdOutlineContentCopy} from 'react-icons/md'
-import { Link } from "react-router-dom";
+import { MdOutlineContentCopy } from 'react-icons/md'
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Card1 = (props) => {
-  const {currency_prefrence} = useSelector((state) => state.currency.value)
+  const { currency_prefrence } = useSelector((state) => state.currency.value)
   const [unit, setUnit] = useState('')
   // setUnit(currency_prefrence == 'inr' ? currency_prefrence == 'INR' : currency_prefrence == "USD")
   const walletInfo = props.wallet;
   const [copied, setCopied] = useState(false);
-
-  useEffect(()=>{
+  const navigate = useNavigate();
+  useEffect(() => {
     setUnit(currency_prefrence == 'inr' ? 'INR' : "USD")
-  },[])
-  
-   const addString = props.address;
+  }, [])
+
+  const addString = props.address;
   const first = addString?.substring(0, 20);
   const second = addString?.substring(35, addString.length);
   const address = first + "...." + second;
- 
+
   return (
     <>
       <div className="container mt-1">
@@ -32,9 +32,12 @@ const Card1 = (props) => {
                 <div className="nk-wgw-inner">
                   <div className="row">
                     <div className="col-6">
-                      <Link
+                      <b
                         className="nk-wgw-name"
-                        to={`/cryptoTransaction/${props.lable}`}
+                        onClick={() => { 
+                          navigate("/cryptoTransaction", { state: props.lable }) 
+                        }}
+                        style={{cursor:"pointer"}}
                       >
                         <div className="nk-wgw-icon is-default">
                           <img
@@ -45,7 +48,7 @@ const Card1 = (props) => {
                           {/* <em className="icon ni ni-sign-kobo"></em> */}
                         </div>
                         <h5 className="nk-wgw-title title ml-2">{props.title}</h5>
-                      </Link>
+                      </b>
                       <div className="nk-wgw-balance">
                         <div className="amount">
                           {props.price}
@@ -78,26 +81,26 @@ const Card1 = (props) => {
                         }}
                       >
                         {address}
-                        
+
                       </span>
-                      </div>
-                     <div className="col-2">
+                    </div>
+                    <div className="col-2">
                       <div className="">
-                        
-                         <CopyToClipboard text={props.address}
+
+                        <CopyToClipboard text={props.address}
                           onCopy={() => {
                             setCopied(true)
                             setTimeout(() => {
-                                 setCopied(false);
+                              setCopied(false);
                             }, 800);
-                            }}>
-                            <div>
-                         <MdOutlineContentCopy color="white" />
-                         {copied?
-                         <p className="text-light position-absolute" style={{fontSize:"14px", top:"3px",left:"25px", padding:"0px 5px", backgroundColor:"transparent"}}>copied!</p>:null}
-                            </div>
-                          </CopyToClipboard>
-                         
+                          }}>
+                          <div>
+                            <MdOutlineContentCopy color="white" />
+                            {copied ?
+                              <p className="text-light position-absolute" style={{ fontSize: "14px", top: "3px", left: "25px", padding: "0px 5px", backgroundColor: "transparent" }}>copied!</p> : null}
+                          </div>
+                        </CopyToClipboard>
+
                       </div>
                     </div>
                   </div>

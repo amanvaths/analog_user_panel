@@ -10,6 +10,12 @@ import "react-multi-carousel/lib/styles.css";
 import Getpresale from "../components/Getpresale";
 import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
+import swal from "sweetalert";
+
+import {useSelector, useDispatch } from "react-redux";
+import { setBalance } from "../redux/reducer/user";
+import { useNavigate } from "react-router-dom";
+// import { setUserInfo, setIsLoggedIn, setSettingPage } from "../redux/reducer/user";
 
 // import { Carousel } from "react-responsive-carousel";
 // import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -70,6 +76,16 @@ const slideImages = [
 ];
 
 const  Home = ()=>{
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const lemail = localStorage.getItem("email");
+  const token = localStorage.getItem("token");
+  if (!lemail && !token) {
+    navigate("/Login");
+  }
+
+  const {userInfo} = useSelector((state)=> state.user.value)
+
 
   const [totalAnalogBuy, setTotalAnalogBuy] = useState(0)
   const [inceptive, setInceptive] = useState(0)
@@ -81,12 +97,14 @@ const  Home = ()=>{
   const [totalWallet, setTotalwallet] = useState(0)
   const [totalTransaction, setTransaction] = useState(0)
   const [lastActivity, setLastActivity] = useState(0)
+
+  const [data, setData] = useState([])
+  const email = localStorage.getItem("email")
+  console.log("::EMAIL", email);
   const [recentActivities, setRecentActivities] = useState([]);
   const [totalRefferal, setTotalRefferal] = useState(0);
   const [totalReffEarn, setTotalReffEarn] = useState(0);
 
-  const [data, setData] = useState([])
-  const email = localStorage.getItem("email")
  
     const getPreSale = async()=>{
         try {
@@ -100,21 +118,26 @@ const  Home = ()=>{
     const getUserWalletData = async()=>{
       try {
         const res = await axios.post(`${BASE_URL}/userWalletData`, {email: email})
-        setTotalAnalogBuy(res.data.token_balance)
-        setInceptive(res.data.inceptive_wallet)
-        setAirDrop(res.data.airdrop_wallet)
-        setffiliates(res.data.affilites_wallet)
-        setInherited(res.data.affilites_wallet)
-        setBounty(res.data.bounty_wallet)
-        setHandOut(res.data.handout_wallet)
-        setTotalwallet(res.data.total_wallet)
-        setTransaction(res.data.total_transaction)
-        setLastActivity(res.data.last_activity)
+        
+          // dispatch(setBalance({balance: res.data}),
+          setTotalAnalogBuy(res.data.token_balance)
+
+          setInceptive(res.data.inceptive_wallet)
+          setAirDrop(res.data.airdrop_wallet)
+          setffiliates(res.data.affilites_wallet)
+          setInherited(res.data.affilites_wallet)
+          setBounty(res.data.bounty_wallet)
+          setHandOut(res.data.handout_wallet)
+          setTotalwallet(res.data.total_wallet)
+          setTransaction(res.data.total_transaction)
+          setLastActivity(res.data.last_activity)
+        
+
       } catch (error) {
-        console.log(" Error in user Wallet data " +error);
+        console.log(error);
       }
     }
-
+    
     const recentActivity = async() => {
       try{
         const res = await axios.post(`${BASE_URL}/recentActivities`, { email: email, limit : 4 });      
@@ -143,10 +166,12 @@ const  Home = ()=>{
     const time = a.toLocaleTimeString()
 
 useEffect(()=>{
+  refferalData()
+  recentActivity()
   getUserWalletData()
   getPreSale()
   recentActivity()
-  refferalData();
+  refferalData()
 },[])
 
 
@@ -526,7 +551,7 @@ useEffect(()=>{
                                 <div className="tranx-col">
                                   <div className="tranx-amount">
                                     <div className="number">
-                                      { data.cVolume } 
+                                      { data.amount } 
                                       <span className="currency currency-btc">ANA</span>
                                     </div>
                                     <div className="number-sm">
@@ -638,7 +663,7 @@ useEffect(()=>{
                                 type="text"
                                 className="form-control copy-text"
                                 id="refUrl"
-                                value="https://inceptive.network/?ref=Ia5ghTL2paqchJTR65nBKvZ"
+                                value={`http://localhost:3000/signup?ref=${userInfo?.refferal}`}
                               />
                             </div>
                           </div>
@@ -667,13 +692,13 @@ useEffect(()=>{
                               </div>
                             </div>
                             <div className="nk-refwg-more dropdown mt-n1 mr-n1">
-                              <a
+                              {/* <a
                                 href="#"
                                 className="btn btn-icon btn-trigger"
                                 data-toggle="dropdown"
                               >
                                 <em className="icon ni ni-more-h"></em>
-                              </a>
+                              </a> */}
                               {/* <div className="dropdown-menu dropdown-menu-xs dropdown-menu-right">
                                 <ul className="link-list-plain sm">
                                   <li>

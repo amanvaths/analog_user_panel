@@ -149,7 +149,7 @@ export default function Orders() {
   useEffect(() => {
     if (email) {
       axios
-        .get(`${BASE_URL}/getAllOrder`)
+        .get(`${BASE_URL}/getAllOrder`, {email: email})
         .then((res) => {
           console.log(res.data, "All Order");
           setHistory(res.data.order);

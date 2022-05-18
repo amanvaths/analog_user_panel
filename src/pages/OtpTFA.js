@@ -9,11 +9,8 @@ const OtpTFA = (props) => {
   const location = useLocation()
   const {userInfo} = useSelector((state)=> state.user.value)
   const navigate = useNavigate()
-  const email = localStorage.getItem("email");
   const [otp, setOtp] = useState('')
   const [otpError, setOtpError] = useState(false)
-
-  console.log(location.state.email, "userinfo in 2fa ", location.state.token);
 
   const verifyOTP = async(e)=>{
       try {
@@ -22,17 +19,23 @@ const OtpTFA = (props) => {
           setOtpError(true)
         }
         else{
-          const data = await axios.post(`${BASE_URL}/verifyauthtoken`,{email: location.state.email, token: otp})
-          console.log(data.data.status, ":::data");
+          console.log(location.state.email, "email");
+          console.log(location.state.token, "token");
+          console.log(otp, "otp");
+          const data = await axios.post(`${BASE_URL}/verifyauthtoken`,{email: location.state.email, token: otp, })
           if(data.data.status == 1){
             swal("OTP Verified", "", "success");
-            
+            localStorage.setItem("email", location.state.email);
+            localStorage.setItem("token", location.state.token);
             navigate('/home')
           }else if(data.data.status == 0){
             swal("Invalid OTP", "", "error");
+          }else if(data.data.status == 2){
+            swal("Google 2FA is not activated", "", "error")
+          }else if(data.data.status == 3){
+            swal("Invalid API Call", "", 'error')
           }
         }
-        
       } catch (error) {
         console.log(error);
       }

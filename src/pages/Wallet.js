@@ -7,13 +7,13 @@ import Card1 from "../components/Card";
 import axios from "axios";
 import { Triangle } from 'react-loader-spinner'
 import { useSelector, useDispatch } from 'react-redux';
+import { BASE_URL } from "../Api_connection/config";
+import { setUserInfo } from "../redux/reducer/user";
 
 
 const Wallet = (props) => {
-  const { currency_prefrence } = useSelector((state) => state.currency.value)
-  const { settings, } = useSelector((state) => state.setting.value);
-
-  console.log(currency_prefrence, "::currency Prefrence in wallet.js");
+  const { userInfo } = useSelector((state) => state.user.value)
+  const dispatch = useDispatch();
 
   const [coinData, setCoinData] = useState([]);
   const [walletDetails, setWalletDetails] = useState([]);
@@ -22,17 +22,16 @@ const Wallet = (props) => {
 
   const email = localStorage.getItem("email");
 
-  const getData = async (cp) => {
+  const getData = async () => {
     try {
-      console.log(cp, "updated");
-      const res = await axios.post("http://localhost:3001/api/getCoinData", { currency: cp });
+      console.log(":: cp in ", userInfo.currency_preference);
+      const cp  = userInfo?.currency_preference?.toUpperCase()
+      const res = await axios.post(`${BASE_URL}/getCoinData`, { currency: cp });
       const cd = [];
       console.log(res.data, "::res.data");
-      for (let coin of Object.entries(res.data)) {
-        //console.log(coin);
+      for (let coin of Object.entries(res.data)) {  
         cd.push(coin[1]);
       }
-      //console.log(cd, "coin data");
       setCoinData([...cd]);
     } catch (error) {
       console.log(error);
@@ -41,37 +40,31 @@ const Wallet = (props) => {
 
   async function getWalletDetails() {
     const walletAddress = await axios.post(
-      "http://localhost:3001/api/getwalletdata", { email: email });
+      `${BASE_URL}/getwalletdata`, { email: email });
     console.log(walletAddress, "wallet address")
     setWalletDetails([...walletAddress.data]);
   }
 
   const updateWallet = async () => {
     try {
-      const data = await axios.post('http://localhost:3001/api/transaction_update', { email: email })
+      const data = await axios.post(`${BASE_URL}/transaction_update`, { email: email })
     } catch (error) {
       console.log(error);
     }
   }
 
-  // useEffect(() => {
-  //   getData();
-  //   getWalletDetails();
-  //   console.log("mnpsettings::",settings);
-  //   // updateWallet()
-  // }, []);
+
+  useEffect( async() => {
+    const data = await axios.post(`${BASE_URL}/configSettings`, {email: email})
+            if(data){
+              dispatch(setUserInfo({userInfo: data.data}))
+              updateWallet()
+              getData();
+              getWalletDetails();
+            }
+  }, [])
 
   useEffect(() => {
-    updateWallet()
-    console.log("settings updated::", settings, Object.values(settings));
-    if (Object.values(settings).length > 0) {
-      getData(settings.currency_preference);
-      getWalletDetails();
-    }
-  }, [settings])
-
-  useEffect(() => {
-
     if (coinData.length > 0 && walletDetails.length > 0) {
       const cd = [];
       for (let coind of coinData) {
@@ -84,18 +77,8 @@ const Wallet = (props) => {
     }
   }, [walletDetails, coinData]);
 
-  // console.log(coinWW, ":: coinWW");
-  // var individualBalance = 0;
-  // var individualPriceInUsd = 0;
-  // var totalPriceInUsd = 0;
-  // var allFundValue = 0;
 
-  // for (let balance of coinWW) {
-  //   individualBalance = balance?.wallet?.balance;
-  //   individualPriceInUsd = balance?.quote?.[currency_prefrence.toUpperCase()]?.price;
-  //   totalPriceInUsd = individualBalance * individualPriceInUsd;
-  //   allFundValue = parseFloat(totalPriceInUsd) + allFundValue;
-  // }
+  console.log(coinWW, ":: coin data in wallet *********#$#$#$#$#$#$#$#$#$#$#$#");
 
   return (
     <>
@@ -132,18 +115,18 @@ const Wallet = (props) => {
                   </div>
                   <div className="row" style={{ marginBottom: "15vh" }}>
                     {coinWW.map((element, index) => {
+                      // console.log(element?.quote?.[userInfo.currency_preference.toUpperCase()].price, "::balance 7878787878787", userInfo.currency_preference.toUpperCase());
                       return (
                         <div className="walletCard col-md-6 col-lg-4 col-12">
                           <Card1
-                            title={element.name}
-                            // price={element.quote.USD.price.toFixed(2)}
-                            priceInUsd={element?.quote?.[currency_prefrence?.toUpperCase()]?.price.toFixed(2)}
-                            price={element?.wallet?.balance}
+                            title={element.name}  
+                            priceInUsd={element?.quote?.[userInfo?.currency_preference.toUpperCase()]?.price?.toFixed(2)}
+                            price={element?.wallet?.balance.toFixed(2)}
                             lable={element?.symbol}
                             wallet={element?.wallet}
                             address={element?.wallet?.walletAddr}
                             logo={`https://s2.coinmarketcap.com/static/img/coins/64x64/${element.id}.png`}
-                            cp={Object.values(settings).length > 0 ? settings.currency_preference.toUpperCase() : 'USD'}
+                            cp={Object.values(userInfo).length > 0 ? userInfo.currency_preference.toUpperCase() : 'USD'}
                           />
                         </div>
                       );

@@ -1,38 +1,33 @@
-import React, { useDeferredValue, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../Api_connection/config";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { setCurrencyPrefrence } from "../redux/currency";
-import { setReferralCode } from '../redux/User'
 import { getSettings } from "../Api_connection/ApiFunction";
-import { setSettings } from "../redux/settings";
-
+import { setUserInfo } from "../redux/reducer/user";
 
 const PersonalInfo = () => {
   const email = localStorage.getItem("email")
   const dispatch = useDispatch()
-  const { referralCode } = useSelector((state) => state.user.value)
-  const { settings } = useSelector((state) => state.setting.value)
+  const { userInfo } = useSelector((state) => state.user.value)
   const [load, setLoad] = useState({})
   const [showUser, setShowUser] = useState(true)
   const [showUser1, setShowUser1] = useState(true)
-  const [showUser3, setShowUser3] = useState(referralCode.length == 0 ? true : false);
+  const [showUser3, setShowUser3] = useState(false);
   const [value, setValue] = useState('')
   const [phone, setPhone] = useState('')
+  const [ref, setRefferal] = useState('')
   const [myCurrency, setMyCurrency] = useState('');
   const [updatedUserName, setUpdatedUserName] = useState('')
   const [updatedPhone, setUpdatedPhone] = useState('')
+  const [pMenu, setPMenu] = useState(0);
 
-  console.log(referralCode, "ref code");
-
-
-  const handelRefupdate = (e) => {
-    dispatch(setReferralCode({ referralCode: e.target.value }))
+  const handelReferralChange = (e) => {
+    setRefferal(e.target.value)
   }
 
   function updateSetting() {
     getSettings(email).then((res) => {
-      dispatch(setSettings({ settings: res.data }));
+      dispatch(setUserInfo({ userInfo: res.data }));
     }).catch((er) => { console.log(er) })
   }
 
@@ -51,8 +46,6 @@ const PersonalInfo = () => {
         const data = await axios.post(`${BASE_URL}/settings`, apidata)
         setUpdatedUserName(apidata['username']);
         setUpdatedPhone(apidata['contact'])
-        // dispatch(setCurrencyPrefrence())
-        // setMyCurrency(apidata['currency'])
         console.log(data, "::settings APi response");
         setMyCurrency(myCurrency);
         updateSetting();
@@ -68,7 +61,6 @@ const PersonalInfo = () => {
     const data1 = await axios.post('http://localhost:3001/api/settings', { email: email, task: "personal_information" })
     setUpdatedUserName(data1.data.username)
     setUpdatedPhone(data1.data.contact_no)
-    // setMyCurrency(data1.data.currency)
 
     if (data1?.data?.username?.length > 0) {
       setShowUser(false);
@@ -83,40 +75,43 @@ const PersonalInfo = () => {
       setMyCurrency("inr");
     }
 
-    dispatch(setCurrencyPrefrence({ currency_prefrence: data1.data.currency }))
+    dispatch(setUserInfo({ currency_prefrence: data1.data.currency }))
   }
 
-  // console.log(referralCode, "red code");
   const updateReferral = async () => {
     try {
-      setShowUser3(false);
-      const data = await axios.post(`${BASE_URL}/update_refferal`, { email: email, refferalCode: referralCode })
-        if (data) {
-          getSettings(email).then((res) => {
-            dispatch(setSettings({ settings: res.data }));
-          }).catch((e) => {
-            console.log(e);
-          })
-        }
-      
-      setLoad(data)
+      const data = await axios.post(`${BASE_URL}/update_refferal`, { email: email, refferalCode: ref })
+      if (data) {
+        const res = await axios.post(`${BASE_URL}/configSettings`, { email: email })
+        dispatch(setUserInfo({ userInfo: res.data }))
+        console.log(userInfo.refferal, ":: User info after update");
+      }
       console.log(data.data.status, ":: response from update Referaal API ");
     } catch (error) {
       console.log(error);
     }
   }
 
-  console.log(showUser3);
-
-  // useEffect(() => {
-  //   console.log(referralCode, "refcode");
-  //   if (referralCode.length == 0) {
-  //     setShowUser3(true)
-  //   }
-  //   else {
-  //     setShowUser3(false)
-  //   }
-  // }, [load])
+  const profileMenu = () => {  
+    // alert("hellow" )
+       if(pMenu == 0){
+       var element = document.getElementById("myBody"); 
+       element.classList.add("toggle-shown"); 
+       var element = document.getElementById("toggleBtn"); 
+       element.classList.add("active");                                 
+       var element = document.getElementById("cardAside"); 
+       element.classList.add("content-active");  
+       setPMenu(1)
+      }else{
+         var element = document.getElementById("myBody"); 
+         element.classList.remove("toggle-shown"); 
+         var element = document.getElementById("toggleBtn"); 
+         element.classList.remove("active");                                 
+         var element = document.getElementById("cardAside"); 
+         element.classList.remove("content-active");
+         setPMenu(0)
+       } 
+   }
 
   useEffect(() => {
     getData();
@@ -141,8 +136,9 @@ const PersonalInfo = () => {
                 href="#"
                 className="toggle btn btn-icon btn-trigger mt-n1"
                 data-target="userAside"
+                id = "toggleBtn"
               >
-                <em className="icon ni ni-menu-alt-r"></em>
+                <em className="icon ni ni-menu-alt-r" onClick={profileMenu }></em>
               </a>
             </div>
           </div>
@@ -275,7 +271,7 @@ const PersonalInfo = () => {
                     checked={myCurrency === "inr"}
                     onChange={(e) => {
                       updateData("inr")
-                      dispatch(setCurrencyPrefrence("inr"))
+                      dispatch(setUserInfo({ currency_prefrence: "inr" }))
                     }}
                   />
                   <label class="custom-control-label" for="inrx" ></label>
@@ -301,7 +297,7 @@ const PersonalInfo = () => {
                     onChange={(e) => {
 
                       updateData("usd")
-                      dispatch(setCurrencyPrefrence("usd"))
+                      dispatch(setUserInfo({ currency_prefrence: "usd" }))
                     }}
                   /><label class="custom-control-label" for="usdt" ></label>
                 </div>
@@ -321,36 +317,34 @@ const PersonalInfo = () => {
                 </div>
               </div>
               <div className="col-4">
-                {Object.values(settings).length > 0 ? !settings.refferal.length > 0 ?
+                {userInfo?.refferal ?
+                  <span className="data-value">{userInfo?.refferal}</span>:
                   <div class="input-group-sm">
                     <input type="text"
                       class="form-control"
                       aria-label="Username"
                       aria-describedby="basic-addon1"
-                      value={referralCode}
+                      value={ref}
                       placeholder="Enter Referral Code"
                       onChange={(e) => {
-                        handelRefupdate(e)
+                        handelReferralChange(e)
                       }}
                       maxLength={10}
                       minLength={10}
                     />
-                  </div> :
-                  <span className="data-value">{settings.refferal}</span> : null}
+                  </div>
+                }
               </div>
               <div className="col-4 d-flex justify-content-end">
                 <div className="">
                   <span className="">
-                    {Object.values(settings).length > 0 ? !settings.refferal.length > 0 ? <button class="btn btn-dim btn-primary" onClick={() => {
-
+                    {userInfo?.refferal  ? <span className=" disable">
+                      <em className="icon ni ni-lock-alt"></em>
+                    </span> : <button class="btn btn-dim btn-primary" onClick={() => {
                       updateReferral();
+                    }}>Update</button>
 
-
-                    }}>Update</button> :
-                      <span className=" disable">
-                        <em className="icon ni ni-lock-alt"></em>
-                      </span>
-                      : null}
+                    }
                   </span>
                 </div>
               </div>

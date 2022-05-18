@@ -1,49 +1,54 @@
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
 import { useSelector, useDispatch } from "react-redux";
-import {
-    setIsNewBrowserOn,
-    setIsUnusualActivityOn,
-    setIsSalesOn,
-    setIsFeaturesOn,
-    setIsTipsOn
-} from "../redux/settings";
+
+import { setUserInfo,} from "../redux/reducer/user";
 
 const Notification = () => {
     const email = localStorage.getItem("email");
-    const [reflect,setReflect] = useState(true);
-    const [isInit,setInit] = useState(false);
+    const [reflect, setReflect] = useState(true);
+    const [isInit, setInit] = useState(false);
     const dispatch = useDispatch()
-    const {
-        isNewBrowserOn,
-        isUnusualActivityOn,
-        isSalesOn,
-        isNewFeaturesOn,
-        isTipsOn
-    } = useSelector((state) => state.setting.value)
+    const { userInfo } = useSelector((state) => state.user.value)
+    const [pMenu, setPMenu] = useState(0);
 
-    const setNotification = async(e)=>{
-        try{
-            // console.log(e.target.);
-            console.log(isNewBrowserOn,
-                isUnusualActivityOn,
-                isSalesOn,
-                isNewFeaturesOn,
-                isTipsOn, "::data before API ");
+    const setNotification = async (e) => {
+        try {
             const data = await axios.post(`${BASE_URL}/notificationSettings`, {
                 email: email,
-                unusual_activity: isUnusualActivityOn,
-                new_browser: isNewBrowserOn,
-                sales:  isSalesOn,
-                new_features: isNewFeaturesOn,
-                tips: isTipsOn
+                unusual_activity: userInfo.unusual_activity,
+                new_browser: userInfo.new_browser,
+                sales: userInfo.sales_latest_news,
+                new_features: userInfo.new_features_updates,
+                tips: userInfo.tips
             })
             console.log(data.data, "response from notification api");
         } catch (error) {
             console.log(error);
         }
     }
+
+    const profileMenu = () => {  
+        // alert("hellow" )
+           if(pMenu == 0){
+           var element = document.getElementById("myBody"); 
+           element.classList.add("toggle-shown"); 
+           var element = document.getElementById("toggleBtn"); 
+           element.classList.add("active");                                 
+           var element = document.getElementById("cardAside"); 
+           element.classList.add("content-active");  
+           setPMenu(1)
+          }else{
+             var element = document.getElementById("myBody"); 
+             element.classList.remove("toggle-shown"); 
+             var element = document.getElementById("toggleBtn"); 
+             element.classList.remove("active");                                 
+             var element = document.getElementById("cardAside"); 
+             element.classList.remove("content-active");
+             setPMenu(0)
+           } 
+       }
 
     useEffect(()=>{
         if(isInit){
@@ -55,11 +60,13 @@ const Notification = () => {
         }
     },[reflect]);
 
-    console.table("browser",isNewBrowserOn, 
-    "unusual",isUnusualActivityOn, 
-    "sales",  isSalesOn, 
-    "features",  isNewFeaturesOn, 
-    "tips",  isTipsOn, );
+    useEffect(async()=>{
+        const data = await axios.post(`${BASE_URL}/configSettings`, {email: email})
+        if(data){
+            dispatch(setUserInfo({userInfo: data.data}))
+        }
+    },[])
+
     return (
         <>
             <div class="card-inner card-inner-lg">
@@ -71,10 +78,14 @@ const Notification = () => {
                                 <p>You will get only notification what have enabled.</p>
                             </div>
                         </div>
-                        <div class="nk-block-head-content align-self-start d-lg-none"><a
+                        <div class="nk-block-head-content align-self-start d-lg-none">
+                            <a
                             href="#" class="toggle btn btn-icon btn-trigger mt-n1"
-                            data-target="userAside"><em
-                                class="icon ni ni-menu-alt-r"></em></a></div>
+                            data-target="userAside"   id = "toggleBtn">
+                                <em
+                                class="icon ni ni-menu-alt-r" onClick={ profileMenu }></em>
+                               </a>
+                               </div>
                     </div>
                 </div>
                 <div class="nk-block-head nk-block-head-sm">
@@ -91,15 +102,18 @@ const Notification = () => {
                                     type="checkbox"
                                     class="custom-control-input"
                                     id="unusual-activity"
-                                    checked={isUnusualActivityOn}
+                                    checked={userInfo?.unusual_activity}
                                     onChange={(e) => {
-                                        if (isUnusualActivityOn) {
-                                            dispatch(setIsUnusualActivityOn({ isUnusualActivityOn: 0 }))
+                                        const obj ={userInfo}
+                                        if (userInfo?.unusual_activity) {
+                                            obj['unusual_activity'] = 0
+                                            dispatch(setUserInfo({ userInfo: obj }))
                                         } else {
-                                            dispatch(setIsUnusualActivityOn({ isUnusualActivityOn: 1 }))
+                                         obj['unusual_activity'] = 1
+                                            dispatch(setUserInfo({ userInfo: obj }))
                                         }
                                         setReflect(!reflect);
-                                       
+
                                     }}
                                 />
                                 <label
@@ -113,12 +127,15 @@ const Notification = () => {
                                 <input type="checkbox"
                                     class="custom-control-input"
                                     id="new-browser"
-                                    checked={isNewBrowserOn}
+                                    checked={userInfo?.new_browser}
                                     onChange={() => {
-                                        if (isNewBrowserOn) {
-                                            dispatch(setIsNewBrowserOn({ isNewBrowserOn: 0 }))
+                                        const obj ={userInfo}
+                                        if (userInfo?.new_browser) {
+                                          obj['new_browser'] = 0
+                                            dispatch(setUserInfo({ userInfo: obj }))
                                         } else {
-                                            dispatch(setIsNewBrowserOn({ isNewBrowserOn: 1 }))
+                                            obj['new_browser'] = 1
+                                            dispatch(setUserInfo({ userInfo: obj }))
                                         }
                                         setReflect(!reflect);
                                     }}
@@ -143,13 +160,16 @@ const Notification = () => {
                                     type="checkbox"
                                     class="custom-control-input"
                                     id="latest-sale"
-                                    name="amit"
-                                    checked={isSalesOn}
+                                   
+                                    checked={userInfo?.sales_latest_news}
                                     onChange={(e) => {
-                                        if (isSalesOn) {
-                                            dispatch(setIsSalesOn({ isSalesOn: 0 }))
+                                        const obj ={userInfo}
+                                        if (userInfo?.sales_latest_news) {
+                                            obj['sales_latest_news'] = 0
+                                            dispatch(setUserInfo({ userInfo: obj }))
                                         } else {
-                                            dispatch(setIsSalesOn({ isSalesOn: 1 }))
+                                            obj['sales_latest_news'] = 1
+                                            dispatch(setUserInfo({ userInfo: obj }))
                                         }
                                         setReflect(!reflect);
                                     }}
@@ -164,12 +184,15 @@ const Notification = () => {
                                     type="checkbox"
                                     class="custom-control-input"
                                     id="feature-update"
-                                    checked={isNewFeaturesOn}
+                                    checked={userInfo?.new_features_updates}
                                     onChange={() => {
-                                        if (isNewFeaturesOn) {
-                                            dispatch(setIsFeaturesOn({ isNewFeaturesOn: 0 }))
+                                        const obj ={userInfo}
+                                        if (userInfo?.new_features_updates) {
+                                            obj['new_features_updates'] = 0
+                                            dispatch(setUserInfo({ userInfo: obj }))
                                         } else {
-                                            dispatch(setIsFeaturesOn({ isNewFeaturesOn: 1 }))
+                                            obj['new_features_updates'] = 1
+                                            dispatch(setUserInfo({ userInfo: obj }))
                                         }
                                         setReflect(!reflect);
                                     }}
@@ -184,12 +207,15 @@ const Notification = () => {
                                     type="checkbox"
                                     class="custom-control-input"
                                     id="account-tips"
-                                    checked={isTipsOn}
+                                    checked={userInfo?.tips}
                                     onChange={() => {
-                                        if (isTipsOn) {
-                                            dispatch(setIsTipsOn({ isTipsOn: 0 }))
+                                        const obj ={userInfo}
+                                        if (userInfo?.tips) {
+                                            obj['tips'] = 0
+                                            dispatch(setUserInfo({ userInfo: obj }))
                                         } else {
-                                            dispatch(setIsTipsOn({ isTipsOn: 1 }))
+                                            obj['tips'] = 1
+                                            dispatch(setUserInfo({ userInfo: obj }))
                                         }
                                         setReflect(!reflect);
                                     }}
