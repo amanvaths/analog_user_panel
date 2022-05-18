@@ -238,6 +238,7 @@ useEffect(()=>{
                       coinPrice={data.price}
                       coinQty={data.coinquantity}
                       duration={data.duration}
+                      persent={data.persentsold}
                     />
                   );
                 })

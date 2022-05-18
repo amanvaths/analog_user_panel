@@ -15,7 +15,7 @@ const Header = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
 
-  const sidebarMenu = async () => {
+  const sidebarMenu = async () => {   
     if(isopen == 0){
     var element = document.getElementById("myBody"); 
     element.classList.add("nav-shown"); 

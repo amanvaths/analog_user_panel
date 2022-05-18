@@ -8,7 +8,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { setUserInfo, setSettingPage } from "../redux/reducer/user";
 import swal from 'sweetalert'
 
-
 const SecuritySettings = () => {
   const { userInfo, settingPages } = useSelector((state) => state.user.value)
   console.log(":: USER INFO::::", userInfo);
@@ -23,7 +22,7 @@ const SecuritySettings = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  const [pMenu, setPMenu] = useState(0);
  
 
   const handelLog = async (e) => {
@@ -35,6 +34,27 @@ const SecuritySettings = () => {
       console.log(error);
     }
   }
+
+  const profileMenu = () => {  
+    // alert("hellow" )
+       if(pMenu == 0){
+       var element = document.getElementById("myBody"); 
+       element.classList.add("toggle-shown"); 
+       var element = document.getElementById("toggleBtn"); 
+       element.classList.add("active");                                 
+       var element = document.getElementById("cardAside"); 
+       element.classList.add("content-active");  
+       setPMenu(1)
+      }else{
+         var element = document.getElementById("myBody"); 
+         element.classList.remove("toggle-shown"); 
+         var element = document.getElementById("toggleBtn"); 
+         element.classList.remove("active");                                 
+         var element = document.getElementById("cardAside"); 
+         element.classList.remove("content-active");
+         setPMenu(0)
+       } 
+   }
 
   useEffect(async()=>{
     const data = await axios.post(`${BASE_URL}/configSettings`, {email: email})
@@ -64,7 +84,8 @@ const SecuritySettings = () => {
                 href="#"
                 className="toggle btn btn-icon btn-trigger mt-n1"
                 data-target="userAside"
-              ><em className="icon ni ni-menu-alt-r"></em
+                id = "toggleBtn"
+              ><em className="icon ni ni-menu-alt-r" onClick={ profileMenu }></em
               ></a>
             </div>
           </div>
