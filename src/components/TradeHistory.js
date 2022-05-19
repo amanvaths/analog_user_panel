@@ -29,7 +29,7 @@ export default function TradeHistory() {
 
       <div class="card-body table-responsive p-0">
         <table class="table font-w-600 mb-0">
-          <div>
+          <div style={{display:"contents"}}>
             <thead>
               <tr>
                 <th>Total Anolog</th>
@@ -46,11 +46,11 @@ export default function TradeHistory() {
                     <tr class="zoom">
                       <td> {h.cVolume}</td>
                       <td class="text-danger">
-                        {h.currency_type}{" "}
+                        {h.preferred_currency_amount.toFixed(2)}{" "}{h.compair_currency=="usd"?"USDT":"INRX"}
                         <i class="ion ion-arrow-graph-up-right"></i>
                       </td>
                       <td class="text-success">
-                        3,23,55,479{" "}
+                        0.501{" "}
                         <i class="ion ion-arrow-graph-down-right"></i>
                       </td>
                       <td>{h.presalelevel}</td>

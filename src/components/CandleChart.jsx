@@ -27,7 +27,7 @@ class TVChartContainer extends React.PureComponent  {
 			symbol: symbols,
 			theme:this.props.theme=="dark"?"Dark":"Light",
 			// BEWARE: no trailing slash is expected in feed URL
-			datafeed: new window.Datafeeds.UDFCompatibleDatafeed(widgtProp.datafeedUrl),
+			datafeed: new window.Datafeeds.UDFCompatibleDatafeed(widgtProp?.datafeedUrl),
 			//  datafeed: "ohlc",
 			interval: widgtProp.interval,
 			container_id: widgtProp.containerId,
