@@ -17,11 +17,6 @@ import { setUserInfo, setIsLoggedIn, setSettingPage } from "../redux/reducer/use
 const Login = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const lemail = localStorage.getItem("email");
-  const token = localStorage.getItem("token");
-  if (lemail && token) {
-    navigate("/home");
-  }
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailerror, setEmailerror] = useState(false);
@@ -69,16 +64,17 @@ const Login = (props) => {
           if (resp.googleAuth == 1) {
             navigate('/2faAuthentication', { state: { email: email, token: resp.token } })
           } else {
-            localStorage.setItem("email", email);
-            localStorage.setItem("token", resp.token);
-            localStorage.setItem("theme", "0")
-
-            const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
-            if (data) {
-              swal(`${resp.message}`, "Welcome", "success");
-              dispatch(setUserInfo({ userInfo: data.data }))
-              navigate('/home')
-            }
+            // localStorage.setItem("email", email);
+            // localStorage.setItem("token", resp.token);
+            // localStorage.setItem("theme", "0")
+            dispatch(setIsLoggedIn({ LoginDetails: resp }))
+            navigate('/home')
+            // const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
+            // if (data) {
+            //   swal(`${resp.message}`, "Welcome", "success");
+            //   dispatch(setUserInfo({ userInfo: data.data }))
+            //   navigate('/home')
+            // }
           }
         }
         if (resp.status == 3) {

@@ -7,7 +7,8 @@ import { setOneUsdPrice, setTotalAna } from "../redux/reducer/user";
 
 function Menu (){
   const dispatch = useDispatch()
-  const email = localStorage.getItem("email")
+  const {user} = useSelector((state)=> state.user.value)
+  const email = user.email;
   const [anaBalancce, setAnaBalance] = useState('')
   const [usdPrice, setUsdPrice] = useState('')
 
@@ -58,7 +59,7 @@ function Menu (){
           <div className="nk-sidebar-element nk-sidebar-head">
             <div className="nk-sidebar-brand">
               <a
-                href="/"
+                href="/home"
                 className="logo-link nk-sidebar-logo"
               >
                 <img
@@ -273,7 +274,7 @@ function Menu (){
                       </Link>
                     </li>
                     <li class="nk-menu-item">
-                      <Link to="/myAccount" class="nk-menu-link">
+                      <Link to="/accountSettings" class="nk-menu-link">
                         <span class="nk-menu-icon">
                           <em class="icon ni ni-user-c"></em>
                         </span>

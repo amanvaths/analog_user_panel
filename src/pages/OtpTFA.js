@@ -3,10 +3,12 @@ import { BASE_URL } from "../Api_connection/config";
 import { useNavigate, useLocation } from "react-router-dom";
 import swal from "sweetalert";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setIsLoggedIn } from "../redux/reducer/user";
 
 const OtpTFA = (props) => {
   const location = useLocation()
+  const dispatch = useDispatch()
   const {userInfo} = useSelector((state)=> state.user.value)
   const navigate = useNavigate()
   const [otp, setOtp] = useState('')
@@ -27,6 +29,11 @@ const OtpTFA = (props) => {
             swal("OTP Verified", "", "success");
             localStorage.setItem("email", location.state.email);
             localStorage.setItem("token", location.state.token);
+            const obj ={
+              email: location.state.email,
+              token: location.state.token
+            }
+            dispatch(setIsLoggedIn({ LoginDetails: obj }))
             navigate('/home')
           }else if(data.data.status == 0){
             swal("Invalid OTP", "", "error");

@@ -4,6 +4,7 @@ import { BASE_URL } from "../Api_connection/config";
 import { Signupn } from "../Api_connection/ApiFunction";
 import { GoogleLogin } from "react-google-login";
 import swal from "sweetalert";
+import {AiOutlineEyeInvisible, AiOutlineEye} from 'react-icons/ai'
 // import queryString from "query-string";
 import { useParams, useLocation } from "react-router-dom";
 
@@ -11,7 +12,7 @@ import { useParams, useLocation } from "react-router-dom";
 const ResetPassword = (props) => {
   const location = useLocation();
   const resetCode = location.search;
-  const resetCode1 = resetCode.substring(10);
+  const resetCode1 = resetCode.substring(11);
   console.log(resetCode1, "reset code");
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -20,9 +21,18 @@ const ResetPassword = (props) => {
   const [response, setResponse] = useState("");
   const [passworderror, setPassworderror] = useState(false);
   const [confirmPassworderror, setConfirmPassworderror] = useState(false);
-  // const [otp, setOTP] = useState("");
-  // const [otpErr, setOtpError] = useState(false);
-  // const [valida, setValida] = useState(false);
+
+
+  const [oldPasswordShown, setOldPasswordShone] = useState(false);
+  const [newPasswordShown, setNewPasswordShone] = useState(false);
+
+  const togglePassword1 = () => {
+    setOldPasswordShone(!oldPasswordShown)
+  };
+  const togglePassword2 = () => {
+    setNewPasswordShone(!newPasswordShown)
+  };
+
   const clientId =
     "28253347908-l3f5pge45v4avpv50ppksjlkvvap6t35.apps.googleusercontent.com";
 
@@ -55,7 +65,7 @@ const ResetPassword = (props) => {
         if (resp.status == "true") {
           swal(resp.message);
           setTimeout(() => {
-            navigate("/Login");
+            navigate("/login");
           }, 2000);
 
           // return <Navigate to="/dashboard" />;
@@ -222,11 +232,12 @@ const ResetPassword = (props) => {
                       className="form-icon form-icon-right passcode-switch"
                       data-target="password"
                     >
-                      <em className="passcode-icon icon-show icon ni ni-eye"></em>
-                      <em className="passcode-icon icon-hide icon ni ni-eye-off"></em>
+                      {
+                        oldPasswordShown == false ? <AiOutlineEyeInvisible onClick={togglePassword1} /> : <AiOutlineEye onClick={togglePassword1} />
+                      }
                     </a>
                     <input
-                      type="password"
+                      type={oldPasswordShown ? "text" : "password"}
                       className="form-control form-control-lg"
                       id="password"
                       placeholder="Enter your password"
@@ -244,21 +255,6 @@ const ResetPassword = (props) => {
                       onFocus={() => _onfocus()}
                       onKeyUp={() => _onkeyup()}
                     />
-                  </div>
-
-                  <div id="validation-box">
-                    <h6 className="passvalid" id="capital">
-                      1 Uppercase Character
-                    </h6>
-                    <h6 className="passvalid" id="number">
-                      1 Numeric Value
-                    </h6>
-                    <h6 className="passvalid" id="letter">
-                      1 Special Symbol eg:@#
-                    </h6>
-                    <h6 className="passvalid" id="length">
-                      length should be greater than 8
-                    </h6>
                   </div>
 
                   <div id="validation-box">
@@ -295,11 +291,12 @@ const ResetPassword = (props) => {
                       className="form-icon form-icon-right passcode-switch"
                       data-target="confirm-password"
                     >
-                      <em className="passcode-icon icon-show icon ni ni-eye"></em>
-                      <em className="passcode-icon icon-hide icon ni ni-eye-off"></em>
+                      {
+                        newPasswordShown == false ? <AiOutlineEyeInvisible onClick={togglePassword2} /> : <AiOutlineEye onClick={togglePassword2} />
+                      }
                     </a>
                     <input
-                      type="password"
+                      type={newPasswordShown ? "text" : "password"}
                       className="form-control form-control-lg"
                       id="confirm-password"
                       placeholder="Confirm your password"
@@ -333,7 +330,7 @@ const ResetPassword = (props) => {
               </form>
               <div className="form-note-s2 pt-4">
                 {" "}
-                Already Interact <a href="/Login">Sign in</a>
+                Already Interact <a href="/login">Sign in</a>
                 {/* Otp Interact <a href="/EmailOtp">Resend Otp</a> */}
               </div>
 

@@ -9,20 +9,27 @@ import { setUserInfo, setSettingPage } from "../redux/reducer/user";
 import swal from 'sweetalert'
 
 const SecuritySettings = () => {
-  const { userInfo, settingPages } = useSelector((state) => state.user.value)
+  const { userInfo, settingPages, user } = useSelector((state) => state.user.value)
   console.log(":: USER INFO::::", userInfo);
   const [otp, setOtp] = useState("");
+  const [otpD, setOtpD] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
 
-  const email = localStorage.getItem("email")
+  const email = user.email
   const [lable, setLable] = useState(false);
   const [security, setSecurityKey] = useState("")
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [pMenu, setPMenu] = useState(0);
+
+  const handleClose1 = () => setShow1(false);
+  const  handleShow1 = () => setShow1(true);
+
+
+  const [show1, setShow1] = useState(false);
  
 
   const handelLog = async (e) => {
@@ -206,6 +213,7 @@ const SecuritySettings = () => {
 
                         <div className="nk-block-actions">
                           <button onClick={async() => {
+                            handleShow1();
                             await axios.post(`${BASE_URL}/generateauthtoken`, { email: email })
                           }} className="btn btn-primary">Disable</button>
                         </div>
@@ -280,6 +288,59 @@ const SecuritySettings = () => {
                           obj['googleAuth'] = !obj.userInfo.googleAuth
                           dispatch(setUserInfo({userInfo: obj }))
                         }
+                      }}>
+                        Close
+                      </Button>
+                    </Modal.Footer>
+
+                  </Modal>
+
+                  {/* Model for 2FA Disable */}
+
+                  <Modal show={show1} onHide={() => {
+                   handleClose1()
+                  }}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>Google Authentication</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <div className='row d-flex justify-content-around flex-row align-items-center py-2'>
+                        
+                        <div className='col-12'>
+                          <form action="" style={{}}>
+                            <div class="form-group">
+                              <div class="form-group">
+                                <label for="inputOtp">Enter OTP to disable 2FA</label>
+                                <input type="text" class="form-control" id="inputOtp" placeholder="Enter Otp" onChange={(e) => setOtpD(e.target.value)} />
+                              </div>
+                              <button type="button" class="btn btn-primary px-2" style={{ width: "150px" }} onClick={() => {
+                                axios.post(`${BASE_URL}/generateauthtoken`, { email: email, token2: otpD }).then((resp) => {
+                                  if (resp.data.status == 1) {
+
+                                    swal(`2FA Disabled Successfully.`, "", "success")
+                                    if (Object?.values(userInfo)?.length > 0) {
+                                      handleClose1()
+                                      const obj = {userInfo}
+                                      obj['googleAuth'] = !obj.userInfo.googleAuth
+                                      dispatch(setUserInfo({userInfo: obj }))
+                                    }
+                                  } else {
+                                    swal(
+                                      "Incorrect Credentials",
+                                      "Please Enter Right Credentials",
+                                      "error"
+                                    );
+                                  }
+                                })
+                              }}>Disable</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={() => {
+                       handleClose1()
                       }}>
                         Close
                       </Button>

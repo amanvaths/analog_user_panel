@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 // import { FacebookLogin } from "react-facebook-login";
 import swal from "sweetalert";
 import {AiOutlineEyeInvisible, AiOutlineEye} from 'react-icons/ai'
+import { sendOtp } from "../redux/reducer/user";
 
 // import FacebookLogin from "react-facebook-login";
 const Signup = (props) => {
@@ -50,11 +51,9 @@ const Signup = (props) => {
     })
       .then((res) => res.json())
       .then((resp) => {
-        localStorage.setItem("email", email);
-        console.log(resp, "response..");
-
         if (resp.status == 1) {
           swal("User Sign Up Successfully", "Please verify OTP", "success");
+          dispatch(sendOtp(({ LoginDetails: resp })))
           setTimeout(() => {
             navigate("/EmailOtp");
           }, 3000);
@@ -395,7 +394,7 @@ const Signup = (props) => {
               </form>
               <div className="form-note-s2 pt-4">
                 {" "}
-                Already Interact <a href="/Login">Sign in</a>
+                Already Interact <a href="/login">Sign in</a>
                 {/* Otp Interact <a href="/EmailOtp">Resend Otp</a> */}
               </div>
 

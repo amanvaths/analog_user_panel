@@ -3,12 +3,12 @@ import axios from "axios";
 import { isIP } from 'is-ip'
 import { BASE_URL } from '../Api_connection/config'
 import swal from "sweetalert";
+import { useSelector } from "react-redux";
 
 
 const IPwhiteListing = () => {
-
-
-    const email = localStorage.getItem("email")
+    const {user} = useSelector((state)=> state.user.value)
+    const email = user?.email;
     const [whiteIP, setWhiteIP] = useState([])
     const [ip, setIp] = useState('')
     const [ipError, setipError] = useState(false)

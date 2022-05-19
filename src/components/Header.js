@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setUserInfo } from "../redux/reducer/user";
+import { setUserInfo, logout } from "../redux/reducer/user";
 import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
 
@@ -9,8 +9,8 @@ import { BASE_URL } from "../Api_connection/config";
 const Header = () => {
   const [isopen, setIsopen] = useState(0);
   const [dark, setDark] = useState(0)
-  const email = localStorage.getItem("email")
-  const {userInfo} = useSelector((state)=> state.user.value)
+  const {user, userInfo} = useSelector((state)=> state.user.value)
+  const email = user.email;
   const btn = useSelector((store)=> store.navsetter)
   const dispatch = useDispatch()
   const navigate = useNavigate();
@@ -49,8 +49,8 @@ const Header = () => {
 
   const signOut = () => {
     // navigate("/", { replace: true });
-    localStorage.clear();
-    navigate("/")    
+    dispatch(logout())
+    navigate("/login")    
   };
 
   useEffect( async() => {

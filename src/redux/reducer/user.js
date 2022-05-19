@@ -1,7 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+let email = localStorage.getItem("exchange-inrx-email");
+let token = localStorage.getItem("exchange-inrx-token");
+
 const initialValue = {
-  isLoggedIn: false,
+  user : {
+    email:email?email:'',
+    token:token?token:'',
+  },
+  otpSend: false,
+  isLoggedIn:(email && token)?true:false, 
   userInfo: {},
   settingPages: {
     activity: false,
@@ -22,10 +30,17 @@ export const userSlice = createSlice({
   },
   reducers: {
     setIsLoggedIn: (state, action)=>{
-      state.value.isLoggedIn = action.payload.isLoggedIn
+      localStorage.setItem("exchange-inrx-email", action.payload.LoginDetails.email);
+      localStorage.setItem("exchange-inrx-token", action.payload.LoginDetails.token);
+      state.value.user = action.payload.LoginDetails;
+      state.value.isLoggedIn = true
+    },
+    sendOtp: (state, action)=>{
+      state.value.user = action.payload.LoginDetails;
+      state.value.otpSend = true
     },
     setUserInfo: (state, action) => {
-     
+      
       state.value.userInfo = action.payload.userInfo;
     },
     setSettingPage: (state, action)=> {
@@ -37,9 +52,15 @@ export const userSlice = createSlice({
     setTotalAna: (state, action) => {
       state.value.totalAna = action.payload.totalAna
     },
+    logout: (state, action) => {
+      localStorage.removeItem("exchange-inrx-email");
+      localStorage.removeItem("exchange-inrx-token");
+      state.value.user={};
+      state.value.isLoggedIn = false;
+    },
 
   },
 });
 
-export const {setIsLoggedIn, setUserInfo, setSettingPage, setOneUsdPrice, setTotalAna} = userSlice.actions;
+export const {setIsLoggedIn, setUserInfo, setSettingPage, setOneUsdPrice, setTotalAna, logout, sendOtp} = userSlice.actions;
 export default userSlice.reducer;

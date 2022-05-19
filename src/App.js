@@ -25,21 +25,20 @@ import BuySell from "./pages/BuySell";
 import ChangePassword from "./components/ChangePassword";
 import OtpTFA from "./pages/OtpTFA";
 import MyAccount from "./pages/MyAccount";
+import { useSelector } from "react-redux";
 
-function App() {
-
-  const email = localStorage.getItem("email");
-  const token = localStorage.getItem("token");
-  console.log(email, token);
+function App(props) {
+  const {user, } = useSelector((state)=> state.user.value)
+  console.log("user", user);
   return (
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/home" element={<Home /> } />
+          
+          <Route path="/home" element={(user.email && user.token)?<Home />:<Login /> } />
           <Route path="/Psecurity" element={<Psecurity />} />
           <Route path="/Profile" element={<Profile />} />
-          <Route path="/Login" element={<Login />} />
+          <Route path="/login" element={(user.email && user.token)?<Home />:<Login />} />
           <Route path="/Signup" element={<Signup />} />
           <Route path="/Terms" element={<Terms />} />
           <Route path="/Faq" element={<Faq />} />
@@ -50,7 +49,7 @@ function App() {
           <Route path="/ForgetPassword" element={<ForgetPassword />} />
           <Route path="/ResetPassword" element={<ResetPassword />} />
           <Route path="/ResendOtp" element={<ResendOtp />} />
-          <Route path="/wallet" element={email && token ? <Wallet /> : <Navigate to="/login" />} />
+          <Route path="/wallet" element={<Wallet />} />
           <Route path="/accountSettings" element={<AccountSettings />} />
           <Route path="/cryptoTransaction" element={<CryptoTransaction />} />
           <Route path="/userlist" element={<UserList />} />
@@ -58,6 +57,7 @@ function App() {
           <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="/2faAuthentication" element={<OtpTFA />} />
           <Route path="/myAccount" element={<MyAccount />} />
+          <Route path="/*" element={(user.email && user.token)?<Home />:<Login />} />
           {/* <Route path="/orders" element={<Orders />} /> */}
         </Routes>
       </BrowserRouter>

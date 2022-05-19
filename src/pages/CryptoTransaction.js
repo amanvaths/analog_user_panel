@@ -12,9 +12,9 @@ import { getSettings } from "../Api_connection/ApiFunction";
 
 const CryptoTransaction = () => {
   const dispatch = useDispatch()
-  const { userInfo } = useSelector((state) => state.user.value)
+  const { userInfo, user } = useSelector((state) => state.user.value)
   const { state } = useLocation();
-  const email = localStorage.getItem('email');
+  const email = user?.email
   const [history, setHistory] = useState([]);
   const [totalOrder, setTotalOrder] = useState('')
   const [coinData, setCoinData] = useState('')

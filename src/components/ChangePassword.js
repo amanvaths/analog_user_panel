@@ -3,9 +3,11 @@ import { useState } from 'react';
 import axios from 'axios';
 import {AiOutlineEyeInvisible, AiOutlineEye} from 'react-icons/ai'
 import swal from 'sweetalert';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const ChangePassword = () => {
+    const {user} = useSelector((state)=> state.user.value)
 
     const [oldPassword, setOldPassword] = useState("")
     const [newPassword, setNewPassword] = useState("");
@@ -20,7 +22,7 @@ const ChangePassword = () => {
     const [newPasswordShown, setNewPasswordShone] = useState(false);
     const [confirmPasswordShown, setConfirmPasswordShone] = useState(false);
 
-    const email = localStorage.getItem("email")
+    const email = user?.email
     const navigate = useNavigate();
 
     const changePassword = async()=>{
@@ -30,7 +32,7 @@ const ChangePassword = () => {
             if(data.data.status == 1){
                 swal("Password Changed Successfully", "Please Login", "success");
           setTimeout(() => {
-            navigate("/Login");
+            navigate("/login");
           }, 2000);
             setOldPassword(" ")
             setNewPassword(" ")
@@ -41,6 +43,7 @@ const ChangePassword = () => {
             console.log(error);
         }
     }
+    
     const togglePassword1 = () => {
         setOldPasswordShone(!oldPasswordShown)
        
@@ -125,13 +128,9 @@ const ChangePassword = () => {
         if (confirmPassword == "") {
             setConfirmPasswordError(true);
         }
-        
         if (oldPassword !== "" && newPassword !== "" && confirmPassword !== "") {
           changePassword()
           }
-
-
-
     }
 
     return (

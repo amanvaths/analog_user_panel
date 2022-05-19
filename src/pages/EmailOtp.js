@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { BASE_URL } from "../Api_connection/config";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
+import { useSelector } from "react-redux";
 
 const EmailOtp = (props) => {
+  const {user, otpSend} = useSelector((state)=> state.user.value)
   const [otp, setOtp] = useState("");
   // const [otpError, setOtpError] = useState(false);
   const [res, setResponse] = useState("");
@@ -11,8 +13,8 @@ const EmailOtp = (props) => {
 
   // console.log(otp, "otpp");
 
-  var email = localStorage.getItem("email");
-  if (email == "") {
+  var email = user?.email;
+  if (!otpSend) {
     navigate("/");
   }
   async function OtpApi(e) {
@@ -35,7 +37,7 @@ const EmailOtp = (props) => {
         if (resp.status == "1") {
           swal(`${resp.message}`, "You can now Login", "success");
           setTimeout(() => {
-            navigate("/Login");
+            navigate("/login");
           }, 3000);
 
           // console.log(resp, "resp");

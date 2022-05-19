@@ -12,7 +12,7 @@ import { setUserInfo } from "../redux/reducer/user";
 
 
 const Wallet = (props) => {
-  const { userInfo, oneUsdPrice, totalAna } = useSelector((state) => state.user.value)
+  const { userInfo, oneUsdPrice, totalAna, user } = useSelector((state) => state.user.value)
   const dispatch = useDispatch();
 
   const [coinData, setCoinData] = useState([]);
@@ -27,7 +27,7 @@ const Wallet = (props) => {
   const [bounty, setBounty] = useState(0)
   const [handOut, setHandOut] = useState(0)
 
-  const email = localStorage.getItem("email");
+  const email = user.email;
 
   const getUserAllWallletData = async () => {
     try {
@@ -144,12 +144,13 @@ const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + 
                             <div className="nk-wgw">
                               <div className="nk-wgw-inner">
                                 <div className="row" style={{color: "white"}}>
-                                  <div className="col-6">
+                                  <div className="col-6 d-flex justify-content-center">
+                                    <div className="w-50" style={{fontSize: "1.1rem", fontWeight: "500px"}}>
                                     <p className="p-1">
                                       <span>*Total Fund: </span>
-                                      <span>&nbsp;&nbsp;{totalAna? totalAna?.toFixed(2): ""} ANA</span>
+                                      <span >&nbsp;&nbsp;{totalAna? totalAna?.toFixed(2): ""} ANA </span>
                                     </p>
-                                    <p className="p-1">
+                                    <p className="p-1" >
                                       <span>Total Spend: </span>
                                       <span>&nbsp;&nbsp;58973.02</span>
                                     </p>
@@ -157,15 +158,15 @@ const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + 
                                       <span>*Current Balance: </span>
                                       <span>&nbsp;&nbsp;{userInfo?.currency_preference == "usd" ? `${coinWW[8]?.wallet?.usdt_balance?.toFixed(2)} USDT` : `${(oneUsdPrice * coinWW[8]?.wallet?.usdt_balance).toFixed(2)} INRX`}</span>
                                     </p>
-
+                                    </div>
                                   </div>
-                                  <div className="col-6">
-
-                                    <p>
+                                  <div className="col-6 d-flex justify-content-center">
+                                  <div className="w-50" style={{fontSize: "1.1rem", fontWeight: "500px"}}>
+                                    <p className="p-1">
                                       <span>*Analog Value: </span>
                                       <span>&nbsp;&nbsp;{userInfo?.anaPrice} {userInfo?.currency_preference == 'inr' ? "INRX" : "USDT"}</span>
                                     </p>
-                                    <p>
+                                    <p className="p-1">
                                       <span>*Bonus:</span>
                                       <span>&nbsp;&nbsp;
                                         {totalBonus?.toFixed(2)}&nbsp;&nbsp;{
@@ -173,11 +174,11 @@ const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + 
                                                     }
                                       </span>
                                     </p>
-                                    <p>
+                                    <p className="p-1">
                                       <span>Total API: </span>
                                       <span>&nbsp;&nbsp;0</span>
                                     </p>
-
+                                    </div>
                                   </div>
                                 </div>
                               </div>

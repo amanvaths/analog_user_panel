@@ -6,9 +6,9 @@ import { getSettings } from "../Api_connection/ApiFunction";
 import { setUserInfo } from "../redux/reducer/user";
 
 const PersonalInfo = () => {
-  const email = localStorage.getItem("email")
   const dispatch = useDispatch()
-  const { userInfo } = useSelector((state) => state.user.value)
+  const { userInfo, user } = useSelector((state) => state.user.value)
+  const email = user.email;
   const [load, setLoad] = useState({})
   const [showUser, setShowUser] = useState(true)
   const [showUser1, setShowUser1] = useState(true)

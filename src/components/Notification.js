@@ -3,14 +3,15 @@ import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
 import { useSelector, useDispatch } from "react-redux";
 
-import { setUserInfo,} from "../redux/reducer/user";
+import { setUserInfo} from "../redux/reducer/user";
 
 const Notification = () => {
-    const email = localStorage.getItem("email");
+    const { userInfo, user } = useSelector((state) => state.user.value)
+    const email = user.email
     const [reflect, setReflect] = useState(true);
     const [isInit, setInit] = useState(false);
     const dispatch = useDispatch()
-    const { userInfo } = useSelector((state) => state.user.value)
+    
     const [pMenu, setPMenu] = useState(0);
 
     const setNotification = async (e) => {

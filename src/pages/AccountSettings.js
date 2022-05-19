@@ -22,9 +22,9 @@ import { BASE_URL } from "../Api_connection/config";
 
 const AccountSettings = () => {
   const dispatch = useDispatch()
-  const { userInfo, settingPages } = useSelector((state) => state.user.value)
+  const { userInfo, settingPages, user } = useSelector((state) => state.user.value)
   const [logData, setLogData] = useState([])
-  const email = localStorage.getItem("email")
+  const email = user.email
   const [pMenu, setPMenu] = useState(0);
 
   const getLoginLog = async () => {
