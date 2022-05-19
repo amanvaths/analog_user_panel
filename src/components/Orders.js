@@ -180,7 +180,7 @@ export default function Orders() {
                       <tr class="zoom" style={{ fontSize: "10px" }}>
                         <td> {h.cVolume}</td>
                         <td class="text-danger">
-                        {h.preferred_currency_amount.toFixed(2)}{" "}{h.compair_currency=="usd"?"USDT":"INRX"}
+                        {h.preferred_currency_amount?.toFixed(2)}{" "}{h.compair_currency=="usd"?"USDT":"INRX"}
                           <i class="ion ion-arrow-graph-up-right"></i>
                         </td>
                         <td class="text-success">

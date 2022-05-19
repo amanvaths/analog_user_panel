@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {widget} from '../../src/charting_library'
+import {widget} from '../charting_library/charting_library'
 import {connect} from "react-redux";
 class TVChartContainer extends React.PureComponent  {
 	constructor(props) {
