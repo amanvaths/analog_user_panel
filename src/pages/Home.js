@@ -135,6 +135,15 @@ const  Home = ()=>{
       }
     }
 
+    const reffetalData = async()=>{
+      try {
+        const res = await axios.get(`${BASE_URL}/geRefferalData`, { email : email })
+        setData(res.data)
+      } catch (error) {
+        console.log(error);
+      }
+  }
+
     const getUserAllWallletData =async() => {
       try{
         const res = await axios.get(`${BASE_URL}/userAllRecords?email=${ email }&bonus_type=Level`)

@@ -11,7 +11,8 @@ const initialValue = {
     changePassword: false,
     ipWhiteListing: false,
   } ,
-  oneUsdPrice: ''
+  oneUsdPrice: '',
+  totalAna: ''
 };
 
 export const userSlice = createSlice({
@@ -32,9 +33,13 @@ export const userSlice = createSlice({
     },
     setOneUsdPrice: (state, action) => {
       state.value.oneUsdPrice = action.payload.oneUsdPrice
-    }
+    },
+    setTotalAna: (state, action) => {
+      state.value.totalAna = action.payload.totalAna
+    },
+
   },
 });
 
-export const {setIsLoggedIn, setUserInfo, setSettingPage, setOneUsdPrice} = userSlice.actions;
+export const {setIsLoggedIn, setUserInfo, setSettingPage, setOneUsdPrice, setTotalAna} = userSlice.actions;
 export default userSlice.reducer;

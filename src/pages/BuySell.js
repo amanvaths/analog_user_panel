@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import Menu from "../components/Menu";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import CandleGraph from "../components/CandleGraph";
+// import CandleGraph from "../components/CandleGraph";
 import Orders from "../components/Orders";
 import TradeHistory from "../components/TradeHistory";
 
-const UserList = () => {
-  const [dropdown, setDropdown] = useState(false);
+function BuySell(props) {
+  
   return (
+    <>
     <div>
       <div class="nk-app-root">
         <div class="nk-main ">
@@ -18,7 +19,7 @@ const UserList = () => {
             <Header />
             <div className="row" style={{ margin: "20px 10px 0px" }}>
               <div className="col-lg-8" style={{  height: "100%" }}>
-                <CandleGraph />
+                {/* <CandleGraph /> */}
                 <div className="">
                   <TradeHistory />
                 </div>
@@ -37,7 +38,8 @@ const UserList = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
-export default UserList;
+export default BuySell;

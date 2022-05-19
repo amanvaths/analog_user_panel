@@ -12,7 +12,7 @@ import { setUserInfo } from "../redux/reducer/user";
 
 
 const Wallet = (props) => {
-  const { userInfo, oneUsdPrice } = useSelector((state) => state.user.value)
+  const { userInfo, oneUsdPrice, totalAna } = useSelector((state) => state.user.value)
   const dispatch = useDispatch();
 
   const [coinData, setCoinData] = useState([]);
@@ -20,17 +20,38 @@ const Wallet = (props) => {
   const [coinWW, setCoinWW] = useState([]);
   const [loader, setLoader] = useState(true)
   const [usdPrice, setUsdPrice] = useState()
+  const [inceptive, setInceptive] = useState(0)
+  const [airdrop, setAirDrop] = useState(0)
+  const [affiliates, setffiliates] = useState(0)
+  const [inherited, setInherited] = useState(0)
+  const [bounty, setBounty] = useState(0)
+  const [handOut, setHandOut] = useState(0)
 
   const email = localStorage.getItem("email");
 
+  const getUserAllWallletData = async () => {
+    try {
+        const res = await axios.get(`${BASE_URL}/userAllRecords?email=${email}&bonus_type=Level`)
+        //console.warn(res.data +"Reff data ");
+        setInceptive(res?.data?.income[0]?.inceptive_wallet)
+        setAirDrop(res?.data?.income[0]?.airdrop_wallet)
+        setffiliates(res?.data?.income[1]?.total_bonus?.toFixed(2))
+        setInherited(res.data?.income[0].inherited_wallet)
+        setBounty(res?.data?.income[0].total_bonus)
+        setHandOut(res?.data?.income[0].handout_wallet)
+    } catch (error) {
+        console.log("Error in refferal Data API " + error);
+    }
+}
+const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + Number(inherited) + Number(bounty) + Number(handOut);
   const getData = async () => {
     try {
       console.log(":: cp in ", userInfo?.currency_preference);
-      const cp  = userInfo?.currency_preference?.toUpperCase()
+      const cp = userInfo?.currency_preference?.toUpperCase()
       const res = await axios.post(`${BASE_URL}/getCoinData`, { currency: cp });
       const cd = [];
       console.log(res.data, "::res.data");
-      for (let coin of Object.entries(res.data)) {  
+      for (let coin of Object.entries(res.data)) {
         cd.push(coin[1]);
       }
       setCoinData([...cd]);
@@ -54,17 +75,18 @@ const Wallet = (props) => {
     }
   }
 
-  useEffect( async() => {
-    const data = await axios.post(`${BASE_URL}/configSettings`, {email: email})
-            if(data){
-              dispatch(setUserInfo({userInfo: data.data})) 
-              updateWallet()
-              getData();
-              getWalletDetails();
-            }
+  useEffect(async () => {
+    const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
+    if (data) {
+      dispatch(setUserInfo({ userInfo: data.data }))
+      getUserAllWallletData()
+      updateWallet()
+      getData();
+      getWalletDetails();
+    }
   }, [])
 
-  
+
   useEffect(() => {
     if (coinData.length > 0 && walletDetails.length > 0) {
       const cd = [];
@@ -106,21 +128,72 @@ const Wallet = (props) => {
                         style={{ padding: "0 30px" }}
                       >
                         <h6>
-                          Total Balance:&nbsp;&nbsp; 
-                          {userInfo.currency_preference == "usd" ? `${coinWW[8]?.wallet?.usdt_balance?.toFixed(2)} USDT`: `${(oneUsdPrice * coinWW[8]?.wallet?.usdt_balance).toFixed(2)} INRX` }
-                           
-                           
+                          Total Balance:&nbsp;&nbsp;
+                          {userInfo.currency_preference == "usd" ? `${coinWW[8]?.wallet?.usdt_balance?.toFixed(2)} USDT` : `${(oneUsdPrice * coinWW[8]?.wallet?.usdt_balance).toFixed(2)} INRX`}
+
+
                         </h6>
                       </label>
                     </div>
                   </div>
+                  <div className="row py-5">
+                    <div className="container mt-1 px-5">
+                      <div className="row" style={{ padding: "0px" }}>
+                        <div className="">
+                          <div className="card card-bordered is-dark">
+                            <div className="nk-wgw">
+                              <div className="nk-wgw-inner">
+                                <div className="row" style={{color: "white"}}>
+                                  <div className="col-6">
+                                    <p className="p-1">
+                                      <span>*Total Fund: </span>
+                                      <span>&nbsp;&nbsp;{totalAna? totalAna?.toFixed(2): ""} ANA</span>
+                                    </p>
+                                    <p className="p-1">
+                                      <span>Total Spend: </span>
+                                      <span>&nbsp;&nbsp;58973.02</span>
+                                    </p>
+                                    <p className="p-1">
+                                      <span>*Current Balance: </span>
+                                      <span>&nbsp;&nbsp;{userInfo?.currency_preference == "usd" ? `${coinWW[8]?.wallet?.usdt_balance?.toFixed(2)} USDT` : `${(oneUsdPrice * coinWW[8]?.wallet?.usdt_balance).toFixed(2)} INRX`}</span>
+                                    </p>
+
+                                  </div>
+                                  <div className="col-6">
+
+                                    <p>
+                                      <span>*Analog Value: </span>
+                                      <span>&nbsp;&nbsp;{userInfo?.anaPrice} {userInfo?.currency_preference == 'inr' ? "INRX" : "USDT"}</span>
+                                    </p>
+                                    <p>
+                                      <span>*Bonus:</span>
+                                      <span>&nbsp;&nbsp;
+                                        {totalBonus?.toFixed(2)}&nbsp;&nbsp;{
+                                                        userInfo?.currency_preference == 'inr' ? "INRX" : "USDT"
+                                                    }
+                                      </span>
+                                    </p>
+                                    <p>
+                                      <span>Total API: </span>
+                                      <span>&nbsp;&nbsp;0</span>
+                                    </p>
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <div className="row" style={{ marginBottom: "15vh" }}>
                     {coinWW.map((element, index) => {
-                
+
                       return (
                         <div className="walletCard col-md-6 col-lg-4 col-12">
                           <Card1
-                            title={element.name}  
+                            title={element.name}
                             priceInUsd={(element?.quote?.[userInfo?.currency_preference.toUpperCase()]?.price)?.toFixed(2)}
                             price={element?.wallet?.balance.toFixed(2)}
                             lable={element?.symbol}

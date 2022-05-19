@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
 import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
-import { setOneUsdPrice } from "../redux/reducer/user";
+import { setOneUsdPrice, setTotalAna } from "../redux/reducer/user";
 
 function Menu (){
   const dispatch = useDispatch()
@@ -14,7 +14,11 @@ function Menu (){
   const getData = async()=>{
     try {
         const data = await axios.post(`${BASE_URL}/userWalletData`, {email: email})
-        setAnaBalance(data.data.token_balance)
+        if(data){
+          setAnaBalance(data.data.token_balance)
+          dispatch(setTotalAna({totalAna: data.data.token_balance}))
+        }
+        
     } catch (error) {
       console.log(error);
     }
@@ -434,7 +438,7 @@ function Menu (){
                           <em className="icon ni ni-sign-kobo"></em>
                         </div>
                         <div className="wallet-text">
-                          <h6 className="wallet-name">{userInfo?.currency_preference?.toUpperCase()} Wallet</h6>
+                          <h6 className="wallet-name">{userInfo?.currency_preference == 'inr'? 'INRX' : "USDT"} Wallet</h6>
                           <span className="wallet-balance">
                             {Number(anaBalancce)?.toFixed(2)}{" "}
                             <span className="currency currency-nio">ANA</span>
