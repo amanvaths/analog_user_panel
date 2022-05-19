@@ -3,19 +3,33 @@ import Menu from "../components/Menu";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { BASE_URL } from "../Api_connection/config";
 
 const UserList = () => {  
-  const email = localStorage.getItem('email');
+  const {user} = useSelector((state)=> state.user.value)
+  const email = user.email
   const [affiliates, setAffiliates] = useState([]);
+  const [affiliateCount, setAffiliatesCount] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1);
 
   const getAffiliate = async () => {
     try{
       console.log(email , " user email asjljasf")
-        const data = await axios.post('http://localhost:3001/api/getAffiliates', { email : email })       
-        setAffiliates(data.data);
+        const data = await axios.post(`${BASE_URL}/getAffiliates`, { email : email })       
+        setAffiliates(data.data.data);
+        setAffiliatesCount(data.data.count)
     }catch(error){
       console.log("Error in getting data Affililate :" +error);
     }
+  }
+
+  function goToPreviousPage() {
+    setCurrentPage((page) => page - 1);
+  }
+
+  function goToNextPage() {
+    setCurrentPage((page) => page + 1);
   }
 
   useEffect(()=>{
@@ -45,7 +59,8 @@ const UserList = () => {
                         Affiliates Lists
                       </h3>
                       <div class="nk-block-des text-soft">
-                        <p>You have total 2,595 users.</p>
+                       
+                        <p>{`You have total ${affiliateCount} users.`}</p>
                       </div>
                     </div>
                     <div class="nk-block-head-content affiliates">
@@ -90,7 +105,7 @@ const UserList = () => {
                         <div class="card-title-group">
                           <div class="card-tools">
                             <div class="form-inline flex-nowrap gx-3">
-                              <div class="form-wrap w-150px">
+                              {/* <div class="form-wrap w-150px">
                                 <select
                                   className="select2-selection__rendered "
                                   class="btn btn-dim btn-outline-grey text-muted"
@@ -101,15 +116,15 @@ const UserList = () => {
                                   aria-hidden="true"
                                   style={{ border: "0.1px solid grey" }}
                                 >
-                                  {/* <option value="" data-select2-id="3">
+                                   <option value="" data-select2-id="3">
                                    Level
-                                  </option> */}
+                                  </option> 
                                   <option value="email">level 1</option>
                                   <option value="group">Level 2</option>
                                   <option value="suspend">Level 3</option>
                                 </select>
-                              </div>
-                              <div class="btn-wrap pl-10">
+                              </div> */}
+                              {/* <div class="btn-wrap pl-10">
                                 <span
                                   class="d-none d-md-block"
                                   style={{ marginLeft: -20 }}
@@ -123,7 +138,7 @@ const UserList = () => {
                                     <em class="icon ni ni-arrow-right"></em>
                                   </button>
                                 </span>
-                              </div>
+                              </div> */}
                             </div>
                           </div>
                           <div class="card-tools me-n1">
@@ -445,37 +460,21 @@ const UserList = () => {
                       </div>
                     </div>
                     <div class="card-inner">
-                      <ul class="pagination justify-content-center justify-content-md-start">
+                      <ul class="pagination justify-content-center justify-content-md-center">
                         <li class="page-item">
                           <a class="page-link" href="#">
                             Prev
                           </a>
                         </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">
-                            1
-                          </a>
-                        </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">
-                            2
-                          </a>
-                        </li>
+                       
+                        
                         <li class="page-item">
                           <span class="page-link">
-                            <em class="icon ni ni-more-h"></em>
+                            <p>page number</p>
                           </span>
                         </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">
-                            6
-                          </a>
-                        </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">
-                            7
-                          </a>
-                        </li>
+                        
+                       
                         <li class="page-item">
                           <a class="page-link" href="#">
                             Next
