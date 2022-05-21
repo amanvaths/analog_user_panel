@@ -12,7 +12,7 @@ const EmailOtp = (props) => {
   const navigate = useNavigate();
 
   // console.log(otp, "otpp");
-
+  console.log(otpSend);
   var email = user?.email;
   if (!otpSend) {
     navigate("/");
@@ -39,9 +39,17 @@ const EmailOtp = (props) => {
           setTimeout(() => {
             navigate("/login");
           }, 3000);
-
-          // console.log(resp, "resp");
-        } else {
+        } 
+        else if(resp.status == 2){
+          swal("Inncorrect OTP", "Enter Correct OTP", "error");
+        }
+        else if(resp.status == 3){
+          swal("Invalid User", "", "error");
+        }
+        else if(resp.status == 0){
+          swal("Something Went wrong", "", "error");
+        }
+        else {
           setResponse(resp);
         }
       });
