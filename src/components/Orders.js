@@ -178,10 +178,11 @@ export default function Orders() {
           <div style={{ display: "contents" }}>
             <thead>
               <tr style={{ fontSize: "10px" }}>
-                <th  style={{width:"23%"}}>Total Anolog</th>
-                <th  style={{width:"23%"}}>Total Amount Pay</th>
-                <th  style={{width:"23%"}}>Buying Price</th>
-                <th style={{width:"31%"}}>Pool</th>
+
+                <th  style={{width:"22%"}}>Total Analog</th>
+                <th  style={{width:"22%"}}>Total Amount Pay</th>
+                <th  style={{width:"29%"}}>Buying Price</th>
+                <th style={{width:"27%"}}>Pool</th>
                 {/* <th>Time</th> */}
               </tr>
             </thead>
@@ -192,7 +193,11 @@ export default function Orders() {
                   return (
                     <>
                       <tr class="zoom" style={{ fontSize: "10px" }}>
-                        <td style={{width:"23%"}}> {h.cVolume?.toFixed(2)}</td>
+                        <td style={{width:"23%"}}> {h.cVolume?.toFixed(2)}<img
+                            src="./images/Analog.png"
+                            style={{ width: "20px" }}
+                           
+                          /></td>
                         <td class="text-danger" style={{width:"23%"}}>
                           {h.preferred_currency_amount?.toFixed(2)}{" "}
                           {h.compair_currency == "usd" ? (
@@ -210,13 +215,13 @@ export default function Orders() {
                           )}
                           <i class="ion ion-arrow-graph-up-right"></i>
                         </td>
-                        <td class="text-success" style={{width:"23%"}}>
+                        <td class="text-success" style={{width:"22%"}}>
                           {h.compair_currency == "usd"
                             ? h.pref_raw_price.toFixed(8)
                             : h.pref_raw_price}
                           <i class="ion ion-arrow-graph-down-right"></i>
                         </td>
-                        <td style={{width:"31%"}}>{h.presalelevel}</td>
+                        <td style={{width:"32%"}}>{h.presalelevel}</td>
                         {/* <td>{h.date}</td> */}
                       </tr>
                     </>
