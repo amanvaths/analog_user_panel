@@ -8,7 +8,7 @@ export default function TradeHistory() {
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
-    if (email) {
+   
       axios
         .get(`${BASE_URL}/getAllOrder`, { email: "" })
         .then((res) => {
@@ -19,7 +19,7 @@ export default function TradeHistory() {
         .catch((error) => {
           console.log(error.message);
         });
-    }
+   
   }, []);
   return (
     <div class="card mt-2">
@@ -32,9 +32,9 @@ export default function TradeHistory() {
           <div style={{ display: "contents" }}>
             <thead >
               <tr>
-                <th style={{width:"18%"}}>Total Anolog</th>
-                <th style={{width:"18%"}}>Total Amount Pay</th>
-                <th style={{width:"18%"}}>Buying Price</th>
+                <th style={{width:"15%"}}>Total Analog</th>
+                <th style={{width:"20%"}}>Total Amount Pay</th>
+                <th style={{width:"19%"}}>Buying Price</th>
                 <th style={{width:"20%"}}>Pool</th>
                 <th style={{width:"26%"}}>Time</th>
               </tr>
@@ -45,7 +45,12 @@ export default function TradeHistory() {
                 return (
                   <>
                     <tr class="zoom ">
-                      <td style={{width:"18%"}}> {h.cVolume.toFixed(2)}</td>
+                      <td style={{width:"18%"}}> {h.cVolume.toFixed(2)} 
+                         <img
+                            src="./images/Analog.png"
+                            style={{ width: "24px" }}
+                           
+                          /></td>
                       <td class="text-danger" style={{width:"18%"}}>
                         {h.preferred_currency_amount?.toFixed(2)}{" "}
                         {h.compair_currency == "usd" ? (
