@@ -20,13 +20,29 @@ const CryptoTransaction = () => {
   const [coinData, setCoinData] = useState('')
   const [load, setLoad] = useState(false)
 
+  const [currentPage, setCurrentPage] = useState(1);
+
+  
+  function goToPreviousPage() {
+    setCurrentPage((page) => page - 1);
+  }
+
+  function goToNextPage() {
+    setCurrentPage((page) => page + 1);
+  }
+
+
+
+  console.log(state, "::_________STATE");
+
   const getTrnsaction = async () => {
     try {
-      console.log(email, state, "::Parameter");
-      const data = await axios.post(`${BASE_URL}/transaction_history`, { email: email, symbol: state })
+     
+      const data = await axios.post(`${BASE_URL}/transaction_history`, { email: email, symbol: state.lable })
       if (data) {
         getSettings(email).then((res) => {
           setUserInfo({ userInfo: res.data })
+          setTotalOrder(data.data.length)
         })
       }
       console.log(data.data, ":: response from tranction api");
@@ -36,38 +52,11 @@ const CryptoTransaction = () => {
     }
   }
 
-  // console.log(, "::currencyPrefrence in transaction");
-  const cp = userInfo?.currency_preference;
-  const getData = async (cp) => {
-    try {
-      console.log(cp, "updated");
-      const res = await axios.post(`${BASE_URL}/getCoinData`, { currency: cp, base_currency: state });
-      setLoad(res)
-      const cd = [];
-      console.log(res.data, "::res.data");
-      for (let coin of Object.entries(res.data)) {
-        //console.log(coin);
-        cd.push(coin[1]);
-      }
-      //console.log(cd, "coin data");
-      setCoinData([...cd]);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  // console.log(coinData, "::CoinData in crypto trnasaction");
-  // console.log(userInfo.currency_preference);
-  // const cpInCapital = userInfo.currency_preference.toUpperCase()
-  // console.log(cpInCapital, "::capital");
-  // const priceofOneCoinInPreferedCoin = coinData[0].quote[cpInCapital].price;
-  // const totalPriceInPreferedCoin = priceofOneCoinInPreferedCoin * 
-
+  
   useEffect(async() => {
     const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
     if (data) {
       dispatch(setUserInfo({ userInfo: data.data }))
-      getData(cp)
     getTrnsaction()
     }
   }, [])
@@ -104,7 +93,7 @@ const CryptoTransaction = () => {
                               className="toggle-expand-content"
                               data-content="pageMenu"
                             >
-                              <ul className="nk-block-tools g-3">
+                              {/* <ul className="nk-block-tools g-3">
                                 <li>
                                   <a
                                     href="#"
@@ -136,7 +125,7 @@ const CryptoTransaction = () => {
                                     </div>
                                   </div>
                                 </li>
-                              </ul>
+                              </ul> */}
                             </div>
                           </div>
                         </div>
@@ -151,7 +140,7 @@ const CryptoTransaction = () => {
                                 <h5 className="title">All Orders</h5>
                               </div>
                               <div className="card-tools me-n1">
-                                <ul className="btn-toolbar gx-1">
+                                {/* <ul className="btn-toolbar gx-1">
                                   <li>
                                     <a
                                       href="#"
@@ -161,7 +150,7 @@ const CryptoTransaction = () => {
                                     ></a>
                                   </li>
                                   <li className="btn-toolbar-sep"></li>
-                                  <li>
+                                   <li>
                                     <div className="dropdown">
                                       <a
                                         href="#"
@@ -324,8 +313,8 @@ const CryptoTransaction = () => {
                                         </div>
                                       </div>
                                     </div>
-                                  </li>
-                                  <li>
+                                  </li> 
+                                   <li>
                                     <div className="dropdown">
                                       <a
                                         href="#"
@@ -351,8 +340,8 @@ const CryptoTransaction = () => {
                                         </ul>
                                       </div>
                                     </div>
-                                  </li>
-                                </ul>
+                                  </li> 
+                                </ul> */}
                               </div>
                               <div
                                 className="card-search search-wrap"
@@ -410,10 +399,11 @@ const CryptoTransaction = () => {
                                             <em className="icon ni ni-arrow-up-right"></em>
                                           </div>
                                           <div className="nk-tnx-type-text">
-                                            <span className="tb-lead">{element.type == 'deposit' ? "Deposit" : null}</span><span className="tb-date">
+                                            <span className="tb-lead">{element?.type}</span>
+                                            <span className="tb-date">
                                               {a.toLocaleDateString()} {a.toLocaleTimeString()}
-                                            </span
-                                            >
+                                            </span>
+                                            
                                           </div>
                                         </div>
                                       </div>
@@ -421,24 +411,28 @@ const CryptoTransaction = () => {
                                       <div className="nk-tb-col text-end">
                                         <span className="tb-amount"
                                         >
-                                          {element.amount.toFixed(2)}
-                                          <span>{element.symbol}</span></span
-                                        >
-                                        {/* <span className="tb-amount-sm">{(element?.amount * priceofOneCoinInPreferedCoin)?.toFixed(2)} {cpInCapital}</span> */}
+                                          {element.amount.toFixed(2)}&nbsp;
+                                          <span>{element.symbol}</span></span>
+                                        
+                                        <span className="tb-amount-sm">{(element?.amount * state?.price)?.toFixed(2)}&nbsp; 
+                                        {userInfo?.currency_preference == 'inr' ? "INRX" : "USDT"}
+                                         </span>
                                       </div>
                                       <div className="nk-tb-col text-end tb-col-sm">
-                                        <span className="tb-amount">{element.balance} <span>{element.symbol}</span></span
-                                        ><span className="tb-amount-sm">101290.49 USD</span>
+                                        <span className="tb-amount">{element?.balance} <span>{element?.symbol}</span></span
+                                        ><span className="tb-amount-sm">{(element?.balance * state?.price)?.toFixed(2)}&nbsp; 
+                                        {userInfo?.currency_preference == 'inr' ? "INRX" : "USDT"}</span>
                                       </div>
                                       <div className="nk-tb-col nk-tb-col-status">
                                         <div className="dot dot-success d-md-none"></div>
                                         <span
-                                          className="badge badge-sm badge-dim bg-outline-success d-none d-md-inline-flex"
-                                        >Completed</span
-                                        >
+                                    className="badge badge-sm badge-dim bg-outline-success d-none d-md-inline-flex">
+                                     {element?.status ==1 ? "Completed" : "Failed"} 
+                                      </span>
+                                        
                                       </div>
                                       <div className="nk-tb-col nk-tb-col-tools">
-                                        <ul className="nk-tb-actions gx-2">
+                                        {/* <ul className="nk-tb-actions gx-2">
                                           <li className="nk-tb-action-hidden">
                                             <a
                                               href="#"
@@ -502,7 +496,7 @@ const CryptoTransaction = () => {
                                               </div>
                                             </div>
                                           </li>
-                                        </ul>
+                                        </ul> */}
                                       </div>
                                     </div>
                                   )
@@ -1518,35 +1512,29 @@ const CryptoTransaction = () => {
                           </div> */}
                             </div>
                           </div>
-                          {/* <div className="card-inner">
+                           <div className="card-inner">
                             <ul
-                              className="pagination justify-content-center justify-content-md-start"
+                              className="pagination justify-content-center justify-content-md-center"
                             >
                               <li className="page-item">
                                 <a className="page-link" href="#">Prev</a>
                               </li>
-                              <li className="page-item">
-                                <a className="page-link" href="#">1</a>
-                              </li>
-                              <li className="page-item">
-                                <a className="page-link" href="#">2</a>
-                              </li>
-                              <li className="page-item">
+                              
+                              
+                              {/* <li className="page-item">
                                 <span className="page-link"
                                 ><em className="icon ni ni-more-h"></em
                                 ></span>
-                              </li>
+                              </li> */}
                               <li className="page-item">
-                                <a className="page-link" href="#">6</a>
+                                <a className="page-link" href="#">{currentPage}</a>
                               </li>
-                              <li className="page-item">
-                                <a className="page-link" href="#">7</a>
-                              </li>
+                             
                               <li className="page-item">
                                 <a className="page-link" href="#">Next</a>
                               </li>
                             </ul>
-                          </div> */}
+                          </div> 
                         </div>
                       </div>
                     </div>

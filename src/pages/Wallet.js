@@ -8,13 +8,15 @@ import axios from "axios";
 import { Triangle } from 'react-loader-spinner'
 import { useSelector, useDispatch } from 'react-redux';
 import { BASE_URL } from "../Api_connection/config";
-import { setUserInfo } from "../redux/reducer/user";
+import { setUserInfo, setOneCoinPrice } from "../redux/reducer/user";
+import { Link, useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 
 
 const Wallet = (props) => {
   const { userInfo, oneUsdPrice, totalAna, user } = useSelector((state) => state.user.value)
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const [coinData, setCoinData] = useState([]);
   const [walletDetails, setWalletDetails] = useState([]);
   const [coinWW, setCoinWW] = useState([]);
@@ -80,11 +82,18 @@ const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + 
     if (data) {
       dispatch(setUserInfo({ userInfo: data.data }))
       getUserAllWallletData()
-      updateWallet()
+     
       getData();
       getWalletDetails();
     }
   }, [])
+
+  useEffect(()=>{
+    setTimeout(() => {
+      updateWallet()
+    }, 20000);
+   
+  },[])
 
 
   useEffect(() => {
@@ -102,7 +111,7 @@ const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + 
 
 
   console.log(coinWW[8], ":: coin data in wallet *********#$#$#$#$#$#$#$#$#$#$#$#");
-
+  const a =0 
   return (
     <>
       <div>
@@ -190,7 +199,7 @@ const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + 
                   </div>
                   <div className="row" style={{ marginBottom: "15vh" }}>
                     {coinWW.map((element, index) => {
-
+                     
                       return (
                         <div className="walletCard col-md-6 col-lg-4 col-12">
                           <Card1
@@ -202,7 +211,12 @@ const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + 
                             address={element?.wallet?.walletAddr}
                             logo={`https://s2.coinmarketcap.com/static/img/coins/64x64/${element.id}.png`}
                             cp={Object.values(userInfo).length > 0 ? userInfo.currency_preference.toUpperCase() : 'USD'}
-                          />
+                           onClick={()=> 
+                            {
+                            navigate("/cryptoTransaction", { state: {lable: element.symbol, price: (element?.quote?.[userInfo?.currency_preference.toUpperCase()]?.price)?.toFixed(2)} })
+                           }
+                           }
+                           />
                         </div>
                       );
                     })}
@@ -211,7 +225,8 @@ const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + 
                 <Footer />
               </div>
             </div>
-          </div>)}
+          </div>) 
+          }
       </div>
     </>
   );

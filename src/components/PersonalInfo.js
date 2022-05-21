@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { getSettings } from "../Api_connection/ApiFunction";
 import { setUserInfo } from "../redux/reducer/user";
+import { Triangle } from 'react-loader-spinner'
 
 const PersonalInfo = () => {
   const dispatch = useDispatch()
@@ -12,7 +13,7 @@ const PersonalInfo = () => {
   const [load, setLoad] = useState({})
   const [showUser, setShowUser] = useState(true)
   const [showUser1, setShowUser1] = useState(true)
-  const [showUser3, setShowUser3] = useState(false);
+  const [showUser2, setShowUser2] = useState(true);
   const [value, setValue] = useState('')
   const [phone, setPhone] = useState('')
   const [ref, setRefferal] = useState('')
@@ -20,6 +21,7 @@ const PersonalInfo = () => {
   const [updatedUserName, setUpdatedUserName] = useState('')
   const [updatedPhone, setUpdatedPhone] = useState('')
   const [pMenu, setPMenu] = useState(0);
+  const [loader, setLoader] = useState(true)
 
   const handelReferralChange = (e) => {
     setRefferal(e.target.value)
@@ -55,17 +57,19 @@ const PersonalInfo = () => {
     } else {
       alert("please fill all the required data!")
     }
+
+    getData()
   }
 
   async function getData() {
-    const data1 = await axios.post('http://localhost:3001/api/settings', { email: email, task: "personal_information" })
+    const data1 = await axios.post(`${BASE_URL}/settings`, { email: email, task: "personal_information" })
     setUpdatedUserName(data1.data.username)
     setUpdatedPhone(data1.data.contact_no)
 
     if (data1?.data?.username?.length > 0) {
       setShowUser(false);
     }
-    if (data1?.data?.username?.length > 0) {
+    if (data1?.data?.contact_no) {
       setShowUser1(false)
     }
     if (data1.data.currency == 'usd') {
@@ -92,37 +96,39 @@ const PersonalInfo = () => {
     }
   }
 
-  const profileMenu = () => {  
+  const profileMenu = () => {
     // alert("hellow" )
-       if(pMenu == 0){
-       var element = document.getElementById("myBody"); 
-       element.classList.add("toggle-shown"); 
-       var element = document.getElementById("toggleBtn"); 
-       element.classList.add("active");                                 
-       var element = document.getElementById("cardAside"); 
-       element.classList.add("content-active");  
-       setPMenu(1)
-      }else{
-         var element = document.getElementById("myBody"); 
-         element.classList.remove("toggle-shown"); 
-         var element = document.getElementById("toggleBtn"); 
-         element.classList.remove("active");                                 
-         var element = document.getElementById("cardAside"); 
-         element.classList.remove("content-active");
-         setPMenu(0)
-       } 
-   }
+    if (pMenu == 0) {
+      var element = document.getElementById("myBody");
+      element.classList.add("toggle-shown");
+      var element = document.getElementById("toggleBtn");
+      element.classList.add("active");
+      var element = document.getElementById("cardAside");
+      element.classList.add("content-active");
+      setPMenu(1)
+    } else {
+      var element = document.getElementById("myBody");
+      element.classList.remove("toggle-shown");
+      var element = document.getElementById("toggleBtn");
+      element.classList.remove("active");
+      var element = document.getElementById("cardAside");
+      element.classList.remove("content-active");
+      setPMenu(0)
+    }
+  }
 
   useEffect(() => {
     getData();
+    setLoader(false)
   }, [])
 
-  useEffect(() => {
-    getData();
-  }, [myCurrency])
+  // useEffect(() => {
+  //   getData();
+  // }, [myCurrency])
 
   return (
     <>
+
       <div className="card-inner card-inner-lg">
         <div className="nk-block-head nk-block-head-lg">
           <div className="nk-block-between">
@@ -136,9 +142,9 @@ const PersonalInfo = () => {
                 href="#"
                 className="toggle btn btn-icon btn-trigger mt-n1"
                 data-target="userAside"
-                id = "toggleBtn"
+                id="toggleBtn"
               >
-                <em className="icon ni ni-menu-alt-r" onClick={profileMenu }></em>
+                <em className="icon ni ni-menu-alt-r" onClick={profileMenu}></em>
               </a>
             </div>
           </div>
@@ -213,14 +219,18 @@ const PersonalInfo = () => {
               <div className="col-4 ">
                 <div className="">
                   <span className="data-label">Phone Number</span>
-
                 </div>
               </div>
               <div className="col-4">
                 {showUser1 == true ? <div class="input-group-sm">
-                  <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1"
+                  <input type="text" class="form-control" aria-label="Phone" aria-describedby="basic-addon2"
                     value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
+                    onChange={(e) => {
+                      const ph = e.target.value
+                        .replace(/[^0-9.]/g, "")
+                        .replace(/(\..?)\../g, "$1");
+                      setPhone(ph)
+                    }}
                     maxLength={10}
                     minLength={10}
                     style={{
@@ -255,54 +265,60 @@ const PersonalInfo = () => {
             <div className="data-head">
               <h6 className="overline-title">Currency Preferences</h6>
             </div>
-
-            <div className="data-item">
-              <div className="data-col">
-                <span className="data-label">INRX</span>
-              </div>
-              <div class="nk-block-actions">
-                <div class="custom-control custom-switch me-n2">
-                  <input
-                    type="radio"
-                    class="custom-control-input"
-                    id="inrx"
-                    name="currency"
-                    value="inr"
-                    checked={myCurrency === "inr"}
-                    onChange={(e) => {
-                      updateData("inr")
-                      dispatch(setUserInfo({ currency_prefrence: "inr" }))
-                    }}
-                  />
-                  <label class="custom-control-label" for="inrx" ></label>
+            {
+              showUser2 ? <>
+                <div className="data-item">
+                  <div className="data-col">
+                    <span className="data-label">INRX</span>
+                  </div>
+                  <div class="nk-block-actions">
+                    <div class="custom-control custom-switch me-n2">
+                      <input
+                        type="radio"
+                        class="custom-control-input"
+                        id="inrx"
+                        name="currency"
+                        value="inr"
+                        checked={myCurrency === "inr"}
+                        onChange={(e) => {
+                          updateData("inr")
+                          dispatch(setUserInfo({ currency_prefrence: "inr" }))
+                        }}
+                      />
+                      <label class="custom-control-label" for="inrx" ></label>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
 
 
-            <div className="data-item">
-              <div className="data-col">
-                <span className="data-label">USDT</span>
+                <div className="data-item">
+                  <div className="data-col">
+                    <span className="data-label">USDT</span>
 
-              </div>
-              <div class="nk-block-actions">
-                <div class="custom-control custom-switch me-n2">
-                  <input
-                    type="radio"
-                    class="custom-control-input"
-                    id="usdt"
-                    name="currency"
-                    value="usd"
-                    checked={myCurrency === "usd"}
-                    onChange={(e) => {
+                  </div>
+                  <div class="nk-block-actions">
+                    <div class="custom-control custom-switch me-n2">
+                      <input
+                        type="radio"
+                        class="custom-control-input"
+                        id="usdt"
+                        name="currency"
+                        value="usd"
+                        checked={myCurrency === "usd"}
+                        onChange={(e) => {
 
-                      updateData("usd")
-                      dispatch(setUserInfo({ currency_prefrence: "usd" }))
-                    }}
-                  /><label class="custom-control-label" for="usdt" ></label>
+                          updateData("usd")
+                          dispatch(setUserInfo({ currency_prefrence: "usd" }))
+                        }}
+                      /><label class="custom-control-label" for="usdt" ></label>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </> : null
+            }
+
+
+
           </div>
 
           <div className="nk-data data-list">
@@ -318,7 +334,7 @@ const PersonalInfo = () => {
               </div>
               <div className="col-4">
                 {userInfo?.refferal ?
-                  <span className="data-value">{userInfo?.refferal}</span>:
+                  <span className="data-value">{userInfo?.refferal}</span> :
                   <div class="input-group-sm">
                     <input type="text"
                       class="form-control"
@@ -338,7 +354,7 @@ const PersonalInfo = () => {
               <div className="col-4 d-flex justify-content-end">
                 <div className="">
                   <span className="">
-                    {userInfo?.refferal  ? <span className=" disable">
+                    {userInfo?.refferal ? <span className=" disable">
                       <em className="icon ni ni-lock-alt"></em>
                     </span> : <button class="btn btn-dim btn-primary" onClick={() => {
                       updateReferral();

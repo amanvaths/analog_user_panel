@@ -19,7 +19,7 @@ const EmailOtp = (props) => {
   }
   async function OtpApi(e) {
     e.preventDefault();
-    await fetch("http://localhost:3001/api/varify", {
+    await fetch(`${BASE_URL}/varify`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -35,7 +35,7 @@ const EmailOtp = (props) => {
         // console.log(email);
         console.log(res, "resp");
         if (resp.status == "1") {
-          swal(`${resp.message}`, "You can now Login", "success");
+          swal(`OTP Verified Successfully`, "You can now Login", "success");
           setTimeout(() => {
             navigate("/login");
           }, 3000);
