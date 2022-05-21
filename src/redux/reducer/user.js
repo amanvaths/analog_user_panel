@@ -58,9 +58,12 @@ export const userSlice = createSlice({
       state.value.user={};
       state.value.isLoggedIn = false;
     },
+    setOneCoinPrice: (state, action) => {
+      state.value.coinPrice = action.payload.coinPrice
+    },
 
   },
 });
 
-export const {setIsLoggedIn, setUserInfo, setSettingPage, setOneUsdPrice, setTotalAna, logout, sendOtp} = userSlice.actions;
+export const {setIsLoggedIn, setUserInfo, setSettingPage, setOneUsdPrice, setTotalAna, logout, sendOtp, setOneCoinPrice} = userSlice.actions;
 export default userSlice.reducer;

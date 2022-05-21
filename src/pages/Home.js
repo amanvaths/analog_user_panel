@@ -116,6 +116,12 @@ const Home = () => {
       setTotalwallet(res.data.total_wallet)
       setTransaction(res.data.total_transaction)
       setLastActivity(res.data.last_activity)
+      setInceptive(res?.data?.inceptive_wallet)
+      setAirDrop(res?.data?.airdrop_wallet)
+      setffiliates(res?.data?.affilites_wallet?.toFixed(2))
+      setInherited(res?.data?.inherited_wallet)
+      setBounty(res?.data?.bounty_wallet)
+      setHandOut(res?.data?.handout_wallet)
     } catch (error) {
       console.log(error);
     }
@@ -140,23 +146,6 @@ const Home = () => {
     }
   }
 
-  // console.log(refData, "::RefData");
-
-  const getUserAllWallletData = async () => {
-    try {
-      const res = await axios.get(`${BASE_URL}/userAllRecords?email=${email}&bonus_type=Level`)
-      //console.warn(res.data +"Reff data ");
-      setInceptive(res?.data?.income[0]?.inceptive_wallet)
-      setAirDrop(res?.data?.income[0]?.airdrop_wallet)
-      setffiliates(res?.data?.income[1]?.total_bonus?.toFixed(2))
-      setInherited(res.data?.income[0].inherited_wallet)
-      setBounty(res?.data?.income[0].total_bonus)
-      setHandOut(res?.data?.income[0].handout_wallet)
-    } catch (error) {
-      console.log("Error in refferal Data API " + error);
-    }
-  }
-
   const a = new Date(lastActivity)
   const date = a.toDateString()
   const time = a.toLocaleTimeString()
@@ -166,7 +155,6 @@ const Home = () => {
     getPreSale()
     recentActivity()
     reffetalData()
-    getUserAllWallletData()
   }, [oneUsdPrice, userInfo])
 
   const responsive = {
@@ -335,9 +323,9 @@ const Home = () => {
                                   </div>
                                   <div className="nk-wgw-balance">
                                     <div className="amount">
-                                      {inceptive}
+                                      {userInfo?.currency_preference == "inr" ? inceptive : (inceptive/oneUsdPrice).toFixed(2)}
                                       <span className="currency currency-nio">
-                                        INRX
+                                       {userInfo?.currency_preference == "inr"  ? "INRX": "USDT"}
                                       </span>
                                     </div>
                                   </div>
@@ -362,9 +350,9 @@ const Home = () => {
                                   </div>
                                   <div className="nk-wgw-balance">
                                     <div className="amount">
-                                      {airdrop}
+                                    {userInfo?.currency_preference == "inr" ? airdrop : (airdrop/oneUsdPrice).toFixed(2)}
                                       <span className="currency currency-btc">
-                                        INRX
+                                      {userInfo?.currency_preference == "inr"  ? "INRX": "USDT"}
                                       </span>
                                     </div>
                                   </div>
@@ -386,9 +374,9 @@ const Home = () => {
                                   </div>
                                   <div className="nk-wgw-balance">
                                     <div className="amount">
-                                      {affiliates}
+                                      {userInfo?.currency_preference == 'inr' ? (affiliates * oneUsdPrice)?.toFixed(2) : affiliates?.toFixed(2)}
                                       <span className="currency currency-eth">
-                                        INRX
+                                      {userInfo?.currency_preference == "inr"  ? "INRX": "USDT"}
                                       </span>
                                     </div>
                                   </div>
@@ -422,9 +410,9 @@ const Home = () => {
                                   </div>
                                   <div className="nk-wgw-balance">
                                     <div className="amount">
-                                      {inherited}
+                                    {userInfo?.currency_preference == 'inr' ? (inherited * oneUsdPrice)?.toFixed(2) : inherited?.toFixed(2)}
                                       <span className="currency currency-nio">
-                                        INRX
+                                      {userInfo?.currency_preference == "inr"  ? "INRX": "USDT"}
                                       </span>
                                     </div>
                                   </div>
@@ -454,9 +442,10 @@ const Home = () => {
                                     >
                                       {/* [L<sup>1</sup> / L<sup>2</sup> / L
                                         <sup>3</sup>][1% / 0.5% / 0.2% ] */}
-                                      {bounty?.toFixed(2)}
+                                
+                                      {userInfo?.currency_preference == 'inr' ? (bounty* oneUsdPrice)?.toFixed(2) : bounty?.toFixed(2)}
                                       <span className="currency currency-btc">
-                                        INRX
+                                      {userInfo?.currency_preference == "inr"  ? "INRX": "USDT"}
                                       </span>
                                     </div>
                                   </div>
@@ -481,9 +470,10 @@ const Home = () => {
                                   </div>
                                   <div className="nk-wgw-balance">
                                     <div className="amount">
-                                      {handOut}
+                                    {userInfo?.currency_preference == 'inr' ? (handOut* oneUsdPrice)?.toFixed(2) : handOut?.toFixed(2)}
+                                  
                                       <span className="currency currency-eth">
-                                        INRX
+                                      {userInfo?.currency_preference == "inr"  ? "INRX": "USDT"}
                                       </span>
                                     </div>
                                   </div>
