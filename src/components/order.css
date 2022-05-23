@@ -40,56 +40,78 @@
   z-index: 2;
 }
 
+@media only screen and (min-width: 1800px) and (max-width: 1819px) {
+       .OrderhistorySize{
+         font-size: 9px;
+       }
+}
+
 @media only screen and (min-width: 1501px) and (max-width: 1800px) {
   .p-3{
-    max-width: 400px;
+    max-width: 350px;
        }
+   .OrderhistorySize{
+         font-size: 8px;
+       }
+       .TradeHistorySize{
+        font-size: 12px;
+         
+      }
 }
 @media only screen and (min-width: 1200px) and (max-width: 1500px) {
   .p-3{
-    max-width: 330px;
+    max-width: 320px;
        }
+       .TradeHistorySize{
+        font-size: 10px;
+          /* width: 20%; */
+      }
+      .OrderhistorySize{
+        font-size:7.5px;
+        padding: 0px !important;
+      }
+      .img{
+        width: 10px
+      }
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .p-3{
-    max-width: 350px;
+    max-width: 330px;
        }
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .p-3{
     max-width:500px;
        }
+       .OrderhistorySize{
+        font-size: 17.5px;
+      }
 
 }
+@media only screen and (min-width: 500px) and (max-width: 875px) {
+  .historyorder{
+      font-size: 12px;
+  }
+}
+
+@media only screen and (min-width: 400px) and (max-width: 693px) {
+  .TradeHistorySize{
+    font-size: 9px;
+      
+  }
+}
+
+@media only screen and (min-width: 300px) and (max-width: 575px) {
+  .p-3{
+    max-width:500px;
+       }
+}
+
+.TradeHistorySize{
+  /* font-size:15.5px; */
+}
 
 
-/* 
-@media (max-width: 1250px) {
-   .p-3{
-max-width: 283px;
-   }
-}
-@media (max-width: 1300px) {
-  .p-3{
-max-width: 305px;
-  }
-}
-@media (min-width: 1300px) {
-  .p-3{
-max-width: 700px;
-  }
-}
-@media (max-width: 900px) {
-  .p-3{
-max-width: 500px;
-  }
-}
-@media (max-width: 922px) {
-  .p-3{
-max-width: 750px;
-width: 750px;
-  }
-} */
 
 .order_cont:hover{
   transform: scaleY(1.1);
@@ -101,3 +123,18 @@ width: 750px;
   background-color: rgb(230, 255, 245);
   font-weight: bold;
 }
+
+
+
+.zoom:hover{
+  transform: scaleY(1.1);
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+  0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+  0 2.5px 1px rgba(0, 0, 0, 0.06),
+  0 2.3px 7.9px rgba(0, 0, 0, 0.072);
+  /* 0 4.8px 3.4px rgba(0, 0, 0, 0.086),
+  0 10px 8px rgba(0, 0, 0, 0.12); */
+  overflow-y: hidden;
+  
+}
+
