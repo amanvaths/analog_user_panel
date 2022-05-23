@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import { BASE_URL, GOOGLE_ID } from "../Api_connection/config";
 
+
 // import ForgetPassword from "./ForgetPassword";
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
 import swal from "sweetalert";
 import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { setUserInfo, setIsLoggedIn, setSettingPage } from "../redux/reducer/user";
+import { useDispatch } from "react-redux";
+import { setUserInfo, setIsLoggedIn, setSettingPage, sendOtp } from "../redux/reducer/user";
 
 
 // import FacebookLogin from "react-facebook-login";
@@ -79,6 +80,10 @@ const Login = (props) => {
         }
         if (resp.status == 3) {
           swal("Email is not varified", "Verify Email before Login", "error");
+          dispatch(sendOtp(({ LoginDetails: resp })))
+          setTimeout(() => {
+            navigate("/EmailOtp");
+          }, 3000);
           navigate("/ResendOtp");
         }
         if (resp.status == 4) {

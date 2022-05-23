@@ -6,21 +6,21 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { BASE_URL } from "../Api_connection/config";
 
-const UserList = () => {  
-  const {user} = useSelector((state)=> state.user.value)
+const UserList = () => {
+  const { user } = useSelector((state) => state.user.value)
   const email = user.email
   const [affiliates, setAffiliates] = useState([]);
   const [affiliateCount, setAffiliatesCount] = useState(0)
   const [currentPage, setCurrentPage] = useState(1);
 
   const getAffiliate = async () => {
-    try{
-      console.log(email , " user email asjljasf")
-        const data = await axios.post(`${BASE_URL}/getAffiliates`, { email : email })       
-        setAffiliates(data.data);
-        setAffiliatesCount(data.data)
-    }catch(error){
-      console.log("Error in getting data Affililate :" +error);
+    try {
+      console.log(email, " user email asjljasf")
+      const data = await axios.post(`${BASE_URL}/getAffiliates`, { email: email })
+      setAffiliates(data.data);
+      setAffiliatesCount(data.data)
+    } catch (error) {
+      console.log("Error in getting data Affililate :" + error);
     }
   }
 
@@ -32,9 +32,9 @@ const UserList = () => {
   //   setCurrentPage((page) => page + 1);
   // }
 
-  useEffect(()=>{
+  useEffect(() => {
     getAffiliate();
-  },[])
+  }, [])
 
   return (
     <div>
@@ -44,7 +44,7 @@ const UserList = () => {
 
           <div class="nk-wrap ">
             <Header />
-           
+
             {/* Add This Line  */}
 
             <div class="container-xl tableContainer">
@@ -56,10 +56,10 @@ const UserList = () => {
                   <div class="nk-block-between position-relative">
                     <div class="nk-block-head-content ">
                       <h3 class="nk-block-title page-title">
-                        Affiliates 
+                        Affiliates
                       </h3>
                       <div class="nk-block-des text-soft">
-                       
+
                         <p>{`Your affiliatese.`}</p>
                       </div>
                     </div>
@@ -95,10 +95,37 @@ const UserList = () => {
                     </div>
                   </div>
                 </div>
-                <div class="nk-block">
-                  <div class="card card-bordered card-stretch">
-                    
-                  </div>
+                <div className="row">
+                    <div className="card-bordered col-md-6 col-lg-4 col-12">
+                      <div class="card-inner">
+                        <h5 class="card-title">Level 1</h5>
+                        <h6 class="card-subtitle mb-2">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                      </div>
+                    </div>
+
+                    <div class="card card-bordered col-md-6 col-lg-4 col-12">
+                      <div class="card-inner">
+                        <h5 class="card-title">Level</h5>
+                        <h6 class="card-subtitle mb-2">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                      </div>
+                    </div>
+
+                    <div class="card-bordered col-md-6 col-lg-4 col-12">
+                      <div class="card-inner">
+                        <h5 class="card-title">Card title</h5>
+                        <h6 class="card-subtitle mb-2">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                      </div>
+                    </div>
+                 
                 </div>
               </div>
             </div>
