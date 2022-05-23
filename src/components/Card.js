@@ -24,7 +24,7 @@ const Card1 = (props) => {
 
   return (
     <>
-      <div className="container mt-1" onClick={props.onClick}>
+      <div className="container mt-1" onClick={props.onClick} style={{zIndex:100}}>
         <div className="row" style={{ padding: "0px" }}>
           <div className="">
             <div className="card card-bordered is-dark">

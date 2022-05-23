@@ -156,15 +156,15 @@ const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + 
                                   <div className="col-6 d-flex justify-content-center">
                                     <div className="w-50" style={{fontSize: "1.1rem", fontWeight: "500px"}}>
                                     <p className="p-1">
-                                      <span>*Total Fund: </span>
+                                      <span>Total Fund: </span>
                                       <span >&nbsp;&nbsp;{totalAna? totalAna?.toFixed(2): ""} ANA </span>
                                     </p>
                                     <p className="p-1" >
                                       <span>Total Spend: </span>
-                                      <span>&nbsp;&nbsp;58973.02</span>
+                                      <span>&nbsp;&nbsp;0</span>
                                     </p>
                                     <p className="p-1">
-                                      <span>*Current Balance: </span>
+                                      <span>Current Balance: </span>
                                       <span>&nbsp;&nbsp;{userInfo?.currency_preference == "usd" ? `${coinWW[8]?.wallet?.usdt_balance?.toFixed(2)} USDT` : `${(oneUsdPrice * coinWW[8]?.wallet?.usdt_balance).toFixed(2)} INRX`}</span>
                                     </p>
                                     </div>
@@ -172,11 +172,11 @@ const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + 
                                   <div className="col-6 d-flex justify-content-center">
                                   <div className="w-50" style={{fontSize: "1.1rem", fontWeight: "500px"}}>
                                     <p className="p-1">
-                                      <span>*Analog Value: </span>
+                                      <span>Analog Value: </span>
                                       <span>&nbsp;&nbsp;{userInfo?.anaPrice} {userInfo?.currency_preference == 'inr' ? "INRX" : "USDT"}</span>
                                     </p>
                                     <p className="p-1">
-                                      <span>*Bonus:</span>
+                                      <span>Bonus:</span>
                                       <span>&nbsp;&nbsp;
                                         {totalBonus?.toFixed(2)}&nbsp;&nbsp;{
                                                         userInfo?.currency_preference == 'inr' ? "INRX" : "USDT"
@@ -213,7 +213,7 @@ const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + 
                             cp={Object.values(userInfo).length > 0 ? userInfo.currency_preference.toUpperCase() : 'USD'}
                            onClick={()=> 
                             {
-                            navigate("/cryptoTransaction", { state: {lable: element.symbol, price: (element?.quote?.[userInfo?.currency_preference.toUpperCase()]?.price)?.toFixed(2)} })
+                            navigate("/cryptoTransaction", { state: {logo: `https://s2.coinmarketcap.com/static/img/coins/64x64/${element.id}.png`, lable: element.symbol, price: (element?.quote?.[userInfo?.currency_preference.toUpperCase()]?.price)?.toFixed(2)} })
                            }
                            }
                            />

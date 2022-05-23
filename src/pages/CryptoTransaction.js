@@ -407,12 +407,14 @@ const CryptoTransaction = () => {
                                           </div>
                                         </div>
                                       </div>
+                                      {/* <span> <img src={state.logo} alt="" style={{height: "40px", width: "40px"}}/> </span> */}
 
                                       <div className="nk-tb-col text-end">
                                         <span className="tb-amount"
                                         >
                                           {element.amount.toFixed(2)}&nbsp;
-                                          <span>{element.symbol}</span></span>
+                                          <span>{element.symbol}</span>
+                                          </span>
                                         
                                         <span className="tb-amount-sm">{(element?.amount * state?.price)?.toFixed(2)}&nbsp; 
                                         {userInfo?.currency_preference == 'inr' ? "INRX" : "USDT"}

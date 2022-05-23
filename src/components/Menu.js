@@ -363,7 +363,7 @@ function Menu (){
                     {/* Add Line */}
 
                     <li class="nk-menu-item">
-                      <Link to="/userlist" class="nk-menu-link">
+                      <Link to="/Affiliate" class="nk-menu-link">
                         <span class="nk-menu-icon">
                           <em class="icon ni ni-user-circle"></em>
                         </span>

@@ -11,7 +11,7 @@ import Getpresale from "../components/Getpresale";
 import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
 import swal from "sweetalert";
-
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useSelector, useDispatch } from "react-redux";
 import { setBalance } from "../redux/reducer/user";
 import { useNavigate } from "react-router-dom";
@@ -20,60 +20,60 @@ import { useNavigate } from "react-router-dom";
 // import { Carousel } from "react-responsive-carousel";
 // import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-const slideImages = [
-  {
-    url: "http://localhost:3000/images/slides/2.png",
-    caption: "",
-  },
-  {
-    url: "http://localhost:3000/images/slides/3.png",
-    caption: "",
-  },
-  {
-    url: "http://localhost:3000/images/slides/4.png",
-    caption: "",
-  },
-  {
-    url: "http://localhost:3000/images/slides/5.png",
-    caption: "",
-  },
-  {
-    url: "http://localhost:3000/images/slides/6.png",
-    caption: "",
-  },
-  {
-    url: "http://localhost:3000/images/slides/7.png",
-    caption: "",
-  },
-  {
-    url: "http://localhost:3000/images/slides/8.png",
-    caption: "",
-  },
-  {
-    url: "http://localhost:3000/images/slides/9.png",
-    caption: "",
-  },
-  {
-    url: "http://localhost:3000/images/slides/10.png",
-    caption: "",
-  },
-  {
-    url: "http://localhost:3000/images/slides/11.png",
-    caption: "",
-  },
-  {
-    url: "http://localhost:3000/images/slides/12.png",
-    caption: "",
-  },
-  {
-    url: "http://localhost:3000/images/slides/13.png",
-    caption: "",
-  },
-  {
-    url: "http://localhost:3000/images/slides/14.png",
-    caption: "",
-  }
-];
+// const slideImages = [
+//   {
+//     url: "http://localhost:3000/images/slides/2.png",
+//     caption: "",
+//   },
+//   {
+//     url: "http://localhost:3000/images/slides/3.png",
+//     caption: "",
+//   },
+//   {
+//     url: "http://localhost:3000/images/slides/4.png",
+//     caption: "",
+//   },
+//   {
+//     url: "http://localhost:3000/images/slides/5.png",
+//     caption: "",
+//   },
+//   {
+//     url: "http://localhost:3000/images/slides/6.png",
+//     caption: "",
+//   },
+//   {
+//     url: "http://localhost:3000/images/slides/7.png",
+//     caption: "",
+//   },
+//   {
+//     url: "http://localhost:3000/images/slides/8.png",
+//     caption: "",
+//   },
+//   {
+//     url: "http://localhost:3000/images/slides/9.png",
+//     caption: "",
+//   },
+//   {
+//     url: "http://localhost:3000/images/slides/10.png",
+//     caption: "",
+//   },
+//   {
+//     url: "http://localhost:3000/images/slides/11.png",
+//     caption: "",
+//   },
+//   {
+//     url: "http://localhost:3000/images/slides/12.png",
+//     caption: "",
+//   },
+//   {
+//     url: "http://localhost:3000/images/slides/13.png",
+//     caption: "",
+//   },
+//   {
+//     url: "http://localhost:3000/images/slides/14.png",
+//     caption: "",
+//   }
+// ];
 
 const Home = () => {
 
@@ -91,13 +91,15 @@ const Home = () => {
   const [totalTransaction, setTransaction] = useState(0)
   const [lastActivity, setLastActivity] = useState(0)
 
+  const [copied, setCopied] = useState(false);
+
   const [data, setData] = useState([])
 
   const [recentActivities, setRecentActivities] = useState([]);
   const [totalRef, setTotalRef] = useState(0)
   const [totalRefIncome, setTotalRefIncome] = useState(0)
+  const [i, setI] = useState([])
 
-  
 
 
   const getPreSale = async () => {
@@ -131,6 +133,8 @@ const Home = () => {
     try {
       const res = await axios.post(`${BASE_URL}/recentActivities`, { email: email, limit: 4 });
       setRecentActivities(res.data);
+      const img = await axios.post(`${BASE_URL}/bannerData`)
+      setI(img?.data?.message)
     } catch (error) {
       console.log(" Error in recent Activity API " + error);
     }
@@ -146,11 +150,14 @@ const Home = () => {
     }
   }
 
+
+
   const a = new Date(lastActivity)
   const date = a.toDateString()
   const time = a.toLocaleTimeString()
 
   useEffect(() => {
+
     getUserWalletData()
     getPreSale()
     recentActivity()
@@ -191,55 +198,63 @@ const Home = () => {
             {/* Add this code  */}
             <div className="slide-container">
               <Slide>
-                {slideImages.map((slideImage, index) => (
-                  <div className="each-slide" key={index}>
-                    <div
-                      style={{
-                        backgroundImage: `url(${slideImage.url})`,
-                        height: "250px",
-                        width: "100%",
-                        backgroundSize: "cover",
-                        backgroundRepeat: "no-repeat",
-                        backgroundAttachment: "fixed"
-                      }}
-                    >
-                      <span
+                {i?.map((slideImage, index) => {
+                  return (
+                    <div className="each-slide" key={index}>
+                      <div
                         style={{
+                          backgroundImage: `url(http://localhost:3001${slideImage.banner})`,
                           height: "250px",
-                          display: "inline-block",
-                          marginTop: "60px",
+                          width: "100%",
+                          backgroundSize: "cover",
+                          backgroundRepeat: "no-repeat",
+                          backgroundAttachment: "fixed"
                         }}
                       >
-                        {slideImage.caption}
-                      </span>
-                    </div>
-                  </div>
-                ))}
+                        <span
+                          style={{
+                            height: "250px",
+                            display: "inline-block",
+                            marginTop: "60px",
+                          }}
+                        >
+                          {slideImage.caption}
+                        </span>
+                      </div>
+                    </div>)
+                })}
               </Slide>
             </div>
             {/* Add Slide small card */}
-            <Carousel
-              responsive={responsive}
-              arrows={false}
-              itemclassName="carousel-item-padding-80-px"
-              containerclassName="carousel-container"
-            // className="position-absolute top-50 start-50 translate-middle"
-            >
-              {
-                data.map((data) => {
-                  console.log(data.levelname, "level name");
-                  return (
-                    <Getpresale
-                      levelname={data.levelname}
-                      coinPrice={data.price}
-                      coinQty={data.coinquantity}
-                      duration={data.duration}
-                      persent={data.persentsold}
-                    />
-                  );
-                })
-              }
-            </Carousel>
+            <div className="row">
+              <div className="col-12">
+                <Carousel
+                  className="react-multi-carousel-list"
+                  responsive={responsive}
+                  arrows={false}
+                  centerMode={true}
+                  itemclassName=""
+                  containerclassName="carousel-container"
+                >
+                  {
+                    data.map((data) => {
+                      console.log(data.levelname, "level name");
+                      return (
+                        <Getpresale
+                          levelname={data.levelname}
+                          coinPrice={data.price}
+                          coinQty={data.coinquantity}
+                          duration={data.duration}
+                          persent={data.persentsold}
+                        />
+                      );
+                    })
+                  }
+                </Carousel>
+              </div>
+
+            </div>
+
 
             <div className="nk-content nk-content-fluid">
               <div className="container-xl wide-lg">
@@ -323,9 +338,9 @@ const Home = () => {
                                   </div>
                                   <div className="nk-wgw-balance">
                                     <div className="amount">
-                                      {userInfo?.currency_preference == "inr" ? inceptive : (inceptive/oneUsdPrice).toFixed(2)}
+                                      {userInfo?.currency_preference == "inr" ? inceptive : (inceptive / oneUsdPrice).toFixed(2)}
                                       <span className="currency currency-nio">
-                                       {userInfo?.currency_preference == "inr"  ? "INRX": "USDT"}
+                                        {userInfo?.currency_preference == "inr" ? "INRX" : "USDT"}
                                       </span>
                                     </div>
                                   </div>
@@ -350,9 +365,9 @@ const Home = () => {
                                   </div>
                                   <div className="nk-wgw-balance">
                                     <div className="amount">
-                                    {userInfo?.currency_preference == "inr" ? airdrop : (airdrop/oneUsdPrice).toFixed(2)}
+                                      {userInfo?.currency_preference == "inr" ? airdrop : (airdrop / oneUsdPrice).toFixed(2)}
                                       <span className="currency currency-btc">
-                                      {userInfo?.currency_preference == "inr"  ? "INRX": "USDT"}
+                                        {userInfo?.currency_preference == "inr" ? "INRX" : "USDT"}
                                       </span>
                                     </div>
                                   </div>
@@ -376,7 +391,7 @@ const Home = () => {
                                     <div className="amount">
                                       {userInfo?.currency_preference == 'inr' ? (affiliates * oneUsdPrice)?.toFixed(2) : affiliates?.toFixed(2)}
                                       <span className="currency currency-eth">
-                                      {userInfo?.currency_preference == "inr"  ? "INRX": "USDT"}
+                                        {userInfo?.currency_preference == "inr" ? "INRX" : "USDT"}
                                       </span>
                                     </div>
                                   </div>
@@ -410,9 +425,9 @@ const Home = () => {
                                   </div>
                                   <div className="nk-wgw-balance">
                                     <div className="amount">
-                                    {userInfo?.currency_preference == 'inr' ? (inherited * oneUsdPrice)?.toFixed(2) : inherited?.toFixed(2)}
+                                      {userInfo?.currency_preference == 'inr' ? (inherited * oneUsdPrice)?.toFixed(2) : inherited?.toFixed(2)}
                                       <span className="currency currency-nio">
-                                      {userInfo?.currency_preference == "inr"  ? "INRX": "USDT"}
+                                        {userInfo?.currency_preference == "inr" ? "INRX" : "USDT"}
                                       </span>
                                     </div>
                                   </div>
@@ -442,10 +457,10 @@ const Home = () => {
                                     >
                                       {/* [L<sup>1</sup> / L<sup>2</sup> / L
                                         <sup>3</sup>][1% / 0.5% / 0.2% ] */}
-                                
-                                      {userInfo?.currency_preference == 'inr' ? (bounty* oneUsdPrice)?.toFixed(2) : bounty?.toFixed(2)}
+
+                                      {userInfo?.currency_preference == 'inr' ? (bounty * oneUsdPrice)?.toFixed(2) : bounty?.toFixed(2)}
                                       <span className="currency currency-btc">
-                                      {userInfo?.currency_preference == "inr"  ? "INRX": "USDT"}
+                                        {userInfo?.currency_preference == "inr" ? "INRX" : "USDT"}
                                       </span>
                                     </div>
                                   </div>
@@ -470,10 +485,10 @@ const Home = () => {
                                   </div>
                                   <div className="nk-wgw-balance">
                                     <div className="amount">
-                                    {userInfo?.currency_preference == 'inr' ? (handOut* oneUsdPrice)?.toFixed(2) : handOut?.toFixed(2)}
-                                  
+                                      {userInfo?.currency_preference == 'inr' ? (handOut * oneUsdPrice)?.toFixed(2) : handOut?.toFixed(2)}
+
                                       <span className="currency currency-eth">
-                                      {userInfo?.currency_preference == "inr"  ? "INRX": "USDT"}
+                                        {userInfo?.currency_preference == "inr" ? "INRX" : "USDT"}
                                       </span>
                                     </div>
                                   </div>
@@ -493,25 +508,9 @@ const Home = () => {
                         <div className="card-title  mb-0">
                           <h5 className="title">Recent Activities</h5>
                         </div>
-                        {/* <div className="card-tools">
-                            <ul className="card-tools-nav">
-                              <li>
-                                <a href="#">Buy</a>
-                              </li>
-                              <li>
-                                <a href="#">Sell</a>
-                              </li>
-                              <li className="active">
-                                <a href="#">All</a>
-                              </li>
-                            </ul>
-                          </div> */}
                       </div>
 
-
-
                       <div className="tranx-list card card-bordered">
-
                         {
                           recentActivities.map((data) => {
                             const d = new Date(data.createdAt);
@@ -635,8 +634,23 @@ const Home = () => {
                               data-success="Copied"
                               data-text="Copy Link"
                             >
-                              <em className="clipboard-icon icon ni ni-copy"></em>{" "}
-                              <span className="clipboard-text">Copy Link</span>
+                              {/* <em className="clipboard-icon icon ni ni-copy"></em>{" "}
+                              <span className="clipboard-text">Copy Link</span> */}
+                              <CopyToClipboard text={`http://localhost:3000/signup?ref=${userInfo?.refferal}`}
+                                onCopy={() => {
+                                  setCopied(true)
+                                  setTimeout(() => {
+                                    setCopied(false);
+                                  }, 800);
+                                }}>
+                                <div>
+                                <em className="clipboard-icon icon ni ni-copy"></em>
+                                
+                                  {/* <MdOutlineContentCopy color="white" /> */}
+                                  {copied ?
+                                    <p className="text-light position-absolute" style={{ fontSize: "14px", top: "-21px", left: "17px", padding: "0px 5px", backgroundColor: "transparent" }}>copied!</p> : null}
+                                </div>
+                              </CopyToClipboard>
                             </div>
                             <div className="form-icon">
                               <em className="icon ni ni-link-alt"></em>
@@ -672,7 +686,7 @@ const Home = () => {
                               {/* <div className="title">{userInfo?.currency_preference == 'inr' ? `${refData?.totalIncome?.toFixed(2)} INRX` : 
                                 `${(refData?.totalIncome / oneUsdPrice)?.toFixed(2)} USDT`
                               }</div> */}
-                              {totalRefIncome > 0 ? userInfo.currency_preference == 'inr' ?  `${totalRefIncome.toFixed(2)}` : `${(totalRefIncome/ oneUsdPrice)?.toFixed(2)}`: 0} &nbsp;&nbsp;
+                              {totalRefIncome > 0 ? userInfo.currency_preference == 'inr' ? `${totalRefIncome.toFixed(2)}` : `${(totalRefIncome / oneUsdPrice)?.toFixed(2)}` : 0} &nbsp;&nbsp;
                               {userInfo.currency_preference == 'inr' ? "INRX" : "USDT"}
                               <div className="sub-text">Referral Earn</div>
                             </div>

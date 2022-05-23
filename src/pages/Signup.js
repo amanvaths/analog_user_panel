@@ -88,11 +88,11 @@ const Signup = (props) => {
     "28253347908-l3f5pge45v4avpv50ppksjlkvvap6t35.apps.googleusercontent.com";
 
   const onLoginSuccess = (res) => {
-    console.log(res);
+    console.log(res, "P");
   };
 
   const onLoginFailure = (res) => {
-    console.log(res);
+    console.log(res, "F");
   };
 
   //Validation Box

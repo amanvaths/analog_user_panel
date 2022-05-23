@@ -5,6 +5,9 @@ import axios from "axios";
 import { getSettings } from "../Api_connection/ApiFunction";
 import { setUserInfo } from "../redux/reducer/user";
 import { Triangle } from 'react-loader-spinner'
+import swal from "sweetalert";
+import 'react-notifications/lib/notifications.css';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 const PersonalInfo = () => {
   const dispatch = useDispatch()
@@ -85,14 +88,24 @@ const PersonalInfo = () => {
   const updateReferral = async () => {
     try {
       const data = await axios.post(`${BASE_URL}/update_refferal`, { email: email, refferalCode: ref })
-      if (data) {
+      console.log(data.data.status, "::DATA>STATUS");
+      if (data.data.status == 1) {
         const res = await axios.post(`${BASE_URL}/configSettings`, { email: email })
         dispatch(setUserInfo({ userInfo: res.data }))
-        console.log(userInfo.refferal, ":: User info after update");
+        NotificationManager.success('Refferal Added', '')
+        console.log(userInfo, ":: User info after update");
+        updateSetting();
       }
       console.log(data.data.status, ":: response from update Referaal API ");
     } catch (error) {
-      console.log(error);
+      if(error.response.data.status == 2){
+        swal("Invalid refferal Code or Already updated", "", "error")
+      }
+      else if(error.response.data.status == 0){
+        swal("Something Went wrong 1", "", "error")
+      }
+      console.log(error.response.data.status);
+      console.log(error.response.data.message);
     }
   }
 
@@ -317,7 +330,7 @@ const PersonalInfo = () => {
               </> : null
             }
 
-
+ <NotificationContainer/>
 
           </div>
 
