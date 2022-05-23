@@ -10,7 +10,7 @@ export default function TradeHistory() {
   useEffect(() => {
    
       axios
-        .get(`${BASE_URL}/getAllOrder`, { email: "" })
+        .get(`${BASE_URL}/getAllOrder`)
         .then((res) => {
           console.log(res.data, "All Order trandHistory");
           setHistory(res.data.order);
@@ -26,12 +26,11 @@ export default function TradeHistory() {
       <div class="card-header justify-content-between align-items-center">
         <h6 class="card-title"> TRADE HISTORY</h6>
       </div>
-
-      <div class="card-body   p-0">
+      <div class="card-body table-responsive  p-0">
         <table class="table  mb-0">
           <div style={{ display: "contents" }}>
             <thead >
-              <tr>
+              <tr className="historyorder">
                 <th style={{width:"15%"}}>Total Analog</th>
                 <th style={{width:"20%"}}>Total Amount Pay</th>
                 <th style={{width:"19%"}}>Buying Price</th>
@@ -44,14 +43,14 @@ export default function TradeHistory() {
               {history.map((h) => {
                 return (
                   <>
-                    <tr class="zoom ">
-                      <td style={{width:"18%"}}> {h.cVolume.toFixed(2)} 
+                    <tr class="zoom  historyorder">
+                      <td className="TradeHistorySize" style={{width:"15%"}}> {h.cVolume.toFixed(2)} 
                          <img
                             src="./images/Analog.png"
                             style={{ width: "24px" }}
                            
                           /></td>
-                      <td class="text-danger" style={{width:"18%"}}>
+                      <td  class="text-danger TradeHistorySize" style={{width:"20%"}}>
                         {h.preferred_currency_amount?.toFixed(2)}{" "}
                         {h.compair_currency == "usd" ? (
                           <img
@@ -68,15 +67,15 @@ export default function TradeHistory() {
                         )}
                         <i class="ion ion-arrow-graph-up-right"></i>
                       </td>
-                      <td class="text-success" style={{width:"18%"}}>
+                      <td class="text-success TradeHistorySize" style={{width:"19%"}}>
                         {/* {h.pref_raw_price.toFixed(8)} */}
                         {h.compair_currency == "usd"
                           ? h.pref_raw_price.toFixed(8)
                           : h.pref_raw_price}
                         <i class="ion ion-arrow-graph-down-right"></i>
                       </td>
-                      <td style={{width:"20%"}}>{h.presalelevel}</td>
-                      <td style={{width:"26%"}}>{h.date}</td>
+                      <td className="TradeHistorySize" style={{width:"20%"}}>{h.presalelevel}</td>
+                      <td className="TradeHistorySize" style={{width:"26%"}}>{h.date}</td>
                     </tr>
                   </>
                 );

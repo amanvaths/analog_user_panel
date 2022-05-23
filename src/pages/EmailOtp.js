@@ -12,6 +12,7 @@ const EmailOtp = (props) => {
   const navigate = useNavigate();
 
   // console.log(otp, "otpp");
+  console.log(otpSend, ":: IS OTP SEND");
 
   var email = user?.email;
   if (!otpSend) {

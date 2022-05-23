@@ -118,7 +118,7 @@ const Home = () => {
       setLastActivity(res.data.last_activity)
       setInceptive(res?.data?.inceptive_wallet)
       setAirDrop(res?.data?.airdrop_wallet)
-      setffiliates(res?.data?.affilites_wallet?.toFixed(2))
+      setffiliates(res?.data?.affilites_wallet)
       setInherited(res?.data?.inherited_wallet)
       setBounty(res?.data?.bounty_wallet)
       setHandOut(res?.data?.handout_wallet)

@@ -9,7 +9,7 @@ import swal from "sweetalert";
 
 export default function Orders() {
   const dispatch = useDispatch();
-  const email = localStorage.getItem("email");
+  // const email = localStorage.getItem("email");
   const [buy, setBuy] = useState(true);
   const [coinData, setCoinData] = useState({});
   const [atprice, setAtprice] = useState(0);
@@ -20,6 +20,7 @@ export default function Orders() {
   const [wallets, setWallets] = useState([]);
   const [walletbalance, setWalletBalance] = useState("");
   const [walletsymbol, setWalletsymbol] = useState("");
+  const [CurrencyType, setCurrencyType] = useState("")
   const [quantity, setQuantity] = useState(0);
   const [quantityerror, setQuantityError] = useState(false);
   const [message, setMessage] = useState("");
@@ -27,15 +28,16 @@ export default function Orders() {
 
   // dispatch
 
-  const { userInfo, oneUsdPrice } = useSelector((state) => state.user.value);
+  const {user, userInfo, oneUsdPrice } = useSelector((state) => state.user.value);
+  const email = user?.email;
   const symbolState = useSelector((store) => store);
-  console.log(userInfo?.currency_preference, "vipin currency_prefrence");
-  console.log(oneUsdPrice, "One Usd Price ");
+  // setCurrencyType(userInfo?.currency_preference)
 
   const getData = async () => {
     try {
       const res = await axios.post(`${BASE_URL}/getCoinData`, {
         currency: userInfo?.currency_preference,
+       
       });
       setCoinData({ ...res.data });
     } catch (error) {
@@ -50,23 +52,16 @@ export default function Orders() {
       });
       let walletData = res.data;
       const data = {
-        // symbol: walletData[4]?.symbol,
-        balance: walletData[4]?.usdt_balance,
+        balance: walletData[8]?.usdt_balance,
         // inrxsymbol: walletData[5]?.symbol,
       };
-      console.log(data.balance, "::BALANCE AMIT");
-
-      console.log(
-        ":::::::::::::::::::::-------",
-        typeof data?.balance,
-        typeof oneUsdPrice
-      );
+ 
       setWalletBalance(
         userInfo?.currency_preference == "usd"
           ? data?.balance
           : Number(data?.balance * oneUsdPrice)
       );
-
+     console.log(data.balance,"data.balance Anurag");
       walletData = walletData.filter((wallet) => wallet?.balance > 0);
       setWallets([...walletData]);
       const cd = [];
@@ -75,7 +70,7 @@ export default function Orders() {
           //console.log(coin);
           cd.push(coin[1]);
         }
-        //console.log(cd, "coin data");
+        
         setCoinData([...cd]); */
     } catch (error) {
       console.log(error);
@@ -88,7 +83,7 @@ export default function Orders() {
     try {
       const res = await axios.post(`${BASE_URL}/anaPrice`, {});
       let Anadata = res.data;
-      console.log(res.data._data.price, "ana Price erefrf fgfhg gbghgfhnf");
+     
       // setAnaprice(res.data.price)
       setAtprice(res.data._data.price);
     } catch (error) {
@@ -124,7 +119,7 @@ export default function Orders() {
       return atprice;
     }
   }
-  console.log(wallets, ":: All Data In Wallets ");
+
 
   function TotalAmt() {
     if (ammount == 0) {
@@ -141,9 +136,9 @@ export default function Orders() {
       axios
         .post(`${BASE_URL}/order`, params)
         .then((res) => {
-          console.log(res.data, "ffdddf");
           if (res.data.status == true) {
             swal(`${res.data.message}`, "Welcome", "success");
+            ammount=0;
           }
         })
         .catch((error) => {
@@ -156,25 +151,27 @@ export default function Orders() {
   useEffect(() => {
     if (email) {
       axios
-        .get(`${BASE_URL}/getAllOrder`, { email: email })
+        .get(`${BASE_URL}/getAllOrder?email=${email}&& compair_currency=${userInfo?.currency_preference}`)
         .then((res) => {
-          console.log(res.data, "All Order");
-          setHistory(res.data.order);
+          const orderrespons=res.data;
+          setHistory(orderrespons.order);
+          console.log(orderrespons.order,"orderresponse...")
+          console.log(userInfo?.currency_preference,"userInfo.currency_preference")
         })
         .catch((error) => {
           console.log(error.message);
         });
     }
-  }, []);
+  }, [userInfo]);
 
   return (
     <div className="order">
-      <div class="card mt-2" style={{ height: "450px" }}>
+      <div class="card mt-2">
         <div class="card-header justify-content-between align-items-center">
-          <h6 class="card-title align-items-center text-dark"> ORDER</h6>
+          <h6 class="card-title "> ORDER</h6>
         </div>
-        <div class="card-body p-0">
-          <table class="table font-w-600 mb-0">
+        <div class="card-body table-responsive  p-0">
+          <table class="table  mb-0">
           <div style={{ display: "contents" }}>
             <thead>
               <tr style={{ fontSize: "10px" }}>
@@ -187,41 +184,43 @@ export default function Orders() {
               </tr>
             </thead>
             <div style={{ height: "373px",overflow:"auto",display: "table-caption"}}>
-            <tbody>
+            <tbody >
               {history &&
                 history.map((h) => {
                   return (
                     <>
-                      <tr class="zoom" style={{ fontSize: "10px" }}>
-                        <td style={{width:"23%"}}> {h.cVolume?.toFixed(2)}<img
+                      <tr class="zoom" style={{ fontSize: "9.5px" }}>
+                        <td className="OrderhistorySize" style={{width:"20%"}}> {h.cVolume?.toFixed(2)}<img
                             src="./images/Analog.png"
                             style={{ width: "20px" }}
-                           
+                            className="img"
                           /></td>
-                        <td class="text-danger" style={{width:"23%"}}>
+                        <td className="OrderhistorySize" class="text-danger" style={{width:"20%"}}>
                           {h.preferred_currency_amount?.toFixed(2)}{" "}
                           {h.compair_currency == "usd" ? (
                             <img
                               src="./images/Usdt.png"
                               style={{ width: "17px" }}
                               alt="usdt"
+                              className="img"
                             />
                           ) : (
                             <img
                               src="./images/Inrx_black.png"
                               style={{ width: "17px" }}
                               alt="inrx"
+                              className="img"
                             />
                           )}
                           <i class="ion ion-arrow-graph-up-right"></i>
                         </td>
-                        <td class="text-success" style={{width:"22%"}}>
+                        <td className="OrderhistorySize" class="text-success" style={{width:"25%"}}>
                           {h.compair_currency == "usd"
                             ? h.pref_raw_price.toFixed(8)
                             : h.pref_raw_price}
                           <i class="ion ion-arrow-graph-down-right"></i>
                         </td>
-                        <td style={{width:"32%"}}>{h.presalelevel}</td>
+                        <td className="OrderhistorySize" style={{width:"32%"}}>{h.presalelevel}</td>
                         {/* <td>{h.date}</td> */}
                       </tr>
                     </>
@@ -248,6 +247,7 @@ export default function Orders() {
               textAlign: "center",
               fontWeight: "bold",
               background: "rgb(241, 241, 241)",
+              margin:"4px 0px"
             }}
           >
             BUY
@@ -269,7 +269,7 @@ export default function Orders() {
                 className="sing-up-button"
                 style={{
                   textAlign: "center",
-                  height: "400px",
+                  height: "460px",
                   justifyContent: "center",
                   alignItems: "center",
                   display: " flex",
@@ -278,7 +278,7 @@ export default function Orders() {
               >
                 {/* Buy Btex Option  */}
 
-                <div class="p-3" style={{ width: "465px" }}>
+                <div class="p-3" style={{ width: "450px" }}>
                   <div>
                     <h6>
                       ANA PRICE{" "}
@@ -302,7 +302,7 @@ export default function Orders() {
                       </div>
                     </h6>
                   </div>
-                  <div class="input-group mb-3">
+                  <div class="input-group mb-3" style={{margin:"0px"}} >
                     <div class="input-group-prepend">
                       <span
                         class="input-group-text buy-sell-form-bg buy-sell-theme"
@@ -381,6 +381,7 @@ export default function Orders() {
                         </svg>
                       </span>
                       {Number(walletbalance).toFixed(4)}
+                      
                     </div>
                     <div
                       class="col-6 p-2 d-flex justify-content-between"
@@ -394,10 +395,6 @@ export default function Orders() {
                         class="cursor"
                         style={{ cursor: "pointer" }}
                         onClick={() => {
-                          console.log(
-                            (walletbalance * 0.25 * oneUsdPrice) / atprice,
-                            "PriceCal"
-                          );
                           setTotal(
                             Number(walletbalance ? walletbalance * 0.25 : 0)
                           );
