@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useLayoutEffect } from "react";
 import "./order.css";
 import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { setCurrency_type } from "../redux/buySell";
 import { data } from "jquery";
 import swal from "sweetalert";
+import "../App.css";
+import MultiRangeSlider from "./multiRangeSlider/MultiRangeSlider";
 
 export default function Orders() {
   const dispatch = useDispatch();
@@ -20,24 +22,29 @@ export default function Orders() {
   const [wallets, setWallets] = useState([]);
   const [walletbalance, setWalletBalance] = useState("");
   const [walletsymbol, setWalletsymbol] = useState("");
-  const [CurrencyType, setCurrencyType] = useState("")
-  const [quantity, setQuantity] = useState(0);
-  const [quantityerror, setQuantityError] = useState(false);
-  const [message, setMessage] = useState("");
-  const [status, setStatus] = useState("");
+  const [minimumvalue, setMinimumValue] = useState("");
+
+  // const [CurrencyType, setCurrencyType] = useState("");
+  // const [quantity, setQuantity] = useState(0);
+  // const [quantityerror, setQuantityError] = useState(false);
+  // const [message, setMessage] = useState("");
+  // const [status, setStatus] = useState("");
 
   // dispatch
 
-  const {user, userInfo, oneUsdPrice } = useSelector((state) => state.user.value);
+  const { user, userInfo, oneUsdPrice, totalAna } = useSelector(
+    (state) => state.user.value
+  );
   const email = user?.email;
-  const symbolState = useSelector((store) => store);
-  // setCurrencyType(userInfo?.currency_preference)
+  // const symbolState = useSelector((store) => store);
+  
+
+  
 
   const getData = async () => {
     try {
       const res = await axios.post(`${BASE_URL}/getCoinData`, {
         currency: userInfo?.currency_preference,
-       
       });
       setCoinData({ ...res.data });
     } catch (error) {
@@ -55,13 +62,13 @@ export default function Orders() {
         balance: walletData[8]?.usdt_balance,
         // inrxsymbol: walletData[5]?.symbol,
       };
- 
+
       setWalletBalance(
         userInfo?.currency_preference == "usd"
           ? data?.balance
           : Number(data?.balance * oneUsdPrice)
       );
-     console.log(data.balance,"data.balance Anurag");
+    
       walletData = walletData.filter((wallet) => wallet?.balance > 0);
       setWallets([...walletData]);
       const cd = [];
@@ -83,7 +90,7 @@ export default function Orders() {
     try {
       const res = await axios.post(`${BASE_URL}/anaPrice`, {});
       let Anadata = res.data;
-     
+
       // setAnaprice(res.data.price)
       setAtprice(res.data._data.price);
     } catch (error) {
@@ -99,17 +106,14 @@ export default function Orders() {
   }, [oneUsdPrice, userInfo, data.balance]);
 
   const trxInAna = atprice / coinData[walletsymbol]?.quote?.INR?.price;
-  console.log(trxInAna, "1trx in 1 ana");
-  console.log(atprice, "AtPrice");
+  
+
   const inTrx = ammount * trxInAna;
-  console.log(inTrx, "Total Trx");
+ 
 
   function calculatePrice(coinPrice) {
-    console.log(coinPrice, ":::::::: Coin Data");
     const trxInAna = atprice / coinPrice;
-    console.log(trxInAna, "1trx value");
     const inTrx = ammount * trxInAna;
-    console.log(inTrx, "Total Trx value");
     setTotal(inTrx);
     setAtprice(inTrx);
   }
@@ -119,7 +123,6 @@ export default function Orders() {
       return atprice;
     }
   }
-
 
   function TotalAmt() {
     if (ammount == 0) {
@@ -138,7 +141,7 @@ export default function Orders() {
         .then((res) => {
           if (res.data.status == true) {
             swal(`${res.data.message}`, "Welcome", "success");
-            ammount=0;
+            ammount = 0;
           }
         })
         .catch((error) => {
@@ -151,18 +154,20 @@ export default function Orders() {
   useEffect(() => {
     if (email) {
       axios
-        .get(`${BASE_URL}/getAllOrder?email=${email}&& compair_currency=${userInfo?.currency_preference}`)
+        .get(
+          `${BASE_URL}/getAllOrder?email=${email}&& compair_currency=${userInfo?.currency_preference}`
+        )
         .then((res) => {
-          const orderrespons=res.data;
+          const orderrespons = res.data;
           setHistory(orderrespons.order);
-          console.log(orderrespons.order,"orderresponse...")
-          console.log(userInfo?.currency_preference,"userInfo.currency_preference")
         })
         .catch((error) => {
           console.log(error.message);
         });
     }
   }, [userInfo]);
+
+  // progress Bar
 
   return (
     <div className="order">
@@ -172,63 +177,109 @@ export default function Orders() {
         </div>
         <div class="card-body table-responsive  p-0">
           <table class="table  mb-0">
-          <div style={{ display: "contents" }}>
-            <thead>
-              <tr style={{ fontSize: "10px" }}>
-
-                <th  style={{width:"22%"}}>Total Analog</th>
-                <th  style={{width:"22%"}}>Total Amount Pay</th>
-                <th  style={{width:"29%"}}>Buying Price</th>
-                <th style={{width:"27%"}}>Pool</th>
-                {/* <th>Time</th> */}
-              </tr>
-            </thead>
-            <div style={{ height: "373px",overflow:"auto",display: "table-caption"}}>
-            <tbody >
-              {history &&
-                history.map((h) => {
-                  return (
-                    <>
-                      <tr class="zoom" style={{ fontSize: "9.5px" }}>
-                        <td className="OrderhistorySize" style={{width:"20%"}}> {h.cVolume?.toFixed(2)}<img
-                            src="./images/Analog.png"
-                            style={{ width: "20px" }}
-                            className="img"
-                          /></td>
-                        <td className="OrderhistorySize" class="text-danger" style={{width:"20%"}}>
-                          {h.preferred_currency_amount?.toFixed(2)}{" "}
-                          {h.compair_currency == "usd" ? (
-                            <img
-                              src="./images/Usdt.png"
-                              style={{ width: "17px" }}
-                              alt="usdt"
-                              className="img"
-                            />
-                          ) : (
-                            <img
-                              src="./images/Inrx_black.png"
-                              style={{ width: "17px" }}
-                              alt="inrx"
-                              className="img"
-                            />
-                          )}
-                          <i class="ion ion-arrow-graph-up-right"></i>
-                        </td>
-                        <td className="OrderhistorySize" class="text-success" style={{width:"25%"}}>
-                          {h.compair_currency == "usd"
-                            ? h.pref_raw_price.toFixed(8)
-                            : h.pref_raw_price}
-                          <i class="ion ion-arrow-graph-down-right"></i>
-                        </td>
-                        <td className="OrderhistorySize" style={{width:"32%"}}>{h.presalelevel}</td>
-                        {/* <td>{h.date}</td> */}
-                      </tr>
-                    </>
-                  );
-                })}
-            </tbody>
+            <div style={{ display: "contents" }}>
+              <thead>
+                <tr style={{ fontSize: "10px" }}>
+                  <th
+                    className="OrderHistoryHedding"
+                    style={{ width: "20%", padding: "7px 7px" }}
+                  >
+                    Total Analog
+                  </th>
+                  <th
+                    className="OrderHistoryHedding"
+                    style={{ width: "23%", padding: "7px 7px" }}
+                  >
+                    Total Amount Pay
+                  </th>
+                  <th
+                    className="OrderHistoryHedding"
+                    style={{ width: "30%", padding: "7px 7px" }}
+                  >
+                    Buying Price
+                  </th>
+                  <th
+                    className="OrderHistoryHedding"
+                    style={{ width: "27%", padding: "7px 7px" }}
+                  >
+                    Pool
+                  </th>
+                  {/* <th>Time</th> */}
+                </tr>
+              </thead>
+              <div
+                style={{
+                  height: "373px",
+                  overflow: "auto",
+                  display: "table-caption",
+                }}
+                className="OrderHistoryContainer"
+              >
+                <tbody>
+                  {history &&
+                    history.map((h) => {
+                      return (
+                        <>
+                          <tr class="zoom" style={{ fontSize: "9.5px" }}>
+                            <td
+                              className="OrderhistorySize"
+                              style={{ width: "20%" }}
+                            >
+                              {" "}
+                              {h.cVolume?.toFixed(2)}
+                              <img
+                                src="./images/Analog.png"
+                                style={{ width: "20px" }}
+                                className="img"
+                              />
+                            </td>
+                            <td
+                              className="OrderhistorySize"
+                              class="text-danger"
+                              style={{ width: "22%" }}
+                            >
+                              {h.preferred_currency_amount?.toFixed(2)}{" "}
+                              {h.compair_currency == "usd" ? (
+                                <img
+                                  src="./images/Usdt.png"
+                                  style={{ width: "17px" }}
+                                  alt="usdt"
+                                  className="img"
+                                />
+                              ) : (
+                                <img
+                                  src="./images/Inrx_black.png"
+                                  style={{ width: "17px" }}
+                                  alt="inrx"
+                                  className="img"
+                                />
+                              )}
+                              <i class="ion ion-arrow-graph-up-right"></i>
+                            </td>
+                            <td
+                              className="OrderhistorySize"
+                              class="text-success"
+                              style={{ width: "23%" }}
+                            >
+                              {h.compair_currency == "usd"
+                                ? h.pref_raw_price.toFixed(8)
+                                : h.pref_raw_price}
+                              <i class="ion ion-arrow-graph-down-right"></i>
+                            </td>
+                            <td
+                              className="OrderhistorySize"
+                              style={{ width: "32%" }}
+                            >
+                              {h.presalelevel}
+                            </td>
+                            {/* <td>{h.date}</td> */}
+                          </tr>
+                        </>
+                      );
+                    })}
+                </tbody>
+              </div>
             </div>
-          </div>
           </table>
         </div>
       </div>
@@ -247,7 +298,7 @@ export default function Orders() {
               textAlign: "center",
               fontWeight: "bold",
               background: "rgb(241, 241, 241)",
-              margin:"4px 0px"
+              margin: "4px 0px",
             }}
           >
             BUY
@@ -279,30 +330,7 @@ export default function Orders() {
                 {/* Buy Btex Option  */}
 
                 <div class="p-3" style={{ width: "450px" }}>
-                  <div>
-                    <h6>
-                      ANA PRICE{" "}
-                      <div className="column">
-                        {userInfo?.currency_preference == "usd"
-                          ? (atprice / oneUsdPrice).toFixed(8)
-                          : atprice}{" "}
-                        {userInfo?.currency_preference == "usd" ? (
-                          <img
-                            src="./images/Usdt.png"
-                            style={{ width: "17px" }}
-                            alt="usdt"
-                          />
-                        ) : (
-                          <img
-                            src="./images/Inrx_black.png"
-                            style={{ width: "17px" }}
-                            alt="inrx"
-                          />
-                        )}
-                      </div>
-                    </h6>
-                  </div>
-                  <div class="input-group mb-3" style={{margin:"0px"}} >
+                  <div class="input-group mb-3" style={{ margin: "0px" }}>
                     <div class="input-group-prepend">
                       <span
                         class="input-group-text buy-sell-form-bg buy-sell-theme"
@@ -319,7 +347,7 @@ export default function Orders() {
                     <input
                       type="number"
                       class="form-control buy-sell-form-bg buy-sell-theme"
-                      value={ammount}
+                      value={ammount?.toFixed(4)}
                       style={{
                         borderColor: "rgb(202, 202, 204)",
                         height: "54px",
@@ -334,155 +362,88 @@ export default function Orders() {
                             ? (amt * atprice) / oneUsdPrice
                             : atprice * amt;
                         setTotal(tAmt);
-                        setQuantityError(false);
+                        // setQuantityError(false);
                       }}
                     />
-
-                    {/* {quantityerror == true ? (
-                    alert("Please Enter A Valid ammount *")
-
-                ) : null} */}
                   </div>
-                  <div style={{ marginRight: "23pc", marginTop: "-15px" }}>
-                    {total.toFixed(6)}
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between",fontSize:"13px"}}
+                  >
+                    <div style={{ marginTop: "-15px" }}>
+                      <div>Price:- {total && total?.toFixed(2)} {userInfo?.currency_preference == "usd" ? "USDT" : "INRX"}</div>
+                    </div>
+                    <div
+                      style={{
+                        // fontSize: "10px",
+                        marginTop: "-15px",
+                        // marginLeft: "23pc",
+                      }}
+                    >
+                      <div>
+                        ANA PRICE{":- "}
+                        {userInfo?.currency_preference == "usd"
+                          ? (atprice / oneUsdPrice).toFixed(8)
+                          : atprice}{" "}
+                        {userInfo?.currency_preference == "usd" ? (
+                          <img
+                            src="./images/Usdt.png"
+                            style={{ width: "15px" }}
+                            alt="usdt"
+                          />
+                        ) : (
+                          <img
+                            src="./images/Inrx_black.png"
+                            style={{ width: "15px" }}
+                            alt="inrx"
+                          />
+                        )}
+                      </div>
+                    </div>
                   </div>
-
-                  <div style={{ margin: "10px 0px" }}>
-                    {/* <h4>{walletdata}</h4> */}
+                  <div style={{ margin: "30px 0px" }}>
                     <h4 style={{ fontSize: "15px" }}>
                       {userInfo?.currency_preference == "usd" ? "USDT" : "INRX"}
                     </h4>
                   </div>
+                  {/* Progress Bar  */}
 
-                  <div class="row  px-3" style={{ margin: "0px -16px" }}>
-                    <div
-                      class="col-6 pl-1"
-                      style={{
-                        display: "flex",
-                        flexDirection: " row",
-                        alignItems: " center",
-                        borderInline: "1px solid rgb(206, 212, 218)",
-                        border: " 1px solid rgb(206, 212, 218)",
-                        borderRadius: "5px",
-                      }}
-                    >
-                      <span class="mx-2" title="wallet">
-                        <svg
-                          stroke="currentColor"
-                          fill="currentColor"
-                          strokeWidth="0"
-                          viewBox="0 0 512 512"
-                          class="text-secondary"
-                          height="24"
-                          width="24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path d="M200.4 27.39L180.9 183h42.8l49.1-146.57-72.4-9.04zm91.7 8L242.7 183l149.7.1 34.3-102.61-134.6-45.1zM180 46.03l-71.9 7.84L122.2 183h40.7L180 46.03zM64 153c-11.5 0-19.18 8.8-21.27 17.2-1.04 4.2-.45 7.6.73 9.5 1.17 1.8 2.79 3.3 8.54 3.3h52.1l-3.3-30H64zm357.4 0l-10 30h47.5c-2.6-5-3.7-10.3-3-15.6.7-5.2 2.7-9.9 5.3-14.4h-39.8zM41 201v246.9c0 5.1 2.79 11.1 7.37 15.7C52.96 468.2 59 471 64 471l384 .1c5 0 11-2.8 15.6-7.4 4.6-4.6 7.4-10.6 7.4-15.7v-71h-87c-44 0-44-82 0-82h87v-93.9L41 201zm343 112c-20 0-20 46 0 46h22.3c-9-3.8-15.3-12.7-15.3-23s6.3-19.2 15.3-23H384zm41.7 0c9 3.8 15.3 12.7 15.3 23s-6.3 19.2-15.3 23H487v-46h-61.3zm-9.7 16c-4 0-7 3-7 7s3 7 7 7 7-3 7-7-3-7-7-7z"></path>
-                        </svg>
-                      </span>
-                      {Number(walletbalance).toFixed(4)}
-                      
-                    </div>
-                    <div
-                      class="col-6 p-2 d-flex justify-content-between"
-                      style={{
-                        borderRight: "1px solid rgb(206, 212, 218)",
-                        border: "1px solid rgb(206, 212, 218)",
-                        borderRadius: "5px",
-                      }}
-                    >
-                      <div
-                        class="cursor"
-                        style={{ cursor: "pointer" }}
-                        onClick={() => {
-                          setTotal(
-                            Number(walletbalance ? walletbalance * 0.25 : 0)
-                          );
-                          if (userInfo?.currency_preference == "usd") {
-                            const amt = Number(
-                              (walletbalance ? walletbalance * 0.25 : 0) /
-                                (atprice / oneUsdPrice)
-                            );
-                            setAmmount(amt);
+                  <div>
+                    {totalAna &&
+                    userInfo &&
+                    oneUsdPrice &&
+                    userInfo?.currency_preference ? (
+                      <MultiRangeSlider
+                        min={
+                          userInfo?.currency_preference == "inr"
+                            ? 5000
+                            : 5000 / oneUsdPrice
+                        }
+                        symbol={userInfo?.currency_preference == "usd" ? "USDT" : "INRX"}
+                        
+                        // max={totalAna * userInfo?.anaPrice}
+                        max={
+                          userInfo?.currency_preference == "inr"
+                          ?(totalAna * userInfo?.anaPrice)
+                          :((totalAna * userInfo?.anaPrice)/oneUsdPrice)
+                        }
+                        fixedmax={ userInfo?.currency_preference == "inr"
+                        ?(totalAna * userInfo?.anaPrice)
+                        :((totalAna * userInfo?.anaPrice)/oneUsdPrice)}
+                        onChange={({ min, max,symbol }) => {
+                          // console.log(`min = ${min}, max = ${max}`);
+                          if (userInfo?.currency_preference == "inr") {
+                            const maxvalue = max / atprice;
+                            setAmmount(maxvalue);
+                            setTotal(max);
                           } else {
-                            const amt = Number(
-                              (walletbalance ? walletbalance * 0.25 : 0) /
-                                atprice
-                            );
-                            setAmmount(amt);
+                            const minvalue = max * atprice;
+                            setAmmount(minvalue);
+                            setTotal(max);
                           }
                         }}
-                      >
-                        25%
-                      </div>
-                      <div
-                        class="px-1 cursor"
-                        style={{ cursor: "pointer" }}
-                        onClick={() => {
-                          setTotal(walletbalance ? walletbalance * 0.5 : 0);
-                          if (userInfo?.currency_preference == "usd") {
-                            const amt = Number(
-                              (walletbalance ? walletbalance * 0.5 : 0) /
-                                (atprice / oneUsdPrice)
-                            );
-                            setAmmount(amt);
-                          } else {
-                            const amt = Number(
-                              (walletbalance ? walletbalance * 0.5 : 0) /
-                                atprice
-                            );
-                            setAmmount(amt);
-                          }
-                        }}
-                      >
-                        50%
-                      </div>
-                      <div
-                        class="px-1 cursor"
-                        style={{ cursor: "pointer" }}
-                        onClick={() => {
-                          setTotal(walletbalance ? walletbalance * 0.75 : 0);
-                          if (userInfo?.currency_preference == "usd") {
-                            const amt = Number(
-                              (walletbalance ? walletbalance * 0.75 : 0) /
-                                (atprice / oneUsdPrice)
-                            );
-                            setAmmount(amt);
-                          } else {
-                            const amt = Number(
-                              (walletbalance ? walletbalance * 0.75 : 0) /
-                                atprice
-                            );
-                            setAmmount(amt);
-                          }
-                        }}
-                      >
-                        75%
-                      </div>
-                      <div
-                        class="cursor"
-                        style={{ cursor: "pointer" }}
-                        onClick={() => {
-                          setTotal(walletbalance ? walletbalance : 0);
-                          if (userInfo?.currency_preference == "usd") {
-                            const amt = Number(
-                              (walletbalance ? walletbalance : 0) /
-                                (atprice / oneUsdPrice)
-                            );
-                            setAmmount(amt);
-                          } else {
-                            const amt = Number(
-                              (walletbalance ? walletbalance : 0) / atprice
-                            );
-                            setAmmount(amt);
-                          }
-                        }}
-                      >
-                        100%
-                      </div>
-                    </div>
+                      />
+                    ) : null}
                   </div>
-
                   <button
                     class="btn text-light btn-block my-2"
                     style={{ background: "rgb(108, 183, 125)", top: "40px" }}

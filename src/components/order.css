@@ -62,6 +62,14 @@
   .p-3{
     max-width: 320px;
        }
+       .historyorder{
+         font-size: 10px;
+         width: 20%;
+       }
+       .OrderHistoryHedding{
+          font-size: 8px;
+         width: 25%;
+       }
        .TradeHistorySize{
         font-size: 10px;
           /* width: 20%; */
@@ -69,22 +77,67 @@
       .OrderhistorySize{
         font-size:7.5px;
         padding: 0px !important;
+       
       }
       .img{
         width: 10px
       }
+      .OrderHistoryContainer{
+        height: 330px;
+      }
 }
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
+@media only screen and (min-width: 1000px) and (max-width: 1199px) {
   .p-3{
     max-width: 330px;
        }
+       .OrderhistorySize{
+        font-size: 8.5px;
+      }
+      .TradeHistorySize{
+        font-size: 12px;
+      }
+      .historyorder{
+        font-size: 12px;
+    }
+    .OrderHistoryHedding{
+      font-size: 8px;
+   
+   }
+   .thumb--right{
+    right: 32px;
+  }
+  .thumb--left{
+    left: 32px;
+  }
+ 
 }
+@media only screen and (min-width: 992px) and (max-width: 1000px) {
+  .p-3{
+    max-width:310px;
+       }
+
+       .thumb--right{
+         right: 44px;
+       }
+       .thumb--left{
+         left: 44px;
+       }
+      
+
+}
+
+
+
+
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .p-3{
     max-width:500px;
        }
        .OrderhistorySize{
-        font-size: 17.5px;
+        font-size: 23px;
+      }
+      .order{
+        background: none !important;
       }
 
 }
@@ -92,24 +145,34 @@
   .historyorder{
       font-size: 12px;
   }
+  .OrderhistorySize{
+    font-size: 18px;
+  }
+  .p-3{
+    max-width:580px;
+       }
 }
 
 @media only screen and (min-width: 400px) and (max-width: 693px) {
   .TradeHistorySize{
-    font-size: 9px;
+    font-size: 8.5px;
       
+  }
+  .OrderhistorySize{
+    font-size: 13px;
   }
 }
 
 @media only screen and (min-width: 300px) and (max-width: 575px) {
   .p-3{
-    max-width:500px;
+    max-width:345px;
+       }
+       .order{
+         background: none !important;
        }
 }
 
-.TradeHistorySize{
-  /* font-size:15.5px; */
-}
+
 
 
 
