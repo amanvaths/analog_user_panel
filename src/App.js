@@ -20,11 +20,12 @@ import ResendOtp from "./pages/ResendOtp";
 import Wallet from "./pages/Wallet";
 import AccountSettings from "./pages/AccountSettings";
 import CryptoTransaction from "./pages/CryptoTransaction";
-import UserList from "./pages/UserList";
+// import UserList from "./pages/Affiliate";
 import BuySell from "./pages/BuySell";
 import ChangePassword from "./components/ChangePassword";
 import OtpTFA from "./pages/OtpTFA";
 import MyAccount from "./pages/MyAccount";
+import AffiliateTable from "./pages/AffiliateTable";
 import { useSelector } from "react-redux";
 
 function App(props) {
@@ -52,12 +53,13 @@ function App(props) {
           <Route path="/wallet" element={<Wallet />} />
           <Route path="/accountSettings" element={<AccountSettings />} />
           <Route path="/cryptoTransaction" element={<CryptoTransaction />} />
-          <Route path="/userlist" element={<UserList />} />
+          {/* <Route path="/userlist" element={<UserList />} /> */}
           <Route path="/buysell" element={< BuySell />} />
           <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="/2faAuthentication" element={<OtpTFA />} />
           <Route path="/myAccount" element={<MyAccount />} />
           <Route path="/*" element={(user.email && user.token)?<Home />:<Login />} />
+          <Route path="/AffiliateList" element={(user.email && user.token)?<AffiliateTable />:<Login />} />
           {/* <Route path="/orders" element={<Orders />} /> */}
         </Routes>
       </BrowserRouter>

@@ -47792,7 +47792,7 @@ button.close {
 }
 .nk-tb-col {
   position: relative;
-  display: table-cell;
+  display: table-cell !important;
   vertical-align: middle;
   padding: 1rem 0.5rem;
 }
@@ -89048,7 +89048,7 @@ button.close {
 }
 .nk-tb-col {
   position: relative;
-  display: table-cell;
+  display: table-cell !important;
   vertical-align: middle;
   padding: 1rem 0.5rem;
 }
@@ -98096,4 +98096,8 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode input,
 
 .col-4{
   color:red;
+}
+
+.react-multi-carousel-list{
+  display: block !important;
 }

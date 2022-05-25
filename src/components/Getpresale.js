@@ -68,6 +68,7 @@ const Getpresale = (props) => {
                 label={`${persent}%`}
                 variant="success "
                 aria-valuemin={100}
+               
               />
             </div>
                
