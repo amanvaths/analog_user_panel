@@ -10,7 +10,7 @@ function BuySell(props) {
   
   return (
     <>
-    <div style={{ width:"100%"}}>
+    <div style={{ maxWidth:"100%"}}>
       <div class="nk-app-root">
         <div class="nk-main ">
           <Menu />

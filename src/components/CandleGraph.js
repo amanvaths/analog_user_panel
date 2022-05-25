@@ -11,7 +11,7 @@ function CandleGraph() {
 // dispatch
 const {currency_prefrence} = useSelector((state)=> state.currency.value)
   const symbolState = useSelector((store)=>store);
-  console.log(symbolState,"symbolState");
+  
 
   const dispatch = useDispatch();
 

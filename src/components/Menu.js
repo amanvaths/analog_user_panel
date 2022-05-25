@@ -40,7 +40,7 @@ function Menu (){
   
  
   // dispatch(set)
-  console.log(":: USD PRice",usdPrice);
+ 
 
   useEffect(()=>{
     getUsdPrice()

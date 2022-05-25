@@ -60,7 +60,8 @@ class TVChartContainer extends React.PureComponent  {
 		interval: '1H',
 		containerId: 'tv_chart_container',
 		// datafeedUrl: 'https://demo_feed.tradingview.com',
-		datafeedUrl: 'https://order.btexapi.cloud/api/chart',
+		// datafeedUrl: 'https://order.btexapi.cloud/api/chart',
+		datafeedUrl: 'http://localhost:3001/api/chart',
 		//https://bitflash.io/api/chart
 		// datafeedUrl: 'http://localhost/api/chart',
 		libraryPath: '/charting_library/',
@@ -89,15 +90,14 @@ class TVChartContainer extends React.PureComponent  {
 		// console.log("TVChartContainer coming:");
 		// this.init();
 		
-		console.log("theme:: " ,this.props.theme);
 		const tvWidget = this.widgetOptionsFunc(this.props,this.state.symbols);
 		this.tvWidget = tvWidget;
 	}
 	componentWillReceiveProps(){
-		console.log("theme:: " ,this.props.theme);
+		
 	}
 	componentDidUpdate() {
-		console.log("theme:: " ,this.props.theme);
+	
 
 	
 		// console.log("this: " ,this.state);
@@ -123,7 +123,6 @@ class TVChartContainer extends React.PureComponent  {
 	}
 }
 function mapStateToProps(state) {
-	console.log("state:::",state) // state
 	return {
 		theme:"Light",
 	}

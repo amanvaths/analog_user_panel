@@ -12,9 +12,7 @@ export default function TradeHistory() {
       axios
         .get(`${BASE_URL}/getAllOrder`)
         .then((res) => {
-          console.log(res.data, "All Order trandHistory");
           setHistory(res.data.order);
-          console.log(history, "history");
         })
         .catch((error) => {
           console.log(error.message);
