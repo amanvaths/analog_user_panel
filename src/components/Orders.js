@@ -370,7 +370,7 @@ export default function Orders() {
                     style={{ display: "flex", justifyContent: "space-between",fontSize:"13px"}}
                   >
                     <div style={{ marginTop: "-15px" }}>
-                      <div>Price:- {total && total?.toFixed(2)} {userInfo?.currency_preference == "usd" ? "USDT" : "INRX"}</div>
+                      <div>Buying Ammount:- {total && total?.toFixed(2)} {userInfo?.currency_preference == "usd" ? "USDT" : "INRX"}</div>
                     </div>
                     <div
                       style={{

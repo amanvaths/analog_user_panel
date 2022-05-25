@@ -86,7 +86,7 @@ const MultiRangeSlider = ({fixedmax, min, max, onChange}) => {
         <div className="slider__right-value" style={{right:"0px",display:"none"}}>{maxVal?.toFixed(2)}</div>
         <div className="slider__right-value">{fixedmax?.toFixed(2)}</div>
         <div className="slider__left-value "style={{left:"0px",fontWeight:"bold"}}>{ userInfo?.currency_preference=="inr"?"INRX":"USDT"}</div>
-        <div className="slider__right-value "style={{right:"60px",fontWeight:"bold"}}>{ userInfo?.currency_preference=="inr"?"INRX":"USDT"}</div>
+        <div className="slider__right-value "style={{right:"55px",fontWeight:"bold"}}>{ userInfo?.currency_preference=="inr"?"INRX":"USDT"}</div>
       </div>
     </div>
   );

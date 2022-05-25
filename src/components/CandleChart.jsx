@@ -60,7 +60,8 @@ class TVChartContainer extends React.PureComponent  {
 		interval: '1H',
 		containerId: 'tv_chart_container',
 		// datafeedUrl: 'https://demo_feed.tradingview.com',
-		datafeedUrl: 'https://order.btexapi.cloud/api/chart',
+		// datafeedUrl: 'https://order.btexapi.cloud/api/chart',
+		datafeedUrl: 'http://localhost:3001/api/chart',
 		//https://bitflash.io/api/chart
 		// datafeedUrl: 'http://localhost/api/chart',
 		libraryPath: '/charting_library/',
