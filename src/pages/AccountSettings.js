@@ -46,26 +46,16 @@ const AccountSettings = () => {
 
   }, [])
 
-  const profileMenu = () => {  
-   // alert("hellow" )
-      if(pMenu == 0){
-      var element = document.getElementById("myBody"); 
-      element.classList.add("toggle-shown"); 
-      var element = document.getElementById("toggleBtn"); 
-      element.classList.add("active");                                 
-      var element = document.getElementById("cardAside"); 
-      element.classList.add("content-active");  
-      setPMenu(1)      
-     }else{
-        var element = document.getElementById("myBody"); 
-        element.classList.remove("toggle-shown"); 
-        var element = document.getElementById("toggleBtn"); 
-        element.classList.remove("active");                                 
-        var element = document.getElementById("cardAside"); 
-        element.classList.remove("content-active");
-        setPMenu(0)
-      } 
+  const profileMenuRemove = ()=>{
+    var element = document.getElementById("myBody"); 
+  element.classList.remove("toggle-shown"); 
+  var element = document.getElementById("toggleBtn"); 
+  element.classList.remove("active");                                 
+  var element = document.getElementById("cardAside"); 
+  element.classList.remove("content-active"); 
   }
+
+ 
   return (
     <>
       <div>
@@ -110,7 +100,7 @@ const AccountSettings = () => {
                                     // className={btn1?"toggle btn btn-icon btn-trigger mt-n1 active":"toggle btn btn-icon btn-trigger mt-n1"}
                                     data-target="userAside"                                  
                                   >
-                                    <em className="icon ni ni-menu-alt-r" onClick={()=>profileMenu()}  ></em>
+                                    <em className="icon ni ni-menu-alt-r" onClick={()=>profileMenuRemove()}  ></em>
                                   </a>
                                 </div>
                               </div>
@@ -188,16 +178,16 @@ const AccountSettings = () => {
                                   </span>
                                   <span className="sub-text">{userInfo?.user_id}</span>
                                 </div>
-                                {/* <div className="user-action">
+                                <div className="user-action">
                                   <div className="dropdown">
                                     <a
                                       className="btn btn-icon btn-trigger me-n2"
                                       data-bs-toggle="dropdown"
                                       href="#"
                                     >
-                                      <em className="icon ni ni-more-v"></em>
-                                    </a> */}
-                                    {/* <div className="dropdown-menu dropdown-menu-end">
+                                      <em className="icon ni ni-arrow-left" onClick={profileMenuRemove}></em>
+                                    </a> 
+                                     {/* <div className="dropdown-menu dropdown-menu-end">
                                       <ul className="link-list-opt no-bdr">
                                         <li>
                                           <a href="#">
@@ -212,9 +202,9 @@ const AccountSettings = () => {
                                           </a>
                                         </li>
                                       </ul>
-                                    </div> */}
-                                  {/* </div>
-                                </div> */}
+                                    </div>  */}
+                                   </div>
+                                </div> 
                               </div>
                             </div>
                             <div className="card-inner">

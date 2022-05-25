@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { Modal, Button } from "react-bootstrap"
 import { useSelector, useDispatch } from "react-redux";
 import { setUserInfo, setSettingPage } from "../redux/reducer/user";
+import { profileMenu } from '../Api_connection/ApiFunction';
 import swal from 'sweetalert'
 
 const SecuritySettings = () => {
@@ -41,27 +42,6 @@ const SecuritySettings = () => {
       console.log(error);
     }
   }
-
-  const profileMenu = () => {  
-    // alert("hellow" )
-       if(pMenu == 0){
-       var element = document.getElementById("myBody"); 
-       element.classList.add("toggle-shown"); 
-       var element = document.getElementById("toggleBtn"); 
-       element.classList.add("active");                                 
-       var element = document.getElementById("cardAside"); 
-       element.classList.add("content-active");  
-       setPMenu(1)
-      }else{
-         var element = document.getElementById("myBody"); 
-         element.classList.remove("toggle-shown"); 
-         var element = document.getElementById("toggleBtn"); 
-         element.classList.remove("active");                                 
-         var element = document.getElementById("cardAside"); 
-         element.classList.remove("content-active");
-         setPMenu(0)
-       } 
-   }
 
   useEffect(async()=>{
     const data = await axios.post(`${BASE_URL}/configSettings`, {email: email})

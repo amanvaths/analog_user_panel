@@ -24,3 +24,12 @@ export function Signupn(data) {
 export function getSettings(email) {
   return axios.post(`${BASE_URL}/configSettings`, { email: email }).then((res) => res).catch((error) => { console.log(error) });
 }
+
+export function profileMenu (){  
+  var element = document.getElementById("myBody"); 
+  element.classList.toggle("toggle-shown"); 
+  var element = document.getElementById("toggleBtn"); 
+  element.classList.toggle("active");                                 
+  var element = document.getElementById("cardAside"); 
+  element.classList.toggle("content-active");          
+}

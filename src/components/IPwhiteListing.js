@@ -4,6 +4,8 @@ import { isIP } from 'is-ip'
 import { BASE_URL } from '../Api_connection/config'
 import swal from "sweetalert";
 import { useSelector } from "react-redux";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { profileMenu } from "../Api_connection/ApiFunction";
 
 
 const IPwhiteListing = () => {
@@ -37,7 +39,7 @@ const IPwhiteListing = () => {
             const data = await axios.post(`${BASE_URL}/add_whitelisted_ip`, { email: email, ip: ip })
             console.log(data.data.status, "add");
             if(data.data.status == 1){
-                swal("IP Added Successfuly", " ", "success")
+                NotificationManager.success('IP Added', '')
             }
             getWhiteIP()
         } catch (error) {
@@ -50,34 +52,13 @@ const IPwhiteListing = () => {
             const data = await axios.post(`${BASE_URL}/removeWhiteListedIp`, { _id: id })
             console.log(data, "delete Data");
             if(data.data.status == 1){
-                swal("IP Deleted Successfuly", " ", "success")
+                NotificationManager.error('IP Removed', '')
             }
             getWhiteIP()
         } catch (error) {
             console.log("error");
         }
     }
-
-    const profileMenu = () => {  
-        // alert("hellow" )
-           if(pMenu == 0){
-           var element = document.getElementById("myBody"); 
-           element.classList.add("toggle-shown"); 
-           var element = document.getElementById("toggleBtn"); 
-           element.classList.add("active");                                 
-           var element = document.getElementById("cardAside"); 
-           element.classList.add("content-active");  
-           setPMenu(1)
-          }else{
-             var element = document.getElementById("myBody"); 
-             element.classList.remove("toggle-shown"); 
-             var element = document.getElementById("toggleBtn"); 
-             element.classList.remove("active");                                 
-             var element = document.getElementById("cardAside"); 
-             element.classList.remove("content-active");
-             setPMenu(0)
-           } 
-       }
 
     const handelSubmit = () => {
         setipError(!isIP(ip))
@@ -95,6 +76,7 @@ const IPwhiteListing = () => {
     }, [])
     return (
         <>
+         <NotificationContainer/>
             <div className="card-inner card-inner-lg">
                 <div className="nk-block-head nk-block-head-lg">
 

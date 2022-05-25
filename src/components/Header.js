@@ -8,58 +8,67 @@ import { BASE_URL } from "../Api_connection/config";
 
 const Header = () => {
   const [isopen, setIsopen] = useState(0);
-  const [dark, setDark] = useState(0)
-  const {user, userInfo} = useSelector((state)=> state.user.value)
+  const { user, userInfo } = useSelector((state) => state.user.value)
   const email = user.email;
-  const btn = useSelector((store)=> store.navsetter)
+  const btn = useSelector((store) => store.navsetter)
   const dispatch = useDispatch()
   const navigate = useNavigate();
 
-  const sidebarMenu = async () => {   
-    if(isopen == 0){
-    var element = document.getElementById("myBody"); 
-    element.classList.add("nav-shown"); 
-    var element = document.getElementById("nk-sidebar"); 
-    element.classList.add("nk-sidebar-active");                                 
-    var element = document.getElementById("nk-nav-toggle"); 
-    element.classList.add("toggle-active");  
-    setIsopen(1);  
-    }else{
-      var element = document.getElementById("myBody"); 
-      element.classList.remove("nav-shown"); 
-      var element = document.getElementById("nk-sidebar"); 
-      element.classList.remove("nk-sidebar-active");                                 
-      var element = document.getElementById("nk-nav-toggle"); 
-      element.classList.remove("toggle-active");  
-      setIsopen(0);  
-    }                            
+  const sidebarMenu = async () => {
+   
+      var element = document.getElementById("myBody");
+      element.classList.add("nav-shown");
+      var element = document.getElementById("nk-sidebar");
+      element.classList.add("nk-sidebar-active");
+      var element = document.getElementById("nk-nav-toggle");
+      element.classList.add("toggle-active");
+    
+      var element1 = document.getElementById("myBody"); 
+      if(element1.classList.contains("toggle-shown")){
+        element1.classList.remove("toggle-shown") 
+      }
+      var element2 = document.getElementById("toggleBtn");
+      if(element2){
+        if(element2.classList.contains("active")) {
+          element2.classList.remove("active")
+        }  
+      }                                  
+      var element3 = document.getElementById("cardAside")
+      if(element3){
+        if(element3.classList.contains("content-active")){
+          element3.classList.remove("content-active") 
+        }
+          
+      }
+      
   }
-  const mode = localStorage.getItem("theme") 
-  if(mode == 1){
-    var element = document.getElementById("myBody"); 
+  const mode = localStorage.getItem("theme")
+  if (mode == 1) {
+    var element = document.getElementById("myBody");
     element.classList.add("dark-mode")
-  }else{
-    var element = document.getElementById("myBody"); 
+  } else {
+    var element = document.getElementById("myBody");
     element.classList.remove("dark-mode")
   }
+
     
-  
+
 
 
 
   const signOut = () => {
     // navigate("/", { replace: true });
     dispatch(logout())
-    navigate("/login")    
+    navigate("/login")
   };
 
-  useEffect( async() => {
-    const data = await axios.post(`${BASE_URL}/configSettings`, {email: email})
-            if(data){
-              dispatch(setUserInfo({userInfo: data.data}))
-            }
+  useEffect(async () => {
+    const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
+    if (data) {
+      dispatch(setUserInfo({ userInfo: data.data }))
+    }
   }, [])
-            
+
 
 
   return (
@@ -72,14 +81,14 @@ const Header = () => {
                 href="#"
                 // onClick={()=>dispatch(navsetter())}
                 // className= "nk-nav-toggle nk-quick-nav-icon toggle-active"
-                className={btn?"nk-nav-toggle nk-quick-nav-icon toggle-active":"nk-nav-toggle nk-quick-nav-icon"}
+                className={btn ? "nk-nav-toggle nk-quick-nav-icon toggle-active" : "nk-nav-toggle nk-quick-nav-icon"}
                 data-target="sidebarMenu"
               >
-                <em className="icon ni ni-menu"  onClick={sidebarMenu}></em>
+                <em className="icon ni ni-menu" onClick={sidebarMenu}></em>
               </a>
             </div>
             <div className="nk-header-brand d-xl-none">
-              <a href="html/crypto/index.html" className="logo-link">
+              <Link to="/home" className="logo-link">
                 <img
                   className="logo-light logo-img"
                   src="images/logo.png"
@@ -93,7 +102,7 @@ const Header = () => {
                   alt="logo-dark"
                 />
                 {/* <span className="nio-version">Crypto</span> */}
-              </a>
+              </Link>
             </div>
             <div className="nk-header-news d-none d-xl-block">
               <div className="nk-news-list">
@@ -102,7 +111,7 @@ const Header = () => {
                     <em className="icon ni ni-card-view"></em>
                   </div>
                   <div className="nk-news-text">
-                    <p> 
+                    <p>
                       Do you know the latest update of 2019?{" "}
                       <span>
                         {" "}
@@ -292,11 +301,11 @@ const Header = () => {
                         </div> */}
                     </div>
                   </a>
-                 
+
 
                   {/* Amit */}
 
-                  <div className="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1" style={{width: "210px"}}>
+                  <div className="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1" style={{ width: "210px" }}>
                     <div className="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                       <div className="user-card">
                         <div className="user-avatar">
@@ -307,7 +316,7 @@ const Header = () => {
                             {userInfo?.username}
                           </span>
                           <span className="sub-text">
-                           {userInfo?.user_id}
+                            {userInfo?.user_id}
                           </span>
                         </div>
                       </div>
@@ -351,33 +360,16 @@ const Header = () => {
                           </Link>
                         </li> */}
                         <li>
-                    
-                             <Link className="dark-switch" to=""  
-                            onClick={()=>  mode ==1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")}
-                            >
-                            <em className="icon ni ni-moon mr-1"></em>
-                            <span className="mr-1">Dark Mode</span>
-                          </Link> 
-{/* 
-                          <div className="data-item">
-              <div className="data-col">
-                <span className="data-label">INRX</span>
-              </div>
-              <div class="nk-block-actions">
-                <div class="custom-control custom-switch me-n2">
-                  <input
-                    type="checkbox"
-                    class="custom-control-input"
-                    id="mo"
-                    name="th"
-                    value="li"
-                    onClick={()=>  mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")}
-                    
-                  />
-                  <label class="custom-control-label" for="mo" ></label>
-                </div>
-              </div>
-            </div>   */}
+                          {
+                            mode == 0 ? <Link to=""
+                              onClick={() => mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")}>
+                              <em className="icon ni ni-moon mr-1"></em>
+                              <span className="mr-1">Dark Mode</span>
+                            </Link> : <Link to="" onClick={() => mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")}>
+                              <em className="icon ni ni-sun mr-1"></em>
+                              <span className="mr-1">Light Mode</span>
+                            </Link>
+                          }
                         </li>
                       </ul>
                     </div>
