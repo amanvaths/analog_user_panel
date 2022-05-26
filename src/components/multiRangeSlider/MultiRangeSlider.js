@@ -21,6 +21,8 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
     " userInfo?.currency_preference userInfo?.currency_preference userInfo?.currency_preference"
   );
 
+
+
   // Convert to percentage
   const getPercent = useCallback(
     (value) => Math.round(((value - min) / (max - min)) * 100),
@@ -56,9 +58,7 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
   return (
     <div className="containerProgress">
       <input
-        // disabled={userInfo?.currency_preference == "usd"
-        //  ?(totalAna * userInfo?.anaPrice) == 0 
-        // :((totalAna * userInfo?.anaPrice)/oneUsdPrice) == 0}
+        disabled
         type="range"
         min={min}
         max={max}
@@ -73,9 +73,9 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
 
       />
       <input
-       disabled={userInfo?.currency_preference == "usd"
-       ?(totalAna * userInfo?.anaPrice) == 0 
-      :((totalAna * userInfo?.anaPrice)/oneUsdPrice) == 0}
+      //  disabled={userInfo?.currency_preference == "usd"
+      //  ?(totalAna * userInfo?.anaPrice) == 0 
+      // :((totalAna * userInfo?.anaPrice)/oneUsdPrice) == 0}
         type="range"
         min={min}
         max={max}

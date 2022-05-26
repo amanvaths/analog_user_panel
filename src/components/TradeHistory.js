@@ -48,7 +48,7 @@ export default function TradeHistory() {
                 {history.map((h) => {
                   return (
                     <>
-                      <tr class="zoom  historyorder">
+                      <tr class="zoom  historyorder" style={{fontSize:"15.3px"}}>
                         <td className="TradeHistorySize" style={{ width: "15%" }}> {h.cVolume.toFixed(2)}
                           <img
                             src="./images/Analog.png"

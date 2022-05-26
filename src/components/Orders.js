@@ -366,7 +366,9 @@ export default function Orders() {
                     <input
                       type="number"
                       class="form-control buy-sell-form-bg buy-sell-theme"
-                      value={ammount?.toFixed(4)}
+                      value={userInfo?.currency_preference == "usd"?total/(atprice / oneUsdPrice):
+                           total/atprice
+                    }
                       style={{
                         borderColor: "rgb(202, 202, 204)",
                         height: "54px",
@@ -454,7 +456,8 @@ export default function Orders() {
                   {/* Progress Bar  */}
 
                   <div>
-                    {totalAna &&
+                    {
+                    // totalAna &&
                     userInfo &&
                     oneUsdPrice &&
                     userInfo?.currency_preference ? (
@@ -495,23 +498,13 @@ export default function Orders() {
                           }
                         }}
                       />
-                    ) : (
-                      <MultiRangeSlider
-                        min={0}
-                        max={0}
-                        fixedmax={0}
-                        onChange={({ min, max, symbol }) => {
-                          // console.log(`min = ${min}, max = ${max}`);
-                        }}
-                      />
-                    )}
+                    ) : null}
                   </div>
                   <button
                     class="btn text-light btn-block my-2"
                     style={{ background: "rgb(108, 183, 125)", top: "60px" }}
                     onClick={TotalAmt}
-                    disabled
-                    ={
+                    disabled={
                       userInfo?.currency_preference == "usd"
                         ? totalAna * userInfo?.anaPrice == 0
                         : (totalAna * userInfo?.anaPrice) / oneUsdPrice == 0
