@@ -4992,7 +4992,7 @@ a:hover .btn-trigger:before { opacity: 1; height: 120%; width: 120%; }
 
 .form-select { height: calc(2.125rem + 2px); }
 
-.form-select:not(.form-control) { opacity: 0; }
+/* .form-select:not(.form-control) { opacity: 0; } */
 
 .form-select-sm, .form-select[data-ui*="sm"] { height: calc(1.75rem + 2px); }
 

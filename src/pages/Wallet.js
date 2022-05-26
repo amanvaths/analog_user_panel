@@ -95,7 +95,6 @@ const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + 
    
   },[])
 
-
   useEffect(() => {
     if (coinData.length > 0 && walletDetails.length > 0) {
       const cd = [];
@@ -103,15 +102,12 @@ const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + 
         const w = walletDetails.filter((w) => w.symbol == coind.symbol);
         cd.push({ ...coind, wallet: w[0] });
       }
-      console.log(cd, "cdcdddcdcdcdcdcdccddd");
       setCoinWW([...cd]);
       setLoader(false)
     }
   }, [walletDetails, coinData]);
 
 
-  console.log(coinWW[8], ":: coin data in wallet *********#$#$#$#$#$#$#$#$#$#$#$#");
-  const a =0 
   return (
     <>
       <div>

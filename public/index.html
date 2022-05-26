@@ -49,7 +49,33 @@
   <script src="assets/js/libs/jkanban.js"></script>
   <script src="assets/js/apps/kanban.js"></script>
   <script src="assets/js/demo-settings.js"></script>
+  
+  <script>
+    document.querySelector(".nk-wrap").addEventListener('click',()=>{
+      
+      var element1 = document.getElementById("myBody");
+      if(element1.classList.contains("nav-shown")){
+    
+        element1.classList.remove("nav-shown");
+      }
 
+      var element2 = document.getElementById("nk-sidebar");
+     if(element2.classList.contains("nk-sidebar")){
+      
+      element2.classList.remove("nk-sidebar-active");
+     }
+     
+     var element3 = document.getElementById("nk-nav-toggle");
+      if(element3){
+   
+        element3.classList.remove("toggle-active");
+      }
+        
+    })
+
+   
+    // } 
+  </script>
 
 
   

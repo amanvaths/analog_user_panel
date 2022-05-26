@@ -1,12 +1,10 @@
 import React, {useEffect } from "react";
-import Particles from "react-particles-js";
 import Menu from "../components/Menu";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
-import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 
-const AffiliateTable = () => {
+
+const Bounty = () => {
   
     return (
       <div>
@@ -20,15 +18,15 @@ const AffiliateTable = () => {
               <div className="nk-content ">
 
             
-                <div className="container wide-xl">
+                <div className="container wide-xl" >
                   <div className="nk-content-inner">
                     <div className="nk-content-body">
-                      <div className="nk-content-wrap">
+                      <div className="nk-content-wrap" >
                         <div className="nk-block-head">
                           <div className="nk-block-between">
                             <div className="nk-block-head-content">
                               <h3 className="nk-block-title page-title">
-                                Affiliate List
+                                Bounty
                               </h3>
                               <div className="nk-block-des text-soft">
                                 <p>Level 1</p>
@@ -37,7 +35,7 @@ const AffiliateTable = () => {
                             <div className="nk-block-head-content">
                               <div className="toggle-wrap nk-block-tools-toggle">
                                 <a
-                                  href="#"
+                                  
                                   className="btn btn-icon btn-trigger toggle-expand mr-n1"
                                   data-target="pageMenu"
                                 >
@@ -93,7 +91,7 @@ const AffiliateTable = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="nk-block">
+                        <div className="nk-block" >
                           <div className="card card-bordered card-stretch">
                             <div className="card-inner-group">
                               <div className="card-inner position-relative card-tools-toggle">
@@ -106,33 +104,17 @@ const AffiliateTable = () => {
                                           data-search="off"
                                           data-placeholder="Bulk Action"
                                         >
-                                          <option value="">Bulk Action</option>
+                                          <option value="">Level 1</option>
                                           <option value="email">
-                                            Send Email
+                                            Level 2
                                           </option>
                                           <option value="group">
-                                            Change Group
+                                            Level 3
                                           </option>
-                                          <option value="suspend">
-                                            Suspend User
-                                          </option>
-                                          <option value="delete">
-                                            Delete User
-                                          </option>
+                                          
                                         </select>
                                       </div>
-                                      <div className="btn-wrap">
-                                        <span className="d-none d-md-block">
-                                          <button className="btn btn-dim btn-outline-light disabled">
-                                            Apply
-                                          </button>
-                                        </span>
-                                        <span className="d-md-none">
-                                          <button className="btn btn-dim btn-outline-light btn-icon disabled">
-                                            <em className="icon ni ni-arrow-right"></em>
-                                          </button>
-                                        </span>
-                                      </div>
+                                      
                                     </div>
                                   </div>
                                   <div className="card-tools mr-n1">
@@ -369,26 +351,26 @@ const AffiliateTable = () => {
                                   </div>
                                 </div>
                               </div>
-                              <div className="card-inner p-0">
+                              <div className="card-inner p-0" style={{overflowX: "scroll"}}>
                                 <div className="nk-tb-list nk-tb-ulist is-compact">
                                   <div className="nk-tb-item nk-tb-head">
                                     <div className="nk-tb-col tb-col-md">
                                         <span className="">Sr No.</span>
                                         </div>
                                     <div className="nk-tb-col">
-                                      <span className="sub-text">User ID</span>
+                                      <span className="sub-text">Price</span>
                                     </div>
                                     <div className="nk-tb-col tb-col-md">
-                                      <span className="sub-text">Email</span>
+                                      <span className="sub-text">Pool</span>
                                     </div>
                                     <div className="nk-tb-col tb-col-sm">
-                                      <span className="sub-text">Amount</span>
+                                      <span className="sub-text">Purchased</span>
                                     </div>
                                     <div className="nk-tb-col tb-col-md">
-                                      <span className="sub-text">Quantity</span>
+                                      <span className="sub-text">Expense</span>
                                     </div>
                                     <div className="nk-tb-col tb-col-xl">
-                                      <span className="sub-text">Date</span>
+                                      <span className="sub-text">Inherited 5 %</span>
                                     </div>
                                     <div className="nk-tb-col tb-col-xl">
                                       <span className="sub-text">Time</span>
@@ -2585,4 +2567,4 @@ const AffiliateTable = () => {
     );
  
 }
-export default AffiliateTable;
+export default Bounty;

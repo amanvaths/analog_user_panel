@@ -15,7 +15,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useSelector, useDispatch } from "react-redux";
 import { setBalance } from "../redux/reducer/user";
 import { useNavigate } from "react-router-dom";
-// import { setUserInfo, setIsLoggedIn, setSettingPage } from "../redux/reducer/user";
+
 
 // import { Carousel } from "react-responsive-carousel";
 // import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -79,6 +79,7 @@ const Home = () => {
 
   const { user, userInfo, oneUsdPrice } = useSelector((state) => state.user.value)
   const email = user?.email;
+  const navigate = useNavigate()
 
   const [totalAnalogBuy, setTotalAnalogBuy] = useState(0)
   const [inceptive, setInceptive] = useState(0)
@@ -144,7 +145,7 @@ const Home = () => {
     try {
       const res = await axios.post(`${BASE_URL}/geRefferalData`, { email: email })
       setTotalRef(res.data.totalRefferal)
-      setTotalRefIncome(res.data.totalIncome)
+      setTotalRefIncome(res?.data?.totalIncome)
     } catch (error) {
       console.log(error);
     }
@@ -348,12 +349,12 @@ const Home = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-sm-4">
+                          <div className="col-sm-4" onClick={()=> navigate('/Airdrop')} style={{cursor: "pointer"}}>
                             <div className="card bg-light">
                               <div className="nk-wgw sm">
                                 <a
                                   className="nk-wgw-inner"
-                                  href="#"
+                                  
                                 >
                                   <div className="nk-wgw-name">
                                     <div className="nk-wgw-icon">
@@ -375,10 +376,10 @@ const Home = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-sm-4">
+                          <div className="col-sm-4" onClick={()=> navigate('/Affiliate', {replace: true})} style={{cursor: "pointer"}}>
                             <div className="card bg-light">
                               <div className="nk-wgw sm">
-                                <a className="nk-wgw-inner" href="#">
+                                <a className="nk-wgw-inner">
                                   <div className="nk-wgw-name">
                                     <div className="nk-wgw-icon">
                                       <em className="icon ni ni-sign-eth"></em>
@@ -435,12 +436,12 @@ const Home = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-sm-4">
+                          <div className="col-sm-4" onClick={()=> navigate('/Bounty')} style={{cursor: "pointer"}}>
                             <div className="card bg-light">
                               <div className="nk-wgw sm">
                                 <a
                                   className="nk-wgw-inner"
-                                  href="#"
+                                 
                                 >
                                   <div className="nk-wgw-name">
                                     <div className="nk-wgw-icon">
@@ -686,8 +687,8 @@ const Home = () => {
                               {/* <div className="title">{userInfo?.currency_preference == 'inr' ? `${refData?.totalIncome?.toFixed(2)} INRX` : 
                                 `${(refData?.totalIncome / oneUsdPrice)?.toFixed(2)} USDT`
                               }</div> */}
-                              {totalRefIncome > 0 ? userInfo.currency_preference == 'inr' ? `${totalRefIncome.toFixed(2)}` : `${(totalRefIncome / oneUsdPrice)?.toFixed(2)}` : 0} &nbsp;&nbsp;
-                              {userInfo.currency_preference == 'inr' ? "INRX" : "USDT"}
+                              {totalRefIncome > 0 ? userInfo?.currency_preference == 'inr' ? `${totalRefIncome?.toFixed(2)}` : `${(totalRefIncome / oneUsdPrice)?.toFixed(2)}` : 0} &nbsp;&nbsp;
+                              {userInfo?.currency_preference == 'inr' ? "INRX" : "USDT"}
                               <div className="sub-text">Referral Earn</div>
                             </div>
                           </div>
