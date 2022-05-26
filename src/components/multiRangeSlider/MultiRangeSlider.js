@@ -21,12 +21,6 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
     " userInfo?.currency_preference userInfo?.currency_preference userInfo?.currency_preference"
   );
 
-  const ProgressRange=userInfo?.currency_preference == "usd"?true:false
-  const ProgressMin=(totalAna * userInfo?.anaPrice) == 0?true:false
-  const ProgressMax=((totalAna * userInfo?.anaPrice)/oneUsdPrice) == 0?true:false
-
-  console.log(totalAna * userInfo?.anaPrice,"((totalAna * userInfo?.anaPrice)/oneUsdPrice) == 0((totalAna * userInfo?.anaPrice)/oneUsdPrice) == 0")
-
   // Convert to percentage
   const getPercent = useCallback(
     (value) => Math.round(((value - min) / (max - min)) * 100),
@@ -62,9 +56,9 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
   return (
     <div className="containerProgress">
       <input
-        disabled={userInfo?.currency_preference == "usd"
-         ?(totalAna * userInfo?.anaPrice) == 0 
-        :((totalAna * userInfo?.anaPrice)/oneUsdPrice) == 0}
+        // disabled={userInfo?.currency_preference == "usd"
+        //  ?(totalAna * userInfo?.anaPrice) == 0 
+        // :((totalAna * userInfo?.anaPrice)/oneUsdPrice) == 0}
         type="range"
         min={min}
         max={max}

@@ -8,6 +8,7 @@ import { data } from "jquery";
 import swal from "sweetalert";
 import "../App.css";
 import MultiRangeSlider from "./multiRangeSlider/MultiRangeSlider";
+import { Triangle } from "react-loader-spinner";
 
 export default function Orders() {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export default function Orders() {
   const [walletbalance, setWalletBalance] = useState("");
   const [walletsymbol, setWalletsymbol] = useState("");
   const [minimumvalue, setMinimumValue] = useState("");
+  const [loader, setLoader] = useState(true);
 
   // const [CurrencyType, setCurrencyType] = useState("");
   // const [quantity, setQuantity] = useState(0);
@@ -37,6 +39,12 @@ export default function Orders() {
   );
   const email = user?.email;
   // const symbolState = useSelector((store) => store);
+  console.log(
+    userInfo.currency_preference,
+    "userInfo,userInfo,userInfouser,Infouser,Infouser,Infouser,Info "
+  );
+  console.log(oneUsdPrice, "oneUsdPrice,oneUsdPrice,oneUsdPrice,oneUsdPrice");
+  console.log(totalAna, "totalAna,totalAna,totalAna, totalAna");
 
   const getData = async () => {
     try {
@@ -155,6 +163,7 @@ export default function Orders() {
         .then((res) => {
           const orderrespons = res.data;
           setHistory(orderrespons.order);
+          setLoader(false);
         })
         .catch((error) => {
           console.log(error.message);
@@ -211,6 +220,21 @@ export default function Orders() {
                 className="OrderHistoryContainer"
               >
                 <tbody>
+                  {loader && (
+                    <>
+                      <div
+                        style={{
+                          position: "absolute",
+                          zIndex: "99",
+                          top: "50%",
+                          left: "50%",
+                          transform: "translate(-50%, -50%)",
+                        }}
+                      >
+                        <Triangle ariaLabel="loading-indicator" color="green" />
+                      </div>
+                    </>
+                  )}
                   {history &&
                     history.map((h) => {
                       return (
@@ -440,6 +464,7 @@ export default function Orders() {
                             ? 5000
                             : 5000 / oneUsdPrice
                         }
+                        // min={200}
                         symbol={
                           userInfo?.currency_preference == "usd"
                             ? "USDT"
@@ -470,12 +495,27 @@ export default function Orders() {
                           }
                         }}
                       />
-                    ) : null}
+                    ) : (
+                      <MultiRangeSlider
+                        min={0}
+                        max={0}
+                        fixedmax={0}
+                        onChange={({ min, max, symbol }) => {
+                          // console.log(`min = ${min}, max = ${max}`);
+                        }}
+                      />
+                    )}
                   </div>
                   <button
                     class="btn text-light btn-block my-2"
                     style={{ background: "rgb(108, 183, 125)", top: "60px" }}
                     onClick={TotalAmt}
+                    disabled
+                    ={
+                      userInfo?.currency_preference == "usd"
+                        ? totalAna * userInfo?.anaPrice == 0
+                        : (totalAna * userInfo?.anaPrice) / oneUsdPrice == 0
+                    }
                   >
                     BUY ANA
                   </button>
