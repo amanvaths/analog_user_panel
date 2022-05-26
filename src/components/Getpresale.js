@@ -47,13 +47,14 @@ const Getpresale = (props) => {
               <div className="nk-wg7-title is-dark text-body">{levelname}</div>
               <div className="number-lg amount text-success">{coinPrice}</div>
             </div>
-            <div className="nk-wg7-stats-group">
-              <div className="nk-wg7-stats w-50">
+            <div className="nk-wg7-stats-group" style={{display:"flex",justifyContent:"space-between"}}>
+              <div className="nk-wg7-stats " style={{display:"flex"}}>
                 <div className="nk-wg7-title "></div>
+                
                 <div className="number-lg text-success coinqty">{coinQty}</div>
               </div>
               <div
-                className="nk-wg7-stats w-50  duration duration2"
+                className="nk-wg7-stats  duration duration2"
                 // style={{ marginLeft: 150 }}
               >
                 <div className="nk-wg7-title text-body ">Duration</div>
@@ -73,7 +74,7 @@ const Getpresale = (props) => {
             </div>
                
             <div className="number text-dark countdown"  
-            //  style={{ marginLeft: 270 }}
+             style={{display:"flex",justifyContent:"end" }}
              >
               {timer.days}:{timer.hour}:{timer.minute}:{timer.second}
             </div>

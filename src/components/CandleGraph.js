@@ -45,7 +45,7 @@ sync_wallet:true,
    }];
   // const navigate = useNavigate();
   // const { coin } = useParams();
-  const [prev_symbol, prevSymbol] =useState("btc-inr");
+  const [prev_symbol, prevSymbol] =useState("ANA-inr");
    const [currentPrice,setcurrentPrice]=useState("1.5");
   const [newgetchart, NewGetChart] = React.useState(true);
    let browser_currency_pair;
@@ -54,7 +54,7 @@ sync_wallet:true,
    browser_currency_pair = coin.split("-");
    }
    const SelCurency = browser_currency_pair;
-  const symbol2="btc-inr"
+  const symbol2="ANA-inr"
 
   const data = Object.values(coins).find((d) => {
     if (d.symbol === browser_currency_pair[0].toUpperCase()) {
@@ -73,7 +73,7 @@ sync_wallet:true,
   }
   
   useEffect(() => {
-     let coinsym = "btc-inr";
+     let coinsym = "ANA-inr";
   //   if(paired_currency_price && data && SelCurency){
   //     let inrPrice = data.current_price_inr ? data.current_price_inr : 1; 
   //     let selPrice = (SelCurency == 'INR') ? 1 : paired_currency_price[SelCurency] ? paired_currency_price[SelCurency] : 1; 
