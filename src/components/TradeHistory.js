@@ -4,20 +4,18 @@ import { BASE_URL } from "../Api_connection/config";
 import "./tradehistory.css";
 
 export default function TradeHistory() {
-  const email = localStorage.getItem("email");
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
-   
-      axios
-        .get(`${BASE_URL}/getAllOrder`)
-        .then((res) => {
-          setHistory(res.data.order);
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
-   
+    axios
+      .get(`${BASE_URL}/getAllOrder`)
+      .then((res) => {
+        setHistory(res.data.order);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+
   }, []);
   return (
     <div class="card mt-2">
@@ -29,56 +27,56 @@ export default function TradeHistory() {
           <div style={{ display: "contents" }}>
             <thead >
               <tr className="historyorder">
-                <th style={{width:"15%"}}>Total Analog</th>
-                <th style={{width:"20%"}}>Total Amount Pay</th>
-                <th style={{width:"19%"}}>Buying Price</th>
-                <th style={{width:"20%"}}>Pool</th>
-                <th style={{width:"26%"}}>Time</th>
+                <th style={{ width: "15%" }}>Total Analog</th>
+                <th style={{ width: "20%" }}>Total Amount Pay</th>
+                <th style={{ width: "19%" }}>Buying Price</th>
+                <th style={{ width: "20%" }}>Pool</th>
+                <th style={{ width: "26%" }}>Time</th>
               </tr>
             </thead>
-        <div style={{ height: "450px",overflow:"auto",display: "table-caption"}}>
-            <tbody>
-              {history.map((h) => {
-                return (
-                  <>
-                    <tr class="zoom  historyorder">
-                      <td className="TradeHistorySize" style={{width:"15%"}}> {h.cVolume.toFixed(2)} 
-                         <img
+            <div style={{ height: "450px", overflow: "auto", display: "table-caption" }}>
+              <tbody>
+                {history.map((h) => {
+                  return (
+                    <>
+                      <tr class="zoom  historyorder">
+                        <td className="TradeHistorySize" style={{ width: "15%" }}> {h.cVolume.toFixed(2)}
+                          <img
                             src="./images/Analog.png"
                             style={{ width: "24px" }}
-                           
+
                           /></td>
-                      <td  class="text-danger TradeHistorySize" style={{width:"20%"}}>
-                        {h.preferred_currency_amount?.toFixed(2)}{" "}
-                        {h.compair_currency == "usd" ? (
-                          <img
-                            src="./images/Usdt.png"
-                            style={{ width: "17px" }}
-                            alt="usdt"
-                          />
-                        ) : (
-                          <img
-                            src="./images/Inrx_black.png"
-                            style={{ width: "17px" }}
-                            alt="inrx"
-                          />
-                        )}
-                        <i class="ion ion-arrow-graph-up-right"></i>
-                      </td>
-                      <td class="text-success TradeHistorySize" style={{width:"19%"}}>
-                        {/* {h.pref_raw_price.toFixed(8)} */}
-                        {h.compair_currency == "usd"
-                          ? h.pref_raw_price.toFixed(8)
-                          : h.pref_raw_price}
-                        <i class="ion ion-arrow-graph-down-right"></i>
-                      </td>
-                      <td className="TradeHistorySize" style={{width:"20%"}}>{h.presalelevel}</td>
-                      <td className="TradeHistorySize" style={{width:"26%"}}>{h.date}</td>
-                    </tr>
-                  </>
-                );
-              })}
-            </tbody>
+                        <td class="text-danger TradeHistorySize" style={{ width: "20%" }}>
+                          {h.preferred_currency_amount?.toFixed(2)}{" "}
+                          {h.compair_currency == "usd" ? (
+                            <img
+                              src="./images/Usdt.png"
+                              style={{ width: "17px" }}
+                              alt="usdt"
+                            />
+                          ) : (
+                            <img
+                              src="./images/Inrx_black.png"
+                              style={{ width: "17px" }}
+                              alt="inrx"
+                            />
+                          )}
+                          <i class="ion ion-arrow-graph-up-right"></i>
+                        </td>
+                        <td class="text-success TradeHistorySize" style={{ width: "19%" }}>
+                          {/* {h.pref_raw_price.toFixed(8)} */}
+                          {h.compair_currency == "usd"
+                            ? h.pref_raw_price.toFixed(8)
+                            : h.pref_raw_price}
+                          <i class="ion ion-arrow-graph-down-right"></i>
+                        </td>
+                        <td className="TradeHistorySize" style={{ width: "20%" }}>{h.presalelevel}</td>
+                        <td className="TradeHistorySize" style={{ width: "26%" }}>{h.date}</td>
+                      </tr>
+                    </>
+                  );
+                })}
+              </tbody>
             </div>
           </div>
         </table>

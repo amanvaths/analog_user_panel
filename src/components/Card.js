@@ -52,7 +52,7 @@ const Card1 = (props) => {
                       <div className="nk-wgw-balance">
                         <div className="amount">
                           {props.price}
-                          <span className="currency currency-nio">
+                          <span className="currency currency-nio" style={{fontSize: "10px"}}>
                             {props.lable}
                           </span>
                         </div>
