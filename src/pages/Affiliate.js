@@ -120,10 +120,10 @@ const Affiliate = () => {
                         return (
                           <AffiliatCard
                             level={`Level ${index + 1}`}
-                            totalUser={affiliates[1][item]?.totalUsers}
-                            totalAnalogBuy={affiliates[1][item]?.totalAna?.toFixed(2)}
-                            totalExpence={affiliates[1][item]?.totalExpense?.toFixed(2)}
-                            totalAffiliates={affiliates[1][item]?.totalInc?.toFixed(2)}
+                            totalUser={affiliates[1][item].totalUsers}
+                            totalAnalogBuy={affiliates[1][item].totalAna.toFixed(2)}
+                            totalExpence={affiliates[1][item].totalExpense.toFixed(2)}
+                            totalAffiliates={affiliates[1][item].totalInc.toFixed(2)}
                             widthdrawl={0}
                             toalRemaining={0}
                           />
