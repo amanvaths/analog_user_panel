@@ -10,7 +10,7 @@ const navigate = useNavigate()
     return (
         <>
             <div className=" col-md-6 col-lg-4 col-12 p-3" style={{borderRadious: "10px solid black"}}>
-                <div class="card-bordered card-inner" style={{backgroundColor: "#0b3175",color: "white", borderRadious: "10px solid black"}}>
+                <div class="card-bordered card-inner" style={{backgroundColor: "#0b3175",color: "white", borderRadius: "10px"}}>
                     <h5 class="card-title" style={{color:"white"}}>{props.level}</h5>
                     <div className="row">
                         <div className="col-6">
