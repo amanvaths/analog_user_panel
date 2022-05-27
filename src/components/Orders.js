@@ -39,12 +39,7 @@ export default function Orders() {
   );
   const email = user?.email;
   // const symbolState = useSelector((store) => store);
-  console.log(
-    userInfo.currency_preference,
-    "userInfo,userInfo,userInfouser,Infouser,Infouser,Infouser,Info "
-  );
-  console.log(oneUsdPrice, "oneUsdPrice,oneUsdPrice,oneUsdPrice,oneUsdPrice");
-  console.log(totalAna, "totalAna,totalAna,totalAna, totalAna");
+
 
   const getData = async () => {
     try {
@@ -119,6 +114,7 @@ export default function Orders() {
     const inTrx = ammount * trxInAna;
     setTotal(inTrx);
     setAtprice(inTrx);
+    console.log(coinPrice,"coin Price Coin Price ");
   }
 
   function selectedCoin() {
@@ -132,7 +128,8 @@ export default function Orders() {
       swal("Please Enter A Valid ammount", "Enter Ammount", "error");
     } else {
       let params = {
-        amount: ammount,
+        amount: userInfo?.currency_preference == "usd"?total/(atprice / oneUsdPrice):
+        total/atprice,
         raw_price: trxInAna,
         currencyType: walletsymbol,
         compairCurrency: userInfo?.currency_preference,

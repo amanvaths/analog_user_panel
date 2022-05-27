@@ -9,7 +9,7 @@ import  TVChartContainer  from "./CandleChart";
 function CandleGraph() {
 
 // dispatch
-const {currency_prefrence} = useSelector((state)=> state.currency.value)
+const {userInfo} = useSelector((state)=> state.currency.value)
   const symbolState = useSelector((store)=>store);
   
 
@@ -73,16 +73,14 @@ sync_wallet:true,
   }
   
   useEffect(() => {
-     let coinsym = "ANA-inr";
-  //   if(paired_currency_price && data && SelCurency){
-  //     let inrPrice = data.current_price_inr ? data.current_price_inr : 1; 
-  //     let selPrice = (SelCurency == 'INR') ? 1 : paired_currency_price[SelCurency] ? paired_currency_price[SelCurency] : 1; 
-       let fPrice = 1.5;
-      setcurrentPrice(fPrice)
-  //   }
-    NewGetChart(getChart(coinsym, prev_symbol));
- }, []);
- //console.log("getChart1: ", newgetchart);
+    let coinsym = userInfo?.currency_preference=='usd'?"ana-usd":"ana-inr";
+ 
+      let fPrice = 1.5;
+     setcurrentPrice(fPrice)
+ 
+   NewGetChart(getChart(coinsym, prev_symbol));
+}, [userInfo]);
+ 
 
   return (
     <>
