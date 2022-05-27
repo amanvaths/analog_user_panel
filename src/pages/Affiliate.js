@@ -43,7 +43,7 @@ const Affiliate = () => {
 
   const getAffiliateList = async (level) => {
     const data = await axios.post(`${BASE_URL}/levelWiseList`, { email: email, level: level })
-    console.log(data.data, "::Response from AFFILIATE TABLE API");
+    console.log(data, "::Response from AFFILIATE TABLE API");
     if(data){
       setTab(data.data.data);
       setLoader(false)
@@ -63,10 +63,8 @@ const Affiliate = () => {
       <div class="nk-app-root">
         <div class="nk-main ">
           <Menu />
-
           <div class="nk-wrap ">
             <Header />
-
             {/* Add This Line  */}
 
             <div class="container-xl tableContainer">
@@ -122,15 +120,17 @@ const Affiliate = () => {
                         return (
                           <AffiliatCard
                             level={`Level ${index + 1}`}
-                            totalUser={affiliates[1][item].totalUsers}
-                            totalAnalogBuy={affiliates[1][item].totalAna.toFixed(2)}
-                            totalExpence={affiliates[1][item].totalExpense.toFixed(2)}
-                            totalAffiliates={affiliates[1][item].totalInc.toFixed(2)}
+                            totalUser={affiliates[1][item]?.totalUsers}
+                            totalAnalogBuy={affiliates[1][item]?.totalAna?.toFixed(2)}
+                            totalExpence={affiliates[1][item]?.totalExpense?.toFixed(2)}
+                            totalAffiliates={affiliates[1][item]?.totalInc?.toFixed(2)}
                             widthdrawl={0}
                             toalRemaining={0}
                           />
                         )
-                      }) : null :
+                      }) : 
+                        <h3>No Record Found</h3>
+                      :
 
                       <div style={{ position: "absolute", zIndex: "99", top: "29%", left: "108%", transform: "translate(-50%, -50%)" }}>
                         <Triangle ariaLabel="loading-indicator" color="blue" />
@@ -141,7 +141,6 @@ const Affiliate = () => {
                 </div>
 
                 <div className="row my-1" >
-
                   <div className="nk-content-wrap">
                     <div className="nk-block-head">
                       <div className="nk-block-between">
@@ -152,7 +151,8 @@ const Affiliate = () => {
                           <div className="nk-block-des text-soft">
                             <ul class="nk-block-tools g-3" style={{ paddingLeft: "0px" }}>
                               <li>
-                                <a class="btn btn-white btn-dim btn-outline-light" onClick={() => {
+                                <a className={level1 ? 'btn btn-white btn-dim btn-outline-light active':
+                                "btn btn-white btn-dim btn-outline-light"}onClick={() => {
                                   setLevel1(true)
                                   setLevel2(false)
                                   setLevel3(false)
@@ -161,7 +161,8 @@ const Affiliate = () => {
                                   <span>Level 1</span></a>
                               </li>
                               <li>
-                                <a class="btn btn-white btn-dim btn-outline-light" onClick={() => {
+                                <a className={level2 ? 'btn btn-white btn-dim btn-outline-light active':
+                                "btn btn-white btn-dim btn-outline-light"}onClick={() => {
                                   setLevel1(false)
                                   setLevel2(true)
                                   setLevel3(false)
@@ -170,7 +171,8 @@ const Affiliate = () => {
                                   <span>Level 2</span></a>
                               </li>
                               <li>
-                                <a class="btn btn-white btn-dim btn-outline-light" onClick={() => {
+                                <a className={level3 ? 'btn btn-white btn-dim btn-outline-light active':
+                                "btn btn-white btn-dim btn-outline-light"}onClick={() => {
                                   setLevel1(false)
                                   setLevel2(false)
                                   setLevel3(true)
@@ -283,8 +285,9 @@ const Affiliate = () => {
                                     <span className="sub-text">View</span>
                                   </div>
                                 </div>
-
-                                {tab.map((element, index) => {
+                                { 
+                                tab.length > 0 ? 
+                                tab.map((element, index) => {
                                   console.log(index, "::INDEx");
                                   return (
                                     <div className="nk-tb-item ">
@@ -323,7 +326,9 @@ const Affiliate = () => {
 
                                     </div>
                                   )
-                                })}
+                                }): 
+                                <div>No Recored Found</div>
+                              }
 
                                 {/* <div className="nk-tb-item">
                                                 <div className="nk-tb-col nk-tb-col-check">
@@ -553,7 +558,9 @@ const Affiliate = () => {
                               </div>
                             </div>
 
-                            {tab.map((element, index) => {
+                            {
+                              tab.length > 0 ?
+                            tab.map((element, index) => {
                               console.log(index, "::INDEx");
                               return (
                                 <div className="nk-tb-item ">
@@ -592,7 +599,10 @@ const Affiliate = () => {
 
                                 </div>
                               )
-                            })}
+                            }) : 
+
+                            <h3>No Record Found</h3>
+                          }
 
                             {/* <div className="nk-tb-item">
                                             <div className="nk-tb-col nk-tb-col-check">
@@ -825,7 +835,9 @@ const Affiliate = () => {
                               </div>
                             </div>
 -
-                            {tab.map((element, index) => {
+                            {
+                            tab.length> 0 ? 
+                            tab.map((element, index) => {
                               console.log(index, "::INDEx");
                               return (
                                 <>
@@ -877,7 +889,9 @@ const Affiliate = () => {
                                 </div>
                                 </>
                               )
-                            })}
+                            }): 
+                            <h3>No Data Found</h3>
+                            }
 
                             {/* <div className="nk-tb-item">
                                             <div className="nk-tb-col nk-tb-col-check">

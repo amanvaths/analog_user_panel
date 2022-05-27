@@ -504,10 +504,8 @@ export default function Orders() {
                     style={{ background: "rgb(108, 183, 125)", top: "60px" }}
                     onClick={TotalAmt}
                     disabled={
-                      userInfo?.currency_preference == "usd"
-                        ? totalAna * userInfo?.anaPrice == 0
-                        : (totalAna * userInfo?.anaPrice) / oneUsdPrice == 0
-                    }
+                      walletbalance <= (userInfo?.currency_preference == "inr"? 5000: 5000 / oneUsdPrice)
+                     }
                   >
                     BUY ANA
                   </button>
