@@ -52,6 +52,8 @@ export default function Orders() {
     }
   };
 
+  console.log(userInfo?.currency_preference,"userInfo?.currency_preference");
+
   const getWalletData = async () => {
     try {
       const res = await axios.post(`${BASE_URL}/getWalletData`, {
@@ -83,6 +85,8 @@ export default function Orders() {
       console.log(error);
     }
   };
+
+  
 
   // Ana price
 
@@ -345,7 +349,7 @@ export default function Orders() {
               >
                 {/* Buy Btex Option  */}
 
-                <div class="p-3" style={{ width: "450px" }}>
+                <div class="p-3 screenfix" style={{ width: "450px" }}>
                   <div class="input-group mb-3" style={{ margin: "0px" }}>
                     <div class="input-group-prepend">
                       <span
@@ -400,7 +404,7 @@ export default function Orders() {
                         <span style={{ color: "#008000", fontWeight: "bold" }}>
                           {total && total?.toFixed(2)}
                         </span>{" "}
-                        {userInfo?.currency_preference == "usd" ? (
+                        {userInfo?.currency_preference && userInfo?.currency_preference == "usd" ? (
                           <img
                             src="./images/Usdt.png"
                             style={{ width: "15px" }}
@@ -425,22 +429,16 @@ export default function Orders() {
                       <div style={{ fontWeight: "bold" }}>
                         ANA PRICE{"  "}
                         <span style={{ color: "#008000", fontWeight: "bold" }}>
-                          {userInfo?.currency_preference == "usd"
+                          {userInfo?.currency_preference && userInfo?.currency_preference == "usd"
                             ? (atprice / oneUsdPrice)?.toFixed(8)
                             : atprice?.toFixed(8)}{" "}
-                          {userInfo?.currency_preference == "usd" ? (
+                         
                             <img
-                              src="./images/Usdt.png"
+                              src={(userInfo?.currency_preference && userInfo?.currency_preference == "usd") && ((userInfo?.currency_preference && userInfo?.currency_preference != null)) ? "./images/Usdt.png" : "./images/Inrx_black.png"}
                               style={{ width: "15px" }}
                               alt="usdt"
                             />
-                          ) : (
-                            <img
-                              src="./images/Inrx_black.png"
-                              style={{ width: "15px" }}
-                              alt="inrx"
-                            />
-                          )}
+                          
                         </span>
                       </div>
                     </div>
@@ -470,18 +468,18 @@ export default function Orders() {
                             ? "USDT"
                             : "INRX"
                         }
-                        // max={0}
-                        max={
-                          userInfo?.currency_preference == "inr"
-                            ? totalAna * userInfo?.anaPrice
-                            : (totalAna * userInfo?.anaPrice) / oneUsdPrice
-                        }
-                        // fixedmax={0}
-                        fixedmax={
-                          userInfo?.currency_preference == "inr"
-                            ? totalAna * userInfo?.anaPrice
-                            : (totalAna * userInfo?.anaPrice) / oneUsdPrice
-                        }
+                        max={walletbalance}
+                        // max={
+                        //   userInfo?.currency_preference == "inr"
+                        //     ? totalAna * userInfo?.anaPrice
+                        //     : (totalAna * userInfo?.anaPrice) / oneUsdPrice
+                        // }
+                        fixedmax={walletbalance}
+                        // fixedmax={
+                        //   userInfo?.currency_preference == "inr"
+                        //     ? totalAna * userInfo?.anaPrice
+                        //     : (totalAna * userInfo?.anaPrice) / oneUsdPrice
+                        // }
                         onChange={({ min, max, symbol }) => {
                           // console.log(`min = ${min}, max = ${max}`);
                           if (userInfo?.currency_preference == "inr") {
