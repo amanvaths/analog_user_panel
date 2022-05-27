@@ -12538,7 +12538,7 @@ p > span > .icon.ni { vertical-align: middle; }
 
 .nk-tb-item:not(:last-child) .nk-tb-col { border-bottom: 1px solid #dbdfea; }
 
-.nk-tb-head .nk-tb-col { padding-top: 0.5rem; padding-bottom: 0.5rem; color: #8094ae; font-size: .9em; border-bottom: 1px solid #dbdfea; }
+.nk-tb-head .nk-tb-col { padding-top: 0.5rem; padding-bottom: 0.5rem; color: #0770f7; font-size: .9em; border-bottom: 1px solid #dbdfea; }
 
 .nk-tb-col-action { text-align: right; }
 
@@ -47795,6 +47795,7 @@ button.close {
   display: table-cell !important;
   vertical-align: middle;
   padding: 1rem 0.5rem;
+  height: 30px;
 }
 .nk-tb-col:first-child {
   padding-left: 1.25rem;
@@ -47817,7 +47818,7 @@ button.close {
 .nk-tb-head .nk-tb-col {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  color: #8094ae;
+  color: #0770f7;
   font-size: 0.9em;
   border-bottom: 1px solid #dbdfea;
 }
@@ -89051,6 +89052,7 @@ button.close {
   display: table-cell !important;
   vertical-align: middle;
   padding: 1rem 0.5rem;
+  height: 30px;
 }
 .nk-tb-col:first-child {
   padding-left: 1.25rem;

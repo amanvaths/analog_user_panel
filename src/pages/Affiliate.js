@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { BASE_URL } from "../Api_connection/config";
 import AffiliatCard from "../components/AffiliateCard";
 import { setUserInfo } from "../redux/reducer/user";
-import { Triangle } from 'react-loader-spinner'
+import { Triangle,ThreeDots } from 'react-loader-spinner'
 import { MdMoreHoriz } from 'react-icons/md'
 
 const Affiliate = () => {
@@ -21,7 +21,8 @@ const Affiliate = () => {
   const [level1, setLevel1] = useState(true)
   const [level2, setLevel2] = useState(false)
   const [level3, setLevel3] = useState(false)
-  const [tab, setTab] = useState([])
+  const [tab, setTab] = useState([]);
+  const [loader,setLoader] = useState(true)
 
   const [load, setLoad] = useState(false)
 
@@ -43,7 +44,11 @@ const Affiliate = () => {
   const getAffiliateList = async (level) => {
     const data = await axios.post(`${BASE_URL}/levelWiseList`, { email: email, level: level })
     console.log(data.data, "::Response from AFFILIATE TABLE API");
-    setTab(data.data.data)
+    if(data){
+      setTab(data.data.data);
+      setLoader(false)
+    }
+   
   }
 
   console.log(tab, ":: DATA IN TAB");
@@ -238,454 +243,826 @@ const Affiliate = () => {
 
                     {/* Level 1 */}
                     {level1 == true ?
-                      <div class="table-responsive-md">
-                        <h2>Level 1</h2>
-                        <table class="table table-hover">
-                          <thead>
-                            <tr>
-                              <th scope="col">S.N.</th>
-                              <th scope="col">Email</th>
-                              <th scope="col">Total Purchased</th>
-                              <th scope="col">Total Expenase</th>
-                              <th scope="col">Affiliate Recived (5%)</th>
-                              <th scope="col">Handout</th>
-                              <th scope="col">View</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {
-                              tab.map((element, index) => {
-                                return (
-                                  <tr>
-                                    <th scope="row">{index + 1}</th>
-                                    <td>{element.email}</td>
-                                    <td>{element?.totalBuy?.toFixed(2)} ANA</td>
-                                    <td>
-                                      {
-                                        userInfo?.currency_preference == 'usd' ? `${element?.totalExp?.toFixed(2)} USDT` : `${(element?.totalExp * oneUsdPrice)?.toFixed(2)} INRX`
-                                      }
-                                    </td>
-                                    <td>
-                                      {
-                                        userInfo?.currency_preference == 'usd' ? `${element?.totalAff?.toFixed(2)} USDT` : `${(element?.totalAff * oneUsdPrice).toFixed(2)} INRX`
-                                      }
-                                    </td>
-                                    <td>
-                                      {
-                                        userInfo?.currency_preference == 'usd' ? `${element?.totalHandout?.toFixed(2)} USDT` : `${(element?.totalHandout * oneUsdPrice).toFixed(2)} INRX`
-                                      }
-                                    </td>
-                                    <td>
-                                      <MdMoreHoriz />
-                                    </td>
-                                  </tr>
-                                )
-                              })
-                            }
-                          </tbody>
-                        </table>
-                      </div> : null}
-
-                    {/* Level 2 */}
-                    {level2 == true ? <div className="nk-block">
-                      <div className="card card-bordered card-stretch">
-                        <div className="card-inner-group">
-                          <div className="card-inner position-relative card-tools-toggle">
-                            <div className="card-title-group">
-                              <div className="card-tools">
-                                <div className="form-inline flex-nowrap gx-3">
-                                  <h5>Level 2</h5>
-                                  {/* <div className="form-wrap w-150px">
-                                    <select
-                                      className="form-select form-select-sm"
-                                      data-search="off"
-                                      data-placeholder="Bulk Action"
-                                    >
-                                      <option value="">Level 1</option>
-                                      <option value="email">
-                                        Level 2
-                                      </option>
-                                      <option value="group">
-                                        Level 3
-                                      </option>
-
-                                    </select>
-                                  </div> */}
-
-                                </div>
-                              </div>
-                              <div className="card-tools mr-n1">
-                                <ul className="btn-toolbar gx-1">
-                                  <li>
-                                    <a
-                                      href="#"
-                                      className="btn btn-icon search-toggle toggle-search"
-                                      data-target="search"
-                                    >
-                                      <em className="icon ni ni-search"></em>
-                                    </a>
-                                  </li>
-                                  <li className="btn-toolbar-sep"></li>
-                                  <li>
-                                    <div className="toggle-wrap">
-                                      <a
-                                        href="#"
-                                        className="btn btn-icon btn-trigger toggle"
-                                        data-target="cardTools"
-                                      >
-                                        <em className="icon ni ni-menu-right"></em>
-                                      </a>
-                                      <div
-                                        className="toggle-content"
-                                        data-content="cardTools"
-                                      >
-                                        <ul className="btn-toolbar gx-1">
-                                          <li className="toggle-close">
-                                            <a
-                                              href="#"
-                                              className="btn btn-icon btn-trigger toggle"
-                                              data-target="cardTools"
-                                            >
-                                              <em className="icon ni ni-arrow-left"></em>
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <div className="dropdown">
-                                              <a
-                                                href="#"
-                                                className="btn btn-trigger btn-icon dropdown-toggle"
-                                                data-toggle="dropdown"
-                                              >
-                                                <div className="dot dot-primary"></div>
-                                                <em className="icon ni ni-filter-alt"></em>
-                                              </a>
-                                              <div className="filter-wg dropdown-menu dropdown-menu-xl dropdown-menu-right">
-                                                <div className="dropdown-head">
-                                                  <span className="sub-title dropdown-title">
-                                                    Filter Users
-                                                  </span>
-                                                  <div className="dropdown">
-                                                    <a
-                                                      href="#"
-                                                      className="btn btn-sm btn-icon"
-                                                    >
-                                                      <em className="icon ni ni-more-h"></em>
-                                                    </a>
-                                                  </div>
-                                                </div>
-                                                <div className="dropdown-body dropdown-body-rg">
-                                                  <div className="row gx-6 gy-3">
-                                                    <div className="col-6">
-                                                      <div className="custom-control custom-control-sm custom-checkbox">
-                                                        <input
-                                                          type="checkbox"
-                                                          className="custom-control-input"
-                                                          id="hasBalance"
-                                                        />
-                                                        <label
-                                                          className="custom-control-label"
-                                                          for="hasBalance"
-                                                        >
-                                                          {" "}
-                                                          Have Balance
-                                                        </label>
-                                                      </div>
-                                                    </div>
-                                                    <div className="col-6">
-                                                      <div className="custom-control custom-control-sm custom-checkbox">
-                                                        <input
-                                                          type="checkbox"
-                                                          className="custom-control-input"
-                                                          id="hasKYC"
-                                                        />
-                                                        <label
-                                                          className="custom-control-label"
-                                                          for="hasKYC"
-                                                        >
-                                                          {" "}
-                                                          KYC Verified
-                                                        </label>
-                                                      </div>
-                                                    </div>
-                                                    <div className="col-6">
-                                                      <div className="form-group">
-                                                        <label className="overline-title overline-title-alt">
-                                                          Role
-                                                        </label>
-                                                        <select className="form-select form-select-sm">
-                                                          <option value="any">
-                                                            Any Role
-                                                          </option>
-                                                          <option value="investor">
-                                                            Investor
-                                                          </option>
-                                                          <option value="seller">
-                                                            Seller
-                                                          </option>
-                                                          <option value="buyer">
-                                                            Buyer
-                                                          </option>
-                                                        </select>
-                                                      </div>
-                                                    </div>
-                                                    <div className="col-6">
-                                                      <div className="form-group">
-                                                        <label className="overline-title overline-title-alt">
-                                                          Status
-                                                        </label>
-                                                        <select className="form-select form-select-sm">
-                                                          <option value="any">
-                                                            Any Status
-                                                          </option>
-                                                          <option value="active">
-                                                            Active
-                                                          </option>
-                                                          <option value="pending">
-                                                            Pending
-                                                          </option>
-                                                          <option value="suspend">
-                                                            Suspend
-                                                          </option>
-                                                          <option value="deleted">
-                                                            Deleted
-                                                          </option>
-                                                        </select>
-                                                      </div>
-                                                    </div>
-                                                    <div className="col-12">
-                                                      <div className="form-group">
-                                                        <button
-                                                          type="button"
-                                                          className="btn btn-secondary"
-                                                        >
-                                                          Filter
-                                                        </button>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                                <div className="dropdown-foot between">
-                                                  <a
-                                                    className="clickable"
-                                                    href="#"
-                                                  >
-                                                    Reset Filter
-                                                  </a>
-                                                  <a href="#">
-                                                    Save Filter
-                                                  </a>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </li>
-                                          <li>
-                                            <div className="dropdown">
-                                              <a
-                                                href="#"
-                                                className="btn btn-trigger btn-icon dropdown-toggle"
-                                                data-toggle="dropdown"
-                                              >
-                                                <em className="icon ni ni-setting"></em>
-                                              </a>
-                                              <div className="dropdown-menu dropdown-menu-xs dropdown-menu-right">
-                                                <ul className="link-check">
-                                                  <li>
-                                                    <span>Show</span>
-                                                  </li>
-                                                  <li className="active">
-                                                    <a href="#">10</a>
-                                                  </li>
-                                                  <li>
-                                                    <a href="#">20</a>
-                                                  </li>
-                                                  <li>
-                                                    <a href="#">50</a>
-                                                  </li>
-                                                </ul>
-                                                <ul className="link-check">
-                                                  <li>
-                                                    <span>Order</span>
-                                                  </li>
-                                                  <li className="active">
-                                                    <a href="#">DESC</a>
-                                                  </li>
-                                                  <li>
-                                                    <a href="#">ASC</a>
-                                                  </li>
-                                                </ul>
-                                              </div>
-                                            </div>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                    </div>
-                                  </li>
-                                </ul>
+                      <div className="nk-block">
+                        <div className="card card-bordered card-stretch">
+                          <div className="card-inner-group">
+                            <div className="card-inner">
+                              <div className="card-title-group">
+                                <div className="card-tools">
+                                  <div className="form-inline flex-nowrap gx-3">
+                                    <h5>Level 1</h5>
+                                  </div>
+                                </div> 
                               </div>
                             </div>
-                            <div
-                              className="card-search search-wrap"
-                              data-search="search"
-                            >
-                              <div className="card-body">
-                                <div className="search-content">
-                                  <a
-                                    href="#"
-                                    className="search-back btn btn-icon toggle-search"
-                                    data-target="search"
-                                  >
-                                    <em className="icon ni ni-arrow-left"></em>
-                                  </a>
-                                  <input
-                                    type="text"
-                                    className="form-control border-transparent form-focus-none"
-                                    placeholder="Search by user or email"
-                                  />
-                                  <button className="search-submit btn btn-icon">
-                                    <em className="icon ni ni-search"></em>
-                                  </button>
+                            <div className="card-inner">
+                              <div className="nk-tb-list nk-tb-ulist is-compact" >
+                                <div className="nk-tb-item nk-tb-head">
+                                  <div className="nk-tb-col tb-col-sm">
+                                    {/* <span className="sub-text">S. N.</span> */}
+                                  </div>
+                                  <div className="nk-tb-col tb-col-sm">
+                                    <span className="sub-text">S. N.</span>
+                                  </div>
+                                  <div className="nk-tb-col tb-col-sm">
+                                    <span className="sub-text">Email</span>
+                                  </div>
+                                  <div className="nk-tb-col tb-col-sm">
+                                    <span className="sub-text">Total Purchased</span>
+                                  </div>
+                                  <div className="nk-tb-col tb-col-sm">
+                                    <span className="sub-text">Total Expense</span>
+                                  </div>
+                                  <div className="nk-tb-col tb-col-sm">
+                                    <span className="sub-text">Affiliate Rcvd (5%)</span>
+                                  </div>
+                                  <div className="nk-tb-col tb-col-sm">
+                                    <span className="sub-text">Handout</span>
+                                  </div>
+                                  <div className="nk-tb-col tb-col-sm">
+                                    <span className="sub-text">View</span>
+                                  </div>
                                 </div>
-                              </div>
-                            </div>
-                          </div>
-                          <table class="table table-hover">
-                            <thead>
-                              <tr>
-                                <th scope="col">S.N.</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Sponsor</th>
-                                <th scope="col">Total Purchased</th>
-                                <th scope="col">Total Expenase</th>
-                                <th scope="col">Affiliate Recived (5%)</th>
-                                <th scope="col">Handout</th>
-                                <th scope="col">view</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {
-                                tab.map((element, index) => {
+
+                                {tab.map((element, index) => {
+                                  console.log(index, "::INDEx");
                                   return (
-                                    <tr>
-                                      <th scope="row">{index + 1}</th>
-                                      <td>{element.email}</td>
-                                      <td>{element.sponsor}</td>
-                                      <td>{element?.totalBuy?.toFixed(2)} ANA</td>
-                                      <td>
-                                        {
-                                          userInfo?.currency_preference == 'usd' ? `${element?.totalExp?.toFixed(2)} USDT` : `${(element?.totalExp * oneUsdPrice)?.toFixed(2)} INRX`
-                                        }
-                                      </td>
-                                      <td>
-                                        {
-                                          userInfo?.currency_preference == 'usd' ? `${element?.totalAff?.toFixed(2)} USDT` : `${(element?.totalAff * oneUsdPrice).toFixed(2)} INRX`
-                                        }
-                                      </td>
-                                      <td>
-                                        0 INRX
-                                      </td>
-                                      <td>
-                                        <MdMoreHoriz />
-                                      </td>
-                                    </tr>
+                                    <div className="nk-tb-item ">
+
+                                      <div className="nk-tb-col tb-col-sm">
+                                      </div>
+                                      <div className="nk-tb-col tb-col-sm">
+                                        <span className="">{index + 1}</span>
+                                      </div>
+                                      <div className="nk-tb-col tb-col-sm">
+                                        <span className="">{element.email}</span>
+                                      </div>
+                                      <div className="nk-tb-col tb-col-sm">
+                                        <span>{element?.totalBuy?.toFixed(2)} ANA</span>
+                                      </div>
+                                      <div className="nk-tb-col tb-col-sm">
+                                        <span>
+                                          {
+                                            userInfo?.currency_preference == 'usd' ? `${element?.totalExp?.toFixed(2)} USDT` : `${(element?.totalExp * oneUsdPrice)?.toFixed(2)} INRX`
+                                          }
+                                        </span>
+                                      </div>
+                                      <div className="nk-tb-col tb-col-sm">
+                                        <span>
+                                          {
+                                            userInfo?.currency_preference == 'usd' ? `${element?.totalAff?.toFixed(2)} USDT` : `${(element?.totalAff * oneUsdPrice).toFixed(2)} INRX`
+                                          }
+                                        </span>
+                                      </div>
+                                      <div className="nk-tb-col tb-col-sm ">
+                                        <span>0 INRX</span>
+                                      </div>
+                                      <div className="nk-tb-col tb-col-sm">
+                                        <span>Action</span>
+                                      </div>
+
+                                    </div>
                                   )
-                                })
-                              }
-                            </tbody>
-                          </table>
-                          <div className="card-inner">
-                            <ul className="pagination justify-content-center justify-content-md-center">
-                              <li className="page-item">
-                                <a className="page-link" href="#">
-                                  Prev
-                                </a>
-                              </li>
-                              <li className="page-item">
-                                <a className="page-link" href="#">
-                                  1
-                                </a>
-                              </li>
-                              <li className="page-item">
-                                <a className="page-link" href="#">
-                                  2
-                                </a>
-                              </li>
-                              <li className="page-item">
-                                <span className="page-link">
-                                  <em className="icon ni ni-more-h"></em>
-                                </span>
-                              </li>
-                              <li className="page-item">
-                                <a className="page-link" href="#">
-                                  6
-                                </a>
-                              </li>
-                              <li className="page-item">
-                                <a className="page-link" href="#">
-                                  7
-                                </a>
-                              </li>
-                              <li className="page-item">
-                                <a className="page-link" href="#">
-                                  Next
-                                </a>
-                              </li>
-                            </ul>
+                                })}
+
+                                {/* <div className="nk-tb-item">
+                                                <div className="nk-tb-col nk-tb-col-check">
+                                                  <div className="custom-control custom-control-sm custom-checkbox notext">
+                                                    <input
+                                                      type="checkbox"
+                                                      className="custom-control-input"
+                                                      id="uid2"
+                                                    />
+                                                    <label
+                                                      className="custom-control-label"
+                                                      for="uid2"
+                                                    ></label>
+                                                  </div>
+                                                </div>
+                                                <div className="nk-tb-col">
+                                                  <div className="user-card">
+                                                    <div className="user-avatar xs bg-warning">
+                                                      <span>PN</span>
+                                                    </div>
+                                                    <div className="user-name">
+                                                      <span className="tb-lead">
+                                                        Patrick Newman
+                                                      </span>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div className="nk-tb-col tb-col-md">
+                                                  <span>Investor</span>
+                                                </div>
+                                                <div className="nk-tb-col tb-col-sm">
+                                                  <span>patrick@example.com</span>
+                                                </div>
+                                                <div className="nk-tb-col tb-col-md">
+                                                  <span>+942 238-4474</span>
+                                                </div>
+                                                <div className="nk-tb-col tb-col-xl">
+                                                  <span>United States</span>
+                                                </div>
+                                                <div className="nk-tb-col tb-col-xl">
+                                                  <ul className="list-status">
+                                                    <li>
+                                                      <em className="icon text-success ni ni-check-circle"></em>{" "}
+                                                      <span>Email</span>
+                                                    </li>
+                                                  </ul>
+                                                </div>
+                                                <div className="nk-tb-col tb-col-xl">
+                                                  <span>06 Feb 2020</span>
+                                                </div>
+                                                <div className="nk-tb-col">
+                                                  <span className="tb-status text-success">
+                                                    Active
+                                                  </span>
+                                                </div>
+                                                <div className="nk-tb-col nk-tb-col-tools">
+                                                  <ul className="nk-tb-actions gx-2">
+                                                    <li className="nk-tb-action-hidden">
+                                                      <a
+                                                        href="#"
+                                                        className="btn btn-sm btn-icon btn-trigger"
+                                                        data-toggle="tooltip"
+                                                        data-placement="top"
+                                                        title="Wallet"
+                                                      >
+                                                        <em className="icon ni ni-wallet-fill"></em>
+                                                      </a>
+                                                    </li>
+                                                    <li className="nk-tb-action-hidden">
+                                                      <a
+                                                        href="#"
+                                                        className="btn btn-sm btn-icon btn-trigger"
+                                                        data-toggle="tooltip"
+                                                        data-placement="top"
+                                                        title="Send Email"
+                                                      >
+                                                        <em className="icon ni ni-mail-fill"></em>
+                                                      </a>
+                                                    </li>
+                                                    <li className="nk-tb-action-hidden">
+                                                      <a
+                                                        href="#"
+                                                        className="btn btn-sm btn-icon btn-trigger"
+                                                        data-toggle="tooltip"
+                                                        data-placement="top"
+                                                        title="Suspend"
+                                                      >
+                                                        <em className="icon ni ni-user-cross-fill"></em>
+                                                      </a>
+                                                    </li>
+                                                    <li>
+                                                      <div className="drodown">
+                                                        <a
+                                                          href="#"
+                                                          className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
+                                                          data-toggle="dropdown"
+                                                        >
+                                                          <em className="icon ni ni-more-h"></em>
+                                                        </a>
+                                                        <div className="dropdown-menu dropdown-menu-right">
+                                                          <ul className="link-list-opt no-bdr">
+                                                            <li>
+                                                              <a href="#">
+                                                                <em className="icon ni ni-eye"></em>
+                                                                <span>View Details</span>
+                                                              </a>
+                                                            </li>
+                                                            <li>
+                                                              <a href="#">
+                                                                <em className="icon ni ni-repeat"></em>
+                                                                <span>Orders</span>
+                                                              </a>
+                                                            </li>
+                                                            <li className="divider"></li>
+                                                            <li>
+                                                              <a href="#">
+                                                                <em className="icon ni ni-shield-star"></em>
+                                                                <span>Reset Pass</span>
+                                                              </a>
+                                                            </li>
+                                                            <li>
+                                                              <a href="#">
+                                                                <em className="icon ni ni-shield-off"></em>
+                                                                <span>Reset 2FA</span>
+                                                              </a>
+                                                            </li>
+                                                            <li>
+                                                              <a href="#">
+                                                                <em className="icon ni ni-na"></em>
+                                                                <span>Suspend User</span>
+                                                              </a>
+                                                            </li>
+                                                          </ul>
+                                                        </div>
+                                                      </div>
+                                                    </li>
+                                                  </ul>
+                                                </div>
+                                              </div> */}
+
+                              </div>
+                            </div>
+                            <div className="card-inner">
+                              <ul className="pagination justify-content-center justify-content-md-center">
+                                <li className="page-item">
+                                  <a className="page-link" href="#">
+                                    Prev
+                                  </a>
+                                </li>
+                                <li className="page-item">
+                                  <a className="page-link" href="#">
+                                    1
+                                  </a>
+                                </li>
+                                <li className="page-item">
+                                  <a className="page-link" href="#">
+                                    2
+                                  </a>
+                                </li>
+                                <li className="page-item">
+                                  <span className="page-link">
+                                    <em className="icon ni ni-more-h"></em>
+                                  </span>
+                                </li>
+                                <li className="page-item">
+                                  <a className="page-link" href="#">
+                                    6
+                                  </a>
+                                </li>
+                                <li className="page-item">
+                                  <a className="page-link" href="#">
+                                    7
+                                  </a>
+                                </li>
+                                <li className="page-item">
+                                  <a className="page-link" href="#">
+                                    Next
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div> : null}
+                      : null}
 
-                    {/* Level 3 */}
-                    {level3 == true ?
-                      <>
-                        <h3>Level 3</h3>
-                        <table class="table table-hover">
-                          <thead>
-                            <tr>
-                              <th scope="col">S.N.</th>
-                              <th scope="col">Email</th>
-                              <th scope="col">Sponsor</th>
-                              <th scope="col">Total Purchased</th>
-                              <th scope="col">Total Expenase</th>
-                              <th scope="col">Affiliate Recived (2%)</th>
-                              <th scope="col">Handout</th>
-                              <th scope="col">view</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {
-                              tab.map((element, index) => {
-                                return (
-                                  <tr>
-                                    <th scope="row">{index + 1}</th>
-                                    <td>{element.email}</td>
-                                    <td>{element.sponsor}</td>
-                                    <td>{element?.totalBuy?.toFixed(2)} ANA</td>
-                                    <td>
+                    {/* Level 2 */}
+                    {level2 == true ? 
+                    <div className="nk-block">
+                    <div className="card card-bordered card-stretch">
+                      <div className="card-inner-group">
+                        <div className="card-inner">
+                          <div className="card-title-group">
+                            <div className="card-tools">
+                              <div className="form-inline flex-nowrap gx-3">
+                                <h5>Level 2</h5>
+                              </div>
+                            </div> 
+                          </div>
+                        </div>
+                        <div className="card-inner">
+                          <div className="nk-tb-list nk-tb-ulist is-compact" >
+                            <div className="nk-tb-item nk-tb-head">
+                              <div className="nk-tb-col tb-col-sm">
+                                {/* <span className="sub-text">S. N.</span> */}
+                              </div>
+                              <div className="nk-tb-col tb-col-sm">
+                                <span className="tb-lead">S. N.</span>
+                              </div>
+                              <div className="nk-tb-col tb-col-sm">
+                                <span className="tb-lead">Email</span>
+                              </div>
+                              <div className="nk-tb-col tb-col-sm">
+                                <span className="tb-lead">Total Purchased</span>
+                              </div>
+                              <div className="nk-tb-col tb-col-sm">
+                                <span className="tb-lead">Total Expense</span>
+                              </div>
+                              <div className="nk-tb-col tb-col-sm">
+                                <span className="tb-lead">Affiliate Rcvd (3%)</span>
+                              </div>
+                              <div className="nk-tb-col tb-col-sm">
+                                <span className="tb-lead">Handout</span>
+                              </div>
+                              <div className="nk-tb-col tb-col-sm">
+                                <span className="tb-lead">View</span>
+                              </div>
+                            </div>
+
+                            {tab.map((element, index) => {
+                              console.log(index, "::INDEx");
+                              return (
+                                <div className="nk-tb-item ">
+
+                                  <div className="nk-tb-col tb-col-sm">
+                                  </div>
+                                  <div className="nk-tb-col tb-col-sm">
+                                    <span className="tb-text">{index + 1}</span>
+                                  </div>
+                                  <div className="nk-tb-col tb-col-sm">
+                                    <span className="tb-text">{element.email}</span>
+                                  </div>
+                                  <div className="nk-tb-col tb-col-sm">
+                                    <span className="tb-text">{element?.totalBuy?.toFixed(2)} ANA</span>
+                                  </div>
+                                  <div className="nk-tb-col tb-col-sm">
+                                    <span className="tb-text">
                                       {
                                         userInfo?.currency_preference == 'usd' ? `${element?.totalExp?.toFixed(2)} USDT` : `${(element?.totalExp * oneUsdPrice)?.toFixed(2)} INRX`
                                       }
-                                    </td>
-                                    <td>
+                                    </span>
+                                  </div>
+                                  <div className="nk-tb-col tb-col-sm">
+                                    <span className="tb-text">
                                       {
                                         userInfo?.currency_preference == 'usd' ? `${element?.totalAff?.toFixed(2)} USDT` : `${(element?.totalAff * oneUsdPrice).toFixed(2)} INRX`
                                       }
-                                    </td>
-                                    <td>
+                                    </span>
+                                  </div>
+                                  <div className="nk-tb-col tb-col-sm">
+                                    <span className="tb-text">0 INRX</span>
+                                  </div>
+                                  <div className="nk-tb-col tb-col-sm">
+                                    <span className="tb-text">Action</span>
+                                  </div>
+
+                                </div>
+                              )
+                            })}
+
+                            {/* <div className="nk-tb-item">
+                                            <div className="nk-tb-col nk-tb-col-check">
+                                              <div className="custom-control custom-control-sm custom-checkbox notext">
+                                                <input
+                                                  type="checkbox"
+                                                  className="custom-control-input"
+                                                  id="uid2"
+                                                />
+                                                <label
+                                                  className="custom-control-label"
+                                                  for="uid2"
+                                                ></label>
+                                              </div>
+                                            </div>
+                                            <div className="nk-tb-col">
+                                              <div className="user-card">
+                                                <div className="user-avatar xs bg-warning">
+                                                  <span>PN</span>
+                                                </div>
+                                                <div className="user-name">
+                                                  <span className="tb-lead">
+                                                    Patrick Newman
+                                                  </span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-md">
+                                              <span>Investor</span>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-sm">
+                                              <span>patrick@example.com</span>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-md">
+                                              <span>+942 238-4474</span>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-xl">
+                                              <span>United States</span>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-xl">
+                                              <ul className="list-status">
+                                                <li>
+                                                  <em className="icon text-success ni ni-check-circle"></em>{" "}
+                                                  <span>Email</span>
+                                                </li>
+                                              </ul>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-xl">
+                                              <span>06 Feb 2020</span>
+                                            </div>
+                                            <div className="nk-tb-col">
+                                              <span className="tb-status text-success">
+                                                Active
+                                              </span>
+                                            </div>
+                                            <div className="nk-tb-col nk-tb-col-tools">
+                                              <ul className="nk-tb-actions gx-2">
+                                                <li className="nk-tb-action-hidden">
+                                                  <a
+                                                    href="#"
+                                                    className="btn btn-sm btn-icon btn-trigger"
+                                                    data-toggle="tooltip"
+                                                    data-placement="top"
+                                                    title="Wallet"
+                                                  >
+                                                    <em className="icon ni ni-wallet-fill"></em>
+                                                  </a>
+                                                </li>
+                                                <li className="nk-tb-action-hidden">
+                                                  <a
+                                                    href="#"
+                                                    className="btn btn-sm btn-icon btn-trigger"
+                                                    data-toggle="tooltip"
+                                                    data-placement="top"
+                                                    title="Send Email"
+                                                  >
+                                                    <em className="icon ni ni-mail-fill"></em>
+                                                  </a>
+                                                </li>
+                                                <li className="nk-tb-action-hidden">
+                                                  <a
+                                                    href="#"
+                                                    className="btn btn-sm btn-icon btn-trigger"
+                                                    data-toggle="tooltip"
+                                                    data-placement="top"
+                                                    title="Suspend"
+                                                  >
+                                                    <em className="icon ni ni-user-cross-fill"></em>
+                                                  </a>
+                                                </li>
+                                                <li>
+                                                  <div className="drodown">
+                                                    <a
+                                                      href="#"
+                                                      className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
+                                                      data-toggle="dropdown"
+                                                    >
+                                                      <em className="icon ni ni-more-h"></em>
+                                                    </a>
+                                                    <div className="dropdown-menu dropdown-menu-right">
+                                                      <ul className="link-list-opt no-bdr">
+                                                        <li>
+                                                          <a href="#">
+                                                            <em className="icon ni ni-eye"></em>
+                                                            <span>View Details</span>
+                                                          </a>
+                                                        </li>
+                                                        <li>
+                                                          <a href="#">
+                                                            <em className="icon ni ni-repeat"></em>
+                                                            <span>Orders</span>
+                                                          </a>
+                                                        </li>
+                                                        <li className="divider"></li>
+                                                        <li>
+                                                          <a href="#">
+                                                            <em className="icon ni ni-shield-star"></em>
+                                                            <span>Reset Pass</span>
+                                                          </a>
+                                                        </li>
+                                                        <li>
+                                                          <a href="#">
+                                                            <em className="icon ni ni-shield-off"></em>
+                                                            <span>Reset 2FA</span>
+                                                          </a>
+                                                        </li>
+                                                        <li>
+                                                          <a href="#">
+                                                            <em className="icon ni ni-na"></em>
+                                                            <span>Suspend User</span>
+                                                          </a>
+                                                        </li>
+                                                      </ul>
+                                                    </div>
+                                                  </div>
+                                                </li>
+                                              </ul>
+                                            </div>
+                                          </div> */}
+
+                          </div>
+                        </div>
+                        <div className="card-inner">
+                          <ul className="pagination justify-content-center justify-content-md-center">
+                            <li className="page-item">
+                              <a className="page-link" href="#">
+                                Prev
+                              </a>
+                            </li>
+                            <li className="page-item">
+                              <a className="page-link" href="#">
+                                1
+                              </a>
+                            </li>
+                            <li className="page-item">
+                              <a className="page-link" href="#">
+                                2
+                              </a>
+                            </li>
+                            <li className="page-item">
+                              <span className="page-link">
+                                <em className="icon ni ni-more-h"></em>
+                              </span>
+                            </li>
+                            <li className="page-item">
+                              <a className="page-link" href="#">
+                                6
+                              </a>
+                            </li>
+                            <li className="page-item">
+                              <a className="page-link" href="#">
+                                7
+                              </a>
+                            </li>
+                            <li className="page-item">
+                              <a className="page-link" href="#">
+                                Next
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  : null}
+
+                    {/* Level 3 */}
+                    {level3 == true ?
+                    <div className="nk-block">
+                    <div className="card card-bordered card-stretch">
+                      <div className="card-inner-group">
+                        <div className="card-inner">
+                          <div className="card-title-group">
+                            <div className="card-tools">
+                              <div className="form-inline flex-nowrap gx-3">
+                                <h5>Level 3</h5>
+                              </div>
+                            </div> 
+                          </div>
+                        </div>
+                        <div className="card-inner">
+                          <div className="nk-tb-list nk-tb-ulist is-compact" >
+                            <div className="nk-tb-item nk-tb-head">
+                              <div className="nk-tb-col tb-col-sm">
+                                {/* <span className="sub-text">S. N.</span> */}
+                              </div>
+                              <div className="nk-tb-col tb-col-sm">
+                                <span className="tb-lead">S. N.</span>
+                              </div>
+                              <div className="nk-tb-col tb-col-sm">
+                                <span className="tb-lead">Email</span>
+                              </div>
+                              <div className="nk-tb-col tb-col-sm">
+                                <span className="tb-lead">Sponsor</span>
+                              </div>
+                              <div className="nk-tb-col tb-col-sm">
+                                <span className="tb-lead">Total Purchased</span>
+                              </div>
+                              <div className="nk-tb-col tb-col-sm">
+                                <span className="tb-lead">Total Expense</span>
+                              </div>
+                              <div className="nk-tb-col tb-col-sm">
+                                <span className="tb-lead">Affiliate Rcvd (2%)</span>
+                              </div>
+                              <div className="nk-tb-col tb-col-sm">
+                                <span className="tb-lead">Handout</span>
+                              </div>
+                              <div className="nk-tb-col tb-col-sm">
+                                <span className="tb-lead">View</span>
+                              </div>
+                            </div>
+-
+                            {tab.map((element, index) => {
+                              console.log(index, "::INDEx");
+                              return (
+                                <>
+                                 <div className="nk-tb-item ">
+
+                                  <div className="nk-tb-col tb-col-sm">
+                                  </div>
+                                  <div className="nk-tb-col tb-col-sm">
+                                    <span className="tb-text">{index + 1}</span>
+                                  </div>
+                                  <div className="nk-tb-col tb-col-sm">
+                                    <span className="tb-text">{element.email}</span>
+                                  </div>
+                                  <div className="nk-tb-col tb-col-sm">
+                                    <span className="tb-text">{element.sponsor}</span>
+                                  </div>
+                                  <div className="nk-tb-col tb-col-sm">
+                                    <span className="tb-text">{element?.totalBuy?.toFixed(2)} ANA</span>
+                                  </div>
+                                  <div className="nk-tb-col tb-col-sm">
+                                    <span className="tb-text">
+                                      {
+                                        userInfo?.currency_preference == 'usd' ? `${element?.totalExp?.toFixed(2)} USDT` : `${(element?.totalExp * oneUsdPrice)?.toFixed(2)} INRX`
+                                      }
+                                    </span>
+                                  </div>
+                                  <div className="nk-tb-col tb-col-sm">
+                                    <span className="tb-text">
+                                      {
+                                        userInfo?.currency_preference == 'usd' ? `${element?.totalAff?.toFixed(2)} USDT` : `${(element?.totalAff * oneUsdPrice).toFixed(2)} INRX`
+                                      }
+                                    </span>
+                                  </div>
+                                  <div className="nk-tb-col tb-col-sm">
+                                    <span className="tb-text">
+                                    <span className="tb-text">
                                       {
                                         userInfo?.currency_preference == 'usd' ? `${element?.totalHandout?.toFixed(2)} USDT` : `${(element?.totalHandout * oneUsdPrice).toFixed(2)} INRX`
                                       }
-                                    </td>
-                                    <td>
-                                      <MdMoreHoriz />
-                                    </td>
-                                  </tr>
-                                )
-                              })
-                            }
-                          </tbody>
-                        </table>
-                      </> : null}
+                                    </span>
+                                      </span>
+                                  </div>
+                                  <div className="nk-tb-col tb-col-sm">
+                                    <span className="tb-text">
+                                      < MdMoreHoriz/>
+                                      </span>
+                                  </div>
+
+                                </div>
+                                </>
+                              )
+                            })}
+
+                            {/* <div className="nk-tb-item">
+                                            <div className="nk-tb-col nk-tb-col-check">
+                                              <div className="custom-control custom-control-sm custom-checkbox notext">
+                                                <input
+                                                  type="checkbox"
+                                                  className="custom-control-input"
+                                                  id="uid2"
+                                                />
+                                                <label
+                                                  className="custom-control-label"
+                                                  for="uid2"
+                                                ></label>
+                                              </div>
+                                            </div>
+                                            <div className="nk-tb-col">
+                                              <div className="user-card">
+                                                <div className="user-avatar xs bg-warning">
+                                                  <span>PN</span>
+                                                </div>
+                                                <div className="user-name">
+                                                  <span className="tb-lead">
+                                                    Patrick Newman
+                                                  </span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-md">
+                                              <span>Investor</span>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-sm">
+                                              <span>patrick@example.com</span>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-md">
+                                              <span>+942 238-4474</span>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-xl">
+                                              <span>United States</span>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-xl">
+                                              <ul className="list-status">
+                                                <li>
+                                                  <em className="icon text-success ni ni-check-circle"></em>{" "}
+                                                  <span>Email</span>
+                                                </li>
+                                              </ul>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-xl">
+                                              <span>06 Feb 2020</span>
+                                            </div>
+                                            <div className="nk-tb-col">
+                                              <span className="tb-status text-success">
+                                                Active
+                                              </span>
+                                            </div>
+                                            <div className="nk-tb-col nk-tb-col-tools">
+                                              <ul className="nk-tb-actions gx-2">
+                                                <li className="nk-tb-action-hidden">
+                                                  <a
+                                                    href="#"
+                                                    className="btn btn-sm btn-icon btn-trigger"
+                                                    data-toggle="tooltip"
+                                                    data-placement="top"
+                                                    title="Wallet"
+                                                  >
+                                                    <em className="icon ni ni-wallet-fill"></em>
+                                                  </a>
+                                                </li>
+                                                <li className="nk-tb-action-hidden">
+                                                  <a
+                                                    href="#"
+                                                    className="btn btn-sm btn-icon btn-trigger"
+                                                    data-toggle="tooltip"
+                                                    data-placement="top"
+                                                    title="Send Email"
+                                                  >
+                                                    <em className="icon ni ni-mail-fill"></em>
+                                                  </a>
+                                                </li>
+                                                <li className="nk-tb-action-hidden">
+                                                  <a
+                                                    href="#"
+                                                    className="btn btn-sm btn-icon btn-trigger"
+                                                    data-toggle="tooltip"
+                                                    data-placement="top"
+                                                    title="Suspend"
+                                                  >
+                                                    <em className="icon ni ni-user-cross-fill"></em>
+                                                  </a>
+                                                </li>
+                                                <li>
+                                                  <div className="drodown">
+                                                    <a
+                                                      href="#"
+                                                      className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
+                                                      data-toggle="dropdown"
+                                                    >
+                                                      <em className="icon ni ni-more-h"></em>
+                                                    </a>
+                                                    <div className="dropdown-menu dropdown-menu-right">
+                                                      <ul className="link-list-opt no-bdr">
+                                                        <li>
+                                                          <a href="#">
+                                                            <em className="icon ni ni-eye"></em>
+                                                            <span>View Details</span>
+                                                          </a>
+                                                        </li>
+                                                        <li>
+                                                          <a href="#">
+                                                            <em className="icon ni ni-repeat"></em>
+                                                            <span>Orders</span>
+                                                          </a>
+                                                        </li>
+                                                        <li className="divider"></li>
+                                                        <li>
+                                                          <a href="#">
+                                                            <em className="icon ni ni-shield-star"></em>
+                                                            <span>Reset Pass</span>
+                                                          </a>
+                                                        </li>
+                                                        <li>
+                                                          <a href="#">
+                                                            <em className="icon ni ni-shield-off"></em>
+                                                            <span>Reset 2FA</span>
+                                                          </a>
+                                                        </li>
+                                                        <li>
+                                                          <a href="#">
+                                                            <em className="icon ni ni-na"></em>
+                                                            <span>Suspend User</span>
+                                                          </a>
+                                                        </li>
+                                                      </ul>
+                                                    </div>
+                                                  </div>
+                                                </li>
+                                              </ul>
+                                            </div>
+                                          </div> */}
+
+                          </div>
+                        </div>
+                        <div className="card-inner">
+                          <ul className="pagination justify-content-center justify-content-md-center">
+                            <li className="page-item">
+                              <a className="page-link" href="#">
+                                Prev
+                              </a>
+                            </li>
+                            <li className="page-item">
+                              <a className="page-link" href="#">
+                                1
+                              </a>
+                            </li>
+                            <li className="page-item">
+                              <a className="page-link" href="#">
+                                2
+                              </a>
+                            </li>
+                            <li className="page-item">
+                              <span className="page-link">
+                                <em className="icon ni ni-more-h"></em>
+                              </span>
+                            </li>
+                            <li className="page-item">
+                              <a className="page-link" href="#">
+                                6
+                              </a>
+                            </li>
+                            <li className="page-item">
+                              <a className="page-link" href="#">
+                                7
+                              </a>
+                            </li>
+                            <li className="page-item">
+                              <a className="page-link" href="#">
+                                Next
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                      : null}
 
                   </div>
 

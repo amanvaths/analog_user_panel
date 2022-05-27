@@ -10,70 +10,12 @@ import "react-multi-carousel/lib/styles.css";
 import Getpresale from "../components/Getpresale";
 import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
-import swal from "sweetalert";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useSelector, useDispatch } from "react-redux";
 import { setBalance } from "../redux/reducer/user";
 import { useNavigate } from "react-router-dom";
+import { Triangle } from "react-loader-spinner";
 
-
-// import { Carousel } from "react-responsive-carousel";
-// import "react-responsive-carousel/lib/styles/carousel.min.css";
-
-// const slideImages = [
-//   {
-//     url: "http://localhost:3000/images/slides/2.png",
-//     caption: "",
-//   },
-//   {
-//     url: "http://localhost:3000/images/slides/3.png",
-//     caption: "",
-//   },
-//   {
-//     url: "http://localhost:3000/images/slides/4.png",
-//     caption: "",
-//   },
-//   {
-//     url: "http://localhost:3000/images/slides/5.png",
-//     caption: "",
-//   },
-//   {
-//     url: "http://localhost:3000/images/slides/6.png",
-//     caption: "",
-//   },
-//   {
-//     url: "http://localhost:3000/images/slides/7.png",
-//     caption: "",
-//   },
-//   {
-//     url: "http://localhost:3000/images/slides/8.png",
-//     caption: "",
-//   },
-//   {
-//     url: "http://localhost:3000/images/slides/9.png",
-//     caption: "",
-//   },
-//   {
-//     url: "http://localhost:3000/images/slides/10.png",
-//     caption: "",
-//   },
-//   {
-//     url: "http://localhost:3000/images/slides/11.png",
-//     caption: "",
-//   },
-//   {
-//     url: "http://localhost:3000/images/slides/12.png",
-//     caption: "",
-//   },
-//   {
-//     url: "http://localhost:3000/images/slides/13.png",
-//     caption: "",
-//   },
-//   {
-//     url: "http://localhost:3000/images/slides/14.png",
-//     caption: "",
-//   }
-// ];
 
 const Home = () => {
 
@@ -100,6 +42,8 @@ const Home = () => {
   const [totalRef, setTotalRef] = useState(0)
   const [totalRefIncome, setTotalRefIncome] = useState(0)
   const [i, setI] = useState([])
+
+  const [recentLoad, setRecentLoad] = useState(true)
 
 
 
@@ -134,6 +78,7 @@ const Home = () => {
     try {
       const res = await axios.post(`${BASE_URL}/recentActivities`, { email: email, limit: 4 });
       setRecentActivities(res.data);
+      setRecentLoad(false)
       const img = await axios.post(`${BASE_URL}/bannerData`)
       setI(img?.data?.message)
     } catch (error) {
@@ -349,12 +294,12 @@ const Home = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-sm-4" onClick={()=> navigate('/Airdrop')} style={{cursor: "pointer"}}>
+                          <div className="col-sm-4" onClick={() => navigate('/Airdrop')} style={{ cursor: "pointer" }}>
                             <div className="card bg-light">
                               <div className="nk-wgw sm">
                                 <a
                                   className="nk-wgw-inner"
-                                  
+
                                 >
                                   <div className="nk-wgw-name">
                                     <div className="nk-wgw-icon">
@@ -376,7 +321,7 @@ const Home = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-sm-4" onClick={()=> navigate('/Affiliate', {replace: true})} style={{cursor: "pointer"}}>
+                          <div className="col-sm-4" onClick={() => navigate('/Affiliate', { replace: true })} style={{ cursor: "pointer" }}>
                             <div className="card bg-light">
                               <div className="nk-wgw sm">
                                 <a className="nk-wgw-inner">
@@ -436,12 +381,12 @@ const Home = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-sm-4" onClick={()=> navigate('/Bounty')} style={{cursor: "pointer"}}>
+                          <div className="col-sm-4" onClick={() => navigate('/Bounty')} style={{ cursor: "pointer" }}>
                             <div className="card bg-light">
                               <div className="nk-wgw sm">
                                 <a
                                   className="nk-wgw-inner"
-                                 
+
                                 >
                                   <div className="nk-wgw-name">
                                     <div className="nk-wgw-icon">
@@ -513,39 +458,63 @@ const Home = () => {
 
                       <div className="tranx-list card card-bordered">
                         {
-                          recentActivities.map((data) => {
-                            const d = new Date(data.createdAt);
-                            return (
-                              <div className="tranx-item">
-                                <div className="tranx-col">
-                                  <div className="tranx-info">
-                                    <div className="tranx-data">
-                                      <div className="tranx-label">
-                                        Buy {data.currency_type}
-                                        <em className="tranx-icon sm icon ni ni-sign-btc"></em>
-                                      </div>
-                                      <div className="tranx-date">
-                                        {d.toLocaleDateString()} {d.toLocaleTimeString()}
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="tranx-col">
-                                  <div className="tranx-amount">
-                                    <div className="number">
-                                      {data.amount}
-                                      <span className="currency currency-btc">ANA</span>
-                                    </div>
-                                    <div className="number-sm">
-                                      {data.cVolume}
-                                      <span className="currency currency-usd"> {data.currency_type} </span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
+                          recentLoad ?
+                            <div style={{ position: "absolute", zIndex: "99", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+                              <Triangle ariaLabel="loading-indicator" color="blue"/>
+                            </div> :
+                            recentActivities.map((data) => {
+                              const d = new Date(data.createdAt);
+                              return (
+                                <div className="tranx-item">
+                                  <div className="tranx-col">
+                                    <div className="tranx-info">
+                                      <div className="tranx-data">
+                                        <div className="tranx-label">
+                                          Buy {data?.compair_currency == 'usd' ? "USDT" : "INRX"}
+                                          {data.compair_currency == "usd" ? (
+                                            <div className="p-1">
+                                              <img
+                                                src="./images/Usdt.png"
+                                                style={{ width: "17px" }}
+                                                alt="usdt"
 
-                            )
-                          })
+                                              />
+                                            </div>
+
+                                          ) : (
+                                            <div className="p-1">
+                                              <img
+                                                src="./images/Inrx_black.png"
+                                                style={{ width: "17px" }}
+                                                alt="inrx"
+                                              />
+                                            </div>
+
+                                          )}
+                                          {/* <em className="tranx-icon sm icon ni ni-sign-btc"></em> */}
+                                        </div>
+                                        <div className="tranx-date">
+                                          {d.toLocaleDateString()} {d.toLocaleTimeString()}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="tranx-col">
+                                    <div className="tranx-amount">
+                                      <div className="number">
+                                        {data.cVolume}
+                                        <span className="currency currency-btc">ANA</span>
+                                      </div>
+                                      <div className="number-sm">
+                                        @ {data?.raw_price?.toFixed(2)}
+                                        <span className="currency currency-usd"> {data.currency_type} </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                              )
+                            })
                         }
 
                       </div>
@@ -645,11 +614,11 @@ const Home = () => {
                                   }, 800);
                                 }}>
                                 <div>
-                                <em className="clipboard-icon icon ni ni-copy"></em>
-                                
+                                  <em className="clipboard-icon icon ni ni-copy"></em>
+
                                   {/* <MdOutlineContentCopy color="white" /> */}
                                   {copied ?
-                                    <p className="text-light position-absolute" style={{ fontSize: "14px", top: "-21px", left: "17px", padding: "0px 5px", backgroundColor: "transparent" }}>copied!</p> : null}
+                                    <p className=" position-absolute" style={{ fontSize: "14px", top: "-21px", left: "17px", padding: "0px 5px", backgroundColor: "transparent", color: "grey" }}>copied!</p> : null}
                                 </div>
                               </CopyToClipboard>
                             </div>

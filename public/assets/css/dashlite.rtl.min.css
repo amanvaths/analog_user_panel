@@ -28865,6 +28865,7 @@ p > span > .icon.ni {
   display: table-cell;
   vertical-align: middle;
   padding: 1rem 0.5rem;
+  height: 30px;
 }
 .nk-tb-col:first-child {
   padding-right: 1.25rem;
