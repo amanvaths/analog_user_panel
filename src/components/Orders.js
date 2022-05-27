@@ -8,6 +8,7 @@ import { data } from "jquery";
 import swal from "sweetalert";
 import "../App.css";
 import MultiRangeSlider from "./multiRangeSlider/MultiRangeSlider";
+import { Triangle } from "react-loader-spinner";
 
 export default function Orders() {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export default function Orders() {
   const [walletbalance, setWalletBalance] = useState("");
   const [walletsymbol, setWalletsymbol] = useState("");
   const [minimumvalue, setMinimumValue] = useState("");
+  const [loader, setLoader] = useState(true);
 
   // const [CurrencyType, setCurrencyType] = useState("");
   // const [quantity, setQuantity] = useState(0);
@@ -37,9 +39,12 @@ export default function Orders() {
   );
   const email = user?.email;
   // const symbolState = useSelector((store) => store);
-  
-
-  
+  console.log(
+    userInfo.currency_preference,
+    "userInfo,userInfo,userInfouser,Infouser,Infouser,Infouser,Info "
+  );
+  console.log(oneUsdPrice, "oneUsdPrice,oneUsdPrice,oneUsdPrice,oneUsdPrice");
+  console.log(totalAna, "totalAna,totalAna,totalAna, totalAna");
 
   const getData = async () => {
     try {
@@ -68,7 +73,7 @@ export default function Orders() {
           ? data?.balance
           : Number(data?.balance * oneUsdPrice)
       );
-    
+
       walletData = walletData.filter((wallet) => wallet?.balance > 0);
       setWallets([...walletData]);
       const cd = [];
@@ -106,10 +111,8 @@ export default function Orders() {
   }, [oneUsdPrice, userInfo, data.balance]);
 
   const trxInAna = atprice / coinData[walletsymbol]?.quote?.INR?.price;
-  
 
   const inTrx = ammount * trxInAna;
- 
 
   function calculatePrice(coinPrice) {
     const trxInAna = atprice / coinPrice;
@@ -160,6 +163,7 @@ export default function Orders() {
         .then((res) => {
           const orderrespons = res.data;
           setHistory(orderrespons.order);
+          setLoader(false);
         })
         .catch((error) => {
           console.log(error.message);
@@ -216,6 +220,21 @@ export default function Orders() {
                 className="OrderHistoryContainer"
               >
                 <tbody>
+                  {loader && (
+                    <>
+                      <div
+                        style={{
+                          position: "absolute",
+                          zIndex: "99",
+                          top: "50%",
+                          left: "50%",
+                          transform: "translate(-50%, -50%)",
+                        }}
+                      >
+                        <Triangle ariaLabel="loading-indicator" color="green" />
+                      </div>
+                    </>
+                  )}
                   {history &&
                     history.map((h) => {
                       return (
@@ -347,10 +366,14 @@ export default function Orders() {
                     <input
                       type="number"
                       class="form-control buy-sell-form-bg buy-sell-theme"
-                      value={ammount?.toFixed(4)}
+                      value={userInfo?.currency_preference == "usd"?total/(atprice / oneUsdPrice):
+                           total/atprice
+                    }
                       style={{
                         borderColor: "rgb(202, 202, 204)",
                         height: "54px",
+                        color: "#008000",
+                        fontWeight: "bold",
                       }}
                       onChange={(e) => {
                         const amt = e.target.value
@@ -367,23 +390,19 @@ export default function Orders() {
                     />
                   </div>
                   <div
-                    style={{ display: "flex", justifyContent: "space-between",fontSize:"13px"}}
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      fontSize: "13px",
+                      marginBottom: "70px",
+                    }}
                   >
                     <div style={{ marginTop: "-15px" }}>
-                      <div>Buying Ammount:- {total && total?.toFixed(2)} {userInfo?.currency_preference == "usd" ? "USDT" : "INRX"}</div>
-                    </div>
-                    <div
-                      style={{
-                        // fontSize: "10px",
-                        marginTop: "-15px",
-                        // marginLeft: "23pc",
-                      }}
-                    >
-                      <div>
-                        ANA PRICE{":- "}
-                        {userInfo?.currency_preference == "usd"
-                          ? (atprice / oneUsdPrice).toFixed(8)
-                          : atprice}{" "}
+                      <div style={{ fontWeight: "bold" }}>
+                        Buying Amount{" "}
+                        <span style={{ color: "#008000", fontWeight: "bold" }}>
+                          {total && total?.toFixed(2)}
+                        </span>{" "}
                         {userInfo?.currency_preference == "usd" ? (
                           <img
                             src="./images/Usdt.png"
@@ -399,16 +418,46 @@ export default function Orders() {
                         )}
                       </div>
                     </div>
+                    <div
+                      style={{
+                        // fontSize: "10px",
+                        marginTop: "-15px",
+                        // marginLeft: "23pc",
+                      }}
+                    >
+                      <div style={{ fontWeight: "bold" }}>
+                        ANA PRICE{"  "}
+                        <span style={{ color: "#008000", fontWeight: "bold" }}>
+                          {userInfo?.currency_preference == "usd"
+                            ? (atprice / oneUsdPrice)?.toFixed(8)
+                            : atprice?.toFixed(8)}{" "}
+                          {userInfo?.currency_preference == "usd" ? (
+                            <img
+                              src="./images/Usdt.png"
+                              style={{ width: "15px" }}
+                              alt="usdt"
+                            />
+                          ) : (
+                            <img
+                              src="./images/Inrx_black.png"
+                              style={{ width: "15px" }}
+                              alt="inrx"
+                            />
+                          )}
+                        </span>
+                      </div>
+                    </div>
                   </div>
                   <div style={{ margin: "30px 0px" }}>
-                    <h4 style={{ fontSize: "15px" }}>
+                    {/* <h4 style={{ fontSize: "15px" }}>
                       {userInfo?.currency_preference == "usd" ? "USDT" : "INRX"}
-                    </h4>
+                    </h4> */}
                   </div>
                   {/* Progress Bar  */}
 
                   <div>
-                    {totalAna &&
+                    {
+                    // totalAna &&
                     userInfo &&
                     oneUsdPrice &&
                     userInfo?.currency_preference ? (
@@ -418,18 +467,25 @@ export default function Orders() {
                             ? 5000
                             : 5000 / oneUsdPrice
                         }
-                        symbol={userInfo?.currency_preference == "usd" ? "USDT" : "INRX"}
-                        
-                        // max={totalAna * userInfo?.anaPrice}
+                        // min={200}
+                        symbol={
+                          userInfo?.currency_preference == "usd"
+                            ? "USDT"
+                            : "INRX"
+                        }
+                        // max={0}
                         max={
                           userInfo?.currency_preference == "inr"
-                          ?(totalAna * userInfo?.anaPrice)
-                          :((totalAna * userInfo?.anaPrice)/oneUsdPrice)
+                            ? totalAna * userInfo?.anaPrice
+                            : (totalAna * userInfo?.anaPrice) / oneUsdPrice
                         }
-                        fixedmax={ userInfo?.currency_preference == "inr"
-                        ?(totalAna * userInfo?.anaPrice)
-                        :((totalAna * userInfo?.anaPrice)/oneUsdPrice)}
-                        onChange={({ min, max,symbol }) => {
+                        // fixedmax={0}
+                        fixedmax={
+                          userInfo?.currency_preference == "inr"
+                            ? totalAna * userInfo?.anaPrice
+                            : (totalAna * userInfo?.anaPrice) / oneUsdPrice
+                        }
+                        onChange={({ min, max, symbol }) => {
                           // console.log(`min = ${min}, max = ${max}`);
                           if (userInfo?.currency_preference == "inr") {
                             const maxvalue = max / atprice;
@@ -446,8 +502,13 @@ export default function Orders() {
                   </div>
                   <button
                     class="btn text-light btn-block my-2"
-                    style={{ background: "rgb(108, 183, 125)", top: "40px" }}
+                    style={{ background: "rgb(108, 183, 125)", top: "60px" }}
                     onClick={TotalAmt}
+                    disabled={
+                      userInfo?.currency_preference == "usd"
+                        ? totalAna * userInfo?.anaPrice == 0
+                        : (totalAna * userInfo?.anaPrice) / oneUsdPrice == 0
+                    }
                   >
                     BUY ANA
                   </button>

@@ -4,7 +4,7 @@ import "./MultiRangeSlider.css";
 import { useSelector, useDispatch } from "react-redux";
 import { prototype } from "react-copy-to-clipboard";
 
-const MultiRangeSlider = ({fixedmax, min, max, onChange}) => {
+const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
   const [minVal, setMinVal] = useState(min);
   const [maxVal, setMaxVal] = useState(max);
   const minValRef = useRef(min);
@@ -12,12 +12,16 @@ const MultiRangeSlider = ({fixedmax, min, max, onChange}) => {
   const range = useRef(null);
   const dispatch = useDispatch();
 
+  
+
   // Dispatch
-  const { userInfo} = useSelector(
-    (state) => state.user.value
-    
+  const { userInfo,totalAna,oneUsdPrice } = useSelector((state) => state.user.value);
+  console.log(
+    userInfo?.currency_preference,
+    " userInfo?.currency_preference userInfo?.currency_preference userInfo?.currency_preference"
   );
-  console.log( userInfo?.currency_preference," userInfo?.currency_preference userInfo?.currency_preference userInfo?.currency_preference");
+
+
 
   // Convert to percentage
   const getPercent = useCallback(
@@ -52,8 +56,9 @@ const MultiRangeSlider = ({fixedmax, min, max, onChange}) => {
   }, [minVal, maxVal, onChange]);
 
   return (
-    <div className="container">
+    <div className="containerProgress">
       <input
+        disabled
         type="range"
         min={min}
         max={max}
@@ -64,15 +69,19 @@ const MultiRangeSlider = ({fixedmax, min, max, onChange}) => {
           minValRef.current = value;
         }}
         className="thumb thumb--left"
-        style={{ zIndex: minVal > max - 100 && "5" }}
+        style={{ zIndex: minVal > max - 100 && "5"}}
+
       />
       <input
+      //  disabled={userInfo?.currency_preference == "usd"
+      //  ?(totalAna * userInfo?.anaPrice) == 0 
+      // :((totalAna * userInfo?.anaPrice)/oneUsdPrice) == 0}
         type="range"
         min={min}
         max={max}
         value={maxVal}
         onChange={(event) => {
-          const value = Math.max(Number(event.target.value), minVal + 1 );
+          const value = Math.max(Number(event.target.value), minVal + 1);
           setMaxVal(value);
           maxValRef.current = value;
         }}
@@ -81,12 +90,57 @@ const MultiRangeSlider = ({fixedmax, min, max, onChange}) => {
 
       <div className="slider">
         <div className="slider__track" />
-        <div ref={range} className="slider__range" />
-        <div className="slider__left-value" style={{left:"35px"}}>{minVal?.toFixed(2)}</div>
-        <div className="slider__right-value" style={{right:"0px",display:"none"}}>{maxVal?.toFixed(2)}</div>
-        <div className="slider__right-value">{fixedmax?.toFixed(2)}</div>
-        <div className="slider__left-value "style={{left:"0px",fontWeight:"bold"}}>{ userInfo?.currency_preference=="inr"?"INRX":"USDT"}</div>
-        <div className="slider__right-value "style={{right:"55px",fontWeight:"bold"}}>{ userInfo?.currency_preference=="inr"?"INRX":"USDT"}</div>
+        <div ref={range} className="slider__range"  />
+        <div className="slider__left-value" style={{ left: "25px",color:"green",fontWeight:"bold" }}>
+          {minVal?.toFixed(2)}
+        </div>
+        <div
+          className="slider__right-value"
+          style={{ right: "0px", display: "none" }}
+        >
+          {maxVal?.toFixed(2)}
+        </div>
+        <div className="slider__right-value" style={{color:"green",fontWeight:"bold" }}>{fixedmax?.toFixed(2)}</div>
+        <div
+          className="slider__left-value "
+          style={{ left: "0px", fontWeight: "bold" }}
+        >
+          {userInfo?.currency_preference == "usd" ? (
+            <img
+              src="./images/Usdt.png"
+              style={{ width: "17px", marginTop: "-7px" }}
+              alt="usdt"
+              className="img"
+            />
+          ) : (
+            <img
+              src="./images/Inrx_black.png"
+              style={{ width: "17px", marginTop: "-7px" }}
+              alt="inrx"
+              className="img"
+            />
+          )}
+        </div>
+        <div
+          className="slider__right-value "
+          style={{ right: "60px", fontWeight: "bold" }}
+        >
+          {userInfo?.currency_preference == "usd" ? (
+            <img
+              src="./images/Usdt.png"
+              style={{ width: "17px", marginTop: "-3px" }}
+              alt="usdt"
+              className="img"
+            />
+          ) : (
+            <img
+              src="./images/Inrx_black.png"
+              style={{ width: "17px", marginTop: "-7px" }}
+              alt="inrx"
+              className="img"
+            />
+          )}
+        </div>
       </div>
     </div>
   );
@@ -95,8 +149,8 @@ const MultiRangeSlider = ({fixedmax, min, max, onChange}) => {
 MultiRangeSlider.propTypes = {
   min: PropTypes.number.isRequired,
   max: PropTypes.number.isRequired,
-  fixedmax:PropTypes.number.isRequired,
-  onChange: PropTypes.func.isRequired
+  fixedmax: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default MultiRangeSlider;

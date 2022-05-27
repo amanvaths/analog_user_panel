@@ -2,15 +2,18 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
 import "./tradehistory.css";
+import { Triangle } from "react-loader-spinner";
 
 export default function TradeHistory() {
   const [history, setHistory] = useState([]);
+  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     axios
       .get(`${BASE_URL}/getAllOrder`)
       .then((res) => {
         setHistory(res.data.order);
+        setLoader(false);
       })
       .catch((error) => {
         console.log(error.message);
@@ -36,10 +39,16 @@ export default function TradeHistory() {
             </thead>
             <div style={{ height: "450px", overflow: "auto", display: "table-caption" }}>
               <tbody>
+              {loader && (<>
+          <div style={{ position: "absolute", zIndex: "99", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+            <Triangle ariaLabel="loading-indicator" color="green" />
+          </div>
+        </>) 
+            }
                 {history.map((h) => {
                   return (
                     <>
-                      <tr class="zoom  historyorder">
+                      <tr class="zoom  historyorder" style={{fontSize:"15.3px"}}>
                         <td className="TradeHistorySize" style={{ width: "15%" }}> {h.cVolume.toFixed(2)}
                           <img
                             src="./images/Analog.png"
