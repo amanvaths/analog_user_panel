@@ -60,17 +60,21 @@ export default function Orders() {
         email: email,
       });
       let walletData = res.data;
+      const d = walletData.find((data,i)=>data.symbol=="USDT");
+      console.log(d,"ddddddddddddddddddddd")
       const data = {
-        balance: walletData[8]?.usdt_balance,
+        balance: d.usdt_balance,
+
+       
         // inrxsymbol: walletData[5]?.symbol,
       };
+      console.log(d.usdt_balance," walletData[d[0]]?.usdt_balance walletData[d[0]]?.usdt_balance walletData[d[0]]?.usdt_balance");
 
       setWalletBalance(
         userInfo?.currency_preference == "usd"
           ? data?.balance
           : Number(data?.balance * oneUsdPrice)
       );
-
       walletData = walletData.filter((wallet) => wallet?.balance > 0);
       setWallets([...walletData]);
       const cd = [];
