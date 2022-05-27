@@ -16,10 +16,7 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
 
   // Dispatch
   const { userInfo,totalAna,oneUsdPrice } = useSelector((state) => state.user.value);
-  console.log(
-    userInfo?.currency_preference,
-    " userInfo?.currency_preference userInfo?.currency_preference userInfo?.currency_preference"
-  );
+
 
 
 
