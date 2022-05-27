@@ -367,11 +367,10 @@ const CryptoTransaction = () => {
                           <div className="card-inner p-0">
                             <div className="nk-tb-list nk-tb-tnx">
                               <div className="nk-tb-item nk-tb-head">
+                              <div className="nk-tb-col"><span>Sr. No</span></div>
                                 <div className="nk-tb-col"><span>Details</span></div>
 
-                                {/* <div className="nk-tb-col tb-col-lg">
-                              <span>Order</span>
-                            </div> */}
+                                
                                 <div className="nk-tb-col text-end">
                                   <span>Amount</span>
                                 </div>
@@ -391,6 +390,12 @@ const CryptoTransaction = () => {
                                   return (
 
                                     <div className="nk-tb-item">
+                                      <div className="nk-tb-col">
+                                        <div className="nk-tnx-type">
+                                         
+                                          <span>{index +1}</span>
+                                        </div>
+                                      </div>
                                       <div className="nk-tb-col">
                                         <div className="nk-tnx-type">
                                           <div
