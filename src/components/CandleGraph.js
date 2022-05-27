@@ -9,7 +9,7 @@ import  TVChartContainer  from "./CandleChart";
 function CandleGraph() {
 
 // dispatch
-const {userInfo} = useSelector((state)=> state.currency.value)
+const {userInfo} = useSelector((state)=> state.user.value)
   const symbolState = useSelector((store)=>store);
   
 
