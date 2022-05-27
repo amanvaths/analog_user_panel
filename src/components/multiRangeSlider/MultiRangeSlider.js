@@ -102,7 +102,7 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
           className="slider__left-value "
           style={{ left: "0px", fontWeight: "bold" }}
         >
-          {userInfo?.currency_preference == "usd" ? (
+          {userInfo?.currency_preference && userInfo?.currency_preference == "usd" ? (
             <img
               src="./images/Usdt.png"
               style={{ width: "17px", marginTop: "-7px" }}
@@ -122,7 +122,7 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
           className="slider__right-value "
           style={{ right: "60px", fontWeight: "bold" }}
         >
-          {userInfo?.currency_preference == "usd" ? (
+          {userInfo?.currency_preference && userInfo?.currency_preference == "usd" ? (
             <img
               src="./images/Usdt.png"
               style={{ width: "17px", marginTop: "-3px" }}
