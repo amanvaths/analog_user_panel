@@ -60,11 +60,19 @@ const Signup = (props) => {
         }
         if (resp.status == 0) {
           swal(
-            "Password and Confirm Password do not match",
-            "Enter Same Password",
+            "Something went wrong",
+            "Try again",
             "error"
           );
         }
+        if (resp.status == 3) {
+          swal(
+            "Invalid Refferal Code",
+            "Try again",
+            "error"
+          );
+        }
+
         if (resp.status == -1) {
           swal("Email Already Registerd", "Try with new Email ID", "error");
         } /* else {
@@ -170,7 +178,13 @@ const Signup = (props) => {
     if (confirmPassword == "") {
       setConfirmPassworderror(true);
     }
-
+    if(password !== confirmPassword){
+      return  swal(
+        "Password and Confirm password not matched",
+        "Enter correct password",
+        "error"
+      );
+    }
     if (email !== "" && password !== "" && confirmPassword !== "") {
       Signup();
     }
