@@ -22,6 +22,7 @@ import ChangePassword from "./components/ChangePassword";
 import OtpTFA from "./pages/OtpTFA";
 import Bounty from "./pages/Bounty";
 import AirDrop from "./pages/AirDrop";
+import Withdrawal from './pages/Withdrawal'
 import { useSelector } from "react-redux";
 
 function App(props) {
@@ -58,6 +59,7 @@ function App(props) {
           <Route path="/*" element={(user.email && user.token)?<Home />:<Login />} />
           <Route path="/Bounty" element={(user.email && user.token)?<Bounty />:<Login />} />
           <Route path="/Airdrop" element={(user.email && user.token)?<AirDrop />:<Login />} />
+          <Route path="/Withdrawal" element={(user.email && user.token)?<Withdrawal />:<Login />} />
         
         </Routes>
       </BrowserRouter>

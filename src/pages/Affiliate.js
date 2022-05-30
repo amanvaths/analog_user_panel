@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { BASE_URL } from "../Api_connection/config";
 import AffiliatCard from "../components/AffiliateCard";
 import { setUserInfo } from "../redux/reducer/user";
-import { Triangle,ThreeDots } from 'react-loader-spinner'
+import { Triangle, ThreeDots } from 'react-loader-spinner'
 import { MdMoreHoriz } from 'react-icons/md'
 
 const Affiliate = () => {
@@ -22,7 +22,7 @@ const Affiliate = () => {
   const [level2, setLevel2] = useState(false)
   const [level3, setLevel3] = useState(false)
   const [tab, setTab] = useState([]);
-  const [loader,setLoader] = useState(true)
+  const [loader, setLoader] = useState(true)
 
   const [load, setLoad] = useState(false)
 
@@ -44,11 +44,11 @@ const Affiliate = () => {
   const getAffiliateList = async (level) => {
     const data = await axios.post(`${BASE_URL}/levelWiseList`, { email: email, level: level })
     console.log(data, "::Response from AFFILIATE TABLE API");
-    if(data){
+    if (data) {
       setTab(data.data.data);
       setLoader(false)
     }
-   
+
   }
 
   console.log(tab, ":: DATA IN TAB");
@@ -128,8 +128,8 @@ const Affiliate = () => {
                             toalRemaining={0}
                           />
                         )
-                      }) : 
-                        <h3>No Record Found</h3>
+                      }) :
+                      <h3>No Record Found</h3>
                       :
 
                       <div style={{ position: "absolute", zIndex: "99", top: "29%", left: "108%", transform: "translate(-50%, -50%)" }}>
@@ -151,33 +151,33 @@ const Affiliate = () => {
                           <div className="nk-block-des text-soft">
                             <ul class="nk-block-tools g-3" style={{ paddingLeft: "0px" }}>
                               <li>
-                                <a className={level1 ? 'btn btn-white btn-dim btn-outline-light active':
-                                "btn btn-white btn-dim btn-outline-light"}onClick={() => {
-                                  setLevel1(true)
-                                  setLevel2(false)
-                                  setLevel3(false)
-                                  getAffiliateList(1)
-                                }}>
+                                <a className={level1 ? 'btn btn-white btn-dim btn-outline-light active' :
+                                  "btn btn-white btn-dim btn-outline-light"} onClick={() => {
+                                    setLevel1(true)
+                                    setLevel2(false)
+                                    setLevel3(false)
+                                    getAffiliateList(1)
+                                  }}>
                                   <span>Level 1</span></a>
                               </li>
                               <li>
-                                <a className={level2 ? 'btn btn-white btn-dim btn-outline-light active':
-                                "btn btn-white btn-dim btn-outline-light"}onClick={() => {
-                                  setLevel1(false)
-                                  setLevel2(true)
-                                  setLevel3(false)
-                                  getAffiliateList(2)
-                                }}>
+                                <a className={level2 ? 'btn btn-white btn-dim btn-outline-light active' :
+                                  "btn btn-white btn-dim btn-outline-light"} onClick={() => {
+                                    setLevel1(false)
+                                    setLevel2(true)
+                                    setLevel3(false)
+                                    getAffiliateList(2)
+                                  }}>
                                   <span>Level 2</span></a>
                               </li>
                               <li>
-                                <a className={level3 ? 'btn btn-white btn-dim btn-outline-light active':
-                                "btn btn-white btn-dim btn-outline-light"}onClick={() => {
-                                  setLevel1(false)
-                                  setLevel2(false)
-                                  setLevel3(true)
-                                  getAffiliateList(3)
-                                }}>
+                                <a className={level3 ? 'btn btn-white btn-dim btn-outline-light active' :
+                                  "btn btn-white btn-dim btn-outline-light"} onClick={() => {
+                                    setLevel1(false)
+                                    setLevel2(false)
+                                    setLevel3(true)
+                                    getAffiliateList(3)
+                                  }}>
                                   <span>Level 3</span></a>
                               </li>
                             </ul>
@@ -254,7 +254,7 @@ const Affiliate = () => {
                                   <div className="form-inline flex-nowrap gx-3">
                                     <h5>Level 1</h5>
                                   </div>
-                                </div> 
+                                </div>
                               </div>
                             </div>
                             <div className="card-inner">
@@ -285,50 +285,77 @@ const Affiliate = () => {
                                     <span className="sub-text">View</span>
                                   </div>
                                 </div>
-                                { 
-                                tab.length > 0 ? 
-                                tab.map((element, index) => {
-                                  console.log(index, "::INDEx");
-                                  return (
-                                    <div className="nk-tb-item ">
+                                {
+                                  tab.length > 0 ?
+                                    tab.map((element, index) => {
+                                      console.log(index, "::INDEx");
+                                      return (
+                                        <div className="nk-tb-item ">
 
-                                      <div className="nk-tb-col tb-col-sm">
-                                      </div>
-                                      <div className="nk-tb-col tb-col-sm">
-                                        <span className="">{index + 1}</span>
-                                      </div>
-                                      <div className="nk-tb-col tb-col-sm">
-                                        <span className="">{element.email}</span>
-                                      </div>
-                                      <div className="nk-tb-col tb-col-sm">
-                                        <span>{element?.totalBuy?.toFixed(2)} ANA</span>
-                                      </div>
-                                      <div className="nk-tb-col tb-col-sm">
-                                        <span>
-                                          {
-                                            userInfo?.currency_preference == 'usd' ? `${element?.totalExp?.toFixed(2)} USDT` : `${(element?.totalExp * oneUsdPrice)?.toFixed(2)} INRX`
-                                          }
-                                        </span>
-                                      </div>
-                                      <div className="nk-tb-col tb-col-sm">
-                                        <span>
-                                          {
-                                            userInfo?.currency_preference == 'usd' ? `${element?.totalAff?.toFixed(2)} USDT` : `${(element?.totalAff * oneUsdPrice).toFixed(2)} INRX`
-                                          }
-                                        </span>
-                                      </div>
-                                      <div className="nk-tb-col tb-col-sm ">
-                                        <span>0 INRX</span>
-                                      </div>
-                                      <div className="nk-tb-col tb-col-sm">
-                                        <span>Action</span>
-                                      </div>
+                                          <div className="nk-tb-col tb-col-sm">
+                                          </div>
+                                          <div className="nk-tb-col tb-col-sm">
+                                            <span className="">{index + 1}</span>
+                                          </div>
+                                          <div className="nk-tb-col tb-col-sm">
+                                            <span className="">{element.email}</span>
+                                          </div>
+                                          <div className="nk-tb-col tb-col-sm">
+                                            <span style={{ color: "green" }}>{element?.totalBuy?.toFixed(2)} ANA</span>
+                                            <img src="./images/Analog.png" style={{ width: "24px" }} />
+                                          </div>
+                                          <div className="nk-tb-col tb-col-sm">
+                                            <span style={{ color: "red" }}>
+                                              {
+                                                userInfo?.currency_preference == 'usd' ? `${element?.totalExp?.toFixed(2)} USDT` : `${(element?.totalExp * oneUsdPrice)?.toFixed(2)} INRX`
 
-                                    </div>
-                                  )
-                                }): 
-                                <div>No Recored Found</div>
-                              }
+                                              }
+                                              {userInfo?.currency_preference == "usd" ? (
+                                              <img
+                                                src="./images/Usdt.png"
+                                                style={{ width: "17px", paddingLeft: "1px" }}
+                                                alt="usdt"
+
+                                              />) : (
+                                              <img
+                                                src="./images/Inrx_black.png"
+                                                style={{ width: "17px" }}
+                                                alt="inrx"
+                                              />)}
+                                            </span>
+
+                                          </div>
+                                          <div className="nk-tb-col tb-col-sm">
+                                            <span style={{ color: "green" }}>
+                                              {
+                                                userInfo?.currency_preference == 'usd' ? `${element?.totalAff?.toFixed(2)} USDT` : `${(element?.totalAff * oneUsdPrice).toFixed(2)} INRX`
+                                              }
+                                              {userInfo?.currency_preference == "usd" ? (
+                                              <img
+                                                src="./images/Usdt.png"
+                                                style={{ width: "17px", paddingLeft: "1px" }}
+                                                alt="usdt"
+
+                                              />) : (
+                                              <img
+                                                src="./images/Inrx_black.png"
+                                                style={{ width: "17px" }}
+                                                alt="inrx"
+                                              />)}
+                                            </span>
+                                          </div>
+                                          <div className="nk-tb-col tb-col-sm ">
+                                            <span style={{ color: "green" }}>0 INRX</span>
+                                          </div>
+                                          <div className="nk-tb-col tb-col-sm">
+                                            <span>Action</span>
+                                          </div>
+
+                                        </div>
+                                      )
+                                    }) :
+                                    <div>No Recored Found</div>
+                                }
 
                                 {/* <div className="nk-tb-item">
                                                 <div className="nk-tb-col nk-tb-col-check">
@@ -516,95 +543,95 @@ const Affiliate = () => {
                       : null}
 
                     {/* Level 2 */}
-                    {level2 == true ? 
-                    <div className="nk-block">
-                    <div className="card card-bordered card-stretch">
-                      <div className="card-inner-group">
-                        <div className="card-inner">
-                          <div className="card-title-group">
-                            <div className="card-tools">
-                              <div className="form-inline flex-nowrap gx-3">
-                                <h5>Level 2</h5>
-                              </div>
-                            </div> 
-                          </div>
-                        </div>
-                        <div className="card-inner">
-                          <div className="nk-tb-list nk-tb-ulist is-compact" >
-                            <div className="nk-tb-item nk-tb-head">
-                              <div className="nk-tb-col tb-col-sm">
-                                {/* <span className="sub-text">S. N.</span> */}
-                              </div>
-                              <div className="nk-tb-col tb-col-sm">
-                                <span className="tb-lead">S. N.</span>
-                              </div>
-                              <div className="nk-tb-col tb-col-sm">
-                                <span className="tb-lead">Email</span>
-                              </div>
-                              <div className="nk-tb-col tb-col-sm">
-                                <span className="tb-lead">Total Purchased</span>
-                              </div>
-                              <div className="nk-tb-col tb-col-sm">
-                                <span className="tb-lead">Total Expense</span>
-                              </div>
-                              <div className="nk-tb-col tb-col-sm">
-                                <span className="tb-lead">Affiliate Rcvd (3%)</span>
-                              </div>
-                              <div className="nk-tb-col tb-col-sm">
-                                <span className="tb-lead">Handout</span>
-                              </div>
-                              <div className="nk-tb-col tb-col-sm">
-                                <span className="tb-lead">View</span>
+                    {level2 == true ?
+                      <div className="nk-block">
+                        <div className="card card-bordered card-stretch">
+                          <div className="card-inner-group">
+                            <div className="card-inner">
+                              <div className="card-title-group">
+                                <div className="card-tools">
+                                  <div className="form-inline flex-nowrap gx-3">
+                                    <h5>Level 2</h5>
+                                  </div>
+                                </div>
                               </div>
                             </div>
-
-                            {
-                              tab.length > 0 ?
-                            tab.map((element, index) => {
-                              console.log(index, "::INDEx");
-                              return (
-                                <div className="nk-tb-item ">
-
+                            <div className="card-inner">
+                              <div className="nk-tb-list nk-tb-ulist is-compact" >
+                                <div className="nk-tb-item nk-tb-head">
                                   <div className="nk-tb-col tb-col-sm">
+                                    {/* <span className="sub-text">S. N.</span> */}
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="tb-text">{index + 1}</span>
+                                    <span className="tb-lead">S. N.</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="tb-text">{element.email}</span>
+                                    <span className="tb-lead">Email</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="tb-text">{element?.totalBuy?.toFixed(2)} ANA</span>
+                                    <span className="tb-lead">Total Purchased</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="tb-text">
-                                      {
-                                        userInfo?.currency_preference == 'usd' ? `${element?.totalExp?.toFixed(2)} USDT` : `${(element?.totalExp * oneUsdPrice)?.toFixed(2)} INRX`
-                                      }
-                                    </span>
+                                    <span className="tb-lead">Total Expense</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="tb-text">
-                                      {
-                                        userInfo?.currency_preference == 'usd' ? `${element?.totalAff?.toFixed(2)} USDT` : `${(element?.totalAff * oneUsdPrice).toFixed(2)} INRX`
-                                      }
-                                    </span>
+                                    <span className="tb-lead">Affiliate Rcvd (3%)</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="tb-text">0 INRX</span>
+                                    <span className="tb-lead">Handout</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="tb-text">Action</span>
+                                    <span className="tb-lead">View</span>
                                   </div>
-
                                 </div>
-                              )
-                            }) : 
 
-                            <h3>No Record Found</h3>
-                          }
+                                {
+                                  tab.length > 0 ?
+                                    tab.map((element, index) => {
+                                      console.log(index, "::INDEx");
+                                      return (
+                                        <div className="nk-tb-item ">
 
-                            {/* <div className="nk-tb-item">
+                                          <div className="nk-tb-col tb-col-sm">
+                                          </div>
+                                          <div className="nk-tb-col tb-col-sm">
+                                            <span className="tb-text">{index + 1}</span>
+                                          </div>
+                                          <div className="nk-tb-col tb-col-sm">
+                                            <span className="tb-text">{element.email}</span>
+                                          </div>
+                                          <div className="nk-tb-col tb-col-sm">
+                                            <span className="tb-text">{element?.totalBuy?.toFixed(2)} ANA</span>
+                                          </div>
+                                          <div className="nk-tb-col tb-col-sm">
+                                            <span className="tb-text">
+                                              {
+                                                userInfo?.currency_preference == 'usd' ? `${element?.totalExp?.toFixed(2)} USDT` : `${(element?.totalExp * oneUsdPrice)?.toFixed(2)} INRX`
+                                              }
+                                            </span>
+                                          </div>
+                                          <div className="nk-tb-col tb-col-sm">
+                                            <span className="tb-text">
+                                              {
+                                                userInfo?.currency_preference == 'usd' ? `${element?.totalAff?.toFixed(2)} USDT` : `${(element?.totalAff * oneUsdPrice).toFixed(2)} INRX`
+                                              }
+                                            </span>
+                                          </div>
+                                          <div className="nk-tb-col tb-col-sm">
+                                            <span className="tb-text">0 INRX</span>
+                                          </div>
+                                          <div className="nk-tb-col tb-col-sm">
+                                            <span className="tb-text">Action</span>
+                                          </div>
+
+                                        </div>
+                                      )
+                                    }) :
+
+                                    <h3>No Record Found</h3>
+                                }
+
+                                {/* <div className="nk-tb-item">
                                             <div className="nk-tb-col nk-tb-col-check">
                                               <div className="custom-control custom-control-sm custom-checkbox notext">
                                                 <input
@@ -743,157 +770,157 @@ const Affiliate = () => {
                                             </div>
                                           </div> */}
 
+                              </div>
+                            </div>
+                            <div className="card-inner">
+                              <ul className="pagination justify-content-center justify-content-md-center">
+                                <li className="page-item">
+                                  <a className="page-link" href="#">
+                                    Prev
+                                  </a>
+                                </li>
+                                <li className="page-item">
+                                  <a className="page-link" href="#">
+                                    1
+                                  </a>
+                                </li>
+                                <li className="page-item">
+                                  <a className="page-link" href="#">
+                                    2
+                                  </a>
+                                </li>
+                                <li className="page-item">
+                                  <span className="page-link">
+                                    <em className="icon ni ni-more-h"></em>
+                                  </span>
+                                </li>
+                                <li className="page-item">
+                                  <a className="page-link" href="#">
+                                    6
+                                  </a>
+                                </li>
+                                <li className="page-item">
+                                  <a className="page-link" href="#">
+                                    7
+                                  </a>
+                                </li>
+                                <li className="page-item">
+                                  <a className="page-link" href="#">
+                                    Next
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
                           </div>
                         </div>
-                        <div className="card-inner">
-                          <ul className="pagination justify-content-center justify-content-md-center">
-                            <li className="page-item">
-                              <a className="page-link" href="#">
-                                Prev
-                              </a>
-                            </li>
-                            <li className="page-item">
-                              <a className="page-link" href="#">
-                                1
-                              </a>
-                            </li>
-                            <li className="page-item">
-                              <a className="page-link" href="#">
-                                2
-                              </a>
-                            </li>
-                            <li className="page-item">
-                              <span className="page-link">
-                                <em className="icon ni ni-more-h"></em>
-                              </span>
-                            </li>
-                            <li className="page-item">
-                              <a className="page-link" href="#">
-                                6
-                              </a>
-                            </li>
-                            <li className="page-item">
-                              <a className="page-link" href="#">
-                                7
-                              </a>
-                            </li>
-                            <li className="page-item">
-                              <a className="page-link" href="#">
-                                Next
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
                       </div>
-                    </div>
-                  </div>
-                  : null}
+                      : null}
 
                     {/* Level 3 */}
                     {level3 == true ?
-                    <div className="nk-block">
-                    <div className="card card-bordered card-stretch">
-                      <div className="card-inner-group">
-                        <div className="card-inner">
-                          <div className="card-title-group">
-                            <div className="card-tools">
-                              <div className="form-inline flex-nowrap gx-3">
-                                <h5>Level 3</h5>
-                              </div>
-                            </div> 
-                          </div>
-                        </div>
-                        <div className="card-inner">
-                          <div className="nk-tb-list nk-tb-ulist is-compact" >
-                            <div className="nk-tb-item nk-tb-head">
-                              <div className="nk-tb-col tb-col-sm">
-                                {/* <span className="sub-text">S. N.</span> */}
-                              </div>
-                              <div className="nk-tb-col tb-col-sm">
-                                <span className="tb-lead">S. N.</span>
-                              </div>
-                              <div className="nk-tb-col tb-col-sm">
-                                <span className="tb-lead">Email</span>
-                              </div>
-                              <div className="nk-tb-col tb-col-sm">
-                                <span className="tb-lead">Sponsor</span>
-                              </div>
-                              <div className="nk-tb-col tb-col-sm">
-                                <span className="tb-lead">Total Purchased</span>
-                              </div>
-                              <div className="nk-tb-col tb-col-sm">
-                                <span className="tb-lead">Total Expense</span>
-                              </div>
-                              <div className="nk-tb-col tb-col-sm">
-                                <span className="tb-lead">Affiliate Rcvd (2%)</span>
-                              </div>
-                              <div className="nk-tb-col tb-col-sm">
-                                <span className="tb-lead">Handout</span>
-                              </div>
-                              <div className="nk-tb-col tb-col-sm">
-                                <span className="tb-lead">View</span>
+                      <div className="nk-block">
+                        <div className="card card-bordered card-stretch">
+                          <div className="card-inner-group">
+                            <div className="card-inner">
+                              <div className="card-title-group">
+                                <div className="card-tools">
+                                  <div className="form-inline flex-nowrap gx-3">
+                                    <h5>Level 3</h5>
+                                  </div>
+                                </div>
                               </div>
                             </div>
--
-                            {
-                            tab.length> 0 ? 
-                            tab.map((element, index) => {
-                              console.log(index, "::INDEx");
-                              return (
-                                <>
-                                 <div className="nk-tb-item ">
-
+                            <div className="card-inner">
+                              <div className="nk-tb-list nk-tb-ulist is-compact" >
+                                <div className="nk-tb-item nk-tb-head">
                                   <div className="nk-tb-col tb-col-sm">
+                                    {/* <span className="sub-text">S. N.</span> */}
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="tb-text">{index + 1}</span>
+                                    <span className="tb-lead">S. N.</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="tb-text">{element.email}</span>
+                                    <span className="tb-lead">Email</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="tb-text">{element.sponsor}</span>
+                                    <span className="tb-lead">Sponsor</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="tb-text">{element?.totalBuy?.toFixed(2)} ANA</span>
+                                    <span className="tb-lead">Total Purchased</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="tb-text">
-                                      {
-                                        userInfo?.currency_preference == 'usd' ? `${element?.totalExp?.toFixed(2)} USDT` : `${(element?.totalExp * oneUsdPrice)?.toFixed(2)} INRX`
-                                      }
-                                    </span>
+                                    <span className="tb-lead">Total Expense</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="tb-text">
-                                      {
-                                        userInfo?.currency_preference == 'usd' ? `${element?.totalAff?.toFixed(2)} USDT` : `${(element?.totalAff * oneUsdPrice).toFixed(2)} INRX`
-                                      }
-                                    </span>
+                                    <span className="tb-lead">Affiliate Rcvd (2%)</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="tb-text">
-                                    <span className="tb-text">
-                                      {
-                                        userInfo?.currency_preference == 'usd' ? `${element?.totalHandout?.toFixed(2)} USDT` : `${(element?.totalHandout * oneUsdPrice).toFixed(2)} INRX`
-                                      }
-                                    </span>
-                                      </span>
+                                    <span className="tb-lead">Handout</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="tb-text">
-                                      < MdMoreHoriz/>
-                                      </span>
+                                    <span className="tb-lead">View</span>
                                   </div>
-
                                 </div>
-                                </>
-                              )
-                            }): 
-                            <h3>No Data Found</h3>
-                            }
+                                -
+                                {
+                                  tab.length > 0 ?
+                                    tab.map((element, index) => {
+                                      console.log(index, "::INDEx");
+                                      return (
+                                        <>
+                                          <div className="nk-tb-item ">
 
-                            {/* <div className="nk-tb-item">
+                                            <div className="nk-tb-col tb-col-sm">
+                                            </div>
+                                            <div className="nk-tb-col tb-col-sm">
+                                              <span className="tb-text">{index + 1}</span>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-sm">
+                                              <span className="tb-text">{element.email}</span>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-sm">
+                                              <span className="tb-text">{element.sponsor}</span>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-sm">
+                                              <span className="tb-text">{element?.totalBuy?.toFixed(2)} ANA</span>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-sm">
+                                              <span className="tb-text">
+                                                {
+                                                  userInfo?.currency_preference == 'usd' ? `${element?.totalExp?.toFixed(2)} USDT` : `${(element?.totalExp * oneUsdPrice)?.toFixed(2)} INRX`
+                                                }
+                                              </span>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-sm">
+                                              <span className="tb-text">
+                                                {
+                                                  userInfo?.currency_preference == 'usd' ? `${element?.totalAff?.toFixed(2)} USDT` : `${(element?.totalAff * oneUsdPrice).toFixed(2)} INRX`
+                                                }
+                                              </span>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-sm">
+                                              <span className="tb-text">
+                                                <span className="tb-text">
+                                                  {
+                                                    userInfo?.currency_preference == 'usd' ? `${element?.totalHandout?.toFixed(2)} USDT` : `${(element?.totalHandout * oneUsdPrice).toFixed(2)} INRX`
+                                                  }
+                                                </span>
+                                              </span>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-sm">
+                                              <span className="tb-text">
+                                                < MdMoreHoriz />
+                                              </span>
+                                            </div>
+
+                                          </div>
+                                        </>
+                                      )
+                                    }) :
+                                    <h3>No Data Found</h3>
+                                }
+
+                                {/* <div className="nk-tb-item">
                                             <div className="nk-tb-col nk-tb-col-check">
                                               <div className="custom-control custom-control-sm custom-checkbox notext">
                                                 <input
@@ -1032,50 +1059,50 @@ const Affiliate = () => {
                                             </div>
                                           </div> */}
 
+                              </div>
+                            </div>
+                            <div className="card-inner">
+                              <ul className="pagination justify-content-center justify-content-md-center">
+                                <li className="page-item">
+                                  <a className="page-link" href="#">
+                                    Prev
+                                  </a>
+                                </li>
+                                <li className="page-item">
+                                  <a className="page-link" href="#">
+                                    1
+                                  </a>
+                                </li>
+                                <li className="page-item">
+                                  <a className="page-link" href="#">
+                                    2
+                                  </a>
+                                </li>
+                                <li className="page-item">
+                                  <span className="page-link">
+                                    <em className="icon ni ni-more-h"></em>
+                                  </span>
+                                </li>
+                                <li className="page-item">
+                                  <a className="page-link" href="#">
+                                    6
+                                  </a>
+                                </li>
+                                <li className="page-item">
+                                  <a className="page-link" href="#">
+                                    7
+                                  </a>
+                                </li>
+                                <li className="page-item">
+                                  <a className="page-link" href="#">
+                                    Next
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
                           </div>
                         </div>
-                        <div className="card-inner">
-                          <ul className="pagination justify-content-center justify-content-md-center">
-                            <li className="page-item">
-                              <a className="page-link" href="#">
-                                Prev
-                              </a>
-                            </li>
-                            <li className="page-item">
-                              <a className="page-link" href="#">
-                                1
-                              </a>
-                            </li>
-                            <li className="page-item">
-                              <a className="page-link" href="#">
-                                2
-                              </a>
-                            </li>
-                            <li className="page-item">
-                              <span className="page-link">
-                                <em className="icon ni ni-more-h"></em>
-                              </span>
-                            </li>
-                            <li className="page-item">
-                              <a className="page-link" href="#">
-                                6
-                              </a>
-                            </li>
-                            <li className="page-item">
-                              <a className="page-link" href="#">
-                                7
-                              </a>
-                            </li>
-                            <li className="page-item">
-                              <a className="page-link" href="#">
-                                Next
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
                       </div>
-                    </div>
-                  </div>
                       : null}
 
                   </div>

@@ -45,7 +45,6 @@ const Home = () => {
 
   const [recentLoad, setRecentLoad] = useState(true)
 
-  console.log(userInfo?.user_id, "USER ID");
 
   const getPreSale = async () => {
     try {
@@ -184,7 +183,7 @@ const Home = () => {
                 >
                   {
                     data.map((data) => {
-                      console.log(data.levelname, "level name");
+                     
                       return (
                         <Getpresale
                           levelname={data.levelname}
