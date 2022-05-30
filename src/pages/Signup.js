@@ -65,6 +65,14 @@ const Signup = (props) => {
             "error"
           );
         }
+        if (resp.status == 3) {
+          swal(
+            "Invalid Refferal Code",
+            "Try again",
+            "error"
+          );
+        }
+
         if (resp.status == -1) {
           swal("Email Already Registerd", "Try with new Email ID", "error");
         } /* else {
