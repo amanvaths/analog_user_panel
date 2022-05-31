@@ -12,7 +12,7 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
   const range = useRef(null);
   const dispatch = useDispatch();
 
-   console.log(max,"Max Value")
+
   
 
   // Dispatch

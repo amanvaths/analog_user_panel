@@ -131,7 +131,7 @@
     max-width: 500px;
   }
   .OrderhistorySize {
-    font-size: 23px;
+    font-size: 21.2px;
   }
   .order {
     background: none !important;
@@ -147,6 +147,9 @@
   .p-3 {
     max-width: 580px;
   }
+  .order {
+    background: none !important;
+  }
 }
 
 @media only screen and (min-width: 400px) and (max-width: 693px) {
@@ -155,6 +158,9 @@
   }
   .OrderhistorySize {
     font-size: 13px;
+  }
+  .order {
+    background: none !important;
   }
 }
 
@@ -186,4 +192,18 @@
   /* 0 4.8px 3.4px rgba(0, 0, 0, 0.086),
   0 10px 8px rgba(0, 0, 0, 0.12); */
   overflow-y: hidden;
+}
+
+
+/* increment button */
+
+#mount{
+  display:flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+#counter{
+  font-size: 2rem;
 }

@@ -30,11 +30,11 @@ export default function TradeHistory() {
           <div style={{ display: "contents" }}>
             <thead >
               <tr className="historyorder">
-                <th style={{ width: "15%" }}>Total Analog</th>
+                <th style={{ width: "20%" }}>Total Analog</th>
                 <th style={{ width: "20%" }}>Total Amount Pay</th>
-                <th style={{ width: "19%" }}>Buying Price</th>
+                <th style={{ width: "20%" }}>Buying Price</th>
                 <th style={{ width: "20%" }}>Pool</th>
-                <th style={{ width: "26%" }}>Time</th>
+                <th style={{ width: "20%" }}>Time</th>
               </tr>
             </thead>
             <div style={{ height: "450px", overflow: "auto", display: "table-caption" }}>
@@ -48,8 +48,8 @@ export default function TradeHistory() {
                 {history.map((h) => {
                   return (
                     <>
-                      <tr class="zoom  historyorder" style={{fontSize:"15.3px"}}>
-                        <td className="TradeHistorySize" style={{ width: "15%" }}> {h.cVolume.toFixed(2)}
+                      <tr class="zoom  historyorder" style={{fontSize:"13.76px"}}>
+                        <td className="TradeHistorySize" style={{ width: "20%" }}> {h.cVolume.toFixed(2)}
                           <img
                             src="./images/Analog.png"
                             style={{ width: "24px" }}
@@ -72,15 +72,15 @@ export default function TradeHistory() {
                           )}
                           <i class="ion ion-arrow-graph-up-right"></i>
                         </td>
-                        <td class="text-success TradeHistorySize" style={{ width: "19%" }}>
+                        <td class="text-success TradeHistorySize" style={{ width: "20%" }}>
                           {/* {h.pref_raw_price.toFixed(8)} */}
                           {h.compair_currency == "usd"
                             ? h.pref_raw_price.toFixed(8)
-                            : h.pref_raw_price}
+                            : h.pref_raw_price.toFixed(8)}
                           <i class="ion ion-arrow-graph-down-right"></i>
                         </td>
                         <td className="TradeHistorySize" style={{ width: "20%" }}>{h.presalelevel}</td>
-                        <td className="TradeHistorySize" style={{ width: "26%" }}>{h.date}</td>
+                        <td className="TradeHistorySize" style={{ width: "20%" }}>{h.date}</td>
                       </tr>
                     </>
                   );
