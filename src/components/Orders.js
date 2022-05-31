@@ -63,12 +63,8 @@ export default function Orders() {
       const d = walletData.find((data,i)=>data.symbol=="USDT");
       console.log(d,"ddddddddddddddddddddd")
       const data = {
-        balance: d.usdt_balance,
-
-       
-        // inrxsymbol: walletData[5]?.symbol,
+        balance: d.usdt_balance,    
       };
-      console.log(d.usdt_balance," walletData[d[0]]?.usdt_balance walletData[d[0]]?.usdt_balance walletData[d[0]]?.usdt_balance");
 
       setWalletBalance(
         userInfo?.currency_preference == "usd"

@@ -191,11 +191,12 @@ const Bounty = () => {
                                   <div className="nk-tb-col tb-col-sm">
                                     <span className="tb-amount-sm">{element?.presalelevel == null ? 'no data found' : element?.presalelevel}</span>
                                   </div>
-                                  <div className="nk-tb-col tb-col-sm">
-                                    <span className="tb-amount-sm" style={{color: "green"}}>
+                                  <div className="nk-tb-col tb-col-sm" style={{color: "green"}}>
+                                    <span className="tb-amount-sm" >
                                       {
                                        `${element.token_quantity} ANA`
                                       }
+                                      <img src="./images/Analog.png" style={{ width: "24px" }} />
                                     </span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
@@ -204,6 +205,18 @@ const Bounty = () => {
                                         userInfo?.currency_preference == 'usd' ? `${element?.amount?.toFixed(2)} USDT` :
                                           `${(element?.amount * oneUsdPrice)?.toFixed(2)} INRX`
                                       }
+                                       {userInfo?.currency_preference == "usd" ? (
+                                              <img
+                                                src="./images/Usdt.png"
+                                                style={{ width: "17px", paddingLeft: "1px" }}
+                                                alt="usdt"
+
+                                              />) : (
+                                              <img
+                                                src="./images/Inrx_black.png"
+                                                style={{ width: "17px", marginLeft: "5px" }}
+                                                alt="inrx"
+                                              />)}
                                     </span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm" style={{color: "green"}}>
@@ -212,6 +225,18 @@ const Bounty = () => {
                                         userInfo?.currency_preference == 'usd' ? `${element?.bonus?.toFixed(6)} USDT` :
                                           `${(element?.bonus * oneUsdPrice)?.toFixed(6)} INRX`
                                       }
+                                       {userInfo?.currency_preference == "usd" ? (
+                                              <img
+                                                src="./images/Usdt.png"
+                                                style={{ width: "17px", paddingLeft: "1px" }}
+                                                alt="usdt"
+
+                                              />) : (
+                                              <img
+                                                src="./images/Inrx_black.png"
+                                                style={{ width: "17px", marginLeft: "5px" }}
+                                                alt="inrx"
+                                              />)}
                                       </span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">

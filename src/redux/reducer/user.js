@@ -7,6 +7,7 @@ const initialValue = {
   user : {
     email:email?email:'',
     token:token?token:'',
+   
   },
   otpSend: false,
   isLoggedIn:(email && token)?true:false, 
@@ -20,7 +21,8 @@ const initialValue = {
     ipWhiteListing: false,
   } ,
   oneUsdPrice: '',
-  totalAna: ''
+  totalAna: '',
+  walletBalance: ''
 };
 
 export const userSlice = createSlice({
@@ -61,9 +63,12 @@ export const userSlice = createSlice({
     setOneCoinPrice: (state, action) => {
       state.value.coinPrice = action.payload.coinPrice
     },
+    setTotalWalletBalance: (state, action) => {
+      state.value.walletBalance = action.payload.walletBalance
+    },
 
   },
 });
 
-export const {setIsLoggedIn, setUserInfo, setSettingPage, setOneUsdPrice, setTotalAna, logout, sendOtp, setOneCoinPrice} = userSlice.actions;
+export const {setIsLoggedIn, setUserInfo, setSettingPage, setOneUsdPrice, setTotalAna, logout, sendOtp, setOneCoinPrice, setTotalWalletBalance} = userSlice.actions;
 export default userSlice.reducer;

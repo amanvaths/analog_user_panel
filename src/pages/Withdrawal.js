@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import Menu from "../components/Menu";
 import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
+import swal from "sweetalert";
 
 const Withdrawal = () => {
     const { user, userInfo, oneUsdPrice } = useSelector((state) => state.user.value)
@@ -17,8 +18,17 @@ const Withdrawal = () => {
     const [balanceC, setBalanceC] = useState(0)
     const [active, setActive] = useState(0)
 
-    console.log(typeof(balanceB));
-    
+    const [toWalletAddress, setToWalletAddress] = useState('')
+    const [fromWalletAddress, setfromWalletAddress] = useState('')
+    const [usdFees, setUsdFees] = useState(5)
+    const [inrFees, setInrFees] = useState(100)
+
+
+    console.log(toWalletAddress);
+    console.log(fromWalletAddress);
+    console.log(balanceB ? balanceB : balanceC);
+
+
 
     const getWalletCard = async () => {
         try {
@@ -27,6 +37,18 @@ const Withdrawal = () => {
                 setTab(data.data.data)
                 console.log(data.data.data, "::DATA");
             }
+        } catch (error) {
+
+        }
+    }
+
+    const withdraw = async () => {
+        console.table("Called");
+        try {
+            const data = await axios.post(`${BASE_URL}/witdrawl`, { email: email, toWalletAddr: toWalletAddress, fromWallet: fromWalletAddress, amount: balanceB ? balanceB : balanceC, fees: usdFees ? usdFees : inrFees })
+           if(data){
+               
+           }
         } catch (error) {
 
         }
@@ -65,24 +87,25 @@ const Withdrawal = () => {
                                                             tab.map((element, index) => {
                                                                 return (
                                                                     <div className="col-sm-4">
-                                                                        <div className={active == element.index ?"card bg-light "  : "card bg-light "}>
+                                                                        <div className={active == element.index ? "card bg-light " : "card bg-light "}>
                                                                             <div className="nk-wgw sm">
                                                                                 <a className="nk-wgw-inner" href="#">
                                                                                     <div className="nk-wgw-name">
                                                                                         <div className="nk-wgw-icon">
                                                                                             <em className="icon ni ni-sign-btc"></em>
                                                                                         </div>
-                                                                                        <h5 className="nk-wgw-title title" onClick={()=> {
+                                                                                        <h5 className="nk-wgw-title title" onClick={() => {
                                                                                             setBalanceA(element.balance)
                                                                                             setBalanceB(element.balance)
                                                                                             setActive(element.index)
+                                                                                            setfromWalletAddress(element.name)
                                                                                         }}>
                                                                                             {element.name}
                                                                                         </h5>
                                                                                     </div>
                                                                                     <div className="nk-wgw-balance">
                                                                                         <div className="amount">
-                                                                                            {(element?.balance)?.toFixed(3)}
+                                                                                            {userInfo?.currency_preference == 'usd' ? (element?.balance)?.toFixed(3) : (element?.balance * oneUsdPrice).toFixed(3)}
                                                                                             <span className="currency currency-nio">
                                                                                                 {userInfo?.currency_preference == "inr" ? "INRX" : "USDT"}
                                                                                             </span>
@@ -138,16 +161,16 @@ const Withdrawal = () => {
                                                                                                 </div>
                                                                                                 <form action="#">
                                                                                                     <div class="form-group">
-                                                                                                        
+
                                                                                                         <label class="form-label" for="full-name">Amount - {`${userInfo?.currency_preference == 'inr' ? 'INRX' : 'USDT'}`}</label>
                                                                                                         <div class="form-control-wrap">
                                                                                                             <input type="text" class="form-control" id="full-name" value={balanceB ? balanceB?.toFixed(3) : balanceC}
-                                                                                                                onChange={(e)=>setBalanceB(setBalanceC(Number(e.target.value)))}/>
+                                                                                                                onChange={(e) => setBalanceB(setBalanceC(Number(e.target.value)))} />
                                                                                                             <span className="m-1 float-right">
-                                                                                                                <label className="form-label p-1" for="full-name" onClick={()=> setBalanceB((balanceA * 25) /100)?.toFixed(3)}>25%</label>
-                                                                                                                <label className="form-label p-1" for="full-name" onClick={()=> setBalanceB((balanceA * 50) /100)?.toFixed(3)}>50%</label>
-                                                                                                                <label className="form-label p-1" for="full-name" onClick={()=> setBalanceB((balanceA * 75) /100)?.toFixed(3)}>75%</label>
-                                                                                                                <label className="form-label p-1" for="full-name" onClick={()=> setBalanceB((balanceA * 100) /100)?.toFixed(3)}>100%</label>
+                                                                                                                <label className="form-label p-1" for="full-name" onClick={() => setBalanceB((balanceA * 25) / 100)?.toFixed(3)}>25%</label>
+                                                                                                                <label className="form-label p-1" for="full-name" onClick={() => setBalanceB((balanceA * 50) / 100)?.toFixed(3)}>50%</label>
+                                                                                                                <label className="form-label p-1" for="full-name" onClick={() => setBalanceB((balanceA * 75) / 100)?.toFixed(3)}>75%</label>
+                                                                                                                <label className="form-label p-1" for="full-name" onClick={() => setBalanceB((balanceA * 100) / 100)?.toFixed(3)}>100%</label>
                                                                                                             </span>
                                                                                                         </div>
                                                                                                     </div>
@@ -155,12 +178,14 @@ const Withdrawal = () => {
                                                                                                         <label class="form-label"
                                                                                                             for="email-address">Wallet Address</label>
                                                                                                         <div class="form-control-wrap">
-                                                                                                            <input type="text" class="form-control" id="email-address" /></div>
+                                                                                                            <input type="text" class="form-control" id="email-address"
+                                                                                                                onChange={(e) => setToWalletAddress(e.target.value)}
+                                                                                                            /></div>
                                                                                                     </div>
                                                                                                     <div class="form-group">
-                                                                                                        <label class="form-label" for="phone-no">Fees</label>
+                                                                                                        <label class="form-label" for="phone-no">Fees- {`${userInfo?.currency_preference == 'inr' ? 'INRX' : 'USDT'}`}</label>
                                                                                                         <div class="form-control-wrap">
-                                                                                                            <input type="text" class="form-control" id="phone-no" />
+                                                                                                            <input type="text" class="form-control" id="phone-no" value={userInfo?.currency_preference == 'inr' ? inrFees : usdFees} readOnly />
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     {/* <div class="form-group">
@@ -236,8 +261,15 @@ const Withdrawal = () => {
                                                                                                             </li>
                                                                                                         </ul>
                                                                                                     </div> */}
-                                                                                                    <div class="form-group"><button type="submit"
-                                                                                                        class="btn btn-lg btn-primary">Withdraw</button></div>
+                                                                                                    <div class="form-group">
+                                                                                                        <button type="button"
+                                                                                                            class="btn btn-lg btn-primary"
+                                                                                                            onClick={() => {
+                                                                                                                console.log(email, toWalletAddress, fromWalletAddress, balanceB ? balanceB : balanceC, usdFees ? usdFees : inrFees)
+                                                                                                                withdraw()
+                                                                                                            }}>
+                                                                                                            Withdraw</button>
+                                                                                                    </div>
                                                                                                 </form>
                                                                                             </div>
                                                                                         </div>

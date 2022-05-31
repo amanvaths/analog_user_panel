@@ -121,9 +121,9 @@ const Affiliate = () => {
                           <AffiliatCard
                             level={`Level ${index + 1}`}
                             totalUser={affiliates[1][item].totalUsers}
-                            totalAnalogBuy={affiliates[1][item].totalAna.toFixed(2)}
-                            totalExpence={affiliates[1][item].totalExpense.toFixed(2)}
-                            totalAffiliates={affiliates[1][item].totalInc.toFixed(2)}
+                            totalAnalogBuy={`${affiliates[1][item].totalAna.toFixed(2)} ANA`}
+                            totalExpence={userInfo.currency_preference == 'usd'? `${affiliates[1][item].totalExpense.toFixed(2)} USDT` : `${(affiliates[1][item].totalExpense * oneUsdPrice).toFixed(3)} INRX`}
+                            totalAffiliates={userInfo.currency_preference == 'usd'?  `${affiliates[1][item].totalInc.toFixed(3)} USDT` : `${(affiliates[1][item].totalInc * oneUsdPrice).toFixed(3)} INRX`}
                             widthdrawl={0}
                             toalRemaining={0}
                           />
@@ -319,7 +319,7 @@ const Affiliate = () => {
                                               />) : (
                                               <img
                                                 src="./images/Inrx_black.png"
-                                                style={{ width: "17px" }}
+                                                style={{ width: "17px", marginLeft: "5px" }}
                                                 alt="inrx"
                                               />)}
                                             </span>
@@ -339,13 +339,29 @@ const Affiliate = () => {
                                               />) : (
                                               <img
                                                 src="./images/Inrx_black.png"
-                                                style={{ width: "17px" }}
+                                                style={{ width: "17px", marginLeft: "5px" }}
                                                 alt="inrx"
                                               />)}
                                             </span>
                                           </div>
-                                          <div className="nk-tb-col tb-col-sm ">
-                                            <span style={{ color: "green" }}>0 INRX</span>
+                                          <div className="nk-tb-col tb-col-sm">
+                                            <span style={{ color: "green" }}>
+                                              {
+                                                userInfo?.currency_preference == 'usd' ? `${element?.totalHandout?.toFixed(2)} USDT` : `${(element?.totalHandout * oneUsdPrice).toFixed(2)} INRX`
+                                              }
+                                              {userInfo?.currency_preference == "usd" ? (
+                                              <img
+                                                src="./images/Usdt.png"
+                                                style={{ width: "17px", paddingLeft: "1px" }}
+                                                alt="usdt"
+
+                                              />) : (
+                                              <img
+                                                src="./images/Inrx_black.png"
+                                                style={{ width: "17px", marginLeft: "5px" }}
+                                                alt="inrx"
+                                              />)}
+                                            </span>
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
                                             <span>Action</span>
@@ -600,25 +616,66 @@ const Affiliate = () => {
                                           <div className="nk-tb-col tb-col-sm">
                                             <span className="tb-text">{element.email}</span>
                                           </div>
-                                          <div className="nk-tb-col tb-col-sm">
+                                          <div className="nk-tb-col tb-col-sm" style={{color: "green"}}>
                                             <span className="tb-text">{element?.totalBuy?.toFixed(2)} ANA</span>
+                                            <img src="./images/Analog.png" style={{ width: "24px" }} />
                                           </div>
-                                          <div className="nk-tb-col tb-col-sm">
+                                          <div className="nk-tb-col tb-col-sm" style={{color: "red"}}>
                                             <span className="tb-text">
                                               {
                                                 userInfo?.currency_preference == 'usd' ? `${element?.totalExp?.toFixed(2)} USDT` : `${(element?.totalExp * oneUsdPrice)?.toFixed(2)} INRX`
                                               }
+                                              {userInfo?.currency_preference == "usd" ? (
+                                              <img
+                                                src="./images/Usdt.png"
+                                                style={{ width: "17px", paddingLeft: "1px" }}
+                                                alt="usdt"
+
+                                              />) : (
+                                              <img
+                                                src="./images/Inrx_black.png"
+                                                style={{ width: "17px", marginLeft: "5px" }}
+                                                alt="inrx"
+                                              />)}
                                             </span>
                                           </div>
-                                          <div className="nk-tb-col tb-col-sm">
+                                          <div className="nk-tb-col tb-col-sm" style={{color: "green"}}>
                                             <span className="tb-text">
                                               {
                                                 userInfo?.currency_preference == 'usd' ? `${element?.totalAff?.toFixed(2)} USDT` : `${(element?.totalAff * oneUsdPrice).toFixed(2)} INRX`
                                               }
+                                              {userInfo?.currency_preference == "usd" ? (
+                                              <img
+                                                src="./images/Usdt.png"
+                                                style={{ width: "17px", paddingLeft: "1px" }}
+                                                alt="usdt"
+
+                                              />) : (
+                                              <img
+                                                src="./images/Inrx_black.png"
+                                                style={{ width: "17px", marginLeft: "5px" }}
+                                                alt="inrx"
+                                              />)}
                                             </span>
                                           </div>
-                                          <div className="nk-tb-col tb-col-sm">
-                                            <span className="tb-text">0 INRX</span>
+                                          <div className="nk-tb-col tb-col-sm" style={{color: "green"}}>
+                                            <span style={{ color: "green" }}>
+                                              {
+                                                userInfo?.currency_preference == 'usd' ? `${element?.totalHandout?.toFixed(2)} USDT` : `${(element?.totalHandout * oneUsdPrice).toFixed(2)} INRX`
+                                              }
+                                              {userInfo?.currency_preference == "usd" ? (
+                                              <img
+                                                src="./images/Usdt.png"
+                                                style={{ width: "17px", paddingLeft: "1px" }}
+                                                alt="usdt"
+
+                                              />) : (
+                                              <img
+                                                src="./images/Inrx_black.png"
+                                                style={{ width: "17px", marginLeft: "5px" }}
+                                                alt="inrx"
+                                              />)}
+                                            </span>
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
                                             <span className="tb-text">Action</span>
@@ -881,29 +938,66 @@ const Affiliate = () => {
                                             <div className="nk-tb-col tb-col-sm">
                                               <span className="tb-text">{element.sponsor}</span>
                                             </div>
-                                            <div className="nk-tb-col tb-col-sm">
+                                            <div className="nk-tb-col tb-col-sm" style={{color: "green"}}>
                                               <span className="tb-text">{element?.totalBuy?.toFixed(2)} ANA</span>
+                                              <img src="./images/Analog.png" style={{ width: "24px" }} />
                                             </div>
-                                            <div className="nk-tb-col tb-col-sm">
+                                            <div className="nk-tb-col tb-col-sm" style={{color: "red"}}>
                                               <span className="tb-text">
                                                 {
                                                   userInfo?.currency_preference == 'usd' ? `${element?.totalExp?.toFixed(2)} USDT` : `${(element?.totalExp * oneUsdPrice)?.toFixed(2)} INRX`
                                                 }
+                                                {userInfo?.currency_preference == "usd" ? (
+                                              <img
+                                                src="./images/Usdt.png"
+                                                style={{ width: "17px", paddingLeft: "1px" }}
+                                                alt="usdt"
+
+                                              />) : (
+                                              <img
+                                                src="./images/Inrx_black.png"
+                                                style={{ width: "17px", marginLeft: "5px" }}
+                                                alt="inrx"
+                                              />)}
                                               </span>
                                             </div>
-                                            <div className="nk-tb-col tb-col-sm">
+                                            <div className="nk-tb-col tb-col-sm" style={{color: "green"}}>
                                               <span className="tb-text">
                                                 {
                                                   userInfo?.currency_preference == 'usd' ? `${element?.totalAff?.toFixed(2)} USDT` : `${(element?.totalAff * oneUsdPrice).toFixed(2)} INRX`
                                                 }
+                                                {userInfo?.currency_preference == "usd" ? (
+                                              <img
+                                                src="./images/Usdt.png"
+                                                style={{ width: "17px", paddingLeft: "1px" }}
+                                                alt="usdt"
+
+                                              />) : (
+                                              <img
+                                                src="./images/Inrx_black.png"
+                                                style={{ width: "17px", marginLeft: "5px" }}
+                                                alt="inrx"
+                                              />)}
                                               </span>
                                             </div>
-                                            <div className="nk-tb-col tb-col-sm">
+                                            <div className="nk-tb-col tb-col-sm" style={{color: "green"}}>
                                               <span className="tb-text">
                                                 <span className="tb-text">
                                                   {
                                                     userInfo?.currency_preference == 'usd' ? `${element?.totalHandout?.toFixed(2)} USDT` : `${(element?.totalHandout * oneUsdPrice).toFixed(2)} INRX`
                                                   }
+                                                  {userInfo?.currency_preference == "usd" ? (
+                                              <img
+                                                src="./images/Usdt.png"
+                                                style={{ width: "17px", paddingLeft: "1px" }}
+                                                alt="usdt"
+
+                                              />) : (
+                                              <img
+                                                src="./images/Inrx_black.png"
+                                                style={{ width: "17px", marginLeft: "5px" }}
+                                                alt="inrx"
+                                              />)}
                                                 </span>
                                               </span>
                                             </div>

@@ -8,13 +8,13 @@ import axios from "axios";
 import { Triangle } from 'react-loader-spinner'
 import { useSelector, useDispatch } from 'react-redux';
 import { BASE_URL } from "../Api_connection/config";
-import { setUserInfo, setOneCoinPrice } from "../redux/reducer/user";
+import { setUserInfo, setOneCoinPrice, setTotalWalletBalance } from "../redux/reducer/user";
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 
 
 const Wallet = (props) => {
-  const { userInfo, oneUsdPrice, totalAna, user } = useSelector((state) => state.user.value)
+  const { userInfo, oneUsdPrice, totalAna, user,  } = useSelector((state) => state.user.value)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [coinData, setCoinData] = useState([]);
@@ -135,8 +135,6 @@ const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + 
                         <h6>
                           Total Balance:&nbsp;&nbsp;
                           {userInfo.currency_preference == "usd" ? `${coinWW[8]?.wallet?.usdt_balance?.toFixed(2)} USDT` : `${(oneUsdPrice * coinWW[8]?.wallet?.usdt_balance).toFixed(2)} INRX`}
-
-
                         </h6>
                       </label>
                     </div>

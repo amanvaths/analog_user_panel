@@ -7,10 +7,11 @@ import { setOneUsdPrice, setTotalAna } from "../redux/reducer/user";
 
 function Menu (){
   const dispatch = useDispatch()
-  const {user} = useSelector((state)=> state.user.value)
+  const {user, oneUsdPrice} = useSelector((state)=> state.user.value)
   const email = user.email;
   const [anaBalancce, setAnaBalance] = useState('')
   const [usdPrice, setUsdPrice] = useState('')
+  const [walletBalance, setWalletBalance] = useState(0)
 
   const getData = async()=>{
     try {
@@ -37,14 +38,20 @@ function Menu (){
     }
   };
 
-  
- 
-  // dispatch(set)
- 
+  const gettotalWalletFund = async () => {
+    try {
+      const res = await axios.post(`${BASE_URL}/getWalletData`, {email: email})
+      const d = res.data.find((data,i)=>data.symbol=="USDT");
+      setWalletBalance(d.usdt_balance)  
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(()=>{
     getUsdPrice()
     getData()
+    gettotalWalletFund()
   },[])
    const btn = useSelector(store=>store.navsetter);
    const {userInfo} = useSelector((state)=> state.user.value)
@@ -441,8 +448,11 @@ function Menu (){
                         <div className="wallet-text">
                           <h6 className="wallet-name">{userInfo?.currency_preference == 'inr'? 'INRX' : "USDT"} Wallet</h6>
                           <span className="wallet-balance">
-                            {Number(anaBalancce)?.toFixed(2)}{" "}
-                            <span className="currency currency-nio">ANA</span>
+                            {userInfo?.currency_preference == 'usd' ? Number(walletBalance)?.toFixed(3) : (walletBalance * oneUsdPrice)?.toFixed(3)}
+                            {" "}
+                            <span className="currency currency-nio">
+                            {userInfo?.currency_preference == 'inr'? 'INRX' : "USDT"}
+                            </span>
                           </span>
                         </div>
                       </a>
