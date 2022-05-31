@@ -543,16 +543,8 @@ export default function Orders() {
                       ConfirmBox
                     }
                     disabled={
-<<<<<<< HEAD
-                      walletbalance <=
-                      (userInfo?.currency_preference == "inr"
-                        ? 5000
-                        : 5000 / oneUsdPrice)
-                    }
-=======
                       walletbalance <= (userInfo?.currency_preference == "inr"? 5000: 5000 / oneUsdPrice)
                      }
->>>>>>> ec636fc9a1ddce1016b5206f2415edf41fbcfaf8
                   >
                     BUY ANA
                   </button>
