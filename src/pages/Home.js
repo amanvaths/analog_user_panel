@@ -46,7 +46,6 @@ const Home = () => {
   const [recentLoad, setRecentLoad] = useState(true)
 
 
-
   const getPreSale = async () => {
     try {
       const res = axios.get(`${BASE_URL}/getpresale`)
@@ -184,7 +183,7 @@ const Home = () => {
                 >
                   {
                     data.map((data) => {
-                      console.log(data.levelname, "level name");
+                     
                       return (
                         <Getpresale
                           levelname={data.levelname}
@@ -460,61 +459,77 @@ const Home = () => {
                         {
                           recentLoad ?
                             <div style={{ position: "absolute", zIndex: "99", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
-                              <Triangle ariaLabel="loading-indicator" color="blue"/>
+                              <Triangle ariaLabel="loading-indicator" color="blue" />
                             </div> :
-                            recentActivities.map((data) => {
-                              const d = new Date(data.createdAt);
-                              return (
-                                <div className="tranx-item">
-                                  <div className="tranx-col">
-                                    <div className="tranx-info">
-                                      <div className="tranx-data">
-                                        <div className="tranx-label">
-                                          Buy {data?.compair_currency == 'usd' ? "USDT" : "INRX"}
-                                          {data.compair_currency == "usd" ? (
-                                            <div className="p-1">
-                                              <img
-                                                src="./images/Usdt.png"
-                                                style={{ width: "17px" }}
-                                                alt="usdt"
+                            recentActivities.length > 0 ?
+                              recentActivities.map((data) => {
+                                const d = new Date(data.createdAt);
+                                return (
+                                  <div className="tranx-item">
+                                    <div className="tranx-col">
+                                      <div className="tranx-info">
+                                        <div className="tranx-data">
+                                          <div className="tranx-label">
+                                            Buy {data?.compair_currency == 'usd' ? "USDT" : "INRX"}
+                                            {data.compair_currency == "usd" ? (
+                                              <div className="p-1">
+                                                <img
+                                                  src="./images/Usdt.png"
+                                                  style={{ width: "17px" }}
+                                                  alt="usdt"
 
-                                              />
-                                            </div>
+                                                />
+                                              </div>
 
-                                          ) : (
-                                            <div className="p-1">
-                                              <img
-                                                src="./images/Inrx_black.png"
-                                                style={{ width: "17px" }}
-                                                alt="inrx"
-                                              />
-                                            </div>
+                                            ) : (
+                                              <div className="p-1">
+                                                <img
+                                                  src="./images/Inrx_black.png"
+                                                  style={{ width: "17px" }}
+                                                  alt="inrx"
+                                                />
+                                              </div>
 
-                                          )}
-                                          {/* <em className="tranx-icon sm icon ni ni-sign-btc"></em> */}
+                                            )}
+                                            {/* <em className="tranx-icon sm icon ni ni-sign-btc"></em> */}
+                                          </div>
+                                          <div className="tranx-date">
+                                            {d.toLocaleDateString()} {d.toLocaleTimeString()}
+                                          </div>
                                         </div>
-                                        <div className="tranx-date">
-                                          {d.toLocaleDateString()} {d.toLocaleTimeString()}
+                                      </div>
+                                    </div>
+                                    <div className="tranx-col">
+                                      <div className="tranx-amount">
+                                        <div className="number">
+                                          {data.cVolume}
+                                          <span className="currency currency-btc">ANA</span>
+                                        </div>
+                                        <div className="number-sm">
+                                          @ {data?.raw_price?.toFixed(2)}
+                                          <span className="currency currency-usd"> {data.currency_type} </span>
                                         </div>
                                       </div>
                                     </div>
                                   </div>
+
+                                )
+                              }) :
+                              <>
+                                <div className="tranx-item" style={{justifyContent: "center"}}>
                                   <div className="tranx-col">
-                                    <div className="tranx-amount">
-                                      <div className="number">
-                                        {data.cVolume}
-                                        <span className="currency currency-btc">ANA</span>
-                                      </div>
-                                      <div className="number-sm">
-                                        @ {data?.raw_price?.toFixed(2)}
-                                        <span className="currency currency-usd"> {data.currency_type} </span>
-                                      </div>
-                                    </div>
+                                    <h4>{"Record not Found"}</h4>
                                   </div>
                                 </div>
+                               
+                              </>
 
-                              )
-                            })
+
+
+
+
+
+
                         }
 
                       </div>
@@ -606,7 +621,7 @@ const Home = () => {
                             >
                               {/* <em className="clipboard-icon icon ni ni-copy"></em>{" "}
                               <span className="clipboard-text">Copy Link</span> */}
-                              <CopyToClipboard text={`http://localhost:3000/signup?ref=${userInfo?.refferal}`}
+                              <CopyToClipboard text={`http://localhost:3000/signup?ref=${userInfo?.user_id}`}
                                 onCopy={() => {
                                   setCopied(true)
                                   setTimeout(() => {
@@ -629,7 +644,7 @@ const Home = () => {
                               type="text"
                               className="form-control copy-text"
                               id="refUrl"
-                              value={`http://localhost:3000/signup?ref=${userInfo?.refferal}`}
+                              value={`http://localhost:3000/signup?ref=${userInfo?.user_id}`}
                             />
                           </div>
                         </div>

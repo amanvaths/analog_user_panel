@@ -6,18 +6,27 @@ import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
 import { useSelector } from "react-redux";
 import ReactPaginate from 'react-paginate';
+import { Link, useNavigate } from "react-router-dom";
 
 
 const Bounty = () => {
   const { userInfo, user, oneUsdPrice } = useSelector((state) => state.user.value)
   const email = user?.email
+  const navigate = useNavigate()
   const [tab, setTab] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
+  const [totalBounty, setTotalBounty] = useState(0)
 
   const getBounty = async () => {
     const data = await axios.post(`${BASE_URL}/bounty`, { email: email })
     if (data) {
       setTab(data.data.data)
+      var b = 0;
+      data.data.data.forEach(element => {
+       b =  element
+      });
+      console.log(b, "DATA>DATA>DATA");
+      // setTotalBounty(data.data.data)
     }
   }
 
@@ -55,16 +64,15 @@ const Bounty = () => {
                           className="toggle-expand-content"
                           data-content="pageMenu"
                         >
-                          {/* <ul className="nk-block-tools g-3">
+                           <ul className="nk-block-tools g-3">
                             <li>
-                              <a
-                                href="#"
-                                className="btn btn-white btn-dim btn-outline-light"
-                              ><em className="icon ni ni-download-cloud"></em
-                              ><span>Export</span></a
-                              >
+                              <Link
+                              to={'/Withdrawal'}
+                              // onClick={()=> navigate('/Withdrawal')}
+                                className="btn btn-white btn-primary btn-outline-light">
+                                  <span>Withdrawal</span></Link>
                             </li>
-                            <li className="nk-block-tools-opt">
+                            {/* <li className="nk-block-tools-opt">
                               <div className="drodown">
                                 <a
                                   href="#"
@@ -86,8 +94,8 @@ const Bounty = () => {
                                   </ul>
                                 </div>
                               </div>
-                            </li>
-                          </ul> */}
+                            </li> */}
+                          </ul> 
                         </div>
                       </div>
                     </div>
@@ -100,6 +108,7 @@ const Bounty = () => {
                         <div className="card-title-group">
                           <div className="card-title">
                             <h5 className="title">Bounty</h5>
+                            <h6 className="title">Total Bounty: 26.89 USDT</h6>
                           </div>
                           <div className="card-tools me-n1">
                             <ul className="btn-toolbar gx-1">
@@ -174,8 +183,8 @@ const Bounty = () => {
                                   <div className="nk-tb-col">
                                     <span className="tb-amount-sm">
                                       {
-                                        userInfo?.currency_preference == 'usd' ? `${element?.token_price?.toFixed(2)} USDT` :
-                                          `${(element?.token_price / oneUsdPrice)?.toFixed(2)} INRX`
+                                        userInfo?.currency_preference == 'inr' ? `${element?.token_price?.toFixed(6)} INRX` :
+                                          `${(element?.token_price / oneUsdPrice)?.toFixed(6)} USDT`
                                       }
                                     </span>
                                   </div>
@@ -183,23 +192,27 @@ const Bounty = () => {
                                     <span className="tb-amount-sm">{element?.presalelevel == null ? 'no data found' : element?.presalelevel}</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="tb-amount-sm">
+                                    <span className="tb-amount-sm" style={{color: "green"}}>
                                       {
-                                        userInfo?.currency_preference == 'usd' ? `${element?.token_quantity?.toFixed(2)} USDT` :
-                                          `${(element?.token_quantity / oneUsdPrice)?.toFixed(2)} INRX`
+                                       `${element.token_quantity} ANA`
                                       }
                                     </span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="tb-amount-sm">
+                                    <span className="tb-amount-sm" style={{color: "red"}}>
                                       {
                                         userInfo?.currency_preference == 'usd' ? `${element?.amount?.toFixed(2)} USDT` :
-                                          `${(element?.amount / oneUsdPrice)?.toFixed(2)} INRX`
+                                          `${(element?.amount * oneUsdPrice)?.toFixed(2)} INRX`
                                       }
                                     </span>
                                   </div>
-                                  <div className="nk-tb-col tb-col-sm">
-                                    <span className="tb-amount-sm">{element?.bonus_percent}%</span>
+                                  <div className="nk-tb-col tb-col-sm" style={{color: "green"}}>
+                                    <span className="tb-amount-sm">
+                                    {
+                                        userInfo?.currency_preference == 'usd' ? `${element?.bonus?.toFixed(6)} USDT` :
+                                          `${(element?.bonus * oneUsdPrice)?.toFixed(6)} INRX`
+                                      }
+                                      </span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
                                     <span className="tb-amount-sm">{a.toLocaleTimeString()} {a.toLocaleDateString()} </span>
