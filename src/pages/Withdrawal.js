@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import Menu from "../components/Menu";
 import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
+import Swal from "sweetalert2/dist/sweetalert2.js";
 import swal from "sweetalert";
 
 const Withdrawal = () => {
@@ -16,7 +17,7 @@ const Withdrawal = () => {
     const [balanceA, setBalanceA] = useState(0)
     const [balanceB, setBalanceB] = useState(0)
     const [balanceC, setBalanceC] = useState(0)
-    const [active, setActive] = useState(0)
+    const [active, setActive] = useState({ index: null })
 
     const [toWalletAddress, setToWalletAddress] = useState('')
     const [fromWalletAddress, setfromWalletAddress] = useState('')
@@ -24,11 +25,52 @@ const Withdrawal = () => {
     const [inrFees, setInrFees] = useState(100)
 
 
-    console.log(toWalletAddress);
-    console.log(fromWalletAddress);
-    console.log(balanceB ? balanceB : balanceC);
 
+    function ConfirmBox() {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: "btn btn-success",
+                cancelButton: "btn btn-danger",
+            },
+            buttonsStyling: false,
+        });
 
+        if(toWalletAddress != '')
+        {
+            swalWithBootstrapButtons
+            .fire({
+                title: "Are you sure?",
+                text: `Confirm Withdrwal`,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, confirm it!",
+                cancelButtonText: "No, cancel!",
+                reverseButtons: true,
+            })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    withdraw()
+                    //   swalWithBootstrapButtons.fire(
+                    //     "Confirm!",
+                    //     "Your withdrwal request has been sent.",
+                    //     "success"
+                    //   );
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        "Cancelled",
+                        "",
+                        "error"
+                    );
+                }
+            });
+        }else{
+            swal("Enter Wallet Address", "", "error")
+        }
+        
+    }
 
     const getWalletCard = async () => {
         try {
@@ -45,18 +87,27 @@ const Withdrawal = () => {
     const withdraw = async () => {
         console.table("Called");
         try {
-            const data = await axios.post(`${BASE_URL}/witdrawl`, { email: email, toWalletAddr: toWalletAddress, fromWallet: fromWalletAddress, amount: balanceB ? balanceB : balanceC, fees: usdFees ? usdFees : inrFees })
-           if(data){
-               
-           }
-        } catch (error) {
+            const data = await axios.post(`${BASE_URL}/witdrawl`, { email: email, toWalletAddr: toWalletAddress, fromWallet: fromWalletAddress,
+                 amount: userInfo?.currency_preference == 'usd' ? balanceB ? balanceB : balanceC : balanceB ? balanceB / oneUsdPrice : balanceC / oneUsdPrice,
+                  fees: usdFees ? usdFees : inrFees, usdt_price: oneUsdPrice })
+            console.log(data, "DATA__>>")
+            if (data.data.status == 1) {
+                swal({
+                    title: "Your Withdraw request has been sent",
+                    icon: "success",
+                });
+            }
 
+        } catch (error) {
+            swal(`${error?.response?.data?.message}`, "", "error")
+            // console.log(error?.response?.data?.message, "::ERROR-->");
         }
     }
 
     useEffect(() => {
         getWalletCard()
     }, [])
+
 
     return (
         <>
@@ -86,20 +137,23 @@ const Withdrawal = () => {
                                                         {
                                                             tab.map((element, index) => {
                                                                 return (
-                                                                    <div className="col-sm-4">
-                                                                        <div className={active == element.index ? "card bg-light " : "card bg-light "}>
+                                                                    <div className="col-sm-4"
+                                                                        key={element.index}
+                                                                        onClick={() => {
+                                                                            setBalanceA(userInfo?.currency_preference == 'usd' ? (element?.balance) : (element?.balance * oneUsdPrice))
+                                                                            setBalanceB(userInfo?.currency_preference == 'usd' ? (element?.balance) : (element?.balance * oneUsdPrice))
+                                                                            setActive({ index: index })
+                                                                            setfromWalletAddress(element.name)
+                                                                        }}
+                                                                    >
+                                                                        <div className={active.index == index ? "card bg-dark " : "card bg-light "}>
                                                                             <div className="nk-wgw sm">
                                                                                 <a className="nk-wgw-inner" href="#">
                                                                                     <div className="nk-wgw-name">
                                                                                         <div className="nk-wgw-icon">
                                                                                             <em className="icon ni ni-sign-btc"></em>
                                                                                         </div>
-                                                                                        <h5 className="nk-wgw-title title" onClick={() => {
-                                                                                            setBalanceA(element.balance)
-                                                                                            setBalanceB(element.balance)
-                                                                                            setActive(element.index)
-                                                                                            setfromWalletAddress(element.name)
-                                                                                        }}>
+                                                                                        <h5 className="nk-wgw-title title">
                                                                                             {element.name}
                                                                                         </h5>
                                                                                     </div>
@@ -157,7 +211,7 @@ const Withdrawal = () => {
                                                                                         <div class="card card-bordered h-100">
                                                                                             <div class="card-inner">
                                                                                                 <div class="card-head">
-                                                                                                    {/* <h5 class="card-title">Withdrwal form</h5> */}
+                                                                                                    <h5 class="card-title">{fromWalletAddress}</h5>
                                                                                                 </div>
                                                                                                 <form action="#">
                                                                                                     <div class="form-group">
@@ -165,7 +219,8 @@ const Withdrawal = () => {
                                                                                                         <label class="form-label" for="full-name">Amount - {`${userInfo?.currency_preference == 'inr' ? 'INRX' : 'USDT'}`}</label>
                                                                                                         <div class="form-control-wrap">
                                                                                                             <input type="text" class="form-control" id="full-name" value={balanceB ? balanceB?.toFixed(3) : balanceC}
-                                                                                                                onChange={(e) => setBalanceB(setBalanceC(Number(e.target.value)))} />
+                                                                                                                onChange={(e) => setBalanceB(setBalanceC(Number(e.target.value.replace(/[^0-9.]/g, "")
+                                                                                                                    .replace(/(\..*?)\..*/g, "$1"))))} />
                                                                                                             <span className="m-1 float-right">
                                                                                                                 <label className="form-label p-1" for="full-name" onClick={() => setBalanceB((balanceA * 25) / 100)?.toFixed(3)}>25%</label>
                                                                                                                 <label className="form-label p-1" for="full-name" onClick={() => setBalanceB((balanceA * 50) / 100)?.toFixed(3)}>50%</label>
@@ -266,8 +321,12 @@ const Withdrawal = () => {
                                                                                                             class="btn btn-lg btn-primary"
                                                                                                             onClick={() => {
                                                                                                                 console.log(email, toWalletAddress, fromWalletAddress, balanceB ? balanceB : balanceC, usdFees ? usdFees : inrFees)
-                                                                                                                withdraw()
-                                                                                                            }}>
+
+                                                                                                                ConfirmBox()
+
+                                                                                                            }}
+                                                                                                            disabled={balanceB ? balanceB <= 0 : balanceC <= 0}
+                                                                                                        >
                                                                                                             Withdraw</button>
                                                                                                     </div>
                                                                                                 </form>

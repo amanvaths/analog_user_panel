@@ -205,11 +205,6 @@ const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + 
                             address={element?.wallet?.walletAddr}
                             logo={`https://s2.coinmarketcap.com/static/img/coins/64x64/${element.id}.png`}
                             cp={Object.values(userInfo).length > 0 ? userInfo.currency_preference.toUpperCase() : 'USD'}
-                           onClick={()=> 
-                            {
-                            navigate("/cryptoTransaction", { state: {logo: `https://s2.coinmarketcap.com/static/img/coins/64x64/${element.id}.png`, lable: element.symbol, price: (element?.quote?.[userInfo?.currency_preference.toUpperCase()]?.price)?.toFixed(2)} })
-                           }
-                           }
                            />
                         </div>
                       );

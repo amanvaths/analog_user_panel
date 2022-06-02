@@ -9,8 +9,10 @@ import AffiliatCard from "../components/AffiliateCard";
 import { setUserInfo } from "../redux/reducer/user";
 import { Triangle, ThreeDots } from 'react-loader-spinner'
 import { MdMoreHoriz } from 'react-icons/md'
+import Paginate from "../components/Pagination";
+import { Link, useNavigate } from "react-router-dom";
 
-const Affiliate = () => {
+const Affiliate = (props) => {
   const { user, userInfo, oneUsdPrice } = useSelector((state) => state.user.value)
   const email = user?.email
   const [affiliates, setAffiliates] = useState([]);
@@ -40,6 +42,7 @@ const Affiliate = () => {
     }
   }
 
+  console.log(props, "::PROPS-->>");
 
   const getAffiliateList = async (level) => {
     const data = await axios.post(`${BASE_URL}/levelWiseList`, { email: email, level: level })
@@ -56,7 +59,10 @@ const Affiliate = () => {
   useEffect(() => {
     getAffiliate();
     getAffiliateList(level)
-  }, [])
+  }, []);
+
+
+  console.log(tab,"tqabbbbb")
 
   return (
     <div>
@@ -77,7 +83,7 @@ const Affiliate = () => {
                       </h3>
                       <div class="nk-block-des text-soft">
 
-                        <p>{`Your affiliatese.`}</p>
+                        <p>{`Your affiliates.`}</p>
                       </div>
                     </div>
                     <div class="nk-block-head-content affiliates">
@@ -194,19 +200,18 @@ const Affiliate = () => {
                             </a>
                             <div
                               className="toggle-expand-content"
-                              data-content="pageMenu"
-                            >
-                              {/* <ul className="nk-block-tools g-3">
+                              data-content="pageMenu">
+                               <ul className="nk-block-tools g-3">
                                     <li>
-                                      <a
-                                        href="#"
-                                        className="btn btn-white btn-outline-light"
+                                      <Link
+                                        to={'/Withdrawal'}
+                                        className="btn btn-primary btn-outline-light"
                                       >
-                                        <em className="icon ni ni-download-cloud"></em>
-                                        <span>Export</span>
-                                      </a>
+                                        
+                                        <span>Withdrwa</span>
+                                      </Link>
                                     </li>
-                                    <li className="nk-block-tools-opt">
+                                    {/* <li className="nk-block-tools-opt">
                                       <div className="drodown">
                                         <a
                                           href="#"
@@ -235,8 +240,8 @@ const Affiliate = () => {
                                           </ul>
                                         </div>
                                       </div>
-                                    </li>
-                                  </ul> */}
+                                    </li> */}
+                                  </ul> 
                             </div>
                           </div>
                         </div>
@@ -1155,45 +1160,10 @@ const Affiliate = () => {
 
                               </div>
                             </div>
-                            <div className="card-inner">
-                              <ul className="pagination justify-content-center justify-content-md-center">
-                                <li className="page-item">
-                                  <a className="page-link" href="#">
-                                    Prev
-                                  </a>
-                                </li>
-                                <li className="page-item">
-                                  <a className="page-link" href="#">
-                                    1
-                                  </a>
-                                </li>
-                                <li className="page-item">
-                                  <a className="page-link" href="#">
-                                    2
-                                  </a>
-                                </li>
-                                <li className="page-item">
-                                  <span className="page-link">
-                                    <em className="icon ni ni-more-h"></em>
-                                  </span>
-                                </li>
-                                <li className="page-item">
-                                  <a className="page-link" href="#">
-                                    6
-                                  </a>
-                                </li>
-                                <li className="page-item">
-                                  <a className="page-link" href="#">
-                                    7
-                                  </a>
-                                </li>
-                                <li className="page-item">
-                                  <a className="page-link" href="#">
-                                    Next
-                                  </a>
-                                </li>
-                              </ul>
-                            </div>
+                           <Paginate 
+                           data={tab.length}
+
+                           />
                           </div>
                         </div>
                       </div>

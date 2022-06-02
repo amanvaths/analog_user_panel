@@ -12,7 +12,7 @@ const Card1 = (props) => {
   // setUnit(currency_prefrence == 'inr' ? currency_prefrence == 'INR' : currency_prefrence == "USD")
   const walletInfo = props.wallet;
   const [copied, setCopied] = useState(false);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   useEffect(() => {
     setUnit(currency_prefrence == 'inr' ? 'INR' : "USD")
   }, [])
@@ -47,7 +47,9 @@ const Card1 = (props) => {
                           />
                           {/* <em className="icon ni ni-sign-kobo"></em> */}
                         </div>
-                        <h5 className="nk-wgw-title title ml-2">{props.title}</h5>
+                        <h5 className="nk-wgw-title title ml-2" onClick={()=>{
+                          navigate("/cryptoTransaction", { state: {logo: props.logo, lable: props.lable, price: props.price}})
+                        }}>{props.title}</h5>
                       </b>
                       <div className="nk-wgw-balance">
                         <div className="amount">

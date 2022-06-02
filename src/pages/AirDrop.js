@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setUserInfo } from "../redux/reducer/user";
 import { BASE_URL } from "../Api_connection/config";
 import { getSettings } from "../Api_connection/ApiFunction";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const AirDrop = () => {
@@ -59,16 +60,15 @@ const AirDrop = () => {
                             className="toggle-expand-content"
                             data-content="pageMenu"
                           >
-                            {/* <ul className="nk-block-tools g-3">
+                             <ul className="nk-block-tools g-3">
                                 <li>
-                                  <a
-                                    href="#"
-                                    className="btn btn-white btn-dim btn-outline-light"
-                                  ><em className="icon ni ni-download-cloud"></em
-                                  ><span>Export</span></a
-                                  >
+                                  <Link
+                                   to={'/Withdrawal'}
+                                    className="btn btn-white btn-primary btn-outline-light">
+                                    
+                                    <span>Withdraw</span></Link>
                                 </li>
-                                <li className="nk-block-tools-opt">
+                                {/* <li className="nk-block-tools-opt">
                                   <div className="drodown">
                                     <a
                                       href="#"
@@ -90,8 +90,8 @@ const AirDrop = () => {
                                       </ul>
                                     </div>
                                   </div>
-                                </li>
-                              </ul> */}
+                                </li> */}
+                              </ul> 
                           </div>
                         </div>
                       </div>

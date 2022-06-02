@@ -25,7 +25,7 @@ export default function Orders() {
   const [walletbalance, setWalletBalance] = useState("");
   const [walletsymbol, setWalletsymbol] = useState("");
   const [loader, setLoader] = useState(true);
-  const [buyamt ,setBuyAmt]=useState("");
+  const [buyamt, setBuyAmt] = useState("");
 
   const { user, userInfo, oneUsdPrice, totalAna } = useSelector(
     (state) => state.user.value
@@ -37,7 +37,7 @@ export default function Orders() {
   // (total/atprice)?.toFixed(4));
 
 
-  
+
   const getData = async () => {
     try {
       const res = await axios.post(`${BASE_URL}/getCoinData`, {
@@ -49,16 +49,14 @@ export default function Orders() {
     }
   };
 
-  console.log(userInfo?.currency_preference,"userInfo?.currency_preference");
+  console.log(userInfo?.currency_preference, "userInfo?.currency_preference");
 
-  
 
-  
+
+
   const getWalletData = async () => {
     try {
-      const res = await axios.post(`${BASE_URL}/getWalletData`, {
-        email: email,
-      });
+      const res = await axios.post(`${BASE_URL}/getWalletData`, {email: email});
       let walletData = res.data;
       const d = walletData.find((data, i) => data.symbol == "USDT");
       const data = {
@@ -112,7 +110,7 @@ export default function Orders() {
     }
   }
 
-  console.log(coinData[walletsymbol]?.quote?.USD?.price,"total total total total total");
+  console.log(coinData[walletsymbol]?.quote?.USD?.price, "total total total total total");
 
   function TotalAmt() {
     if (ammount == 0) {
@@ -124,7 +122,7 @@ export default function Orders() {
             ? total / (atprice / oneUsdPrice)
             : total / atprice,
         raw_price: trxInAna,
-        currencyType:userInfo?.currency_preference=="usd"?"USDT":"INRX" ,
+        currencyType: userInfo?.currency_preference == "usd" ? "USDT" : "INRX",
         compairCurrency: userInfo?.currency_preference,
         TotalTrx: inTrx,
         email: email,
@@ -174,11 +172,10 @@ export default function Orders() {
     swalWithBootstrapButtons
       .fire({
         title: "Are you sure?",
-        text: `Buyint Amount : ${total} , Quantity : ${
-          userInfo?.currency_preference == "usd"
+        text: `Buyint Amount : ${total} , Quantity : ${userInfo?.currency_preference == "usd"
             ? total / (atprice / oneUsdPrice)
             : total / atprice
-        }`,
+          }`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Yes, confirm it!",
@@ -320,7 +317,7 @@ export default function Orders() {
                             </td>
                             <td
                               className="OrderhistorySize"
-                              style={{ width: "25%",padding:"8px 6.5px" }}
+                              style={{ width: "25%", padding: "8px 6.5px" }}
                             >
                               {h.presalelevel}
                             </td>
@@ -451,9 +448,9 @@ export default function Orders() {
                           <img
                             src={
                               userInfo?.currency_preference &&
-                              userInfo?.currency_preference == "usd" &&
-                              userInfo?.currency_preference &&
-                              userInfo?.currency_preference != null
+                                userInfo?.currency_preference == "usd" &&
+                                userInfo?.currency_preference &&
+                                userInfo?.currency_preference != null
                                 ? "./images/Usdt.png"
                                 : "./images/Inrx_black.png"
                             }
@@ -491,8 +488,8 @@ export default function Orders() {
                       }}
                       onChange={(e) => {
                         // setTotal(e.target.value);
-                         setAmmount(userInfo?.currency_preference == "inr"?e.target.value/atprice:e.target.value/(atprice / oneUsdPrice))
-                       
+                        setAmmount(userInfo?.currency_preference == "inr" ? e.target.value / atprice : e.target.value / (atprice / oneUsdPrice))
+
                       }}
                     />
                   </div>
@@ -528,7 +525,7 @@ export default function Orders() {
                               setAmmount(max / atprice);
                               setTotal(max);
                             } else {
-                              setAmmount(max/(atprice / oneUsdPrice));
+                              setAmmount(max / (atprice / oneUsdPrice));
                               setTotal(max);
                             }
                           }}
@@ -544,8 +541,8 @@ export default function Orders() {
                       ConfirmBox
                     }
                     disabled={
-                      walletbalance <= (userInfo?.currency_preference == "inr"? 5000: 5000 / oneUsdPrice)
-                     }
+                      walletbalance <= (userInfo?.currency_preference == "inr" ? 5000 : 5000 / oneUsdPrice)
+                    }
                   >
                     BUY ANA
                   </button>

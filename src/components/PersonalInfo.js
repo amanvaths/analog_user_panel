@@ -49,11 +49,15 @@ const PersonalInfo = () => {
     if (apidata.email && apidata.task && apidata[task]) {
       try {
         const data = await axios.post(`${BASE_URL}/settings`, apidata)
-        setUpdatedUserName(apidata['username']);
-        setUpdatedPhone(apidata['contact'])
-        console.log(data, "::settings APi response");
-        setMyCurrency(myCurrency);
-        updateSetting();
+        if(data.data.status == 1){
+          setUpdatedUserName(apidata['username']);
+          setUpdatedPhone(apidata['contact'])
+          setMyCurrency(myCurrency);
+          updateSetting();
+        }
+        else if(data.data.status == -1){
+          NotificationManager.error('Refferal Added', data.data.message)
+        }
       } catch (error) {
         console.log(error);
       }

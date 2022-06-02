@@ -210,20 +210,22 @@
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     dataUnit: 'BTC',
     datasets: [{
-      label: "Total Deposit",
+      label: "Total Deposit", 
       color: "#5ce0aa",
-      data: [110, 80, 125, 55, 95, 75, 90, 110, 80, 125, 55, 95]
-    },
-     {
-      label: "Total Send",
-      color: "#3a8dfe",
-      data: [80, 54, 105, 120, 82, 85, 60, 80, 54, 105, 120, 82]
-    },
-     {
-      label: "Total Withdraw",
-      color: "#f6ca3e",
-      data: [90, 98, 115, 70, 87, 95, 67, 90, 98, 115, 70, 87]
-    }]
+      data: [110, 80, 125, 55, 95, 75, 90, 110, 80, 125, 55, 95, 400]
+    }
+    ,
+    //  {
+    //   label: "Total Send",
+    //   color: "#3a8dfe",
+    //   data: [80, 54, 105, 120, 82, 85, 60, 80, 54, 105, 120, 82]
+    // },
+    //  {
+    //   label: "Total Withdraw",
+    //   color: "#f6ca3e",
+    //   data: [90, 98, 115, 70, 87, 95, 67, 90, 98, 115, 70, 87]
+    // }
+  ]
   };
 
   function accountSummary(selector, set_data) {

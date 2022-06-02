@@ -10,7 +10,7 @@ import PaginatedItems from "../components/Pagination"
 import { Link, useNavigate } from "react-router-dom";
 
 
-const Bounty = () => {
+const Handout = () => {
   const { userInfo, user, oneUsdPrice } = useSelector((state) => state.user.value)
   const email = user?.email
   const navigate = useNavigate()
@@ -121,7 +121,7 @@ const Bounty = () => {
                         <div className="card-title-group">
                           <div className="card-title">
                             <h5 className="title">Bounty</h5>
-                            {/* <h6 className="title">Total Bounty: 26.89 USDT</h6> */}
+                            <h6 className="title">Total Bounty: 26.89 USDT</h6>
                           </div>
                           <div className="card-tools me-n1">
                             <ul className="btn-toolbar gx-1">
@@ -278,4 +278,4 @@ const Bounty = () => {
   );
 
 }
-export default Bounty;
+export default Handout;

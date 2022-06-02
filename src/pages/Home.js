@@ -470,7 +470,8 @@ const Home = () => {
                                       <div className="tranx-info">
                                         <div className="tranx-data">
                                           <div className="tranx-label">
-                                            Buy {data?.compair_currency == 'usd' ? "USDT" : "INRX"}
+                                            {data?.type}
+                                            {data?.compair_currency == 'usd' ? "USDT" : "INRX"}
                                             {data.compair_currency == "usd" ? (
                                               <div className="p-1">
                                                 <img
@@ -499,18 +500,37 @@ const Home = () => {
                                         </div>
                                       </div>
                                     </div>
-                                    <div className="tranx-col">
+                                    {
+                                      data?.type == 'Buy'? (<div className="tranx-col">
                                       <div className="tranx-amount">
                                         <div className="number">
                                           {data.cVolume}
                                           <span className="currency currency-btc">ANA</span>
                                         </div>
                                         <div className="number-sm">
-                                          @ {data?.raw_price?.toFixed(2)}
-                                          <span className="currency currency-usd"> {data.currency_type} </span>
+                                          @ {data?.pref_raw_price?.toFixed(2)}
+                                          <span className="currency currency-usd"> {data?.compair_currency == 'inr' ? "INRX" : 'USDT'} </span>
                                         </div>
                                       </div>
-                                    </div>
+                                    </div>) : 
+                                    (
+                                      <div className="tranx-amount">
+                                        <div className="number">
+                                          {(data?.amount)?.toFixed(3)}
+                                          <span className="currency currency-btc">
+                                            {
+                                              data?.compair_currency == 'inr' ? "INRX" : 'USDT'
+                                            }
+                                          </span>
+                                        </div>
+                                        {/* <div className="number-sm">
+                                          @ {data?.pref_raw_price?.toFixed(2)}
+                                          <span className="currency currency-usd"> {data?.compair_currency == 'inr' ? "INRX" : 'USDT'} </span>
+                                        </div> */}
+                                      </div>
+                                    )
+                                    }
+                                    
                                   </div>
 
                                 )
