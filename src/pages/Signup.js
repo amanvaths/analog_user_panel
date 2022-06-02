@@ -30,10 +30,6 @@ const Signup = (props) => {
   const [passwordShone, setPasswordShone] = useState(false)
   const [confirmPasswordShown, setConfirmPasswordShown] = useState(false)
 
-  // const [showOtp, setShowOtp] = useState(false);
-  // const [otp, setOTP] = useState("");
-  // const [otpErr, setOtpError] = useState(false);
-  // const [valida, setValida] = useState(false);
 
   async function Signup() {
     await fetch(BASE_URL + "/signup", {

@@ -15,7 +15,57 @@ import { useSelector, useDispatch } from "react-redux";
 import { setBalance } from "../redux/reducer/user";
 import { useNavigate } from "react-router-dom";
 import { Triangle } from "react-loader-spinner";
+import { Line } from "react-chartjs-2";
+import Chart from 'chart.js/auto';
 
+
+/*
+const lineOptions = {
+  onClick: (e, element) => {
+    if (element.length > 0) {
+      var ind = element[0]._index;
+      alert(ind);
+    }
+  },
+  scales: {
+    xAxes: [
+      {
+        gridLines: {
+          display: false
+        }
+      }
+    ],
+    yAxes: [
+      {
+        // stacked: true,
+        gridLines: {
+          display: false
+        },
+        ticks: {
+          beginAtZero: true,
+          // Return an empty string to draw the tick line but hide the tick label
+          // Return `null` or `undefined` to hide the tick line entirely
+          userCallback(value) {
+            // Convert the number to a string and splite the string every 3 charaters from the end
+            value = value.toString();
+            value = value.split(/(?=(?:...)*$)/);
+
+            // Convert the array to a string and format the output
+            value = value.join(".");
+            return `Rp.${value}`;
+          }
+        }
+      }
+    ]
+  },
+  legend: {
+    display: false
+  },
+  tooltips: {
+    enabled: false
+  }
+};
+*/
 
 const Home = () => {
 
@@ -33,18 +83,54 @@ const Home = () => {
   const [totalWallet, setTotalwallet] = useState(0)
   const [totalTransaction, setTransaction] = useState(0)
   const [lastActivity, setLastActivity] = useState(0)
-
   const [copied, setCopied] = useState(false);
-
   const [data, setData] = useState([])
-
   const [recentActivities, setRecentActivities] = useState([]);
   const [totalRef, setTotalRef] = useState(0)
   const [totalRefIncome, setTotalRefIncome] = useState(0)
   const [i, setI] = useState([])
-
   const [recentLoad, setRecentLoad] = useState(true)
+  const [chartAmt, setChartAmt] = useState([]);
 
+  
+
+  const summaryBalance = {
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    dataUnit: 'BTC',
+    datasets: [
+      {  
+      label: "Buy",
+      fill: false,
+      lineTension: 0.5,
+      backgroundColor: "#6baafe", 
+      borderColor: "#6baafe",  
+      borderCapStyle: "butt",
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: "miter",
+      pointBorderColor: "#0d6efd",
+      pointBackgroundColor: "#fff",
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: "#0d6efd",
+      pointHoverBorderColor: "rgba(220,220,220,1)",
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,   
+      data: chartAmt
+      
+    }
+  ]
+  };
+ 
+  const chartData = async () => {
+    try {
+      const res = await axios.post(`${BASE_URL}/buyChart`, { email: email })    
+      setChartAmt(res.data.data)
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const getPreSale = async () => {
     try {
@@ -107,6 +193,7 @@ const Home = () => {
     getPreSale()
     recentActivity()
     reffetalData()
+    chartData()
   }, [oneUsdPrice, userInfo])
 
   const responsive = {
@@ -552,7 +639,7 @@ const Home = () => {
                       </div>
                       <div className="card card-bordered">
                         <div className="card-inner">
-                          <div className="nk-wg4">
+                          {/* <div className="nk-wg4">
                             <div className="nk-wg4-group justify-center gy-3 gx-4">
                               <div className="nk-wg4-item">
                                 <div className="sub-text">
@@ -582,12 +669,14 @@ const Home = () => {
                                 </div>
                               </div>
                             </div>
-                          </div>
+                          </div> */}
                           <div className="nk-ck3">
-                            <canvas
+                            {/* <canvas
                               className="chart-account-summary"
-                              id="summaryBalance"
-                            ></canvas>
+                              data={ summaryBalance } id= "summaryBalance"
+                            ></canvas> */}
+                        <Line  data={summaryBalance}   />
+                         {/* options={lineOptions} */}
                           </div>
                         </div>
                       </div>
