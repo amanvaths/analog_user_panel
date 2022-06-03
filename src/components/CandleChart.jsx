@@ -124,7 +124,7 @@ class TVChartContainer extends React.PureComponent  {
 }
 function mapStateToProps(state) {
 	return {
-		theme:"Light",
+		theme:"Dark",
 	}
 	
   }

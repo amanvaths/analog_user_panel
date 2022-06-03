@@ -220,7 +220,7 @@ const Handout = () => {
                                       }
                                        {userInfo?.currency_preference == "usd" ? (
                                               <img
-                                                src="./images/Usdt.png"
+                                                src="./images/usdt_icon.png"
                                                 style={{ width: "17px", paddingLeft: "1px" }}
                                                 alt="usdt"
 
@@ -240,7 +240,7 @@ const Handout = () => {
                                       }
                                        {userInfo?.currency_preference == "usd" ? (
                                               <img
-                                                src="./images/Usdt.png"
+                                                src="./images/usdt_icon.png"
                                                 style={{ width: "17px", paddingLeft: "1px" }}
                                                 alt="usdt"
 

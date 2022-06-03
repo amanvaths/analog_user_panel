@@ -105,7 +105,7 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
         >
           {userInfo?.currency_preference && userInfo?.currency_preference == "usd" ? (
             <img
-              src="./images/Usdt.png"
+              src="./images/usdt_icon.png"
               style={{ width: "17px", marginTop: "-7px" }}
               alt="usdt"
               className="img"
@@ -125,7 +125,7 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
         >
           {userInfo?.currency_preference && userInfo?.currency_preference == "usd" ? (
             <img
-              src="./images/Usdt.png"
+              src="./images/usdt_icon.png"
               style={{ width: "17px", marginTop: "-3px" }}
               alt="usdt"
               className="img"
