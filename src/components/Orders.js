@@ -27,14 +27,11 @@ export default function Orders() {
   const [loader, setLoader] = useState(true);
   const [buyamt, setBuyAmt] = useState("");
 
-  const { user, userInfo, oneUsdPrice, totalAna } = useSelector(
+  const { user, userInfo, oneUsdPrice, totalAna, theme } = useSelector(
     (state) => state.user.value
   );
   const email = user?.email;
-  // const symbolState = useSelector((store) => store);
 
-  // setAmmount(userInfo?.currency_preference == "usd"?(total/(atprice / oneUsdPrice))?.toFixed(4):
-  // (total/atprice)?.toFixed(4));
 
 
 
@@ -52,7 +49,7 @@ export default function Orders() {
   console.log(userInfo?.currency_preference, "userInfo?.currency_preference");
 
 
-
+  
 
   const getWalletData = async () => {
     try {
@@ -97,6 +94,7 @@ export default function Orders() {
     selectedCoin();
     setTotal();
     setAmmount()
+  
     // setWalletsymbol(userInfo?.currency_preference=="usd"?"USDT":"INRX")
   }, [totalAna, oneUsdPrice, userInfo, data.balance]);
 
@@ -267,6 +265,7 @@ export default function Orders() {
                   )}
                   {history &&
                     history.map((h) => {
+                      console.log(theme, "::THTHTHTHT");
                       return (
                         <>
                           <tr class="zoom" style={{ fontSize: "9.5px" }}>
@@ -290,18 +289,26 @@ export default function Orders() {
                               {h.preferred_currency_amount?.toFixed(2)}{" "}
                               {h.compair_currency == "usd" ? (
                                 <img
-                                  src="./images/Usdt.png"
+                                  src="./images/usdt_icon.png"
                                   style={{ width: "15px" }}
                                   alt="usdt"
                                   className="img"
                                 />
                               ) : (
+                               
+                              theme == 0 ? 
                                 <img
                                   src="./images/Inrx_black.png"
                                   style={{ width: "25px" }}
                                   alt="inrx"
                                   className="img"
-                                />
+                                /> : 
+                                <img
+                                src="./images/Inrx_white.png"
+                                style={{ width: "25px" }}
+                                alt="inrx"
+                                className="img"
+                              />
                               )}
                               <i class="ion ion-arrow-graph-up-right"></i>
                             </td>
@@ -421,7 +428,7 @@ export default function Orders() {
                         </span>{" "}
                         {userInfo?.currency_preference && userInfo?.currency_preference == "usd" ? (
                           <img
-                            src="./images/Usdt.png"
+                            src="./images/usdt_icon.png"
                             style={{ width: "15px" }}
                             alt="usdt"
                           />
@@ -451,7 +458,7 @@ export default function Orders() {
                                 userInfo?.currency_preference == "usd" &&
                                 userInfo?.currency_preference &&
                                 userInfo?.currency_preference != null
-                                ? "./images/Usdt.png"
+                                ? "./images/usdt_icon.png"
                                 : "./images/Inrx_black.png"
                             }
                             style={{ width: "15px" }}

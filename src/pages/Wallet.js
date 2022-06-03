@@ -21,7 +21,9 @@ const Wallet = (props) => {
   const [walletDetails, setWalletDetails] = useState([]);
   const [coinWW, setCoinWW] = useState([]);
   const [loader, setLoader] = useState(true)
-  const [usdPrice, setUsdPrice] = useState()
+  const [totalSpendINR, setTotalSpendINR] = useState(0)
+  const [totalSpendUSDT, setTotalSpendUSDT] = useState(0)
+
   const [inceptive, setInceptive] = useState(0)
   const [airdrop, setAirDrop] = useState(0)
   const [affiliates, setffiliates] = useState(0)
@@ -40,6 +42,8 @@ const Wallet = (props) => {
         setInherited(res.data?.income[0]?.inherited_wallet)
         setBounty(res?.data?.income[0]?.total_bonus)
         setHandOut(res?.data?.income[0]?.handout_wallet)
+        setTotalSpendINR(res?.data?.income[0]?.total_spend_inrx)
+        setTotalSpendUSDT(res?.data?.income[0]?.total_spend_usdt)
     } catch (error) {
         console.log("Error in refferal Data API " + error);
     }
@@ -83,10 +87,10 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
       dispatch(setUserInfo({ userInfo: data.data }))
       getUserAllWallletData()
       updateWallet() 
-      getData();
-      getWalletDetails();
+      getData()
+      getWalletDetails()
     }
-  }, [])
+  }, [coinWW])
 
 
   useEffect(() => {
@@ -149,7 +153,7 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                                     </p>
                                     <p className="p-1" >
                                       <span>Total Spend: </span>
-                                      <span>&nbsp;&nbsp;0</span>
+                                      <span>{userInfo?.currency_preference == 'inr'? `${totalSpendINR?.toFixed(3)} INRX` : `${totalSpendUSDT.toFixed(3)} USDT`}</span>
                                     </p>
                                     <p className="p-1">
                                       <span>Current Balance: </span>
@@ -161,14 +165,18 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                                   <div className="w-50" style={{fontSize: "1.1rem", fontWeight: "500px"}}>
                                     <p className="p-1">
                                       <span>Analog Value: </span>
-                                      <span>&nbsp;&nbsp;{userInfo?.anaPrice} {userInfo?.currency_preference == 'inr' ? "INRX" : "USDT"}</span>
+                                      <span>&nbsp;&nbsp;
+                                        {
+                                          userInfo?.currency_preference == 'inr' ? `${(userInfo?.anaPrice).toFixed(3)} INRX` : `${(userInfo?.anaPrice / oneUsdPrice)?.toFixed(3)} USDT`
+                                        }
+                                  
+                                        </span>
                                     </p>
                                     <p className="p-1">
                                       <span>Bonus:</span>
                                       <span>&nbsp;&nbsp;
-                                        {totalBonus? totalBonus?.toFixed(2): null}&nbsp;&nbsp;{
-                                                        userInfo?.currency_preference == 'inr' ? "INRX" : "USDT"
-                                                    }
+                                        {totalBonus? userInfo?.currency_preference == 'usd' ? `${totalBonus?.toFixed(2)} USDT`: `${(totalBonus * oneUsdPrice).toFixed(3)} INRX` : null}
+                                     
                                       </span>
                                     </p>
                                     <p className="p-1">
@@ -187,13 +195,10 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                   </div>
                   <div className="row" style={{ marginBottom: "15vh" }}>
                     {coinWW.map((element, index) => {
-                     
+                   
                       return (
                         <div className="walletCard col-md-6 col-lg-4 col-12">
-                        
-                         
-                          <Card1
-                            
+                           <Card1
                             title={element.name}
                             priceInUsd={(element?.quote?.[userInfo?.currency_preference.toUpperCase()]?.price)?.toFixed(20).match(/^-?\d*\.?0*\d{0,2}/)[0]}
                             price={element?.wallet?.balance.toFixed(3) }

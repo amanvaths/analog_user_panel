@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setUserInfo, logout } from "../redux/reducer/user";
+import { setUserInfo, logout, setTheme } from "../redux/reducer/user";
 import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
 
@@ -362,10 +362,16 @@ const Header = () => {
                         <li>
                           {
                             mode == 0 ? <Link to=""
-                              onClick={() => mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")}>
+                              onClick={() => {
+                                dispatch(setTheme({theme: 1}))
+                                mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")
+                                } }>
                               <em className="icon ni ni-moon mr-1"></em>
                               <span className="mr-1">Dark Mode</span>
-                            </Link> : <Link to="" onClick={() => mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")}>
+                            </Link> : <Link to="" onClick={() => {
+                              dispatch(setTheme({theme: 0}))
+                              mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")
+                              } }>
                               <em className="icon ni ni-sun mr-1"></em>
                               <span className="mr-1">Light Mode</span>
                             </Link>

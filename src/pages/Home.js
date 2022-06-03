@@ -511,12 +511,12 @@ const Home = () => {
                                       <div className="tranx-info">
                                         <div className="tranx-data">
                                           <div className="tranx-label">
-                                            {data?.type}
+                                            {data?.type}&nbsp;
                                             {data?.compair_currency == 'usd' ? "USDT" : "INRX"}
                                             {data.compair_currency == "usd" ? (
                                               <div className="p-1">
                                                 <img
-                                                  src="./images/Usdt.png"
+                                                  src="./images/usdt_icon.png"
                                                   style={{ width: "17px" }}
                                                   alt="usdt"
 

@@ -9,18 +9,6 @@
   // dataUnit: string, (Used in tooltip or other section for display) 
   // datasets: [{label : string, color: string (color code with # or other format), data: array}]
 
-  var amount;
-   fetch('http://localhost:3001/api/buyChart', {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-      "allow-access-origin-control": "*",
-    },
-    body: JSON.stringify({
-      email: 'rahulnadcab@byom.de'
-    }),
-  }).then((res)=> 
-  res.json()).then((data)=> amount = data.amount ).catch((err)=> console.log(err))
 
   
   var mainBalance = {
