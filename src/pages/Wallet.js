@@ -34,18 +34,18 @@ const Wallet = (props) => {
   const getUserAllWallletData = async () => {
     try {
         const res = await axios.get(`${BASE_URL}/userAllRecords?email=${email}&bonus_type=Level`)
-        //console.warn(res.data +"Reff data ");
         setInceptive(res?.data?.income[0]?.inceptive_wallet)
         setAirDrop(res?.data?.income[0]?.airdrop_wallet)
         setffiliates(res?.data?.income[1]?.total_bonus?.toFixed(2))
-        setInherited(res.data?.income[0].inherited_wallet)
-        setBounty(res?.data?.income[0].total_bonus)
-        setHandOut(res?.data?.income[0].handout_wallet)
+        setInherited(res.data?.income[0]?.inherited_wallet)
+        setBounty(res?.data?.income[0]?.total_bonus)
+        setHandOut(res?.data?.income[0]?.handout_wallet)
     } catch (error) {
         console.log("Error in refferal Data API " + error);
     }
 }
-const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + Number(inherited) + Number(bounty) + Number(handOut);
+
+const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)  + Number(affiliates ? affiliates:0)  + Number(inherited ? inherited : 0) + Number(bounty ? bounty : 0) + Number(handOut ? handOut : 0);
   const getData = async () => {
     try {
       console.log(":: cp in ", userInfo?.currency_preference);
@@ -82,18 +82,12 @@ const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + 
     if (data) {
       dispatch(setUserInfo({ userInfo: data.data }))
       getUserAllWallletData()
-     
+      updateWallet() 
       getData();
       getWalletDetails();
     }
   }, [])
 
-  useEffect(()=>{
-    setTimeout(() => {
-      updateWallet()
-    }, 20000);
-   
-  },[])
 
   useEffect(() => {
     if (coinData.length > 0 && walletDetails.length > 0) {
@@ -172,7 +166,7 @@ const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + 
                                     <p className="p-1">
                                       <span>Bonus:</span>
                                       <span>&nbsp;&nbsp;
-                                        {totalBonus?.toFixed(2)}&nbsp;&nbsp;{
+                                        {totalBonus? totalBonus?.toFixed(2): null}&nbsp;&nbsp;{
                                                         userInfo?.currency_preference == 'inr' ? "INRX" : "USDT"
                                                     }
                                       </span>
@@ -196,15 +190,19 @@ const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + 
                      
                       return (
                         <div className="walletCard col-md-6 col-lg-4 col-12">
+                        
+                         
                           <Card1
+                            
                             title={element.name}
-                            priceInUsd={(element?.quote?.[userInfo?.currency_preference.toUpperCase()]?.price)?.toFixed(2)}
-                            price={element?.wallet?.balance.toFixed(2)}
+                            priceInUsd={(element?.quote?.[userInfo?.currency_preference.toUpperCase()]?.price)?.toFixed(20).match(/^-?\d*\.?0*\d{0,2}/)[0]}
+                            price={element?.wallet?.balance.toFixed(3) }
                             lable={element?.symbol}
                             wallet={element?.wallet}
                             address={element?.wallet?.walletAddr}
                             logo={`https://s2.coinmarketcap.com/static/img/coins/64x64/${element.id}.png`}
                             cp={Object.values(userInfo).length > 0 ? userInfo.currency_preference.toUpperCase() : 'USD'}
+                            
                            />
                         </div>
                       );

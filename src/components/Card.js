@@ -5,16 +5,18 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { MdOutlineContentCopy } from 'react-icons/md'
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import ReactTooltip from 'react-tooltip';
+
 
 const Card1 = (props) => {
-  const { currency_prefrence } = useSelector((state) => state.currency.value)
+  const { currency_prefrence, oneUsdPrice, userInfo} = useSelector((state) => state.user.value)
   const [unit, setUnit] = useState('')
   // setUnit(currency_prefrence == 'inr' ? currency_prefrence == 'INR' : currency_prefrence == "USD")
   const walletInfo = props.wallet;
   const [copied, setCopied] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    setUnit(currency_prefrence == 'inr' ? 'INR' : "USD")
+    setUnit(userInfo?.currency_preference == 'inr' ? 'INR' : "USD")
   }, [])
 
   const addString = props.address;
@@ -24,7 +26,8 @@ const Card1 = (props) => {
 
   return (
     <>
-      <div className="container mt-1" onClick={props.onClick} style={{zIndex:100}}>
+      <ReactTooltip />
+      <div className="container mt-1" onClick={props.onClick} style={{zIndex:100}} >
         <div className="row" style={{ padding: "0px" }}>
           <div className="">
             <div className="card card-bordered is-dark">
@@ -54,9 +57,10 @@ const Card1 = (props) => {
                       <div className="nk-wgw-balance">
                         <div className="amount">
                           {props.price}
-                          <span className="currency currency-nio" style={{fontSize: "10px"}}>{props.lable}</span>&nbsp;/&nbsp;
-                             {props.priceInUsd}
-                          <span className="currency currency-nio" style={{fontSize: "10px"}}>{props.cp}</span>
+                          <span className="currency currency-nio" style={{fontSize: "10px"}}>{props.lable}</span>
+                          <span style={{fontSize: "10px"}}> &nbsp;/&nbsp;{props.priceInUsd}</span>
+                             
+                          <span className="currency currency-nio" style={{fontSize: "10px"}}> {props.cp}</span>
                            
                         </div>
                         <div className="amount-sm">
@@ -65,7 +69,7 @@ const Card1 = (props) => {
                         </div>
                       </div>
                     </div>
-                    <div className="col-4">
+                    <div className="col-4" data-tip={userInfo?.currency_preference == 'inr'? "Minimum Deposit 5000 INRX" : `Minimum Deposit ${(5000 / oneUsdPrice).toFixed(3)} USDT`}>
                       <img
                         src={`https://image-charts.com/chart?chs=177x177&cht=qr&chl=${walletInfo?.walletAddr}&choe=UTF-8&icqrb=0b3175&icqrf=FFFFFF`}
                         style={{ height: "100px" }}
