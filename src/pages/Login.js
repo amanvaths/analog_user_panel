@@ -372,8 +372,8 @@ const Login = (props) => {
                     <div className="nk-feature-img">
                       <img
                         className="round"
-                        src="./images/slides/slide-a.png"
-                        srcSet="./images/slides/promo-a2x.png 2x"
+                        src="/images/logo.png"
+                        srcSet="/images/logo.png 2x"
                         alt=""
                       />
                     </div>

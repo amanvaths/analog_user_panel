@@ -84,7 +84,7 @@ h6 {
 } */
 @media (max-width: 992px) {
   .nk-auth-container {
-    width: 35%;
+    width: 100%;
   }
   .countdown {
     padding-left: 270px;

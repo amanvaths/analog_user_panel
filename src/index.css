@@ -11,3 +11,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@media (max-width: 769px) {
+  .responsive {
+    top: 30px !important;
+  }
+  .nk-responsive{
+    top: 25px !important;
+  }
+}
+@media (max-width: 506px){
+.nk-responsive {
+    top: 0px !important;
+}}
+
+@media (max-width: 500px) {
+.logohide{
+      display: none !important;
+}
+}
