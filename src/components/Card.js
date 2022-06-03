@@ -31,7 +31,7 @@ const Card1 = (props) => {
               <div className="nk-wgw">
                 <div className="nk-wgw-inner">
                   <div className="row">
-                    <div className="col-6">
+                    <div className="col-8">
                       <b
                         className="nk-wgw-name"
                         // onClick={() => { 
@@ -54,17 +54,18 @@ const Card1 = (props) => {
                       <div className="nk-wgw-balance">
                         <div className="amount">
                           {props.price}
-                          <span className="currency currency-nio" style={{fontSize: "10px"}}>
-                            {props.lable}
-                          </span>
+                          <span className="currency currency-nio" style={{fontSize: "10px"}}>{props.lable}</span>&nbsp;/&nbsp;
+                             {props.priceInUsd}
+                          <span className="currency currency-nio" style={{fontSize: "10px"}}>{props.cp}</span>
+                           
                         </div>
                         <div className="amount-sm">
-                          {props.priceInUsd}
+                          {(props.priceInUsd * props.price).toFixed(3)}
                           <span className="currency currency-usd">{props.cp}</span>
                         </div>
                       </div>
                     </div>
-                    <div className="col-6">
+                    <div className="col-4">
                       <img
                         src={`https://image-charts.com/chart?chs=177x177&cht=qr&chl=${walletInfo?.walletAddr}&choe=UTF-8&icqrb=0b3175&icqrf=FFFFFF`}
                         style={{ height: "100px" }}
