@@ -16,7 +16,7 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
   
 
   // Dispatch
-  const { userInfo,totalAna,oneUsdPrice } = useSelector((state) => state.user.value);
+  const { userInfo,totalAna,oneUsdPrice,theme } = useSelector((state) => state.user.value);
 
 
 
@@ -90,7 +90,8 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
         <div className="slider__track" />
         <div ref={range} className="slider__range"  />
         <div className="slider__left-value" style={{ left: "25px",color:"green",fontWeight:"bold" }}>
-          {minVal && minVal?.toFixed(2)}
+          {oneUsdPrice&&minVal==""?"0": minVal && minVal?.toFixed(2)}
+         
         </div>
         <div
           className="slider__right-value"
@@ -98,45 +99,62 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
         >
           {maxVal && maxVal?.toFixed(2)}
         </div>
-        <div className="slider__right-value" style={{color:"green",fontWeight:"bold" }}>{fixedmax && fixedmax?.toFixed(2)}</div>
+        <div className="slider__right-value" style={{color:"green",fontWeight:"bold",paddingRight:"20px" }}>
+          {oneUsdPrice&&fixedmax==""?"0":fixedmax && fixedmax?.toFixed(2)}
+         
+          </div>
         <div
           className="slider__left-value "
           style={{ left: "0px", fontWeight: "bold" }}
         >
           {userInfo?.currency_preference && userInfo?.currency_preference == "usd" ? (
-            <img
-              src="./images/Usdt.png"
-              style={{ width: "17px", marginTop: "-7px" }}
-              alt="usdt"
-              className="img"
-            />
-          ) : (
-            <img
-              src="./images/Inrx_black.png"
-              style={{ width: "17px", marginTop: "-7px" }}
-              alt="inrx"
-              className="img"
-            />
+             <img
+             src="./images/usdt_icon.png"
+             style={{ width: "15px" }}
+             alt="usdt"
+             className="tradeUsdIcon"
+           />
+         ) : theme == 0 ? (
+           <img
+             src="./images/Inrx_black.png"
+             style={{ width: "17px" }}
+             alt="inrx"
+             className="img"
+           />
+         ) : (
+           <img
+             src="./images/Inrx_white.png"
+             style={{ width: "17px" }}
+             alt="inrx"
+             className="img"
+           />
           )}
         </div>
         <div
           className="slider__right-value "
-          style={{ right: "60px", fontWeight: "bold" }}
+          style={{ fontWeight: "bold" }}
         >
           {userInfo?.currency_preference && userInfo?.currency_preference == "usd" ? (
-            <img
-              src="./images/Usdt.png"
-              style={{ width: "17px", marginTop: "-3px" }}
-              alt="usdt"
-              className="img"
-            />
-          ) : (
-            <img
-              src="./images/Inrx_black.png"
-              style={{ width: "17px", marginTop: "-7px" }}
-              alt="inrx"
-              className="img"
-            />
+             <img
+             src="./images/usdt_icon.png"
+             style={{ width: "15px" }}
+             alt="usdt"
+             className="tradeUsdIcon"
+           />
+         ) : theme == 0 ? (
+           <img
+             src="./images/Inrx_black.png"
+             style={{ width: "17px" }}
+             alt="inrx"
+             className="img"
+           />
+         ) : (
+           <img
+             src="./images/Inrx_white.png"
+             style={{ width: "17px" }}
+             alt="inrx"
+             className="img"
+           />
           )}
         </div>
       </div>

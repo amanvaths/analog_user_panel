@@ -64,7 +64,7 @@ const Card1 = (props) => {
                            
                         </div>
                         <div className="amount-sm">
-                          {(props.priceInUsd * props.price).toFixed(3)}
+                          { props ? (props.priceInUsd * props.price).toFixed(3) : null}
                           <span className="currency currency-usd">{props.cp}</span>
                         </div>
                       </div>

@@ -7,7 +7,7 @@ import { setUserInfo } from "../redux/reducer/user";
 import { Triangle } from 'react-loader-spinner'
 import swal from "sweetalert";
 import 'react-notifications/lib/notifications.css';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 
 const PersonalInfo = () => {
   const dispatch = useDispatch()
@@ -49,14 +49,17 @@ const PersonalInfo = () => {
     if (apidata.email && apidata.task && apidata[task]) {
       try {
         const data = await axios.post(`${BASE_URL}/settings`, apidata)
-        if(data.data.status == 1){
+        if (data.data.status == 1) {
           setUpdatedUserName(apidata['username']);
           setUpdatedPhone(apidata['contact'])
-          setMyCurrency(myCurrency);
+          setMyCurrency(apidata['currency']);
+          setValue("");
+          setMyCurrency("");
+          setPhone("");
           updateSetting();
         }
-        else if(data.data.status == -1){
-          NotificationManager.error('Refferal Added', data.data.message)
+        else if (data.data.status == -1) {
+          NotificationManager.error(data.data.message)
         }
       } catch (error) {
         console.log(error);
@@ -102,10 +105,10 @@ const PersonalInfo = () => {
       }
       console.log(data.data.status, ":: response from update Referaal API ");
     } catch (error) {
-      if(error.response.data.status == 2){
+      if (error.response.data.status == 2) {
         swal("Invalid refferal Code or Already updated", "", "error")
       }
-      else if(error.response.data.status == 0){
+      else if (error.response.data.status == 0) {
         swal("Something Went wrong 1", "", "error")
       }
       console.log(error.response.data.status);
@@ -139,9 +142,7 @@ const PersonalInfo = () => {
     setLoader(false)
   }, [])
 
-  // useEffect(() => {
-  //   getData();
-  // }, [myCurrency])
+
 
   return (
     <>
@@ -334,7 +335,7 @@ const PersonalInfo = () => {
               </> : null
             }
 
- <NotificationContainer/>
+            <NotificationContainer />
 
           </div>
 

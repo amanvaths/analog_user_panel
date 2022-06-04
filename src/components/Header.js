@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setUserInfo, logout } from "../redux/reducer/user";
+import { setUserInfo, logout, setTheme } from "../redux/reducer/user";
 import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
+import { navsetter } from "../redux/actions/websiteDBAction";
 
 
 const Header = () => {
@@ -14,7 +15,7 @@ const Header = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
 
-  const sidebarMenu = async () => {
+   const sidebarMenu = async () => {
    
       var element = document.getElementById("myBody");
       element.classList.add("nav-shown");
@@ -42,6 +43,8 @@ const Header = () => {
       }
       
   }
+
+
   const mode = localStorage.getItem("theme")
   if (mode == 1) {
     var element = document.getElementById("myBody");
@@ -79,7 +82,7 @@ const Header = () => {
             <div className="nk-menu-trigger d-xl-none ml-n1">
               <a
                 href="#"
-                // onClick={()=>dispatch(navsetter())}
+                onClick={()=>dispatch(navsetter())} 
                 // className= "nk-nav-toggle nk-quick-nav-icon toggle-active"
                 className={btn ? "nk-nav-toggle nk-quick-nav-icon toggle-active" : "nk-nav-toggle nk-quick-nav-icon"}
                 data-target="sidebarMenu"
@@ -87,7 +90,7 @@ const Header = () => {
                 <em className="icon ni ni-menu" onClick={sidebarMenu}></em>
               </a>
             </div>
-            <div className="nk-header-brand d-xl-none">
+            <div className=" nk-header-brand d-xl-none">
               <Link to="/home" className="logo-link">
                 <img
                   className="logo-light logo-img"
@@ -126,7 +129,7 @@ const Header = () => {
             <div className="nk-header-tools">
               <ul className="nk-quick-nav">
                 <li>
-                  <div className="nk-block-head">
+                  <div className="nk-block-head logohide">
                     {/* <div className="nk-block-head-sub">
                         <span>Welcome!</span>
                       </div> */}
@@ -362,10 +365,16 @@ const Header = () => {
                         <li>
                           {
                             mode == 0 ? <Link to=""
-                              onClick={() => mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")}>
+                              onClick={() => {
+                                dispatch(setTheme({theme: 1}))
+                                mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")
+                                } }>
                               <em className="icon ni ni-moon mr-1"></em>
                               <span className="mr-1">Dark Mode</span>
-                            </Link> : <Link to="" onClick={() => mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")}>
+                            </Link> : <Link to="" onClick={() => {
+                              dispatch(setTheme({theme: 0}))
+                              mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")
+                              } }>
                               <em className="icon ni ni-sun mr-1"></em>
                               <span className="mr-1">Light Mode</span>
                             </Link>
