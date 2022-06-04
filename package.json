@@ -37,6 +37,7 @@
     "react-scripts": "4.0.3",
     "react-slideshow-image": "^3.7.3",
     "react-super-responsive-table": "^5.2.0",
+    "react-tooltip": "^4.2.21",
     "react-tradingview-embed": "^3.0.6",
     "react-tradingview-widget": "^1.3.2",
     "redux": "^4.2.0",

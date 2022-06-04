@@ -16,7 +16,7 @@ export function getWebsite() {
 }
 
 export function navsetter(){
-  return (dispatch)=>{
+  return async (dispatch)=>{
     dispatch({type:NAV_SETTER})
   }
 }

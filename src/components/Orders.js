@@ -22,10 +22,14 @@ export default function Orders() {
 
   //  GetCoinData
 
-  const { user, userInfo, oneUsdPrice, totalAna } = useSelector(
+  const { user, userInfo, oneUsdPrice, totalAna, theme } = useSelector(
     (state) => state.user.value
   );
   const email = user?.email;
+
+
+
+
   const getData = async () => {
     try {
       const res = await axios.post(`${BASE_URL}/getCoinData`, {
@@ -264,6 +268,7 @@ Swal.fire({
                   )}
                   {history &&
                     history.map((h) => {
+                      console.log(theme, "::THTHTHTHT");
                       return (
                         <>
                           <tr
@@ -290,18 +295,26 @@ Swal.fire({
                               {h.preferred_currency_amount?.toFixed(2)}{" "}
                               {h.compair_currency == "usd" ? (
                                 <img
-                                  src="./images/Usdt.png"
+                                  src="./images/usdt_icon.png"
                                   style={{ width: "15px" }}
                                   alt="usdt"
                                   className="tradeUsdIcon"
                                 />
                               ) : (
+                               
+                              theme == 0 ? 
                                 <img
                                   src="./images/Inrx_black.png"
                                   style={{ width: "17px" }}
                                   alt="inrx"
-                                  className="tradeUsdIcon"
-                                />
+                                  className="img"
+                                /> : 
+                                <img
+                                src="./images/Inrx_white.png"
+                                style={{ width: "25px" }}
+                                alt="inrx"
+                                className="img"
+                              />
                               )}
                               <i class="ion ion-arrow-graph-up-right"></i>
                             </td>
@@ -433,7 +446,7 @@ Swal.fire({
                         </span>{" "}
                         {userInfo?.currency_preference && userInfo?.currency_preference == "usd" ? (
                           <img
-                            src="./images/Usdt.png"
+                            src="./images/usdt_icon.png"
                             style={{ width: "15px" }}
                             alt="usdt"
                           />
@@ -446,29 +459,46 @@ Swal.fire({
                         )}
                       </div>
                     </div> */}
-                  <div
-                    style={{
-                      marginTop: "-15px",
-                    }}
-                  >
-                    <div style={{ fontWeight: "bold" }}>
-                      ANA PRICE{"  "}
-                      <span style={{ color: "#008000", fontWeight: "bold" }}>
-                        {userInfo?.currency_preference == "usd"
-                          ? (atprice / oneUsdPrice)?.toFixed(8)
-                          : atprice?.toFixed(8)}{" "}
-                        <img
-                          src={
-                            userInfo?.currency_preference &&
-                            userInfo?.currency_preference == "usd" &&
-                            userInfo?.currency_preference &&
-                            userInfo?.currency_preference != null
-                              ? "./images/Usdt.png"
-                              : "./images/Inrx_black.png"
-                          }
-                          style={{ width: "15px" }}
-                          alt="usdt"
-                        />
+                    <div
+                      style={{
+                        marginTop: "-15px",
+                      }}
+                    >
+                      <div style={{ fontWeight: "bold" }}>
+                        ANA PRICE{"  "}
+                        <span style={{ color: "#008000", fontWeight: "bold" }}>
+                          {userInfo?.currency_preference == "usd"
+                            ? (atprice / oneUsdPrice)?.toFixed(8)
+                            : atprice?.toFixed(8)}{" "}
+                          <img
+                            src={
+                              userInfo?.currency_preference &&
+                                userInfo?.currency_preference == "usd" &&
+                                userInfo?.currency_preference &&
+                                userInfo?.currency_preference != null
+                                ? "./images/usdt_icon.png"
+                                : "./images/Inrx_black.png"
+                            }
+                            style={{ width: "15px" }}
+                            alt="usdt"
+                          />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="input-group mb-3" style={{ margin: "0px" }}>
+                    <div class="input-group-prepend">
+                      <span
+                        class="input-group-text buy-sell-form-bg buy-sell-theme"
+                        style={{
+                          fontSize: " 10px",
+                          borderColor: " rgb(202, 202, 204)",
+                        }}
+                      >
+                        BUYING
+                        <br />
+                        AMOUNT
                       </span>
                     </div>
                   </div>
@@ -573,6 +603,6 @@ Swal.fire({
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }

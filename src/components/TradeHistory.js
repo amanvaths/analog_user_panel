@@ -60,7 +60,7 @@ export default function TradeHistory() {
                           {h.preferred_currency_amount?.toFixed(2)}{" "}
                           {h.compair_currency == "usd" ? (
                             <img
-                              src="./images/Usdt.png"
+                              src="./images/usdt_icon.png"
                               style={{ width: "17px" }}
                               alt="usdt"
                               className="tradeUsdIcon"
