@@ -14,7 +14,6 @@ function BuySell(props) {
       <div class="nk-app-root">
         <div class="nk-main ">
           <Menu />
-
           <div class="nk-wrap ">
             <Header />
             <div className="row" style={{ margin: "20px 10px 0px" }}>

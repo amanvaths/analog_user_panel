@@ -46,15 +46,16 @@ export default function TradeHistory() {
         </>) 
             }
                 {history.map((h) => {
+                  let a= new Date(h.date).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})
                   return (
                     <>
-                      <tr class="zoom  historyorder" style={{fontSize:"13.76px"}}>
+                      <tr class="zoom  historyorder" style={{fontSize:"16.6px"}}>
                         <td className="TradeHistorySize" style={{ width: "20%" }}> {h.cVolume.toFixed(2)}
                           <img
                             src="./images/Analog.png"
                             style={{ width: "24px" }}
-
-                          /></td>
+                            className="tradeAnaIcon"/>
+                            </td>
                         <td class="text-danger TradeHistorySize" style={{ width: "20%" }}>
                           {h.preferred_currency_amount?.toFixed(2)}{" "}
                           {h.compair_currency == "usd" ? (
@@ -62,12 +63,14 @@ export default function TradeHistory() {
                               src="./images/Usdt.png"
                               style={{ width: "17px" }}
                               alt="usdt"
+                              className="tradeUsdIcon"
                             />
                           ) : (
                             <img
                               src="./images/Inrx_black.png"
                               style={{ width: "17px" }}
                               alt="inrx"
+                              className="tradeUsdIcon"
                             />
                           )}
                           <i class="ion ion-arrow-graph-up-right"></i>
@@ -77,10 +80,24 @@ export default function TradeHistory() {
                           {h.compair_currency == "usd"
                             ? h.pref_raw_price.toFixed(8)
                             : h.pref_raw_price.toFixed(8)}
+                            {" "}
+                             <img
+                            src={
+                              h.compair_currency &&
+                                h.compair_currency == "usd" &&
+                                h.compair_currency &&
+                                h.compair_currency != null
+                                ? "./images/Usdt.png"
+                                : "./images/Inrx_black.png"
+                            }
+                            style={{ width: "17px" }}
+                            alt="usdt"
+                            className="tradeUsdIcon"
+                          />
                           <i class="ion ion-arrow-graph-down-right"></i>
                         </td>
                         <td className="TradeHistorySize" style={{ width: "20%" }}>{h.presalelevel}</td>
-                        <td className="TradeHistorySize" style={{ width: "20%" }}>{h.date}</td>
+                        <td className="TradeHistorySize" style={{ width: "20%" }}>{a}</td>
                       </tr>
                     </>
                   );

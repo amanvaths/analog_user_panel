@@ -90,7 +90,8 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
         <div className="slider__track" />
         <div ref={range} className="slider__range"  />
         <div className="slider__left-value" style={{ left: "25px",color:"green",fontWeight:"bold" }}>
-          {minVal && minVal?.toFixed(2)}
+          {oneUsdPrice&&minVal==""?"0": minVal && minVal?.toFixed(2)}
+         
         </div>
         <div
           className="slider__right-value"
@@ -98,7 +99,10 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
         >
           {maxVal && maxVal?.toFixed(2)}
         </div>
-        <div className="slider__right-value" style={{color:"green",fontWeight:"bold" }}>{fixedmax && fixedmax?.toFixed(2)}</div>
+        <div className="slider__right-value" style={{color:"green",fontWeight:"bold",paddingRight:"20px" }}>
+          {oneUsdPrice&&fixedmax==""?"0":fixedmax && fixedmax?.toFixed(2)}
+         
+          </div>
         <div
           className="slider__left-value "
           style={{ left: "0px", fontWeight: "bold" }}
@@ -121,7 +125,7 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
         </div>
         <div
           className="slider__right-value "
-          style={{ right: "60px", fontWeight: "bold" }}
+          style={{ fontWeight: "bold" }}
         >
           {userInfo?.currency_preference && userInfo?.currency_preference == "usd" ? (
             <img
