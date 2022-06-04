@@ -16,7 +16,7 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
   
 
   // Dispatch
-  const { userInfo,totalAna,oneUsdPrice } = useSelector((state) => state.user.value);
+  const { userInfo,totalAna,oneUsdPrice,theme } = useSelector((state) => state.user.value);
 
 
 
@@ -108,19 +108,26 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
           style={{ left: "0px", fontWeight: "bold" }}
         >
           {userInfo?.currency_preference && userInfo?.currency_preference == "usd" ? (
-            <img
-              src="./images/usdt_icon.png"
-              style={{ width: "17px", marginTop: "-7px" }}
-              alt="usdt"
-              className="img"
-            />
-          ) : (
-            <img
-              src="./images/Inrx_black.png"
-              style={{ width: "17px", marginTop: "-7px" }}
-              alt="inrx"
-              className="img"
-            />
+             <img
+             src="./images/usdt_icon.png"
+             style={{ width: "15px" }}
+             alt="usdt"
+             className="tradeUsdIcon"
+           />
+         ) : theme == 0 ? (
+           <img
+             src="./images/Inrx_black.png"
+             style={{ width: "17px" }}
+             alt="inrx"
+             className="img"
+           />
+         ) : (
+           <img
+             src="./images/Inrx_white.png"
+             style={{ width: "17px" }}
+             alt="inrx"
+             className="img"
+           />
           )}
         </div>
         <div
@@ -128,19 +135,26 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
           style={{ fontWeight: "bold" }}
         >
           {userInfo?.currency_preference && userInfo?.currency_preference == "usd" ? (
-            <img
-              src="./images/usdt_icon.png"
-              style={{ width: "17px", marginTop: "-3px" }}
-              alt="usdt"
-              className="img"
-            />
-          ) : (
-            <img
-              src="./images/Inrx_black.png"
-              style={{ width: "17px", marginTop: "-7px" }}
-              alt="inrx"
-              className="img"
-            />
+             <img
+             src="./images/usdt_icon.png"
+             style={{ width: "15px" }}
+             alt="usdt"
+             className="tradeUsdIcon"
+           />
+         ) : theme == 0 ? (
+           <img
+             src="./images/Inrx_black.png"
+             style={{ width: "17px" }}
+             alt="inrx"
+             className="img"
+           />
+         ) : (
+           <img
+             src="./images/Inrx_white.png"
+             style={{ width: "17px" }}
+             alt="inrx"
+             className="img"
+           />
           )}
         </div>
       </div>

@@ -37,6 +37,7 @@
   .slider__range {
     background-color: green;
     z-index: 2;
+    max-width: 100%;
   }
   
   .slider__left-value,

@@ -27,9 +27,6 @@ export default function Orders() {
   );
   const email = user?.email;
 
-
-
-
   const getData = async () => {
     try {
       const res = await axios.post(`${BASE_URL}/getCoinData`, {
@@ -177,36 +174,52 @@ export default function Orders() {
   }
 
   //  SweetAlert Loader
-  function sweetalertLoader(){
-    let timerInterval
-Swal.fire({
-  title: 'Auto close alert!',
-  html: 'I will close in <b></b> milliseconds.',
-  timer: 2000,
-  timerProgressBar: true,
-  didOpen: () => {
-    setLoader2(true);
-    Swal.showLoading()
-    const b = Swal.getHtmlContainer().querySelector('b')
-    timerInterval = setInterval(() => {
-      b.textContent = Swal.getTimerLeft()
-    }, 100)
-  },
-  willClose: () => {
-    clearInterval(timerInterval)
+  function sweetalertLoader() {
+    let timerInterval;
+    Swal.fire({
+      title: "Auto close alert!",
+      html: "I will close in <b></b> milliseconds.",
+      timer: 2000,
+      timerProgressBar: true,
+      didOpen: () => {
+        setLoader2(true);
+        Swal.showLoading();
+        const b = Swal.getHtmlContainer().querySelector("b");
+        timerInterval = setInterval(() => {
+          b.textContent = Swal.getTimerLeft();
+        }, 100);
+      },
+      willClose: () => {
+        clearInterval(timerInterval);
+      },
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log("I was closed by the timer");
+      }
+    });
   }
-}).then((result) => {
-  /* Read more about handling dismissals below */
-  if (result.dismiss === Swal.DismissReason.timer) {
-    console.log('I was closed by the timer')
-  }
-})
-   }
 
- 
   return (
     <div className="order">
-     
+      <div style={{ backgroundColor: "red", zIndex: "99" }}>
+        {loader2 && (
+          <>
+            <div
+              style={{
+                position: "absolute",
+                zIndex: "99",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
+            >
+              <Triangle ariaLabel="loading-indicator" color="green" />
+            </div>
+          </>
+        )}
+      </div>
+
       <div class="card mt-2">
         <div class="card-header justify-content-between align-items-center">
           <h6 class="card-title "> ORDER</h6>
@@ -300,21 +313,20 @@ Swal.fire({
                                   alt="usdt"
                                   className="tradeUsdIcon"
                                 />
-                              ) : (
-                               
-                              theme == 0 ? 
+                              ) : theme == 0 ? (
                                 <img
                                   src="./images/Inrx_black.png"
                                   style={{ width: "17px" }}
                                   alt="inrx"
                                   className="img"
-                                /> : 
+                                />
+                              ) : (
                                 <img
-                                src="./images/Inrx_white.png"
-                                style={{ width: "25px" }}
-                                alt="inrx"
-                                className="img"
-                              />
+                                  src="./images/Inrx_white.png"
+                                  style={{ width: "17px" }}
+                                  alt="inrx"
+                                  className="img"
+                                />
                               )}
                               <i class="ion ion-arrow-graph-up-right"></i>
                             </td>
@@ -328,17 +340,24 @@ Swal.fire({
                                 : h.pref_raw_price.toFixed(8)}{" "}
                               {h.compair_currency == "usd" ? (
                                 <img
-                                  src="./images/Usdt.png"
+                                  src="./images/usdt_icon.png"
                                   style={{ width: "15px" }}
                                   alt="usdt"
                                   className="tradeUsdIcon"
                                 />
-                              ) : (
+                              ) : theme == 0 ? (
                                 <img
                                   src="./images/Inrx_black.png"
                                   style={{ width: "17px" }}
                                   alt="inrx"
-                                  className="tradeUsdIcon"
+                                  className="img"
+                                />
+                              ) : (
+                                <img
+                                  src="./images/Inrx_white.png"
+                                  style={{ width: "17px" }}
+                                  alt="inrx"
+                                  className="img"
                                 />
                               )}
                               <i class="ion ion-arrow-graph-down-right"></i>
@@ -437,7 +456,6 @@ Swal.fire({
                     marginBottom: "35px",
                   }}
                 >
-    
                   {/* <div style={{ marginTop: "-15px" }}>
                       <div style={{ fontWeight: "bold" }}>
                         Buying Amount{" "}
@@ -459,46 +477,39 @@ Swal.fire({
                         )}
                       </div>
                     </div> */}
-                    <div
-                      style={{
-                        marginTop: "-15px",
-                      }}
-                    >
-                      <div style={{ fontWeight: "bold" }}>
-                        ANA PRICE{"  "}
-                        <span style={{ color: "#008000", fontWeight: "bold" }}>
-                          {userInfo?.currency_preference == "usd"
-                            ? (atprice / oneUsdPrice)?.toFixed(8)
-                            : atprice?.toFixed(8)}{" "}
+                  <div
+                    style={{
+                      marginTop: "-15px",
+                    }}
+                  >
+                    <div style={{ fontWeight: "bold" }}>
+                      ANA PRICE{"  "}
+                      <span style={{ color: "#008000", fontWeight: "bold" }}>
+                        {userInfo?.currency_preference == "usd"
+                          ? (atprice / oneUsdPrice)?.toFixed(8)
+                          : atprice?.toFixed(8)}{" "}
+                        {userInfo?.currency_preference == "usd" ? (
                           <img
-                            src={
-                              userInfo?.currency_preference &&
-                                userInfo?.currency_preference == "usd" &&
-                                userInfo?.currency_preference &&
-                                userInfo?.currency_preference != null
-                                ? "./images/usdt_icon.png"
-                                : "./images/Inrx_black.png"
-                            }
+                            src="./images/Usdt.png"
                             style={{ width: "15px" }}
                             alt="usdt"
+                            className="tradeUsdIcon"
                           />
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="input-group mb-3" style={{ margin: "0px" }}>
-                    <div class="input-group-prepend">
-                      <span
-                        class="input-group-text buy-sell-form-bg buy-sell-theme"
-                        style={{
-                          fontSize: " 10px",
-                          borderColor: " rgb(202, 202, 204)",
-                        }}
-                      >
-                        BUYING
-                        <br />
-                        AMOUNT
+                        ) : theme == 0 ? (
+                          <img
+                            src="./images/Inrx_black.png"
+                            style={{ width: "17px" }}
+                            alt="inrx"
+                            className="img"
+                          />
+                        ) : (
+                          <img
+                            src="./images/Inrx_white.png"
+                            style={{ width: "17px" }}
+                            alt="inrx"
+                            className="img"
+                          />
+                        )}
                       </span>
                     </div>
                   </div>
@@ -538,71 +549,89 @@ Swal.fire({
                     }}
                   />
                 </div>
-
-                <div style={{ backgroundColor: "red" ,zIndex:"99"}}>
-        {loader2 && (
-          <>
-            <div
-              style={{
-                position: "absolute",
-                zIndex: "99",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-              }}
-            >
-              <Triangle ariaLabel="loading-indicator" color="green" />
-            </div>
-          </>
-        )}
-                </div>
-
-                <div style={{ margin: "30px 0px" }}></div>
-                <div>
-                  {walletbalance && userInfo?.currency_preference ? (
-                    <MultiRangeSlider
-                      min={
-                        userInfo?.currency_preference == "inr"
-                          ? 5000
-                          : 5000 / oneUsdPrice
-                      }
-                      // min={200}
-                      symbol={
-                        userInfo?.currency_preference == "usd" ? "USDT" : "INRX"
-                      }
-                      max={walletbalance}
-                      fixedmax={walletbalance}
-                      onChange={({ min, max, symbol }) => {
-                        // console.log(`min = ${min}, max = ${max}`);
-                        if (userInfo?.currency_preference == "inr") {
-                          setAmmount(max / atprice);
-                          setTotal(max);
-                        } else {
-                          setAmmount(max / (atprice / oneUsdPrice));
-                          setTotal(max);
-                        }
-                      }}
-                    />
-                  ) : null}
-                </div>
-                <button
-                  class="btn text-light btn-block my-2"
-                  style={{ background: "rgb(108, 183, 125)", top: "60px" }}
-                  onClick={ConfirmBox}
-                  disabled={
-                    walletbalance <=
-                    (userInfo?.currency_preference == "inr"
-                      ? 5000
-                      : 5000 / oneUsdPrice)
-                  }
-                >
-                  BUY ANA
-                </button>
               </div>
+
+              {/* <div class="input-group mb-3" style={{ margin: "0px" }}>
+                  <div class="input-group-prepend">
+                    <span
+                      class="input-group-text buy-sell-form-bg buy-sell-theme"
+                      style={{
+                        fontSize: " 10px",
+                        borderColor: " rgb(202, 202, 204)",
+                      }}
+                    >
+                      BUYING
+                      <br />
+                      AMOUNT
+                    </span>
+                  </div>
+                  <input
+                    type="number"
+                    class="form-control buy-sell-form-bg buy-sell-theme"
+                    value={Number(total)?.toFixed(2)}
+                    style={{
+                      borderColor: "rgb(202, 202, 204)",
+                      height: "54px",
+                      color: "#008000",
+                      fontWeight: "bold",
+                    }}
+                    onChange={(e) => {
+                      setTotal(Number(e.target.value)?.toFixed(2));
+                      setAmmount(
+                        userInfo?.currency_preference == "inr"
+                          ? e.target.value / atprice
+                          : e.target.value / (atprice / oneUsdPrice)
+                      );
+                    }}
+                  />
+                </div> */}
+
+              <div style={{ margin: "30px 0px" }}></div>
+              <div>
+                {walletbalance && userInfo?.currency_preference ? (
+                  <MultiRangeSlider
+                    min={
+                      userInfo?.currency_preference == "inr"
+                        ? 5000
+                        : 5000 / oneUsdPrice
+                    }
+                    // min={200}
+                    symbol={
+                      userInfo?.currency_preference == "usd" ? "USDT" : "INRX"
+                    }
+                    max={walletbalance}
+                    fixedmax={walletbalance}
+                    onChange={({ min, max, symbol }) => {
+                      // console.log(`min = ${min}, max = ${max}`);
+                      if (userInfo?.currency_preference == "inr") {
+                        setAmmount(max / atprice);
+                        setTotal(max);
+                      } else {
+                        setAmmount(max / (atprice / oneUsdPrice));
+                        setTotal(max);
+                      }
+                    }}
+                  />
+                ) : null}
+              </div>
+              <button
+                class="btn text-light btn-block my-2"
+                style={{ background: "rgb(108, 183, 125)", top: "60px" }}
+                onClick={ConfirmBox}
+                disabled={
+                  walletbalance <=
+                  (userInfo?.currency_preference == "inr"
+                    ? 5000
+                    : 5000 / oneUsdPrice)
+                }
+              >
+                BUY ANA
+              </button>
             </div>
           </div>
         </div>
       </div>
+    </div>
     // </div>
   );
 }

@@ -3,10 +3,17 @@ import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
 import "./tradehistory.css";
 import { Triangle } from "react-loader-spinner";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function TradeHistory() {
+  const dispatch = useDispatch();
   const [history, setHistory] = useState([]);
   const [loader, setLoader] = useState(true);
+  
+
+  const { user, userInfo, oneUsdPrice, totalAna, theme } = useSelector(
+    (state) => state.user.value
+  );
 
   useEffect(() => {
     axios
@@ -50,54 +57,71 @@ export default function TradeHistory() {
                   return (
                     <>
                       <tr class="zoom  historyorder" style={{fontSize:"16.6px"}}>
-                        <td className="TradeHistorySize" style={{ width: "20%" }}> {h.cVolume.toFixed(2)}
+                        <td className="TradeHistorySize" style={{ width: "16.6%" }}> {h.cVolume.toFixed(2)}
                           <img
                             src="./images/Analog.png"
                             style={{ width: "24px" }}
                             className="tradeAnaIcon"/>
                             </td>
-                        <td class="text-danger TradeHistorySize" style={{ width: "20%" }}>
+                        <td class="text-danger TradeHistorySize" style={{ width: "16.6%" }}>
                           {h.preferred_currency_amount?.toFixed(2)}{" "}
+                         
                           {h.compair_currency == "usd" ? (
-                            <img
-                              src="./images/usdt_icon.png"
-                              style={{ width: "17px" }}
-                              alt="usdt"
-                              className="tradeUsdIcon"
-                            />
-                          ) : (
-                            <img
-                              src="./images/Inrx_black.png"
-                              style={{ width: "17px" }}
-                              alt="inrx"
-                              className="tradeUsdIcon"
-                            />
-                          )}
+                           <img
+                           src="./images/usdt_icon.png"
+                           style={{ width: "15px" }}
+                           alt="usdt"
+                           className="tradeUsdIcon"
+                         />
+                       ) : theme == 0 ? (
+                         <img
+                           src="./images/Inrx_black.png"
+                           style={{ width: "17px" }}
+                           alt="inrx"
+                           className="img"
+                         />
+                       ) : (
+                         <img
+                           src="./images/Inrx_white.png"
+                           style={{ width: "17px" }}
+                           alt="inrx"
+                           className="img"
+                         />
+                          )} 
                           <i class="ion ion-arrow-graph-up-right"></i>
                         </td>
-                        <td class="text-success TradeHistorySize" style={{ width: "20%" }}>
+                        <td class=" TradeHistorySize" style={{ width: "16.6%" }}>
                           {/* {h.pref_raw_price.toFixed(8)} */}
                           {h.compair_currency == "usd"
                             ? h.pref_raw_price.toFixed(8)
                             : h.pref_raw_price.toFixed(8)}
                             {" "}
-                             <img
-                            src={
-                              h.compair_currency &&
-                                h.compair_currency == "usd" &&
-                                h.compair_currency &&
-                                h.compair_currency != null
-                                ? "./images/Usdt.png"
-                                : "./images/Inrx_black.png"
-                            }
-                            style={{ width: "17px" }}
-                            alt="usdt"
-                            className="tradeUsdIcon"
-                          />
+                            {h.compair_currency == "usd" ? (
+                           <img
+                           src="./images/usdt_icon.png"
+                           style={{ width: "15px" }}
+                           alt="usdt"
+                           className="tradeUsdIcon"
+                         />
+                       ) : theme == 0 ? (
+                         <img
+                           src="./images/Inrx_black.png"
+                           style={{ width: "17px" }}
+                           alt="inrx"
+                           className="img"
+                         />
+                       ) : (
+                         <img
+                           src="./images/Inrx_white.png"
+                           style={{ width: "17px" }}
+                           alt="inrx"
+                           className="img"
+                         />
+                          )}
                           <i class="ion ion-arrow-graph-down-right"></i>
                         </td>
-                        <td className="TradeHistorySize" style={{ width: "20%" }}>{h.presalelevel}</td>
-                        <td className="TradeHistorySize" style={{ width: "20%" }}>{a}</td>
+                        <td className="TradeHistorySize" style={{ width: "16.6%" }}>{h.presalelevel}</td>
+                        <td className="TradeHistorySize" style={{ width: "16.6%" }}>{a}</td>
                       </tr>
                     </>
                   );
