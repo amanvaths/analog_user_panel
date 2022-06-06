@@ -6,18 +6,24 @@ import { Triangle } from "react-loader-spinner";
 import { useSelector, useDispatch } from "react-redux";
 
 export default function TradeHistory() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [history, setHistory] = useState([]);
   const [loader, setLoader] = useState(true);
   
+  
 
-  const { user, userInfo, oneUsdPrice, totalAna, theme } = useSelector(
+  const { userInfo, theme } = useSelector(
     (state) => state.user.value
   );
+  const [uInfo, setUInfo] = useState(userInfo);
+
+  console.log(userInfo?.currency_preference,"userInfo?  console.log(userInfo?.currency_preference)");
 
   useEffect(() => {
+    console.log(userInfo?.currency_preference,"userInfo?");    
+    const p = uInfo?.currency_preference;
     axios
-      .get(`${BASE_URL}/getAllOrder`)
+      .get(`${BASE_URL}/getAllOrder?type=Buy&currency=${p}`)
       .then((res) => {
         setHistory(res.data.order);
         setLoader(false);
@@ -57,15 +63,18 @@ export default function TradeHistory() {
                   return (
                     <>
                       <tr class="zoom  historyorder" style={{fontSize:"16.6px"}}>
-                        <td className="TradeHistorySize" style={{ width: "16.6%" }}> {h.cVolume.toFixed(2)}
+                        <td className="TradeHistorySize" style={{ width: "16.6%" }}>
+
+                           {h.cVolume.toFixed(2)}
                           <img
                             src="./images/Analog.png"
                             style={{ width: "24px" }}
                             className="tradeAnaIcon"/>
+
                             </td>
                         <td class="text-danger TradeHistorySize" style={{ width: "16.6%" }}>
+
                           {h.preferred_currency_amount?.toFixed(2)}{" "}
-                         
                           {h.compair_currency == "usd" ? (
                            <img
                            src="./images/usdt_icon.png"
@@ -88,10 +97,11 @@ export default function TradeHistory() {
                            className="img"
                          />
                           )} 
+
                           <i class="ion ion-arrow-graph-up-right"></i>
                         </td>
                         <td class=" TradeHistorySize" style={{ width: "16.6%" }}>
-                          {/* {h.pref_raw_price.toFixed(8)} */}
+
                           {h.compair_currency == "usd"
                             ? h.pref_raw_price.toFixed(8)
                             : h.pref_raw_price.toFixed(8)}
@@ -118,10 +128,19 @@ export default function TradeHistory() {
                            className="img"
                          />
                           )}
+
                           <i class="ion ion-arrow-graph-down-right"></i>
                         </td>
-                        <td className="TradeHistorySize" style={{ width: "16.6%" }}>{h.presalelevel}</td>
-                        <td className="TradeHistorySize" style={{ width: "16.6%" }}>{a}</td>
+                        <td className="TradeHistorySize" style={{ width: "16.6%" }}>
+
+                          {h.presalelevel}
+
+                          </td>
+                        <td className="TradeHistorySize" style={{ width: "16.6%" }}>
+                          
+                          {a}
+                          
+                          </td>
                       </tr>
                     </>
                   );

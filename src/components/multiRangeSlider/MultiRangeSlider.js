@@ -16,7 +16,7 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
   
 
   // Dispatch
-  const { userInfo,totalAna,oneUsdPrice,theme } = useSelector((state) => state.user.value);
+  const { userInfo,theme } = useSelector((state) => state.user.value);
 
 
 
@@ -90,7 +90,7 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
         <div className="slider__track" />
         <div ref={range} className="slider__range"  />
         <div className="slider__left-value" style={{ left: "25px",color:"green",fontWeight:"bold" }}>
-          {oneUsdPrice&&minVal==""?"0": minVal && minVal?.toFixed(2)}
+          { minVal && minVal?.toFixed(2)}
          
         </div>
         <div
@@ -100,7 +100,7 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
           {maxVal && maxVal?.toFixed(2)}
         </div>
         <div className="slider__right-value" style={{color:"green",fontWeight:"bold",paddingRight:"20px" }}>
-          {oneUsdPrice&&fixedmax==""?"0":fixedmax && fixedmax?.toFixed(2)}
+          {fixedmax && fixedmax?.toFixed(2)}
          
           </div>
         <div
