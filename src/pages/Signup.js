@@ -539,8 +539,8 @@ const Signup = (props) => {
                     <div className="nk-feature-img">
                       <img
                         className="round"
-                        src="./images/slides/promo-a.png"
-                        srcSet="./images/slides/promo-a2x.png 2x"
+                        src="images/logo-dark.png"
+                        srcSet="images/logo-dark.png "
                         alt=""
                       />
                     </div>

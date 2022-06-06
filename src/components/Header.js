@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setUserInfo, logout, setTheme } from "../redux/reducer/user";
 import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
+import { navsetter } from "../redux/actions/websiteDBAction";
 
 
 const Header = () => {
@@ -14,7 +15,7 @@ const Header = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
 
-  const sidebarMenu = async () => {
+   const sidebarMenu = async () => {
    
       var element = document.getElementById("myBody");
       element.classList.add("nav-shown");
@@ -42,6 +43,8 @@ const Header = () => {
       }
       
   }
+
+
   const mode = localStorage.getItem("theme")
   if (mode == 1) {
     var element = document.getElementById("myBody");
@@ -79,7 +82,7 @@ const Header = () => {
             <div className="nk-menu-trigger d-xl-none ml-n1">
               <a
                 href="#"
-                // onClick={()=>dispatch(navsetter())}
+                onClick={()=>dispatch(navsetter())} 
                 // className= "nk-nav-toggle nk-quick-nav-icon toggle-active"
                 className={btn ? "nk-nav-toggle nk-quick-nav-icon toggle-active" : "nk-nav-toggle nk-quick-nav-icon"}
                 data-target="sidebarMenu"
@@ -87,7 +90,7 @@ const Header = () => {
                 <em className="icon ni ni-menu" onClick={sidebarMenu}></em>
               </a>
             </div>
-            <div className="nk-header-brand d-xl-none">
+            <div className=" nk-header-brand d-xl-none">
               <Link to="/home" className="logo-link">
                 <img
                   className="logo-light logo-img"
@@ -126,7 +129,7 @@ const Header = () => {
             <div className="nk-header-tools">
               <ul className="nk-quick-nav">
                 <li>
-                  <div className="nk-block-head">
+                  <div className="nk-block-head logohide">
                     {/* <div className="nk-block-head-sub">
                         <span>Welcome!</span>
                       </div> */}

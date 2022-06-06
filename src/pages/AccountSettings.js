@@ -11,7 +11,6 @@ import IPwhiteListing from "../components/IPwhiteListing";
 
 import { navsetters } from "../redux/actions/websiteDBAction";
 
-
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { IoLocation } from 'react-icons/io5'
@@ -26,6 +25,8 @@ const AccountSettings = () => {
   const [logData, setLogData] = useState([])
   const email = user.email
   const [pMenu, setPMenu] = useState(0);
+  const btn1 = useSelector((store) => store.navsetters)
+
 
   const getLoginLog = async () => {
     try {
@@ -98,12 +99,14 @@ const AccountSettings = () => {
                                     </p>
                                   </div>
                                 </div>
-                                <div onClick={()=>dispatch(navsetters())} className="nk-block-head-content align-self-start d-lg-none">
+                                <div 
+                                onClick={()=>dispatch(navsetters())} 
+                                className="nk-block-head-content align-self-start d-lg-none">
                                   <a
                                   
-                                    className="toggle btn btn-icon btn-trigger mt-n1"
+                                    // className="toggle btn btn-icon btn-trigger mt-n1"
                                     id = "toggleBtn"
-                                    // className={btn1?"toggle btn btn-icon btn-trigger mt-n1 active":"toggle btn btn-icon btn-trigger mt-n1"}
+                                    className={btn1?"toggle btn btn-icon btn-trigger mt-n1 active":"toggle btn btn-icon btn-trigger mt-n1"}
                                     data-target="userAside"                                  
                                   >
                                     <em className="icon ni ni-menu-alt-r" onClick={()=>profileMenuRemove()}  ></em>

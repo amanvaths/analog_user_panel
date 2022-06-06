@@ -56,11 +56,39 @@ function Menu (){
    const btn = useSelector(store=>store.navsetter);
    const {userInfo} = useSelector((state)=> state.user.value)
   
+   const sidebarMenu = async () => {
+   
+    var element = document.getElementById("myBody");
+    element.classList.add("nav-shown");
+    var element = document.getElementById("nk-sidebar");
+    element.classList.add("nk-sidebar-active");
+    var element = document.getElementById("nk-nav-toggle");
+    element.classList.add("toggle-active");
+  
+    var element1 = document.getElementById("myBody"); 
+    if(element1.classList.contains("toggle-shown")){
+      element1.classList.remove("toggle-shown") 
+    }
+    var element2 = document.getElementById("toggleBtn");
+    if(element2){
+      if(element2.classList.contains("active")) {
+        element2.classList.remove("active")
+      }  
+    }                                  
+    var element3 = document.getElementById("cardAside")
+    if(element3){
+      if(element3.classList.contains("content-active")){
+        element3.classList.remove("content-active") 
+      }
+        
+    }
+    
+}
 
     return (
       <>
         <div
-          className={btn?"nk-sidebar nk-sidebar-fixed nk-sidebar-mobile nk-sidebar-active":"nk-sidebar nk-sidebar-fixed nk-sidebar-mobile"}
+          className={btn?" nk-responsive nk-sidebar nk-sidebar-fixed nk-sidebar-mobile nk-sidebar-active":"nk-responsive nk-sidebar nk-sidebar-fixed nk-sidebar-mobile"}
           data-content="sidebarMenu" id="nk-sidebar"
         >
           <div className="nk-sidebar-element nk-sidebar-head">
@@ -72,13 +100,13 @@ function Menu (){
                 <img
                   className="logo-light logo-img"
                   src="images/logo.png"
-                  srcSet="images/logo2x.png 2x"
+                  // srcSet="images/logo-dark.png 2x"
                   alt="logo"                 
                 />
                 <img
                   className="logo-dark logo-img"
                   src="images/logo-dark.png"
-                  srcSet="images/logo-dark2x.png 2x"
+                  // srcSet="images/logo-dark.png 2x"
                   alt="logo-dark"                
                 />
                 {/* <span className="nio-version">ANALOG</span> */}
@@ -90,7 +118,7 @@ function Menu (){
                 className="nk-nav-toggle nk-quick-nav-icon d-xl-none"
                 data-target="sidebarMenu" id="nk-nav-toggle"
               >
-                <em className="icon ni ni-arrow-left" ></em>
+                <em className="icon ni ni-arrow-left"  ></em>
               </a>
             </div>
           </div>
