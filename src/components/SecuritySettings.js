@@ -176,7 +176,7 @@ const SecuritySettings = () => {
                       }
 
                     </h6>
-                    <p className='p-1'>
+                    <div className='p-1'>
                       Secure your account with 2FA security.
                       <p>When it is activated you will need to
                         enter not only your password, but also a
@@ -185,7 +185,7 @@ const SecuritySettings = () => {
                           this code by in mobile app.</p>
                       </p>
 
-                    </p>
+                    </div>
                   </div>
                   {Object?.values(userInfo)?.length > 0 ?
                     userInfo.googleAuth ?

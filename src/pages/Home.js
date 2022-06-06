@@ -312,7 +312,7 @@ const Home = () => {
                               <div className="nk-wgw sm">
                                 <a
                                   className="nk-wgw-inner"
-                                  href="#"
+                                
                                 >
                                   <div className="nk-wgw-name">
                                     <div className="nk-wgw-icon">
@@ -400,7 +400,7 @@ const Home = () => {
                           <div className="col-sm-4">
                             <div className="card bg-light">
                               <div className="nk-wgw sm">
-                                <a className="nk-wgw-inner" href="#">
+                                <a className="nk-wgw-inner" >
                                   <div className="nk-wgw-name">
                                     <div className="nk-wgw-icon">
                                       <em className="icon ni ni-sign-btc"></em>
@@ -454,12 +454,12 @@ const Home = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-sm-4">
+                          <div className="col-sm-4" onClick={() => navigate('/Handout')} style={{ cursor: "pointer" }}>
                             <div className="card bg-light">
                               <div className="nk-wgw sm">
                                 <a
                                   className="nk-wgw-inner"
-                                  href="#"
+                                 
                                 >
                                   <div className="nk-wgw-name">
                                     <div className="nk-wgw-icon">

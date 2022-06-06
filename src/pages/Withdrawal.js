@@ -96,6 +96,11 @@ const Withdrawal = () => {
                     title: "Your Withdraw request has been sent",
                     icon: "success",
                 });
+                setToWalletAddress('')
+                setfromWalletAddress('')
+                setBalanceA(0)
+                setBalanceB(0)
+                setBalanceC(0)
             }
 
         } catch (error) {
@@ -233,7 +238,7 @@ const Withdrawal = () => {
                                                                                                         <label class="form-label"
                                                                                                             for="email-address">Wallet Address</label>
                                                                                                         <div class="form-control-wrap">
-                                                                                                            <input type="text" class="form-control" id="email-address"
+                                                                                                            <input type="text" class="form-control" id="email-address" value={toWalletAddress}
                                                                                                                 onChange={(e) => setToWalletAddress(e.target.value)}
                                                                                                             /></div>
                                                                                                     </div>

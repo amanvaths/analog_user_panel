@@ -18,7 +18,7 @@ import { IoLocation } from 'react-icons/io5'
 import { useSelector, useDispatch } from "react-redux";
 import { setUserInfo, setSettingPage } from "../redux/reducer/user";
 import { BASE_URL } from "../Api_connection/config";
-
+import { getSettings } from "../Api_connection/ApiFunction";
 
 const AccountSettings = () => {
   const dispatch = useDispatch()
@@ -36,14 +36,20 @@ const AccountSettings = () => {
     }
   }
 
-
-  useEffect(async () => {
-    const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
-    if (data) {
-      dispatch(setUserInfo({ userInfo: data.data }))
-      getLoginLog()
+  const go = async()=>{
+    try {
+      const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
+      if (data) {
+        dispatch(setUserInfo({ userInfo: data.data }))
+        getLoginLog()
     }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
+  useEffect( () => {
+   go()
   }, [])
 
   const profileMenuRemove = ()=>{
@@ -134,7 +140,8 @@ const AccountSettings = () => {
                                     logData.map((element, index) => {
                                       const a = new Date(element.createdAt)
                                       return (
-                                        <tr>
+                                      
+                                        <tr key={index}>
                                           <td className="tb-col-os">{element.browser_name}</td>
                                           <td className="tb-col-os">{element.request_device}</td>
                                           <td className="tb-col-ip">
@@ -159,7 +166,6 @@ const AccountSettings = () => {
 
                         <div
                         className="card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg"
-                          // className={btn1?"card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg content-active":"card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg"}
                           data-toggle-body="true"
                           data-content="userAside"
                           data-toggle-screen="lg"
@@ -245,6 +251,10 @@ const AccountSettings = () => {
                                         ipWhiteListing: false
                                       }
                                       dispatch(setSettingPage({settingPages: obj5}))
+                                      go()
+                                      // getSetti(email)
+                                      // dispatch(setUserInfo({currency_prefrence: userInfo?.currency_prefrence}))
+                                      // dispatch(setUserInfo({ currency_prefrence: "inr" }))
                                     }}
                                   >
                                     <em className="icon ni ni-user-fill-c"></em>

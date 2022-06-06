@@ -154,7 +154,7 @@ const IPwhiteListing = () => {
                                 whiteIP.map((element, index) => {
                                     const a = new Date(element.createdAt)
                                     return (
-                                        <tr>
+                                        <tr key={index}>
                                             <td className="tb-col-ip">{element.ip}</td>
                                             <td className="tb-col-action">
                                                 {/* <span className="sub-text">{a.toDateString()} {a.toLocaleTimeString()}</span> */}

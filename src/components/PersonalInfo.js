@@ -56,7 +56,7 @@ const PersonalInfo = () => {
           setValue("");
           setMyCurrency("");
           setPhone("");
-          updateSetting();
+          updateSetting(); 
         }
         else if (data.data.status == -1) {
           NotificationManager.error(data.data.message)

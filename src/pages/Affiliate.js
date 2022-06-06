@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { BASE_URL } from "../Api_connection/config";
 import AffiliatCard from "../components/AffiliateCard";
 import { setUserInfo } from "../redux/reducer/user";
-import { Triangle, ThreeDots } from 'react-loader-spinner'
+import { Bars, ThreeDots } from 'react-loader-spinner'
 import { MdMoreHoriz } from 'react-icons/md'
 import Paginate from "../components/Pagination";
 import { Link, useNavigate } from "react-router-dom";
@@ -25,6 +25,7 @@ const Affiliate = (props) => {
   const [level3, setLevel3] = useState(false)
   const [tab, setTab] = useState([]);
   const [loader, setLoader] = useState(true)
+  const [status, setStatus] = useState()
 
   const [load, setLoad] = useState(false)
 
@@ -49,12 +50,13 @@ const Affiliate = (props) => {
     console.log(data, "::Response from AFFILIATE TABLE API");
     if (data) {
       setTab(data.data.data);
+      setStatus(data.data.status)
       setLoader(false)
     }
 
   }
 
-  console.log(tab, ":: DATA IN TAB");
+ 
 
   useEffect(() => {
     getAffiliate();
@@ -62,7 +64,6 @@ const Affiliate = (props) => {
   }, []);
 
 
-  console.log(tab,"tqabbbbb")
 
   return (
     <div>
@@ -139,7 +140,7 @@ const Affiliate = (props) => {
                       :
 
                       <div style={{ position: "absolute", zIndex: "99", top: "29%", left: "108%", transform: "translate(-50%, -50%)" }}>
-                        <Triangle ariaLabel="loading-indicator" color="blue" />
+                        <Bars heigth="100" width="100" color="#0b3175" ariaLabel="loading-indicator" />
                       </div>
 
 
@@ -162,6 +163,7 @@ const Affiliate = (props) => {
                                     setLevel1(true)
                                     setLevel2(false)
                                     setLevel3(false)
+                                    setTab([])
                                     getAffiliateList(1)
                                   }}>
                                   <span>Level 1</span></a>
@@ -172,6 +174,7 @@ const Affiliate = (props) => {
                                     setLevel1(false)
                                     setLevel2(true)
                                     setLevel3(false)
+                                    setTab([])
                                     getAffiliateList(2)
                                   }}>
                                   <span>Level 2</span></a>
@@ -182,6 +185,7 @@ const Affiliate = (props) => {
                                     setLevel1(false)
                                     setLevel2(false)
                                     setLevel3(true)
+                                    setTab([])
                                     getAffiliateList(3)
                                   }}>
                                   <span>Level 3</span></a>
@@ -291,6 +295,7 @@ const Affiliate = (props) => {
                                   </div>
                                 </div>
                                 {
+                                  status == 2 ? <h5>Record Not Found</h5> :
                                   tab.length > 0 ?
                                     tab.map((element, index) => {
                                       console.log(index, "::INDEx");
@@ -375,7 +380,7 @@ const Affiliate = (props) => {
                                         </div>
                                       )
                                     }) :
-                                    <div>No Recored Found</div>
+                                    <Bars heigth="20" width="20 " color="#0b3175" ariaLabel="loading-indicator" />
                                 }
 
                                 {/* <div className="nk-tb-item">
@@ -607,6 +612,7 @@ const Affiliate = (props) => {
                                 </div>
 
                                 {
+                                  status == 2 ? <h5>Record Not Found</h5> : 
                                   tab.length > 0 ?
                                     tab.map((element, index) => {
                                       console.log(index, "::INDEx");
@@ -689,8 +695,7 @@ const Affiliate = (props) => {
                                         </div>
                                       )
                                     }) :
-
-                                    <h3>No Record Found</h3>
+                                    <Bars heigth="20" width="20 " color="#0b3175" ariaLabel="loading-indicator" />
                                 }
 
                                 {/* <div className="nk-tb-item">
@@ -923,8 +928,9 @@ const Affiliate = (props) => {
                                     <span className="tb-lead">View</span>
                                   </div>
                                 </div>
-                                -
+                                
                                 {
+                                  status == 2 ? <h5>Record Not Found</h5> :
                                   tab.length > 0 ?
                                     tab.map((element, index) => {
                                       console.log(index, "::INDEx");
@@ -1015,8 +1021,8 @@ const Affiliate = (props) => {
                                           </div>
                                         </>
                                       )
-                                    }) :
-                                    <h3>No Data Found</h3>
+                                    }) :  
+                                    <Bars heigth="20" width="20 " color="#0b3175" ariaLabel="loading-indicator" />  
                                 }
 
                                 {/* <div className="nk-tb-item">

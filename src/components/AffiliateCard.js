@@ -24,10 +24,8 @@ const navigate = useNavigate()
                     <h6 class="card-subtitle mb-2">Total Remaining</h6> <p>{props.toalRemaining}</p>
                         </div>
                     </div>
-                   
                 </div>
             </div>
-
             {/* <div className=" col-md-6 col-lg-4 col-12 p-3" >
                 <div class=" card-bordered card-inner" style={{backgroundColor: "#0b3175",color: "white"}}>
                     <h5 class="card-title" style={{color: "white"}}>Level 2</h5>
@@ -43,12 +41,9 @@ const navigate = useNavigate()
                     <h6 class="card-subtitle mb-2">Total Remaining</h6> <p>1234.99</p>
               
                         </div>
-                    </div>
-                   
-                   
+                    </div>  
                 </div>
             </div> */}
-
             {/* <div className="p-3 col-md-6 col-lg-4 col-12" >
                 <div class=" card-bordered card-inner" style={{backgroundColor: "#0b3175", color: "white"}}>
                     <h5 class="card-title" style={{color: "white"}}>Level 3</h5>
@@ -62,11 +57,8 @@ const navigate = useNavigate()
                         <h6 class="card-subtitle mb-2">Total Affiliates</h6> <p>1234.99</p>
                     <h6 class="card-subtitle mb-2">Total Withdrawal</h6> <p>1234.99</p>
                     <h6 class="card-subtitle mb-2">Total Remaining</h6> <p>1234.99</p>
-              
                         </div>
                     </div>
-                   
-                   
                 </div>
             </div> */}
         </>
