@@ -10,7 +10,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { BASE_URL } from "../Api_connection/config";
 import { setUserInfo, setOneCoinPrice, setTotalWalletBalance } from "../redux/reducer/user";
 import { Link, useNavigate } from "react-router-dom";
-import swal from "sweetalert";
+const { io } = require("socket.io-client");
+
 
 
 const Wallet = (props) => {
@@ -31,7 +32,40 @@ const Wallet = (props) => {
   const [bounty, setBounty] = useState(0)
   const [handOut, setHandOut] = useState(0)
 
+  const [recive, setRecive] = useState(0)
+
   const email = user.email;
+  const socket = io(`ws//:localhost:8080`);
+
+  useEffect(()=>{
+    socket.on("connect", ()=> {
+      socket.on("balance", (arg)=>{
+        setRecive(arg)
+        console.log("SOCKET DATA->>>>");
+      })
+      console.log("Socked Connected"); 
+    });
+    
+    return () => {
+      socket.disconnect();
+    }
+  },[])
+
+  console.log(recive, "RECIVED DATA FROM SOCKET");
+  
+
+const socketCall = async()=>{
+  try {
+    const data = await axios.get(`http://localhost:3001/balance`, {email: email})
+    console.log("Caslled");
+  } catch (error) {
+    
+  }
+}
+
+setInterval(() => {
+  socketCall()
+}, 15000);
 
   const getUserAllWallletData = async () => {
     try {
@@ -86,7 +120,7 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
     if (data) {
       dispatch(setUserInfo({ userInfo: data.data }))
       getUserAllWallletData()
-      updateWallet() 
+      // updateWallet() 
       getData()
       getWalletDetails()
     }
