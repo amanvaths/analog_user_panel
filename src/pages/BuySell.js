@@ -11,8 +11,7 @@ import LoadingOverlay from "react-loading-overlay";
 function BuySell(props) {
   const { buyloader } = useSelector((state) => state.user.value);
   return (
-    <>
-      
+    <>  
       <LoadingOverlay className="Loading" active={buyloader} spinner text="Loading...." >
 
         <div style={{ maxWidth: "100%" }}>

@@ -15,15 +15,14 @@ export default function TradeHistory() {
   const { userInfo, theme } = useSelector(
     (state) => state.user.value
   );
-  const [uInfo, setUInfo] = useState(userInfo);
+ 
 
-  console.log(userInfo?.currency_preference,"userInfo?  console.log(userInfo?.currency_preference)");
+  
 
   useEffect(() => {
     console.log(userInfo?.currency_preference,"userInfo?");    
-    const p = uInfo?.currency_preference;
     axios
-      .get(`${BASE_URL}/getAllOrder?type=Buy&currency=${p}`)
+      .get(`${BASE_URL}/getAllOrder?type=Buy&compair_currency=${userInfo?.currency_preference}`)
       .then((res) => {
         setHistory(res.data.order);
         setLoader(false);
@@ -32,7 +31,7 @@ export default function TradeHistory() {
         console.log(error.message);
       });
 
-  }, []);
+  }, [userInfo]);
   return (
     <div class="card mt-2">
       <div class="card-header justify-content-between align-items-center">

@@ -93,8 +93,11 @@ export default function Orders() {
         .post(`${BASE_URL}/order`, params)
         .then((res) => {
           if (res.data.status == true) {
+           
             swal(`${res.data.message}`, "", "success");
+            getWalletData()
             dispatch(setBuyLoader({buyloader: false}))
+            
           }
         })
         .catch((error) => {
@@ -111,7 +114,7 @@ export default function Orders() {
     if (email) {
       axios
         .get(
-          `${BASE_URL}/getAllOrder?email=${email}&& compair_currency=${userInfo?.currency_preference}`
+          `${BASE_URL}/getAllOrder?email=${email}&type=Buy&compair_currency=${userInfo?.currency_preference}`
         )
         .then((res) => {
           const orderrespons = res.data;
@@ -152,7 +155,7 @@ export default function Orders() {
       .then((result) => {
         if (result.isConfirmed) {
           dispatch(setBuyLoader({buyloader: true}))
-          
+          // getWalletData()
           TotalAmt();
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           swalWithBootstrapButtons.fire("Cancelled", "", "error");
@@ -226,7 +229,7 @@ export default function Orders() {
                         <>
                           <tr
                             class="zoom UserOrderHistory"
-                            style={{ fontSize: "9.9px" }}
+                            style={{ fontSize: "10px" }}
                           >
                             <td
                               className="OrderhistorySize"
@@ -249,7 +252,7 @@ export default function Orders() {
                               {h.compair_currency == "usd" ? (
                                 <img
                                   src="./images/usdt_icon.png"
-                                  style={{ width: "15px" }}
+                                  style={{ width: "12px" }}
                                   alt="usdt"
                                   className="tradeUsdIcon"
                                 />
@@ -273,7 +276,7 @@ export default function Orders() {
                             <td
                               className="OrderhistorySize"
                               class="text-success"
-                              style={{ width: "25%" }}
+                              style={{ width: "24%" }}
                             >
                               {h.compair_currency == "usd"
                                 ? h.pref_raw_price.toFixed(8)
@@ -281,7 +284,7 @@ export default function Orders() {
                               {h.compair_currency == "usd" ? (
                                 <img
                                   src="./images/usdt_icon.png"
-                                  style={{ width: "15px" }}
+                                  style={{ width: "12px" }}
                                   alt="usdt"
                                   className="tradeUsdIcon"
                                 />
@@ -304,7 +307,7 @@ export default function Orders() {
                             </td>
                             <td
                               className="OrderhistorySize"
-                              style={{ width: "25%", padding: "8px 6.5px" }}
+                              style={{ width: "26%", padding: "8px 6.5px" }}
                             >
                               {h.presalelevel}
                             </td>
@@ -483,12 +486,12 @@ export default function Orders() {
                       fontWeight: "bold",
                     }}
                     onChange={(e) => {
-                      setTotal(Number(e.target.value)?.toFixed(2));
-                      setAmmount(
-                        userInfo?.currency_preference == "inr"
-                          ? e.target.value / atprice
-                          : e.target.value / (atprice / oneUsdPrice)
-                      );
+                      // setTotal(Number(e.target.value)?.toFixed(2));
+                      // setAmmount(
+                      //   userInfo?.currency_preference == "inr"
+                      //     ? e.target.value / atprice
+                      //     : e.target.value / (atprice / oneUsdPrice)
+                      // );
                     }}
                   />
                 </div>
@@ -505,7 +508,7 @@ export default function Orders() {
                     symbol={
                       userInfo?.currency_preference == "usd" ? "USDT" : "INRX"
                     }
-                    max={ oneUsdPrice==""?0:walletbalance}
+                    max={oneUsdPrice==""?0:walletbalance}
                     fixedmax={oneUsdPrice==""?0:walletbalance}
                     onChange={({ min, max, symbol }) => {
                       // console.log(`min = ${min}, max = ${max}`);
