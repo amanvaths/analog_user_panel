@@ -43,7 +43,7 @@ const Affiliate = (props) => {
     }
   }
 
-  console.log(props, "::PROPS-->>");
+  
 
   const getAffiliateList = async (level) => {
     const data = await axios.post(`${BASE_URL}/levelWiseList`, { email: email, level: level })
