@@ -1,18 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import Menu from "../components/Menu";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CandleGraph from "../components/CandleGraph";
 import Orders from "../components/Orders";
 import TradeHistory from "../components/TradeHistory";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import LoadingOverlay from "react-loading-overlay";
 
 function BuySell(props) {
   const { buyloader } = useSelector((state) => state.user.value);
   return (
-    <>
-      
+    <>  
       <LoadingOverlay className="Loading" active={buyloader} spinner text="Loading...." >
 
         <div style={{ maxWidth: "100%" }}>

@@ -68,7 +68,6 @@ export default function Orders() {
       console.log(error);
     }
   };
-
   useEffect(() => {
     getWalletData();
     getData();
@@ -78,31 +77,31 @@ export default function Orders() {
   // Order
 
   function TotalAmt() {
-      let params = {
-        amount:
-          userInfo?.currency_preference == "usd"
-            ? total / (atprice / oneUsdPrice)
-            : total / atprice,
-        raw_price: "",
-        currencyType: userInfo?.currency_preference == "usd" ? "USDT" : "INRX",
-        compairCurrency: userInfo?.currency_preference,
-        TotalTrx: "",
-        email: email,
-      };
-      axios
-        .post(`${BASE_URL}/order`, params)
-        .then((res) => {
-          if (res.data.status == true) {
-            swal(`${res.data.message}`, "", "success");
-            dispatch(setBuyLoader({buyloader: false}))
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          swal(`${error?.response?.data?.message}`, "", "error");
-          dispatch(setBuyLoader({buyloader: false}))
-        });
-    
+    let params = {
+      amount:
+        userInfo?.currency_preference == "usd"
+          ? total / (atprice / oneUsdPrice)
+          : total / atprice,
+      raw_price: "",
+      currencyType: userInfo?.currency_preference == "usd" ? "USDT" : "INRX",
+      compairCurrency: userInfo?.currency_preference,
+      TotalTrx: "",
+      email: email,
+    };
+    axios
+      .post(`${BASE_URL}/order`, params)
+      .then((res) => {
+        if (res.data.status == true) {
+          swal(`${res.data.message}`, "", "success");
+          getWalletData();
+          dispatch(setBuyLoader({ buyloader: false }));
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        swal(`${error?.response?.data?.message}`, "", "error");
+        dispatch(setBuyLoader({ buyloader: false }));
+      });
   }
 
   // GetAllOrder
@@ -111,7 +110,7 @@ export default function Orders() {
     if (email) {
       axios
         .get(
-          `${BASE_URL}/getAllOrder?email=${email}&& compair_currency=${userInfo?.currency_preference}`
+          `${BASE_URL}/getAllOrder?email=${email}&type=Buy&compair_currency=${userInfo?.currency_preference}`
         )
         .then((res) => {
           const orderrespons = res.data;
@@ -134,7 +133,6 @@ export default function Orders() {
       },
       buttonsStyling: false,
     });
-
     swalWithBootstrapButtons
       .fire({
         title: "Are you sure?",
@@ -151,8 +149,7 @@ export default function Orders() {
       })
       .then((result) => {
         if (result.isConfirmed) {
-          dispatch(setBuyLoader({buyloader: true}))
-          
+          dispatch(setBuyLoader({ buyloader: true }));
           TotalAmt();
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           swalWithBootstrapButtons.fire("Cancelled", "", "error");
@@ -163,7 +160,7 @@ export default function Orders() {
     <div className="order">
       <div class="card mt-2">
         <div class="card-header justify-content-between align-items-center">
-          <h6 class="card-title "> ORDER</h6>
+          <h6 class="card-title font-weight-bold "> ORDER</h6>
         </div>
         <div class="card-body table-responsive  p-0">
           <table class="table  mb-0">
@@ -199,7 +196,7 @@ export default function Orders() {
               <div
                 style={{
                   height: "373px",
-                  overflow: "auto",
+                  overflowX: "hidden",
                   display: "table-caption",
                 }}
                 className="OrderHistoryContainer"
@@ -226,7 +223,7 @@ export default function Orders() {
                         <>
                           <tr
                             class="zoom UserOrderHistory"
-                            style={{ fontSize: "9.9px" }}
+                            style={{ fontSize: "10px" }}
                           >
                             <td
                               className="OrderhistorySize"
@@ -249,7 +246,7 @@ export default function Orders() {
                               {h.compair_currency == "usd" ? (
                                 <img
                                   src="./images/usdt_icon.png"
-                                  style={{ width: "15px" }}
+                                  style={{ width: "12px" }}
                                   alt="usdt"
                                   className="tradeUsdIcon"
                                 />
@@ -273,7 +270,7 @@ export default function Orders() {
                             <td
                               className="OrderhistorySize"
                               class="text-success"
-                              style={{ width: "25%" }}
+                              style={{ width: "24%" }}
                             >
                               {h.compair_currency == "usd"
                                 ? h.pref_raw_price.toFixed(8)
@@ -281,7 +278,7 @@ export default function Orders() {
                               {h.compair_currency == "usd" ? (
                                 <img
                                   src="./images/usdt_icon.png"
-                                  style={{ width: "15px" }}
+                                  style={{ width: "12px" }}
                                   alt="usdt"
                                   className="tradeUsdIcon"
                                 />
@@ -304,7 +301,7 @@ export default function Orders() {
                             </td>
                             <td
                               className="OrderhistorySize"
-                              style={{ width: "25%", padding: "8px 6.5px" }}
+                              style={{ width: "26%", padding: "8px 6.5px" }}
                             >
                               {h.presalelevel}
                             </td>
@@ -319,7 +316,7 @@ export default function Orders() {
         </div>
       </div>
 
-      {/* Buy Sell */}
+      {/* Buy */}
       <div>
         <nav
           class="coinsfather-theme-color"
@@ -339,9 +336,6 @@ export default function Orders() {
             BUY
           </div>
         </nav>
-
-        {/* Buy */}
-
         <div
           className=" tab-content orders"
           style={{ borderColor: "rgba(25, 32, 87, 0.2)" }}
@@ -396,27 +390,6 @@ export default function Orders() {
                     marginBottom: "35px",
                   }}
                 >
-                  {/* <div style={{ marginTop: "-15px" }}>
-                      <div style={{ fontWeight: "bold" }}>
-                        Buying Amount{" "}
-                        <span style={{ color: "#008000", fontWeight: "bold" }}>
-                          {total && total?.toFixed(2)}
-                        </span>{" "}
-                        {userInfo?.currency_preference && userInfo?.currency_preference == "usd" ? (
-                          <img
-                            src="./images/usdt_icon.png"
-                            style={{ width: "15px" }}
-                            alt="usdt"
-                          />
-                        ) : (
-                          <img
-                            src="./images/Inrx_black.png"
-                            style={{ width: "15px" }}
-                            alt="inrx"
-                          />
-                        )}
-                      </div>
-                    </div> */}
                   <div
                     style={{
                       marginTop: "-15px",
@@ -425,12 +398,12 @@ export default function Orders() {
                     <div style={{ fontWeight: "bold" }}>
                       ANA PRICE{"  "}
                       <span style={{ color: "#008000", fontWeight: "bold" }}>
-                        {oneUsdPrice==""?0:userInfo?.currency_preference == "usd"
+                        {oneUsdPrice == ""
+                          ? 0
+                          : userInfo?.currency_preference == "usd"
                           ? Number(atprice / oneUsdPrice)?.toFixed(8)
                           : Number(atprice)?.toFixed(8)}
-                        {}
-                          
-                          {" "}
+                        {}{" "}
                         {userInfo?.currency_preference == "usd" ? (
                           <img
                             src="./images/Usdt.png"
@@ -483,64 +456,64 @@ export default function Orders() {
                       fontWeight: "bold",
                     }}
                     onChange={(e) => {
-                      setTotal(Number(e.target.value)?.toFixed(2));
-                      setAmmount(
-                        userInfo?.currency_preference == "inr"
-                          ? e.target.value / atprice
-                          : e.target.value / (atprice / oneUsdPrice)
-                      );
+                      // setTotal(Number(e.target.value)?.toFixed(2));
+                      // setAmmount(
+                      //   userInfo?.currency_preference == "inr"
+                      //     ? e.target.value / atprice
+                      //     : e.target.value / (atprice / oneUsdPrice)
+                      // );
                     }}
                   />
                 </div>
                 <div style={{ margin: "30px 0px" }}></div>
+
                 <div>
-                {walletbalance && userInfo?.currency_preference ? (
-                  <MultiRangeSlider
-                    min={oneUsdPrice==""?0: userInfo?.currency_preference == "inr"
-                    ? 5000
-                    : 5000 / oneUsdPrice
-                     
-                    }
-                    // min={200}
-                    symbol={
-                      userInfo?.currency_preference == "usd" ? "USDT" : "INRX"
-                    }
-                    max={ oneUsdPrice==""?0:walletbalance}
-                    fixedmax={oneUsdPrice==""?0:walletbalance}
-                    onChange={({ min, max, symbol }) => {
-                      // console.log(`min = ${min}, max = ${max}`);
-                      if (userInfo?.currency_preference == "inr") {
-                        setAmmount(max / atprice);
-                        setTotal(max);
-                      } else {
-                        setAmmount(max / (atprice / oneUsdPrice));
-                        setTotal(max);
+                  {walletbalance && userInfo?.currency_preference ? (
+                    <MultiRangeSlider
+                      min={
+                        oneUsdPrice == ""
+                          ? 0
+                          : userInfo?.currency_preference == "inr"
+                          ? 5000
+                          : 5000 / oneUsdPrice
                       }
-                    }}
-                  />
-                ) : null}
+                      symbol={
+                        userInfo?.currency_preference == "usd" ? "USDT" : "INRX"
+                      }
+                      max={oneUsdPrice == "" ? 0 : walletbalance}
+                      fixedmax={oneUsdPrice == "" ? 0 : walletbalance}
+                      onChange={({ min, max, symbol }) => {
+                        // console.log(`min = ${min}, max = ${max}`);
+                        if (userInfo?.currency_preference == "inr") {
+                          setAmmount(max / atprice);
+                          setTotal(max);
+                        } else {
+                          setAmmount(max / (atprice / oneUsdPrice));
+                          setTotal(max);
+                        }
+                      }}
+                    />
+                  ) : null}
+                </div>
+
+                <button
+                  class="btn text-light btn-block my-2"
+                  style={{ background: "rgb(108, 183, 125)", top: "60px" }}
+                  onClick={ConfirmBox}
+                  disabled={
+                    walletbalance <=
+                    (userInfo?.currency_preference == "inr"
+                      ? 5000
+                      : 5000 / oneUsdPrice)
+                  }
+                >
+                  BUY ANA
+                </button>
               </div>
-              <button
-                class="btn text-light btn-block my-2"
-                style={{ background: "rgb(108, 183, 125)", top: "60px" }}
-                onClick={ConfirmBox}
-                disabled={
-                  walletbalance <=
-                  (userInfo?.currency_preference == "inr"
-                    ? 5000
-                    : 5000 / oneUsdPrice)
-                }
-              >
-                BUY ANA
-              </button>
-              </div>
-             
-             
             </div>
           </div>
         </div>
       </div>
     </div>
-    // </div>
   );
 }

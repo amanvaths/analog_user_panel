@@ -10,6 +10,8 @@ import PaginatedItems from "../components/Pagination"
 import { Link, useNavigate } from "react-router-dom";
 
 
+
+
 const Bounty = () => {
   const { userInfo, user, oneUsdPrice } = useSelector((state) => state.user.value)
   const email = user?.email
@@ -19,28 +21,21 @@ const Bounty = () => {
   const [totalBounty, setTotalBounty] = useState(0)
 
 
-  const getBounty = async () => {
-    const data = await axios.post(`${BASE_URL}/bounty`, { email: email })
+  const getBounty = async (page) => {
+    const data = await axios.post(`${BASE_URL}/bounty`, { email: email, page: page })
     if (data) {
       setTab(data.data.data)
+      setTotalBounty(data.data.count)
 
     }
   }
 
-  const onNext = () => {
-    setCurrentPage(currentPage + 1);
-  };
-
-  const onPrevious = () => {
-    if(currentPage != 1){
-      setCurrentPage(currentPage - 1);
-    }
-    else{
-      setCurrentPage(1)
-    }
-  };
 
 
+  const fun =(data)=>{
+    setCurrentPage(data.selected + 1)
+    getBounty(data.selected + 1)
+  }
 
 
   useEffect(() => {
@@ -190,7 +185,7 @@ const Bounty = () => {
                                 <div className="nk-tb-item">
                                   <div className="nk-tb-col">
                                     <div className="nk-tnx-type">
-                                      <span>{index + 1}</span>
+                                      <span>{(((currentPage - 1) * 10) + index +1)}</span>
                                     </div>
                                   </div>
                                   <div className="nk-tb-col">
@@ -262,8 +257,27 @@ const Bounty = () => {
                         </div>
                       </div>
                       <div className="card-inner">
+                      <ReactPaginate
+                              previousLabel={'Prev'}
+                              nextLabel={'Next'}
+                              breakLabel={"..."}
+                              pageCount={Math.ceil(totalBounty/10)}
+                              marginPagesDisplayed={2}
+                              pageRangeDisplayed={2}
+                              onPageChange={fun}
+                              containerClassName={'pagination justify-content-center'}
+                              pageClassName={'page-item'}
+                              pageLinkClassName={'page-link'}
+                              previousClassName={'page-item'}
+                              previousLinkClassName={'page-link'}
+                              nextClassName={'page-item'}
+                              nextLinkClassName={'page-link'}
+                              breakClassName={'page-item'}
+                              breakLinkClassName={'page-link'}
+                              activeClassName={"active"}
+                             />
                         
-                      <PaginatedItems itemsPerPage={4}/>
+                      {/* <PaginatedItems itemsPerPage={4}/> */}
                       </div>
                     </div>
                   </div>
