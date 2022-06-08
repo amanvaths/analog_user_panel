@@ -35,7 +35,7 @@ export default function TradeHistory() {
   return (
     <div class="card mt-2">
       <div class="card-header justify-content-between align-items-center">
-        <h6 class="card-title"> TRADE HISTORY</h6>
+        <h6 class="card-title font-weight-bold"> TRADE HISTORY</h6>
       </div>
       <div class="card-body table-responsive  p-0">
         <table class="table  mb-0">
@@ -49,7 +49,7 @@ export default function TradeHistory() {
                 <th style={{ width: "20%" }}>Time</th>
               </tr>
             </thead>
-            <div style={{ height: "450px", overflow: "auto", display: "table-caption" }}>
+            <div style={{ height: "450px", overflowX:"hidden", display: "table-caption" }}>
               <tbody>
               {loader && (<>
           <div style={{ position: "absolute", zIndex: "99", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>

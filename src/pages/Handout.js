@@ -11,6 +11,7 @@ import { Bars, ThreeDots } from 'react-loader-spinner'
 import { MdMoreHoriz } from 'react-icons/md'
 import Paginate from "../components/Pagination";
 import { Link, useNavigate } from "react-router-dom";
+import ReactPaginate from 'react-paginate';
 
 const Handout= (props) => {
   const { user, userInfo, oneUsdPrice } = useSelector((state) => state.user.value)
@@ -26,8 +27,9 @@ const Handout= (props) => {
   const [tab, setTab] = useState([]);
   const [loader, setLoader] = useState(true)
   const [status, setStatus] = useState()
-
   const [load, setLoad] = useState(false)
+
+  const [items,setItems]=useState([]);
 
   const getAffiliate = async () => {
     try {
@@ -52,17 +54,21 @@ const Handout= (props) => {
       setTab(data.data.data);
       setStatus(data.data.status)
       setLoader(false)
+      setItems(data.data.status)
+      console.log(data.data.status,"data.data.status data.data.status data.data.status");
     }
 
   }
 
  
-
   useEffect(() => {
     getAffiliate();
     getAffiliateList(level)
   }, []);
 
+  const handlePageClick=(data)=>{
+    console.log(data);
+  }
 
 
   return (
@@ -1163,13 +1169,71 @@ const Handout= (props) => {
                                               </ul>
                                             </div>
                                           </div> */}
-
                               </div>
                             </div>
-                           <Paginate 
+                           {/* <Paginate 
                            data={tab.length}
 
-                           />
+                           /> */}
+                             <ReactPaginate
+                              previousLabel={'Prev'}
+                              nextLabel={'Next'}
+                              breakLabel={"..."}
+                              pageCount={10}
+                              marginPagesDisplayed={2}
+                              pageRangeDisplayed={2}
+                              onPageChange={handlePageClick}
+                              containerClassName={'pagination justify-content-center'}
+                              pageClassName={'page-item'}
+                              pageLinkClassName={'page-link'}
+                              previousClassName={'page-item'}
+                              previousLinkClassName={'page-link'}
+                              nextClassName={'page-item'}
+                              nextLinkClassName={'page-link'}
+                              breakClassName={'page-item'}
+                              breakLinkClassName={'page-link'}
+                              activeClassName={"active"}
+                             />
+
+                             {/* <div className="card-inner">
+                              <ul className="pagination justify-content-center justify-content-md-center">
+                                <li className="page-item">
+                                  <a className="page-link" href="#">
+                                    Prev
+                                  </a>
+                                </li>
+                                <li className="page-item">
+                                  <a className="page-link" href="#">
+                                    1
+                                  </a>
+                                </li>
+                                <li className="page-item">
+                                  <a className="page-link" href="#">
+                                    2
+                                  </a>
+                                </li>
+                                <li className="page-item">
+                                  <span className="page-link">
+                                    <em className="icon ni ni-more-h"></em>
+                                  </span>
+                                </li>
+                                <li className="page-item">
+                                  <a className="page-link" href="#">
+                                    6
+                                  </a>
+                                </li>
+                                <li className="page-item">
+                                  <a className="page-link" href="#">
+                                    7
+                                  </a>
+                                </li>
+                                <li className="page-item">
+                                  <a className="page-link" href="#">
+                                    Next
+                                  </a>
+                                </li>
+                              </ul>
+                            </div> */}
                           </div>
                         </div>
                       </div>

@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import "./MultiRangeSlider.css";
-import { useSelector, useDispatch } from "react-redux";
-import { prototype } from "react-copy-to-clipboard";
+import { useSelector} from "react-redux";
 
 const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
   const [minVal, setMinVal] = useState(min);
@@ -10,7 +9,6 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
   const minValRef = useRef(min);
   const maxValRef = useRef(max);
   const range = useRef(null);
-  const dispatch = useDispatch();
 
 
   
@@ -88,7 +86,7 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
 
       <div className="slider">
         <div className="slider__track" />
-        <div ref={range} className="slider__range"  />
+        <div ref={range} className="slider__range progress-bar-striped"  />
         <div className="slider__left-value" style={{ left: "25px",color:"green",fontWeight:"bold" }}>
           { minVal && minVal?.toFixed(2)}
          
