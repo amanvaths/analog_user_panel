@@ -67,7 +67,7 @@ const Getpresale = (props) => {
                 striped
                 now={persent}
                 label={`${persent}%`}
-                variant="success "
+                variant="success progress-bar-animated"
                 aria-valuemin={100}
                
               />
