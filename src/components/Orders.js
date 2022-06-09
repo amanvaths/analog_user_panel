@@ -27,7 +27,7 @@ export default function Orders() {
   );
   const email = user?.email;
 
-  // console.log(userInfo?.currency_preference,"userInfo?.currency_preference userInfo?.currency_preference");
+  console.log(walletbalance,"walletbalance");
 
   const getData = async () => {
     try {
@@ -223,7 +223,7 @@ export default function Orders() {
                         <>
                           <tr
                             class="zoom UserOrderHistory"
-                            style={{ fontSize: "10px" }}
+                            style={{ fontSize: "10px",cursor:"pointer" }}
                           >
                             <td
                               className="OrderhistorySize"
@@ -485,10 +485,10 @@ export default function Orders() {
                       onChange={({ min, max, symbol }) => {
                         // console.log(`min = ${min}, max = ${max}`);
                         if (userInfo?.currency_preference == "inr") {
-                          setAmmount(max / atprice);
+                          setAmmount(atprice && max / atprice);
                           setTotal(max);
                         } else {
-                          setAmmount(max / (atprice / oneUsdPrice));
+                          setAmmount(atprice&&oneUsdPrice&& max / (atprice / oneUsdPrice));
                           setTotal(max);
                         }
                       }}
