@@ -30,7 +30,7 @@ function BuySell(props) {
 
                   <div
                     className="col-lg-4 order"
-                    style={{ background: "rgb(241, 241, 241)" }}
+                    // style={{ background: "rgb(241, 241, 241)" }}
                   >
                     <Orders />
                   </div>

@@ -35,38 +35,9 @@ const Wallet = (props) => {
   const [recive, setRecive] = useState(0)
 
   const email = user.email;
-  const socket = io(`ws//:localhost:8080`);
-
-  useEffect(()=>{
-    socket.on("connect", ()=> {
-      socket.on("balance", (arg)=>{
-        setRecive(arg)
-        console.log("SOCKET DATA->>>>");
-      })
-      console.log("Socked Connected"); 
-    });
-    
-    return () => {
-      socket.disconnect();
-    }
-  },[])
-
-  console.log(recive, "RECIVED DATA FROM SOCKET");
   
 
-const socketCall = async()=>{
-  try {
-    const data = await axios.get(`http://localhost:3001/balance`, {email: email})
-    console.log("Caslled");
-  } catch (error) {
-    
-  }
-}
-
-setInterval(() => {
-  socketCall()
-}, 15000);
-
+ 
   const getUserAllWallletData = async () => {
     try {
         const res = await axios.get(`${BASE_URL}/userAllRecords?email=${email}&bonus_type=Level`)
@@ -120,7 +91,7 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
     if (data) {
       dispatch(setUserInfo({ userInfo: data.data }))
       getUserAllWallletData()
-      // updateWallet() 
+      updateWallet() 
       getData()
       getWalletDetails()
     }

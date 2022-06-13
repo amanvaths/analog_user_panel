@@ -317,7 +317,7 @@ export default function Orders() {
       </div>
 
       {/* Buy */}
-      <div>
+      <div  >
         <nav
           class="coinsfather-theme-color"
           style={{
@@ -326,10 +326,11 @@ export default function Orders() {
           }}
         >
           <div
+          className="card-header"
             style={{
               textAlign: "center",
               fontWeight: "bold",
-              background: "rgb(241, 241, 241)",
+              // background: "rgb(241, 241, 241)",
               margin: "4px 0px",
             }}
           >
@@ -341,11 +342,11 @@ export default function Orders() {
           style={{ borderColor: "rgba(25, 32, 87, 0.2)" }}
         >
           <div
-            className="d-flex justify-content-center align-items-center"
-            style={{ background: "white" }}
+            // className="d-flex justify-content-center align-items-center"
+            // style={{ background: "white" }}
           >
             <div
-              className="sing-up-button"
+              className="card sing-up-button"
               style={{
                 textAlign: "center",
                 height: "460px",
@@ -497,8 +498,8 @@ export default function Orders() {
                 </div>
 
                 <button
-                  class="btn text-light btn-block my-2"
-                  style={{ background: "rgb(108, 183, 125)", top: "60px" }}
+                  class="btn btn-block my-2"
+                  style={{ background: "rgb(108, 183, 125)", top: "60px", color:"white" }}
                   onClick={ConfirmBox}
                   disabled={
                     walletbalance <=
