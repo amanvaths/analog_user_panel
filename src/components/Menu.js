@@ -4,6 +4,7 @@ import {useSelector, useDispatch} from "react-redux";
 import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
 import { setOneUsdPrice, setTotalAna } from "../redux/reducer/user";
+const { io } = require("socket.io-client");
 
 function Menu (){
   const dispatch = useDispatch()
@@ -12,6 +13,16 @@ function Menu (){
   const [anaBalancce, setAnaBalance] = useState('')
   const [usdPrice, setUsdPrice] = useState('')
   const [walletBalance, setWalletBalance] = useState(0)
+
+  // const socket = io.connect(`http://localhost:3001`)
+
+  // socket.on('connect',()=>{
+  //   console.log("Foront pe connect");
+  
+  //   socket.on('TOOLKIT',(data)=>{
+  //     console.log(data, "TOOLKIT")
+  //   })
+  // })
 
   const getData = async()=>{
     try {

@@ -16,7 +16,9 @@ import { setBalance } from "../redux/reducer/user";
 import { useNavigate } from "react-router-dom";
 import { Triangle } from "react-loader-spinner";
 import { Line } from "react-chartjs-2";
-import Chart from "chart.js/auto";
+import Chart from 'chart.js/auto';
+
+
 
 const Home = () => {
   const { user, userInfo, oneUsdPrice } = useSelector(
@@ -43,6 +45,8 @@ const Home = () => {
   const [i, setI] = useState([]);
   const [recentLoad, setRecentLoad] = useState(true);
   const [chartAmt, setChartAmt] = useState([]);
+
+  const [amit, setAmit] = useState('')
 
   const summaryBalance = {
     labels: [
