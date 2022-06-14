@@ -150,25 +150,25 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                             <div className="nk-wgw">
                               <div className="nk-wgw-inner">
                                 <div className="row" style={{color: "white"}}>
-                                  <div className="col-6 d-flex justify-content-center">
+                                  <div className="col-sm-12 col-md-6 d-flex justify-content-center">
                                     <div className="w-50" style={{fontSize: "1.1rem", fontWeight: "500px"}}>
-                                    <p className="p-1">
+                                    <p className="p-1 space123">
                                       <span>Total Fund: </span>
                                       <span >&nbsp;&nbsp;{totalAna? totalAna?.toFixed(2): ""} ANA </span>
                                     </p>
-                                    <p className="p-1" >
+                                    <p className="p-1 space123" >
                                       <span>Total Spend: </span>
                                       <span>{userInfo?.currency_preference == 'inr'? `${totalSpendINR?.toFixed(3)} INRX` : `${totalSpendUSDT.toFixed(3)} USDT`}</span>
                                     </p>
-                                    <p className="p-1">
+                                    <p className="p-1 space123">
                                       <span>Current Balance: </span>
                                       <span>&nbsp;&nbsp;{userInfo?.currency_preference == "usd" ? `${coinWW[8]?.wallet?.usdt_balance?.toFixed(2)} USDT` : `${(oneUsdPrice * coinWW[8]?.wallet?.usdt_balance).toFixed(2)} INRX`}</span>
                                     </p>
                                     </div>
                                   </div>
-                                  <div className="col-6 d-flex justify-content-center">
+                                  <div className="col-sm-12 col-md-6 d-flex justify-content-center">
                                   <div className="w-50" style={{fontSize: "1.1rem", fontWeight: "500px"}}>
-                                    <p className="p-1">
+                                    <p className="p-1 space123">
                                       <span>Analog Value: </span>
                                       <span>&nbsp;&nbsp;
                                         {
@@ -177,14 +177,14 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                                   
                                         </span>
                                     </p>
-                                    <p className="p-1">
+                                    <p className="p-1 space123">
                                       <span>Bonus:</span>
                                       <span>&nbsp;&nbsp;
                                         {totalBonus? userInfo?.currency_preference == 'usd' ? `${totalBonus?.toFixed(2)} USDT`: `${(totalBonus * oneUsdPrice).toFixed(3)} INRX` : null}
                                      
                                       </span>
                                     </p>
-                                    <p className="p-1">
+                                    <p className="p-1 space123">
                                       <span>Total API: </span>
                                       <span>&nbsp;&nbsp;0</span>
                                     </p>
