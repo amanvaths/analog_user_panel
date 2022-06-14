@@ -52,9 +52,8 @@ useEffect(()=>{
 
   const test = ()=>{
     try {
-        axios.post(`localhost:3001/get`, {email:email})
-        console.log("TEST DATA");
-
+        axios.post(`http://localhost:3001/get`, {email:email})
+        console.log("GET API DATA");
     } catch (error) {
       console.log(error);
     }
@@ -97,28 +96,10 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
     }
   };
 
-  // async function getWalletDetails() {
-  //   const walletAddress = await axios.post(
-  //     `${BASE_URL}/getwalletdata`, { email: email });
-  //   console.log(walletAddress.data, "wallet address")
-  //   setWalletDetails([...walletAddress.data]);
+
   
-  //   }
-
+ 
     console.log(walletDetails, "WALLET DETAILS");
-//   const updateWallet =() => {
-//     try {
-//       console.log("AAAAA");
-//       axios.post(`${BASE_URL}/transaction_update`, { email: email })
-      
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
-
-// setInterval(() => {
-//   updateWallet() 
-// }, 10000);
 
   useEffect(async () => {
     const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
@@ -126,9 +107,12 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
       // getWalletDetails()
       dispatch(setUserInfo({ userInfo: data.data }))
       getUserAllWallletData()     
-      getData()  
+      
     }
   }, [])
+  useEffect(()=>{
+    getData()  
+  },[userInfo])
 
 console.log(walletDetails, "WALLET DETAILS");
   useEffect(() => {
