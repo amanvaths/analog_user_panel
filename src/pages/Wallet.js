@@ -32,40 +32,37 @@ const Wallet = (props) => {
   const [bounty, setBounty] = useState(0)
   const [handOut, setHandOut] = useState(0)
 
-  const [recive, setRecive] = useState(0)
+
 
   const email = user.email;
-  const socket = io(`ws//:localhost:8080`);
+  const socket = io(`http://localhost:8080`)
 
-  useEffect(()=>{
-    socket.on("connect", ()=> {
-      socket.on("balance", (arg)=>{
-        setRecive(arg)
-        console.log("SOCKET DATA->>>>");
-      })
-      console.log("Socked Connected"); 
-    });
-    
-    return () => {
-      socket.disconnect();
-    }
-  },[])
+useEffect(()=>{
+  socket.on('connect',()=>{
+    console.log("Socket Connected");
+  
+    socket.on('balance',(data)=>{
+      console.log("BALANCE EVENT", data)
+      setWalletDetails([...data]);
+    })
+  })
+},[socket])
 
-  console.log(recive, "RECIVED DATA FROM SOCKET");
   
 
-const socketCall = async()=>{
-  try {
-    const data = await axios.get(`http://localhost:3001/balance`, {email: email})
-    console.log("Caslled");
-  } catch (error) {
-    
-  }
-}
+  const test = ()=>{
+    try {
+        axios.post(`localhost:3001/get`, {email:email})
+        console.log("TEST DATA");
 
-setInterval(() => {
-  socketCall()
-}, 15000);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(()=>{
+    test()
+  },[])
 
   const getUserAllWallletData = async () => {
     try {
@@ -100,34 +97,42 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
     }
   };
 
-  async function getWalletDetails() {
-    const walletAddress = await axios.post(
-      `${BASE_URL}/getwalletdata`, { email: email });
-    console.log(walletAddress, "wallet address")
-    setWalletDetails([...walletAddress.data]);
-  }
+  // async function getWalletDetails() {
+  //   const walletAddress = await axios.post(
+  //     `${BASE_URL}/getwalletdata`, { email: email });
+  //   console.log(walletAddress.data, "wallet address")
+  //   setWalletDetails([...walletAddress.data]);
+  
+  //   }
 
-  const updateWallet = async () => {
-    try {
-      const data = await axios.post(`${BASE_URL}/transaction_update`, { email: email })
-    } catch (error) {
-      console.log(error);
-    }
-  }
+    console.log(walletDetails, "WALLET DETAILS");
+//   const updateWallet =() => {
+//     try {
+//       console.log("AAAAA");
+//       axios.post(`${BASE_URL}/transaction_update`, { email: email })
+      
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   }
+
+// setInterval(() => {
+//   updateWallet() 
+// }, 10000);
 
   useEffect(async () => {
     const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
     if (data) {
+      // getWalletDetails()
       dispatch(setUserInfo({ userInfo: data.data }))
-      getUserAllWallletData()
-      // updateWallet() 
-      getData()
-      getWalletDetails()
+      getUserAllWallletData()     
+      getData()  
     }
-  }, [coinWW])
+  }, [])
 
-
+console.log(walletDetails, "WALLET DETAILS");
   useEffect(() => {
+    console.log(walletDetails.length);
     if (coinData.length > 0 && walletDetails.length > 0) {
       const cd = [];
       for (let coind of coinData) {
@@ -137,19 +142,18 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
       setCoinWW([...cd]);
       setLoader(false)
     }
-  }, [walletDetails, coinData]);
+  }, [coinData, walletDetails]);
 
 
   return (
     <>
       <div>
-        {loader ? (<>
+        {loader ? 
+        (
           <div style={{ position: "absolute", zIndex: "99", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
             <Triangle ariaLabel="loading-indicator" color="blue" />
-          </div>
-
-        </>) :
-          (<div className="nk-app-root">
+          </div>) :(
+          <div className="nk-app-root">
             <div className="nk-main ">
               <Menu />
               <div className="nk-wrap">
@@ -251,9 +255,10 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                 <Footer />
               </div>
             </div>
-          </div>) 
-          }
-      </div>
+          </div>
+           ) 
+          } 
+       </div>
     </>
   );
 };

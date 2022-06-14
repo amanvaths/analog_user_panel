@@ -17,8 +17,6 @@ import { useNavigate } from "react-router-dom";
 import { Triangle } from "react-loader-spinner";
 import { Line } from "react-chartjs-2";
 import Chart from 'chart.js/auto';
-import { io } from "socket.io-client";
-
 
 
 
@@ -48,39 +46,6 @@ const Home = () => {
   const [chartAmt, setChartAmt] = useState([]);
 
   const [amit, setAmit] = useState('')
-
-
-  const socket = io("http://localhost:8080");
-  const testSocket = async()=>{
-    try {
-      const data = await axios.post(`${BASE_URL}/transaction_update`, { email : email })
-      console.log(data, ":get api");
-    } catch (error) {
-      console.log(error, "::SOCKET ERROR");
-    }  
-  }
-
-  // setInterval(() => {
-  //   testSocket()
-  // }, 20000);
-
-  socket.on('connect', ()=>{   
- 
-    socket.on('balance', (arg)=>{     
-      console.log("Socket Connected", arg);     
-    })
-
-    // socket.on('buyChart', (arg)=>{
-    //   setAmit(arg)
-    //   console.log("Socket Connected", arg);     
-    // })
-
-
-  })
-
-  // socket.io.on("connect_error", (socket) => {
-  //   console.log(socket.id)
-  // });
 
   const summaryBalance = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
