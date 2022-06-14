@@ -30,8 +30,10 @@ const Bounty = () => {
     }
   }
 
-  const fun = (data) => {
-    setLoad(false)
+ 
+
+
+  const fun =(data)=>{
     setCurrentPage(data.selected + 1)
     getBounty(data.selected + 1)
 

@@ -86,7 +86,7 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
 
       <div className="slider">
         <div className="slider__track" />
-        <div ref={range} className="slider__range progress-bar-striped"  />
+        <div ref={range} className="slider__range"  />
         <div className="slider__left-value" style={{ left: "25px",color:"green",fontWeight:"bold" }}>
           { minVal && minVal?.toFixed(2)}
          

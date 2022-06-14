@@ -39,7 +39,7 @@ const Getpresale = (props) => {
   }
 
   return (
-    <div className="nk-block first-card">
+    <div className="nk-block first-card pt-1">
       <div className="card card-bordered  text-secondary  h-100">
         <div className="card-inner">
           <div className="nk-wg7">
@@ -67,7 +67,7 @@ const Getpresale = (props) => {
                 striped
                 now={persent}
                 label={`${persent}%`}
-                variant="success "
+                variant="success progress-bar-animated"
                 aria-valuemin={100}
                
               />

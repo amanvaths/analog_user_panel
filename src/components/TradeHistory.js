@@ -61,7 +61,7 @@ export default function TradeHistory() {
                   let a= new Date(h.date).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})
                   return (
                     <>
-                      <tr class="zoom  historyorder" style={{fontSize:"16.6px"}}>
+                      <tr class="zoom  historyorder" style={{fontSize:"16.6px",cursor:"pointer"}}>
                         <td className="TradeHistorySize" style={{ width: "16.6%" }}>
 
                            {h.cVolume.toFixed(2)}

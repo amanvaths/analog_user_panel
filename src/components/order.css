@@ -59,7 +59,7 @@
   }
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1500px) {
+@media only screen and (min-width: 1199px) and (max-width: 1500px) {
   .p-3 {
     max-width: 270px;
   }
@@ -87,9 +87,10 @@
   .tradeUsdIcon{
     width: 12px !important;
   }
+ 
 }
 
-@media only screen and (min-width: 1000px) and (max-width: 1200px) {
+@media only screen and (min-width: 1000px) and (max-width: 1199px) {
   .p-3 {
     max-width: 330px;
   }
@@ -111,13 +112,13 @@
  
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1000px) {
+@media only screen and (min-width: 991px) and (max-width: 1000px) {
   .p-3 {
     max-width: 310px;
   }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 992px) {
+@media only screen and (min-width: 768px) and (max-width: 991px) {
   .p-3 {
     max-width: 500px;
   }
