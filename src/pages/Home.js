@@ -45,24 +45,12 @@ const Home = () => {
   const [i, setI] = useState([]);
   const [recentLoad, setRecentLoad] = useState(true);
   const [chartAmt, setChartAmt] = useState([]);
+  const [chartLabel, setChartLabel] = useState([])
 
-  const [amit, setAmit] = useState('')
+
 
   const summaryBalance = {
-    labels: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
+    labels: chartLabel,
     dataUnit: "BTC",
     datasets: [
       {
@@ -82,17 +70,27 @@ const Home = () => {
         pointHoverBackgroundColor: "#0d6efd",
         pointHoverBorderColor: "rgba(220,220,220,1)",
         pointHoverBorderWidth: 2,
-        pointRadius: 1,
+        pointRadius: 3,
         pointHitRadius: 10,
         data: chartAmt,
       },
     ],
   };
 
+  var total = [];
+  var year = [];
   const chartData = async () => {
     try {
       const res = await axios.post(`${BASE_URL}/buyChart`, { email: email });
-      setChartAmt(res.data.data);
+      const arr = res.data.data;
+      console.log(arr, 'orid');
+      arr.map((element, index)=>{
+        total.push(element.total)
+        year.push(`${element.month}/${element.year}`)
+        console.log(`${element.month}/${element.year}`, "element");     
+      })
+      setChartAmt(total)
+      setChartLabel(year)
     } catch (error) {
       console.log(error);
     }

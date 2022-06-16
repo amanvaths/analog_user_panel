@@ -3,6 +3,8 @@ import Menu from "../components/Menu";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Card1 from "../components/Card";
+import 'react-notifications/lib/notifications.css';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 
 import axios from "axios";
 import { Triangle } from 'react-loader-spinner'
@@ -32,11 +34,13 @@ const Wallet = (props) => {
   const [bounty, setBounty] = useState(0)
   const [handOut, setHandOut] = useState(0)
 
+  const [msg, setMsg] = useState(true)
+
 
 
   const email = user.email;
   const socket = io(`http://localhost:8080`)
-
+var status = 0;
 useEffect(()=>{
   socket.on('connect',()=>{
     console.log("Socket Connected");
@@ -45,10 +49,17 @@ useEffect(()=>{
       console.log("BALANCE EVENT", data)
       setWalletDetails([...data]);
     })
+    
+    socket.on("msg",(data)=>{
+      console.log(status, '::STATUS')
+      NotificationManager.success('Added',data)
+    })
   })
 },[socket])
 
-  
+
+
+
 
   const test = ()=>{
     try {
@@ -99,7 +110,7 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
 
   
  
-    console.log(walletDetails, "WALLET DETAILS");
+    // console.log(walletDetails, "WALLET DETAILS");
 
   useEffect(async () => {
     const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
@@ -114,7 +125,7 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
     getData()  
   },[userInfo])
 
-console.log(walletDetails, "WALLET DETAILS");
+// console.log(walletDetails, "WALLET DETAILS");
   useEffect(() => {
     console.log(walletDetails.length);
     if (coinData.length > 0 && walletDetails.length > 0) {
@@ -235,6 +246,7 @@ console.log(walletDetails, "WALLET DETAILS");
                       );
                     })}
                   </div>
+                  <NotificationContainer />
                 </div>
                 <Footer />
               </div>
