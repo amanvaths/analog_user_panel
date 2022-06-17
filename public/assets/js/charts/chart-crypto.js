@@ -9,19 +9,7 @@
   // dataUnit: string, (Used in tooltip or other section for display) 
   // datasets: [{label : string, color: string (color code with # or other format), data: array}]
 
-  var amount;
-   fetch('http://localhost:3001/api/buyChart', {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-      "allow-access-origin-control": "*",
-    },
-    body: JSON.stringify({
-      email: 'rahulnadcab@byom.de'
-    }),
-  }).then((res)=> 
-  res.json()).then((data)=> amount = data.amount ).catch((err)=> console.log(err))
-
+  
   
   var mainBalance = {
     labels: ["01 Nov", "02 Nov", "03 Nov", "04 Nov", "05 Nov", "06 Nov", "07 Nov", "08 Nov", "09 Nov", "10 Nov", "11 Nov", "12 Nov", "13 Nov", "14 Nov", "15 Nov", "16 Nov", "17 Nov", "18 Nov", "19 Nov", "20 Nov", "21 Nov", "22 Nov", "23 Nov", "24 Nov", "25 Nov", "26 Nov", "27 Nov", "28 Nov", "29 Nov", "30 Nov"],

@@ -9,7 +9,7 @@ import AffiliatCard from "../components/AffiliateCard";
 import { setUserInfo } from "../redux/reducer/user";
 import { Bars, ThreeDots } from 'react-loader-spinner'
 import { MdMoreHoriz } from 'react-icons/md'
-import Paginate from "../components/Pagination";
+import ReactPaginate from 'react-paginate';
 import { Link, useNavigate } from "react-router-dom";
 
 const Affiliate = (props) => {
@@ -20,6 +20,7 @@ const Affiliate = (props) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const [level, setLevel] = useState(1)
+
   const [level1, setLevel1] = useState(true)
   const [level2, setLevel2] = useState(false)
   const [level3, setLevel3] = useState(false)
@@ -56,6 +57,10 @@ const Affiliate = (props) => {
 
   }
 
+  const level3Pagination = (data)=>{
+  
+    getAffiliateList(level)
+  }
  
 
   useEffect(() => {
@@ -119,9 +124,7 @@ const Affiliate = (props) => {
                     </div>
                   </div>
                 </div>
-                <div className="row">
-
-                  {
+                <div className="row">{
                     load ? affiliates.length > 0 ?
                       affiliates[0].map((item, index) => {
                         return (
@@ -142,9 +145,7 @@ const Affiliate = (props) => {
                       <div style={{ position: "absolute", zIndex: "99", top: "29%", left: "108%", transform: "translate(-50%, -50%)" }}>
                         <Bars heigth="100" width="100" color="#0b3175" ariaLabel="loading-indicator" />
                       </div>
-
-
-                  }
+}
                 </div>
 
                 <div className="row my-1" >
@@ -1024,8 +1025,8 @@ const Affiliate = (props) => {
                                     }) :  
                                     <Bars heigth="20" width="20 " color="#0b3175" ariaLabel="loading-indicator" />  
                                 }
-
-                                {/* <div className="nk-tb-item">
+{/*
+                                 <div className="nk-tb-item">
                                             <div className="nk-tb-col nk-tb-col-check">
                                               <div className="custom-control custom-control-sm custom-checkbox notext">
                                                 <input
@@ -1166,10 +1167,27 @@ const Affiliate = (props) => {
 
                               </div>
                             </div>
-                           <Paginate 
-                           data={tab.length}
-
-                           />
+                            <div className="card-inner">
+                            <ReactPaginate
+                          previousLabel={'Prev'}
+                          nextLabel={'Next'}
+                          breakLabel={"..."}
+                          pageCount={50}
+                          marginPagesDisplayed={2}
+                          pageRangeDisplayed={2}
+                          onPageChange={level3Pagination}
+                          containerClassName={'pagination justify-content-center'}
+                          pageClassName={'page-item'}
+                          pageLinkClassName={'page-link'}
+                          previousClassName={'page-item'}
+                          previousLinkClassName={'page-link'}
+                          nextClassName={'page-item'}
+                          nextLinkClassName={'page-link'}
+                          breakClassName={'page-item'}
+                          breakLinkClassName={'page-link'}
+                          activeClassName={"active"}
+                        /> 
+                        </div>
                           </div>
                         </div>
                       </div>

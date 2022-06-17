@@ -98103,3 +98103,9 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode input,
 .react-multi-carousel-list{
   display: block !important;
 }
+
+@media (max-width: 575px) {
+.space123{
+  justify-content: space-between !important;
+  display: flex !important;
+}}
