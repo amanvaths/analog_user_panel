@@ -49,7 +49,7 @@ export default function Orders() {
       let walletData = res.data;
       const d = walletData.find((data, i) => data.symbol == "USDT");
       setWalletBalance(
-        userInfo?.currency_preference == "usd"
+       userInfo?.currency_preference == "usd"
           ? Number(d.usdt_balance)
           : Number(d.usdt_balance * oneUsdPrice)
       );
@@ -405,7 +405,7 @@ export default function Orders() {
                           ? Number(atprice / oneUsdPrice)?.toFixed(8)
                           : Number(atprice)?.toFixed(8)}
                         {}{" "}
-                        {userInfo?.currency_preference == "usd" ? (
+                        {userInfo?.currency_preference&&userInfo?.currency_preference == "usd" ? (
                           <img
                             src="./images/Usdt.png"
                             style={{ width: "15px" }}

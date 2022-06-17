@@ -126,7 +126,7 @@ const Header = () => {
                 </a>
               </div>
             </div>
-            <div className="nk-header-tools">
+            <div className="nk-header-tools" style={{width:"100%",display:"flex",justifyContent:"end"}}>
               <ul className="nk-quick-nav">
                 <li>
                   <div className="nk-block-head logohide">
