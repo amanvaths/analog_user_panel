@@ -18,6 +18,7 @@ import { Triangle } from "react-loader-spinner";
 import { Line } from "react-chartjs-2";
 import Chart from 'chart.js/auto';
 import { io } from "socket.io-client";
+import { RWebShare } from "react-web-share";
 
 
 
@@ -705,9 +706,21 @@ const Home = () => {
                             </div>
                           </div>
                           <div className="nk-refwg-action">
-                            <a href="#" className="btn btn-primary">
+                             <div>
+                              <RWebShare
+                                data={{
+                                  text: "Like humans, flamingos make friends for life",
+                                  url: `http://localhost:3000/signup?ref=${userInfo?.user_id}`,
+                                  title: "Flamingos",
+                                }}
+                                onClick={() => console.log("shared successfully!")}
+                              >
+                                <button style={{border:"none"}} className="btn btn-primary">Invite 🔗</button>
+                              </RWebShare>
+                            </div>
+                            {/* <a href="#" className="btn btn-primary">
                               Invite
-                            </a>
+                            </a> */}
                           </div>
                         </div>
                         <div className="nk-refwg-url">
