@@ -12,12 +12,13 @@ import { MdMoreHoriz } from 'react-icons/md'
 import ReactPaginate from 'react-paginate';
 import { Link, useNavigate } from "react-router-dom";
 
+
 const Affiliate = (props) => {
   const { user, userInfo, oneUsdPrice } = useSelector((state) => state.user.value)
   const email = user?.email
   const [affiliates, setAffiliates] = useState([]);
   const [affiliateCount, setAffiliatesCount] = useState(0)
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(0);
 
   const [level, setLevel] = useState(1)
 
@@ -27,6 +28,7 @@ const Affiliate = (props) => {
   const [tab, setTab] = useState([]);
   const [loader, setLoader] = useState(true)
   const [status, setStatus] = useState()
+  const [total, setTotal] = useState(0)
 
   const [load, setLoad] = useState(false)
 
@@ -44,28 +46,24 @@ const Affiliate = (props) => {
     }
   }
 
-  
-
-  const getAffiliateList = async (level) => {
+  const getAffiliateList = async (level, selelcted) => {
     const data = await axios.post(`${BASE_URL}/levelWiseList`, { email: email, level: level })
-    console.log(data, "::Response from AFFILIATE TABLE API");
+    let limit = 5
     if (data) {
-      setTab(data.data.data);
+      setTotal(data.data.data)
+      const startIndex = (selelcted + 1) * limit - limit;
+      const endIndex = (startIndex + 2)
+      setTab((data.data.data).slice(startIndex, endIndex));
       setStatus(data.data.status)
       setLoader(false)
     }
 
   }
 
-  const level3Pagination = (data)=>{
-  
-    getAffiliateList(level)
-  }
- 
-
   useEffect(() => {
+    setLevel(1)
     getAffiliate();
-    getAffiliateList(level)
+    getAffiliateList(level, 0)
   }, []);
 
 
@@ -165,7 +163,7 @@ const Affiliate = (props) => {
                                     setLevel2(false)
                                     setLevel3(false)
                                     setTab([])
-                                    getAffiliateList(1)
+                                    getAffiliateList(1,0)
                                   }}>
                                   <span>Level 1</span></a>
                               </li>
@@ -176,7 +174,7 @@ const Affiliate = (props) => {
                                     setLevel2(true)
                                     setLevel3(false)
                                     setTab([])
-                                    getAffiliateList(2)
+                                    getAffiliateList(2, 0)
                                   }}>
                                   <span>Level 2</span></a>
                               </li>
@@ -187,7 +185,7 @@ const Affiliate = (props) => {
                                     setLevel2(false)
                                     setLevel3(true)
                                     setTab([])
-                                    getAffiliateList(3)
+                                    getAffiliateList(3, 0)
                                   }}>
                                   <span>Level 3</span></a>
                               </li>
@@ -384,185 +382,30 @@ const Affiliate = (props) => {
                                     <Bars heigth="20" width="20 " color="#0b3175" ariaLabel="loading-indicator" />
                                 }
 
-                                {/* <div className="nk-tb-item">
-                                                <div className="nk-tb-col nk-tb-col-check">
-                                                  <div className="custom-control custom-control-sm custom-checkbox notext">
-                                                    <input
-                                                      type="checkbox"
-                                                      className="custom-control-input"
-                                                      id="uid2"
-                                                    />
-                                                    <label
-                                                      className="custom-control-label"
-                                                      for="uid2"
-                                                    ></label>
-                                                  </div>
-                                                </div>
-                                                <div className="nk-tb-col">
-                                                  <div className="user-card">
-                                                    <div className="user-avatar xs bg-warning">
-                                                      <span>PN</span>
-                                                    </div>
-                                                    <div className="user-name">
-                                                      <span className="tb-lead">
-                                                        Patrick Newman
-                                                      </span>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                                <div className="nk-tb-col tb-col-md">
-                                                  <span>Investor</span>
-                                                </div>
-                                                <div className="nk-tb-col tb-col-sm">
-                                                  <span>patrick@example.com</span>
-                                                </div>
-                                                <div className="nk-tb-col tb-col-md">
-                                                  <span>+942 238-4474</span>
-                                                </div>
-                                                <div className="nk-tb-col tb-col-xl">
-                                                  <span>United States</span>
-                                                </div>
-                                                <div className="nk-tb-col tb-col-xl">
-                                                  <ul className="list-status">
-                                                    <li>
-                                                      <em className="icon text-success ni ni-check-circle"></em>{" "}
-                                                      <span>Email</span>
-                                                    </li>
-                                                  </ul>
-                                                </div>
-                                                <div className="nk-tb-col tb-col-xl">
-                                                  <span>06 Feb 2020</span>
-                                                </div>
-                                                <div className="nk-tb-col">
-                                                  <span className="tb-status text-success">
-                                                    Active
-                                                  </span>
-                                                </div>
-                                                <div className="nk-tb-col nk-tb-col-tools">
-                                                  <ul className="nk-tb-actions gx-2">
-                                                    <li className="nk-tb-action-hidden">
-                                                      <a
-                                                        href="#"
-                                                        className="btn btn-sm btn-icon btn-trigger"
-                                                        data-toggle="tooltip"
-                                                        data-placement="top"
-                                                        title="Wallet"
-                                                      >
-                                                        <em className="icon ni ni-wallet-fill"></em>
-                                                      </a>
-                                                    </li>
-                                                    <li className="nk-tb-action-hidden">
-                                                      <a
-                                                        href="#"
-                                                        className="btn btn-sm btn-icon btn-trigger"
-                                                        data-toggle="tooltip"
-                                                        data-placement="top"
-                                                        title="Send Email"
-                                                      >
-                                                        <em className="icon ni ni-mail-fill"></em>
-                                                      </a>
-                                                    </li>
-                                                    <li className="nk-tb-action-hidden">
-                                                      <a
-                                                        href="#"
-                                                        className="btn btn-sm btn-icon btn-trigger"
-                                                        data-toggle="tooltip"
-                                                        data-placement="top"
-                                                        title="Suspend"
-                                                      >
-                                                        <em className="icon ni ni-user-cross-fill"></em>
-                                                      </a>
-                                                    </li>
-                                                    <li>
-                                                      <div className="drodown">
-                                                        <a
-                                                          href="#"
-                                                          className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
-                                                          data-toggle="dropdown"
-                                                        >
-                                                          <em className="icon ni ni-more-h"></em>
-                                                        </a>
-                                                        <div className="dropdown-menu dropdown-menu-right">
-                                                          <ul className="link-list-opt no-bdr">
-                                                            <li>
-                                                              <a href="#">
-                                                                <em className="icon ni ni-eye"></em>
-                                                                <span>View Details</span>
-                                                              </a>
-                                                            </li>
-                                                            <li>
-                                                              <a href="#">
-                                                                <em className="icon ni ni-repeat"></em>
-                                                                <span>Orders</span>
-                                                              </a>
-                                                            </li>
-                                                            <li className="divider"></li>
-                                                            <li>
-                                                              <a href="#">
-                                                                <em className="icon ni ni-shield-star"></em>
-                                                                <span>Reset Pass</span>
-                                                              </a>
-                                                            </li>
-                                                            <li>
-                                                              <a href="#">
-                                                                <em className="icon ni ni-shield-off"></em>
-                                                                <span>Reset 2FA</span>
-                                                              </a>
-                                                            </li>
-                                                            <li>
-                                                              <a href="#">
-                                                                <em className="icon ni ni-na"></em>
-                                                                <span>Suspend User</span>
-                                                              </a>
-                                                            </li>
-                                                          </ul>
-                                                        </div>
-                                                      </div>
-                                                    </li>
-                                                  </ul>
-                                                </div>
-                                              </div> */}
+                                
 
                               </div>
                             </div>
                             <div className="card-inner">
-                              <ul className="pagination justify-content-center justify-content-md-center">
-                                <li className="page-item">
-                                  <a className="page-link" href="#">
-                                    Prev
-                                  </a>
-                                </li>
-                                <li className="page-item">
-                                  <a className="page-link" href="#">
-                                    1
-                                  </a>
-                                </li>
-                                <li className="page-item">
-                                  <a className="page-link" href="#">
-                                    2
-                                  </a>
-                                </li>
-                                <li className="page-item">
-                                  <span className="page-link">
-                                    <em className="icon ni ni-more-h"></em>
-                                  </span>
-                                </li>
-                                <li className="page-item">
-                                  <a className="page-link" href="#">
-                                    6
-                                  </a>
-                                </li>
-                                <li className="page-item">
-                                  <a className="page-link" href="#">
-                                    7
-                                  </a>
-                                </li>
-                                <li className="page-item">
-                                  <a className="page-link" href="#">
-                                    Next
-                                  </a>
-                                </li>
-                              </ul>
+                            <ReactPaginate
+                          previousLabel={'Prev'}
+                          nextLabel={'Next'}
+                          breakLabel={"..."}
+                          pageCount={Math.ceil(total.length / 2)}
+                          marginPagesDisplayed={2}
+                          pageRangeDisplayed={2}
+                          onPageChange={(data)=>{getAffiliateList(level,data.selected)}}
+                          containerClassName={'pagination justify-content-center'}
+                          pageClassName={'page-item'}
+                          pageLinkClassName={'page-link'}
+                          previousClassName={'page-item'}
+                          previousLinkClassName={'page-link'}
+                          nextClassName={'page-item'}
+                          nextLinkClassName={'page-link'}
+                          breakClassName={'page-item'}
+                          breakLinkClassName={'page-link'}
+                          activeClassName={"active"}
+                        />
                             </div>
                           </div>
                         </div>
@@ -698,186 +541,28 @@ const Affiliate = (props) => {
                                     }) :
                                     <Bars heigth="20" width="20 " color="#0b3175" ariaLabel="loading-indicator" />
                                 }
-
-                                {/* <div className="nk-tb-item">
-                                            <div className="nk-tb-col nk-tb-col-check">
-                                              <div className="custom-control custom-control-sm custom-checkbox notext">
-                                                <input
-                                                  type="checkbox"
-                                                  className="custom-control-input"
-                                                  id="uid2"
-                                                />
-                                                <label
-                                                  className="custom-control-label"
-                                                  for="uid2"
-                                                ></label>
-                                              </div>
-                                            </div>
-                                            <div className="nk-tb-col">
-                                              <div className="user-card">
-                                                <div className="user-avatar xs bg-warning">
-                                                  <span>PN</span>
-                                                </div>
-                                                <div className="user-name">
-                                                  <span className="tb-lead">
-                                                    Patrick Newman
-                                                  </span>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div className="nk-tb-col tb-col-md">
-                                              <span>Investor</span>
-                                            </div>
-                                            <div className="nk-tb-col tb-col-sm">
-                                              <span>patrick@example.com</span>
-                                            </div>
-                                            <div className="nk-tb-col tb-col-md">
-                                              <span>+942 238-4474</span>
-                                            </div>
-                                            <div className="nk-tb-col tb-col-xl">
-                                              <span>United States</span>
-                                            </div>
-                                            <div className="nk-tb-col tb-col-xl">
-                                              <ul className="list-status">
-                                                <li>
-                                                  <em className="icon text-success ni ni-check-circle"></em>{" "}
-                                                  <span>Email</span>
-                                                </li>
-                                              </ul>
-                                            </div>
-                                            <div className="nk-tb-col tb-col-xl">
-                                              <span>06 Feb 2020</span>
-                                            </div>
-                                            <div className="nk-tb-col">
-                                              <span className="tb-status text-success">
-                                                Active
-                                              </span>
-                                            </div>
-                                            <div className="nk-tb-col nk-tb-col-tools">
-                                              <ul className="nk-tb-actions gx-2">
-                                                <li className="nk-tb-action-hidden">
-                                                  <a
-                                                    href="#"
-                                                    className="btn btn-sm btn-icon btn-trigger"
-                                                    data-toggle="tooltip"
-                                                    data-placement="top"
-                                                    title="Wallet"
-                                                  >
-                                                    <em className="icon ni ni-wallet-fill"></em>
-                                                  </a>
-                                                </li>
-                                                <li className="nk-tb-action-hidden">
-                                                  <a
-                                                    href="#"
-                                                    className="btn btn-sm btn-icon btn-trigger"
-                                                    data-toggle="tooltip"
-                                                    data-placement="top"
-                                                    title="Send Email"
-                                                  >
-                                                    <em className="icon ni ni-mail-fill"></em>
-                                                  </a>
-                                                </li>
-                                                <li className="nk-tb-action-hidden">
-                                                  <a
-                                                    href="#"
-                                                    className="btn btn-sm btn-icon btn-trigger"
-                                                    data-toggle="tooltip"
-                                                    data-placement="top"
-                                                    title="Suspend"
-                                                  >
-                                                    <em className="icon ni ni-user-cross-fill"></em>
-                                                  </a>
-                                                </li>
-                                                <li>
-                                                  <div className="drodown">
-                                                    <a
-                                                      href="#"
-                                                      className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
-                                                      data-toggle="dropdown"
-                                                    >
-                                                      <em className="icon ni ni-more-h"></em>
-                                                    </a>
-                                                    <div className="dropdown-menu dropdown-menu-right">
-                                                      <ul className="link-list-opt no-bdr">
-                                                        <li>
-                                                          <a href="#">
-                                                            <em className="icon ni ni-eye"></em>
-                                                            <span>View Details</span>
-                                                          </a>
-                                                        </li>
-                                                        <li>
-                                                          <a href="#">
-                                                            <em className="icon ni ni-repeat"></em>
-                                                            <span>Orders</span>
-                                                          </a>
-                                                        </li>
-                                                        <li className="divider"></li>
-                                                        <li>
-                                                          <a href="#">
-                                                            <em className="icon ni ni-shield-star"></em>
-                                                            <span>Reset Pass</span>
-                                                          </a>
-                                                        </li>
-                                                        <li>
-                                                          <a href="#">
-                                                            <em className="icon ni ni-shield-off"></em>
-                                                            <span>Reset 2FA</span>
-                                                          </a>
-                                                        </li>
-                                                        <li>
-                                                          <a href="#">
-                                                            <em className="icon ni ni-na"></em>
-                                                            <span>Suspend User</span>
-                                                          </a>
-                                                        </li>
-                                                      </ul>
-                                                    </div>
-                                                  </div>
-                                                </li>
-                                              </ul>
-                                            </div>
-                                          </div> */}
-
-                              </div>
+                            </div>
                             </div>
                             <div className="card-inner">
-                              <ul className="pagination justify-content-center justify-content-md-center">
-                                <li className="page-item">
-                                  <a className="page-link" href="#">
-                                    Prev
-                                  </a>
-                                </li>
-                                <li className="page-item">
-                                  <a className="page-link" href="#">
-                                    1
-                                  </a>
-                                </li>
-                                <li className="page-item">
-                                  <a className="page-link" href="#">
-                                    2
-                                  </a>
-                                </li>
-                                <li className="page-item">
-                                  <span className="page-link">
-                                    <em className="icon ni ni-more-h"></em>
-                                  </span>
-                                </li>
-                                <li className="page-item">
-                                  <a className="page-link" href="#">
-                                    6
-                                  </a>
-                                </li>
-                                <li className="page-item">
-                                  <a className="page-link" href="#">
-                                    7
-                                  </a>
-                                </li>
-                                <li className="page-item">
-                                  <a className="page-link" href="#">
-                                    Next
-                                  </a>
-                                </li>
-                              </ul>
+                            <ReactPaginate
+                          previousLabel={'Prev'}
+                          nextLabel={'Next'}
+                          breakLabel={"..."}
+                          pageCount={Math.ceil(tab.length / 5)}
+                          marginPagesDisplayed={2}
+                          pageRangeDisplayed={2}
+                          onPageChange={'page-link'}
+                          containerClassName={'pagination justify-content-center'}
+                          pageClassName={'page-item'}
+                          pageLinkClassName={'page-link'}
+                          previousClassName={'page-item'}
+                          previousLinkClassName={'page-link'}
+                          nextClassName={'page-item'}
+                          nextLinkClassName={'page-link'}
+                          breakClassName={'page-item'}
+                          breakLinkClassName={'page-link'}
+                          activeClassName={"active"}
+                        />
                             </div>
                           </div>
                         </div>
@@ -1025,145 +710,144 @@ const Affiliate = (props) => {
                                     }) :  
                                     <Bars heigth="20" width="20 " color="#0b3175" ariaLabel="loading-indicator" />  
                                 }
-{/*
-                                 <div className="nk-tb-item">
-                                            <div className="nk-tb-col nk-tb-col-check">
-                                              <div className="custom-control custom-control-sm custom-checkbox notext">
-                                                <input
-                                                  type="checkbox"
-                                                  className="custom-control-input"
-                                                  id="uid2"
-                                                />
-                                                <label
-                                                  className="custom-control-label"
-                                                  for="uid2"
-                                                ></label>
-                                              </div>
-                                            </div>
-                                            <div className="nk-tb-col">
-                                              <div className="user-card">
-                                                <div className="user-avatar xs bg-warning">
-                                                  <span>PN</span>
+                               {/*  <div className="nk-tb-item">
+                                                <div className="nk-tb-col nk-tb-col-check">
+                                                  <div className="custom-control custom-control-sm custom-checkbox notext">
+                                                    <input
+                                                      type="checkbox"
+                                                      className="custom-control-input"
+                                                      id="uid2"
+                                                    />
+                                                    <label
+                                                      className="custom-control-label"
+                                                      for="uid2"
+                                                    ></label>
+                                                  </div>
                                                 </div>
-                                                <div className="user-name">
-                                                  <span className="tb-lead">
-                                                    Patrick Newman
-                                                  </span>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div className="nk-tb-col tb-col-md">
-                                              <span>Investor</span>
-                                            </div>
-                                            <div className="nk-tb-col tb-col-sm">
-                                              <span>patrick@example.com</span>
-                                            </div>
-                                            <div className="nk-tb-col tb-col-md">
-                                              <span>+942 238-4474</span>
-                                            </div>
-                                            <div className="nk-tb-col tb-col-xl">
-                                              <span>United States</span>
-                                            </div>
-                                            <div className="nk-tb-col tb-col-xl">
-                                              <ul className="list-status">
-                                                <li>
-                                                  <em className="icon text-success ni ni-check-circle"></em>{" "}
-                                                  <span>Email</span>
-                                                </li>
-                                              </ul>
-                                            </div>
-                                            <div className="nk-tb-col tb-col-xl">
-                                              <span>06 Feb 2020</span>
-                                            </div>
-                                            <div className="nk-tb-col">
-                                              <span className="tb-status text-success">
-                                                Active
-                                              </span>
-                                            </div>
-                                            <div className="nk-tb-col nk-tb-col-tools">
-                                              <ul className="nk-tb-actions gx-2">
-                                                <li className="nk-tb-action-hidden">
-                                                  <a
-                                                    href="#"
-                                                    className="btn btn-sm btn-icon btn-trigger"
-                                                    data-toggle="tooltip"
-                                                    data-placement="top"
-                                                    title="Wallet"
-                                                  >
-                                                    <em className="icon ni ni-wallet-fill"></em>
-                                                  </a>
-                                                </li>
-                                                <li className="nk-tb-action-hidden">
-                                                  <a
-                                                    href="#"
-                                                    className="btn btn-sm btn-icon btn-trigger"
-                                                    data-toggle="tooltip"
-                                                    data-placement="top"
-                                                    title="Send Email"
-                                                  >
-                                                    <em className="icon ni ni-mail-fill"></em>
-                                                  </a>
-                                                </li>
-                                                <li className="nk-tb-action-hidden">
-                                                  <a
-                                                    href="#"
-                                                    className="btn btn-sm btn-icon btn-trigger"
-                                                    data-toggle="tooltip"
-                                                    data-placement="top"
-                                                    title="Suspend"
-                                                  >
-                                                    <em className="icon ni ni-user-cross-fill"></em>
-                                                  </a>
-                                                </li>
-                                                <li>
-                                                  <div className="drodown">
-                                                    <a
-                                                      href="#"
-                                                      className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
-                                                      data-toggle="dropdown"
-                                                    >
-                                                      <em className="icon ni ni-more-h"></em>
-                                                    </a>
-                                                    <div className="dropdown-menu dropdown-menu-right">
-                                                      <ul className="link-list-opt no-bdr">
-                                                        <li>
-                                                          <a href="#">
-                                                            <em className="icon ni ni-eye"></em>
-                                                            <span>View Details</span>
-                                                          </a>
-                                                        </li>
-                                                        <li>
-                                                          <a href="#">
-                                                            <em className="icon ni ni-repeat"></em>
-                                                            <span>Orders</span>
-                                                          </a>
-                                                        </li>
-                                                        <li className="divider"></li>
-                                                        <li>
-                                                          <a href="#">
-                                                            <em className="icon ni ni-shield-star"></em>
-                                                            <span>Reset Pass</span>
-                                                          </a>
-                                                        </li>
-                                                        <li>
-                                                          <a href="#">
-                                                            <em className="icon ni ni-shield-off"></em>
-                                                            <span>Reset 2FA</span>
-                                                          </a>
-                                                        </li>
-                                                        <li>
-                                                          <a href="#">
-                                                            <em className="icon ni ni-na"></em>
-                                                            <span>Suspend User</span>
-                                                          </a>
-                                                        </li>
-                                                      </ul>
+                                                <div className="nk-tb-col">
+                                                  <div className="user-card">
+                                                    <div className="user-avatar xs bg-warning">
+                                                      <span>PN</span>
+                                                    </div>
+                                                    <div className="user-name">
+                                                      <span className="tb-lead">
+                                                        Patrick Newman
+                                                      </span>
                                                     </div>
                                                   </div>
-                                                </li>
-                                              </ul>
-                                            </div>
-                                          </div> */}
+                                                </div>
+                                                <div className="nk-tb-col tb-col-md">
+                                                  <span>Investor</span>
+                                                </div>
+                                                <div className="nk-tb-col tb-col-sm">
+                                                  <span>patrick@example.com</span>
+                                                </div>
+                                                <div className="nk-tb-col tb-col-md">
+                                                  <span>+942 238-4474</span>
+                                                </div>
+                                                <div className="nk-tb-col tb-col-xl">
+                                                  <span>United States</span>
+                                                </div>
+                                                <div className="nk-tb-col tb-col-xl">
+                                                  <ul className="list-status">
+                                                    <li>
+                                                      <em className="icon text-success ni ni-check-circle"></em>{" "}
+                                                      <span>Email</span>
+                                                    </li>
+                                                  </ul>
+                                                </div>
+                                                <div className="nk-tb-col tb-col-xl">
+                                                  <span>06 Feb 2020</span>
+                                                </div>
+                                                <div className="nk-tb-col">
+                                                  <span className="tb-status text-success">
+                                                    Active
+                                                  </span>
+                                                </div>
+                                                <div className="nk-tb-col nk-tb-col-tools">
+                                                  <ul className="nk-tb-actions gx-2">
+                                                    <li className="nk-tb-action-hidden">
+                                                      <a
+                                                        href="#"
+                                                        className="btn btn-sm btn-icon btn-trigger"
+                                                        data-toggle="tooltip"
+                                                        data-placement="top"
+                                                        title="Wallet"
+                                                      >
+                                                        <em className="icon ni ni-wallet-fill"></em>
+                                                      </a>
+                                                    </li>
+                                                    <li className="nk-tb-action-hidden">
+                                                      <a
+                                                        href="#"
+                                                        className="btn btn-sm btn-icon btn-trigger"
+                                                        data-toggle="tooltip"
+                                                        data-placement="top"
+                                                        title="Send Email"
+                                                      >
+                                                        <em className="icon ni ni-mail-fill"></em>
+                                                      </a>
+                                                    </li>
+                                                    <li className="nk-tb-action-hidden">
+                                                      <a
+                                                        href="#"
+                                                        className="btn btn-sm btn-icon btn-trigger"
+                                                        data-toggle="tooltip"
+                                                        data-placement="top"
+                                                        title="Suspend"
+                                                      >
+                                                        <em className="icon ni ni-user-cross-fill"></em>
+                                                      </a>
+                                                    </li>
+                                                    <li>
+                                                      <div className="drodown">
+                                                        <a
+                                                          href="#"
+                                                          className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
+                                                          data-toggle="dropdown"
+                                                        >
+                                                          <em className="icon ni ni-more-h"></em>
+                                                        </a>
+                                                        <div className="dropdown-menu dropdown-menu-right">
+                                                          <ul className="link-list-opt no-bdr">
+                                                            <li>
+                                                              <a href="#">
+                                                                <em className="icon ni ni-eye"></em>
+                                                                <span>View Details</span>
+                                                              </a>
+                                                            </li>
+                                                            <li>
+                                                              <a href="#">
+                                                                <em className="icon ni ni-repeat"></em>
+                                                                <span>Orders</span>
+                                                              </a>
+                                                            </li>
+                                                            <li className="divider"></li>
+                                                            <li>
+                                                              <a href="#">
+                                                                <em className="icon ni ni-shield-star"></em>
+                                                                <span>Reset Pass</span>
+                                                              </a>
+                                                            </li>
+                                                            <li>
+                                                              <a href="#">
+                                                                <em className="icon ni ni-shield-off"></em>
+                                                                <span>Reset 2FA</span>
+                                                              </a>
+                                                            </li>
+                                                            <li>
+                                                              <a href="#">
+                                                                <em className="icon ni ni-na"></em>
+                                                                <span>Suspend User</span>
+                                                              </a>
+                                                            </li>
+                                                          </ul>
+                                                        </div>
+                                                      </div>
+                                                    </li>
+                                                  </ul>
+                                                </div>
+                                              </div> */}
 
                               </div>
                             </div>
@@ -1172,10 +856,10 @@ const Affiliate = (props) => {
                           previousLabel={'Prev'}
                           nextLabel={'Next'}
                           breakLabel={"..."}
-                          pageCount={50}
+                          pageCount={Math.ceil(tab.length / 5)}
                           marginPagesDisplayed={2}
                           pageRangeDisplayed={2}
-                          onPageChange={level3Pagination}
+                          onPageChange={'page-link'}
                           containerClassName={'pagination justify-content-center'}
                           pageClassName={'page-item'}
                           pageLinkClassName={'page-link'}

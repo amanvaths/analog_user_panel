@@ -40,8 +40,8 @@ const Wallet = (props) => {
 
   const email = user.email;
   const socket = io(`http://localhost:8080`)
-var status = 0;
-useEffect(()=>{
+  var status = 0;
+  useEffect(()=>{
   socket.on('connect',()=>{
     console.log("Socket Connected");
   
@@ -49,13 +49,28 @@ useEffect(()=>{
       console.log("BALANCE EVENT", data)
       setWalletDetails([...data]);
     })
-    
+
+      
     socket.on("msg",(data)=>{
-      console.log(status, '::STATUS')
-      NotificationManager.success('Added',data)
+      console.log(data, "MESSAGE DATA");
+      // if(status == 0){
+      //   status = 1
+     
+        NotificationManager.success('Added',data)
+      // }
+     
     })
   })
-},[socket])
+},[])
+
+
+// setInterval(() => {
+//   if(status == 0){
+//     status = 1
+//   }
+  
+// }, 5000);
+
 
 
 
@@ -93,16 +108,17 @@ useEffect(()=>{
 const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)  + Number(affiliates ? affiliates:0)  + Number(inherited ? inherited : 0) + Number(bounty ? bounty : 0) + Number(handOut ? handOut : 0);
   const getData = async () => {
     try {
-      console.log(":: cp in ", userInfo?.currency_preference);
+      
       const cp = userInfo?.currency_preference?.toUpperCase()
       const res = await axios.post(`${BASE_URL}/getCoinData`, { currency: cp });
       const cd = [];
-      console.log(res.data, "::res.data");
+      // console.log(res.data, "::res.data");
       for (let coin of Object.entries(res.data)) {
         cd.push(coin[1]);
       }
       setCoinData([...cd]);
     } catch (error) {
+      getData() 
       console.log(error);
     }
   };
@@ -127,7 +143,7 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
 
 // console.log(walletDetails, "WALLET DETAILS");
   useEffect(() => {
-    console.log(walletDetails.length);
+    // console.log(walletDetails.length);
     if (coinData.length > 0 && walletDetails.length > 0) {
       const cd = [];
       for (let coind of coinData) {
@@ -233,7 +249,7 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                         <div className="walletCard col-md-6 col-lg-4 col-12">
                            <Card1
                             title={element.name}
-                            priceInUsd={(element?.quote?.[userInfo?.currency_preference.toUpperCase()]?.price)?.toFixed(20).match(/^-?\d*\.?0*\d{0,2}/)[0]}
+                            priceInUsd={(element?.quote?.[userInfo?.currency_preference?.toUpperCase()]?.price)?.toFixed(20).match(/^-?\d*\.?0*\d{0,2}/)[0]}
                             price={element?.wallet?.balance.toFixed(3) }
                             lable={element?.symbol}
                             wallet={element?.wallet}

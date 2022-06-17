@@ -14,15 +14,7 @@ function Menu (){
   const [usdPrice, setUsdPrice] = useState('')
   const [walletBalance, setWalletBalance] = useState(0)
 
-  // const socket = io.connect(`http://localhost:3001`)
-
-  // socket.on('connect',()=>{
-  //   console.log("Foront pe connect");
   
-  //   socket.on('TOOLKIT',(data)=>{
-  //     console.log(data, "TOOLKIT")
-  //   })
-  // })
 
   const getData = async()=>{
     try {
