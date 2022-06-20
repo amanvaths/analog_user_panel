@@ -40,17 +40,16 @@ const Wallet = (props) => {
 
   const email = user.email;
   const socket = io(`http://localhost:8080`)
-  var status = 0;
+  // var status = 0;
   useEffect(()=>{
   socket.on('connect',()=>{
     console.log("Socket Connected");
-  
+    socket.emit('join', {email: email });
     socket.on('balance',(data)=>{
       console.log("BALANCE EVENT", data)
       setWalletDetails([...data]);
     })
 
-      
     socket.on("msg",(data)=>{
       console.log(data, "MESSAGE DATA");
       // if(status == 0){
@@ -76,18 +75,18 @@ const Wallet = (props) => {
 
 
 
-  const test = ()=>{
-    try {
-        axios.post(`http://localhost:3001/get`, {email:email})
-        console.log("GET API DATA");
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  // const test = ()=>{
+  //   try {
+  //       axios.post(`http://localhost:3001/get`, {email:email})
+  //       console.log("GET API DATA");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
-  useEffect(()=>{
-    test()
-  },[])
+  // useEffect(()=>{
+  //   test()
+  // },[])
 
   const getUserAllWallletData = async () => {
     try {
