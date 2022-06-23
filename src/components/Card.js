@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, {useState } from "react";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { MdOutlineContentCopy } from 'react-icons/md'
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ReactTooltip from 'react-tooltip';
 
 
 const Card1 = (props) => {
-  const { currency_prefrence, oneUsdPrice, userInfo} = useSelector((state) => state.user.value)
-  const [unit, setUnit] = useState('')
+  const {oneUsdPrice, userInfo} = useSelector((state) => state.user.value)
+  // const [unit, setUnit] = useState('')
   // setUnit(currency_prefrence == 'inr' ? currency_prefrence == 'INR' : currency_prefrence == "USD")
   const walletInfo = props.wallet;
   const [copied, setCopied] = useState(false);
   const navigate = useNavigate();
-  useEffect(() => {
-    setUnit(userInfo?.currency_preference == 'inr' ? 'INR' : "USD")
-  }, [])
+  // useEffect(() => {
+  //   setUnit(userInfo?.currency_preference == 'inr' ? 'INR' : "USD")
+  // }, [])
 
   const addString = props.address;
   const first = addString?.substring(0, 20);
@@ -45,6 +45,7 @@ const Card1 = (props) => {
                         <div className="nk-wgw-icon is-default">
                           <img
                             className=""
+                            alt="Coin"
                             src={props.logo}
                             style={{ width: "30px" }}
                           />
@@ -72,6 +73,7 @@ const Card1 = (props) => {
                     <div className="col-4" data-tip={userInfo?.currency_preference == 'inr'? "Minimum Deposit 5000 INRX" : `Minimum Deposit ${(5000 / oneUsdPrice).toFixed(3)} USDT`}>
                       <img
                         src={`https://image-charts.com/chart?chs=177x177&cht=qr&chl=${walletInfo?.walletAddr}&choe=UTF-8&icqrb=0b3175&icqrf=FFFFFF`}
+                        alt="qr"
                         style={{ height: "100px" }}
                       />
                     </div>

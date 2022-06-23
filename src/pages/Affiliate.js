@@ -6,20 +6,17 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { BASE_URL } from "../Api_connection/config";
 import AffiliatCard from "../components/AffiliateCard";
-import { setUserInfo } from "../redux/reducer/user";
-import { Bars, ThreeDots } from 'react-loader-spinner'
+import { Bars} from 'react-loader-spinner'
 import { MdMoreHoriz } from 'react-icons/md'
 import ReactPaginate from 'react-paginate';
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 
 const Affiliate = (props) => {
+
   const { user, userInfo, oneUsdPrice } = useSelector((state) => state.user.value)
   const email = user?.email
   const [affiliates, setAffiliates] = useState([]);
-  const [affiliateCount, setAffiliatesCount] = useState(0)
-  // const [currentPage, setCurrentPage] = useState(0);
-
   const [level, setLevel] = useState(1)
 
   const [level1, setLevel1] = useState(true)
@@ -29,6 +26,7 @@ const Affiliate = (props) => {
   const [loader, setLoader] = useState(true)
   const [status, setStatus] = useState()
   const [total, setTotal] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1)
 
   const [load, setLoad] = useState(false)
 
@@ -52,7 +50,7 @@ const Affiliate = (props) => {
     if (data) {
       setTotal(data.data.data)
       const startIndex = (selelcted + 1) * limit - limit;
-      const endIndex = (startIndex + 2)
+      const endIndex = (startIndex + limit)
       setTab((data.data.data).slice(startIndex, endIndex));
       setStatus(data.data.status)
       setLoader(false)
@@ -92,13 +90,13 @@ const Affiliate = (props) => {
                     </div>
                     <div class="nk-block-head-content affiliates">
                       <div class="toggle-wrap nk-block-tools-toggle">
-                        <a
-                          href="#"
+                        <Link
+                          to=""
                           class="btn btn-icon btn-trigger toggle-expand me-n1"
                           data-target="pageMenu"
                         >
                           <em class="icon ni ni-menu-alt-r"></em>
-                        </a>
+                        </Link>
                         <div
                           class="toggle-expand-content"
                           data-content="pageMenu"
@@ -157,7 +155,7 @@ const Affiliate = (props) => {
                           <div className="nk-block-des text-soft">
                             <ul class="nk-block-tools g-3" style={{ paddingLeft: "0px" }}>
                               <li>
-                                <a className={level1 ? 'btn btn-white btn-dim btn-outline-light active' :
+                                <Link to="" className={level1 ? 'btn btn-white btn-dim btn-outline-light active' :
                                   "btn btn-white btn-dim btn-outline-light"} onClick={() => {
                                     setLevel1(true)
                                     setLevel2(false)
@@ -165,10 +163,10 @@ const Affiliate = (props) => {
                                     setTab([])
                                     getAffiliateList(1,0)
                                   }}>
-                                  <span>Level 1</span></a>
+                                  <span>Level 1</span></Link>
                               </li>
                               <li>
-                                <a className={level2 ? 'btn btn-white btn-dim btn-outline-light active' :
+                                <Link to="" className={level2 ? 'btn btn-white btn-dim btn-outline-light active' :
                                   "btn btn-white btn-dim btn-outline-light"} onClick={() => {
                                     setLevel1(false)
                                     setLevel2(true)
@@ -176,10 +174,10 @@ const Affiliate = (props) => {
                                     setTab([])
                                     getAffiliateList(2, 0)
                                   }}>
-                                  <span>Level 2</span></a>
+                                  <span>Level 2</span></Link>
                               </li>
                               <li>
-                                <a className={level3 ? 'btn btn-white btn-dim btn-outline-light active' :
+                                <Link to="" className={level3 ? 'btn btn-white btn-dim btn-outline-light active' :
                                   "btn btn-white btn-dim btn-outline-light"} onClick={() => {
                                     setLevel1(false)
                                     setLevel2(false)
@@ -187,20 +185,20 @@ const Affiliate = (props) => {
                                     setTab([])
                                     getAffiliateList(3, 0)
                                   }}>
-                                  <span>Level 3</span></a>
+                                  <span>Level 3</span></Link>
                               </li>
                             </ul>
                           </div>
                         </div>
                         <div className="nk-block-head-content">
                           <div className="toggle-wrap nk-block-tools-toggle">
-                            <a
-                              href="#"
+                            <Link
+                              to=""
                               className="btn btn-icon btn-trigger toggle-expand mr-n1"
                               data-target="pageMenu"
                             >
                               <em className="icon ni ni-menu-alt-r"></em>
-                            </a>
+                            </Link>
                             <div
                               className="toggle-expand-content"
                               data-content="pageMenu">
@@ -304,14 +302,14 @@ const Affiliate = (props) => {
                                           <div className="nk-tb-col tb-col-sm">
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
-                                            <span className="">{index + 1}</span>
+                                            <span className="">{(((currentPage - 1) * 5) + index + 1)}</span>
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
                                             <span className="">{element.email}</span>
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
                                             <span style={{ color: "green" }}>{element?.totalBuy?.toFixed(2)} ANA</span>
-                                            <img src="./images/Analog.png" style={{ width: "24px" }} />
+                                            <img alt="analog" src="./images/Analog.png" style={{ width: "24px" }} />
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
                                             <span style={{ color: "red" }}>
@@ -391,10 +389,12 @@ const Affiliate = (props) => {
                           previousLabel={'Prev'}
                           nextLabel={'Next'}
                           breakLabel={"..."}
-                          pageCount={Math.ceil(total.length / 2)}
+                          pageCount={Math.ceil(total.length / 5)}
                           marginPagesDisplayed={2}
                           pageRangeDisplayed={2}
-                          onPageChange={(data)=>{getAffiliateList(level,data.selected)}}
+                          onPageChange={(data)=>{
+                            getAffiliateList(level,data.selected)
+                             setCurrentPage(data.selected +1)}}
                           containerClassName={'pagination justify-content-center'}
                           pageClassName={'page-item'}
                           pageLinkClassName={'page-link'}
@@ -466,14 +466,14 @@ const Affiliate = (props) => {
                                           <div className="nk-tb-col tb-col-sm">
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
-                                            <span className="tb-text">{index + 1}</span>
+                                            <span className="tb-text">{(((currentPage - 1) * 5) + index + 1)}</span>
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
                                             <span className="tb-text">{element.email}</span>
                                           </div>
                                           <div className="nk-tb-col tb-col-sm" style={{color: "green"}}>
                                             <span className="tb-text">{element?.totalBuy?.toFixed(2)} ANA</span>
-                                            <img src="./images/Analog.png" style={{ width: "24px" }} />
+                                            <img alt="analog" src="./images/Analog.png" style={{ width: "24px" }} />
                                           </div>
                                           <div className="nk-tb-col tb-col-sm" style={{color: "red"}}>
                                             <span className="tb-text">
@@ -551,7 +551,9 @@ const Affiliate = (props) => {
                           pageCount={Math.ceil(tab.length / 5)}
                           marginPagesDisplayed={2}
                           pageRangeDisplayed={2}
-                          onPageChange={'page-link'}
+                          onPageChange={(data)=>{
+                            getAffiliateList(level,data.selected)
+                             setCurrentPage(data.selected +1)}}
                           containerClassName={'pagination justify-content-center'}
                           pageClassName={'page-item'}
                           pageLinkClassName={'page-link'}
@@ -627,7 +629,7 @@ const Affiliate = (props) => {
                                             <div className="nk-tb-col tb-col-sm">
                                             </div>
                                             <div className="nk-tb-col tb-col-sm">
-                                              <span className="tb-text">{index + 1}</span>
+                                              <span className="tb-text">{(((currentPage - 1) * 5) + index + 1)}</span>
                                             </div>
                                             <div className="nk-tb-col tb-col-sm">
                                               <span className="tb-text">{element.email}</span>
@@ -637,7 +639,7 @@ const Affiliate = (props) => {
                                             </div>
                                             <div className="nk-tb-col tb-col-sm" style={{color: "green"}}>
                                               <span className="tb-text">{element?.totalBuy?.toFixed(2)} ANA</span>
-                                              <img src="./images/Analog.png" style={{ width: "24px" }} />
+                                              <img alt="analog" src="./images/Analog.png" style={{ width: "24px" }} />
                                             </div>
                                             <div className="nk-tb-col tb-col-sm" style={{color: "red"}}>
                                               <span className="tb-text">
@@ -859,7 +861,9 @@ const Affiliate = (props) => {
                           pageCount={Math.ceil(tab.length / 5)}
                           marginPagesDisplayed={2}
                           pageRangeDisplayed={2}
-                          onPageChange={'page-link'}
+                          onPageChange={(data)=>{
+                            getAffiliateList(level,data.selected)
+                             setCurrentPage(data.selected +1)}}
                           containerClassName={'pagination justify-content-center'}
                           pageClassName={'page-item'}
                           pageLinkClassName={'page-link'}

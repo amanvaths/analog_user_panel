@@ -1,23 +1,23 @@
-import React, { Component, useEffect, useState } from "react";
-import Particles from "react-particles-js";
+import React, {useEffect, useState } from "react";
+
 import Menu from "../components/Menu";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "react-slideshow-image/dist/styles.css";
 import { Slide } from "react-slideshow-image";
-import Carousel from "react-multi-carousel";
+
 import "react-multi-carousel/lib/styles.css";
 import Getpresale from "../components/Getpresale";
 import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { useSelector, useDispatch } from "react-redux";
-import { setBalance } from "../redux/reducer/user";
-import { useNavigate } from "react-router-dom";
+import { useSelector} from "react-redux";
+
+import { Link, useNavigate } from "react-router-dom";
 import { Triangle } from "react-loader-spinner";
 import { Line } from "react-chartjs-2";
 import Chart from 'chart.js/auto';
-import { io } from "socket.io-client";
+
 import { RWebShare } from "react-web-share";
 
 
@@ -330,7 +330,7 @@ const Home = () => {
                           <div className="col-sm-4">
                             <div className="card bg-light">
                               <div className="nk-wgw sm">
-                                <a className="nk-wgw-inner" href="#">
+                                <Link className="nk-wgw-inner" to="">
                                   <div className="nk-wgw-name">
                                     <div className="nk-wgw-icon">
                                       <em className="icon ni ni-sign-btc"></em>
@@ -351,7 +351,7 @@ const Home = () => {
                                       </span>
                                     </div>
                                   </div>
-                                </a>
+                                </Link>
                               </div>
                             </div>
                           </div>
@@ -362,7 +362,7 @@ const Home = () => {
                           >
                             <div className="card bg-light">
                               <div className="nk-wgw sm">
-                                <a className="nk-wgw-inner">
+                                <Link to="" className="nk-wgw-inner">
                                   <div className="nk-wgw-name">
                                     <div className="nk-wgw-icon">
                                       <em className="icon ni ni-sign-btc"></em>
@@ -383,7 +383,7 @@ const Home = () => {
                                       </span>
                                     </div>
                                   </div>
-                                </a>
+                                </Link>
                               </div>
                             </div>
                           </div>
@@ -396,7 +396,7 @@ const Home = () => {
                           >
                             <div className="card bg-light">
                               <div className="nk-wgw sm">
-                                <a className="nk-wgw-inner">
+                                <Link to="" className="nk-wgw-inner">
                                   <div className="nk-wgw-name">
                                     <div className="nk-wgw-icon">
                                       <em className="icon ni ni-sign-eth"></em>
@@ -417,7 +417,7 @@ const Home = () => {
                                       </span>
                                     </div>
                                   </div>
-                                </a>
+                                </Link>
                               </div>
                             </div>
                           </div>
@@ -436,7 +436,7 @@ const Home = () => {
                           <div className="col-sm-4">
                             <div className="card bg-light">
                               <div className="nk-wgw sm">
-                                <a className="nk-wgw-inner" href="#">
+                                <Link className="nk-wgw-inner" to="">
                                   <div className="nk-wgw-name">
                                     <div className="nk-wgw-icon">
                                       <em className="icon ni ni-sign-btc"></em>
@@ -457,7 +457,7 @@ const Home = () => {
                                       </span>
                                     </div>
                                   </div>
-                                </a>
+                                </Link>
                               </div>
                             </div>
                           </div>
@@ -468,7 +468,7 @@ const Home = () => {
                           >
                             <div className="card bg-light">
                               <div className="nk-wgw sm">
-                                <a className="nk-wgw-inner">
+                                <Link  to="" className="nk-wgw-inner">
                                   <div className="nk-wgw-name">
                                     <div className="nk-wgw-icon">
                                       <em className="icon ni ni-sign-btc"></em>
@@ -495,14 +495,14 @@ const Home = () => {
                                       </span>
                                     </div>
                                   </div>
-                                </a>
+                                </Link>
                               </div>
                             </div>
                           </div>
                           <div className="col-sm-4">
                             <div className="card bg-light">
                               <div className="nk-wgw sm">
-                                <a className="nk-wgw-inner" href="#">
+                                <Link className="nk-wgw-inner" to="">
                                   <div className="nk-wgw-name">
                                     <div className="nk-wgw-icon">
                                       <em className="icon ni ni-sign-eth"></em>
@@ -524,7 +524,7 @@ const Home = () => {
                                       </span>
                                     </div>
                                   </div>
-                                </a>
+                                </Link>
                               </div>
                             </div>
                           </div>
@@ -658,10 +658,10 @@ const Home = () => {
                         {/* <div className="card-tools">
                             <ul className="card-tools-nav">
                               <li>
-                                <a href="#">This Month</a>
+                                <Link to="">This Month</Link>
                               </li>
                               <li className="active">
-                                <a href="#">This Years</a>
+                                <Link to="">This Years</Link>
                               </li>
                             </ul>
                           </div> */}
@@ -736,9 +736,9 @@ const Home = () => {
                                 <button style={{border:"none"}} className="btn btn-primary">Invite 🔗</button>
                               </RWebShare>
                             </div>
-                            {/* <a href="#" className="btn btn-primary">
+                            {/* <Link to="" className="btn btn-primary">
                               Invite
-                            </a> */}
+                            </Link> */}
                           </div>
                         </div>
                         <div className="nk-refwg-url">
@@ -832,22 +832,22 @@ const Home = () => {
                           </div>
                           <div className="nk-refwg-more dropdown mt-n1 mr-n1">
                             {/* <a
-                                href="#"
+                                to=""
                                 className="btn btn-icon btn-trigger"
                                 data-toggle="dropdown"
                               >
                                 <em className="icon ni ni-more-h"></em>
-                              </a> */}
+                              </Link> */}
                             {/* <div className="dropdown-menu dropdown-menu-xs dropdown-menu-right">
                                 <ul className="link-list-plain sm">
                                   <li>
-                                    <a href="#">7 days</a>
+                                    <Link to="">7 days</Link>
                                   </li>
                                   <li>
-                                    <a href="#">15 Days</a>
+                                    <Link to="">15 Days</Link>
                                   </li>
                                   <li>
-                                    <a href="#">30 Days</a>
+                                    <Link to="">30 Days</Link>
                                   </li>
                                 </ul>
                               </div> */}
@@ -1051,12 +1051,12 @@ const Home = () => {
                           </div>
                         </div>
                         <div className="nk-block-content flex-shrink-0">
-                          <a
-                            href="#"
+                          <Link
+                            to=""
                             className="btn btn-lg btn-outline-primary"
                           >
                             Get Support Now
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </div>

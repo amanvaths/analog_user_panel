@@ -5,10 +5,6 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 
 const Getpresale = (props) => {
   const { levelname, coinQty, coinPrice, duration ,persent} = props;
-  const [hours, setHours] = useState("");
-  const [minutes, setMinutes] = useState("");
-  const [seconds, setSeconds] = useState("");
-  const [day, setDay] = useState("");
   const [timer, setTimer] = useState({
     days: "",
     hour: "",
@@ -21,7 +17,7 @@ const Getpresale = (props) => {
   }, []);
 
   function countdowntimer() {
-    var day = 20;
+    
     var se = 86400 * duration;
     var x = setInterval(function () {
       let days = Math.floor(se / 86400);

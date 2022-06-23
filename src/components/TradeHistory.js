@@ -3,7 +3,7 @@ import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
 import "./tradehistory.css";
 import { Triangle } from "react-loader-spinner";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
 
 export default function TradeHistory() {
   // const dispatch = useDispatch();
@@ -66,6 +66,7 @@ export default function TradeHistory() {
 
                            {h.cVolume.toFixed(2)}
                           <img
+                            alt="analog"
                             src="./images/Analog.png"
                             style={{ width: "24px" }}
                             className="tradeAnaIcon"/>

@@ -4,16 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { getSettings } from "../Api_connection/ApiFunction";
 import { setUserInfo } from "../redux/reducer/user";
-import { Triangle } from 'react-loader-spinner'
+
 import swal from "sweetalert";
 import 'react-notifications/lib/notifications.css';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
+import { Link } from "react-router-dom";
 
 const PersonalInfo = () => {
   const dispatch = useDispatch()
   const { userInfo, user } = useSelector((state) => state.user.value)
   const email = user.email;
-  const [load, setLoad] = useState({})
+
   const [showUser, setShowUser] = useState(true)
   const [showUser1, setShowUser1] = useState(true)
   const [showUser2, setShowUser2] = useState(true);
@@ -24,7 +25,7 @@ const PersonalInfo = () => {
   const [updatedUserName, setUpdatedUserName] = useState('')
   const [updatedPhone, setUpdatedPhone] = useState('')
   const [pMenu, setPMenu] = useState(0);
-  const [loader, setLoader] = useState(true)
+  // const [loader, setLoader] = useState(true)
 
   const handelReferralChange = (e) => {
     setRefferal(e.target.value)
@@ -121,17 +122,17 @@ const PersonalInfo = () => {
     if (pMenu == 0) {
       var element = document.getElementById("myBody");
       element.classList.add("toggle-shown");
-      var element = document.getElementById("toggleBtn");
+       element = document.getElementById("toggleBtn");
       element.classList.add("active");
-      var element = document.getElementById("cardAside");
+       element = document.getElementById("cardAside");
       element.classList.add("content-active");
       setPMenu(1)
     } else {
-      var element = document.getElementById("myBody");
+       element = document.getElementById("myBody");
       element.classList.remove("toggle-shown");
-      var element = document.getElementById("toggleBtn");
+       element = document.getElementById("toggleBtn");
       element.classList.remove("active");
-      var element = document.getElementById("cardAside");
+       element = document.getElementById("cardAside");
       element.classList.remove("content-active");
       setPMenu(0)
     }
@@ -139,7 +140,7 @@ const PersonalInfo = () => {
 
   useEffect(() => {
     getData();
-    setLoader(false)
+    // setLoader(false)
   }, [])
 
 
@@ -156,14 +157,14 @@ const PersonalInfo = () => {
               </div>
             </div>
             <div className="nk-block-head-content align-self-start d-lg-none">
-              <a
-                href="#"
+              <Link
+                to=""
                 className="toggle btn btn-icon btn-trigger mt-n1"
                 data-target="userAside"
                 id="toggleBtn"
               >
                 <em className="icon ni ni-menu-alt-r" onClick={profileMenu}></em>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -199,12 +200,12 @@ const PersonalInfo = () => {
                 <div className="">
 
                   <span className="">
-                    {showUser ? <a href="#" class="btn btn-dim btn-primary" onClick={() => {
+                    {showUser ? <Link to="" class="btn btn-dim btn-primary" onClick={() => {
                       if (value) {
                         updateData();
                         setShowUser(false);
                       }
-                    }}>Update</a> :
+                    }}>Update</Link> :
                       <em className="icon ni ni-lock-alt"></em>
 
                     }
@@ -263,12 +264,12 @@ const PersonalInfo = () => {
               <div className="col-4 d-flex justify-content-end">
                 <div className="">
                   <span className="">
-                    {showUser1 ? <a href="#" class="btn btn-dim btn-primary" onClick={() => {
+                    {showUser1 ? <Link to="" class="btn btn-dim btn-primary" onClick={() => {
                       if (phone) {
                         updateData();
                         setShowUser1(false);
                       }
-                    }}>Update</a> : <span className=" disable">
+                    }}>Update</Link> : <span className=" disable">
                       <em className="icon ni ni-lock-alt"></em>
                     </span>
                     }

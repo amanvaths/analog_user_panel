@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserInfo, logout, setTheme } from "../redux/reducer/user";
@@ -8,40 +8,40 @@ import { navsetter } from "../redux/actions/websiteDBAction";
 
 
 const Header = () => {
-  const [isopen, setIsopen] = useState(0);
+
   const { user, userInfo } = useSelector((state) => state.user.value)
   const email = user.email;
   const btn = useSelector((store) => store.navsetter)
   const dispatch = useDispatch()
   const navigate = useNavigate();
 
-   const sidebarMenu = async () => {
-   
-      var element = document.getElementById("myBody");
-      element.classList.add("nav-shown");
-      var element = document.getElementById("nk-sidebar");
-      element.classList.add("nk-sidebar-active");
-      var element = document.getElementById("nk-nav-toggle");
-      element.classList.add("toggle-active");
-    
-      var element1 = document.getElementById("myBody"); 
-      if(element1.classList.contains("toggle-shown")){
-        element1.classList.remove("toggle-shown") 
+  const sidebarMenu = async () => {
+
+    var element = document.getElementById("myBody");
+    element.classList.add("nav-shown");
+    element = document.getElementById("nk-sidebar");
+    element.classList.add("nk-sidebar-active");
+    element = document.getElementById("nk-nav-toggle");
+    element.classList.add("toggle-active");
+
+    var element1 = document.getElementById("myBody");
+    if (element1.classList.contains("toggle-shown")) {
+      element1.classList.remove("toggle-shown")
+    }
+    var element2 = document.getElementById("toggleBtn");
+    if (element2) {
+      if (element2.classList.contains("active")) {
+        element2.classList.remove("active")
       }
-      var element2 = document.getElementById("toggleBtn");
-      if(element2){
-        if(element2.classList.contains("active")) {
-          element2.classList.remove("active")
-        }  
-      }                                  
-      var element3 = document.getElementById("cardAside")
-      if(element3){
-        if(element3.classList.contains("content-active")){
-          element3.classList.remove("content-active") 
-        }
-          
+    }
+    var element3 = document.getElementById("cardAside")
+    if (element3) {
+      if (element3.classList.contains("content-active")) {
+        element3.classList.remove("content-active")
       }
-      
+
+    }
+
   }
 
 
@@ -50,11 +50,11 @@ const Header = () => {
     var element = document.getElementById("myBody");
     element.classList.add("dark-mode")
   } else {
-    var element = document.getElementById("myBody");
+    element = document.getElementById("myBody");
     element.classList.remove("dark-mode")
   }
 
-    
+
 
 
 
@@ -65,11 +65,14 @@ const Header = () => {
     navigate("/login")
   };
 
-  useEffect(async () => {
-    const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
-    if (data) {
-      dispatch(setUserInfo({ userInfo: data.data }))
+  useEffect(() => {
+    const fetchdata = async () => {
+      const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
+      if (data) {
+        dispatch(setUserInfo({ userInfo: data.data }))
+      }
     }
+    fetchdata().catch(console.error)
   }, [])
 
 
@@ -80,15 +83,15 @@ const Header = () => {
         <div className="container-fluid">
           <div className="nk-header-wrap">
             <div className="nk-menu-trigger d-xl-none ml-n1">
-              <a
-                href="#"
-                onClick={()=>dispatch(navsetter())} 
+              <b
+              
+                onClick={() => dispatch(navsetter())}
                 // className= "nk-nav-toggle nk-quick-nav-icon toggle-active"
                 className={btn ? "nk-nav-toggle nk-quick-nav-icon toggle-active" : "nk-nav-toggle nk-quick-nav-icon"}
                 data-target="sidebarMenu"
               >
                 <em className="icon ni ni-menu" onClick={sidebarMenu}></em>
-              </a>
+              </b>
             </div>
             <div className=" nk-header-brand d-xl-none">
               <Link to="/home" className="logo-link">
@@ -109,7 +112,7 @@ const Header = () => {
             </div>
             <div className="nk-header-news d-none d-xl-block">
               <div className="nk-news-list">
-                <a className="nk-news-item" href="#">
+                <b className="nk-news-item" >
                   <div className="nk-news-icon">
                     <em className="icon ni ni-card-view"></em>
                   </div>
@@ -123,10 +126,10 @@ const Header = () => {
                     </p>
                     <em className="icon ni ni-external"></em>
                   </div>
-                </a>
+                </b>
               </div>
             </div>
-            <div className="nk-header-tools" style={{width:"100%",display:"flex",justifyContent:"end"}}>
+            <div className="nk-header-tools" style={{ width: "100%", display: "flex", justifyContent: "end" }}>
               <ul className="nk-quick-nav">
                 <li>
                   <div className="nk-block-head logohide">
@@ -178,15 +181,15 @@ const Header = () => {
                   </div>
                 </li>
                 <li className="dropdown notification-dropdown mr-n1">
-                  <a
-                    href="#"
+                  <b
+                    
                     className="dropdown-toggle nk-quick-nav-icon"
                     data-toggle="dropdown"
                   >
                     <div className="icon-status icon-status-info">
                       <em className="icon ni ni-bell"></em>
                     </div>
-                  </a>
+                  </b>
                   <div
                     className="dropdown-menu dropdown-menu-xl dropdown-menu-right dropdown-menu-s2"
                     style={{ width: 305 }}
@@ -195,7 +198,7 @@ const Header = () => {
                       <span className="sub-title nk-dropdown-title">
                         Notifications
                       </span>
-                      <a href="#">Mark All as Read</a>
+                      <b>Mark All as Read</b>
                     </div>
                     <div className="dropdown-body">
                       <div className="nk-notification">
@@ -280,13 +283,12 @@ const Header = () => {
                       </div>
                     </div>
                     <div className="dropdown-foot center">
-                      <a href="#">View All</a>
+                      <b>View All</b>
                     </div>
                   </div>
                 </li>
                 <li className="dropdown user-dropdown">
-                  <a
-                    href="#"
+                  <b
                     className="dropdown-toggle"
                     data-toggle="dropdown"
                   >
@@ -303,7 +305,7 @@ const Header = () => {
                           </div>
                         </div> */}
                     </div>
-                  </a>
+                  </b>
 
 
                   {/* Amit */}
@@ -366,15 +368,15 @@ const Header = () => {
                           {
                             mode == 0 ? <Link to=""
                               onClick={() => {
-                                dispatch(setTheme({theme: 1}))
+                                dispatch(setTheme({ theme: 1 }))
                                 mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")
-                                } }>
+                              }}>
                               <em className="icon ni ni-moon mr-1"></em>
                               <span className="mr-1">Dark Mode</span>
                             </Link> : <Link to="" onClick={() => {
-                              dispatch(setTheme({theme: 0}))
+                              dispatch(setTheme({ theme: 0 }))
                               mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")
-                              } }>
+                            }}>
                               <em className="icon ni ni-sun mr-1"></em>
                               <span className="mr-1">Light Mode</span>
                             </Link>
@@ -385,10 +387,10 @@ const Header = () => {
                     <div className="dropdown-inner">
                       <ul className="link-list">
                         <li>
-                          <a href="#">
+                          <b  style={{cursor: "pointer"}}>
                             <em className="icon ni ni-signout"></em>
                             <span onClick={() => signOut()}>Sign out</span>
-                          </a>
+                          </b>
                         </li>
                       </ul>
                     </div>

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../Api_connection/config";
-import { Signupn } from "../Api_connection/ApiFunction";
 import { GoogleLogin } from "react-google-login";
 import swal from "sweetalert";
 import {AiOutlineEyeInvisible, AiOutlineEye} from 'react-icons/ai'
@@ -13,9 +12,7 @@ const ResetPassword = (props) => {
   const location = useLocation();
   const resetCode = location.search;
   const resetCode1 = resetCode.substring(11);
-  console.log(resetCode1, "reset code");
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [response, setResponse] = useState("");
@@ -158,17 +155,17 @@ const ResetPassword = (props) => {
         <div className="nk-split nk-split-page nk-split-md">
           <div className="nk-split-content nk-block-area nk-block-area-column nk-auth-container bg-white">
             <div className="absolute-top-right d-lg-none p-3 p-sm-5">
-              <a
-                href="#"
+              <Link
+                to=""
                 className="toggle btn-white btn btn-icon btn-light"
                 data-target="athPromo"
               >
                 <em className="icon ni ni-info"></em>
-              </a>
+              </Link>
             </div>
             <div className="nk-block nk-block-middle nk-auth-body">
               <div className="brand-logo pb-5">
-                <a href="#" className="logo-link">
+                <Link to="" className="logo-link">
                   <img
                     className="logo-light logo-img logo-img-lg"
                     src="./images/logo.png"
@@ -181,7 +178,7 @@ const ResetPassword = (props) => {
                     srcSet="./images/logo-dark2x.png 2x"
                     alt="logo-dark"
                   />
-                </a>
+                </Link>
               </div>
               <div className="nk-block-head">
                 <div className="nk-block-head-content">
@@ -226,16 +223,16 @@ const ResetPassword = (props) => {
                     </label>
                   </div>
                   <div className="form-control-wrap">
-                    <a
+                    <Link
                       tabIndex="-1"
-                      href="#"
+                      to=""
                       className="form-icon form-icon-right passcode-switch"
                       data-target="password"
                     >
                       {
                         oldPasswordShown == false ? <AiOutlineEyeInvisible onClick={togglePassword1} /> : <AiOutlineEye onClick={togglePassword1} />
                       }
-                    </a>
+                    </Link>
                     <input
                       type={oldPasswordShown ? "text" : "password"}
                       className="form-control form-control-lg"
@@ -285,16 +282,16 @@ const ResetPassword = (props) => {
                     </label>
                   </div>
                   <div className="form-control-wrap">
-                    <a
+                    <Link
                       tabIndex="-1"
-                      href="#"
+                      to=""
                       className="form-icon form-icon-right passcode-switch"
                       data-target="confirm-password"
                     >
                       {
                         newPasswordShown == false ? <AiOutlineEyeInvisible onClick={togglePassword2} /> : <AiOutlineEye onClick={togglePassword2} />
                       }
-                    </a>
+                    </Link>
                     <input
                       type={newPasswordShown ? "text" : "password"}
                       className="form-control form-control-lg"
@@ -330,8 +327,8 @@ const ResetPassword = (props) => {
               </form>
               <div className="form-note-s2 pt-4">
                 {" "}
-                Already Interact <a href="/login">Sign in</a>
-                {/* Otp Interact <a href="/EmailOtp">Resend Otp</a> */}
+                Already Interact <Link href="/login">Sign in</Link>
+                {/* Otp Interact <Link href="/EmailOtp">Resend Otp</Link> */}
               </div>
 
               <div className="text-center pt-4 pb-3">
@@ -375,69 +372,69 @@ const ResetPassword = (props) => {
               <div className="nk-block-between">
                 <ul className="nav nav-sm">
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className="nav-link" to="">
                       Terms & Condition
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className="nav-link" to="">
                       Privacy Policy
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className="nav-link" to="">
                       Help
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item dropup">
-                    <a
+                    <Link
                       className="dropdown-toggle dropdown-indicator has-indicator nav-link"
                       data-toggle="dropdown"
                       data-offset="0,10"
                     >
                       <small>English</small>
-                    </a>
+                    </Link>
                     <div className="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                       <ul className="language-list">
                         <li>
-                          <a href="#" className="language-item">
+                          <Link to="" className="language-item">
                             <img
                               src="./images/flags/english.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">English</span>
-                          </a>
+                          </Link>
                         </li>
                         <li>
-                          <a href="#" className="language-item">
+                          <Link to="" className="language-item">
                             <img
                               src="./images/flags/spanish.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">Español</span>
-                          </a>
+                          </Link>
                         </li>
                         <li>
-                          <a href="#" className="language-item">
+                          <Link to="" className="language-item">
                             <img
                               src="./images/flags/french.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">Français</span>
-                          </a>
+                          </Link>
                         </li>
                         <li>
-                          <a href="#" className="language-item">
+                          <Link to="" className="language-item">
                             <img
                               src="./images/flags/turkey.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">Türkçe</span>
-                          </a>
+                          </Link>
                         </li>
                       </ul>
                     </div>

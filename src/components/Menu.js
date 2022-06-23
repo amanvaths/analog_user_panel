@@ -1,10 +1,10 @@
-import React, { Component, useEffect, useState } from "react";
+import React, {useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
 import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
 import { setOneUsdPrice, setTotalAna } from "../redux/reducer/user";
-const { io } = require("socket.io-client");
+
 
 function Menu (){
   const dispatch = useDispatch()
@@ -59,34 +59,7 @@ function Menu (){
    const btn = useSelector(store=>store.navsetter);
    const {userInfo} = useSelector((state)=> state.user.value)
   
-   const sidebarMenu = async () => {
-   
-    var element = document.getElementById("myBody");
-    element.classList.add("nav-shown");
-    var element = document.getElementById("nk-sidebar");
-    element.classList.add("nk-sidebar-active");
-    var element = document.getElementById("nk-nav-toggle");
-    element.classList.add("toggle-active");
-  
-    var element1 = document.getElementById("myBody"); 
-    if(element1.classList.contains("toggle-shown")){
-      element1.classList.remove("toggle-shown") 
-    }
-    var element2 = document.getElementById("toggleBtn");
-    if(element2){
-      if(element2.classList.contains("active")) {
-        element2.classList.remove("active")
-      }  
-    }                                  
-    var element3 = document.getElementById("cardAside")
-    if(element3){
-      if(element3.classList.contains("content-active")){
-        element3.classList.remove("content-active") 
-      }
-        
-    }
-    
-}
+ 
 
     return (
       <>
@@ -96,8 +69,8 @@ function Menu (){
         >
           <div className="nk-sidebar-element nk-sidebar-head">
             <div className="nk-sidebar-brand">
-              <a
-                href="/home"
+              <Link
+                to=""
                 className="logo-link nk-sidebar-logo"
               >
                 <img
@@ -113,16 +86,16 @@ function Menu (){
                   alt="logo-dark"                
                 />
                 {/* <span className="nio-version">ANALOG</span> */}
-              </a>
+              </Link>
             </div>
             <div className="nk-menu-trigger mr-n2" >
-              <a
-                href="#"
+              <Link
+                to=""
                 className="nk-nav-toggle nk-quick-nav-icon d-xl-none"
                 data-target="sidebarMenu" id="nk-nav-toggle"
               >
                 <em className="icon ni ni-arrow-left"  ></em>
-              </a>
+              </Link>
             </div>
           </div>
           <div className="nk-sidebar-element">
@@ -185,10 +158,11 @@ function Menu (){
                             </div> */}
                 </div>
                 <div className="nk-sidebar-widget nk-sidebar-widget-full d-xl-none pt-0">
-                  <a
+                  <Link
+                  to=""
                     className="nk-profile-toggle toggle-expand"
                     data-target="sidebarProfile"
-                    href="#"
+                 
                   >
                     <div className="user-card-wrap">
                       <div className="user-card">
@@ -206,96 +180,12 @@ function Menu (){
                         </div>
                       </div>
                     </div>
-                  </a>
+                  </Link>
                   <div
                     className="nk-profile-content toggle-expand-content"
                     data-content="sidebarProfile"
                   >
-                    <div className="user-account-info between-center">
-                      <div className="user-account-main">
-                        <h6 className="overline-title-alt">
-                          Available Balance
-                        </h6>
-                        <div className="user-balance">
-                          2.014095{" "}
-                          <small className="currency currency-btc">ANA</small>
-                        </div>
-                        <div className="user-balance-alt">
-                          18,934.84{" "}
-                          <span className="currency currency-btc">USD</span>
-                        </div>
-                      </div>
-                      
-                    </div>
-                    <ul className="user-account-data">
-                      <li>
-                        <div className="user-account-label">
-                          <span className="sub-text">Profits (7d)</span>
-                        </div>
-                        <div className="user-account-value">
-                          <span className="lead-text">
-                            + 0.0526{" "}
-                            <span className="currency currency-btc">ANA</span>
-                          </span>
-                          <span className="text-success ml-2">
-                            3.1% <em className="icon ni ni-arrow-long-up"></em>
-                          </span>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="user-account-label">
-                          <span className="sub-text">Deposit in orders</span>
-                        </div>
-                        <div className="user-account-value">
-                          <span className="sub-text text-base">
-                            0.005400{" "}
-                            <span className="currency currency-btc">BTC</span>
-                          </span>
-                        </div>
-                      </li>
-                    </ul>
-                    <ul className="user-account-links">
-                      <li>
-                        <a href="#" className="link">
-                          <span>Withdraw Funds</span>{" "}
-                          <em className="icon ni ni-wallet-out"></em>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="link">
-                          <span>Deposit Funds</span>{" "}
-                          <em className="icon ni ni-wallet-in"></em>
-                        </a>
-                      </li>
-                    </ul>
-                    <ul className="link-list">
-                      <li>
-                        <a href="html/crypto/profile.html">
-                          <em className="icon ni ni-user-alt"></em>
-                          <span>View Profile</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="html/crypto/profile-security.html">
-                          <em className="icon ni ni-setting-alt"></em>
-                          <span>Account Setting</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="html/crypto/profile-activity.html">
-                          <em className="icon ni ni-activity-alt"></em>
-                          <span>Login Activity</span>
-                        </a>
-                      </li>
-                    </ul>
-                    <ul className="link-list">
-                      <li>
-                        <a href="#">
-                          <em className="icon ni ni-signout"></em>
-                          <span>Sign out</span>
-                        </a>
-                      </li>
-                    </ul>
+                    
                   </div>
                 </div>
                 <div className="nk-sidebar-menu">
@@ -338,64 +228,7 @@ function Menu (){
                         <span className="nk-menu-text">Buy / Sell</span>
                       </Link>
                     </li>
-                    {/* <li className="nk-menu-item">
-                      <a
-                        href="#"
-                        className="nk-menu-link"
-                      >
-                        <span className="nk-menu-icon">
-                          <em className="icon ni ni-repeat"></em>
-                        </span>
-                        <span className="nk-menu-text">Orders</span>
-                      </a>
-                    </li> */}
-                    {/* <li className="nk-menu-item">
-                      <a href="html/crypto/chats.html" className="nk-menu-link">
-                        <span className="nk-menu-icon">
-                          <em className="icon ni ni-chat-circle"></em>
-                        </span>
-                        <span className="nk-menu-text">Chats</span>
-                      </a>
-                    </li> */}
-
-                    {/* <li className="nk-menu-item has-sub">
-                      <a href="#" className="nk-menu-link nk-menu-toggle">
-                        <span className="nk-menu-icon">
-                          <em className="icon ni ni-files"></em>
-                        </span>
-                        <span className="nk-menu-text">Additional Pages</span>
-                      </a>
-                      <ul className="nk-menu-sub">
-                        <li className="nk-menu-item">
-                          <a
-                            href="html/crypto/welcome.html"
-                            className="nk-menu-link"
-                          >
-                            <span className="nk-menu-text">Welcome</span>
-                          </a>
-                        </li>
-                        <li className="nk-menu-item">
-                          <a
-                            href="html/crypto/kyc-application.html"
-                            className="nk-menu-link"
-                          >
-                            <span className="nk-menu-text">
-                              KYC - Get Started
-                            </span>
-                          </a>
-                        </li>
-                        <li className="nk-menu-item">
-                          <a
-                            href="html/crypto/kyc-form.html"
-                            className="nk-menu-link"
-                          >
-                            <span className="nk-menu-text">
-                              KYC - Application Form
-                            </span>
-                          </a>
-                        </li>
-                      </ul>
-                    </li> */}
+                    
 
 
                     {/* Add Line */}
@@ -408,57 +241,7 @@ function Menu (){
                         <span class="nk-menu-text">Affiliate</span>
                       </Link>
                     </li>
-                    {/* <li className="nk-menu-heading">
-                      <h6 className="overline-title">Fundamentals</h6>
-                    </li>
-                    <li className="nk-menu-item">
-                      <a href="html/index.html" className="nk-menu-link">
-                        <span className="nk-menu-icon">
-                          <em className="icon ni ni-dashlite"></em>
-                        </span>
-                        <span className="nk-menu-text">Energy</span>
-                      </a>
-                    </li>
-                    <li className="nk-menu-item">
-                      <a href="html/components.html" className="nk-menu-link">
-                        <span className="nk-menu-icon">
-                          <em className="icon ni ni-layers"></em>
-                        </span>
-                        <span className="nk-menu-text">Radiation</span>
-                      </a>
-                    </li>
-                    <li className="nk-menu-item">
-                      <a href="html/components.html" className="nk-menu-link">
-                        <span className="nk-menu-icon">
-                          <em className="icon ni ni-layers"></em>
-                        </span>
-                        <span className="nk-menu-text">Shield</span>
-                      </a>
-                    </li>
-                    <li className="nk-menu-item">
-                      <a href="html/components.html" className="nk-menu-link">
-                        <span className="nk-menu-icon">
-                          <em className="icon ni ni-layers"></em>
-                        </span>
-                        <span className="nk-menu-text">Salvage</span>
-                      </a>
-                    </li>
-                    <li class="nk-menu-item">
-                      <Link to="html/components.html" class="nk-menu-link">
-                        <span class="nk-menu-icon">
-                          <em class="icon ni ni-layers"></em>
-                        </span>
-                        <span class="nk-menu-text">Affiliate</span>
-                      </Link>
-                    </li>
-                    <li className="nk-menu-item">
-                      <a href="html/components.html" className="nk-menu-link">
-                        <span className="nk-menu-icon">
-                          <em className="icon ni ni-layers"></em>
-                        </span>
-                        <span className="nk-menu-text">Plebiscite</span>
-                      </a>
-                    </li> */}
+                   
                   </ul>
                 </div>
                 <div className="nk-sidebar-widget">
@@ -472,7 +255,7 @@ function Menu (){
                   </div>
                   <ul className="wallet-list">
                     <li className="wallet-item">
-                      <a href="#">
+                      <Link to="">
                         <div className="wallet-icon">
                           <em className="icon ni ni-sign-kobo"></em>
                         </div>
@@ -486,49 +269,26 @@ function Menu (){
                             </span>
                           </span>
                         </div>
-                      </a>
+                      </Link>
                     </li>
-                    {/* <li className="wallet-item">
-                      <a href="#">
-                        <div className="wallet-icon">
-                          <em className="icon ni ni-sign-btc"></em>
-                        </div>
-                        <div className="wallet-text">
-                          <h6 className="wallet-name">Bitcoin Wallet</h6>
-                          <span className="wallet-balance">
-                            0.0495950{" "}
-                            <span className="currency currency-btc">BTC</span>
-                          </span>
-                        </div>
-                      </a>
-                    </li> */}
-                    {/* <li className="wallet-item wallet-item-add">
-                      <a href="#">
-                        <div className="wallet-icon">
-                          <em className="icon ni ni-plus"></em>
-                        </div>
-                        <div className="wallet-text">
-                          <h6 className="wallet-name">Add another wallet</h6>
-                        </div>
-                      </a>
-                    </li> */}
+                    
                   </ul>
                 </div>
                 <div className="nk-sidebar-footer">
                   <ul className="nk-menu nk-menu-footer">
                     <li className="nk-menu-item">
-                      <a href="#" className="nk-menu-link">
+                      <Link to="" className="nk-menu-link">
                         <span className="nk-menu-icon">
                           <em className="icon ni ni-help-alt"></em>
                         </span>
                         <span className="nk-menu-text">Support</span>
-                      </a>
+                      </Link>
                     </li>
 
                     <li className="nk-menu-item ml-auto">
                       <div className="dropup">
-                        <a
-                          href="#"
+                        <Link
+                          to=""
                           className="nk-menu-link dropdown-indicator has-indicator"
                           data-toggle="dropdown"
                           data-offset="0,10"
@@ -537,48 +297,48 @@ function Menu (){
                             <em className="icon ni ni-globe"></em>
                           </span>
                           <span className="nk-menu-text">English</span>
-                        </a>
+                        </Link>
                         <div className="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                           <ul className="language-list">
                             <li>
-                              <a href="#" className="language-item">
+                              <Link to="" className="language-item">
                                 <img
                                   src="images/flags/english.png"
                                   alt=""
                                   className="language-flag"
                                 />
                                 <span className="language-name">English</span>
-                              </a>
+                              </Link>
                             </li>
                             <li>
-                              <a href="#" className="language-item">
+                              <Link to="" className="language-item">
                                 <img
                                   src="images/flags/spanish.png"
                                   alt=""
                                   className="language-flag"
                                 />
                                 <span className="language-name">Español</span>
-                              </a>
+                              </Link>
                             </li>
                             <li>
-                              <a href="#" className="language-item">
+                              <Link to="" className="language-item">
                                 <img
                                   src="images/flags/french.png"
                                   alt=""
                                   className="language-flag"
                                 />
                                 <span className="language-name">Français</span>
-                              </a>
+                              </Link>
                             </li>
                             <li>
-                              <a href="#" className="language-item">
+                              <Link to="" className="language-item">
                                 <img
                                   src="images/flags/turkey.png"
                                   alt=""
                                   className="language-flag"
                                 />
                                 <span className="language-name">Türkçe</span>
-                              </a>
+                              </Link>
                             </li>
                           </ul>
                         </div>

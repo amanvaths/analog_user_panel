@@ -1,5 +1,4 @@
-import React, {Component} from 'react';
-import Particles from 'react-particles-js';
+import React from 'react';
 import Menu from '../components/Menu';
 import Header from '../components/Header';
 import Footer from '../components/Footer';

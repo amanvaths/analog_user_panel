@@ -10,7 +10,7 @@ import { profileMenu } from '../Api_connection/ApiFunction';
 import swal from 'sweetalert'
 
 const SecuritySettings = () => {
-  const { userInfo, settingPages, user } = useSelector((state) => state.user.value)
+  const { userInfo, user } = useSelector((state) => state.user.value)
   console.log(":: USER INFO::::", userInfo);
   const [otp, setOtp] = useState("");
   const [otpD, setOtpD] = useState("");
@@ -19,12 +19,12 @@ const SecuritySettings = () => {
   
 
   const email = user.email
-  const [lable, setLable] = useState(false);
+ 
   const [security, setSecurityKey] = useState("")
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [pMenu, setPMenu] = useState(0);
+
 
   const handleClose1 = () => setShow1(false);
   const  handleShow1 = () => setShow1(true);
@@ -43,11 +43,16 @@ const SecuritySettings = () => {
     }
   }
 
-  useEffect(async()=>{
-    const data = await axios.post(`${BASE_URL}/configSettings`, {email: email})
-    if(data){
-      dispatch(setUserInfo({userInfo: data.data}))
+  useEffect(()=>{
+    const conSetting = async()=>{
+      const data = await axios.post(`${BASE_URL}/configSettings`, {email: email})
+      if(data){
+        dispatch(setUserInfo({userInfo: data.data}))
+      }
     }
+
+    conSetting()
+    
   },[])
 
   return (
@@ -67,13 +72,13 @@ const SecuritySettings = () => {
             <div
               className="nk-block-head-content align-self-start d-lg-none"
             >
-              <a
-                href="#"
+              <Link
+                to=""
                 className="toggle btn btn-icon btn-trigger mt-n1"
                 data-target="userAside"
                 id = "toggleBtn"
               ><em className="icon ni ni-menu-alt-r" onClick={ profileMenu }></em
-              ></a>
+              ></Link>
             </div>
           </div>
         </div>
@@ -228,6 +233,7 @@ const SecuritySettings = () => {
                         <div className='col-6'>
                           <div className=''>
                             <img
+                            alt='qr'
                               src={security.qr_url}
                               style={{ height: "150px" }}
                             />

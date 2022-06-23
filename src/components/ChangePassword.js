@@ -29,7 +29,7 @@ const ChangePassword = () => {
         try {
             const data = await axios.post('http://localhost:3001/api/change_password',{email: email, old_password: oldPassword, new_password: newPassword})
             console.log(data.data)
-            if(data.data.status == 1){
+            if(data.data.status === 1){
                 swal("Password Changed Successfully", "Please Login", "success");
           setTimeout(() => {
             navigate("/login");
@@ -119,13 +119,13 @@ const ChangePassword = () => {
 
     const handelFormSubmit = (oldPassword, newPassword, confirmPassword) => {
 
-        if (oldPassword == "") {
+        if (oldPassword === "") {
             setOldPasswordError(true);
         }
-        if (newPassword == '') {
+        if (newPassword === '') {
             setNewPasswordError(true)
         }
-        if (confirmPassword == "") {
+        if (confirmPassword === "") {
             setConfirmPasswordError(true);
         }
         if (oldPassword !== "" && newPassword !== "" && confirmPassword !== "") {
@@ -145,10 +145,10 @@ const ChangePassword = () => {
                                 <p></p>
                             </div>
                         </div>
-                        <div class="nk-block-head-content align-self-start d-lg-none"><a
-                            href="#" class="toggle btn btn-icon btn-trigger mt-n1"
+                        <div class="nk-block-head-content align-self-start d-lg-none"><b
+                             class="toggle btn btn-icon btn-trigger mt-n1"
                             data-target="userAside"><em
-                                class="icon ni ni-menu-alt-r"></em></a></div>
+                                class="icon ni ni-menu-alt-r"></em></b></div>
                     </div>
                 </div>
                 <div className='container w-80'>
@@ -164,16 +164,16 @@ const ChangePassword = () => {
                                 </label>
                             </div>
                             <div className="form-control-wrap">
-                                <a
+                                <b
                                     tabIndex="-1"
-                                    href="#"
+                                    
                                     className="form-icon form-icon-right passcode-switch"
                                     data-target="password"
                                 >
                                     {
                                         oldPasswordShown == false ? <AiOutlineEyeInvisible onClick={togglePassword1}/> : <AiOutlineEye onClick={togglePassword1}/>
                                     }
-                                </a>
+                                </b>
                                 <input
                                     type={oldPasswordShown ? "text" : "password"}
                                     className="form-control form-control-lg"
@@ -222,9 +222,9 @@ const ChangePassword = () => {
                                 </label>
                             </div>
                             <div className="form-control-wrap">
-                                <a
+                                <b
                                     tabIndex="-1"
-                                    href="#"
+                                  
                                     className="form-icon form-icon-right passcode-switch"
                                     data-target="password"
                                 >
@@ -233,7 +233,7 @@ const ChangePassword = () => {
                                     }
                                     
                 
-                                </a>
+                                </b>
                                 <input
                                     type={newPasswordShown ? "text" : "password"}
                                     className="form-control form-control-lg"
@@ -285,16 +285,16 @@ const ChangePassword = () => {
                                 </label>
                             </div>
                             <div className="form-control-wrap">
-                                <a
+                                <b
                                     tabIndex="-1"
-                                    href="#"
+                                   
                                     className="form-icon form-icon-right passcode-switch"
                                     data-target="confirm-password"
                                 >
                                     {
                                         confirmPasswordShown == false ? <AiOutlineEyeInvisible onClick={togglePassword3}/> : <AiOutlineEye onClick={togglePassword3}/>
                                     }
-                                </a>
+                                </b>
                                 <input 
                                     
                                     type={confirmPasswordShown ? "text" : "password"}

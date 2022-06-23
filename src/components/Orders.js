@@ -232,6 +232,7 @@ export default function Orders() {
                               {" "}
                               {h.cVolume?.toFixed(2)}
                               <img
+                              alt="analog"
                                 src="./images/Analog.png"
                                 style={{ width: "17px" }}
                                 className="img"

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
+
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+
+
 
 const AffiliatCard = (props) => {
-const navigate = useNavigate()
+
 
     return (
         <>

@@ -6,19 +6,17 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { BASE_URL } from "../Api_connection/config";
 import AffiliatCard from "../components/AffiliateCard";
-import { setUserInfo } from "../redux/reducer/user";
-import { Bars, ThreeDots } from 'react-loader-spinner'
+import { Bars} from 'react-loader-spinner'
 import { MdMoreHoriz } from 'react-icons/md'
-import Paginate from "../components/Pagination";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import ReactPaginate from 'react-paginate';
 
 const Handout= (props) => {
   const { user, userInfo, oneUsdPrice } = useSelector((state) => state.user.value)
   const email = user?.email
   const [affiliates, setAffiliates] = useState([]);
-  const [affiliateCount, setAffiliatesCount] = useState(0)
-  const [currentPage, setCurrentPage] = useState(1);
+ 
+  
 
   const [level, setLevel] = useState(1)
   const [level1, setLevel1] = useState(true)
@@ -95,13 +93,13 @@ const Handout= (props) => {
                     </div>
                     <div class="nk-block-head-content affiliates">
                       <div class="toggle-wrap nk-block-tools-toggle">
-                        <a
-                          href="#"
+                        <Link
+                          to=""
                           class="btn btn-icon btn-trigger toggle-expand me-n1"
                           data-target="pageMenu"
                         >
                           <em class="icon ni ni-menu-alt-r"></em>
-                        </a>
+                        </Link>
                         <div
                           class="toggle-expand-content"
                           data-content="pageMenu"
@@ -164,7 +162,7 @@ const Handout= (props) => {
                           <div className="nk-block-des text-soft">
                             <ul class="nk-block-tools g-3" style={{ paddingLeft: "0px" }}>
                               <li>
-                                <a className={level1 ? 'btn btn-white btn-dim btn-outline-light active' :
+                                <Link className={level1 ? 'btn btn-white btn-dim btn-outline-light active' :
                                   "btn btn-white btn-dim btn-outline-light"} onClick={() => {
                                     setLevel1(true)
                                     setLevel2(false)
@@ -172,10 +170,10 @@ const Handout= (props) => {
                                     setTab([])
                                     getAffiliateList(1)
                                   }}>
-                                  <span>Level 1</span></a>
+                                  <span>Level 1</span></Link>
                               </li>
                               <li>
-                                <a className={level2 ? 'btn btn-white btn-dim btn-outline-light active' :
+                                <Link className={level2 ? 'btn btn-white btn-dim btn-outline-light active' :
                                   "btn btn-white btn-dim btn-outline-light"} onClick={() => {
                                     setLevel1(false)
                                     setLevel2(true)
@@ -183,10 +181,10 @@ const Handout= (props) => {
                                     setTab([])
                                     getAffiliateList(2)
                                   }}>
-                                  <span>Level 2</span></a>
+                                  <span>Level 2</span></Link>
                               </li>
                               <li>
-                                <a className={level3 ? 'btn btn-white btn-dim btn-outline-light active' :
+                                <Link className={level3 ? 'btn btn-white btn-dim btn-outline-light active' :
                                   "btn btn-white btn-dim btn-outline-light"} onClick={() => {
                                     setLevel1(false)
                                     setLevel2(false)
@@ -194,20 +192,20 @@ const Handout= (props) => {
                                     setTab([])
                                     getAffiliateList(3)
                                   }}>
-                                  <span>Level 3</span></a>
+                                  <span>Level 3</span></Link>
                               </li>
                             </ul>
                           </div>
                         </div>
                         <div className="nk-block-head-content">
                           <div className="toggle-wrap nk-block-tools-toggle">
-                            <a
-                              href="#"
+                            <Link
+                              to=""
                               className="btn btn-icon btn-trigger toggle-expand mr-n1"
                               data-target="pageMenu"
                             >
                               <em className="icon ni ni-menu-alt-r"></em>
-                            </a>
+                            </Link>
                             <div
                               className="toggle-expand-content"
                               data-content="pageMenu">
@@ -223,29 +221,29 @@ const Handout= (props) => {
                                     </li>
                                     {/* <li className="nk-block-tools-opt">
                                       <div className="drodown">
-                                        <a
-                                          href="#"
+                                        <Link
+                                          to=""
                                           className="dropdown-toggle btn btn-icon btn-primary"
                                           data-toggle="dropdown"
                                         >
                                           <em className="icon ni ni-plus"></em>
-                                        </a>
+                                        </Link>
                                         <div className="dropdown-menu dropdown-menu-right">
                                           <ul className="link-list-opt no-bdr">
                                             <li>
-                                              <a href="#">
+                                              <Link to="">
                                                 <span>Add User</span>
-                                              </a>
+                                              </Link>
                                             </li>
                                             <li>
-                                              <a href="#">
+                                              <Link to="">
                                                 <span>Add Team</span>
-                                              </a>
+                                              </Link>
                                             </li>
                                             <li>
-                                              <a href="#">
+                                              <Link to="">
                                                 <span>Import User</span>
-                                              </a>
+                                              </Link>
                                             </li>
                                           </ul>
                                         </div>
@@ -318,7 +316,7 @@ const Handout= (props) => {
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
                                             <span style={{ color: "green" }}>{element?.totalBuy?.toFixed(2)} ANA</span>
-                                            <img src="./images/Analog.png" style={{ width: "24px" }} />
+                                            <img alt="analog" src="./images/Analog.png" style={{ width: "24px" }} />
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
                                             <span style={{ color: "red" }}>
@@ -446,79 +444,79 @@ const Handout= (props) => {
                                                 <div className="nk-tb-col nk-tb-col-tools">
                                                   <ul className="nk-tb-actions gx-2">
                                                     <li className="nk-tb-action-hidden">
-                                                      <a
-                                                        href="#"
+                                                      <Link
+                                                        to=""
                                                         className="btn btn-sm btn-icon btn-trigger"
                                                         data-toggle="tooltip"
                                                         data-placement="top"
                                                         title="Wallet"
                                                       >
                                                         <em className="icon ni ni-wallet-fill"></em>
-                                                      </a>
+                                                      </Link>
                                                     </li>
                                                     <li className="nk-tb-action-hidden">
-                                                      <a
-                                                        href="#"
+                                                      <Link
+                                                        to=""
                                                         className="btn btn-sm btn-icon btn-trigger"
                                                         data-toggle="tooltip"
                                                         data-placement="top"
                                                         title="Send Email"
                                                       >
                                                         <em className="icon ni ni-mail-fill"></em>
-                                                      </a>
+                                                      </Link>
                                                     </li>
                                                     <li className="nk-tb-action-hidden">
-                                                      <a
-                                                        href="#"
+                                                      <Link
+                                                        to=""
                                                         className="btn btn-sm btn-icon btn-trigger"
                                                         data-toggle="tooltip"
                                                         data-placement="top"
                                                         title="Suspend"
                                                       >
                                                         <em className="icon ni ni-user-cross-fill"></em>
-                                                      </a>
+                                                      </Link>
                                                     </li>
                                                     <li>
                                                       <div className="drodown">
-                                                        <a
-                                                          href="#"
+                                                        <Link
+                                                          to=""
                                                           className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
                                                           data-toggle="dropdown"
                                                         >
                                                           <em className="icon ni ni-more-h"></em>
-                                                        </a>
+                                                        </Link>
                                                         <div className="dropdown-menu dropdown-menu-right">
                                                           <ul className="link-list-opt no-bdr">
                                                             <li>
-                                                              <a href="#">
+                                                              <Link to="">
                                                                 <em className="icon ni ni-eye"></em>
                                                                 <span>View Details</span>
-                                                              </a>
+                                                              </Link>
                                                             </li>
                                                             <li>
-                                                              <a href="#">
+                                                              <Link to="">
                                                                 <em className="icon ni ni-repeat"></em>
                                                                 <span>Orders</span>
-                                                              </a>
+                                                              </Link>
                                                             </li>
                                                             <li className="divider"></li>
                                                             <li>
-                                                              <a href="#">
+                                                              <Link to="">
                                                                 <em className="icon ni ni-shield-star"></em>
                                                                 <span>Reset Pass</span>
-                                                              </a>
+                                                              </Link>
                                                             </li>
                                                             <li>
-                                                              <a href="#">
+                                                              <Link to="">
                                                                 <em className="icon ni ni-shield-off"></em>
                                                                 <span>Reset 2FA</span>
-                                                              </a>
+                                                              </Link>
                                                             </li>
                                                             <li>
-                                                              <a href="#">
+                                                              <Link to="">
                                                                 <em className="icon ni ni-na"></em>
                                                                 <span>Suspend User</span>
-                                                              </a>
+                                                              </Link>
                                                             </li>
                                                           </ul>
                                                         </div>
@@ -533,19 +531,19 @@ const Handout= (props) => {
                             <div className="card-inner">
                               <ul className="pagination justify-content-center justify-content-md-center">
                                 <li className="page-item">
-                                  <a className="page-link" href="#">
+                                  <Link className="page-link" to="">
                                     Prev
-                                  </a>
+                                  </Link>
                                 </li>
                                 <li className="page-item">
-                                  <a className="page-link" href="#">
+                                  <Link className="page-link" to="">
                                     1
-                                  </a>
+                                  </Link>
                                 </li>
                                 <li className="page-item">
-                                  <a className="page-link" href="#">
+                                  <Link className="page-link" to="">
                                     2
-                                  </a>
+                                  </Link>
                                 </li>
                                 <li className="page-item">
                                   <span className="page-link">
@@ -553,19 +551,19 @@ const Handout= (props) => {
                                   </span>
                                 </li>
                                 <li className="page-item">
-                                  <a className="page-link" href="#">
+                                  <Link className="page-link" to="">
                                     6
-                                  </a>
+                                  </Link>
                                 </li>
                                 <li className="page-item">
-                                  <a className="page-link" href="#">
+                                  <Link className="page-link" to="">
                                     7
-                                  </a>
+                                  </Link>
                                 </li>
                                 <li className="page-item">
-                                  <a className="page-link" href="#">
+                                  <Link className="page-link" to="">
                                     Next
-                                  </a>
+                                  </Link>
                                 </li>
                               </ul>
                             </div>
@@ -635,7 +633,7 @@ const Handout= (props) => {
                                           </div>
                                           <div className="nk-tb-col tb-col-sm" style={{color: "green"}}>
                                             <span className="tb-text">{element?.totalBuy?.toFixed(2)} ANA</span>
-                                            <img src="./images/Analog.png" style={{ width: "24px" }} />
+                                            <img alt="analog" src="./images/Analog.png" style={{ width: "24px" }} />
                                           </div>
                                           <div className="nk-tb-col tb-col-sm" style={{color: "red"}}>
                                             <span className="tb-text">
@@ -761,79 +759,79 @@ const Handout= (props) => {
                                             <div className="nk-tb-col nk-tb-col-tools">
                                               <ul className="nk-tb-actions gx-2">
                                                 <li className="nk-tb-action-hidden">
-                                                  <a
-                                                    href="#"
+                                                  <Link
+                                                    to=""
                                                     className="btn btn-sm btn-icon btn-trigger"
                                                     data-toggle="tooltip"
                                                     data-placement="top"
                                                     title="Wallet"
                                                   >
                                                     <em className="icon ni ni-wallet-fill"></em>
-                                                  </a>
+                                                  </Link>
                                                 </li>
                                                 <li className="nk-tb-action-hidden">
-                                                  <a
-                                                    href="#"
+                                                  <Link
+                                                    to=""
                                                     className="btn btn-sm btn-icon btn-trigger"
                                                     data-toggle="tooltip"
                                                     data-placement="top"
                                                     title="Send Email"
                                                   >
                                                     <em className="icon ni ni-mail-fill"></em>
-                                                  </a>
+                                                  </Link>
                                                 </li>
                                                 <li className="nk-tb-action-hidden">
-                                                  <a
-                                                    href="#"
+                                                  <Link
+                                                    to=""
                                                     className="btn btn-sm btn-icon btn-trigger"
                                                     data-toggle="tooltip"
                                                     data-placement="top"
                                                     title="Suspend"
                                                   >
                                                     <em className="icon ni ni-user-cross-fill"></em>
-                                                  </a>
+                                                  </Link>
                                                 </li>
                                                 <li>
                                                   <div className="drodown">
-                                                    <a
-                                                      href="#"
+                                                    <Link
+                                                      to=""
                                                       className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
                                                       data-toggle="dropdown"
                                                     >
                                                       <em className="icon ni ni-more-h"></em>
-                                                    </a>
+                                                    </Link>
                                                     <div className="dropdown-menu dropdown-menu-right">
                                                       <ul className="link-list-opt no-bdr">
                                                         <li>
-                                                          <a href="#">
+                                                          <Link to="">
                                                             <em className="icon ni ni-eye"></em>
                                                             <span>View Details</span>
-                                                          </a>
+                                                          </Link>
                                                         </li>
                                                         <li>
-                                                          <a href="#">
+                                                          <Link to="">
                                                             <em className="icon ni ni-repeat"></em>
                                                             <span>Orders</span>
-                                                          </a>
+                                                          </Link>
                                                         </li>
                                                         <li className="divider"></li>
                                                         <li>
-                                                          <a href="#">
+                                                          <Link to="">
                                                             <em className="icon ni ni-shield-star"></em>
                                                             <span>Reset Pass</span>
-                                                          </a>
+                                                          </Link>
                                                         </li>
                                                         <li>
-                                                          <a href="#">
+                                                          <Link to="">
                                                             <em className="icon ni ni-shield-off"></em>
                                                             <span>Reset 2FA</span>
-                                                          </a>
+                                                          </Link>
                                                         </li>
                                                         <li>
-                                                          <a href="#">
+                                                          <Link to="">
                                                             <em className="icon ni ni-na"></em>
                                                             <span>Suspend User</span>
-                                                          </a>
+                                                          </Link>
                                                         </li>
                                                       </ul>
                                                     </div>
@@ -848,19 +846,19 @@ const Handout= (props) => {
                             <div className="card-inner">
                               <ul className="pagination justify-content-center justify-content-md-center">
                                 <li className="page-item">
-                                  <a className="page-link" href="#">
+                                  <Link className="page-link" to="">
                                     Prev
-                                  </a>
+                                  </Link>
                                 </li>
                                 <li className="page-item">
-                                  <a className="page-link" href="#">
+                                  <Link className="page-link" to="">
                                     1
-                                  </a>
+                                  </Link>
                                 </li>
                                 <li className="page-item">
-                                  <a className="page-link" href="#">
+                                  <Link className="page-link" to="">
                                     2
-                                  </a>
+                                  </Link>
                                 </li>
                                 <li className="page-item">
                                   <span className="page-link">
@@ -868,19 +866,19 @@ const Handout= (props) => {
                                   </span>
                                 </li>
                                 <li className="page-item">
-                                  <a className="page-link" href="#">
+                                  <Link className="page-link" to="">
                                     6
-                                  </a>
+                                  </Link>
                                 </li>
                                 <li className="page-item">
-                                  <a className="page-link" href="#">
+                                  <Link className="page-link" to="">
                                     7
-                                  </a>
+                                  </Link>
                                 </li>
                                 <li className="page-item">
-                                  <a className="page-link" href="#">
+                                  <Link className="page-link" to="">
                                     Next
-                                  </a>
+                                  </Link>
                                 </li>
                               </ul>
                             </div>
@@ -957,7 +955,7 @@ const Handout= (props) => {
                                             </div>
                                             <div className="nk-tb-col tb-col-sm" style={{color: "green"}}>
                                               <span className="tb-text">{element?.totalBuy?.toFixed(2)} ANA</span>
-                                              <img src="./images/Analog.png" style={{ width: "24px" }} />
+                                              <img alt="analog" src="./images/Analog.png" style={{ width: "24px" }} />
                                             </div>
                                             <div className="nk-tb-col tb-col-sm" style={{color: "red"}}>
                                               <span className="tb-text">
@@ -1088,79 +1086,79 @@ const Handout= (props) => {
                                             <div className="nk-tb-col nk-tb-col-tools">
                                               <ul className="nk-tb-actions gx-2">
                                                 <li className="nk-tb-action-hidden">
-                                                  <a
-                                                    href="#"
+                                                  <Link
+                                                    to=""
                                                     className="btn btn-sm btn-icon btn-trigger"
                                                     data-toggle="tooltip"
                                                     data-placement="top"
                                                     title="Wallet"
                                                   >
                                                     <em className="icon ni ni-wallet-fill"></em>
-                                                  </a>
+                                                  </Link>
                                                 </li>
                                                 <li className="nk-tb-action-hidden">
-                                                  <a
-                                                    href="#"
+                                                  <Link
+                                                    to=""
                                                     className="btn btn-sm btn-icon btn-trigger"
                                                     data-toggle="tooltip"
                                                     data-placement="top"
                                                     title="Send Email"
                                                   >
                                                     <em className="icon ni ni-mail-fill"></em>
-                                                  </a>
+                                                  </Link>
                                                 </li>
                                                 <li className="nk-tb-action-hidden">
-                                                  <a
-                                                    href="#"
+                                                  <Link
+                                                    to=""
                                                     className="btn btn-sm btn-icon btn-trigger"
                                                     data-toggle="tooltip"
                                                     data-placement="top"
                                                     title="Suspend"
                                                   >
                                                     <em className="icon ni ni-user-cross-fill"></em>
-                                                  </a>
+                                                  </Link>
                                                 </li>
                                                 <li>
                                                   <div className="drodown">
-                                                    <a
-                                                      href="#"
+                                                    <Link
+                                                      to=""
                                                       className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
                                                       data-toggle="dropdown"
                                                     >
                                                       <em className="icon ni ni-more-h"></em>
-                                                    </a>
+                                                    </Link>
                                                     <div className="dropdown-menu dropdown-menu-right">
                                                       <ul className="link-list-opt no-bdr">
                                                         <li>
-                                                          <a href="#">
+                                                          <Link to="">
                                                             <em className="icon ni ni-eye"></em>
                                                             <span>View Details</span>
-                                                          </a>
+                                                          </Link>
                                                         </li>
                                                         <li>
-                                                          <a href="#">
+                                                          <Link to="">
                                                             <em className="icon ni ni-repeat"></em>
                                                             <span>Orders</span>
-                                                          </a>
+                                                          </Link>
                                                         </li>
                                                         <li className="divider"></li>
                                                         <li>
-                                                          <a href="#">
+                                                          <Link to="">
                                                             <em className="icon ni ni-shield-star"></em>
                                                             <span>Reset Pass</span>
-                                                          </a>
+                                                          </Link>
                                                         </li>
                                                         <li>
-                                                          <a href="#">
+                                                          <Link to="">
                                                             <em className="icon ni ni-shield-off"></em>
                                                             <span>Reset 2FA</span>
-                                                          </a>
+                                                          </Link>
                                                         </li>
                                                         <li>
-                                                          <a href="#">
+                                                          <Link to="">
                                                             <em className="icon ni ni-na"></em>
                                                             <span>Suspend User</span>
-                                                          </a>
+                                                          </Link>
                                                         </li>
                                                       </ul>
                                                     </div>
@@ -1198,19 +1196,19 @@ const Handout= (props) => {
                              {/* <div className="card-inner">
                               <ul className="pagination justify-content-center justify-content-md-center">
                                 <li className="page-item">
-                                  <a className="page-link" href="#">
+                                  <Link className="page-link" to="">
                                     Prev
-                                  </a>
+                                  </Link>
                                 </li>
                                 <li className="page-item">
-                                  <a className="page-link" href="#">
+                                  <Link className="page-link" to="">
                                     1
-                                  </a>
+                                  </Link>
                                 </li>
                                 <li className="page-item">
-                                  <a className="page-link" href="#">
+                                  <Link className="page-link" to="">
                                     2
-                                  </a>
+                                  </Link>
                                 </li>
                                 <li className="page-item">
                                   <span className="page-link">
@@ -1218,19 +1216,19 @@ const Handout= (props) => {
                                   </span>
                                 </li>
                                 <li className="page-item">
-                                  <a className="page-link" href="#">
+                                  <Link className="page-link" to="">
                                     6
-                                  </a>
+                                  </Link>
                                 </li>
                                 <li className="page-item">
-                                  <a className="page-link" href="#">
+                                  <Link className="page-link" to="">
                                     7
-                                  </a>
+                                  </Link>
                                 </li>
                                 <li className="page-item">
-                                  <a className="page-link" href="#">
+                                  <Link className="page-link" to="">
                                     Next
-                                  </a>
+                                  </Link>
                                 </li>
                               </ul>
                             </div> */}

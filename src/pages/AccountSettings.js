@@ -17,14 +17,14 @@ import { IoLocation } from 'react-icons/io5'
 import { useSelector, useDispatch } from "react-redux";
 import { setUserInfo, setSettingPage } from "../redux/reducer/user";
 import { BASE_URL } from "../Api_connection/config";
-import { getSettings } from "../Api_connection/ApiFunction";
+
 
 const AccountSettings = () => {
   const dispatch = useDispatch()
   const { userInfo, settingPages, user } = useSelector((state) => state.user.value)
   const [logData, setLogData] = useState([])
   const email = user.email
-  const [pMenu, setPMenu] = useState(0);
+
   const btn1 = useSelector((store) => store.navsetters)
 
 
@@ -55,11 +55,11 @@ const AccountSettings = () => {
 
   const profileMenuRemove = ()=>{
     var element = document.getElementById("myBody"); 
-  element.classList.remove("toggle-shown"); 
-  var element = document.getElementById("toggleBtn"); 
-  element.classList.remove("active");                                 
-  var element = document.getElementById("cardAside"); 
-  element.classList.remove("content-active"); 
+    element.classList.remove("toggle-shown"); 
+    element = document.getElementById("toggleBtn"); 
+    element.classList.remove("active");                                 
+    element = document.getElementById("cardAside"); 
+    element.classList.remove("content-active"); 
   }
 
  
@@ -102,15 +102,15 @@ const AccountSettings = () => {
                                 <div 
                                 onClick={()=>dispatch(navsetters())} 
                                 className="nk-block-head-content align-self-start d-lg-none">
-                                  <a
-                                  
+                                  <Link
+                                    to=""
                                     // className="toggle btn btn-icon btn-trigger mt-n1"
                                     id = "toggleBtn"
                                     className={btn1?"toggle btn btn-icon btn-trigger mt-n1 active":"toggle btn btn-icon btn-trigger mt-n1"}
                                     data-target="userAside"                                  
                                   >
                                     <em className="icon ni ni-menu-alt-r" onClick={()=>profileMenuRemove()}  ></em>
-                                  </a>
+                                  </Link>
                                 </div>
                               </div>
                             </div>
@@ -189,13 +189,13 @@ const AccountSettings = () => {
                                 </div>
                                 <div className="user-action">
                                   <div className="dropdown">
-                                    <a
+                                    <Link
                                       className="btn btn-icon btn-trigger me-n2"
                                       data-bs-toggle="dropdown"
-                                      href="#"
+                                      to=''
                                     >
                                       <em className="icon ni ni-arrow-left" onClick={profileMenuRemove}></em>
-                                    </a> 
+                                    </Link> 
                                      {/* <div className="dropdown-menu dropdown-menu-end">
                                       <ul className="link-list-opt no-bdr">
                                         <li>

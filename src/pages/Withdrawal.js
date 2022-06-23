@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector} from "react-redux";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Menu from "../components/Menu";
@@ -12,7 +12,6 @@ import swal from "sweetalert";
 const Withdrawal = () => {
     const { user, userInfo, oneUsdPrice } = useSelector((state) => state.user.value)
     const email = user?.email
-    const navigate = useNavigate()
     const [tab, setTab] = useState([])
     const [balanceA, setBalanceA] = useState(0)
     const [balanceB, setBalanceB] = useState(0)
@@ -153,7 +152,7 @@ const Withdrawal = () => {
                                                                     >
                                                                         <div className={active.index == index ? "card bg-dark " : "card bg-light "}>
                                                                             <div className="nk-wgw sm">
-                                                                                <a className="nk-wgw-inner" href="#">
+                                                                                <Link className="nk-wgw-inner" to="">
                                                                                     <div className="nk-wgw-name">
                                                                                         <div className="nk-wgw-icon">
                                                                                             <em className="icon ni ni-sign-btc"></em>
@@ -170,7 +169,7 @@ const Withdrawal = () => {
                                                                                             </span>
                                                                                         </div>
                                                                                     </div>
-                                                                                </a>
+                                                                                </Link>
                                                                             </div>
                                                                         </div>
                                                                     </div>

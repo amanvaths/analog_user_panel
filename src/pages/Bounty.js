@@ -66,11 +66,11 @@ const Bounty = () => {
                     </div>
                     <div className="nk-block-head-content">
                       <div className="toggle-wrap nk-block-tools-toggle">
-                        <a
-                          href="#"
+                        <Link
+                          to=""
                           className="btn btn-icon btn-trigger toggle-expand me-n1"
                           data-target="pageMenu">
-                          <em className="icon ni ni-menu-alt-r"></em></a>
+                          <em className="icon ni ni-menu-alt-r"></em></Link>
                         <div
                           className="toggle-expand-content"
                           data-content="pageMenu"
@@ -125,23 +125,23 @@ const Bounty = () => {
                             <ul className="btn-toolbar gx-1">
                               <li>
                                 <div className="dropdown">
-                                  <a
-                                    href="#"
+                                  <Link
+                                    to=""
                                     className="btn btn-trigger btn-icon dropdown-toggle"
-                                    data-bs-toggle="dropdown"><em className="icon ni ni-setting"></em></a>
+                                    data-bs-toggle="dropdown"><em className="icon ni ni-setting"></em></Link>
                                   <div className="dropdown-menu dropdown-menu-xs dropdown-menu-end">
                                     <ul className="link-check">
                                       <li><span>Show</span></li>
-                                      <li className="active"><a href="#">10</a></li>
-                                      <li><a href="#">20</a></li>
-                                      <li><a href="#">50</a></li>
+                                      <li className="active"><Link to="">10</Link></li>
+                                      <li><Link to="">20</Link></li>
+                                      <li><Link to="">50</Link></li>
                                     </ul>
                                     <ul className="link-check">
                                       <li><span>Order</span></li>
                                       <li className="active">
-                                        <a href="#">DESC</a>
+                                        <Link to="">DESC</Link>
                                       </li>
-                                      <li><a href="#">ASC</a></li>
+                                      <li><Link to="">ASC</Link></li>
                                     </ul>
                                   </div>
                                 </div>
@@ -209,7 +209,7 @@ const Bounty = () => {
                                           {
                                             `${element.token_quantity} ANA`
                                           }
-                                          <img src="./images/Analog.png" style={{ width: "24px" }} />
+                                          <img alt="analog" src="./images/Analog.png" style={{ width: "24px" }} />
                                         </span>
                                       </div>
                                       <div className="nk-tb-col tb-col-sm">

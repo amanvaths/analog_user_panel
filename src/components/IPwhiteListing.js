@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { isIP } from 'is-ip'
 import { BASE_URL } from '../Api_connection/config'
-import swal from "sweetalert";
+
 import { useSelector } from "react-redux";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import { profileMenu } from "../Api_connection/ApiFunction";
+import { Link } from "react-router-dom";
 
 
 const IPwhiteListing = () => {
@@ -14,7 +15,7 @@ const IPwhiteListing = () => {
     const [whiteIP, setWhiteIP] = useState([])
     const [ip, setIp] = useState('')
     const [ipError, setipError] = useState(false)
-    const [pMenu, setPMenu] = useState(0);
+    
 
     const getCurrentAPI = async()=>{
         try {
@@ -71,7 +72,6 @@ const IPwhiteListing = () => {
     }
 
     useEffect(() => {
-
         getWhiteIP()
     }, [])
     return (
@@ -94,14 +94,14 @@ const IPwhiteListing = () => {
                         </div>
 
                         <div className="nk-block-head-content align-self-start d-lg-none">
-                            <a
-                                href="#"
+                            <b
+                                
                                 className="toggle btn btn-icon btn-trigger mt-n1"
                                 data-target="userAside"
                                 id = "toggleBtn"
                             >
                                 <em className="icon ni ni-menu-alt-r" onClick={profileMenu }></em>
-                            </a>
+                            </b>
                         </div>
                     </div>
 
@@ -126,7 +126,7 @@ const IPwhiteListing = () => {
                                 <button href="#" className="btn btn-dim btn-light btn-sm" onClick={()=> getCurrentAPI()}>Add Current IP</button>
                             </div>
                             <div>
-                                <a href="#" className="btn btn-dim btn-light btn-sm" onClick={() => handelSubmit()}>Add IP</a>
+                                <Link to="" className="btn btn-dim btn-light btn-sm" onClick={() => handelSubmit()}>Add IP</Link>
                             </div>
 
 
@@ -152,7 +152,7 @@ const IPwhiteListing = () => {
                         <tbody>
                             {
                                 whiteIP.map((element, index) => {
-                                    const a = new Date(element.createdAt)
+                                    // const a = new Date(element.createdAt)
                                     return (
                                         <tr key={index}>
                                             <td className="tb-col-ip">{element.ip}</td>

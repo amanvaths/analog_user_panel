@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Menu from "../components/Menu";
-import { useLocation, useParams } from "react-router-dom";
+import { Link, useLocation} from "react-router-dom";
 import axios from 'axios'
 import { useSelector, useDispatch } from "react-redux";
 import { setUserInfo } from "../redux/reducer/user";
@@ -11,20 +11,16 @@ import { getSettings } from "../Api_connection/ApiFunction";
 import ReactPaginate from 'react-paginate';
 
 const CryptoTransaction = () => {
+
   const dispatch = useDispatch()
   const { userInfo, user } = useSelector((state) => state.user.value)
   const { state } = useLocation();
   const email = user?.email
   const [history, setHistory] = useState([]);
   const [totalOrder, setTotalOrder] = useState('')
-  const [coinData, setCoinData] = useState('')
-  const [load, setLoad] = useState(false)
-
   const [currentPage, setCurrentPage] = useState(1);
 
   
- 
-
   const getTrnsaction = async (page) => {
     try {
       const data = await axios.post(`${BASE_URL}/transaction_history`, { email: email, symbol: state.lable, page: page })
@@ -48,12 +44,17 @@ const CryptoTransaction = () => {
     getTrnsaction(data.selected + 1)
   }
 
-  useEffect(async() => {
-    const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
+  useEffect(() => {
+    const conSetting = async()=>{
+      const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
     if (data) {
       dispatch(setUserInfo({ userInfo: data.data }))
     getTrnsaction()
     }
+    }
+
+    conSetting()
+    
   }, [])
 
   return (
@@ -78,12 +79,12 @@ const CryptoTransaction = () => {
                         </div>
                         <div className="nk-block-head-content">
                           <div className="toggle-wrap nk-block-tools-toggle">
-                            <a
-                              href="#"
+                            <Link
+                              to=""
                               className="btn btn-icon btn-trigger toggle-expand me-n1"
                               data-target="pageMenu"
                             ><em className="icon ni ni-menu-alt-r"></em
-                            ></a>
+                            ></Link>
                             <div
                               className="toggle-expand-content"
                               data-content="pageMenu"
@@ -343,12 +344,11 @@ const CryptoTransaction = () => {
                                 data-search="search"
                               >
                                 <div className="search-content">
-                                  <a
-                                    href="#"
+                                  <Link
+                                    to=""
                                     className="search-back btn btn-icon toggle-search"
                                     data-target="search"
-                                  ><em className="icon ni ni-arrow-left"></em></a
-                                  ><input
+                                  ><em className="icon ni ni-arrow-left"></em></Link><input
                                     type="text"
                                     className="form-control border-transparent form-focus-none"
                                     placeholder="Quick search by transaction"

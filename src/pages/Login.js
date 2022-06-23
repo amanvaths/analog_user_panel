@@ -1,17 +1,11 @@
 import React, { useState } from "react";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import { BASE_URL, GOOGLE_ID } from "../Api_connection/config";
-
-
-// import ForgetPassword from "./ForgetPassword";
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
 import swal from "sweetalert";
-import axios from "axios";
-
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setUserInfo, setIsLoggedIn, setSettingPage, sendOtp } from "../redux/reducer/user";
-
+import {setIsLoggedIn,sendOtp } from "../redux/reducer/user";
 
 // import FacebookLogin from "react-facebook-login";
 
@@ -112,17 +106,17 @@ const Login = (props) => {
         <div className="nk-split nk-split-page nk-split-md">
           <div className="nk-split-content nk-block-area nk-block-area-column nk-auth-container bg-white">
             <div className="absolute-top-right d-lg-none p-3 p-sm-5">
-              <a
-                href="#"
+              <Link
+                to=""
                 className="toggle btn-white btn btn-icon btn-light"
                 data-target="athPromo"
               >
                 <em className="icon ni ni-info"></em>
-              </a>
+              </Link>
             </div>
             <div className="nk-block nk-block-middle nk-auth-body">
               <div className="brand-logo pb-5">
-                <a href="#" className="logo-link">
+                <Link to="" className="logo-link">
                   <img
                     className="logo-light logo-img logo-img-lg"
                     src="./images/logo.png"
@@ -135,7 +129,7 @@ const Login = (props) => {
                     srcSet="./images/logo-dark2x.png 2x"
                     alt="logo-dark"
                   />
-                </a>
+                </Link>
               </div>
               <div className="nk-block-head">
                 <div className="nk-block-head-content">
@@ -164,9 +158,9 @@ const Login = (props) => {
                     <label className="form-label" for="default-01">
                       Email
                     </label>
-                    <a className="link link-primary link-sm" tabindex="-1" href="#">
+                    <Link className="link link-primary link-sm" tabindex="-1" to="">
                       Need Help?
-                    </a>
+                    </Link>
                   </div>
                   <input
                     type="email"
@@ -190,20 +184,20 @@ const Login = (props) => {
                     <label className="form-label" for="password">
                       Password
                     </label>
-                    <a href="/ForgetPassword">Forget Password</a>
+                    <Link to="/ForgetPassword">Forget Password</Link>
                     {/* <Link to={ForgetPassword}>Forget Password</Link> */}
                   </div>
                   <div className="form-control-wrap">
-                    <a
+                    <Link
                       tabIndex="-1"
-                      href="#"
+                      to=""
                       className="form-icon form-icon-right passcode-switch"
                       data-target="password"
                     >
                       {
                         shown == false ? <AiOutlineEyeInvisible onClick={togglePassword1} /> : <AiOutlineEye onClick={togglePassword1} />
                       }
-                    </a>
+                    </Link>
                     <input
                       type={shown ? "text" : 'password'}
                       className="form-control form-control-lg"
@@ -234,7 +228,7 @@ const Login = (props) => {
               </form>
               <div className="form-note-s2 pt-4">
                 {" "}
-                New on our platform? <a href="/signup">Create an account</a>
+                New on our platform? <Link to="/signup">Create an account</Link>
               </div>
               <div className="text-center pt-4 pb-3">
                 <h6 className="overline-title overline-title-sap">
@@ -261,7 +255,7 @@ const Login = (props) => {
                     onFailure={onLoginFailure}
                     cookiePolicy={"single_host_origin"}
                   />
-                  {/* <a className="nav-link" href="#"> */}{" "}
+                  {/* <Link className="nav-link" to=""> */}{" "}
                   {/* <GoogleLogin
                     clientId={clientId}
                     buttonText="Login"
@@ -269,12 +263,12 @@ const Login = (props) => {
                     onFailure={onLoginFailure}
                     cookiePolicy={"single_host_origin"}
                     render={() => (
-                      <a className="nav-link" onClick={onLoginSuccess}>
+                      <Link className="nav-link" onClick={onLoginSuccess}>
                         Google
-                      </a>
+                      </Link>
                     )}
                   /> */}
-                  {/* </a> */}
+                  {/* </Link> */}
                 </li>
               </ul>
             </div>
@@ -282,69 +276,70 @@ const Login = (props) => {
               <div className="nk-block-between">
                 <ul className="nav nav-sm">
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className="nav-link" to="">
                       Terms & Condition
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className="nav-link" to="">
                       Privacy Policy
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className="nav-link" to="">
                       Help
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item dropup">
-                    <a
+                    <Link
+                      to=""
                       className="dropdown-toggle dropdown-indicator has-indicator nav-link"
                       data-toggle="dropdown"
                       data-offset="0,10"
                     >
                       <small>English</small>
-                    </a>
+                    </Link>
                     <div className="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                       <ul className="language-list">
                         <li>
-                          <a href="#" className="language-item">
+                          <Link to="" className="language-item">
                             <img
                               src="./images/flags/english.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">English</span>
-                          </a>
+                          </Link>
                         </li>
                         <li>
-                          <a href="#" className="language-item">
+                          <Link to="" className="language-item">
                             <img
                               src="./images/flags/spanish.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">Español</span>
-                          </a>
+                          </Link>
                         </li>
                         <li>
-                          <a href="#" className="language-item">
+                          <Link to="" className="language-item">
                             <img
                               src="./images/flags/french.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">Français</span>
-                          </a>
+                          </Link>
                         </li>
                         <li>
-                          <a href="#" className="language-item">
+                          <Link to="" className="language-item">
                             <img
                               src="./images/flags/turkey.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">Türkçe</span>
-                          </a>
+                          </Link>
                         </li>
                       </ul>
                     </div>

@@ -10,7 +10,7 @@ import axios from "axios";
 import { Triangle } from 'react-loader-spinner'
 import { useSelector, useDispatch } from 'react-redux';
 import { BASE_URL } from "../Api_connection/config";
-import { setUserInfo, setOneCoinPrice, setTotalWalletBalance } from "../redux/reducer/user";
+import { setUserInfo } from "../redux/reducer/user";
 import { Link, useNavigate } from "react-router-dom";
 const { io } = require("socket.io-client");
 
@@ -19,7 +19,6 @@ const { io } = require("socket.io-client");
 const Wallet = (props) => {
   const { userInfo, oneUsdPrice, totalAna, user,  } = useSelector((state) => state.user.value)
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [coinData, setCoinData] = useState([]);
   const [walletDetails, setWalletDetails] = useState([]);
   const [coinWW, setCoinWW] = useState([]);
@@ -33,8 +32,6 @@ const Wallet = (props) => {
   const [inherited, setInherited] = useState(0)
   const [bounty, setBounty] = useState(0)
   const [handOut, setHandOut] = useState(0)
-
-  const [msg, setMsg] = useState(true)
 
 
 
@@ -127,14 +124,18 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
  
     // console.log(walletDetails, "WALLET DETAILS");
 
-  useEffect(async () => {
-    const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
+  useEffect(() => {
+    const conSetting = async()=>{
+      const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
     if (data) {
       // getWalletDetails()
       dispatch(setUserInfo({ userInfo: data.data }))
       getUserAllWallletData()     
       
     }
+    }
+    conSetting()
+    
   }, [])
   useEffect(()=>{
     getData()  
