@@ -113,7 +113,7 @@ const Header = () => {
               <div className="nk-news-list">
                 <a className="nk-news-item" href="#">
                   <div className="nk-news-icon">
-                    <em className="icon ni ni-card-view"></em>
+                    <em className="icon ni ni-card-view text-success"></em>
                   </div>
                   <div className="nk-news-text">
                     <p>
@@ -148,7 +148,7 @@ const Header = () => {
                       </div>
                       <div class="energy">
                         <div class="nk-block-head-content">
-                          <ul class="nk-block-tools gx-3">
+                         {/* <ul class="nk-block-tools gx-3">
                             <divx></divx>
                             <divx></divx>
                             <divx></divx>
@@ -166,7 +166,7 @@ const Header = () => {
                             <divx></divx>
                             <divx></divx>
                             <divx></divx>
-                          </ul>
+                          </ul>*/}
                           <div className="energy-container">
                             [ <b className="energy-text ">{"    "}Energy</b>{" "}
                             <span style={{ color: "green" }} className="timer">
@@ -293,7 +293,7 @@ const Header = () => {
                     data-toggle="dropdown"
                   >
                     <div className="user-toggle">
-                      <div className="user-avatar sm">
+                      <div className="user-avatar sm bg-success">
                         <em className="icon ni ni-user-alt"></em>
                       </div>
                       {/* <div className="user-info d-none d-md-block">
@@ -313,7 +313,7 @@ const Header = () => {
                   <div className="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1" style={{ width: "210px" }}>
                     <div className="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                       <div className="user-card">
-                        <div className="user-avatar">
+                        <div className="user-avatar bg-success">
                           <span>{(userInfo?.username)?.charAt(0)?.toUpperCase()}</span>
                         </div>
                         <div className="user-info">

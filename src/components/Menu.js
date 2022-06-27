@@ -79,7 +79,7 @@
 
                   />
                   <img
-                    className="logo-dark logo-setter"
+                    className="logo-dark logo-img"
                     src="images/logo-dark.png"
                     srcSet="images/logo-dark2x.png 2x"
                     alt="logo-dark"        
@@ -102,14 +102,14 @@
               <div className="nk-sidebar-body" data-simplebar>
                 <div className="nk-sidebar-content">
                   <div className="nk-sidebar-widget d-none d-xl-block">
-                    <div className="user-account-info">
-                      <div className="user-account-main text-center">
-                        <h6 className="overline-title-alt " style={{paddingBottom:"12px",fontSize:"20px",color:"#0971fe"}}  >Available Balance</h6>
-                        <div className="user-balancen  text-warning  my-2 " style={{fontSize:"18px",color:"",fontFamily:"arial"}}>
+                    <div className="user-account-info between-center">
+                      <div className="user-account-main">
+                        <h2 className="overline-title-alt text-success fs-6">Available Balance</h2>
+                        <div className="user-balance text-warning">
                         { Number(anaBalancce)?.toFixed(2)}{" "}
-                          <small className="currency currency-btc text-warning   my-5" style={{fontSize:"18px",fontFamily:""}}>ANA</small>
+                          <span className="currency currency-btc my-2">ANA</span>
                         </div>
-                        <div className="user-balance-alt text-success">
+                        <div className="user-balance-alt">
                           {userInfo?.currency_preference == "inr" ? (userInfo?.anaPrice * Number(anaBalancce))>0?(userInfo?.anaPrice * Number(anaBalancce)).toFixed(2):0 : 
                             ((userInfo?.anaPrice / usdPrice) * Number(anaBalancce))>0?((userInfo?.anaPrice / usdPrice) * Number(anaBalancce)).toFixed(2):0
                           }
@@ -186,10 +186,10 @@
                     >
                       <div className="user-account-info between-center">
                         <div className="user-account-main">
-                          <h6 className="overline-title-alt">
+                          <h6 className="overline-title-alt fs-6 text-success">
                             Available Balance
                           </h6>
-                          <div className="user-balance">
+                          <div className="user-balance text-warning">
                             2.014095{" "}
                             <small className="currency currency-btc">ANA</small>
                           </div>
@@ -274,30 +274,30 @@
                   <div className="nk-sidebar-menu">
                     <ul className="nk-menu">
                       <li className="nk-menu-heading">
-                        <h6 className="text-dark">Testing</h6>
+                        <h6 className="overline-title text-success fs-6">Quick Links</h6>
                       </li>
                       <li className="nk-menu-item">
                         <Link to="/home" className="nk-menu-link">
-                          <span className="nk-menu-icon text-dark">
+                          <span className="nk-menu-icon">
                             <em className="icon ni ni-dashboard"></em>
                           </span>
-                          <span className="nk-menu-text text-dark">Dashboard</span>
+                          <span className="nk-menu-text">Dashboard</span>
                         </Link>
                       </li>
-                      <li class="nk-menu-item ">
+                      <li class="nk-menu-item">
                         <Link to="/accountSettings" class="nk-menu-link ">
-                          <span class="nk-menu-icon text-dark">
+                          <span class="nk-menu-icon">
                             <em class="icon ni ni-user-c"></em>
                           </span>
-                          <span className="nk-menu-text text-dark">My Account</span>
+                          <span className="nk-menu-text">My Account</span>
                         </Link>
                       </li>
                       <li className="nk-menu-item">
                         <Link to="/wallet" className="nk-menu-link">
-                          <span className="nk-menu-icon text-dark">
+                          <span className="nk-menu-icon">
                             <em className="icon ni ni-wallet-alt"></em>
                           </span>
-                          <span className="nk-menu-text text-dark">Wallets</span>
+                          <span className="nk-menu-text">Wallets</span>
                         </Link>
                       </li>
                       <li className="nk-menu-item">
@@ -305,10 +305,10 @@
                           to="/buysell"
                           className="nk-menu-link"
                         >
-                          <span className="nk-menu-icon text-dark ">
+                          <span className="nk-menu-icon ">
                             <em className="icon ni ni-coins"></em>
                           </span>
-                          <span className="nk-menu-text text-dark">Buy / Sell</span>
+                          <span className="nk-menu-text">Buy / Sell</span>
                         </Link>
                       </li>
                       {/* <li className="nk-menu-item">
@@ -375,10 +375,10 @@
 
                       <li class="nk-menu-item">
                         <Link to="/Affiliate" class="nk-menu-link">
-                          <span class="nk-menu-icon text-dark">
+                          <span class="nk-menu-icon">
                             <em class="icon ni ni-user-circle"></em>
                           </span>
-                          <span class="nk-menu-text text-dark">Affiliate</span>
+                          <span class="nk-menu-text">Affiliate</span>
                         </Link>
                       </li>
                       {/* <li className="nk-menu-heading">
@@ -436,25 +436,25 @@
                   </div>
                   <div className="nk-sidebar-widget">
                     <div className="widget-title">
-                      <h6 className="overline-title text-dark fs-5">
+                      <h6 className="overline-title text-success fs-6">
                         Crypto Accounts <span></span>
                       </h6>
                       {/* <a href="#" className="link">
                         View All
                       </a> */}
                     </div>
-                    <ul className="wallet-list">
+                    <ul className="wallet-list pl-0">
                       <li className="wallet-item">
                         <a href="#">
-                          <div className="wallet-icon text-dark ">
+                          <div className="wallet-icon">
                             <em className="icon ni ni-sign-kobo"></em>
                           </div>
-                          <div className="wallet-text ">
-                            <h6 className="wallet-name text-dark ">{userInfo?.currency_preference == 'inr'? 'INRX' : "USDT"} Wallet</h6>
-                            <span className="wallet-balance text-dark ">
+                          <div className="wallet-text">
+                            <h6 className="wallet-name">{userInfo?.currency_preference == 'inr'? 'INRX' : "USDT"} Wallet</h6>
+                            <span className="wallet-balance">
                               {userInfo?.currency_preference == 'usd' ? Number(walletBalance)?.toFixed(3) : (walletBalance * oneUsdPrice)?.toFixed(3)}
                               {" "}
-                              <span className="currency currency-nio text-dark ">
+                              <span className="currency currency-nio">
                               {userInfo?.currency_preference == 'inr'? 'INRX' : "USDT"}
                               </span>
                             </span>
@@ -491,7 +491,7 @@
                     <ul className="nk-menu nk-menu-footer">
                       <li className="nk-menu-item">
                         <a href="#" className="nk-menu-link">
-                          <span className="nk-menu-icon">
+                          <span className="nk-menu-icon text-success">
                             <em className="icon ni ni-help-alt"></em>
                           </span>
                           <span className="nk-menu-text">Support</span>
@@ -506,7 +506,7 @@
                             data-toggle="dropdown"
                             data-offset="0,10"
                           >
-                            <span className="nk-menu-icon">
+                            <span className="nk-menu-icon text-success">
                               <em className="icon ni ni-globe"></em>
                             </span>
                             <span className="nk-menu-text">English</span>

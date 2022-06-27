@@ -206,7 +206,7 @@ const Home = () => {
           <div className="nk-wrap ">
             <Header />
             {/* Add this code  */}
-            <div className="slide-container ">
+           {/* <div className="slide-container ">
               <Slide>
                 {i?.map((slideImage, index) => {
                   return (
@@ -235,10 +235,10 @@ const Home = () => {
                   );
                 })}
               </Slide>
-            </div>
+              </div>*/}
             {/* Add Slide small card */}
             <div className="container">
-              <div className="row d-flex" style={{justifyContent:"space-between",alignSelf:"center"}}>
+              <div className="row d-flex g-3" style={{justifyContent:"space-between",alignSelf:"center"}}>
                 {data.map((data) => {
                   return (
                     <Getpresale
@@ -253,7 +253,7 @@ const Home = () => {
               </div>
             </div>
             <div className="nk-content nk-content-fluid">
-              <div className="container-xl wide-lg">
+              <div className="container">
                 <div className="nk-content-body">
                   <div className="nk-block-between-md g-4">
                     <div className="nk-block-head-content"></div>
@@ -266,18 +266,18 @@ const Home = () => {
                       <div className="nk-block">
                         <div className="nk-block-head-xs">
                           <div className="nk-block-head-content">
-                            <h5 className="nk-block-title title">Overview</h5>
+                            <h5 className="nk-block-title title">OVERFLOW</h5>
                           </div>
                         </div>
-                        <div className="nk-block ">
-                          <div className="card card-bordered  bg-light  gradient-border   text-dark   h-100" style={{background:"white"}}>
+                        <div className="nk-block">
+                          <div className="card card-bordered bg-light h-100" style={{background:"white"}}>
                             <div className="card-inner">
                               <div className="nk-wg7">
                                 <div className="nk-wg7-stats">
                                   <div className="nk-wg7-title">
                                     TOTAL ANOLOG BUY  
                                   </div>
-                                  <div className="number-lg amount text-dark">
+                                  <div className="number-lg amount text-success">
                                     {totalAnalogBuy.toFixed(2)}
                                   </div>
                                 </div>
@@ -323,21 +323,21 @@ const Home = () => {
                             <div className="nk-block-head-content"></div>
                           </div>
                         </div>
-                        <div className="row g-2">
+                        <div className="row">
                           <div className="col-sm-4">
-                            <div className="card bg-success bb bb ">
+                            <div className="card">
                               <div className="nk-wgw sm">
                                 <a className="nk-wgw-inner" href="#">
                                   <div className="nk-wgw-name">
-                                    <div className="nk-wgw-icon">
+                                    <div className="nk-wgw-icon bg-success">
                                       <em className="icon ni ni-sign-btc"></em>
                                     </div>
-                                    <h5 className="nk-wgw-title title text-white">
+                                    <h5 className="nk-wgw-title title">
                                       INCEPTIVE
                                     </h5>
                                   </div>
                                   <div className="nk-wgw-balance">
-                                    <div className="amount text-white">
+                                    <div className="amount">
                                       {userInfo?.currency_preference == "inr"
                                         ? inceptive
                                         : (inceptive / oneUsdPrice).toFixed(2)}
@@ -357,19 +357,19 @@ const Home = () => {
                             onClick={() => navigate("/Airdrop")}
                             style={{ cursor: "pointer" }}
                           >
-                            <div className="card  bg-success bb">
+                            <div className="card">
                               <div className="nk-wgw sm">
                                 <a className="nk-wgw-inner">
                                   <div className="nk-wgw-name">
-                                    <div className="nk-wgw-icon">
+                                    <div className="nk-wgw-icon bg-success">
                                       <em className="icon ni ni-sign-btc"></em>
                                     </div>
-                                    <h5 className="nk-wgw-title title text-white">
+                                    <h5 className="nk-wgw-title title">
                                       AIRDROP
                                     </h5>
                                   </div>
                                   <div className="nk-wgw-balance">
-                                    <div className="amount text-white">
+                                    <div className="amount">
                                       {userInfo?.currency_preference == "inr"
                                         ? airdrop
                                         : (airdrop / oneUsdPrice).toFixed(2)}
@@ -391,19 +391,19 @@ const Home = () => {
                             }
                             style={{ cursor: "pointer" }}
                           >
-                            <div className="card bg-success bb">
+                            <div className="card">
                               <div className="nk-wgw sm">
                                 <a className="nk-wgw-inner">
                                   <div className="nk-wgw-name">
-                                    <div className="nk-wgw-icon">
+                                    <div className="nk-wgw-icon bg-success">
                                       <em className="icon ni ni-sign-eth"></em>
                                     </div>
-                                    <h5 className="nk-wgw-title title text-white">
+                                    <h5 className="nk-wgw-title title">
                                       AFFILIATES{" "}
                                     </h5>
                                   </div>
                                   <div className="nk-wgw-balance">
-                                    <div className="amount text-white">
+                                    <div className="amount ">
                                       {userInfo?.currency_preference == "inr"
                                         ? (affiliates * oneUsdPrice)?.toFixed(2)
                                         : affiliates?.toFixed(2)}
@@ -424,26 +424,26 @@ const Home = () => {
                         <div className="nk-block-head-xs">
                           <div className="nk-block-between-md g-2">
                             <div className="nk-block-head-content">
-                              <h6 className="nk-block-title title ">GROWTH</h6>
+                              <h5 className="nk-block-title title">GROWTH</h5>
                             </div>
                             <div className="nk-block-head-content"></div>
                           </div>
                         </div>
-                        <div className="row g-2">
+                        <div className="row">
                           <div className="col-sm-4">
-                            <div className="card bg-success bb">
+                            <div className="card">
                               <div className="nk-wgw sm">
                                 <a className="nk-wgw-inner" href="#">
                                   <div className="nk-wgw-name">
-                                    <div className="nk-wgw-icon">
+                                    <div className="nk-wgw-icon bg-success">
                                       <em className="icon ni ni-sign-btc"></em>
                                     </div>
-                                    <h5 className="nk-wgw-title text-white title">
+                                    <h5 className="nk-wgw-title title">
                                       INHERITED
                                     </h5>
                                   </div>
                                   <div className="nk-wgw-balance">
-                                    <div className="amount text-white">
+                                    <div className="amount ">
                                       {userInfo?.currency_preference == "inr"
                                         ? (inherited * oneUsdPrice)?.toFixed(2)
                                         : inherited?.toFixed(2)}
@@ -463,20 +463,20 @@ const Home = () => {
                             onClick={() => navigate("/Bounty")}
                             style={{ cursor: "pointer" }}
                           >
-                            <div className="card bg-success bb">
+                            <div className="card">
                               <div className="nk-wgw sm">
                                 <a className="nk-wgw-inner">
                                   <div className="nk-wgw-name">
-                                    <div className="nk-wgw-icon">
+                                    <div className="nk-wgw-icon bg-success">
                                       <em className="icon ni ni-sign-btc"></em>
                                     </div>
-                                    <h5 className="nk-wgw-title text-white title">
+                                    <h5 className="nk-wgw-title title">
                                       BOUNTY{" "}
                                     </h5>
                                   </div>
                                   <div className="nk-wgw-balance">
                                     <div
-                                      className="amount text-white"
+                                      className="amount "
                                       // style={{ fontSize: "10px" }}
                                     >
                                       {/* [L<sup>1</sup> / L<sup>2</sup> / L
@@ -497,19 +497,19 @@ const Home = () => {
                             </div>
                           </div>
                           <div className="col-sm-4">
-                            <div className="card bg-success bb">
+                            <div className="card">
                               <div className="nk-wgw sm">
                                 <a className="nk-wgw-inner" href="#">
                                   <div className="nk-wgw-name">
-                                    <div className="nk-wgw-icon">
+                                    <div className="nk-wgw-icon bg-success">
                                       <em className="icon ni ni-sign-eth"></em>
                                     </div>
-                                    <h5 className="nk-wgw-title text-white title">
+                                    <h5 className="nk-wgw-title title">
                                       HANDOUT{" "}
                                     </h5>
                                   </div>
-                                  <div className="nk-wgw-balance text-white ">
-                                    <div className="amount text-white">
+                                  <div className="nk-wgw-balance">
+                                    <div className="amount ">
                                       {userInfo?.currency_preference == "inr"
                                         ? (handOut * oneUsdPrice)?.toFixed(2)
                                         : handOut?.toFixed(2)}
@@ -721,7 +721,7 @@ const Home = () => {
                             </div>
                           </div>
                           <div className="nk-refwg-action">
-                            <a href="#" className="btn btn-primary">
+                            <a href="#" className="btn btn-dim btn-outline-success">
                               Invite
                             </a>
                           </div>
@@ -1038,7 +1038,7 @@ const Home = () => {
                         <div className="nk-block-content flex-shrink-0">
                           <a
                             href="#"
-                            className="btn btn-lg btn-outline-primary"
+                            className="btn btn-lg btn btn-dim btn-outline-success"
                           >
                             Get Support Now
                           </a>

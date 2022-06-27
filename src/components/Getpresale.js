@@ -53,10 +53,10 @@ const Getpresale = (props) => {
   }
 
   return (
-    <div className={`col-sm-12 col-md-5  block  ${Backk !== "dark" ? "bg-dark text-white" : "bg-light text-dark"} shadow-lg`}>
+    <div className={`col-sm-12 col-md-6`}>
        
-      <div className="nk-block first-card  " >
-        <div className=" text-dark   h-100">
+      <div className="card card-bordered border-success card-full shadow-sm">
+        <div className="text-success h-100">
           <div className="card-inner">
             <div className="nk-wg7">
               <div className="nk-wg7-stats ">
