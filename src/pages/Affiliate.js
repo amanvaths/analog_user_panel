@@ -118,7 +118,7 @@ const Affiliate = (props) => {
                     </div>
                   </div>
                 </div>
-                <div className="row">
+                <div className="row ">
 
                   {
                     load ? affiliates.length > 0 ?
@@ -250,7 +250,7 @@ const Affiliate = (props) => {
 
                     {/* Level 1 */}
                     {level1 == true ?
-                      <div className="nk-block">
+                      <div className="nk-block table-responsive ">
                         <div className="card card-bordered card-stretch">
                           <div className="card-inner-group">
                             <div className="card-inner">
@@ -565,7 +565,7 @@ const Affiliate = (props) => {
 
                     {/* Level 2 */}
                     {level2 == true ?
-                      <div className="nk-block">
+                      <div className="nk-block table-responsive">
                         <div className="card card-bordered card-stretch">
                           <div className="card-inner-group">
                             <div className="card-inner">
@@ -880,7 +880,7 @@ const Affiliate = (props) => {
 
                     {/* Level 3 */}
                     {level3 == true ?
-                      <div className="nk-block">
+                      <div className="nk-block table-responsive">
                         <div className="card card-bordered card-stretch">
                           <div className="card-inner-group">
                             <div className="card-inner">

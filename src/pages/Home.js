@@ -16,139 +16,163 @@ import { setBalance } from "../redux/reducer/user";
 import { useNavigate } from "react-router-dom";
 import { Triangle } from "react-loader-spinner";
 import { Line } from "react-chartjs-2";
-import Chart from 'chart.js/auto';
-
-
-
+import Chart from "chart.js/auto";
 
 const Home = () => {
-
-  const { user, userInfo, oneUsdPrice } = useSelector((state) => state.user.value)
+  const { user, userInfo, oneUsdPrice } = useSelector(
+    (state) => state.user.value
+  );
   const email = user?.email;
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const [totalAnalogBuy, setTotalAnalogBuy] = useState(0)
-  const [inceptive, setInceptive] = useState(0)
-  const [airdrop, setAirDrop] = useState(0)
-  const [affiliates, setaffiliates] = useState(0)
-  const [inherited, setInherited] = useState(0)
-  const [bounty, setBounty] = useState(0)
-  const [handOut, setHandOut] = useState(0)
-  const [totalWallet, setTotalwallet] = useState(0)
-  const [totalTransaction, setTransaction] = useState(0)
-  const [lastActivity, setLastActivity] = useState(0)
+  const [totalAnalogBuy, setTotalAnalogBuy] = useState(0);
+  const [inceptive, setInceptive] = useState(0);
+  const [airdrop, setAirDrop] = useState(0);
+  const [affiliates, setaffiliates] = useState(0);
+  const [inherited, setInherited] = useState(0);
+  const [bounty, setBounty] = useState(0);
+  const [handOut, setHandOut] = useState(0);
+  const [totalWallet, setTotalwallet] = useState(0);
+  const [totalTransaction, setTransaction] = useState(0);
+  const [lastActivity, setLastActivity] = useState(0);
   const [copied, setCopied] = useState(false);
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
   const [recentActivities, setRecentActivities] = useState([]);
-  const [totalRef, setTotalRef] = useState(0)
-  const [totalRefIncome, setTotalRefIncome] = useState(0)
-  const [i, setI] = useState([])
-  const [recentLoad, setRecentLoad] = useState(true)
+  const [totalRef, setTotalRef] = useState(0);
+  const [totalRefIncome, setTotalRefIncome] = useState(0);
+  const [i, setI] = useState([]);
+  const [recentLoad, setRecentLoad] = useState(true);
   const [chartAmt, setChartAmt] = useState([]);
+  const [Backk, setBackk] = useState("light");
+  const theme = localStorage.getItem("theme");
 
-  
+  useEffect(() => {
+    console.log("mytheme",theme);
+    if (theme) {
+      setBackk("dark");
+    } else {
+      setBackk("light");
+    }
+  }, [theme]);
+
 
   const summaryBalance = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    dataUnit: 'BTC',
+    labels: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    dataUnit: "BTC",
     datasets: [
-      {  
-      label: "Buy",
-      fill: false,
-      lineTension: 0.5,
-      backgroundColor: "#6baafe", 
-      borderColor: "#6baafe",  
-      borderCapStyle: "butt",
-      borderDash: [],
-      borderDashOffset: 0.0,
-      borderJoinStyle: "miter",
-      pointBorderColor: "#0d6efd",
-      pointBackgroundColor: "#fff",
-      pointBorderWidth: 1,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "#0d6efd",
-      pointHoverBorderColor: "rgba(220,220,220,1)",
-      pointHoverBorderWidth: 2,
-      pointRadius: 1,
-      pointHitRadius: 10,   
-      data: chartAmt
-      
-    }
-  ]
+      {
+        label: "Buy",
+        fill: false,
+        lineTension: 0.5,
+        backgroundColor: "#6baafe",
+        borderColor: "#6baafe",
+        borderCapStyle: "butt",
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: "miter",
+        pointBorderColor: "#0d6efd",
+        pointBackgroundColor: "#fff",
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: "#0d6efd",
+        pointHoverBorderColor: "rgba(220,220,220,1)",
+        pointHoverBorderWidth: 2,
+        pointRadius: 1,
+        pointHitRadius: 10,
+        data: chartAmt,
+      },
+    ],
   };
- 
+
   const chartData = async () => {
     try {
-      const res = await axios.post(`${BASE_URL}/buyChart`, { email: email })    
-      setChartAmt(res.data.data)
+      const res = await axios.post(`${BASE_URL}/buyChart`, { email: email });
+      setChartAmt(res.data.data);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const getPreSale = async () => {
     try {
-      const res = axios.get(`${BASE_URL}/getpresale`)
-      setData((await res).data.user_data)
+      const res = axios.get(`${BASE_URL}/getpresale`);
+      setData((await res).data.user_data);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const getUserWalletData = async () => {
     try {
-      const res = await axios.post(`${BASE_URL}/userWalletData`, { email: email })
-      setTotalAnalogBuy(res.data.token_balance)
-      setTotalwallet(res.data.total_wallet)
-      setTransaction(res.data.total_transaction)
-      setLastActivity(res.data.last_activity)
-      setInceptive(res?.data?.inceptive_wallet)
-      setAirDrop(res?.data?.airdrop_wallet)
-      setaffiliates(res?.data?.affilites_wallet)
-      setInherited(res?.data?.inherited_wallet)
-      setBounty(res?.data?.bounty_wallet)
-      setHandOut(res?.data?.handout_wallet)
+      const res = await axios.post(`${BASE_URL}/userWalletData`, {
+        email: email,
+      });
+      setTotalAnalogBuy(res.data.token_balance);
+      setTotalwallet(res.data.total_wallet);
+      setTransaction(res.data.total_transaction);
+      setLastActivity(res.data.last_activity);
+      setInceptive(res?.data?.inceptive_wallet);
+      setAirDrop(res?.data?.airdrop_wallet);
+      setaffiliates(res?.data?.affilites_wallet);
+      setInherited(res?.data?.inherited_wallet);
+      setBounty(res?.data?.bounty_wallet);
+      setHandOut(res?.data?.handout_wallet);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const recentActivity = async () => {
     try {
-      const res = await axios.post(`${BASE_URL}/recentActivities`, { email: email, limit: 4 });
+      const res = await axios.post(`${BASE_URL}/recentActivities`, {
+        email: email,
+        limit: 4,
+      });
       setRecentActivities(res.data);
-      setRecentLoad(false)
-      const img = await axios.post(`${BASE_URL}/bannerData`)
-      setI(img?.data?.message)
+      setRecentLoad(false);
+      const img = await axios.post(`${BASE_URL}/bannerData`);
+      setI(img?.data?.message);
     } catch (error) {
       console.log(" Error in recent Activity API " + error);
     }
-  }
+  };
 
   const reffetalData = async () => {
     try {
-      const res = await axios.post(`${BASE_URL}/geRefferalData`, { email: email })
-      setTotalRef(res.data.totalRefferal)
-      setTotalRefIncome(res?.data?.totalIncome)
+      const res = await axios.post(`${BASE_URL}/geRefferalData`, {
+        email: email,
+      });
+      setTotalRef(res.data.totalRefferal);
+      setTotalRefIncome(res?.data?.totalIncome);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
-
-
-  const a = new Date(lastActivity)
-  const date = a.toDateString()
-  const time = a.toLocaleTimeString()
+  const a = new Date(lastActivity);
+  const date = a.toDateString();
+  const time = a.toLocaleTimeString();
 
   useEffect(() => {
-
-    getUserWalletData()
-    getPreSale()
-    recentActivity()
-    reffetalData()
-    chartData()
-  }, [oneUsdPrice, userInfo])
+    getUserWalletData();
+    getPreSale();
+    recentActivity();
+    reffetalData();
+    chartData();
+  }, [oneUsdPrice, userInfo]);
 
   const responsive = {
     superLargeDesktop: {
@@ -175,26 +199,26 @@ const Home = () => {
 
   return (
     <div>
-      <div className="nk-app-root">
+      <div className="nk-app-root ">
         <div className="nk-main ">
           <Menu />
 
           <div className="nk-wrap ">
             <Header />
             {/* Add this code  */}
-            <div className="slide-container">
+            <div className="slide-container ">
               <Slide>
                 {i?.map((slideImage, index) => {
                   return (
-                    <div className="each-slide" key={index}>
+                    <div className="each-slide border border-" key={index}>
                       <div
                         style={{
                           backgroundImage: `url(http://localhost:3001${slideImage.banner})`,
-                          height: "250px",
+                          // height: "250px",
                           width: "100%",
                           backgroundSize: "cover",
                           backgroundRepeat: "no-repeat",
-                          backgroundAttachment: "fixed"
+                          backgroundAttachment: "fixed",
                         }}
                       >
                         <span
@@ -207,41 +231,27 @@ const Home = () => {
                           {slideImage.caption}
                         </span>
                       </div>
-                    </div>)
+                    </div>
+                  );
                 })}
               </Slide>
             </div>
             {/* Add Slide small card */}
-            <div className="row">
-              <div className="col-12">
-                <Carousel
-                  className="react-multi-carousel-list"
-                  responsive={responsive}
-                  arrows={false}
-                  centerMode={true}
-                  itemclassName=""
-                  containerclassName="carousel-container"
-                >
-                  {
-                    data.map((data) => {
-                     
-                      return (
-                        <Getpresale
-                          levelname={data.levelname}
-                          coinPrice={data.price}
-                          coinQty={data.coinquantity}
-                          duration={data.duration}
-                          persent={data.persentsold}
-                        />
-                      );
-                    })
-                  }
-                </Carousel>
+            <div className="container">
+              <div className="row d-flex" style={{justifyContent:"space-between",alignSelf:"center"}}>
+                {data.map((data) => {
+                  return (
+                    <Getpresale
+                      levelname={data.levelname}
+                      coinPrice={data.price}
+                      coinQty={data.coinquantity}
+                      duration={data.duration}
+                      persent={data.persentsold}
+                    />
+                  );
+                })}
               </div>
-
             </div>
-
-
             <div className="nk-content nk-content-fluid">
               <div className="container-xl wide-lg">
                 <div className="nk-content-body">
@@ -259,33 +269,40 @@ const Home = () => {
                             <h5 className="nk-block-title title">Overview</h5>
                           </div>
                         </div>
-                        <div className="nk-block">
-                          <div className="card card-bordered text-light is-dark h-100">
+                        <div className="nk-block ">
+                          <div className="card card-bordered  bg-light  gradient-border   text-dark   h-100" style={{background:"white"}}>
                             <div className="card-inner">
                               <div className="nk-wg7">
                                 <div className="nk-wg7-stats">
                                   <div className="nk-wg7-title">
-                                    TOTAL ANOLOG BUY
+                                    TOTAL ANOLOG BUY  
                                   </div>
-                                  <div className="number-lg amount">
+                                  <div className="number-lg amount text-dark">
                                     {totalAnalogBuy.toFixed(2)}
                                   </div>
                                 </div>
                                 <div className="nk-wg7-stats-group">
                                   <div className="nk-wg7-stats w-50">
                                     <div className="nk-wg7-title">Wallets</div>
-                                    <div className="number-lg">{totalWallet}</div>
+                                    <div className="number-lg">
+                                      {totalWallet}
+                                    </div>
                                   </div>
-                                  <div className="nk-wg7-stats w-50">
+                                  <div   className="nk-wg7-stats w-50" >
                                     <div className="nk-wg7-title">
                                       Transactions
                                     </div>
-                                    <div className="number">{totalTransaction}</div>
+                                    <div className="number fs-5">
+                                      {totalTransaction}
+                                    </div>
                                   </div>
                                 </div>
                                 <div className="nk-wg7-foot">
                                   <span className="nk-wg7-note">
-                                    Last activity at <span>{date} {time}</span>
+                                    Last activity at{" "}
+                                    <span>
+                                      {date} {time}
+                                    </span>
                                   </span>
                                 </div>
                               </div>
@@ -308,25 +325,26 @@ const Home = () => {
                         </div>
                         <div className="row g-2">
                           <div className="col-sm-4">
-                            <div className="card bg-light">
+                            <div className="card bg-success bb bb ">
                               <div className="nk-wgw sm">
-                                <a
-                                  className="nk-wgw-inner"
-                                  href="#"
-                                >
+                                <a className="nk-wgw-inner" href="#">
                                   <div className="nk-wgw-name">
                                     <div className="nk-wgw-icon">
                                       <em className="icon ni ni-sign-btc"></em>
                                     </div>
-                                    <h5 className="nk-wgw-title title">
+                                    <h5 className="nk-wgw-title title text-white">
                                       INCEPTIVE
                                     </h5>
                                   </div>
                                   <div className="nk-wgw-balance">
-                                    <div className="amount">
-                                      {userInfo?.currency_preference == "inr" ? inceptive : (inceptive / oneUsdPrice).toFixed(2)}
+                                    <div className="amount text-white">
+                                      {userInfo?.currency_preference == "inr"
+                                        ? inceptive
+                                        : (inceptive / oneUsdPrice).toFixed(2)}
                                       <span className="currency currency-nio">
-                                        {userInfo?.currency_preference == "inr" ? "INRX" : "USDT"}
+                                        {userInfo?.currency_preference == "inr"
+                                          ? "INRX"
+                                          : "USDT"}
                                       </span>
                                     </div>
                                   </div>
@@ -334,26 +352,31 @@ const Home = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-sm-4" onClick={() => navigate('/Airdrop')} style={{ cursor: "pointer" }}>
-                            <div className="card bg-light">
+                          <div
+                            className="col-sm-4"
+                            onClick={() => navigate("/Airdrop")}
+                            style={{ cursor: "pointer" }}
+                          >
+                            <div className="card  bg-success bb">
                               <div className="nk-wgw sm">
-                                <a
-                                  className="nk-wgw-inner"
-
-                                >
+                                <a className="nk-wgw-inner">
                                   <div className="nk-wgw-name">
                                     <div className="nk-wgw-icon">
                                       <em className="icon ni ni-sign-btc"></em>
                                     </div>
-                                    <h5 className="nk-wgw-title title">
+                                    <h5 className="nk-wgw-title title text-white">
                                       AIRDROP
                                     </h5>
                                   </div>
                                   <div className="nk-wgw-balance">
-                                    <div className="amount">
-                                      {userInfo?.currency_preference == "inr" ? airdrop : (airdrop / oneUsdPrice).toFixed(2)}
+                                    <div className="amount text-white">
+                                      {userInfo?.currency_preference == "inr"
+                                        ? airdrop
+                                        : (airdrop / oneUsdPrice).toFixed(2)}
                                       <span className="currency currency-btc">
-                                        {userInfo?.currency_preference == "inr" ? "INRX" : "USDT"}
+                                        {userInfo?.currency_preference == "inr"
+                                          ? "INRX"
+                                          : "USDT"}
                                       </span>
                                     </div>
                                   </div>
@@ -361,23 +384,33 @@ const Home = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-sm-4" onClick={() => navigate('/Affiliate', { replace: true })} style={{ cursor: "pointer" }}>
-                            <div className="card bg-light">
+                          <div
+                            className="col-sm-4"
+                            onClick={() =>
+                              navigate("/Affiliate", { replace: true })
+                            }
+                            style={{ cursor: "pointer" }}
+                          >
+                            <div className="card bg-success bb">
                               <div className="nk-wgw sm">
                                 <a className="nk-wgw-inner">
                                   <div className="nk-wgw-name">
                                     <div className="nk-wgw-icon">
                                       <em className="icon ni ni-sign-eth"></em>
                                     </div>
-                                    <h5 className="nk-wgw-title title">
+                                    <h5 className="nk-wgw-title title text-white">
                                       AFFILIATES{" "}
                                     </h5>
                                   </div>
                                   <div className="nk-wgw-balance">
-                                    <div className="amount">
-                                      {userInfo?.currency_preference == 'inr' ? (affiliates * oneUsdPrice)?.toFixed(2) : affiliates?.toFixed(2)}
+                                    <div className="amount text-white">
+                                      {userInfo?.currency_preference == "inr"
+                                        ? (affiliates * oneUsdPrice)?.toFixed(2)
+                                        : affiliates?.toFixed(2)}
                                       <span className="currency currency-eth">
-                                        {userInfo?.currency_preference == "inr" ? "INRX" : "USDT"}
+                                        {userInfo?.currency_preference == "inr"
+                                          ? "INRX"
+                                          : "USDT"}
                                       </span>
                                     </div>
                                   </div>
@@ -391,29 +424,33 @@ const Home = () => {
                         <div className="nk-block-head-xs">
                           <div className="nk-block-between-md g-2">
                             <div className="nk-block-head-content">
-                              <h6 className="nk-block-title title">GROWTH</h6>
+                              <h6 className="nk-block-title title ">GROWTH</h6>
                             </div>
                             <div className="nk-block-head-content"></div>
                           </div>
                         </div>
                         <div className="row g-2">
                           <div className="col-sm-4">
-                            <div className="card bg-light">
+                            <div className="card bg-success bb">
                               <div className="nk-wgw sm">
                                 <a className="nk-wgw-inner" href="#">
                                   <div className="nk-wgw-name">
                                     <div className="nk-wgw-icon">
                                       <em className="icon ni ni-sign-btc"></em>
                                     </div>
-                                    <h5 className="nk-wgw-title title">
+                                    <h5 className="nk-wgw-title text-white title">
                                       INHERITED
                                     </h5>
                                   </div>
                                   <div className="nk-wgw-balance">
-                                    <div className="amount">
-                                      {userInfo?.currency_preference == 'inr' ? (inherited * oneUsdPrice)?.toFixed(2) : inherited?.toFixed(2)}
+                                    <div className="amount text-white">
+                                      {userInfo?.currency_preference == "inr"
+                                        ? (inherited * oneUsdPrice)?.toFixed(2)
+                                        : inherited?.toFixed(2)}
                                       <span className="currency currency-nio">
-                                        {userInfo?.currency_preference == "inr" ? "INRX" : "USDT"}
+                                        {userInfo?.currency_preference == "inr"
+                                          ? "INRX"
+                                          : "USDT"}
                                       </span>
                                     </div>
                                   </div>
@@ -421,32 +458,37 @@ const Home = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-sm-4" onClick={() => navigate('/Bounty')} style={{ cursor: "pointer" }}>
-                            <div className="card bg-light">
+                          <div
+                            className="col-sm-4"
+                            onClick={() => navigate("/Bounty")}
+                            style={{ cursor: "pointer" }}
+                          >
+                            <div className="card bg-success bb">
                               <div className="nk-wgw sm">
-                                <a
-                                  className="nk-wgw-inner"
-
-                                >
+                                <a className="nk-wgw-inner">
                                   <div className="nk-wgw-name">
                                     <div className="nk-wgw-icon">
                                       <em className="icon ni ni-sign-btc"></em>
                                     </div>
-                                    <h5 className="nk-wgw-title title">
+                                    <h5 className="nk-wgw-title text-white title">
                                       BOUNTY{" "}
                                     </h5>
                                   </div>
                                   <div className="nk-wgw-balance">
                                     <div
-                                      className="amount"
-                                    // style={{ fontSize: "10px" }}
+                                      className="amount text-white"
+                                      // style={{ fontSize: "10px" }}
                                     >
                                       {/* [L<sup>1</sup> / L<sup>2</sup> / L
                                         <sup>3</sup>][1% / 0.5% / 0.2% ] */}
 
-                                      {userInfo?.currency_preference == 'inr' ? (bounty * oneUsdPrice)?.toFixed(2) : bounty?.toFixed(2)}
+                                      {userInfo?.currency_preference == "inr"
+                                        ? (bounty * oneUsdPrice)?.toFixed(2)
+                                        : bounty?.toFixed(2)}
                                       <span className="currency currency-btc">
-                                        {userInfo?.currency_preference == "inr" ? "INRX" : "USDT"}
+                                        {userInfo?.currency_preference == "inr"
+                                          ? "INRX"
+                                          : "USDT"}
                                       </span>
                                     </div>
                                   </div>
@@ -455,26 +497,27 @@ const Home = () => {
                             </div>
                           </div>
                           <div className="col-sm-4">
-                            <div className="card bg-light">
+                            <div className="card bg-success bb">
                               <div className="nk-wgw sm">
-                                <a
-                                  className="nk-wgw-inner"
-                                  href="#"
-                                >
+                                <a className="nk-wgw-inner" href="#">
                                   <div className="nk-wgw-name">
                                     <div className="nk-wgw-icon">
                                       <em className="icon ni ni-sign-eth"></em>
                                     </div>
-                                    <h5 className="nk-wgw-title title">
+                                    <h5 className="nk-wgw-title text-white title">
                                       HANDOUT{" "}
                                     </h5>
                                   </div>
-                                  <div className="nk-wgw-balance">
-                                    <div className="amount">
-                                      {userInfo?.currency_preference == 'inr' ? (handOut * oneUsdPrice)?.toFixed(2) : handOut?.toFixed(2)}
+                                  <div className="nk-wgw-balance text-white ">
+                                    <div className="amount text-white">
+                                      {userInfo?.currency_preference == "inr"
+                                        ? (handOut * oneUsdPrice)?.toFixed(2)
+                                        : handOut?.toFixed(2)}
 
                                       <span className="currency currency-eth">
-                                        {userInfo?.currency_preference == "inr" ? "INRX" : "USDT"}
+                                        {userInfo?.currency_preference == "inr"
+                                          ? "INRX"
+                                          : "USDT"}
                                       </span>
                                     </div>
                                   </div>
@@ -497,102 +540,111 @@ const Home = () => {
                       </div>
 
                       <div className="tranx-list card card-bordered">
-                        {
-                          recentLoad ?
-                            <div style={{ position: "absolute", zIndex: "99", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
-                              <Triangle ariaLabel="loading-indicator" color="blue" />
-                            </div> :
-                            recentActivities.length > 0 ?
-                              recentActivities.map((data) => {
-                                const d = new Date(data.createdAt);
-                                return (
-                                  <div className="tranx-item">
-                                    <div className="tranx-col">
-                                      <div className="tranx-info">
-                                        <div className="tranx-data">
-                                          <div className="tranx-label">
-                                            {data?.type}
-                                            {data?.compair_currency == 'usd' ? "USDT" : "INRX"}
-                                            {data.compair_currency == "usd" ? (
-                                              <div className="p-1">
-                                                <img
-                                                  src="./images/Usdt.png"
-                                                  style={{ width: "17px" }}
-                                                  alt="usdt"
-
-                                                />
-                                              </div>
-
-                                            ) : (
-                                              <div className="p-1">
-                                                <img
-                                                  src="./images/Inrx_black.png"
-                                                  style={{ width: "17px" }}
-                                                  alt="inrx"
-                                                />
-                                              </div>
-
-                                            )}
-                                            {/* <em className="tranx-icon sm icon ni ni-sign-btc"></em> */}
+                        {recentLoad ? (
+                          <div
+                            style={{
+                              position: "absolute",
+                              zIndex: "99",
+                              top: "50%",
+                              left: "50%",
+                              transform: "translate(-50%, -50%)",
+                            }}
+                          >
+                            <Triangle
+                              ariaLabel="loading-indicator"
+                              color="blue"
+                            />
+                          </div>
+                        ) : recentActivities.length > 0 ? (
+                          recentActivities.map((data) => {
+                            const d = new Date(data.createdAt);
+                            return (
+                              <div className="tranx-item">
+                                <div className="tranx-col">
+                                  <div className="tranx-info">
+                                    <div className="tranx-data">
+                                      <div className="tranx-label">
+                                        {data?.type}
+                                        {data?.compair_currency == "usd"
+                                          ? "USDT"
+                                          : "INRX"}
+                                        {data.compair_currency == "usd" ? (
+                                          <div className="p-1">
+                                            <img
+                                              src="./images/Usdt.png"
+                                              style={{ width: "17px" }}
+                                              alt="usdt"
+                                            />
                                           </div>
-                                          <div className="tranx-date">
-                                            {d.toLocaleDateString()} {d.toLocaleTimeString()}
+                                        ) : (
+                                          <div className="p-1">
+                                            <img
+                                              src="./images/Inrx_black.png"
+                                              style={{ width: "17px" }}
+                                              alt="inrx"
+                                            />
                                           </div>
-                                        </div>
+                                        )}
+                                        {/* <em className="tranx-icon sm icon ni ni-sign-btc"></em> */}
+                                      </div>
+                                      <div className="tranx-date">
+                                        {d.toLocaleDateString()}{" "}
+                                        {d.toLocaleTimeString()}
                                       </div>
                                     </div>
-                                    {
-                                      data?.type == 'Buy'? (<div className="tranx-col">
-                                      <div className="tranx-amount">
-                                        <div className="number">
-                                          {data.cVolume}
-                                          <span className="currency currency-btc">ANA</span>
-                                        </div>
-                                        <div className="number-sm">
-                                          @ {data?.pref_raw_price?.toFixed(2)}
-                                          <span className="currency currency-usd"> {data?.compair_currency == 'inr' ? "INRX" : 'USDT'} </span>
-                                        </div>
+                                  </div>
+                                </div>
+                                {data?.type == "Buy" ? (
+                                  <div className="tranx-col">
+                                    <div className="tranx-amount">
+                                      <div className="number">
+                                        {data.cVolume}
+                                        <span className="currency currency-btc">
+                                          ANA
+                                        </span>
                                       </div>
-                                    </div>) : 
-                                    (
-                                      <div className="tranx-amount">
-                                        <div className="number">
-                                          {(data?.amount)?.toFixed(3)}
-                                          <span className="currency currency-btc">
-                                            {
-                                              data?.compair_currency == 'inr' ? "INRX" : 'USDT'
-                                            }
-                                          </span>
-                                        </div>
-                                        {/* <div className="number-sm">
+                                      <div className="number-sm">
+                                        @ {data?.pref_raw_price?.toFixed(2)}
+                                        <span className="currency currency-usd">
+                                          {" "}
+                                          {data?.compair_currency == "inr"
+                                            ? "INRX"
+                                            : "USDT"}{" "}
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                ) : (
+                                  <div className="tranx-amount">
+                                    <div className="number">
+                                      {data?.amount?.toFixed(3)}
+                                      <span className="currency currency-btc">
+                                        {data?.compair_currency == "inr"
+                                          ? "INRX"
+                                          : "USDT"}
+                                      </span>
+                                    </div>
+                                    {/* <div className="number-sm">
                                           @ {data?.pref_raw_price?.toFixed(2)}
                                           <span className="currency currency-usd"> {data?.compair_currency == 'inr' ? "INRX" : 'USDT'} </span>
                                         </div> */}
-                                      </div>
-                                    )
-                                    }
-                                    
                                   </div>
-
-                                )
-                              }) :
-                              <>
-                                <div className="tranx-item" style={{justifyContent: "center"}}>
-                                  <div className="tranx-col">
-                                    <h4>{"Record not Found"}</h4>
-                                  </div>
-                                </div>
-                               
-                              </>
-
-
-
-
-
-
-
-                        }
-
+                                )}
+                              </div>
+                            );
+                          })
+                        ) : (
+                          <>
+                            <div
+                              className="tranx-item"
+                              style={{ justifyContent: "center" }}
+                            >
+                              <div className="tranx-col">
+                                <h4>{"Record not Found"}</h4>
+                              </div>
+                            </div>
+                          </>
+                        )}
                       </div>
                     </div>
                     <div className="col-md-6">
@@ -649,8 +701,8 @@ const Home = () => {
                               className="chart-account-summary"
                               data={ summaryBalance } id= "summaryBalance"
                             ></canvas> */}
-                        <Line  data={summaryBalance}   />
-                         {/* options={lineOptions} */}
+                            <Line data={summaryBalance} />
+                            {/* options={lineOptions} */}
                           </div>
                         </div>
                       </div>
@@ -684,19 +736,34 @@ const Home = () => {
                             >
                               {/* <em className="clipboard-icon icon ni ni-copy"></em>{" "}
                               <span className="clipboard-text">Copy Link</span> */}
-                              <CopyToClipboard text={`http://localhost:3000/signup?ref=${userInfo?.user_id}`}
+                              <CopyToClipboard
+                                text={`http://localhost:3000/signup?ref=${userInfo?.user_id}`}
                                 onCopy={() => {
-                                  setCopied(true)
+                                  setCopied(true);
                                   setTimeout(() => {
                                     setCopied(false);
                                   }, 800);
-                                }}>
+                                }}
+                              >
                                 <div>
                                   <em className="clipboard-icon icon ni ni-copy"></em>
 
                                   {/* <MdOutlineContentCopy color="white" /> */}
-                                  {copied ?
-                                    <p className=" position-absolute" style={{ fontSize: "14px", top: "-21px", left: "17px", padding: "0px 5px", backgroundColor: "transparent", color: "grey" }}>copied!</p> : null}
+                                  {copied ? (
+                                    <p
+                                      className=" position-absolute"
+                                      style={{
+                                        fontSize: "14px",
+                                        top: "-21px",
+                                        left: "17px",
+                                        padding: "0px 5px",
+                                        backgroundColor: "transparent",
+                                        color: "grey",
+                                      }}
+                                    >
+                                      copied!
+                                    </p>
+                                  ) : null}
                                 </div>
                               </CopyToClipboard>
                             </div>
@@ -734,8 +801,17 @@ const Home = () => {
                               {/* <div className="title">{userInfo?.currency_preference == 'inr' ? `${refData?.totalIncome?.toFixed(2)} INRX` : 
                                 `${(refData?.totalIncome / oneUsdPrice)?.toFixed(2)} USDT`
                               }</div> */}
-                              {totalRefIncome > 0 ? userInfo?.currency_preference == 'inr' ? `${totalRefIncome?.toFixed(2)}` : `${(totalRefIncome / oneUsdPrice)?.toFixed(2)}` : 0} &nbsp;&nbsp;
-                              {userInfo?.currency_preference == 'inr' ? "INRX" : "USDT"}
+                              {totalRefIncome > 0
+                                ? userInfo?.currency_preference == "inr"
+                                  ? `${totalRefIncome?.toFixed(2)}`
+                                  : `${(totalRefIncome / oneUsdPrice)?.toFixed(
+                                      2
+                                    )}`
+                                : 0}{" "}
+                              &nbsp;&nbsp;
+                              {userInfo?.currency_preference == "inr"
+                                ? "INRX"
+                                : "USDT"}
                               <div className="sub-text">Referral Earn</div>
                             </div>
                           </div>
@@ -960,7 +1036,10 @@ const Home = () => {
                           </div>
                         </div>
                         <div className="nk-block-content flex-shrink-0">
-                          <a href="#" className="btn btn-lg btn-outline-primary">
+                          <a
+                            href="#"
+                            className="btn btn-lg btn-outline-primary"
+                          >
                             Get Support Now
                           </a>
                         </div>
@@ -978,5 +1057,5 @@ const Home = () => {
     </div>
     // </div>
   );
-}
+};
 export default Home;

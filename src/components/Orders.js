@@ -215,25 +215,25 @@ export default function Orders() {
               <thead>
                 <tr style={{ fontSize: "10px" }}>
                   <th
-                    className="OrderHistoryHedding"
+                    className="OrderHistoryHedding text-success"
                     style={{ width: "25%", padding: "7px 7px" }}
                   >
                     Total Analog
                   </th>
                   <th
-                    className="OrderHistoryHedding"
+                    className="OrderHistoryHedding text-success"
                     style={{ width: "25%", padding: "7px 7px" }}
                   >
                     Total Amount Pay
                   </th>
                   <th
-                    className="OrderHistoryHedding"
+                    className="OrderHistoryHedding text-success"
                     style={{ width: "25%", padding: "7px 7px" }}
                   >
                     Buying Price
                   </th>
                   <th
-                    className="OrderHistoryHedding"
+                    className="OrderHistoryHedding text-success"
                     style={{ width: "25%", padding: "7px 7px" }}
                   >
                     Pool
@@ -343,10 +343,11 @@ export default function Orders() {
           }}
         >
           <div
+          className="border border-success"
             style={{
               textAlign: "center",
               fontWeight: "bold",
-              background: "rgb(241, 241, 241)",
+              // background: "rgb(241, 241, 241)",
               margin: "4px 0px",
             }}
           >
@@ -362,8 +363,8 @@ export default function Orders() {
             style={{ borderColor: "rgba(25, 32, 87, 0.2)" }}
           >
             <div
-              className="d-flex justify-content-center align-items-center"
-              style={{ background: "white" }}
+              className="d-flex justify-content-center border    align-items-center"
+              style={{ background: "" }}
             >
               <div
                 className="sing-up-button"

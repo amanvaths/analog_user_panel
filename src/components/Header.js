@@ -7,6 +7,7 @@ import { BASE_URL } from "../Api_connection/config";
 
 
 const Header = () => {
+  var flag=0;
   const [isopen, setIsopen] = useState(0);
   const { user, userInfo } = useSelector((state) => state.user.value)
   const email = user.email;
@@ -16,30 +17,27 @@ const Header = () => {
 
   const sidebarMenu = async () => {
    
-      var element = document.getElementById("myBody");
-      element.classList.add("nav-shown");
-      var element = document.getElementById("nk-sidebar");
-      element.classList.add("nk-sidebar-active");
-      var element = document.getElementById("nk-nav-toggle");
-      element.classList.add("toggle-active");
-    
-      var element1 = document.getElementById("myBody"); 
-      if(element1.classList.contains("toggle-shown")){
-        element1.classList.remove("toggle-shown") 
-      }
-      var element2 = document.getElementById("toggleBtn");
-      if(element2){
-        if(element2.classList.contains("active")) {
-          element2.classList.remove("active")
-        }  
-      }                                  
-      var element3 = document.getElementById("cardAside")
-      if(element3){
-        if(element3.classList.contains("content-active")){
-          element3.classList.remove("content-active") 
-        }
-          
-      }
+  
+   if(flag==0){
+    var element = document.getElementById("nk-sidebar");
+    element.classList.add("nk-sidebar-active");
+    document.getElementById("nk-sidebar").style.visibility="visible"
+    flag++; 
+    console.log("uppper - hello");
+   }
+
+
+  else if(flag==1){
+  
+
+    var element2 = document.getElementById("nk-sidebar");
+      element2.classList.remove("nk-sidebar-active");
+      document.getElementById("nk-sidebar").style.display="hidden"
+      console.log("hello");
+      flag=0;
+   
+  }
+
       
   }
   const mode = localStorage.getItem("theme")
@@ -50,8 +48,15 @@ const Header = () => {
     var element = document.getElementById("myBody");
     element.classList.remove("dark-mode")
   }
+  
 
-    
+//    if(flag==0){
+//     document.getElementById("nk-sidebar").style.display="block";
+// flag++
+//    } 
+
+ 
+  
 
 
 
@@ -73,8 +78,8 @@ const Header = () => {
 
   return (
     <>
-      <div className="nk-header nk-header-fluid is-light ">
-        <div className="container-fluid">
+      <div className="nk-header nk-header-fluid is-light mobile_view_setter">
+        <div className="container-fluid" >
           <div className="nk-header-wrap">
             <div className="nk-menu-trigger d-xl-none ml-n1">
               <a
@@ -84,7 +89,7 @@ const Header = () => {
                 className={btn ? "nk-nav-toggle nk-quick-nav-icon toggle-active" : "nk-nav-toggle nk-quick-nav-icon"}
                 data-target="sidebarMenu"
               >
-                <em className="icon ni ni-menu" onClick={sidebarMenu}></em>
+                <em className="icon ni ni-menu"  onClick={sidebarMenu}></em>
               </a>
             </div>
             <div className="nk-header-brand d-xl-none">
@@ -186,7 +191,7 @@ const Header = () => {
                   </a>
                   <div
                     className="dropdown-menu dropdown-menu-xl dropdown-menu-right dropdown-menu-s2"
-                    style={{ width: 305 }}
+                    style={{ width: 305 ,zIndex:1000}}
                   >
                     <div className="dropdown-head">
                       <span className="sub-title nk-dropdown-title">

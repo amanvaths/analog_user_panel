@@ -117,20 +117,20 @@ const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + 
           </div>
 
         </>) :
-          (<div className="nk-app-root">
-            <div className="nk-main ">
+          (<div className="nk-app-root ms-5">
+            <div className="nk-main text-center   " style={{ overflowWrap: "break-word" }}>
               <Menu />
               <div className="nk-wrap">
                 <Header />
-                <div className="contianer">
+                <div className="contianer   ">
                   <div className="row py-3">
                     <div className="col-6">
-                      <h4 style={{ padding: "0 24px" }}>Wallet / Assets </h4>
+                      {/* <h4 style={{ padding: "px-5" }}>Wallet / Assets </h4> */}
                     </div>
                     <div className="col-6">
                       <label
                         className="float-right"
-                        style={{ padding: "0 30px" }}
+                        style={{ padding: "" }}
                       >
                         <h6>
                           Total Balance:&nbsp;&nbsp;
@@ -139,63 +139,68 @@ const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + 
                       </label>
                     </div>
                   </div>
-                  <div className="row py-5">
-                    <div className="container mt-1 px-5">
-                      <div className="row" style={{ padding: "0px" }}>
-                        <div className="">
-                          <div className="card card-bordered is-dark">
-                            <div className="nk-wgw">
-                              <div className="nk-wgw-inner">
-                                <div className="row" style={{color: "white"}}>
-                                  <div className="col-6 d-flex justify-content-center">
-                                    <div className="w-50" style={{fontSize: "1.1rem", fontWeight: "500px"}}>
-                                    <p className="p-1">
+    
+
+             
+<div class="container my-5">
+  <div class="row">
+    <div class="col">
+    <div className="card">
+            
+                                    <div className="w-50 text-dark" style={{fontSize: "1.1rem", fontWeight: "500px"}}>
+                                    <p className="">
                                       <span>Total Fund: </span>
                                       <span >&nbsp;&nbsp;{totalAna? totalAna?.toFixed(2): ""} ANA </span>
                                     </p>
-                                    <p className="p-1" >
+                                    <p className="" >
                                       <span>Total Spend: </span>
                                       <span>&nbsp;&nbsp;0</span>
                                     </p>
-                                    <p className="p-1">
+                                    <p className="">
                                       <span>Current Balance: </span>
                                       <span>&nbsp;&nbsp;{userInfo?.currency_preference == "usd" ? `${coinWW[8]?.wallet?.usdt_balance?.toFixed(2)} USDT` : `${(oneUsdPrice * coinWW[8]?.wallet?.usdt_balance).toFixed(2)} INRX`}</span>
                                     </p>
                                     </div>
+                                  
+            </div>
+    </div>
+    <div class="col-sm">
+     
+<div className="card">
+<div className="row " style={{color: ""}}>
+                                
+                    
+                                <div className="w-50 text-dark" style={{fontSize: "1.1rem", fontWeight: "500px"}}>
+                                  <p className="">
+                                    <span>Analog Value: </span>
+                                    <span>&nbsp;&nbsp;{userInfo?.anaPrice} {userInfo?.currency_preference == 'inr' ? "INRX" : "USDT"}</span>
+                                  </p>
+                                  <p className="">
+                                    <span>Bonus:</span>
+                                    <span>&nbsp;&nbsp;
+                                      {totalBonus?.toFixed(2)}&nbsp;&nbsp;{
+                                                      userInfo?.currency_preference == 'inr' ? "INRX" : "USDT"
+                                                  }
+                                    </span>
+                                  </p>
+                                  <p className="">
+                                    <span>Total API: </span>
+                                    <span>&nbsp;&nbsp;0</span>
+                                  </p>
                                   </div>
-                                  <div className="col-6 d-flex justify-content-center">
-                                  <div className="w-50" style={{fontSize: "1.1rem", fontWeight: "500px"}}>
-                                    <p className="p-1">
-                                      <span>Analog Value: </span>
-                                      <span>&nbsp;&nbsp;{userInfo?.anaPrice} {userInfo?.currency_preference == 'inr' ? "INRX" : "USDT"}</span>
-                                    </p>
-                                    <p className="p-1">
-                                      <span>Bonus:</span>
-                                      <span>&nbsp;&nbsp;
-                                        {totalBonus?.toFixed(2)}&nbsp;&nbsp;{
-                                                        userInfo?.currency_preference == 'inr' ? "INRX" : "USDT"
-                                                    }
-                                      </span>
-                                    </p>
-                                    <p className="p-1">
-                                      <span>Total API: </span>
-                                      <span>&nbsp;&nbsp;0</span>
-                                    </p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="row" style={{ marginBottom: "15vh" }}>
+                              
+                              </div>  
+</div>
+    </div>
+   
+  </div>
+</div>
+
+                  <div className="row text-center " style={{ marginBottom: "15vh" }}>
                     {coinWW.map((element, index) => {
                      
                       return (
-                        <div className="walletCard col-md-6 col-lg-4 col-12">
+                        <div className="  col-md-6 col-lg-4 col-12">
                           <Card1
                             title={element.name}
                             priceInUsd={(element?.quote?.[userInfo?.currency_preference.toUpperCase()]?.price)?.toFixed(2)}

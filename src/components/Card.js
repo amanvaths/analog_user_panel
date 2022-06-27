@@ -22,12 +22,64 @@ const Card1 = (props) => {
   const second = addString?.substring(35, addString.length);
   const address = first + "...." + second;
 
+
+  const cards = document.querySelectorAll(".cards");
+// const onDocumentMouseMoveHandler = (evt) => {
+//   evt.preventDefault();
+
+//   requestAnimationFrame(() => {
+//     if (!evt.target.closest('.card')) {
+//       card.style.transform = 'perspective(1000px) scale(1) rotateX(0) rotateY(0)';
+//     }
+//   });
+// };
+// document.addEventListener('mousemove', onDocumentMouseMoveHandler)
+
+
+cards.forEach((card) => {
+  const height = card.clientHeight;
+  const width = card.clientWidth;
+
+  const mouseMoveHandler = (evt) => {
+    evt.preventDefault();
+
+    requestAnimationFrame(() => {
+      const xRotation = -30 * ((evt.layerY - height / 2) / height);
+      const yRotation = 20 * ((evt.layerX - width / 2) / width);
+
+      card.style.transform = `perspective(1000px) scale(1.05) rotateX(${xRotation}deg) rotateY(${yRotation}deg)`;
+    });
+  };
+
+  card.addEventListener("mousemove", mouseMoveHandler);
+
+  card.addEventListener("mouseenter", (evt) => {
+    evt.preventDefault();
+    card.addEventListener("mousemove", mouseMoveHandler);
+  });
+
+  card.addEventListener("mouseout", (evt) => {
+    evt.preventDefault();
+    card.style.transform = "perspective(1000px) scale(1) rotateX(0) rotateY(0)";
+    card.removeEventListener("mousemove", mouseMoveHandler);
+  });
+  
+  card.addEventListener("click", (evt) => {
+    evt.preventDefault();
+    card.style.animation = "spin 1s ease-in-out";
+    setTimeout(() => {      
+      card.style.animation = '';
+    }, 1000);
+  });
+}
+);
+
   return (
     <>
-      <div className="container mt-1" onClick={props.onClick} style={{zIndex:100}}>
-        <div className="row" style={{ padding: "0px" }}>
-          <div className="">
-            <div className="card card-bordered is-dark">
+      <div className="container     mt-1" onClick={props.onClick} style={{zIndex:100}}>
+        <div className="row    " style={{ padding: "0px" }}>
+          <div className=" overlay   overlay--light ">
+            <div className=" cards   rainbow-box     button counterclockwise horizontal card--light  ">
               <div className="nk-wgw">
                 <div className="nk-wgw-inner">
                   <div className="row">
@@ -47,7 +99,7 @@ const Card1 = (props) => {
                           />
                           {/* <em className="icon ni ni-sign-kobo"></em> */}
                         </div>
-                        <h5 className="nk-wgw-title title ml-2" onClick={()=>{
+                        <h5 className="nk-wgw-title text-white title ml-2" onClick={()=>{
                           navigate("/cryptoTransaction", { state: {logo: props.logo, lable: props.lable, price: props.price}})
                         }}>{props.title}</h5>
                       </b>

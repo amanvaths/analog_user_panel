@@ -4,7 +4,7 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 // import Countdown from "react-countdown";
 
 const Getpresale = (props) => {
-  const { levelname, coinQty, coinPrice, duration ,persent} = props;
+  const { levelname, coinQty, coinPrice, duration, persent } = props;
   const [hours, setHours] = useState("");
   const [minutes, setMinutes] = useState("");
   const [seconds, setSeconds] = useState("");
@@ -15,6 +15,20 @@ const Getpresale = (props) => {
     minute: "",
     second: "",
   });
+
+  const [Backk, setBackk] = useState("light");
+  const theme = localStorage.getItem("theme");
+
+  useEffect(() => {
+    console.log("mytheme",theme);
+    if (theme) {
+      setBackk("dark");
+    } else {
+      setBackk("light");
+    }
+  }, [theme]);
+
+
 
   useEffect(() => {
     countdowntimer();
@@ -39,44 +53,53 @@ const Getpresale = (props) => {
   }
 
   return (
-    <div className="nk-block first-card">
-      <div className="card card-bordered  text-secondary  h-100">
-        <div className="card-inner">
-          <div className="nk-wg7">
-            <div className="nk-wg7-stats">
-              <div className="nk-wg7-title is-dark text-body">{levelname}</div>
-              <div className="number-lg amount text-success">{coinPrice}</div>
-            </div>
-            <div className="nk-wg7-stats-group" style={{display:"flex",justifyContent:"space-between"}}>
-              <div className="nk-wg7-stats " style={{display:"flex"}}>
-                <div className="nk-wg7-title "></div>
-                
-                <div className="number-lg text-success coinqty">{coinQty}</div>
+    <div className={`col-sm-12 col-md-5  block  ${Backk !== "dark" ? "bg-dark text-white" : "bg-light text-dark"} shadow-lg`}>
+       
+      <div className="nk-block first-card  " >
+        <div className=" text-dark   h-100">
+          <div className="card-inner">
+            <div className="nk-wg7">
+              <div className="nk-wg7-stats ">
+                <div className="nk-wg7-title is-dark text-work">
+                  {levelname}
+                </div>
+                <div className="number-lg amount ">{coinPrice}</div>
               </div>
               <div
-                className="nk-wg7-stats  duration duration2"
-                // style={{ marginLeft: 150 }}
+                className="nk-wg7-stats-group"
+                style={{ display: "flex",color:"white", justifyContent: "space-between" }}
               >
-                <div className="nk-wg7-title text-body ">Duration</div>
-                <div className="number text-success ">{duration} days</div>
+                <div className="nk-wg7-stats " style={{ display: "flex" }}>
+                  <div className="nk-wg7-title "></div>
+
+                  <div className="number-lg text-success coinqty">
+                    {coinQty}
+                  </div>
+                </div>
+                <div
+                  className="nk-wg7-stats  duration duration2"
+                  // style={{ marginLeft: 150 }}
+                >
+                  <div className="nk-wg7-title text-body ">Duration</div>
+                  <div className="number text-warning ">{duration} days</div>
+                </div>
               </div>
-            </div>
-            <div
-             style={{ paddingTop: 11 }}>
-              <ProgressBar
-                striped
-                now={persent}
-                label={`${persent}%`}
-                variant="success "
-                aria-valuemin={100}
-               
-              />
-            </div>
-               
-            <div className="number text-dark countdown"  
-             style={{display:"flex",justifyContent:"end" }}
-             >
-              {timer.days}:{timer.hour}:{timer.minute}:{timer.second}
+              <div style={{ paddingTop: 11 }}>
+                <ProgressBar
+                  striped
+                  now={persent}
+                  label={`${persent}%`}
+                  variant="success "
+                  aria-valuemin={100}
+                />
+              </div>
+
+              <div
+                className="number text-dark countdown"
+                style={{ display: "flex", justifyContent: "end" }}
+              >
+                {timer.days}:{timer.hour}:{timer.minute}:{timer.second}
+              </div>
             </div>
           </div>
         </div>
