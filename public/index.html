@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="images/logo-dark-small2x.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Xintrection " />
+      <link rel="stylesheet" href="assets/css/dashlite.css" />
+      
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link id="skin-default" rel="stylesheet" href="assets/css/theme.css?ver=2.2.0" />
+    <link rel="stylesheet" href="assets/css/energy.css" />
+    <!-- Progress Bar -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+	<link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+
+<!-- JavaScripts -->
+
+<link rel="stylesheet" href="./assets/css/modifiers.css">
+<!-- Online Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300,400,700,900|Montserrat:300,400,500,600,700,800" rel="stylesheet"/>
+<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet"/>
+    <title>ANALOG (ANA) Inceptive : Initial Asset Offering of INRX Network Ecosystem.  </title>
+  </head>
+  <body class="nk-body npc-crypto  has-sidebar nav-show" id="myBody">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+   
+
+  </body>
+  <script src="%PUBLIC_URL%/datafeeds/udf/dist/polyfills.js"></script>
+  <script src="%PUBLIC_URL%/datafeeds/udf/dist/bundle.js"></script>
+  <script src="assets/js/bundle.js"></script>
+  <script src="assets/js/scripts.js"></script>
+  <script src="assets/js/charts/chart-crypto.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+  <script  src="assets/js/energy.js"></script>
+  <script src="assets/js/libs/jkanban.js"></script>
+  <script src="assets/js/apps/kanban.js"></script>
+  <script src="assets/js/demo-settings.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+  <script>
+    document.querySelector(".nk-wrap").addEventListener('click',()=>{
+      
+      var element1 = document.getElementById("myBody");
+      if(element1.classList.contains("nav-shown")){
+    
+        element1.classList.remove("nav-shown");
+      }
+
+      var element2 = document.getElementById("nk-sidebar");
+     if(element2.classList.contains("nk-sidebar")){
+      
+      element2.classList.remove("nk-sidebar-active");
+     }
+     
+     var element3 = document.getElementById("nk-nav-toggle");
+      if(element3){
+   
+        element3.classList.remove("toggle-active");
+      }
+        
+    })
+
+   
+    // } 
+  </script>
+
+
+  
+</html>
