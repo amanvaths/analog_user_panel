@@ -131,7 +131,7 @@ class Home extends React.Component {
                             </div>
                           </div>
                           <div className="nk-block">
-                            <div className="card card-bordered text-light is-dark h-100">
+                            <div className="card card-bordered text-light h-100">
                               <div className="card-inner">
                                 <div className="nk-wg7">
                                   <div className="nk-wg7-stats">
@@ -171,7 +171,7 @@ class Home extends React.Component {
                             <div className="nk-block-between-md g-2">
                               <div className="nk-block-head-content">
                                 <h5 className="nk-block-title title">
-                                  INCEPTIVE WALLETS
+                                  Inceptive Wallets
                                 </h5>
                               </div>
                               <div className="nk-block-head-content"></div>
@@ -560,7 +560,7 @@ class Home extends React.Component {
                             <div className="nk-refwg-title">
                               <h5 className="title">Refer Us & Earn</h5>
                               <div className="title-sub">
-                                Use the bellow link to invite your friends.
+                                Use the below link to invite your friends.
                               </div>
                             </div>
                             <div className="nk-refwg-action">
@@ -827,9 +827,9 @@ class Home extends React.Component {
                           </div>
                           <div className="nk-block-content">
                             <div className="nk-block-content-head px-lg-4">
-                              <h5>We’re here to help you!</h5>
+                              <h5>We're here to help you!</h5>
                               <p className="text-soft">
-                                Ask a question or file a support ticket, mANAge
+                                Ask a question or file a support ticket, manage
                                 request, report an issues. Our team support team
                                 will get back to you by email.
                               </p>

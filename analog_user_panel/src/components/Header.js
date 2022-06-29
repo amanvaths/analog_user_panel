@@ -117,7 +117,7 @@ const Header = () => {
                     data-toggle="dropdown"
                   >
                     <div className="icon-status icon-status-info">
-                      <em className="icon ni ni-bell"></em>
+                      <em className="ni ni-bell"></em>
                     </div>
                   </a>
                   <div

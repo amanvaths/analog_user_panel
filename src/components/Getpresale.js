@@ -55,29 +55,29 @@ const Getpresale = (props) => {
   return (
     <div className={`col-sm-12 col-md-6`}>
        
-      <div className="card card-bordered border-success card-full shadow-sm">
-        <div className="text-success h-100">
+      <div className="kanban-board-header kanban-success shadow-sm">
+        <div className="text-teal h-100">
           <div className="card-inner">
             <div className="nk-wg7">
               <div className="nk-wg7-stats ">
                 <div className="nk-wg7-title is-dark text-work">
                   {levelname}
                 </div>
-                <div className="number-lg amount ">{coinPrice}</div>
+                <div className="number-lg amount">{coinPrice}</div>
               </div>
               <div
                 className="nk-wg7-stats-group"
                 style={{ display: "flex",color:"white", justifyContent: "space-between" }}
               >
-                <div className="nk-wg7-stats " style={{ display: "flex" }}>
-                  <div className="nk-wg7-title "></div>
+                <div className="nk-wg7-stats" style={{ display: "flex" }}>
+                  <div className="nk-wg7-title"></div>
 
-                  <div className="number-lg text-success coinqty">
+                  <div className="number-lg text-dark coinqty">
                     {coinQty}
                   </div>
                 </div>
                 <div
-                  className="nk-wg7-stats  duration duration2"
+                  className="nk-wg7-stats duration duration2"
                   // style={{ marginLeft: 150 }}
                 >
                   <div className="nk-wg7-title text-body ">Duration</div>

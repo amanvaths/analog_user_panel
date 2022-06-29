@@ -127,7 +127,7 @@ const Withdrawal = () => {
                                                         <div className="nk-block-between-md g-2">
                                                             <div className="nk-block-head-content">
                                                                 <h5 className="nk-block-title title">
-                                                                    INCEPTIVE WALLETS
+                                                                    Inceptive Wallets
                                                                 </h5>
                                                             </div>
                                                             <div className="nk-block-head-content"></div>

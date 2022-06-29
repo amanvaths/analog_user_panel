@@ -90,8 +90,8 @@ const PersonalInfo = () => {
         </div>
         <div className="nk-block">
           <div className="nk-data data-list">
-            <div className="data-head">
-              <h6 className="overline-title">Basics</h6>
+            <div className="data-head bg-teal-dim">
+              <span className="overline-title">Basics</span>
             </div>
             {/* -------------- */}
 
@@ -120,13 +120,13 @@ const PersonalInfo = () => {
                 <div className="">
 
                   <span className="">
-                    {showUser ? <a href="#" class="btn btn-dim btn-primary" onClick={() => {
+                    {showUser ? <a href="#" class="btn btn-dim btn-success" onClick={() => {
                       if (value) {
                         updateData();
                         setShowUser(false);
                       }
                     }}>Update</a> :
-                      <em className="icon ni ni-lock-alt"></em>
+                      <em className="ni ni-lock-alt"></em>
 
                     }
 
@@ -147,8 +147,8 @@ const PersonalInfo = () => {
               </div>
               <div className="col-4 d-flex justify-content-end">
                 <div className="">
-                  <span className=" disable">
-                    <em className="icon ni ni-lock-alt"></em>
+                  <span className="disable">
+                    <em className="ni ni-lock-alt"></em>
                   </span>
                 </div>
               </div>
@@ -181,13 +181,13 @@ const PersonalInfo = () => {
                 <div className="">
 
                   <span className="">
-                    {showUser1 ? <a href="#" class="btn btn-dim btn-primary" onClick={() => {
+                    {showUser1 ? <a href="#" class="btn btn-dim btn-success" onClick={() => {
                       if (phone) {
                         updateData();
                         setShowUser1(false);
                       }
                     }}>Update</a> : <span className=" disable">
-                      <em className="icon ni ni-lock-alt"></em>
+                      <em className="ni ni-lock-alt"></em>
                     </span>
                     }
 
@@ -198,8 +198,8 @@ const PersonalInfo = () => {
           </div>
 
           <div className="nk-data data-list">
-            <div className="data-head">
-              <h6 className="overline-title">Currency Preferences</h6>
+            <div className="data-head bg-teal-dim">
+              <span className="overline-title">Currency Preferences</span>
             </div>
 
             <div className="data-item">

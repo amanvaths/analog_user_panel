@@ -66,6 +66,13 @@ const Affiliate = (props) => {
 
   return (
     <div>
+      {loader ? (<>
+          <div style={{ position: "absolute", zIndex: "99", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+            <Triangle ariaLabel="loading-indicator" color="green" />
+          </div>
+
+        </>) :
+          (
       <div class="nk-app-root">
         <div class="nk-main ">
           <Menu />
@@ -81,10 +88,11 @@ const Affiliate = (props) => {
                       <h3 class="nk-block-title page-title">
                         Affiliates
                       </h3>
-                      <div class="nk-block-des text-soft">
+                      {/*<div class="nk-block-des text-soft">
 
                         <p>{`Your affiliates.`}</p>
                       </div>
+                      */}
                     </div>
                     <div class="nk-block-head-content affiliates">
                       <div class="toggle-wrap nk-block-tools-toggle">
@@ -135,30 +143,30 @@ const Affiliate = (props) => {
                           />
                         )
                       }) :
-                      <h3>No Record Found</h3>
+                      <p>No Record Found</p>
                       :
 
                       <div style={{ position: "absolute", zIndex: "99", top: "29%", left: "108%", transform: "translate(-50%, -50%)" }}>
-                        <Triangle ariaLabel="loading-indicator" color="blue" />
+                        <Triangle ariaLabel="loading-indicator" color="green" />
                       </div>
 
 
                   }
                 </div>
 
-                <div className="row my-1" >
+                <div className="row my-4">
                   <div className="nk-content-wrap">
                     <div className="nk-block-head">
                       <div className="nk-block-between">
                         <div className="nk-block-head-content">
-                          <h3 className="nk-block-title page-title">
+                          <h3 className="nk-block-title page-title pb-3 mt-4">
                             Affiliate List
                           </h3>
                           <div className="nk-block-des text-soft">
                             <ul class="nk-block-tools g-3" style={{ paddingLeft: "0px" }}>
                               <li>
-                                <a className={level1 ? 'btn btn-white btn-dim btn-outline-light active' :
-                                  "btn btn-white btn-dim btn-outline-light"} onClick={() => {
+                                <a className={level1 ? 'btn btn-white btn-dim btn-outline-success active' :
+                                  "btn btn-white btn-dim btn-outline-success"} onClick={() => {
                                     setLevel1(true)
                                     setLevel2(false)
                                     setLevel3(false)
@@ -167,8 +175,8 @@ const Affiliate = (props) => {
                                   <span>Level 1</span></a>
                               </li>
                               <li>
-                                <a className={level2 ? 'btn btn-white btn-dim btn-outline-light active' :
-                                  "btn btn-white btn-dim btn-outline-light"} onClick={() => {
+                                <a className={level2 ? 'btn btn-white btn-dim btn-outline-success active' :
+                                  "btn btn-white btn-dim btn-outline-success"} onClick={() => {
                                     setLevel1(false)
                                     setLevel2(true)
                                     setLevel3(false)
@@ -177,8 +185,8 @@ const Affiliate = (props) => {
                                   <span>Level 2</span></a>
                               </li>
                               <li>
-                                <a className={level3 ? 'btn btn-white btn-dim btn-outline-light active' :
-                                  "btn btn-white btn-dim btn-outline-light"} onClick={() => {
+                                <a className={level3 ? 'btn btn-white btn-dim btn-outline-success active' :
+                                  "btn btn-white btn-dim btn-outline-success"} onClick={() => {
                                     setLevel1(false)
                                     setLevel2(false)
                                     setLevel3(true)
@@ -205,10 +213,10 @@ const Affiliate = (props) => {
                                     <li>
                                       <Link
                                         to={'/Withdrawal'}
-                                        className="btn btn-primary btn-outline-light"
+                                        className="btn btn-outline-danger"
                                       >
                                         
-                                        <span>Withdrwa</span>
+                                        <span>Withdraw</span>
                                       </Link>
                                     </li>
                                     {/* <li className="nk-block-tools-opt">
@@ -690,7 +698,7 @@ const Affiliate = (props) => {
                                       )
                                     }) :
 
-                                    <h3>No Record Found</h3>
+                                    <p>No Record Found</p>
                                 }
 
                                 {/* <div className="nk-tb-item">
@@ -1016,7 +1024,7 @@ const Affiliate = (props) => {
                                         </>
                                       )
                                     }) :
-                                    <h3>No Data Found</h3>
+                                    <p>No Data Found</p>
                                 }
 
                                 {/* <div className="nk-tb-item">
@@ -1178,7 +1186,9 @@ const Affiliate = (props) => {
           <Footer />
         </div>
       </div>
-    </div>
+      ) 
+    }
+</div>
   );
 };
 

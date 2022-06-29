@@ -76,94 +76,82 @@ cards.forEach((card) => {
 
   return (
     <>
-      <div className="container     mt-1" onClick={props.onClick} style={{zIndex:100}}>
-        <div className="row    " style={{ padding: "0px" }}>
-          <div className=" overlay   overlay--light ">
-            <div className=" cards   rainbow-box     button counterclockwise horizontal card--light  ">
-              <div className="nk-wgw">
-                <div className="nk-wgw-inner">
-                  <div className="row">
-                    <div className="col-8">
-                      <b
-                        className="nk-wgw-name"
-                        // onClick={() => { 
-                        //   navigate("/cryptoTransaction", { state: props.lable }) 
-                        // }}
-                        style={{cursor:"pointer"}}
-                      >
-                        <div className="nk-wgw-icon is-default">
-                          <img
-                            className=""
-                            src={props.logo}
-                            style={{ width: "30px" }}
-                          />
-                          {/* <em className="icon ni ni-sign-kobo"></em> */}
-                        </div>
-                        <h5 className="nk-wgw-title text-white title ml-2" onClick={()=>{
-                          navigate("/cryptoTransaction", { state: {logo: props.logo, lable: props.lable, price: props.price}})
-                        }}>{props.title}</h5>
-                      </b>
-                      <div className="nk-wgw-balance">
-                        <div className="amount">
-                          {props.price}
-                          <span className="currency currency-nio" style={{fontSize: "10px"}}>{props.lable}</span>&nbsp;/&nbsp;
-                             {props.priceInUsd}
-                          <span className="currency currency-nio" style={{fontSize: "10px"}}>{props.cp}</span>
-                           
-                        </div>
-                        <div className="amount-sm">
-                          {(props.priceInUsd * props.price).toFixed(3)}
-                          <span className="currency currency-usd">{props.cp}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-4">
+      <div className="my-3" onClick={props.onClick} style={{zIndex:100}}>          
+        <div className="card bg-lighter shadow-sm horizontal">
+          <div className="nk-wgw">
+            <div className="nk-wgw-inner">
+              <div className="row">
+                <div className="col-8">
+                  <b
+                    className="nk-wgw-name"
+                    // onClick={() => { 
+                    //   navigate("/cryptoTransaction", { state: props.lable }) 
+                    // }}
+                    style={{cursor:"pointer"}}
+                  >
+                    <div className="nk-wgw-icon is-default">
                       <img
-                        src={`https://image-charts.com/chart?chs=177x177&cht=qr&chl=${walletInfo?.walletAddr}&choe=UTF-8&icqrb=0b3175&icqrf=FFFFFF`}
-                        style={{ height: "100px" }}
+                        className=""
+                        src={props.logo}
+                        style={{ width: "30px" }}
                       />
+                      {/* <em className="icon ni ni-sign-kobo"></em> */}
+                    </div>
+                    <h5 className="nk-wgw-title title" onClick={()=>{
+                      navigate("/cryptoTransaction", { state: {logo: props.logo, lable: props.lable, price: props.price}})
+                    }}>{props.title}</h5>
+                  </b>
+                  <div className="nk-wgw-balance">
+                    <div className="amount text-teal">
+                      {props.price}
+                      <span className="currency currency-nio" style={{fontSize: "10px"}}>{props.lable}</span>&nbsp;/&nbsp;
+                          {props.priceInUsd}
+                      <span className="currency currency-nio" style={{fontSize: "10px"}}>{props.cp}</span>
+                        
+                    </div>
+                    <div className="amount-sm">
+                      {(props.priceInUsd * props.price).toFixed(3)}
+                      <span className="currency currency-usd">{props.cp}</span>
                     </div>
                   </div>
-                  <div className="row d-flex align-items-around">
-                    <div className="col-10 d-flex ">
-                      <span
-                        className="amount-sm"
-                        style={{
-                          color: "white",
-                          marginTop: "5px",
-                          marginBottom: "0px",
-                          fontSize: "14px",
-                        }}
-                      >
-                        {address}
+                </div>
+                <div className="col-4">
+                  <img
+                    src={`https://image-charts.com/chart?chs=177x177&cht=qr&chl=${walletInfo?.walletAddr}&choe=UTF-8&icqrb=0b3175&icqrf=FFFFFF`}
+                    style={{ height: "100px" }}
+                  />
+                </div>
+              </div>
+              <div className="row d-flex align-items-around">
+                <div className="col-10 d-flex ">
+                  <span
+                    className="amount-sm text-muted small">
+                    {address}
+                  </span>
+                </div>
+                <div className="col-2">
+                  <div className="">
 
-                      </span>
-                    </div>
-                    <div className="col-2">
-                      <div className="">
-
-                        <CopyToClipboard text={props.address}
-                          onCopy={() => {
-                            setCopied(true)
-                            setTimeout(() => {
-                              setCopied(false);
-                            }, 800);
-                          }}>
-                          <div>
-                            <MdOutlineContentCopy color="white" />
-                            {copied ?
-                              <p className="text-light position-absolute" style={{ fontSize: "14px", top: "3px", left: "25px", padding: "0px 5px", backgroundColor: "transparent" }}>copied!</p> : null}
-                          </div>
-                        </CopyToClipboard>
-
+                    <CopyToClipboard text={props.address}
+                      onCopy={() => {
+                        setCopied(true)
+                        setTimeout(() => {
+                          setCopied(false);
+                        }, 800);
+                      }}>
+                      <div>
+                        <MdOutlineContentCopy color="" />
+                        {copied ?
+                          <p className="text-teal position-absolute" style={{ fontSize: "13px", top: "3px", left: "25px", padding: "1px 5px", backgroundColor: "transparent" }}>Copied</p> : null}
                       </div>
-                    </div>
+                    </CopyToClipboard>
+
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </div>       
       </div>
     </>
   );

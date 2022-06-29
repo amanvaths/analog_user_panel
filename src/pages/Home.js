@@ -199,8 +199,8 @@ const Home = () => {
 
   return (
     <div>
-      <div className="nk-app-root ">
-        <div className="nk-main ">
+      <div className="nk-app-root">
+        <div className="nk-main">
           <Menu />
 
           <div className="nk-wrap ">
@@ -238,7 +238,7 @@ const Home = () => {
               </div>*/}
             {/* Add Slide small card */}
             <div className="container">
-              <div className="row d-flex g-3" style={{justifyContent:"space-between",alignSelf:"center"}}>
+              <div className="row g-3 mt-4">
                 {data.map((data) => {
                   return (
                     <Getpresale
@@ -252,7 +252,7 @@ const Home = () => {
                 })}
               </div>
             </div>
-            <div className="nk-content nk-content-fluid">
+            <div className="nk-content nk-content-fluid pt-0">
               <div className="container">
                 <div className="nk-content-body">
                   <div className="nk-block-between-md g-4">
@@ -266,39 +266,39 @@ const Home = () => {
                       <div className="nk-block">
                         <div className="nk-block-head-xs">
                           <div className="nk-block-head-content">
-                            <h5 className="nk-block-title title">OVERFLOW</h5>
+                            <h5 className="nk-block-title title text-uppercase">Overflow</h5>
                           </div>
                         </div>
                         <div className="nk-block">
-                          <div className="card card-bordered bg-light h-100" style={{background:"white"}}>
+                          <div className="card card-bordered dark-green text-light shadow-sm h-100">
                             <div className="card-inner">
                               <div className="nk-wg7">
                                 <div className="nk-wg7-stats">
-                                  <div className="nk-wg7-title">
+                                  <div className="nk-wg7-title text-teal">
                                     TOTAL ANOLOG BUY  
                                   </div>
-                                  <div className="number-lg amount text-success">
+                                  <div className="number-lg amount text-white">
                                     {totalAnalogBuy.toFixed(2)}
                                   </div>
                                 </div>
                                 <div className="nk-wg7-stats-group">
                                   <div className="nk-wg7-stats w-50">
-                                    <div className="nk-wg7-title">Wallets</div>
-                                    <div className="number-lg">
+                                    <div className="nk-wg7-title text-teal">Wallets</div>
+                                    <div className="number-lg text-white">
                                       {totalWallet}
                                     </div>
                                   </div>
                                   <div   className="nk-wg7-stats w-50" >
-                                    <div className="nk-wg7-title">
+                                    <div className="nk-wg7-title text-teal">
                                       Transactions
                                     </div>
-                                    <div className="number fs-5">
+                                    <div className="number text-white">
                                       {totalTransaction}
                                     </div>
                                   </div>
                                 </div>
                                 <div className="nk-wg7-foot">
-                                  <span className="nk-wg7-note">
+                                  <span className="nk-wg7-note text-teal">
                                     Last activity at{" "}
                                     <span>
                                       {date} {time}
@@ -316,8 +316,8 @@ const Home = () => {
                         <div className="nk-block-head-xs">
                           <div className="nk-block-between-md g-2">
                             <div className="nk-block-head-content">
-                              <h5 className="nk-block-title title">
-                                INCEPTIVE WALLETS
+                              <h5 className="nk-block-title title text-uppercase">
+                                Inceptive Wallets
                               </h5>
                             </div>
                             <div className="nk-block-head-content"></div>
@@ -325,15 +325,15 @@ const Home = () => {
                         </div>
                         <div className="row">
                           <div className="col-sm-4">
-                            <div className="card">
+                            <div className="card bg-light shadow-sm">
                               <div className="nk-wgw sm">
                                 <a className="nk-wgw-inner" href="#">
                                   <div className="nk-wgw-name">
-                                    <div className="nk-wgw-icon bg-success">
+                                    <div className="nk-wgw-icon bg-teal">
                                       <em className="icon ni ni-sign-btc"></em>
                                     </div>
-                                    <h5 className="nk-wgw-title title">
-                                      INCEPTIVE
+                                    <h5 className="nk-wgw-title title text-uppercase">
+                                      Inceptive
                                     </h5>
                                   </div>
                                   <div className="nk-wgw-balance">
@@ -357,11 +357,11 @@ const Home = () => {
                             onClick={() => navigate("/Airdrop")}
                             style={{ cursor: "pointer" }}
                           >
-                            <div className="card">
+                            <div className="card bg-light shadow-sm">
                               <div className="nk-wgw sm">
                                 <a className="nk-wgw-inner">
                                   <div className="nk-wgw-name">
-                                    <div className="nk-wgw-icon bg-success">
+                                    <div className="nk-wgw-icon bg-teal">
                                       <em className="icon ni ni-sign-btc"></em>
                                     </div>
                                     <h5 className="nk-wgw-title title">
@@ -391,11 +391,11 @@ const Home = () => {
                             }
                             style={{ cursor: "pointer" }}
                           >
-                            <div className="card">
+                            <div className="card bg-light shadow-sm">
                               <div className="nk-wgw sm">
                                 <a className="nk-wgw-inner">
                                   <div className="nk-wgw-name">
-                                    <div className="nk-wgw-icon bg-success">
+                                    <div className="nk-wgw-icon bg-teal">
                                       <em className="icon ni ni-sign-eth"></em>
                                     </div>
                                     <h5 className="nk-wgw-title title">
@@ -431,11 +431,11 @@ const Home = () => {
                         </div>
                         <div className="row">
                           <div className="col-sm-4">
-                            <div className="card">
+                            <div className="card bg-light shadow-sm">
                               <div className="nk-wgw sm">
                                 <a className="nk-wgw-inner" href="#">
                                   <div className="nk-wgw-name">
-                                    <div className="nk-wgw-icon bg-success">
+                                    <div className="nk-wgw-icon bg-teal">
                                       <em className="icon ni ni-sign-btc"></em>
                                     </div>
                                     <h5 className="nk-wgw-title title">
@@ -463,11 +463,11 @@ const Home = () => {
                             onClick={() => navigate("/Bounty")}
                             style={{ cursor: "pointer" }}
                           >
-                            <div className="card">
+                            <div className="card bg-light shadow-sm">
                               <div className="nk-wgw sm">
                                 <a className="nk-wgw-inner">
                                   <div className="nk-wgw-name">
-                                    <div className="nk-wgw-icon bg-success">
+                                    <div className="nk-wgw-icon bg-teal">
                                       <em className="icon ni ni-sign-btc"></em>
                                     </div>
                                     <h5 className="nk-wgw-title title">
@@ -497,11 +497,11 @@ const Home = () => {
                             </div>
                           </div>
                           <div className="col-sm-4">
-                            <div className="card">
+                            <div className="card bg-light shadow-sm">
                               <div className="nk-wgw sm">
                                 <a className="nk-wgw-inner" href="#">
                                   <div className="nk-wgw-name">
-                                    <div className="nk-wgw-icon bg-success">
+                                    <div className="nk-wgw-icon bg-teal">
                                       <em className="icon ni ni-sign-eth"></em>
                                     </div>
                                     <h5 className="nk-wgw-title title">
@@ -534,8 +534,8 @@ const Home = () => {
                   <div className="row gy-gs">
                     <div className="col-md-6">
                       <div className="card-head">
-                        <div className="card-title  mb-0">
-                          <h5 className="title">Recent Activities</h5>
+                        <div className="card-title mb-0">
+                          <h5 className="title text-uppercase">Recent Activities</h5>
                         </div>
                       </div>
 
@@ -650,7 +650,7 @@ const Home = () => {
                     <div className="col-md-6">
                       <div className="card-head">
                         <div className="card-title mb-0">
-                          <h5 className="title">Balance Flow</h5>
+                          <h5 className="title text-uppercase">Balance Flow</h5>
                         </div>
                         {/* <div className="card-tools">
                             <ul className="card-tools-nav">
@@ -715,9 +715,9 @@ const Home = () => {
                       <div className="nk-refwg-invite card-inner">
                         <div className="nk-refwg-head g-3">
                           <div className="nk-refwg-title">
-                            <h5 className="title">Refer Us & Earn</h5>
+                            <h5 className="title">Refer Us &amp; Earn</h5>
                             <div className="title-sub">
-                              Use the bellow link to invite your friends.
+                              Use the below link to invite your friends.
                             </div>
                           </div>
                           <div className="nk-refwg-action">
@@ -1029,7 +1029,7 @@ const Home = () => {
                           <div className="nk-block-content-head px-lg-4">
                             <h5>We’re here to help you!</h5>
                             <p className="text-soft">
-                              Ask a question or file a support ticket, mANAge
+                              Ask a question or file a support ticket, manage
                               request, report an issues. Our team support team
                               will get back to you by email.
                             </p>

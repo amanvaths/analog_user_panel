@@ -67,11 +67,13 @@ const Notification = () => {
                                </a>
                                </div>
                     </div>
+                    <hr class="mb-0"></hr>
                 </div>
                 <div class="nk-block-head nk-block-head-sm">
                     <div class="nk-block-head-content">
-                        <h6 className="p-2">Security Alerts</h6>
-                        <p className="p-2">You will get only those email notification what you want.</p>
+                        <h5>Security Alerts</h5>
+                        <p>You will get only those email notification what you want.</p>
+                       
                     </div>
                 </div>
                 <div class="nk-block-content">
@@ -128,8 +130,8 @@ const Notification = () => {
                 </div>
                 <div class="nk-block-head nk-block-head-sm">
                     <div class="nk-block-head-content">
-                        <h6 className="p-2">News</h6>
-                        <p className="p-2">You will get only those email notification what you want.</p>
+                    <h5>News</h5>
+                        <p>You will get only those email notification what you want.</p>
                     </div>
                 </div>
                 <div class="nk-block-content">

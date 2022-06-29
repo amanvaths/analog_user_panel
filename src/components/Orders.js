@@ -205,12 +205,12 @@ export default function Orders() {
 
   return (
     <div className="order">
-      <div class="card mt-2">
-        <div class="card-header justify-content-between align-items-center">
+      <div class="card mt-4">
+        <div class="card-header bg-teal-dim justify-content-between align-items-center">
           <h6 class="card-title "> ORDER</h6>
         </div>
-        <div class="card-body table-responsive  p-0">
-          <table class="table  mb-0">
+        <div class="card-body table-responsive p-0">
+          <table class="table table-hover mb-0">
             <div style={{ display: "contents" }}>
               <thead>
                 <tr style={{ fontSize: "10px" }}>
@@ -335,31 +335,16 @@ export default function Orders() {
 
       {/* Buy Sell */}
       <div>
-        <nav
-          class="coinsfather-theme-color"
-          style={{
-            border: "0.3px solid rgba(255, 255, 255, 0.2)",
-            marginTop: "6px",
-          }}
-        >
-          <div
-          className="border border-success"
-            style={{
-              textAlign: "center",
-              fontWeight: "bold",
-              // background: "rgb(241, 241, 241)",
-              margin: "4px 0px",
-            }}
-          >
+       <nav
+          class="coinsfather-theme-color border border-bottom-0 card-header bg-teal-dim mt-5">            
             BUY
-          </div>
         </nav>
 
         {/* Buy */}
 
         {buy && (
           <div
-            className=" tab-content orders"
+            className="tab-content orders"
             style={{ borderColor: "rgba(25, 32, 87, 0.2)" }}
           >
             <div

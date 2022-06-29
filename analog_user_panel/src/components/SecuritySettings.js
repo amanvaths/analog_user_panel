@@ -61,9 +61,9 @@ const SecuritySettings = () => {
               </div>
               <div className="card-inner">
                 <div className="between-center flex-wrap g-3">
-                  <div className="nk-block-text">
-                    <h6 className='p-1'>Change Password</h6>
-                    <p className='p-1'>
+                  <div>
+                    <h5>Change Password</h5>
+                    <p>
                       Set a unique password to protect your
                       account.
                     </p>
@@ -75,14 +75,14 @@ const SecuritySettings = () => {
                       className="align-center flex-wrap flex-sm-nowrap gx-3 gy-2"
                     >
                       <li className="order-md-last">
-                        <a href="#" className="btn btn-primary"
+                        <a href="#" className="btn btn-outline-success"
                         >Change Password</a
                         >
                       </li>
                       <li>
                         <em className="text-soft text-date fs-12px"
-                        >Last changed:
-                          <span>Oct 2, 2019</span></em
+                        >Last changed :
+                          <span> Oct 2, 2019</span></em
                         >
                       </li>
                     </ul>
@@ -109,9 +109,7 @@ const SecuritySettings = () => {
                     </p>
                   </div>
                   <div className="nk-block-actions">
-                    <a href="#" className="btn btn-primary"
-                    >Disable</a
-                    >
+                    <a href="#" className="btn btn-danger">Disable</a>
                   </div>
                 </div>
               </div>

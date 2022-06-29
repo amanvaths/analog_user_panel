@@ -186,7 +186,7 @@ const Header = () => {
                     data-toggle="dropdown"
                   >
                     <div className="icon-status icon-status-info">
-                      <em className="icon ni ni-bell"></em>
+                      <em className="ni ni-bell"></em>
                     </div>
                   </a>
                   <div
@@ -313,7 +313,7 @@ const Header = () => {
                   <div className="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1" style={{ width: "210px" }}>
                     <div className="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                       <div className="user-card">
-                        <div className="user-avatar bg-success">
+                        <div className="user-avatar bg-teal">
                           <span>{(userInfo?.username)?.charAt(0)?.toUpperCase()}</span>
                         </div>
                         <div className="user-info">

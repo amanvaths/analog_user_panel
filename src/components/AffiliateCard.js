@@ -20,40 +20,32 @@ const AffiliatCard = (props) => {
 
   return (
     <>
-      <div className=" col-md-6 col-lg-4 col-12  c-subscribe-box u-align-center   ">
-        <div class="rainbow">
-          <span></span>
-          <span></span>
-        </div>
+      <div className="col-md-6 col-lg-4 col-12 shadow-none u-align-center">
+        
         <div
           id="set_back"
-          class={`card-bordered card-inner c-subscribe-box__wrapper ${Back !== "dark" ? "bg-dark" : "bg-light"} shadow-lg`}
-          style={{
-            color: "",
-            borderRadius: "10px",
-          }}
-        >
-          <h5 class="card-title" style={{ color: "white" }}>
-            {props.level}
-          </h5>
-          <div className="row">
-            <div className="col-6">
-              <h6 class="card-subtitle mb-2">Total User</h6>{" "}
-              <p>{props.totalUser}</p>
-              <h6 class="card-subtitle mb-2">Total Analog Buy</h6>{" "}
-              <p>{props.totalAnalogBuy}</p>
-              <h6 class="card-subtitle mb-2">Total Expense</h6>{" "}
-              <p>{props.totalExpence}</p>
+          class={`card card-bordered shadow-sm`}>
+            <div class="bg-lighter text-dark kanban-board-header kanban-success mb-0 rounded-0">{props.level}</div>
+            <div class="card-inner py-3">
+                <div className="row">
+                  <div className="col-6 border-right">
+                    <h6 class="badge bg-light mb-2">Total User</h6>{" "}
+                    <p class="text-teal">{props.totalUser}</p>
+                    <h6 class="badge bg-light mb-2">Total Analog Buy</h6>{" "}
+                    <p class="text-teal">{props.totalAnalogBuy}</p>
+                    <h6 class="badge bg-light mb-2">Total Expense</h6>{" "}
+                    <p class="text-teal">{props.totalExpence}</p>
+                  </div>
+                  <div className="col-6">
+                    <h6 class="badge bg-light mb-2">Total Affiliates</h6>{" "}
+                    <p class="text-teal">{props.totalAffiliates}</p>
+                    <h6 class="badge bg-light mb-2">Total Withdrawal</h6>{" "}
+                    <p class="text-teal">{props.widthdrawl}</p>
+                    <h6 class="badge bg-light mb-2">Total Remaining</h6>{" "}
+                    <p class="text-teal">{props.toalRemaining}</p>
+                  </div>
+                </div>
             </div>
-            <div className="col-6">
-              <h6 class="card-subtitle mb-2">Total Affiliates</h6>{" "}
-              <p>{props.totalAffiliates}</p>
-              <h6 class="card-subtitle mb-2">Total Withdrawal</h6>{" "}
-              <p>{props.widthdrawl}</p>
-              <h6 class="card-subtitle mb-2">Total Remaining</h6>{" "}
-              <p>{props.toalRemaining}</p>
-            </div>
-          </div>
         </div>
       </div>
 

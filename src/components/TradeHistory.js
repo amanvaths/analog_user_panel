@@ -21,15 +21,15 @@ export default function TradeHistory() {
 
   }, []);
   return (
-    <div class="card mt-2">
-      <div class="card-header justify-content-between align-items-center">
+    <div class="card mt-5">
+      <div class="card-header bg-teal-dim text-teal">
         <h6 class="card-title"> TRADE HISTORY</h6>
       </div>
       <div class="card-body table-responsive  p-0">
-        <table class="table  mb-0">
+        <table class="table table-hover mb-0">
           <div style={{ display: "contents" }}>
             <thead >
-              <tr className="historyorder">
+              <tr className="historyorder text-gray font-weight-100">
                 <th style={{ width: "20%" }}>Total Analog</th>
                 <th style={{ width: "20%" }}>Total Amount Pay</th>
                 <th style={{ width: "20%" }}>Buying Price</th>
@@ -48,7 +48,7 @@ export default function TradeHistory() {
                 {history.map((h) => {
                   return (
                     <>
-                      <tr class="zoom  historyorder" style={{fontSize:"13.76px"}}>
+                      <tr class="historyorder" style={{fontSize:"13.76px"}}>
                         <td className="TradeHistorySize" style={{ width: "20%" }}> {h.cVolume.toFixed(2)}
                           <img
                             src="./images/Analog.png"

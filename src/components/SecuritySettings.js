@@ -84,9 +84,9 @@ const SecuritySettings = () => {
                 <div
                   className="between-center flex-wrap flex-md-nowrap g-3"
                 >
-                  <div className="nk-block-text">
-                    <h6 className='p-1'>Save my Activity Logs</h6>
-                    <p className='p-1'>
+                  <div>
+                    <h5>Save my Activity Logs</h5>
+                    <p>
                       You can save your all activity logs
                       including unusual activity detected.
                     </p>
@@ -118,9 +118,9 @@ const SecuritySettings = () => {
               </div>
               <div className="card-inner">
                 <div className="between-center flex-wrap g-3">
-                  <div className="nk-block-text">
-                    <h6 className='p-1'>Change Password</h6>
-                    <p className='p-1'>
+                  <div>
+                    <h5>Change Password</h5>
+                    <p>
                       Set a unique password to protect your
                       account.
                     </p>
@@ -132,7 +132,7 @@ const SecuritySettings = () => {
                       className="align-center flex-wrap flex-sm-nowrap gx-3 gy-2"
                     >
                       <li className="order-md-last">
-                        <Link to="#" className="btn btn-primary"
+                        <Link to="#" className="btn btn-outline-success"
                           onClick={() => {
                             const obj = {
                               personalInfo: false,
@@ -153,8 +153,8 @@ const SecuritySettings = () => {
                       </li>
                       <li>
                         <em className="text-soft text-date fs-12px"
-                        >Last changed:
-                          <span>Oct 2, 2019</span></em
+                        >Last changed :
+                          <span> Oct 2, 2019</span></em
                         >
                       </li>
                     </ul>
@@ -165,8 +165,8 @@ const SecuritySettings = () => {
                 <div
                   className="between-center flex-wrap flex-md-nowrap g-3"
                 >
-                  <div className="nk-block-text">
-                    <h6 className='p-1'>
+                  <div>
+                    <h5>
                       2 Factor Auth &nbsp;
                       {
                     Object?.values(userInfo)?.length > 0 ?
@@ -175,8 +175,8 @@ const SecuritySettings = () => {
                         : null
                       }
 
-                    </h6>
-                    <p className='p-1'>
+                    </h5>
+                    <p>
                       Secure your account with 2FA security.
                       <p>When it is activated you will need to
                         enter not only your password, but also a
@@ -195,7 +195,7 @@ const SecuritySettings = () => {
                           <button onClick={async() => {
                             handleShow1();
                             await axios.post(`${BASE_URL}/generateauthtoken`, { email: email })
-                          }} className="btn btn-primary">Disable</button>
+                          }} className="btn btn-danger">Disable</button>
                         </div>
 
                       ) :
@@ -207,7 +207,7 @@ const SecuritySettings = () => {
                             const obj = {userInfo}
                             obj['googleAuth'] = !obj.userInfo.googleAuth
                             dispatch(setUserInfo({userInfo: obj}))
-                          }} className="btn btn-primary">Enable</button>
+                          }} className="btn btn-outline-success">Enable</button>
                         </div>
                       ) : null
                   }
@@ -240,7 +240,7 @@ const SecuritySettings = () => {
                                 <label for="inputOtp">Enter OTP:</label>
                                 <input type="text" class="form-control" id="inputOtp" placeholder="Enter Otp" onChange={(e) => setOtp(e.target.value)} />
                               </div>
-                              <button type="button" class="btn btn-primary px-2" style={{ width: "150px" }} onClick={() => {
+                              <button type="button" class="btn btn-success px-2" style={{ width: "150px" }} onClick={() => {
                                 axios.post(`${BASE_URL}/generateauthtoken`, { email: email, token: otp }).then((resp) => {
                                   if (resp.data.status == 1) {
 

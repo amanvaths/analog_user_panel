@@ -113,17 +113,17 @@ const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + 
       <div>
         {loader ? (<>
           <div style={{ position: "absolute", zIndex: "99", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
-            <Triangle ariaLabel="loading-indicator" color="blue" />
+            <Triangle ariaLabel="loading-indicator" color="green" />
           </div>
 
         </>) :
           (<div className="nk-app-root ms-5">
-            <div className="nk-main text-center   " style={{ overflowWrap: "break-word" }}>
+            <div className="nk-main" style={{ overflowWrap: "break-word" }}>
               <Menu />
               <div className="nk-wrap">
                 <Header />
-                <div className="contianer   ">
-                  <div className="row py-3">
+                <div className="nk-content nk-content-fluid">
+                  <div className="row">
                     <div className="col-6">
                       {/* <h4 style={{ padding: "px-5" }}>Wallet / Assets </h4> */}
                     </div>
@@ -132,75 +132,61 @@ const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + 
                         className="float-right"
                         style={{ padding: "" }}
                       >
-                        <h6>
-                          Total Balance:&nbsp;&nbsp;
-                          {userInfo.currency_preference == "usd" ? `${coinWW[8]?.wallet?.usdt_balance?.toFixed(2)} USDT` : `${(oneUsdPrice * coinWW[8]?.wallet?.usdt_balance).toFixed(2)} INRX`}
-                        </h6>
+                        <span class="badge bg-outline-dark text-dark fs-5">
+                          Total Balance: 
+                          <span className="text-teal"> {userInfo.currency_preference == "usd" ? `${coinWW[8]?.wallet?.usdt_balance?.toFixed(2)} USDT` : `${(oneUsdPrice * coinWW[8]?.wallet?.usdt_balance).toFixed(2)} INRX`} </span>
+                        </span>
                       </label>
                     </div>
                   </div>
-    
-
-             
-<div class="container my-5">
-  <div class="row">
-    <div class="col">
-    <div className="card">
-            
-                                    <div className="w-50 text-dark" style={{fontSize: "1.1rem", fontWeight: "500px"}}>
-                                    <p className="">
-                                      <span>Total Fund: </span>
-                                      <span >&nbsp;&nbsp;{totalAna? totalAna?.toFixed(2): ""} ANA </span>
-                                    </p>
-                                    <p className="" >
-                                      <span>Total Spend: </span>
-                                      <span>&nbsp;&nbsp;0</span>
-                                    </p>
-                                    <p className="">
-                                      <span>Current Balance: </span>
-                                      <span>&nbsp;&nbsp;{userInfo?.currency_preference == "usd" ? `${coinWW[8]?.wallet?.usdt_balance?.toFixed(2)} USDT` : `${(oneUsdPrice * coinWW[8]?.wallet?.usdt_balance).toFixed(2)} INRX`}</span>
-                                    </p>
-                                    </div>
-                                  
-            </div>
-    </div>
-    <div class="col-sm">
-     
-<div className="card">
-<div className="row " style={{color: ""}}>
-                                
-                    
-                                <div className="w-50 text-dark" style={{fontSize: "1.1rem", fontWeight: "500px"}}>
-                                  <p className="">
-                                    <span>Analog Value: </span>
-                                    <span>&nbsp;&nbsp;{userInfo?.anaPrice} {userInfo?.currency_preference == 'inr' ? "INRX" : "USDT"}</span>
-                                  </p>
-                                  <p className="">
-                                    <span>Bonus:</span>
-                                    <span>&nbsp;&nbsp;
-                                      {totalBonus?.toFixed(2)}&nbsp;&nbsp;{
-                                                      userInfo?.currency_preference == 'inr' ? "INRX" : "USDT"
-                                                  }
-                                    </span>
-                                  </p>
-                                  <p className="">
-                                    <span>Total API: </span>
-                                    <span>&nbsp;&nbsp;0</span>
-                                  </p>
-                                  </div>
-                              
-                              </div>  
-</div>
-    </div>
-   
-  </div>
-</div>
-
-                  <div className="row text-center " style={{ marginBottom: "15vh" }}>
-                    {coinWW.map((element, index) => {
-                     
+                  <div class="mb-4">
+                    <div class="row">
+                      <div class="col-md-6 col-lg-6 col-12">
+                        <div className="kanban-board-header kanban-success shadow-sm">
+                          <div className="card-inner">
+                            <p className="kanban-item-title">
+                              <span className="badge bg-light rounded-pill">Total Fund  </span>
+                              <span className="text-teal"> {totalAna? totalAna?.toFixed(2): ""} ANA </span>
+                            </p>
+                            <p className="kanban-item-title">
+                              <span className="badge bg-light rounded-pill">Total Spend  </span>
+                              <span className="text-teal"> 0</span>
+                            </p>
+                            <p className="kanban-item-title">
+                              <span className="badge bg-light rounded-pill">Current Balance  </span>
+                              <span className="text-teal"> {userInfo?.currency_preference == "usd" ? `${coinWW[8]?.wallet?.usdt_balance?.toFixed(2)} USDT` : `${(oneUsdPrice * coinWW[8]?.wallet?.usdt_balance).toFixed(2)} INRX`}</span>
+                            </p>
+                          </div>                                                
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-lg-6 col-12">
+                          <div className="kanban-board-header kanban-success shadow-sm">
+                            <div className="card-inner">
+                              <p className="kanban-item-title">
+                                <span className="badge bg-light rounded-pill">Analog Value </span>
+                                <span className="text-teal"> {userInfo?.anaPrice} {userInfo?.currency_preference == 'inr' ? "INRX" : "USDT"}</span>
+                              </p>
+                              <p className="kanban-item-title">
+                                <span className="badge bg-light rounded-pill">Bonus </span>
+                                <span className="text-teal"> 
+                                  {totalBonus?.toFixed(2)}&nbsp;&nbsp;{
+                                                  userInfo?.currency_preference == 'inr' ? "INRX" : "USDT"
+                                              }
+                                </span>
+                              </p>
+                              <p className="kanban-item-title">
+                                <span className="badge bg-light rounded-pill">Total API  </span>
+                                <span className="text-teal"> 0</span>
+                              </p>
+                            </div>
+                        </div>
+                      </div>                    
+                    </div>
+                  </div>
+                  <div className="row">
+                    {coinWW.map((element, index) => {                     
                       return (
-                        <div className="  col-md-6 col-lg-4 col-12">
+                        <div className="col-md-6 col-lg-4 col-12">
                           <Card1
                             title={element.name}
                             priceInUsd={(element?.quote?.[userInfo?.currency_preference.toUpperCase()]?.price)?.toFixed(2)}

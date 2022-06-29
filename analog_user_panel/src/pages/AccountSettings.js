@@ -75,54 +75,56 @@ const AccountSettings = () => {
                               </div>
                             </div>
                             <div className="nk-block card card-bordered">
-                              <table className="table table-ulogs">
-                                <thead className="table-light">
-                                  <tr>
-                                    <th className="tb-col-os">
-                                      <span className="overline-title">
-                                        Browser
-                                        <span className="d-sm-none">/ IP</span>
-                                      </span>
-                                    </th>
-                                    <th className="tb-col-ip">
-                                      <span className="overline-title">Device</span>
-                                    </th>
-                                    <th className="tb-col-ip">
-                                      <span className="overline-title">IP</span>
-                                    </th>
-                                    <th className="tb-col-time">
-                                      <span className="overline-title">Time</span>
-                                    </th>
-                                    <th className="tb-col-action">
-                                      <span className="overline-title">&nbsp;</span>
-                                    </th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {
-                                    logData.map((element, index) => {
-                                      const a = new Date(element.createdAt)
-                                      return (
+                              <div className="table-responsive">    
+                                  <table className="table table-hover table-ulogs">
+                                      <thead className="bg-teal-dim text-teal">
                                         <tr>
-                                          <td className="tb-col-os">{element.browser_name}</td>
-                                          <td className="tb-col-os">{element.request_device}</td>
-                                          <td className="tb-col-ip">
-                                            <span className="sub-text">
-                                              {element.request_address}
+                                          <th className="tb-col-os">
+                                            <span>
+                                              Browser
+                                              <span className="d-sm-none">/ IP</span>
                                             </span>
-                                          </td>
-                                          <td className="tb-col-time">
-                                            <span className="sub-text">{a.toDateString()} {a.toLocaleTimeString()}</span>
-                                          </td>
-                                          <td className="tb-col-action">{ }</td>
+                                          </th>
+                                          <th className="tb-col-ip">
+                                            <span>Device</span>
+                                          </th>
+                                          <th className="tb-col-ip">
+                                            <span>IP</span>
+                                          </th>
+                                          <th className="tb-col-time">
+                                            <span>Time</span>
+                                          </th>
+                                          <th className="tb-col-action">
+                                            <span>&nbsp;</span>
+                                          </th>
                                         </tr>
-                                      )
-                                    })
-                                  }
+                                      </thead>
+                                      <tbody>
+                                        {
+                                          logData.map((element, index) => {
+                                            const a = new Date(element.createdAt)
+                                            return (
+                                              <tr>
+                                                <td className="tb-col-os">{element.browser_name}</td>
+                                                <td className="tb-col-os">{element.request_device}</td>
+                                                <td className="tb-col-ip">
+                                                  <span>
+                                                    {element.request_address}
+                                                  </span>
+                                                </td>
+                                                <td className="tb-col-time">
+                                                  <span>{a.toDateString()} {a.toLocaleTimeString()}</span>
+                                                </td>
+                                                <td className="tb-col-action">{ }</td>
+                                              </tr>
+                                            )
+                                          })
+                                        }
 
 
-                                </tbody>
-                              </table>
+                                      </tbody>
+                                    </table>
+                                  </div>
                             </div>
                           </div>
                         ) : null}
@@ -239,7 +241,7 @@ const AccountSettings = () => {
                                     setPersonalInfo(false);
                                   }}>
                                     <em className="icon ni ni-lock-alt-fill"></em>
-                                    <span>Security Settings</span>
+                                    <span> Security Settings</span>
                                   </Link>
                                 </li>
                               </ul>

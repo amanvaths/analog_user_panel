@@ -12,13 +12,14 @@ function BuySell(props) {
     <>
     <div style={{ maxWidth:"100%"}}>
       <div class="nk-app-root">
-        <div class="nk-main ">
+        <div class="nk-main">
           <Menu />
 
-          <div class="nk-wrap ">
+          <div class="nk-wrap">
             <Header />
-            <div className="row" style={{ margin: "20px 10px 0px" }}>
-              <div className="col-lg-8" style={{  height: "100%" }}>
+            <div class="nk-content nk-content-fluid">
+              <div className="row">
+              <div className="col-lg-8 mt-4" style={{  height: "100%" }}>
                 <CandleGraph />
                 <div className="">
                   <TradeHistory />
@@ -32,6 +33,7 @@ function BuySell(props) {
                 <Orders />
               </div>
             </div>
+          </div>
           </div>
 
           <Footer />

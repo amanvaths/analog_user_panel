@@ -45,12 +45,12 @@ const Getpresale = (props) => {
           <div className="nk-wg7">
             <div className="nk-wg7-stats">
               <div className="nk-wg7-title is-dark text-body">{levelname}</div>
-              <div className="number-lg amount text-success">{coinPrice}</div>
+              <div className="number-lg amount text-teal">{coinPrice}</div>
             </div>
             <div className="nk-wg7-stats-group">
               <div className="nk-wg7-stats w-50">
                 <div className="nk-wg7-title "></div>
-                <div className="number-lg text-success coinqty">{coinQty}</div>
+                <div className="number-lg text-dark coinqty">{coinQty}</div>
               </div>
               <div
                 className="nk-wg7-stats w-50  duration"
@@ -65,7 +65,7 @@ const Getpresale = (props) => {
                 striped
                 now={coinPrice}
                 label={`${coinPrice}%`}
-                variant="success "
+                variant="success"
                 aria-valuemin={1000000}
               />
             </div>

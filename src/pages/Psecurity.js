@@ -104,10 +104,10 @@ class Psecurity extends React.Component{
                             <div className="nk-block-actions flex-shrink-sm-0">
                                 <ul className="align-center flex-wrap flex-sm-nowrap gx-3 gy-2">
                                     <li className="order-md-last">
-                                        <a href="#" className="btn btn-primary">Change Password</a>
+                                        <a href="#" className="btn btn-outline-success">Change Password</a>
                                     </li>
                                     <li>
-                                        <em className="text-soft text-date fs-12px">Last changed: <span>Oct 2, 2019</span></em>
+                                        <em className="text-soft text-date fs-12px">Last changed : <span> Oct 2, 2019</span></em>
                                     </li>
                                 </ul>
                             </div>
@@ -120,7 +120,7 @@ class Psecurity extends React.Component{
                                 <p>Secure your account with 2FA security. When it is activated you will need to enter not only your password, but also a special code using app. You can receive this code by in mobile app. </p>
                             </div>
                             <div className="nk-block-actions">
-                                <a href="#" className="btn btn-primary">Disable</a>
+                                <a href="#" className="btn btn-danger">Disable</a>
                             </div>
                         </div>
                     </div>
@@ -138,36 +138,38 @@ class Psecurity extends React.Component{
                 </div>
             </div>
             <div className="card card-bordered">
-                <table className="table table-ulogs">
-                    <thead className="thead-light">
-                        <tr>
-                            <th className="tb-col-os"><span className="overline-title">Browser <span className="d-sm-none">/ IP</span></span></th>
-                            <th className="tb-col-ip"><span className="overline-title">IP</span></th>
-                            <th className="tb-col-time"><span className="overline-title">Time</span></th>
-                            <th className="tb-col-action"><span className="overline-title">&nbsp;</span></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td className="tb-col-os">Chrome on Window</td>
-                            <td className="tb-col-ip"><span className="sub-text">192.149.122.128</span></td>
-                            <td className="tb-col-time"><span className="sub-text">11:34 PM</span></td>
-                            <td className="tb-col-action"></td>
-                        </tr>
-                        <tr>
-                            <td className="tb-col-os">Mozilla on Window</td>
-                            <td className="tb-col-ip"><span className="sub-text">86.188.154.225</span></td>
-                            <td className="tb-col-time"><span className="sub-text">Nov 20, 2019 <span className="d-none d-sm-inline-block">10:34 PM</span></span></td>
-                            <td className="tb-col-action"><a href="#" className="link-cross mr-sm-n1"><em className="icon ni ni-cross"></em></a></td>
-                        </tr>
-                        <tr>
-                            <td className="tb-col-os">Chrome on iMac</td>
-                            <td className="tb-col-ip"><span className="sub-text">192.149.122.128</span></td>
-                            <td className="tb-col-time"><span className="sub-text">Nov 12, 2019 <span className="d-none d-sm-inline-block">08:56 PM</span></span></td>
-                            <td className="tb-col-action"><a href="#" className="link-cross mr-sm-n1"><em className="icon ni ni-cross"></em></a></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div className="table-responsive">
+                    <table className="table table-hover table-ulogs">
+                        <thead className="thead-light">
+                            <tr>
+                                <th className="tb-col-os"><span>Browser <span className="d-sm-none">/ IP</span></span></th>
+                                <th className="tb-col-ip"><span>IP</span></th>
+                                <th className="tb-col-time"><span>Time</span></th>
+                                <th className="tb-col-action"><span>&nbsp;</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td className="tb-col-os">Chrome on Window</td>
+                                <td className="tb-col-ip"><span className="text-grey">192.149.122.128</span></td>
+                                <td className="tb-col-time"><span className="text-grey">11:34 PM</span></td>
+                                <td className="tb-col-action"></td>
+                            </tr>
+                            <tr>
+                                <td className="tb-col-os">Mozilla on Window</td>
+                                <td className="tb-col-ip"><span className="text-grey">86.188.154.225</span></td>
+                                <td className="tb-col-time"><span className="text-grey">Nov 20, 2019 <span className="d-none d-sm-inline-block">10:34 PM</span></span></td>
+                                <td className="tb-col-action"><a href="#" className="link-cross mr-sm-n1"><em className="icon ni ni-cross"></em></a></td>
+                            </tr>
+                            <tr>
+                                <td className="tb-col-os">Chrome on iMac</td>
+                                <td className="tb-col-ip"><span className="text-grey">192.149.122.128</span></td>
+                                <td className="tb-col-time"><span className="text-grey">Nov 12, 2019 <span className="d-none d-sm-inline-block">08:56 PM</span></span></td>
+                                <td className="tb-col-action"><a href="#" className="link-cross mr-sm-n1"><em className="icon ni ni-cross"></em></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

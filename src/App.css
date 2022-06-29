@@ -1,3 +1,22 @@
+.text-grey{
+    color: #8094ae;
+}
+.card.dark-green {
+  background: #07523d;
+}
+
+.link-list-menu a.active,
+.link-list-menu a:hover,
+.link-list-menu a:hover .icon,
+.link-list-menu a.active .icon {
+  color: #20c997 !important;
+}
+.nk-menu-link:hover,
+.active > .nk-menu-link,
+.nk-menu-link:hover .nk-menu-icon {
+  color: #20c997 !important;
+}
+
 .App {
   text-align: center;
 }

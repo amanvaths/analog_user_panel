@@ -104,7 +104,7 @@
                   <div className="nk-sidebar-widget d-none d-xl-block">
                     <div className="user-account-info between-center">
                       <div className="user-account-main">
-                        <h2 className="overline-title-alt text-success fs-6">Available Balance</h2>
+                        <h2 className="overline-title-alt text-teal fs-6">Available Balance</h2>
                         <div className="user-balance text-warning">
                         { Number(anaBalancce)?.toFixed(2)}{" "}
                           <span className="currency currency-btc my-2">ANA</span>
@@ -274,7 +274,7 @@
                   <div className="nk-sidebar-menu">
                     <ul className="nk-menu">
                       <li className="nk-menu-heading">
-                        <h6 className="overline-title text-success fs-6">Quick Links</h6>
+                        <h6 className="overline-title text-teal fs-6">Quick Links</h6>
                       </li>
                       <li className="nk-menu-item">
                         <Link to="/home" className="nk-menu-link">
@@ -436,7 +436,7 @@
                   </div>
                   <div className="nk-sidebar-widget">
                     <div className="widget-title">
-                      <h6 className="overline-title text-success fs-6">
+                      <h6 className="overline-title text-teal fs-6">
                         Crypto Accounts <span></span>
                       </h6>
                       {/* <a href="#" className="link">

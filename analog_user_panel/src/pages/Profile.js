@@ -75,8 +75,8 @@ class Profile extends React.Component{
                                     </div>
                                 </div>
                                 <div className="nk-data data-list">
-                                    <div className="data-head">
-                                        <h6 className="overline-title">Basics</h6>
+                                    <div className="data-head bg-teal-dim">
+                                        <span className="overline-title">Basics</span>
                                     </div>
                                     <div className="data-item" data-toggle="modal" data-target="#profile-edit">
                                         <div className="data-col">
@@ -122,8 +122,8 @@ class Profile extends React.Component{
                                     </div>
                                 </div>
                                 <div className="nk-data data-list">
-                                    <div className="data-head">
-                                        <h6 className="overline-title">Preferences</h6>
+                                    <div className="data-head bg-teal-dim">
+                                        <span className="overline-title">Preferences</span>
                                     </div>
                                     <div className="data-item">
                                         <div className="data-col">

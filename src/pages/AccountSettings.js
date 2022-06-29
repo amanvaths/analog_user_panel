@@ -106,53 +106,55 @@ const AccountSettings = () => {
                               </div>
                             </div>
                             <div className="nk-block card card-bordered">
-                              <table className="table table-ulogs">
-                                <thead className="table-light">
-                                  <tr>
-                                    <th className="tb-col-os">
-                                      <span className="overline-title">
-                                        Browser
-                                        <span className="d-sm-none">/ IP</span>
-                                      </span>
-                                    </th>
-                                    <th className="tb-col-ip">
-                                      <span className="overline-title">Device</span>
-                                    </th>
-                                    <th className="tb-col-ip">
-                                      <span className="overline-title">IP</span>
-                                    </th>
-                                    <th className="tb-col-time">
-                                      <span className="overline-title">Time</span>
-                                    </th>
-                                    <th className="tb-col-action">
-                                      <span className="overline-title">&nbsp;</span>
-                                    </th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {
-                                    logData.map((element, index) => {
-                                      const a = new Date(element.createdAt)
-                                      return (
-                                        <tr>
-                                          <td className="tb-col-os">{element.browser_name}</td>
-                                          <td className="tb-col-os">{element.request_device}</td>
-                                          <td className="tb-col-ip">
-                                            <span className="sub-text">
-                                              {element.request_address}
-                                            </span>
-                                          </td>
-                                          <td className="tb-col-time">
-                                            <span className="sub-text">{a.toDateString()} {a.toLocaleTimeString()}</span>
-                                          </td>
-                                          <td className="tb-col-action">{ }</td>
-                                        </tr>
-                                      )
-                                    })
-                                  }
+                              <div className="table-responsive">    
+                                <table className="table table-hover table-ulogs">
+                                    <thead className="bg-teal-dim text-teal">
+                                      <tr>
+                                        <th className="tb-col-os">
+                                          <span>
+                                            Browser
+                                            <span className="d-sm-none">/ IP</span>
+                                          </span>
+                                        </th>
+                                        <th className="tb-col-ip">
+                                          <span>Device</span>
+                                        </th>
+                                        <th className="tb-col-ip">
+                                          <span>IP</span>
+                                        </th>
+                                        <th className="tb-col-time">
+                                          <span>Time</span>
+                                        </th>
+                                        <th className="tb-col-action">
+                                          <span>&nbsp;</span>
+                                        </th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {
+                                        logData.map((element, index) => {
+                                          const a = new Date(element.createdAt)
+                                          return (
+                                            <tr>
+                                              <td className="tb-col-os">{element.browser_name}</td>
+                                              <td className="tb-col-os">{element.request_device}</td>
+                                              <td className="tb-col-ip">
+                                              <span className="text-grey">
+                                                  {element.request_address}
+                                                </span>
+                                              </td>
+                                              <td className="tb-col-time">
+                                              <span className="text-grey">{a.toDateString()} {a.toLocaleTimeString()}</span>
+                                              </td>
+                                              <td className="tb-col-action">{ }</td>
+                                            </tr>
+                                          )
+                                        })
+                                      }
 
-                                </tbody>
-                              </table>
+                                    </tbody>
+                                  </table>
+                                 </div> 
                             </div>
                           </div>
                         ) : null}
@@ -169,16 +171,16 @@ const AccountSettings = () => {
                           <div className="card-inner-group">
                             <div className="card-inner">
                               <div className="user-card">
-                                <div className="user-avatar bg-primary">
+                                <div className="user-avatar bg-teal">
                                   <span>{userInfo?.username?.charAt(0)?.toUpperCase()}</span>
                                 </div>
                                 <div className="user-info">
-                                  <span className="lead-text">
+                                  <span className="lead-text text-uppercase">
                                     {userInfo?.username}
                                   </span>
-                                  <span className="sub-text">{userInfo?.user_id}</span>
+                                  <span className="text-grey">{userInfo?.user_id}</span>
                                 </div>
-                                <div className="user-action">
+                                {/* <div className="user-action">
                                   <div className="dropdown">
                                     <a
                                       className="btn btn-icon btn-trigger me-n2"
@@ -187,7 +189,7 @@ const AccountSettings = () => {
                                     >
                                       <em className="icon ni ni-arrow-left" onClick={profileMenuRemove}></em>
                                     </a> 
-                                     {/* <div className="dropdown-menu dropdown-menu-end">
+                                     <div className="dropdown-menu dropdown-menu-end">
                                       <ul className="link-list-opt no-bdr">
                                         <li>
                                           <a href="#">
@@ -202,9 +204,9 @@ const AccountSettings = () => {
                                           </a>
                                         </li>
                                       </ul>
-                                    </div>  */}
+                                    </div>  
                                    </div>
-                                </div> 
+                                </div> */}
                               </div>
                             </div>
                             <div className="card-inner">
@@ -212,13 +214,13 @@ const AccountSettings = () => {
                                 <h6 className="overline-title-alt p-2">
                                   Analog Wallet Balance
                                 </h6>
-                                <div className="user-balance p-2">
+                                <div className="user-balance text-warning p-2">
                                   12.395769
                                   <small className="currency currency-btc p-2">
                                     BTC
                                   </small>
                                 </div>
-                                <div className="user-balance-sub">
+                                <div className="user-balance-sub px-2">
                                   Locked
                                   <span className="p-2">
                                     0.344939
@@ -303,7 +305,7 @@ const AccountSettings = () => {
                                       dispatch(setSettingPage({settingPages: obj2}))
                                     }}>
                                     <em className="icon ni ni-lock-alt-fill"></em>
-                                    <span>Security Settings</span>
+                                    <span> Security Settings</span>
                                   </Link>
                                 </li>
                                 <li>
