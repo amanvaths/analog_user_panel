@@ -82,7 +82,7 @@ const Bounty = () => {
                               <Link
                               to={'/Withdrawal'}
                               // onClick={()=> navigate('/Withdrawal')}
-                                className="btn btn-white btn-primary btn-outline-light">
+                                className="btn btn-outline-danger">
                                   <span>Withdrawal</span></Link>
                             </li>
                             {/* <li className="nk-block-tools-opt">
@@ -204,7 +204,7 @@ const Bounty = () => {
                                   <div className="nk-tb-col tb-col-sm">
                                     <span className="tb-amount-sm">{element?.presalelevel == null ? 'no data found' : element?.presalelevel}</span>
                                   </div>
-                                  <div className="nk-tb-col tb-col-sm" style={{color: "green"}}>
+                                  <div className="nk-tb-col tb-col-sm">
                                     <span className="tb-amount-sm" >
                                       {
                                        `${element.token_quantity} ANA`
@@ -213,7 +213,7 @@ const Bounty = () => {
                                     </span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="tb-amount-sm" style={{color: "red"}}>
+                                    <span className="tb-amount-sm text-danger">
                                       {
                                         userInfo?.currency_preference == 'usd' ? `${element?.amount?.toFixed(2)} USDT` :
                                           `${(element?.amount * oneUsdPrice)?.toFixed(2)} INRX`
@@ -232,7 +232,7 @@ const Bounty = () => {
                                               />)}
                                     </span>
                                   </div>
-                                  <div className="nk-tb-col tb-col-sm" style={{color: "green"}}>
+                                  <div className="nk-tb-col tb-col-sm">
                                     <span className="tb-amount-sm">
                                     {
                                         userInfo?.currency_preference == 'usd' ? `${element?.bonus?.toFixed(6)} USDT` :

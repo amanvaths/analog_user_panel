@@ -106,9 +106,9 @@ const AccountSettings = () => {
                                             return (
                                               <tr>
                                                 <td className="tb-col-os">{element.browser_name}</td>
-                                                <td className="tb-col-os">{element.request_device}</td>
+                                                <td className="tb-col-os text-capitalize">{element.request_device}</td>
                                                 <td className="tb-col-ip">
-                                                  <span>
+                                                  <span class="badge bg-light">
                                                     {element.request_address}
                                                   </span>
                                                 </td>

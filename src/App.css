@@ -4,6 +4,9 @@
 .card.dark-green {
   background: #07523d;
 }
+.valign {
+  vertical-align: middle;
+}
 
 .link-list-menu a.active,
 .link-list-menu a:hover,
@@ -63,8 +66,9 @@
   color: white;
 }
 .passvalid {
-  font-size: 10px;
+  font-size: 12px;
   padding-bottom: -14px;
+  line-height: 20px;
 }
 div h6 {
   margin-bottom: -10px;

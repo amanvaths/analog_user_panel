@@ -225,7 +225,7 @@ const SecuritySettings = () => {
                     </Modal.Header>
                     <Modal.Body>
                       <div className='row d-flex justify-content-around flex-row align-items-center py-2'>
-                        <div className='col-6'>
+                        <div className='col-5'>
                           <div className=''>
                             <img
                               src={security.qr_url}
@@ -233,14 +233,14 @@ const SecuritySettings = () => {
                             />
                           </div>
                         </div>
-                        <div className='col-6'>
+                        <div className='col-7'>
                           <form action="" style={{}}>
                             <div class="form-group">
                               <div class="form-group">
-                                <label for="inputOtp">Enter OTP:</label>
-                                <input type="text" class="form-control" id="inputOtp" placeholder="Enter Otp" onChange={(e) => setOtp(e.target.value)} />
+                                <label for="inputOtp" className='mb-1'> OTP</label>
+                                <input type="text" class="form-control" id="inputOtp" placeholder="Enter OTP" onChange={(e) => setOtp(e.target.value)} />
                               </div>
-                              <button type="button" class="btn btn-success px-2" style={{ width: "150px" }} onClick={() => {
+                              <button type="button" class="btn btn-outline-success btn-dim btn-block" onClick={() => {
                                 axios.post(`${BASE_URL}/generateauthtoken`, { email: email, token: otp }).then((resp) => {
                                   if (resp.data.status == 1) {
 
@@ -261,7 +261,7 @@ const SecuritySettings = () => {
                       </div>
                     </Modal.Body>
                     <Modal.Footer>
-                      <Button variant="secondary" onClick={() => {
+                      <Button variant="success" onClick={() => {
                         if (Object?.values(userInfo)?.length > 0) {
                           handleClose()
                           const obj = {userInfo}
@@ -293,7 +293,7 @@ const SecuritySettings = () => {
                                 <label for="inputOtp">Enter OTP to disable 2FA</label>
                                 <input type="text" class="form-control" id="inputOtp" placeholder="Enter Otp" onChange={(e) => setOtpD(e.target.value)} />
                               </div>
-                              <button type="button" class="btn btn-primary px-2" style={{ width: "150px" }} onClick={() => {
+                              <button type="button" class="btn btn-outline-danger btn-dim btn-block" onClick={() => {
                                 axios.post(`${BASE_URL}/generateauthtoken`, { email: email, token2: otpD }).then((resp) => {
                                   if (resp.data.status == 1) {
 
@@ -319,7 +319,7 @@ const SecuritySettings = () => {
                       </div>
                     </Modal.Body>
                     <Modal.Footer>
-                      <Button variant="secondary" onClick={() => {
+                      <Button variant="success" onClick={() => {
                        handleClose1()
                       }}>
                         Close

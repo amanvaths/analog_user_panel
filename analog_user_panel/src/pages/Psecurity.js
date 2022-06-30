@@ -140,7 +140,7 @@ class Psecurity extends React.Component{
             <div className="card card-bordered">
                 <div className="table-responsive">
                     <table className="table table-hover table-ulogs">
-                        <thead className="thead-light">
+                        <thead className="bg-teal-dim text-teal">
                             <tr>
                                 <th className="tb-col-os"><span>Browser <span className="d-sm-none">/ IP</span></span></th>
                                 <th className="tb-col-ip"><span>IP</span></th>

@@ -3,13 +3,13 @@
 
 divx {
   background: lightgrey;
-  height: 20px;
-  width: 5px;
+  height: 16px;
+  width: 4px;
   margin: 2px;
 }
 
 .color {
-  background: orangered;
+  background: #ffa353;
 }
 .timer{width:400px; margin-right: 20px;}
 

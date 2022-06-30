@@ -77,7 +77,7 @@ cards.forEach((card) => {
   return (
     <>
       <div className="my-3" onClick={props.onClick} style={{zIndex:100}}>          
-        <div className="card bg-lighter shadow-sm horizontal">
+        <div className="card bg-light shadow-sm horizontal">
           <div className="nk-wgw">
             <div className="nk-wgw-inner">
               <div className="row">

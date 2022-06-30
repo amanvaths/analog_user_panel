@@ -163,7 +163,7 @@ const ForgetPassword = (props) => {
 
                 <div className="form-group">
                   <button
-                    className="btn btn-lg btn-primary btn-block"
+                    className="btn btn-lg btn-success-outline btn-block"
                     // // onClick={() => (window.location.href = "/faq")}
                     onClick={(e) => {
                       forgetPass(e);

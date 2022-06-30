@@ -581,13 +581,13 @@ body {
 	/* transform: translateX(-50%) translateY(-50%); */
 	/* transition: all .3s; */
 }
-.icon:hover {
+	/*.icon:hover {
 	border: 2px solid transparent;
 	box-shadow: 0  0 0 rgba(255, 0, 0, 0.5) inset,
 				0 0 0 rgba(252, 150, 0, 0.5) inset,
 				0 0 0 rgba(0, 255, 0, 0.5) inset,
 				0 0 0 rgba(0, 150, 255, 0.5) inset;
-}
+}*/
 
 .button.horizontal.counterclockwise .inner:before, .button.both.counterclockwise .inner:before {
   transform-origin: bottom center;

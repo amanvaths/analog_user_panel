@@ -126,7 +126,7 @@ const OtpTFA = (props) => {
 
                 <div className="form-group">
                   <button
-                    className="btn btn-lg btn-primary btn-block"
+                    className="btn btn-dim btn-outline-success btn-block"
                     onClick={(e) => {
                         verifyOTP(e)
                     }}

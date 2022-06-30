@@ -148,7 +148,7 @@ const Header = () => {
                       </div>
                       <div class="energy">
                         <div class="nk-block-head-content">
-                         {/* <ul class="nk-block-tools gx-3">
+                          <ul class="nk-block-tools">
                             <divx></divx>
                             <divx></divx>
                             <divx></divx>
@@ -166,9 +166,11 @@ const Header = () => {
                             <divx></divx>
                             <divx></divx>
                             <divx></divx>
-                          </ul>*/}
-                          <div className="energy-container">
-                            [ <b className="energy-text ">{"    "}Energy</b>{" "}
+                            <divx></divx>
+                            <divx></divx>
+                          </ul>
+                          <div className="energy-container text-right">
+                            [ <span className="text-success font-weight-bold energy-text">{"    "}Energy</span>{" "}
                             <span style={{ color: "green" }} className="timer">
                               5,6881.00
                             </span>

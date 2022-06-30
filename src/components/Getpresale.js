@@ -66,7 +66,7 @@ const Getpresale = (props) => {
                 <div className="number-lg amount">{coinPrice}</div>
               </div>
               <div
-                className="nk-wg7-stats-group"
+                className="nk-wg7-stats-group mt-1"
                 style={{ display: "flex",color:"white", justifyContent: "space-between" }}
               >
                 <div className="nk-wg7-stats" style={{ display: "flex" }}>
@@ -84,12 +84,12 @@ const Getpresale = (props) => {
                   <div className="number text-warning ">{duration} days</div>
                 </div>
               </div>
-              <div style={{ paddingTop: 11 }}>
+              <div className="pt-4">
                 <ProgressBar
-                  striped
+                  
                   now={persent}
                   label={`${persent}%`}
-                  variant="success "
+                  variant="teal"
                   aria-valuemin={100}
                 />
               </div>

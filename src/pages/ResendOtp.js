@@ -147,7 +147,7 @@ const ResendOtp = (props) => {
                 ) : null}
                 <div className="form-group">
                   <button
-                    className="btn btn-lg btn-primary btn-block"
+                    className="btn btn-outline-success btn-dim btn-block"
                     // onClick={(e) => {
                     //   ResendOtpApi(e);
                     // }}

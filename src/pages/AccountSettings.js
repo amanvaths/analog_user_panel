@@ -137,14 +137,14 @@ const AccountSettings = () => {
                                           return (
                                             <tr>
                                               <td className="tb-col-os">{element.browser_name}</td>
-                                              <td className="tb-col-os">{element.request_device}</td>
+                                              <td className="tb-col-os text-capitalize">{element.request_device}</td>
                                               <td className="tb-col-ip">
-                                              <span className="text-grey">
+                                              <span class="badge bg-light">
                                                   {element.request_address}
                                                 </span>
                                               </td>
                                               <td className="tb-col-time">
-                                              <span className="text-grey">{a.toDateString()} {a.toLocaleTimeString()}</span>
+                                              <span className="text-grey"> <em class="icon text-teal ni ni-clock valign"></em> {a.toDateString()} {a.toLocaleTimeString()}</span>
                                               </td>
                                               <td className="tb-col-action">{ }</td>
                                             </tr>

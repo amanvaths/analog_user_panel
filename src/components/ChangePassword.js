@@ -142,8 +142,9 @@ const ChangePassword = () => {
                         <div class="nk-block-head-content">
                             <h4 class="nk-block-title">Change Password</h4>
                             <div class="nk-block-des">
-                                <p></p>
+                                <p>You may update your password any time. We suggest you choose a strong password and update it regularly</p>
                             </div>
+                            <hr></hr>
                         </div>
                         <div class="nk-block-head-content align-self-start d-lg-none"><a
                             href="#" class="toggle btn btn-icon btn-trigger mt-n1"
@@ -157,7 +158,7 @@ const ChangePassword = () => {
                             e.preventDefault();
                             handelFormSubmit(newPassword, oldPassword, confirmPassword);
                         }}>
-                        <div className="form-group w-50">
+                        <div className="form-group">
                             <div className="form-label-group">
                                 <label className="form-label" for="password">
                                     Old Password
@@ -167,7 +168,7 @@ const ChangePassword = () => {
                                 <a
                                     tabIndex="-1"
                                     href="#"
-                                    className="form-icon form-icon-right passcode-switch"
+                                    className="form-icon form-icon-right passcode-switch text-dark"
                                     data-target="password"
                                 >
                                     {
@@ -178,7 +179,7 @@ const ChangePassword = () => {
                                     type={oldPasswordShown ? "text" : "password"}
                                     className="form-control form-control-lg"
                                     id="password"
-                                    placeholder="Enter your password"
+                                    placeholder="Enter old password"
                                     value={oldPassword}
                                     minLength={8}
                                     onChange={(e) => {
@@ -197,16 +198,8 @@ const ChangePassword = () => {
 
                             <div id="validation-box">
                                 <h6 className="passvalid" id="capital">
-                                    1 Uppercase Character
-                                </h6>
-                                <h6 className="passvalid" id="number">
-                                    1 Numeric Value
-                                </h6>
-                                <h6 className="passvalid" id="letter">
-                                    1 Special Symbol eg:@#
-                                </h6>
-                                <h6 className="passvalid" id="length">
-                                    length should be greater than 8
+                                We suggest having at least one capital and one lower-case letter (Aa-Zz), 
+                                one special symbol (#, &amp;, % etc) and one number (0-9) in your password for the best strength
                                 </h6>
                             </div>
                         </div>
@@ -215,7 +208,7 @@ const ChangePassword = () => {
                                 Password is requierd *
                             </p>
                         ) : null}
-                        <div className="form-group w-50">
+                        <div className="form-group">
                             <div className="form-label-group">
                                 <label className="form-label" for="password">
                                     New Password
@@ -225,7 +218,7 @@ const ChangePassword = () => {
                                 <a
                                     tabIndex="-1"
                                     href="#"
-                                    className="form-icon form-icon-right passcode-switch"
+                                    className="form-icon form-icon-right passcode-switch text-dark"
                                     data-target="password"
                                 >
                                     {
@@ -238,7 +231,7 @@ const ChangePassword = () => {
                                     type={newPasswordShown ? "text" : "password"}
                                     className="form-control form-control-lg"
                                     id="npassword"
-                                    placeholder="Enter your password"
+                                    placeholder="Enter new password"
                                     value={newPassword}
                                     minLength={8}
                                     onChange={(e) => {
@@ -257,17 +250,9 @@ const ChangePassword = () => {
                             </div>
 
                             <div id="validation-box1">
-                                <h6 className="passvalid" id="capital">
-                                    1 Uppercase Character
-                                </h6>
-                                <h6 className="passvalid" id="number">
-                                    1 Numeric Value
-                                </h6>
-                                <h6 className="passvalid" id="letter">
-                                    1 Special Symbol eg:@#
-                                </h6>
-                                <h6 className="passvalid" id="length">
-                                    length should be greater than 8
+                            <h6 className="passvalid" id="capital">
+                            We suggest having at least one capital and one lower-case letter (Aa-Zz),
+                             one special symbol (#, &amp;, % etc) and one number (0-9) in your password for the best strength
                                 </h6>
                             </div>
 
@@ -278,7 +263,7 @@ const ChangePassword = () => {
                             </p>
                         ) : null}
 
-                        <div className="form-group w-50">
+                        <div className="form-group">
                             <div className="form-label-group">
                                 <label className="form-label" for="confirm-password">
                                     Confirm Password
@@ -288,7 +273,7 @@ const ChangePassword = () => {
                                 <a
                                     tabIndex="-1"
                                     href="#"
-                                    className="form-icon form-icon-right passcode-switch"
+                                    className="form-icon form-icon-right passcode-switch text-dark"
                                     data-target="confirm-password"
                                 >
                                     {
@@ -332,7 +317,7 @@ const ChangePassword = () => {
 
                         <div className="form-group">
                             <button
-                                className="btn btn-lg btn-primary btn-block w-50"
+                                className="btn btn-dim btn-outline-success btn-block"
                             // onClick={Signup}
                             >
                                 Save

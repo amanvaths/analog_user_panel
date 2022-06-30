@@ -123,7 +123,7 @@ const IPwhiteListing = () => {
                         </div>
                         <div className="col-6 d-flex pt-4 justify-content-end">
                             <div className="mr-3">
-                                <button href="#" className="btn btn-dim btn-outline-success btn-sm" onClick={()=> getCurrentAPI()}>Add Current IP</button>
+                                <button href="#" className="btn btn-dim btn-outline-warning btn-sm" onClick={()=> getCurrentAPI()}>Add Current IP</button>
                             </div>
                             <div>
                                 <a href="#" className="btn btn-dim btn-outline-success btn-sm" onClick={() => handelSubmit()}>Add IP</a>
@@ -138,7 +138,7 @@ const IPwhiteListing = () => {
                 <div className="nk-block card card-bordered">
                     <div className="table-responsive">
                         <table className="table table-hover table-ulogs">
-                            <thead className="table-light">
+                            <thead className="bg-teal-dim text-teal">
                                 <tr>
                                     <th className="tb-col-ip">
                                         <span>IP</span>
@@ -146,6 +146,8 @@ const IPwhiteListing = () => {
 
                                     <th className="tb-col-action">
                                         <span>Actions</span>
+                                    </th>
+                                    <th className="">                                        
                                     </th>
 
                                 </tr>
@@ -160,7 +162,7 @@ const IPwhiteListing = () => {
                                                 <td className="tb-col-action">
                                                     {/* <span className="sub-text">{a.toDateString()} {a.toLocaleTimeString()}</span> */}
 
-                                                    <button className="btn btn-dim btn-light btn-sm" onClick={() => deleteWhiteIP(element._id)}>Delete</button>
+                                                    <button className="btn btn-dim btn-outline-success btn-sm" onClick={() => deleteWhiteIP(element._id)}>Delete</button>
                                                 </td>
                                                 <td className="tb-col-action">{ }</td>
                                             </tr>

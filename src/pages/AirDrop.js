@@ -64,7 +64,7 @@ const AirDrop = () => {
                                 <li>
                                   <Link
                                    to={'/Withdrawal'}
-                                    className="btn btn-white btn-primary btn-outline-light">
+                                    className="btn btn-outline-danger">
                                     
                                     <span>Withdraw</span></Link>
                                 </li>

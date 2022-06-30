@@ -87,7 +87,7 @@ const ForgetPassword = (props) => {
                 <em className="icon ni ni-info"></em>
               </a>
             </div>
-            <div className="nk-block nk-block-middle nk-auth-body">
+            <div className="nk-block nk-block-middle nk-auth-body bg-light border shadow-sm">
               <div className="brand-logo pb-5">
                 <a href="#" className="logo-link">
                   <img
@@ -166,7 +166,7 @@ const ForgetPassword = (props) => {
 
                 <div className="form-group">
                   <button
-                    className="btn btn-lg btn-primary btn-block"
+                    className="btn btn-lg btn-outline-success btn-block"
                     // // onClick={() => (window.location.href = "/faq")}
                     onClick={(e) => {
                       forgetPass(e);
