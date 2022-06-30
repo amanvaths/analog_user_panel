@@ -78,19 +78,21 @@ export default function Orders() {
     getWalletData();
     getData();
     AnaPrice();
+   
+    // setAmmount(
+    //   userInfo?.currency_preference == "inr"
+    //     ? total / atprice
+    //     : total / (atprice / oneUsdPrice)
+    // );
+    
+  }, []);
+  useEffect(()=>{
     setTotal(
-      oneUsdPrice == ""
-        ? 0
-        : userInfo?.currency_preference == "inr"
+         userInfo?.currency_preference == "inr"
         ? 5000
         : 5000 / oneUsdPrice
     );
-    setAmmount(
-      userInfo?.currency_preference == "inr"
-        ? total / atprice
-        : total / (atprice / oneUsdPrice)
-    );
-  }, []);
+  },[userInfo?.currency_preference, oneUsdPrice])
 
   // Order
 
@@ -395,7 +397,7 @@ export default function Orders() {
                     disabled
                     type="number"
                     class="form-control buy-sell-form-bg buy-sell-theme"
-                    value={Number(ammount)?.toFixed(2)}
+                    value={oneUsdPrice && ammount?ammount: userInfo?.currency_preference == "inr"?5000 / atprice:(5000/oneUsdPrice) /(atprice/oneUsdPrice)}
                     style={{
                       borderColor: "rgb(202, 202, 204)",
                       height: "54px",
@@ -453,7 +455,9 @@ export default function Orders() {
                     </div>
                   </div>
                 </div>
-
+                 <span style={{fontSize:"12px",fontWeight:"bold",display:"flex"}}>Minimum Buying Amount {userInfo?.currency_preference == "inr"
+                      ? 5000
+                      : (5000 / oneUsdPrice)?.toFixed(2)}</span>
                 <div class="input-group mb-3" style={{ margin: "0px" }}>
                   <div class="input-group-prepend">
                     <span
@@ -470,9 +474,10 @@ export default function Orders() {
                   </div>
                   <input
                     type="number"
+                    id="total"
                     class="form-control buy-sell-form-bg buy-sell-theme"
                     value={total}
-                    // defaultValue={total}
+                    // defaultValue={total?total: userInfo?.currency_preference == "inr"?5000:5000/oneUsdPrice}
                     style={{
                       borderColor: "rgb(202, 202, 204)",
                       height: "54px",
@@ -480,8 +485,10 @@ export default function Orders() {
                       fontWeight: "bold",
                     }}
                     onChange={(e) => {
-                      if(e.target.value){
+                 
+                      if(e.target.value  ){
                         let val;
+                        
                         if(e.target.value.startsWith(0)) val=e.target.value.substring(1,e.target.length);else val =e.target.value;
                       setRangeValue(val);
                       setTotal(val);
@@ -490,7 +497,11 @@ export default function Orders() {
                           ? val / atprice
                           : val / (atprice / oneUsdPrice)
                       );
-                      }else {
+                      console.log(ammount,"Ammount ");
+                      console.log(val,"val aval");
+                      } 
+                    
+                       else {
                         setRangeValue(0);
                         setTotal(0);
                         setAmmount(0);
@@ -579,6 +590,7 @@ export default function Orders() {
                           oneUsdPrice && 
                           document.querySelector("#slider").value / (atprice / oneUsdPrice)
                       );
+                      console.log(document.querySelector("#slider").value,"value");
                       setTotal(document.querySelector("#slider").value);
                     }
                   }}
@@ -658,12 +670,13 @@ export default function Orders() {
                   class="btn btn-block my-2"
                   style={{
                     background: "rgb(108, 183, 125)",
-                    top: "60px",
+                    top: "40px",
                     color: "white",
                   }}
                   onClick={ConfirmBox}
                   disabled={
-                    walletbalance <=
+                    walletbalance &&
+                  walletbalance <=
                     (userInfo?.currency_preference == "inr"
                       ? 5000
                       : 5000 / oneUsdPrice)
