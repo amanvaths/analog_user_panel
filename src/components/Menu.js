@@ -61,7 +61,7 @@
         <>
           <div
           style={{ }}
-            className={      btn?"nk-sidebar me-5  nk-sidebar-fixed nk-sidebar-mobile nk-sidebar-active":"nk-sidebar  nk-sidebar-fixed nk-sidebar-mobile"}
+            className={      btn?"nk-sidebar me-5  nk-sidebar-fixed nk-sidebar-mobile nk-sidebar-active":"nk-sidebar nk-sidebar-fixed nk-sidebar-mobile"}
             data-content="sidebarMenu" id="nk-sidebar"
           >
             <div className="nk-sidebar-element  nk-sidebar-head">
@@ -487,7 +487,7 @@
                       </li> */}
                     </ul>
                   </div>
-                  <div className="nk-sidebar-footer">
+                  <div className="nk-sidebar-footer sidebar-bg">
                     <ul className="nk-menu nk-menu-footer">
                       <li className="nk-menu-item">
                         <a href="#" className="nk-menu-link">
