@@ -74,20 +74,25 @@ const ForgetPassword = (props) => {
   };
 
   return (
-    <div>
-      <div className="nk-content">
-        <div className="nk-split nk-split-page nk-split-md">
-          <div className="nk-split-content nk-block-area nk-block-area-column nk-auth-container bg-white">
-            <div className="absolute-top-right d-lg-none p-3 p-sm-5">
-              <a
-                href="#"
-                className="toggle btn-white btn btn-icon btn-light"
-                data-target="athPromo"
-              >
-                <em className="icon ni ni-info"></em>
-              </a>
+    <div class="bg-login">
+      <div className="nk-apps-root">
+        <div className="nk-content container mt-lg-5 pt-lg-5 align-items-center">
+          <div className="row justify-content-md-center">
+            <div class="col-md-4 bg-teal shadow  d-flex align-items-center">
+              <div class="card-inner text-white"> 
+                <div className="nk-block-head-content">
+                  <h2 className="nk-block-title">Forgot Password ?</h2>
+                  <div className="lead">
+                    <p>
+                    No worries ! Enter your <b>Email Address</b> and we will send you a{" "}
+                      <b>Reset</b>.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="nk-block nk-block-middle nk-auth-body bg-light border shadow-sm">
+            <div className="col-md-6 bg-light border shadow">
+              <div className="card-inner">
               <div className="brand-logo pb-5">
                 <a href="#" className="logo-link">
                   <img
@@ -104,17 +109,7 @@ const ForgetPassword = (props) => {
                   />
                 </a>
               </div>
-              <div className="nk-block-head">
-                <div className="nk-block-head-content">
-                  <h5 className="nk-block-title">Reset Password </h5>
-                  <div className="nk-block-des">
-                    <p>
-                      Connect with <b>Analog Inceptive</b> of{" "}
-                      <b>INRX Blockchain</b>.
-                    </p>
-                  </div>
-                </div>
-              </div>
+            
               {/*  {showNewMessage ? (
                 <div>
                   {showMessage == true ? (
@@ -149,7 +144,7 @@ const ForgetPassword = (props) => {
                   <input
                     id="user"
                     type="email"
-                    className="form-control form-control-lg"
+                    className="form-control"
                     placeholder="Enter your email address"
                     value={email}
                     onChange={(e) => {
@@ -159,14 +154,14 @@ const ForgetPassword = (props) => {
                   />
                 </div>
                 {emailerror == true ? (
-                  <p style={{ color: "red", marginTop: -20 }}>
-                    Email Is Requierd *
+                  <p className="text-danger mt-n3">
+                    Email is requierd !
                   </p>
                 ) : null}
 
                 <div className="form-group">
                   <button
-                    className="btn btn-lg btn-outline-success btn-block"
+                    className="btn btn-dim  text-white bg-teal btn-block"
                     // // onClick={() => (window.location.href = "/faq")}
                     onClick={(e) => {
                       forgetPass(e);
@@ -178,9 +173,9 @@ const ForgetPassword = (props) => {
                   </button>
                 </div>
               </form>
-              <div className="form-note-s2 pt-4">
+              <div className="form-note-s2 pt-2 text-right">
                 {" "}
-                New on our platform? <a href="/signup">Create an account</a>
+                New User? <a class="text-teal" href="/signup">Create an account</a>
                 {/* New on our platform? <a href="/ResetPassword">Reset Password</a> */}
               </div>
               <div className="text-center pt-4 pb-3">
@@ -219,14 +214,15 @@ const ForgetPassword = (props) => {
                   />
                 </li>
               </ul>
+              </div>
             </div>
 
-            <div className="nk-block nk-auth-footer">
-              <div className="nk-block-between">
-                <ul className="nav nav-sm">
+            <div className="nk-content text-center mt-lg-2">
+              <div className="container container justify-content-center d-flex">
+                {/*<ul className="nav nav-sm">
                   <li className="nav-item">
                     <a className="nav-link" href="#">
-                      Terms & Condition
+                      Terms &amp; Condition
                     </a>
                   </li>
                   <li className="nav-item">
@@ -292,45 +288,14 @@ const ForgetPassword = (props) => {
                       </ul>
                     </div>
                   </li>
-                </ul>
+                </ul>*/}
               </div>
               <div className="mt-3">
-                <p>&copy; 2021 INRX ECOSYSTEM. All Rights Reserved.</p>
+                <p>&copy; 2022 INRX ECOSYSTEM. All Rights Reserved.</p>
               </div>
             </div>
           </div>
-          <div
-            className="nk-split-content nk-split-stretch bg-lighter d-flex toggle-break-lg toggle-slide toggle-slide-right"
-            data-content="athPromo"
-            data-toggle-screen="lg"
-            data-toggle-overlay="true"
-          >
-            <div className="slider-wrap w-100 w-max-550px p-3 p-sm-5 m-auto">
-              <div
-                className="slider-init"
-                data-slick='{"dots":true, "arrows":false}'
-              >
-                <div className="slider-item">
-                  <div className="nk-feature nk-feature-center">
-                    <div className="nk-feature-img">
-                      <img
-                        className="round"
-                        src="./images/slides/slide-a.png"
-                        srcSet="./images/slides/promo-a2x.png 2x"
-                        alt=""
-                      />
-                    </div>
-                    <div className="nk-feature-content py-4 p-sm-5">
-                      <h4>INRX NETWORK</h4>
-                      <p>INCEPTIVE ANALOG</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="slider-dots"></div>
-              <div className="slider-arrows"></div>
-            </div>
-          </div>
+         
         </div>
       </div>
     </div>

@@ -7,6 +7,13 @@
 .valign {
   vertical-align: middle;
 }
+.bg-login {
+  background-color: #fff; 
+  background:url("assets/blockchain-bg.png") no-repeat 0 50%;
+  background-position: left bottom; 
+  height: 100vh;
+  
+}
 
 .link-list-menu a.active,
 .link-list-menu a:hover,

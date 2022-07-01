@@ -107,11 +107,11 @@ const Login = (props) => {
   };
 
   return (
-    <div>
-      <div className="nk-content">
-        <div className="nk-split nk-split-page nk-split-md">
-          <div className="nk-split-content nk-block-area nk-block-area-column nk-auth-container bg-white">
-            <div className="absolute-top-right d-lg-none p-3 p-sm-5">
+    <div class="bg-login">
+      <div className="nk-apps-root">
+        <div className="nk-content container mt-lg-5 pt-lg-5 align-items-center">
+          <div className="row justify-content-md-center">
+           {/*} <div className="absolute-top-right d-lg-none p-3 p-sm-5">
               <a
                 href="#"
                 className="toggle btn-white btn btn-icon btn-light"
@@ -119,35 +119,38 @@ const Login = (props) => {
               >
                 <em className="icon ni ni-info"></em>
               </a>
-            </div>
-            <div className="nk-block nk-block-middle nk-auth-body">
-              <div className="brand-logo pb-5">
-                <a href="#" className="logo-link">
-                  <img
-                    className="logo-light logo-img logo-img-lg"
-                    src="./images/logo.png"
-                    srcSet="./images/logo2x.png 2x"
-                    alt="logo"
-                  />
-                  <img
-                    className="logo-dark logo-img logo-img-lg"
-                    src="./images/logo.png"
-                    srcSet="./images/logo-dark2x.png 2x"
-                    alt="logo-dark"
-                  />
-                </a>
-              </div>
-              <div className="nk-block-head">
+            </div>*/}
+            <div class="col-md-4 bg-teal shadow  d-flex align-items-center">
+              <div class="card-inner text-white"> 
                 <div className="nk-block-head-content">
-                  <h5 className="nk-block-title">Sign-In</h5>
-                  <div className="nk-block-des">
+                  <h2 className="nk-block-title">Sign In</h2>
+                  <div className="lead">
                     <p>
-                      Connect with <b>Analog Inceptive</b> of{" "}
-                      <b>INRX Blockchain</b>.
+                      Welcome back to  <b>Analog Inceptive</b> of{" "}
+                      <b>INRX Blockchain</b>. Login in to your account
                     </p>
                   </div>
-                </div>
+                </div></div>
+            </div>
+            <div className="col-md-6 bg-light border shadow">
+              <div class="card-inner">
+              <div className="brand-logo pb-5">
+                <a href="#" className="logo-link">
+                    <img
+                      className="logo-light logo-img logo-img-lg"
+                      src="./images/logo.png"
+                      srcSet="./images/logo2x.png 2x"
+                      alt="logo"
+                    />
+                    <img
+                      className="logo-dark logo-img logo-img-lg"
+                      src="./images/logo-dark.png"
+                      srcSet="./images/logo-dark2x.png 2x"
+                      alt="logo-dark"
+                    />
+                  </a>
               </div>
+            
               {/* {res.status == true ? (
                 <h1 style={{ color: "green", fontSize: 20 }}>{res.message}</h1>
               ) : (
@@ -164,9 +167,9 @@ const Login = (props) => {
                     <label className="form-label" for="default-01">
                       Email
                     </label>
-                    <a className="link link-primary link-sm" tabindex="-1" href="#">
+                    {/*<a className="link link-primary link-sm" tabindex="-1" href="#">
                       Need Help?
-                    </a>
+                    </a>*/}
                   </div>
                   <input
                     type="email"
@@ -181,8 +184,8 @@ const Login = (props) => {
                     style={{ fontSize: "15px" }} />
                 </div>
                 {emailerror == true ? (
-                  <p style={{ color: "red", marginTop: -20 }}>
-                    Email Is Requierd *
+                  <p className="text-danger mt-n3">
+                    Email is requierd !
                   </p>
                 ) : null}
                 <div className="form-group">
@@ -190,14 +193,14 @@ const Login = (props) => {
                     <label className="form-label" for="password">
                       Password
                     </label>
-                    <a href="/ForgetPassword">Forget Password</a>
+                    <a class="text-teal small" href="/ForgetPassword">Forget Password ?</a>
                     {/* <Link to={ForgetPassword}>Forget Password</Link> */}
                   </div>
                   <div className="form-control-wrap">
                     <a
                       tabIndex="-1"
                       href="#"
-                      className="form-icon form-icon-right passcode-switch"
+                      className="form-icon form-icon-right text-dark passcode-switch"
                       data-target="password"
                     >
                       {
@@ -218,13 +221,13 @@ const Login = (props) => {
                   </div>
                 </div>
                 {passworderror == true ? (
-                  <p style={{ color: "red", marginTop: -20 }}>
-                    Password Is Requierd *
+                  <p className="text-danger mt-n3">
+                    Password is requierd !
                   </p>
                 ) : null}
                 <div className="form-group">
                   <button
-                    className="btn btn-outline-success btn-dim btn-block"
+                    className="btn text-white bg-teal btn-dim btn-block"
                   // onClick={() => (window.location.href = "/faq")}
                   // onClick={Login}
                   >
@@ -232,9 +235,9 @@ const Login = (props) => {
                   </button>
                 </div>
               </form>
-              <div className="form-note-s2 pt-4">
+              <div className="form-note-s2 pt-2 text-right small">
                 {" "}
-                New on our platform? <a href="/signup">Create an account</a>
+                Don't have an account yet? <a className="text-teal" href="/signup">Create an account</a>
               </div>
               <div className="text-center pt-4 pb-3">
                 <h6 className="overline-title overline-title-sap">
@@ -277,13 +280,14 @@ const Login = (props) => {
                   {/* </a> */}
                 </li>
               </ul>
+              </div>
             </div>
-            <div className="nk-block nk-auth-footer">
-              <div className="nk-block-between">
-                <ul className="nav nav-sm">
+            <div className="nk-content text-center">
+              <div className="container container justify-content-center d-flex">
+              {/*}  <ul className="nav nav-sm">
                   <li className="nav-item">
                     <a className="nav-link" href="#">
-                      Terms & Condition
+                      Terms &amp; Condition
                     </a>
                   </li>
                   <li className="nav-item">
@@ -349,45 +353,14 @@ const Login = (props) => {
                       </ul>
                     </div>
                   </li>
-                </ul>
+                </ul>*/}
               </div>
               <div className="mt-3">
-                <p>&copy; 2021 INRX ECOSYSTEM. All Rights Reserved.</p>
+                <p>&copy; 2022  INRX ECOSYSTEM. All Rights Reserved.</p>
               </div>
             </div>
           </div>
-          <div
-            className="nk-split-content nk-split-stretch bg-lighter d-flex toggle-break-lg toggle-slide toggle-slide-right"
-            data-content="athPromo"
-            data-toggle-screen="lg"
-            data-toggle-overlay="true"
-          >
-            <div className="slider-wrap w-100 w-max-550px p-3 p-sm-5 m-auto">
-              <div
-                className="slider-init"
-                data-slick='{"dots":true, "arrows":false}'
-              >
-                <div className="slider-item">
-                  <div className="nk-feature nk-feature-center">
-                    <div className="nk-feature-img">
-                      <img
-                        className="round"
-                        src="./images/slides/slide-a.png"
-                        srcSet="./images/slides/promo-a2x.png 2x"
-                        alt=""
-                      />
-                    </div>
-                    <div className="nk-feature-content py-4 p-sm-5">
-                      <h4>INRX NETWORK</h4>
-                      <p>INCEPTIVE ANALOG</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="slider-dots"></div>
-              <div className="slider-arrows"></div>
-            </div>
-          </div>
+         
         </div>
       </div>
     </div>
