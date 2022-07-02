@@ -175,7 +175,7 @@ export default function Orders() {
 
   return (
     <div className="order">
-      <div class="card mt-2">
+      <div class="card">
         <div class="card-header justify-content-between align-items-center">
           <h6 class="card-title font-weight-bold "> ORDER</h6>
         </div>
@@ -335,12 +335,12 @@ export default function Orders() {
       </div>
 
       {/* Buy */}
-      <div>
+      <div style={{border: "0.5px solid rgba(0,0,0,.125)" ,marginTop:"6px",borderRadius:"3px"}}>
         <nav
           class="coinsfather-theme-color"
           style={{
             border: "0.3px solid rgba(255, 255, 255, 0.2)",
-            marginTop: "6px",
+            // marginTop: "6px",
           }}
         >
           <div
@@ -349,7 +349,7 @@ export default function Orders() {
               textAlign: "center",
               fontWeight: "bold",
               // background: "rgb(241, 241, 241)",
-              margin: "4px 0px",
+              // margin: "4px 0px",
             }}
           >
             BUY
@@ -359,10 +359,7 @@ export default function Orders() {
           className=" tab-content orders"
           style={{ borderColor: "rgba(25, 32, 87, 0.2)" }}
         >
-          <div
-          // className="d-flex justify-content-center align-items-center"
-          // style={{ background: "white" }}
-          >
+         
             <div
               className="card sing-up-button"
               style={{
@@ -731,7 +728,7 @@ export default function Orders() {
                 </button>
               </div>
             </div>
-          </div>
+         
         </div>
       </div>
     </div>
