@@ -23,7 +23,6 @@ export default function Orders() {
   const [balance, setBalance] = useState("");
   const [rangeValue, setRangeValue] = useState(0);
 
-
   useEffect(() => {
     const sliserVal = document.querySelector("#slider").value;
   });
@@ -31,7 +30,7 @@ export default function Orders() {
     (state) => state.user.value
   );
   const email = user?.email;
-    //  GetCoinData
+  //  GetCoinData
   const getData = async () => {
     try {
       const res = await axios.post(`${BASE_URL}/getCoinData`, {
@@ -78,21 +77,18 @@ export default function Orders() {
     getWalletData();
     getData();
     AnaPrice();
-   
+
     // setAmmount(
     //   userInfo?.currency_preference == "inr"
     //     ? total / atprice
     //     : total / (atprice / oneUsdPrice)
     // );
-    
   }, []);
-  useEffect(()=>{
+  useEffect(() => {
     setTotal(
-         userInfo?.currency_preference == "inr"
-        ? 5000
-        : 5000 / oneUsdPrice
+      userInfo?.currency_preference == "inr" ? 5000 : 5000 / oneUsdPrice
     );
-  },[userInfo?.currency_preference, oneUsdPrice])
+  }, [userInfo?.currency_preference, oneUsdPrice]);
 
   // Order
 
@@ -397,7 +393,13 @@ export default function Orders() {
                     disabled
                     type="number"
                     class="form-control buy-sell-form-bg buy-sell-theme"
-                    value={oneUsdPrice && ammount?ammount: userInfo?.currency_preference == "inr"?5000 / atprice:(5000/oneUsdPrice) /(atprice/oneUsdPrice)}
+                    value={
+                      oneUsdPrice && ammount
+                        ? ammount
+                        : userInfo?.currency_preference == "inr"
+                        ? 5000 / atprice
+                        : 5000 / oneUsdPrice / (atprice / oneUsdPrice)
+                    }
                     style={{
                       borderColor: "rgb(202, 202, 204)",
                       height: "54px",
@@ -455,9 +457,47 @@ export default function Orders() {
                     </div>
                   </div>
                 </div>
-                 <span style={{fontSize:"12px",fontWeight:"bold",display:"flex"}}>Minimum Buying Amount {userInfo?.currency_preference == "inr"
+                <div
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: "bold",
+                    display: "flex",
+                  }}
+                >
+                  Minimum Buying Amount {" "}
+                  <span style={{ color: "green",marginLeft:"5px"}}>
+                    {oneUsdPrice == ""
+                      ? 0
+                      :userInfo?.currency_preference == "inr"
                       ? 5000
-                      : (5000 / oneUsdPrice)?.toFixed(2)}</span>
+                      : (5000 / oneUsdPrice)?.toFixed(2)}{" "}
+                  </span> 
+                  <div>
+                    {userInfo?.currency_preference &&
+                    userInfo?.currency_preference == "usd" ? (
+                      <img
+                        src="./images/Usdt.png"
+                        style={{ width: "15px",marginLeft:"5px"}}
+                        alt="usdt"
+                        className="tradeUsdIcon"
+                      />
+                    ) : theme == 0 ? (
+                      <img
+                        src="./images/Inrx_black.png"
+                        style={{ width: "17px" }}
+                        alt="inrx"
+                        className="img"
+                      />
+                    ) : (
+                      <img
+                        src="./images/Inrx_white.png"
+                        style={{ width: "17px" }}
+                        alt="inrx"
+                        className="img"
+                      />
+                    )}
+                  </div>
+                </div>
                 <div class="input-group mb-3" style={{ margin: "0px" }}>
                   <div class="input-group-prepend">
                     <span
@@ -485,23 +525,22 @@ export default function Orders() {
                       fontWeight: "bold",
                     }}
                     onChange={(e) => {
-                 
-                      if(e.target.value  ){
+                      if (e.target.value) {
                         let val;
-                        
-                        if(e.target.value.startsWith(0)) val=e.target.value.substring(1,e.target.length);else val =e.target.value;
-                      setRangeValue(val);
-                      setTotal(val);
-                      setAmmount(
-                        userInfo?.currency_preference == "inr"
-                          ? val / atprice
-                          : val / (atprice / oneUsdPrice)
-                      );
-                      console.log(ammount,"Ammount ");
-                      console.log(val,"val aval");
-                      } 
-                    
-                       else {
+
+                        if (e.target.value.startsWith(0))
+                          val = e.target.value.substring(1, e.target.length);
+                        else val = e.target.value;
+                        setRangeValue(val);
+                        setTotal(val);
+                        setAmmount(
+                          userInfo?.currency_preference == "inr"
+                            ? val / atprice
+                            : val / (atprice / oneUsdPrice)
+                        );
+                        console.log(ammount, "Ammount ");
+                        console.log(val, "val aval");
+                      } else {
                         setRangeValue(0);
                         setTotal(0);
                         setAmmount(0);
@@ -582,15 +621,21 @@ export default function Orders() {
                     setRangeValue(e.target.value);
                     console.log(rangeValue, "range value");
                     if (userInfo?.currency_preference == "inr") {
-                      setAmmount( document.querySelector("#slider").value / atprice);
+                      setAmmount(
+                        document.querySelector("#slider").value / atprice
+                      );
                       setTotal(document.querySelector("#slider").value);
                     } else if (userInfo?.currency_preference == "usd") {
                       setAmmount(
                         atprice &&
-                          oneUsdPrice && 
-                          document.querySelector("#slider").value / (atprice / oneUsdPrice)
+                          oneUsdPrice &&
+                          document.querySelector("#slider").value /
+                            (atprice / oneUsdPrice)
                       );
-                      console.log(document.querySelector("#slider").value,"value");
+                      console.log(
+                        document.querySelector("#slider").value,
+                        "value"
+                      );
                       setTotal(document.querySelector("#slider").value);
                     }
                   }}
@@ -676,10 +721,10 @@ export default function Orders() {
                   onClick={ConfirmBox}
                   disabled={
                     walletbalance &&
-                  walletbalance <=
-                    (userInfo?.currency_preference == "inr"
-                      ? 5000
-                      : 5000 / oneUsdPrice)
+                    walletbalance <=
+                      (userInfo?.currency_preference == "inr"
+                        ? 5000
+                        : 5000 / oneUsdPrice)
                   }
                 >
                   BUY ANA
