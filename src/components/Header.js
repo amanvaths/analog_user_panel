@@ -283,8 +283,8 @@ const Header = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="dropdown-foot center">
-                      <a href="#">View All</a>
+                    <div className="dropdown-foot center" >
+                      <Link to="/Notification">View All</Link>
                     </div>
                   </div>
                 </li>
