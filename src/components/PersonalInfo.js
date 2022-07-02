@@ -183,8 +183,8 @@ const PersonalInfo = () => {
                 </div>
               </div>
               <div className="col-4 ">
-                {showUser == true ? <div class="input-group-sm">
-                  <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1"
+                {showUser == true ? <div className="input-group-sm">
+                  <input type="text" className="form-control" aria-label="Username" aria-describedby="basic-addon1"
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
                     style={{
@@ -200,7 +200,7 @@ const PersonalInfo = () => {
                 <div className="">
 
                   <span className="">
-                    {showUser ? <Link to="" class="btn btn-dim btn-primary" onClick={() => {
+                    {showUser ? <Link to="" className="btn btn-dim btn-primary" onClick={() => {
                       if (value) {
                         updateData();
                         setShowUser(false);
@@ -241,8 +241,8 @@ const PersonalInfo = () => {
                 </div>
               </div>
               <div className="col-4">
-                {showUser1 == true ? <div class="input-group-sm">
-                  <input type="text" class="form-control" aria-label="Phone" aria-describedby="basic-addon2"
+                {showUser1 == true ? <div className="input-group-sm">
+                  <input type="text" className="form-control" aria-label="Phone" aria-describedby="basic-addon2"
                     value={phone}
                     onChange={(e) => {
                       const ph = e.target.value
@@ -264,7 +264,7 @@ const PersonalInfo = () => {
               <div className="col-4 d-flex justify-content-end">
                 <div className="">
                   <span className="">
-                    {showUser1 ? <Link to="" class="btn btn-dim btn-primary" onClick={() => {
+                    {showUser1 ? <Link to="" className="btn btn-dim btn-primary" onClick={() => {
                       if (phone) {
                         updateData();
                         setShowUser1(false);
@@ -290,11 +290,11 @@ const PersonalInfo = () => {
                   <div className="data-col">
                     <span className="data-label">INRX</span>
                   </div>
-                  <div class="nk-block-actions">
-                    <div class="custom-control custom-switch me-n2">
+                  <div className="nk-block-actions">
+                    <div className="custom-control custom-switch me-n2">
                       <input
                         type="radio"
-                        class="custom-control-input"
+                        className="custom-control-input"
                         id="inrx"
                         name="currency"
                         value="inr"
@@ -304,7 +304,7 @@ const PersonalInfo = () => {
                           dispatch(setUserInfo({ currency_prefrence: "inr" }))
                         }}
                       />
-                      <label class="custom-control-label" for="inrx" ></label>
+                      <label className="custom-control-label" for="inrx" ></label>
                     </div>
                   </div>
                 </div>
@@ -315,11 +315,11 @@ const PersonalInfo = () => {
                     <span className="data-label">USDT</span>
 
                   </div>
-                  <div class="nk-block-actions">
-                    <div class="custom-control custom-switch me-n2">
+                  <div className="nk-block-actions">
+                    <div className="custom-control custom-switch me-n2">
                       <input
                         type="radio"
-                        class="custom-control-input"
+                        className="custom-control-input"
                         id="usdt"
                         name="currency"
                         value="usd"
@@ -329,7 +329,7 @@ const PersonalInfo = () => {
                           updateData("usd")
                           dispatch(setUserInfo({ currency_prefrence: "usd" }))
                         }}
-                      /><label class="custom-control-label" for="usdt" ></label>
+                      /><label className="custom-control-label" for="usdt" ></label>
                     </div>
                   </div>
                 </div>
@@ -354,9 +354,9 @@ const PersonalInfo = () => {
               <div className="col-4">
                 {userInfo?.refferal ?
                   <span className="data-value">{userInfo?.refferal}</span> :
-                  <div class="input-group-sm">
+                  <div className="input-group-sm">
                     <input type="text"
-                      class="form-control"
+                      className="form-control"
                       aria-label="Username"
                       aria-describedby="basic-addon1"
                       value={ref}
@@ -375,7 +375,7 @@ const PersonalInfo = () => {
                   <span className="">
                     {userInfo?.refferal ? <span className=" disable">
                       <em className="icon ni ni-lock-alt"></em>
-                    </span> : <button class="btn btn-dim btn-primary" onClick={() => {
+                    </span> : <button className="btn btn-dim btn-primary" onClick={() => {
                       updateReferral();
                     }}>Update</button>
 

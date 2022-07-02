@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* global google */
+import React, { useEffect, useState } from "react";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import { BASE_URL, GOOGLE_ID } from "../Api_connection/config";
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
@@ -6,6 +7,8 @@ import swal from "sweetalert";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {setIsLoggedIn,sendOtp } from "../redux/reducer/user";
+import jwt_decode from 'jwt-decode'
+import axios from "axios";
 
 // import FacebookLogin from "react-facebook-login";
 
@@ -17,9 +20,49 @@ const Login = (props) => {
   const [emailerror, setEmailerror] = useState(false);
   const [passworderror, setPassworderror] = useState(false);
   const [shown, setShown] = useState(false)
+  const [ii, setII] = useState('')
 
 
-  // console.log(settings.google_authenticator, " In Login apge");
+
+  useEffect(()=>{
+    google.accounts.id.initialize({
+      client_id: "879223788790-mhj4ntd15ashepqn5h4ec4hu4fncmr8t.apps.googleusercontent.com",
+      callback: handleCallback
+    });
+
+    google.accounts.id.renderButton(
+      document.getElementById('googleLogin'),
+      {theme: "outline", size: "large"}
+    );
+
+    google.accounts.id.prompt()
+  },[google])
+
+  const handleCallback = async(response)=>{
+    let obj = jwt_decode(response.credential)
+    console.log(obj)
+    // setII(obj.picture)
+    console.log(email,"email");
+    const data  = await axios.post(`${BASE_URL}/signInWithGoogle`, { email: obj.email, password: obj.sub})
+    if(data){
+      console.log(data, "API RESPONSE");
+      if(data.data.status === 1)
+      {
+        console.log(data.data.status, "status");
+        if(data.data.googleAuth === 0){
+          console.log(data.data.googleAuth, "GoogleAuth");
+          dispatch(setIsLoggedIn({ LoginDetails: data.data }))
+            navigate('/home')
+        }else{
+          navigate('/2faAuthentication', { state: { email: data.data.email, token: data.data.token } })
+        }
+      }
+    }else{
+      swal("Something Went Wrong",
+      "He he hehehe",
+      "error")
+    }
+  }
 
   const onLoginSuccess = (res) => {
     console.log(res.profileObj);
@@ -100,6 +143,8 @@ const Login = (props) => {
     }
   };
 
+  
+
   return (
     <div>
       <div className="nk-content">
@@ -114,6 +159,8 @@ const Login = (props) => {
                 <em className="icon ni ni-info"></em>
               </Link>
             </div>
+            {ii == ""? null : <img src={ii} alt="" />}
+            
             <div className="nk-block nk-block-middle nk-auth-body">
               <div className="brand-logo pb-5">
                 <Link to="" className="logo-link">
@@ -204,6 +251,7 @@ const Login = (props) => {
                       id="password"
                       placeholder="Enter password"
                       minLength={8}
+                      autoComplete="on"
                       onChange={(e) => {
                         setPassword(e.target.value);
                         setPassworderror(false);
@@ -248,13 +296,15 @@ const Login = (props) => {
                   /> */}
                 </li>
                 <li className="nav-item">
-                  <GoogleLogin
+                  <div id="googleLogin"></div>
+                  {/* {google.accounts.id.renderButton()} */}
+                  {/* <GoogleLogin
                     clientId={GOOGLE_ID}
                     buttonText="Sign in with Google"
                     onSuccess={onLoginSuccess}
                     onFailure={onLoginFailure}
                     cookiePolicy={"single_host_origin"}
-                  />
+                  /> */}
                   {/* <Link className="nav-link" to=""> */}{" "}
                   {/* <GoogleLogin
                     clientId={clientId}

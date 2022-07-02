@@ -6,7 +6,6 @@ import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
 import { navsetter } from "../redux/actions/websiteDBAction";
 
-
 const Header = () => {
 
   const { user, userInfo } = useSelector((state) => state.user.value)
@@ -147,9 +146,9 @@ const Header = () => {
                             </p>
                           </div> */}
                       </div>
-                      <div class="energy">
-                        <div class="nk-block-head-content">
-                          <ul class="nk-block-tools gx-3">
+                      <div className="energy">
+                        <div className="nk-block-head-content">
+                          <ul className="nk-block-tools gx-3">
                             <divx></divx>
                             <divx></divx>
                             <divx></divx>

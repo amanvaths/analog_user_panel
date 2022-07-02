@@ -15,10 +15,10 @@ function BuySell(props) {
       <LoadingOverlay className="Loading" active={buyloader} spinner text="Loading...." >
 
         <div style={{ maxWidth: "100%" }}>
-          <div class="nk-app-root">
-            <div class="nk-main " style={{zIndex:"1"}}>
+          <div className="nk-app-root">
+            <div className="nk-main " style={{zIndex:"1"}}>
               <Menu />
-              <div class="nk-wrap ">
+              <div className="nk-wrap ">
                 <Header />  
                 <div className="row" style={{ margin: "20px 10px 0px" }}>
                   <div className="col-lg-8" style={{ height: "100%" }}>

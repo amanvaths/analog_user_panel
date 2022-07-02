@@ -33,12 +33,12 @@ export default function TradeHistory() {
 
   }, [userInfo]);
   return (
-    <div class="card mt-2">
-      <div class="card-header justify-content-between align-items-center">
-        <h6 class="card-title font-weight-bold"> TRADE HISTORY</h6>
+    <div className="card mt-2">
+      <div className="card-header justify-content-between align-items-center">
+        <h6 className="card-title font-weight-bold"> TRADE HISTORY</h6>
       </div>
-      <div class="card-body table-responsive  p-0">
-        <table class="table  mb-0">
+      <div className="card-body table-responsive  p-0">
+        <table className="table  mb-0">
           <div style={{ display: "contents" }}>
             <thead >
               <tr className="historyorder">
@@ -61,7 +61,7 @@ export default function TradeHistory() {
                   let a= new Date(h.date).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})
                   return (
                     <>
-                      <tr class="zoom  historyorder" style={{fontSize:"16.6px",cursor:"pointer"}}>
+                      <tr className="zoom  historyorder" style={{fontSize:"16.6px",cursor:"pointer"}}>
                         <td className="TradeHistorySize" style={{ width: "16.6%" }}>
 
                            {h.cVolume.toFixed(2)}
@@ -72,7 +72,7 @@ export default function TradeHistory() {
                             className="tradeAnaIcon"/>
 
                             </td>
-                        <td class="text-danger TradeHistorySize" style={{ width: "16.6%" }}>
+                        <td className="text-danger TradeHistorySize" style={{ width: "16.6%" }}>
 
                           {h.preferred_currency_amount?.toFixed(2)}{" "}
                           {h.compair_currency == "usd" ? (
@@ -98,9 +98,9 @@ export default function TradeHistory() {
                          />
                           )} 
 
-                          <i class="ion ion-arrow-graph-up-right"></i>
+                          <i className="ion ion-arrow-graph-up-right"></i>
                         </td>
-                        <td class=" TradeHistorySize" style={{ width: "16.6%" }}>
+                        <td className=" TradeHistorySize" style={{ width: "16.6%" }}>
 
                           {h.compair_currency == "usd"
                             ? h.pref_raw_price.toFixed(8)
@@ -129,7 +129,7 @@ export default function TradeHistory() {
                          />
                           )}
 
-                          <i class="ion ion-arrow-graph-down-right"></i>
+                          <i className="ion ion-arrow-graph-down-right"></i>
                         </td>
                         <td className="TradeHistorySize" style={{ width: "16.6%" }}>
 
@@ -153,35 +153,35 @@ export default function TradeHistory() {
     </div>
 
     // <div>
-    //   <div class="overflow-hidden" style={{marginTop:"5px"}}>
+    //   <div className="overflow-hidden" style={{marginTop:"5px"}}>
     //     <div
-    //       class="coinsfather-theme-color mt-2 mt-md-0 mt-lg-0"
+    //       className="coinsfather-theme-color mt-2 mt-md-0 mt-lg-0"
     //       //   style={{overflow: "hidden"}}
     //     >
     //       <div style={{ height: "58px", width: "100%" }}>
     //         <div
-    //           class="tab-header  d-flex align-items-center h-50 p-0 px-2"
+    //           className="tab-header  d-flex align-items-center h-50 p-0 px-2"
     //           style={{ background: "rgba(0, 0, 0, 0.1)",color:"black" }}
     //         >
     //           TRADE HISTORY
     //         </div>
-    //         <div class="row m-0 py-1 pair-border mt-1"
+    //         <div className="row m-0 py-1 pair-border mt-1"
     //         style={{color:"black"}}
     //         >
 
-    //           <div class="col-3 text-center" style={{ fontSize: "12px", color:"black",fontWeight:"bold" }}>
+    //           <div className="col-3 text-center" style={{ fontSize: "12px", color:"black",fontWeight:"bold" }}>
     //            Total Anolog
     //           </div>
-    //           <div class="col-2 text-center" style={{ fontSize: "12px", color:"black",fontWeight:"bold" }}>
+    //           <div className="col-2 text-center" style={{ fontSize: "12px", color:"black",fontWeight:"bold" }}>
     //            Total Amount Pay
     //           </div>
-    //           <div class="col-3 text-center" style={{ fontSize: "12px", color:"black",fontWeight:"bold" }}>
+    //           <div className="col-3 text-center" style={{ fontSize: "12px", color:"black",fontWeight:"bold" }}>
     //             Buying Price
     //           </div>
-    //           <div class="col-2 text-center" style={{ fontSize: "12px", color:"black",fontWeight:"bold" }}>
+    //           <div className="col-2 text-center" style={{ fontSize: "12px", color:"black",fontWeight:"bold" }}>
     //              Pool
     //           </div>
-    //           <div class="col-2 text-center" style={{ fontSize: "12px", color:"black",fontWeight:"bold" }}>
+    //           <div className="col-2 text-center" style={{ fontSize: "12px", color:"black",fontWeight:"bold" }}>
     //             Time
     //           </div>
     //         </div>
@@ -190,7 +190,7 @@ export default function TradeHistory() {
     //   {history.map((h) => (
     //     <div className="zoom">
     //       <div
-    //         class="row  m-0"
+    //         className="row  m-0"
     //         style={{
     //           // background: "rgba(241, 67, 47, 0.1)",
     //           color: "rgb(240, 0, 0)",
@@ -200,31 +200,31 @@ export default function TradeHistory() {
     //         }}
     //       >
     //         <div
-    //           class="col-3 text-center text-dark"
+    //           className="col-3 text-center text-dark"
     //           style={{ fontSize: "13px",color:"black" }}
     //         >
     //           {h.cVolume}
     //         </div>
     //         <div
-    //           class="col-2 text-center text-secondary"
+    //           className="col-2 text-center text-secondary"
     //           style={{ fontSize: "13px",color:"black" }}
     //         >
     //           {h.currency_type}
     //         </div>
     //         <div
-    //           class="col-3 text-center text-secondary timeZone"
+    //           className="col-3 text-center text-secondary timeZone"
     //           style={{ fontSize: "13px",color:"black" }}
     //         >
     //           14:54:12
     //         </div>
     //         <div
-    //           class="col-2 text-center text-secondary timeZone"
+    //           className="col-2 text-center text-secondary timeZone"
     //           style={{ fontSize: "13px",color:"black" }}
     //         >
     //           14:54:12
     //         </div>
     //         <div
-    //           class="col-2 text-center text-secondary timeZone"
+    //           className="col-2 text-center text-secondary timeZone"
     //           style={{ fontSize: "13px",color:"black" }}
     //         >
     //           14:54:12

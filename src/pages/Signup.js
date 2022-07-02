@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../Api_connection/config";
 import { GoogleLogin } from "react-google-login";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 // import { setReferralCode } from "../redux/reducer/user";
 // import { FacebookLogin } from "react-facebook-login";
 import swal from "sweetalert";
-import {AiOutlineEyeInvisible, AiOutlineEye} from 'react-icons/ai'
+import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
 import { sendOtp } from "../redux/reducer/user";
 
 // import FacebookLogin from "react-facebook-login";
@@ -29,7 +29,7 @@ const Signup = (props) => {
 
 
   async function Signup() {
-    await fetch(BASE_URL + "/signup", {
+    await fetch(`${BASE_URL}/signup`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -171,8 +171,8 @@ const Signup = (props) => {
     if (confirmPassword == "") {
       setConfirmPassworderror(true);
     }
-    if(password !== confirmPassword){
-      return  swal(
+    if (password !== confirmPassword) {
+      return swal(
         "Password and Confirm password not matched",
         "Enter correct password",
         "error"
@@ -238,7 +238,7 @@ const Signup = (props) => {
                     <label className="form-label" for="default-01">
                       Email
                     </label>
-                    <Link className="link link-primary link-sm" tabindex="-1" to="">
+                    <Link to="" className="link link-primary link-sm" tabindex="-1">
                       Need Help?
                     </Link>
                   </div>
@@ -274,8 +274,9 @@ const Signup = (props) => {
                   </div>
                   <div className="form-control-wrap">
                     <Link
-                      tabIndex="-1"
                       to=""
+                      tabIndex="-1"
+
                       className="form-icon form-icon-right passcode-switch"
                       data-target="password"
                     >
@@ -336,8 +337,9 @@ const Signup = (props) => {
                   </div>
                   <div className="form-control-wrap">
                     <Link
-                      tabIndex="-1"
                       to=""
+                      tabIndex="-1"
+                      
                       className="form-icon form-icon-right passcode-switch"
                       data-target="confirm-password"
                     >
@@ -381,13 +383,13 @@ const Signup = (props) => {
                     id="referal-code"
                     placeholder="Enter Referal Code"
                     value={ref}
-                    readOnly={reff ? true: false}
+                    readOnly={reff ? true : false}
                     onChange={(e) => {
-                     setRef(e.target.value)
+                      setRef(e.target.value)
                       // dispatch(setReferralCode({ referralCode: e.target.value }))
                     }}
-                    style={{ fontSize: "15px" }} 
-                    />
+                    style={{ fontSize: "15px" }}
+                  />
                 </div>
 
                 <div className="form-group">
@@ -401,7 +403,7 @@ const Signup = (props) => {
               </form>
               <div className="form-note-s2 pt-4">
                 {" "}
-                Already Interact <Link href="/login">Sign in</Link>
+                Already Interact <Link to="/login">Sign in</Link>
                 {/* Otp Interact <Link href="/EmailOtp">Resend Otp</Link> */}
               </div>
 
@@ -446,22 +448,23 @@ const Signup = (props) => {
               <div className="nk-block-between">
                 <ul className="nav nav-sm">
                   <li className="nav-item">
-                    <Link className="nav-link" to="">
+                    <Link to="" className="nav-link" >
                       Terms & Condition
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="">
+                    <Link  to="" className="nav-link">
                       Privacy Policy
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="">
+                    <Link to="" className="nav-link" >
                       Help
                     </Link>
                   </li>
                   <li className="nav-item dropup">
                     <Link
+                      to=""
                       className="dropdown-toggle dropdown-indicator has-indicator nav-link"
                       data-toggle="dropdown"
                       data-offset="0,10"

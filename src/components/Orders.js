@@ -239,8 +239,8 @@ export default function Orders() {
                               />
                             </td>
                             <td
-                              className="OrderhistorySize"
-                              class="text-danger"
+                              className="OrderhistorySize text-danger"
+                              
                               style={{ width: "25%" }}
                             >
                               {h.preferred_currency_amount?.toFixed(2)}{" "}

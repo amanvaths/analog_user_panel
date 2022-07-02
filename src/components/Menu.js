@@ -201,10 +201,10 @@ function Menu (){
                         <span className="nk-menu-text">Dashboard</span>
                       </Link>
                     </li>
-                    <li class="nk-menu-item">
-                      <Link to="/accountSettings" class="nk-menu-link">
-                        <span class="nk-menu-icon">
-                          <em class="icon ni ni-user-c"></em>
+                    <li className="nk-menu-item">
+                      <Link to="/accountSettings" className="nk-menu-link">
+                        <span className="nk-menu-icon">
+                          <em className="icon ni ni-user-c"></em>
                         </span>
                         <span className="nk-menu-text">My Account</span>
                       </Link>
@@ -233,12 +233,12 @@ function Menu (){
 
                     {/* Add Line */}
 
-                    <li class="nk-menu-item">
-                      <Link to="/Affiliate" class="nk-menu-link">
-                        <span class="nk-menu-icon">
-                          <em class="icon ni ni-user-circle"></em>
+                    <li className="nk-menu-item">
+                      <Link to="/Affiliate" className="nk-menu-link">
+                        <span className="nk-menu-icon">
+                          <em className="icon ni ni-user-circle"></em>
                         </span>
-                        <span class="nk-menu-text">Affiliate</span>
+                        <span className="nk-menu-text">Affiliate</span>
                       </Link>
                     </li>
                    

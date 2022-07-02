@@ -13,8 +13,8 @@ const MyAccount = () => {
                         <Header />
                         <div className="contianer px-5 py-5">
                             <div className="card">
-                                <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
+                                <div className="card-body">
+                                <h5 className="card-title">Card title</h5>
                                     <div className="row">
                                         <div className="col-2"></div>
                                         <div className="col-5">

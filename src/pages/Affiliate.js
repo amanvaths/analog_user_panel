@@ -68,48 +68,48 @@ const Affiliate = (props) => {
 
   return (
     <div>
-      <div class="nk-app-root">
-        <div class="nk-main ">
+      <div className="nk-app-root">
+        <div className="nk-main ">
           <Menu />
-          <div class="nk-wrap ">
+          <div className="nk-wrap ">
             <Header />
             {/* Add This Line  */}
 
-            <div class="container-xl tableContainer">
-              <div class="nk-content-body" style={{ marginTop: 50, width: "100%", padding: "10px -70%" }}>
-                <div class="nk-block-head nk-block-head-sm">
-                  <div class="nk-block-between position-relative">
-                    <div class="nk-block-head-content ">
-                      <h3 class="nk-block-title page-title">
+            <div className="container-xl tableContainer">
+              <div className="nk-content-body" style={{ marginTop: 50, width: "100%", padding: "10px -70%" }}>
+                <div className="nk-block-head nk-block-head-sm">
+                  <div className="nk-block-between position-relative">
+                    <div className="nk-block-head-content ">
+                      <h3 className="nk-block-title page-title">
                         Affiliates
                       </h3>
-                      <div class="nk-block-des text-soft">
+                      <div className="nk-block-des text-soft">
 
                         <p>{`Your affiliates.`}</p>
                       </div>
                     </div>
-                    <div class="nk-block-head-content affiliates">
-                      <div class="toggle-wrap nk-block-tools-toggle">
+                    <div className="nk-block-head-content affiliates">
+                      <div className="toggle-wrap nk-block-tools-toggle">
                         <Link
                           to=""
-                          class="btn btn-icon btn-trigger toggle-expand me-n1"
+                          className="btn btn-icon btn-trigger toggle-expand me-n1"
                           data-target="pageMenu"
                         >
-                          <em class="icon ni ni-menu-alt-r"></em>
+                          <em className="icon ni ni-menu-alt-r"></em>
                         </Link>
                         <div
-                          class="toggle-expand-content"
+                          className="toggle-expand-content"
                           data-content="pageMenu"
                         >
-                          {/* <ul class="nk-block-tools g-3">
+                          {/* <ul className="nk-block-tools g-3">
                             <li
                             >
-                              <span class="d-none d-md-block">
+                              <span className="d-none d-md-block">
                                 <button
-                                  class="btn btn-dim btn-outline-light"
+                                  className="btn btn-dim btn-outline-light"
                                   style={{ padding: "8px 35px" }}
                                 >
-                                  <em class="icon ni ni-download-cloud"></em>
+                                  <em className="icon ni ni-download-cloud"></em>
                                   <span>Export</span>
                                 </button>
                               </span>
@@ -153,7 +153,7 @@ const Affiliate = (props) => {
                             Affiliate List
                           </h3>
                           <div className="nk-block-des text-soft">
-                            <ul class="nk-block-tools g-3" style={{ paddingLeft: "0px" }}>
+                            <ul className="nk-block-tools g-3" style={{ paddingLeft: "0px" }}>
                               <li>
                                 <Link to="" className={level1 ? 'btn btn-white btn-dim btn-outline-light active' :
                                   "btn btn-white btn-dim btn-outline-light"} onClick={() => {

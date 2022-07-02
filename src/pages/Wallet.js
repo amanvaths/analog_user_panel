@@ -56,6 +56,10 @@ const Wallet = (props) => {
       // }
      
     })
+
+      socket.on('notification',(data)=>{
+        console.log(data, "Notification data");
+      })
   })
 },[])
 
@@ -198,7 +202,7 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                                     <div className="w-50" style={{fontSize: "1.1rem", fontWeight: "500px"}}>
                                     <p className="p-1 space123">
                                       <span>Total Fund: </span>
-                                      <span >&nbsp;&nbsp;{totalAna? totalAna?.toFixed(2): ""} ANA </span>
+                                      <span >&nbsp;&nbsp;{totalAna? totalAna?.toFixed(2): 0} ANA </span>
                                     </p>
                                     <p className="p-1 space123" >
                                       <span>Total Spend: </span>
@@ -224,7 +228,7 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                                     <p className="p-1 space123">
                                       <span>Bonus:</span>
                                       <span>&nbsp;&nbsp;
-                                        {totalBonus? userInfo?.currency_preference == 'usd' ? `${totalBonus?.toFixed(2)} USDT`: `${(totalBonus * oneUsdPrice).toFixed(3)} INRX` : null}
+                                        {totalBonus? userInfo?.currency_preference == 'usd' ? `${totalBonus?.toFixed(2)} USDT`: `${(totalBonus * oneUsdPrice).toFixed(3)} INRX` : 0}
                                      
                                       </span>
                                     </p>
