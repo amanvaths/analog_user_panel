@@ -63,7 +63,7 @@ function App(props) {
           <Route path="/Bounty" element={(user.email && user.token)?<Bounty />:<Login />} />
           <Route path="/Airdrop" element={(user.email && user.token)?<AirDrop />:<Login />} />
           <Route path="/Withdrawal" element={(user.email && user.token)?<Withdrawal />:<Login />} />
-          <Route path="/Handout" element={(user.email && user.token)?<Handout />:<Login />} />
+          {/* <Route path="/Handout" element={(user.email && user.token)?<Handout />:<Login />} /> */}
           <Route path="/Notification" element={(user.email && user.token)?<AllNotifications />:<Login />} />
         </Routes>
       </BrowserRouter>
