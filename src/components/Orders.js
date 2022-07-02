@@ -86,7 +86,7 @@ export default function Orders() {
   }, []);
   useEffect(() => {
     setTotal(
-      userInfo?.currency_preference == "inr" ? 5000 : 5000 / oneUsdPrice
+      userInfo?.currency_preference == "inr" ? 5000 : (5000 / oneUsdPrice).toFixed(2)
     );
   }, [userInfo?.currency_preference, oneUsdPrice]);
 
@@ -395,10 +395,10 @@ export default function Orders() {
                     class="form-control buy-sell-form-bg buy-sell-theme"
                     value={
                       oneUsdPrice && ammount
-                        ? ammount
+                        ? ammount?.toFixed(2)
                         : userInfo?.currency_preference == "inr"
-                        ? 5000 / atprice
-                        : 5000 / oneUsdPrice / (atprice / oneUsdPrice)
+                        ? (5000 / atprice)?.toFixed(2)
+                        : (5000 / oneUsdPrice / (atprice / oneUsdPrice))?.toFixed(2)
                     }
                     style={{
                       borderColor: "rgb(202, 202, 204)",
@@ -472,12 +472,12 @@ export default function Orders() {
                       ? 5000
                       : (5000 / oneUsdPrice)?.toFixed(2)}{" "}
                   </span> 
-                  <div>
+                  <div style={{marginLeft:"5px"}}>
                     {userInfo?.currency_preference &&
                     userInfo?.currency_preference == "usd" ? (
                       <img
                         src="./images/Usdt.png"
-                        style={{ width: "15px",marginLeft:"5px"}}
+                        style={{ width: "15px"}}
                         alt="usdt"
                         className="tradeUsdIcon"
                       />
@@ -624,7 +624,7 @@ export default function Orders() {
                       setAmmount(
                         document.querySelector("#slider").value / atprice
                       );
-                      setTotal(document.querySelector("#slider").value);
+                      setTotal(Number(document.querySelector("#slider").value).toFixed(2));
                     } else if (userInfo?.currency_preference == "usd") {
                       setAmmount(
                         atprice &&
@@ -636,7 +636,7 @@ export default function Orders() {
                         document.querySelector("#slider").value,
                         "value"
                       );
-                      setTotal(document.querySelector("#slider").value);
+                      setTotal(Number(document.querySelector("#slider").value).toFixed(2));
                     }
                   }}
                 />
