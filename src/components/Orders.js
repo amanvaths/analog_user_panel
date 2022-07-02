@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./order.css";
 import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
@@ -6,29 +6,32 @@ import { useSelector, useDispatch } from "react-redux";
 import { data } from "jquery";
 import swal from "sweetalert";
 import "../App.css";
-import MultiRangeSlider from "./multiRangeSlider/MultiRangeSlider";
+// import MultiRangeSlider from "./multiRangeSlider/MultiRangeSlider";
 import { Triangle } from "react-loader-spinner";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { setBuyLoader } from "../redux/reducer/user";
 
 export default function Orders() {
   const dispatch = useDispatch();
+  const refValue = useRef();
   const [atprice, setAtprice] = useState(0);
   const [ammount, setAmmount] = useState(0);
   const [total, setTotal] = useState(0);
   const [history, setHistory] = useState("");
   const [walletbalance, setWalletBalance] = useState("");
   const [loader, setLoader] = useState(true);
+  const [balance, setBalance] = useState("");
+  const [rangeValue, setRangeValue] = useState(0);
 
-  //  GetCoinData
 
+  useEffect(() => {
+    const sliserVal = document.querySelector("#slider").value;
+  });
   const { user, userInfo, oneUsdPrice, totalAna, theme } = useSelector(
     (state) => state.user.value
   );
   const email = user?.email;
-
-  console.log(walletbalance,"walletbalance");
-
+    //  GetCoinData
   const getData = async () => {
     try {
       const res = await axios.post(`${BASE_URL}/getCoinData`, {
@@ -46,13 +49,16 @@ export default function Orders() {
       const res = await axios.post(`${BASE_URL}/getWalletData`, {
         email: email,
       });
-      let walletData = res.data;
-      const d = walletData.find((data, i) => data.symbol == "USDT");
-      setWalletBalance(
-       userInfo?.currency_preference == "usd"
-          ? Number(d.usdt_balance)
-          : Number(d.usdt_balance * oneUsdPrice)
-      );
+      if (res) {
+        let walletData = res.data;
+        const d = walletData.find((data, i) => data.symbol == "USDT");
+        setBalance(d.usdt_balance);
+        setWalletBalance(
+          userInfo?.currency_preference == "usd"
+            ? Number(d.usdt_balance)
+            : Number(d.usdt_balance * oneUsdPrice)
+        );
+      }
     } catch (error) {
       console.log(error);
     }
@@ -72,7 +78,21 @@ export default function Orders() {
     getWalletData();
     getData();
     AnaPrice();
-  }, [totalAna, oneUsdPrice, userInfo, data.balance]);
+   
+    // setAmmount(
+    //   userInfo?.currency_preference == "inr"
+    //     ? total / atprice
+    //     : total / (atprice / oneUsdPrice)
+    // );
+    
+  }, []);
+  useEffect(()=>{
+    setTotal(
+         userInfo?.currency_preference == "inr"
+        ? 5000
+        : 5000 / oneUsdPrice
+    );
+  },[userInfo?.currency_preference, oneUsdPrice])
 
   // Order
 
@@ -156,6 +176,7 @@ export default function Orders() {
         }
       });
   }
+
   return (
     <div className="order">
       <div class="card mt-2">
@@ -223,7 +244,7 @@ export default function Orders() {
                         <>
                           <tr
                             class="zoom UserOrderHistory"
-                            style={{ fontSize: "10px",cursor:"pointer" }}
+                            style={{ fontSize: "10px", cursor: "pointer" }}
                           >
                             <td
                               className="OrderhistorySize"
@@ -232,7 +253,7 @@ export default function Orders() {
                               {" "}
                               {h.cVolume?.toFixed(2)}
                               <img
-                              alt="analog"
+                                alt="analog"
                                 src="./images/Analog.png"
                                 style={{ width: "17px" }}
                                 className="img"
@@ -318,7 +339,7 @@ export default function Orders() {
       </div>
 
       {/* Buy */}
-      <div  >
+      <div>
         <nav
           class="coinsfather-theme-color"
           style={{
@@ -327,7 +348,7 @@ export default function Orders() {
           }}
         >
           <div
-          className="card-header"
+            className="card-header"
             style={{
               textAlign: "center",
               fontWeight: "bold",
@@ -343,8 +364,8 @@ export default function Orders() {
           style={{ borderColor: "rgba(25, 32, 87, 0.2)" }}
         >
           <div
-            // className="d-flex justify-content-center align-items-center"
-            // style={{ background: "white" }}
+          // className="d-flex justify-content-center align-items-center"
+          // style={{ background: "white" }}
           >
             <div
               className="card sing-up-button"
@@ -373,9 +394,10 @@ export default function Orders() {
                     </span>
                   </div>
                   <input
+                    disabled
                     type="number"
                     class="form-control buy-sell-form-bg buy-sell-theme"
-                    value={Number(ammount)?.toFixed(2)}
+                    value={oneUsdPrice && ammount?ammount: userInfo?.currency_preference == "inr"?5000 / atprice:(5000/oneUsdPrice) /(atprice/oneUsdPrice)}
                     style={{
                       borderColor: "rgb(202, 202, 204)",
                       height: "54px",
@@ -406,7 +428,8 @@ export default function Orders() {
                           ? Number(atprice / oneUsdPrice)?.toFixed(8)
                           : Number(atprice)?.toFixed(8)}
                         {}{" "}
-                        {userInfo?.currency_preference&&userInfo?.currency_preference == "usd" ? (
+                        {userInfo?.currency_preference &&
+                        userInfo?.currency_preference == "usd" ? (
                           <img
                             src="./images/Usdt.png"
                             style={{ width: "15px" }}
@@ -432,7 +455,9 @@ export default function Orders() {
                     </div>
                   </div>
                 </div>
-
+                 <span style={{fontSize:"12px",fontWeight:"bold",display:"flex"}}>Minimum Buying Amount {userInfo?.currency_preference == "inr"
+                      ? 5000
+                      : (5000 / oneUsdPrice)?.toFixed(2)}</span>
                 <div class="input-group mb-3" style={{ margin: "0px" }}>
                   <div class="input-group-prepend">
                     <span
@@ -449,8 +474,10 @@ export default function Orders() {
                   </div>
                   <input
                     type="number"
+                    id="total"
                     class="form-control buy-sell-form-bg buy-sell-theme"
-                    value={Number(total)?.toFixed(2)}
+                    value={total}
+                    // defaultValue={total?total: userInfo?.currency_preference == "inr"?5000:5000/oneUsdPrice}
                     style={{
                       borderColor: "rgb(202, 202, 204)",
                       height: "54px",
@@ -458,20 +485,36 @@ export default function Orders() {
                       fontWeight: "bold",
                     }}
                     onChange={(e) => {
-                      // setTotal(Number(e.target.value)?.toFixed(2));
-                      // setAmmount(
-                      //   userInfo?.currency_preference == "inr"
-                      //     ? e.target.value / atprice
-                      //     : e.target.value / (atprice / oneUsdPrice)
-                      // );
+                 
+                      if(e.target.value  ){
+                        let val;
+                        
+                        if(e.target.value.startsWith(0)) val=e.target.value.substring(1,e.target.length);else val =e.target.value;
+                      setRangeValue(val);
+                      setTotal(val);
+                      setAmmount(
+                        userInfo?.currency_preference == "inr"
+                          ? val / atprice
+                          : val / (atprice / oneUsdPrice)
+                      );
+                      console.log(ammount,"Ammount ");
+                      console.log(val,"val aval");
+                      } 
+                    
+                       else {
+                        setRangeValue(0);
+                        setTotal(0);
+                        setAmmount(0);
+                      }
                     }}
                   />
                 </div>
                 <div style={{ margin: "30px 0px" }}></div>
-
-                <div>
+                {/* 
+                 <div>
                   {walletbalance && userInfo?.currency_preference ? (
                     <MultiRangeSlider
+                   
                       min={
                         oneUsdPrice == ""
                           ? 0
@@ -482,28 +525,158 @@ export default function Orders() {
                       symbol={
                         userInfo?.currency_preference == "usd" ? "USDT" : "INRX"
                       }
-                      max={oneUsdPrice == "" ? 0 : walletbalance}
-                      fixedmax={oneUsdPrice == "" ? 0 : walletbalance}
+                      fixedmax={
+                        oneUsdPrice == ""
+                          ? 0
+                          : userInfo?.currency_preference == "usd"
+                          ? Number(balance)
+                          : Number(balance * oneUsdPrice)
+                      }
+                  
+                      max={
+                        oneUsdPrice == ""
+                          ? 0
+                          : userInfo?.currency_preference == "usd"
+                          ? Number(balance)
+                          : Number(balance * oneUsdPrice)
+                      }
+                      
                       onChange={({ min, max, symbol }) => {
-                        // console.log(`min = ${min}, max = ${max}`);
+                        console.log(`min = ${min}, max = ${max}`);
                         if (userInfo?.currency_preference == "inr") {
                           setAmmount(atprice && max / atprice);
                           setTotal(max);
-                        } else {
-                          setAmmount(atprice&&oneUsdPrice&& max / (atprice / oneUsdPrice));
+                        } else if (userInfo?.currency_preference == "usd") {
+                          setAmmount(
+                            atprice &&
+                              oneUsdPrice &&
+                              max / (atprice / oneUsdPrice)
+                          );
                           setTotal(max);
                         }
                       }}
                     />
                   ) : null}
+                </div>  */}
+
+                <input
+                  type="range"
+                  id="slider"
+                  value={rangeValue}
+                  min={
+                    oneUsdPrice == ""
+                      ? 0
+                      : userInfo?.currency_preference == "inr"
+                      ? 5000
+                      : 5000 / oneUsdPrice
+                  }
+                  max={
+                    oneUsdPrice == ""
+                      ? 0
+                      : userInfo?.currency_preference == "usd"
+                      ? Number(balance)
+                      : Number(balance * oneUsdPrice)
+                  }
+                  // value={"6000"}
+                  onChange={(e) => {
+                    setRangeValue(e.target.value);
+                    console.log(rangeValue, "range value");
+                    if (userInfo?.currency_preference == "inr") {
+                      setAmmount( document.querySelector("#slider").value / atprice);
+                      setTotal(document.querySelector("#slider").value);
+                    } else if (userInfo?.currency_preference == "usd") {
+                      setAmmount(
+                        atprice &&
+                          oneUsdPrice && 
+                          document.querySelector("#slider").value / (atprice / oneUsdPrice)
+                      );
+                      console.log(document.querySelector("#slider").value,"value");
+                      setTotal(document.querySelector("#slider").value);
+                    }
+                  }}
+                />
+                <div
+                  className="details"
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <span>
+                    {oneUsdPrice == ""
+                      ? 0
+                      : userInfo?.currency_preference == "inr"
+                      ? 5000
+                      : (5000 / oneUsdPrice)?.toFixed(2)}{" "}
+                    <span>
+                      {userInfo?.currency_preference &&
+                      userInfo?.currency_preference == "usd" ? (
+                        <img
+                          src="./images/Usdt.png"
+                          style={{ width: "15px" }}
+                          alt="usdt"
+                          className="tradeUsdIcon"
+                        />
+                      ) : theme == 0 ? (
+                        <img
+                          src="./images/Inrx_black.png"
+                          style={{ width: "17px" }}
+                          alt="inrx"
+                          className="img"
+                        />
+                      ) : (
+                        <img
+                          src="./images/Inrx_white.png"
+                          style={{ width: "17px" }}
+                          alt="inrx"
+                          className="img"
+                        />
+                      )}
+                    </span>
+                  </span>
+
+                  <span>
+                    {oneUsdPrice == ""
+                      ? 0
+                      : userInfo?.currency_preference == "usd"
+                      ? Number(balance)?.toFixed(2)
+                      : Number(balance * oneUsdPrice)?.toFixed(2)}{" "}
+                    <span>
+                      {userInfo?.currency_preference &&
+                      userInfo?.currency_preference == "usd" ? (
+                        <img
+                          src="./images/Usdt.png"
+                          style={{ width: "15px" }}
+                          alt="usdt"
+                          className="tradeUsdIcon"
+                        />
+                      ) : theme == 0 ? (
+                        <img
+                          src="./images/Inrx_black.png"
+                          style={{ width: "17px" }}
+                          alt="inrx"
+                          className="img"
+                        />
+                      ) : (
+                        <img
+                          src="./images/Inrx_white.png"
+                          style={{ width: "17px" }}
+                          alt="inrx"
+                          className="img"
+                        />
+                      )}
+                    </span>
+                  </span>
                 </div>
 
                 <button
                   class="btn btn-block my-2"
-                  style={{ background: "rgb(108, 183, 125)", top: "60px", color:"white" }}
+                  style={{
+                    background: "rgb(108, 183, 125)",
+                    top: "40px",
+                    color: "white",
+                  }}
                   onClick={ConfirmBox}
                   disabled={
-                    walletbalance <=
+                    walletbalance &&
+                  walletbalance <=
                     (userInfo?.currency_preference == "inr"
                       ? 5000
                       : 5000 / oneUsdPrice)
