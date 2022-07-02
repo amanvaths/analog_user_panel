@@ -42414,7 +42414,7 @@ body.nav-shown {
   justify-content: space-between;
   padding: 14px 24px;
   min-width: 100%;
-  width: 290px;
+  width: 290px; 
   height: 65px;
   border-bottom: 1px solid #e5e9f2;
 }
@@ -98095,17 +98095,6 @@ div.dataTables_wrapper div.dataTables_filter .dark-mode input,
   border-bottom: 2px soild black;
 }
 
-
-.col-4{
-  color:red;
-}
-
 .react-multi-carousel-list{
   display: block !important;
 }
-
-@media (max-width: 575px) {
-.space123{
-  justify-content: space-between !important;
-  display: flex !important;
-}}

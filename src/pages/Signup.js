@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { BASE_URL } from "../Api_connection/config";
+import { Signupn } from "../Api_connection/ApiFunction";
 import { GoogleLogin } from "react-google-login";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 // import { setReferralCode } from "../redux/reducer/user";
 // import { FacebookLogin } from "react-facebook-login";
 import swal from "sweetalert";
-import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
+import {AiOutlineEyeInvisible, AiOutlineEye} from 'react-icons/ai'
 import { sendOtp } from "../redux/reducer/user";
 
 // import FacebookLogin from "react-facebook-login";
@@ -14,6 +15,8 @@ const Signup = (props) => {
   const dispatch = useDispatch();
   const queryParams = new URLSearchParams(window.location.search);
   const reff = queryParams.get('ref');
+
+  const { userInfo } = useSelector((state) => state.user.value)
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,7 +32,7 @@ const Signup = (props) => {
 
 
   async function Signup() {
-    await fetch(`${BASE_URL}/signup`, {
+    await fetch(BASE_URL + "/signup", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -171,8 +174,8 @@ const Signup = (props) => {
     if (confirmPassword == "") {
       setConfirmPassworderror(true);
     }
-    if (password !== confirmPassword) {
-      return swal(
+    if(password !== confirmPassword){
+      return  swal(
         "Password and Confirm password not matched",
         "Enter correct password",
         "error"
@@ -184,377 +187,320 @@ const Signup = (props) => {
   };
 
   return (
-    <div>
-      <div className="nk-content ">
-        <div className="nk-split nk-split-page nk-split-md">
-          <div className="nk-split-content nk-block-area nk-block-area-column nk-auth-container bg-white">
-            <div className="absolute-top-right d-lg-none p-3 p-sm-5">
-              <Link
-                to=""
-                className="toggle btn-white btn btn-icon btn-light"
-                data-target="athPromo"
-              >
-                <em className="icon ni ni-info"></em>
-              </Link>
-            </div>
-            <div className="nk-block nk-block-middle nk-auth-body">
-              <div className="brand-logo pb-5">
-                <Link to="" className="logo-link">
-                  <img
-                    className="logo-light logo-img logo-img-lg"
-                    src="./images/logo.png"
-                    srcSet="./images/logo2x.png 2x"
-                    alt="logo"
-                  />
-                  <img
-                    className="logo-dark logo-img logo-img-lg"
-                    src="./images/logo-dark.png"
-                    srcSet="./images/logo-dark2x.png 2x"
-                    alt="logo-dark"
-                  />
-                </Link>
-              </div>
-              <div className="nk-block-head">
+    <div class="bg-login">
+      <div className="nk-apps-root">
+        <div className="nk-content container mt-lg-5 pt-lg-5 align-items-center">
+          <div className="row justify-content-md-center">
+            <div class="col-md-4 bg-teal shadow  d-flex align-items-center">
+              <div class="card-inner text-white"> 
                 <div className="nk-block-head-content">
-                  <h5 className="nk-block-title">Sign-Up</h5>
-                  <div className="nk-block-des">
+                  <h2 className="nk-block-title">SIGN UP</h2>
+                  <div className="lead">
                     <p>
-                      Connect with <b>Analog Inceptive</b> of{" "}
-                      <b>INRX Blockchain</b>.
+                    Create an account with <b>Analog Inceptive</b> of{" "}
+                      <b>INRX Blockchain</b> and discover a great amount of opportunities
                     </p>
                   </div>
                 </div>
               </div>
-              <form
-                action="#"
-                onSubmit={(e) => {
-                  e.preventDefault();
-
-                  handelFormSubmit(email, password, confirmPassword);
-                }}
-              >
-                <div className="form-group ">
-                  <div className="form-label-group ">
-                    <label className="form-label" for="default-01">
-                      Email
-                    </label>
-                    <Link to="" className="link link-primary link-sm" tabindex="-1">
-                      Need Help?
-                    </Link>
-                  </div>
-
-                  <input
-                    id="user"
-                    type="email"
-                    className="form-control form-control-lg"
-                    placeholder="Enter your email address"
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value.toLowerCase());
-                      setEmailerror(false);
-                    }}
-                    onBlur={() => {
-                      if (email === "") {
-                        setEmailerror(true);
-                      }
-                    }}
-                    style={{ fontSize: "15px" }} />
+            </div>
+            <div className="col-md-6 bg-light border shadow">
+              <div className="card-inner">
+                <div className="brand-logo pb-3">
+                  <a href="#" className="logo-link">                    
+                    <img
+                      className="logo-dark logo-img logo-img-lg"
+                      src="./images/logo-dark.png"
+                      srcSet="./images/logo-dark2x.png 2x"
+                      alt="logo-dark"
+                    />
+                  </a>
                 </div>
-                {emailerror == true ? (
-                  <p style={{ color: "red", marginTop: -20 }}>
-                    Email Is Requierd *
-                  </p>
-                ) : null}
+              
+                <form
+                  action="#"
+                  onSubmit={(e) => {
+                    e.preventDefault();
 
-                <div className="form-group">
-                  <div className="form-label-group">
-                    <label className="form-label" for="password">
-                      Password
-                    </label>
-                  </div>
-                  <div className="form-control-wrap">
-                    <Link
-                      to=""
-                      tabIndex="-1"
+                    handelFormSubmit(email, password, confirmPassword);
+                  }}
+                >
+                  <div className="form-group ">
+                    <div className="form-label-group ">
+                      <label className="form-label" for="default-01">
+                        Email
+                      </label>                      
+                    </div>
 
-                      className="form-icon form-icon-right passcode-switch"
-                      data-target="password"
-                    >
-                      {
-                        passwordShone == false ? <AiOutlineEyeInvisible onClick={togglePassword1} /> : <AiOutlineEye onClick={togglePassword1} />
-                      }
-                    </Link>
                     <input
-                      type={passwordShone ? "text" : "password"}
-                      className="form-control form-control-lg"
-                      id="password"
-                      placeholder="Enter your password"
-                      value={password}
-                      minLength={8}
+                      id="user"
+                      type="email"
+                      className="form-control"
+                      placeholder="Enter your email address"
+                      value={email}
                       onChange={(e) => {
-                        setPassword(e.target.value);
-                        setPassworderror(false);
-                      }}
-                      onFocus={() => _onfocus()}
-                      // onBlur={() => {
-                      //   _onblur();
-                      // }}
-                      onBlur={() => {
-                        if (password === "") {
-                          setPassworderror(true);
-                        }
-                      }}
-                      onKeyUp={() => _onkeyup()}
-                      style={{ fontSize: "15px" }} />
-                  </div>
-
-                  <div id="validation-box">
-                    <h6 className="passvalid" id="capital">
-                      1 Uppercase Character
-                    </h6>
-                    <h6 className="passvalid" id="number">
-                      1 Numeric Value
-                    </h6>
-                    <h6 className="passvalid" id="letter">
-                      1 Special Symbol eg:@#
-                    </h6>
-                    <h6 className="passvalid" id="length">
-                      length should be greater than 8
-                    </h6>
-                  </div>
-                </div>
-                {passworderror == true ? (
-                  <p style={{ color: "red", marginTop: -20 }}>
-                    Password Is Requierd *
-                  </p>
-                ) : null}
-
-                <div className="form-group">
-                  <div className="form-label-group">
-                    <label className="form-label" for="confirm-password">
-                      Confirm Password
-                    </label>
-                  </div>
-                  <div className="form-control-wrap">
-                    <Link
-                      to=""
-                      tabIndex="-1"
-                      
-                      className="form-icon form-icon-right passcode-switch"
-                      data-target="confirm-password"
-                    >
-                      {
-                        confirmPasswordShown == false ? <AiOutlineEyeInvisible onClick={togglePassword2} /> : <AiOutlineEye onClick={togglePassword2} />
-                      }
-                    </Link>
-                    <input
-                      type={confirmPasswordShown ? "text" : "password"}
-                      className="form-control form-control-lg"
-                      id="confirm-password"
-                      placeholder="Confirm your password"
-                      value={confirmPassword}
-                      onChange={(e) => {
-                        setConfirmPassword(e.target.value);
-                        setConfirmPassworderror(false);
+                        setEmail(e.target.value.toLowerCase());
+                        setEmailerror(false);
                       }}
                       onBlur={() => {
-                        if (confirmPassword === "") {
-                          setConfirmPassworderror(true);
+                        if (email === "") {
+                          setEmailerror(true);
                         }
                       }}
                       style={{ fontSize: "15px" }} />
                   </div>
-                </div>
-                {confirmPassworderror == true ? (
-                  <p style={{ color: "red", marginTop: -20 }}>
-                    Password Is Requierd *
-                  </p>
-                ) : null}
+                  {emailerror == true ? (
+                    <p className="text-danger mt-n3">
+                      Email is requierd !
+                    </p>
+                  ) : null}
 
-                <div className="form-group">
-                  <div className="form-label-group">
-                    <label className="form-label" for="referal-code">
-                      Referal Code (optional)
-                    </label>
+                  <div className="form-group">
+                    <div className="form-label-group">
+                      <label className="form-label" for="password">
+                        Password
+                      </label>
+                    </div>
+                    <div className="form-control-wrap">
+                      <a
+                        tabIndex="-1"
+                        href="#"
+                        className="form-icon form-icon-right passcode-switch text-dark"
+                        data-target="password"
+                      >
+                        {
+                          passwordShone == false ? <AiOutlineEyeInvisible onClick={togglePassword1} /> : <AiOutlineEye onClick={togglePassword1} />
+                        }
+                      </a>
+                      <input
+                        type={passwordShone ? "text" : "password"}
+                        className="form-control"
+                        id="password"
+                        placeholder="Enter your password"
+                        value={password}
+                        minLength={8}
+                        onChange={(e) => {
+                          setPassword(e.target.value);
+                          setPassworderror(false);
+                        }}
+                        onFocus={() => _onfocus()}
+                        // onBlur={() => {
+                        //   _onblur();
+                        // }}
+                        onBlur={() => {
+                          if (password === "") {
+                            setPassworderror(true);
+                          }
+                        }}
+                        onKeyUp={() => _onkeyup()}
+                        style={{ fontSize: "15px" }} />
+                    </div>
+
+                    <div id="validation-box">
+                    <p class="text-soft small">We suggest having at least one capital and one lower-case letter (Aa-Zz), 
+                    one special symbol (#, &amp;, % etc) and one number (0-9) in your password for the best strength</p>
+                    </div>
                   </div>
-                  <input
-                    type="text"
-                    className="form-control form-control-lg"
-                    id="referal-code"
-                    placeholder="Enter Referal Code"
-                    value={ref}
-                    readOnly={reff ? true : false}
-                    onChange={(e) => {
+                  {passworderror == true ? (
+                    <p className="text-danger mt-n3">
+                      Password is requierd !
+                    </p>
+                  ) : null}
+
+                  <div className="form-group">
+                    <div className="form-label-group">
+                      <label className="form-label" for="confirm-password">
+                        Confirm Password
+                      </label>
+                    </div>
+                    <div className="form-control-wrap">
+                      <a
+                        tabIndex="-1"
+                        href="#"
+                        className="form-icon form-icon-right passcode-switch text-dark"
+                        data-target="confirm-password"
+                      >
+                        {
+                          confirmPasswordShown == false ? <AiOutlineEyeInvisible onClick={togglePassword2} /> : <AiOutlineEye onClick={togglePassword2} />
+                        }
+                      </a>
+                      <input
+                        type={confirmPasswordShown ? "text" : "password"}
+                        className="form-control"
+                        id="confirm-password"
+                        placeholder="Confirm your password"
+                        value={confirmPassword}
+                        onChange={(e) => {
+                          setConfirmPassword(e.target.value);
+                          setConfirmPassworderror(false);
+                        }}
+                        onBlur={() => {
+                          if (confirmPassword === "") {
+                            setConfirmPassworderror(true);
+                          }
+                        }}
+                        style={{ fontSize: "15px" }} />
+                    </div>
+                  </div>
+                  {confirmPassworderror == true ? (
+                    <p className="text-danger mt-n3">
+                      Password is requierd !
+                    </p>
+                  ) : null}
+
+                  <div className="form-group">
+                    <div className="form-label-group">
+                      <label className="form-label" for="referal-code">
+                        Referal Code (optional)
+                      </label>
+                    </div>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="referal-code"
+                      placeholder="Enter Referal Code"
+                      value={ref}
+                      readOnly={reff ? true: false}
+                      onChange={(e) => {
                       setRef(e.target.value)
-                      // dispatch(setReferralCode({ referralCode: e.target.value }))
-                    }}
-                    style={{ fontSize: "15px" }}
-                  />
+                        // dispatch(setReferralCode({ referralCode: e.target.value }))
+                      }}
+                      style={{ fontSize: "15px" }} 
+                      />
+                  </div>
+
+                  <div className="form-group">
+                    <button
+                      className="btn btn-dim bg-teal text-white btn-block"
+                    // onClick={Signup}
+                    >
+                      Sign up
+                    </button>
+                  </div>
+                </form>
+                <div className="form-note-s2 pt-2 text-right">
+                  {" "}
+                  Already have an account ? <a class="text-teal" href="/login">Sign in</a>
+                  {/* Otp Interact <a href="/EmailOtp">Resend Otp</a> */}
                 </div>
 
-                <div className="form-group">
-                  <button
-                    className="btn btn-lg btn-primary btn-block"
-                  // onClick={Signup}
-                  >
-                    Sign up
-                  </button>
+                <div className="text-center pt-4 pb-3">
+                  <span className="overline-title overline-title-sap">
+                    <span>OR</span>
+                  </span>
                 </div>
-              </form>
-              <div className="form-note-s2 pt-4">
-                {" "}
-                Already Interact <Link to="/login">Sign in</Link>
-                {/* Otp Interact <Link href="/EmailOtp">Resend Otp</Link> */}
-              </div>
-
-              <div className="text-center pt-4 pb-3">
-                <h6 className="overline-title overline-title-sap">
-                  <span>OR</span>
-                </h6>
-              </div>
-              <ul className="nav justify-center gx-4">
-                <li className="nav-item ">
-                  {/* <FacebookLogin
-                      className="facebook-button"
+                <ul className="nav justify-center gx-4">
+                  <li className="nav-item ">
+                    {/* <FacebookLogin
+                        className="facebook-button"
+                        appId="1088597931155576"
+                        autoLoad={true}
+                        //   cssclassName="my-facebook-button-class"
+                        fields="name,email,picture"
+                        scope="public_profile,user_friends,user_actions.books"
+                        callback={this.responseFacebook}
+                      /> */}
+                    {/* <FacebookLogin
                       appId="1088597931155576"
                       autoLoad={true}
-                      //   cssclassName="my-facebook-button-class"
                       fields="name,email,picture"
-                      scope="public_profile,user_friends,user_actions.books"
-                      callback={this.responseFacebook}
+                      callback={props.SocialSignUp}
+                      cssclassName="btnFacebook"
+                      icon={<i className="fa fa-facebook" className="logo-fb"></i>}
+                      textButton="Sign up with Facebook"
                     /> */}
-                  {/* <FacebookLogin
-                    appId="1088597931155576"
-                    autoLoad={true}
-                    fields="name,email,picture"
-                    callback={props.SocialSignUp}
-                    cssclassName="btnFacebook"
-                    icon={<i className="fa fa-facebook" className="logo-fb"></i>}
-                    textButton="Sign up with Facebook"
-                  /> */}
-                </li>
-                <li className="nav-item">
-                  <GoogleLogin
-                    clientId={GoogleId}
-                    buttonText="Sign up with Google"
-                    onSuccess={onLoginSuccess}
-                    onFailure={onLoginFailure}
-                    cookiePolicy={"single_host_origin"}
-                  />
-                </li>
-              </ul>
-            </div>
-            <div className="nk-block nk-auth-footer">
-              <div className="nk-block-between">
-                <ul className="nav nav-sm">
-                  <li className="nav-item">
-                    <Link to="" className="nav-link" >
-                      Terms & Condition
-                    </Link>
                   </li>
                   <li className="nav-item">
-                    <Link  to="" className="nav-link">
+                    <GoogleLogin
+                      clientId={GoogleId}
+                      buttonText="Sign up with Google"
+                      onSuccess={onLoginSuccess}
+                      onFailure={onLoginFailure}
+                      cookiePolicy={"single_host_origin"}
+                    />
+                  </li>
+                </ul>
+              </div>
+           
+          </div>
+          </div>
+          <div className="nk-content text-center mt-lg-2">
+              <div className="container container justify-content-center d-flex">
+               {/*<ul className="nav nav-sm">
+                  <li className="nav-item">
+                    <a className="nav-link" href="#">
+                      Terms &amp; Condition
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="#">
                       Privacy Policy
-                    </Link>
+                    </a>
                   </li>
                   <li className="nav-item">
-                    <Link to="" className="nav-link" >
+                    <a className="nav-link" href="#">
                       Help
-                    </Link>
+                    </a>
                   </li>
                   <li className="nav-item dropup">
-                    <Link
-                      to=""
+                    <a
                       className="dropdown-toggle dropdown-indicator has-indicator nav-link"
                       data-toggle="dropdown"
                       data-offset="0,10"
                     >
                       <small>English</small>
-                    </Link>
+                    </a>
                     <div className="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                       <ul className="language-list">
                         <li>
-                          <Link to="" className="language-item">
+                          <a href="#" className="language-item">
                             <img
                               src="./images/flags/english.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">English</span>
-                          </Link>
+                          </a>
                         </li>
                         <li>
-                          <Link to="" className="language-item">
+                          <a href="#" className="language-item">
                             <img
                               src="./images/flags/spanish.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">Español</span>
-                          </Link>
+                          </a>
                         </li>
                         <li>
-                          <Link to="" className="language-item">
+                          <a href="#" className="language-item">
                             <img
                               src="./images/flags/french.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">Français</span>
-                          </Link>
+                          </a>
                         </li>
                         <li>
-                          <Link to="" className="language-item">
+                          <a href="#" className="language-item">
                             <img
                               src="./images/flags/turkey.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">Türkçe</span>
-                          </Link>
+                          </a>
                         </li>
                       </ul>
                     </div>
                   </li>
-                </ul>
+                  </ul>*/}
               </div>
               <div className="mt-3">
                 <p>&copy; 2022 INRX ECOSYSTEM. All Rights Reserved.</p>
               </div>
             </div>
-          </div>
-          <div
-            className="nk-split-content nk-split-stretch bg-lighter d-flex toggle-break-lg toggle-slide toggle-slide-right"
-            data-content="athPromo"
-            data-toggle-screen="lg"
-            data-toggle-overlay="true"
-          >
-            <div className="slider-wrap w-100 w-max-550px p-3 p-sm-5 m-auto">
-              <div
-                className="slider-init"
-                data-slick='{"dots":true, "arrows":false}'
-              >
-                <div className="slider-item">
-                  <div className="nk-feature nk-feature-center">
-                    <div className="nk-feature-img">
-                      <img
-                        className="round"
-                        src="images/logo-dark.png"
-                        srcSet="images/logo-dark.png "
-                        alt=""
-                      />
-                    </div>
-                    <div className="nk-feature-content py-4 p-sm-5">
-                      <h4>INRX NETWORK</h4>
-                      <p>INCEPTIVE ANALOG</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="slider-dots"></div>
-              <div className="slider-arrows"></div>
-            </div>
-          </div>
         </div>
       </div>
     </div>

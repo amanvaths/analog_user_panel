@@ -11,6 +11,7 @@ import IPwhiteListing from "../components/IPwhiteListing";
 
 import { navsetters } from "../redux/actions/websiteDBAction";
 
+
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { IoLocation } from 'react-icons/io5'
@@ -21,12 +22,10 @@ import { BASE_URL } from "../Api_connection/config";
 
 const AccountSettings = () => {
   const dispatch = useDispatch()
-  const { userInfo, settingPages, user, totalAna } = useSelector((state) => state.user.value)
+  const { userInfo, settingPages, user } = useSelector((state) => state.user.value)
   const [logData, setLogData] = useState([])
   const email = user.email
-
-  const btn1 = useSelector((store) => store.navsetters)
-
+  const [pMenu, setPMenu] = useState(0);
 
   const getLoginLog = async () => {
     try {
@@ -37,31 +36,23 @@ const AccountSettings = () => {
     }
   }
 
-  const go = async()=>{
-    try {
-      const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
-      if (data) {
-        dispatch(setUserInfo({ userInfo: data.data }))
-        getLoginLog()
-    }
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
-  useEffect( () => {
-   go()
+  useEffect(async () => {
+    const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
+    if (data) {
+      dispatch(setUserInfo({ userInfo: data.data }))
+      getLoginLog()
+    }
+
   }, [])
-
-  console.log(totalAna);
 
   const profileMenuRemove = ()=>{
     var element = document.getElementById("myBody"); 
-    element.classList.remove("toggle-shown"); 
-    element = document.getElementById("toggleBtn"); 
-    element.classList.remove("active");                                 
-    element = document.getElementById("cardAside"); 
-    element.classList.remove("content-active"); 
+  element.classList.remove("toggle-shown"); 
+  var element = document.getElementById("toggleBtn"); 
+  element.classList.remove("active");                                 
+  var element = document.getElementById("cardAside"); 
+  element.classList.remove("content-active"); 
   }
 
  
@@ -101,76 +92,76 @@ const AccountSettings = () => {
                                     </p>
                                   </div>
                                 </div>
-                                <div 
-                                onClick={()=>dispatch(navsetters())} 
-                                className="nk-block-head-content align-self-start d-lg-none">
-                                  <Link
-                                    to=""
-                                    // className="toggle btn btn-icon btn-trigger mt-n1"
+                                <div onClick={()=>dispatch(navsetters())} className="nk-block-head-content align-self-start d-lg-none">
+                                  <a
+                                  
+                                    className="toggle btn btn-icon btn-trigger mt-n1"
                                     id = "toggleBtn"
-                                    className={btn1?"toggle btn btn-icon btn-trigger mt-n1 active":"toggle btn btn-icon btn-trigger mt-n1"}
+                                    // className={btn1?"toggle btn btn-icon btn-trigger mt-n1 active":"toggle btn btn-icon btn-trigger mt-n1"}
                                     data-target="userAside"                                  
                                   >
                                     <em className="icon ni ni-menu-alt-r" onClick={()=>profileMenuRemove()}  ></em>
-                                  </Link>
+                                  </a>
                                 </div>
                               </div>
                             </div>
                             <div className="nk-block card card-bordered">
-                              <table className="table table-ulogs">
-                                <thead className="table-light">
-                                  <tr>
-                                    <th className="tb-col-os">
-                                      <span className="overline-title">
-                                        Browser
-                                        <span className="d-sm-none">/ IP</span>
-                                      </span>
-                                    </th>
-                                    <th className="tb-col-ip">
-                                      <span className="overline-title">Device</span>
-                                    </th>
-                                    <th className="tb-col-ip">
-                                      <span className="overline-title">IP</span>
-                                    </th>
-                                    <th className="tb-col-time">
-                                      <span className="overline-title">Time</span>
-                                    </th>
-                                    <th className="tb-col-action">
-                                      <span className="overline-title">&nbsp;</span>
-                                    </th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {
-                                    logData.map((element, index) => {
-                                      const a = new Date(element.createdAt)
-                                      return (
-                                      
-                                        <tr key={index}>
-                                          <td className="tb-col-os">{element.browser_name}</td>
-                                          <td className="tb-col-os">{element.request_device}</td>
-                                          <td className="tb-col-ip">
-                                            <span className="sub-text">
-                                              {element.request_address}
-                                            </span>
-                                          </td>
-                                          <td className="tb-col-time">
-                                            <span className="sub-text">{a.toDateString()} {a.toLocaleTimeString()}</span>
-                                          </td>
-                                          <td className="tb-col-action">{ }</td>
-                                        </tr>
-                                      )
-                                    })
-                                  }
+                              <div className="table-responsive">    
+                                <table className="table table-hover table-ulogs">
+                                    <thead className="bg-teal-dim text-teal">
+                                      <tr>
+                                        <th className="tb-col-os">
+                                          <span>
+                                            Browser
+                                            <span className="d-sm-none">/ IP</span>
+                                          </span>
+                                        </th>
+                                        <th className="tb-col-ip">
+                                          <span>Device</span>
+                                        </th>
+                                        <th className="tb-col-ip">
+                                          <span>IP</span>
+                                        </th>
+                                        <th className="tb-col-time">
+                                          <span>Time</span>
+                                        </th>
+                                        <th className="tb-col-action">
+                                          <span>&nbsp;</span>
+                                        </th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {
+                                        logData.map((element, index) => {
+                                          const a = new Date(element.createdAt)
+                                          return (
+                                            <tr>
+                                              <td className="tb-col-os">{element.browser_name}</td>
+                                              <td className="tb-col-os text-capitalize">{element.request_device}</td>
+                                              <td className="tb-col-ip">
+                                              <span class="badge bg-light">
+                                                  {element.request_address}
+                                                </span>
+                                              </td>
+                                              <td className="tb-col-time">
+                                              <span className="text-grey"> <em class="icon text-teal ni ni-clock valign"></em> {a.toDateString()} {a.toLocaleTimeString()}</span>
+                                              </td>
+                                              <td className="tb-col-action">{ }</td>
+                                            </tr>
+                                          )
+                                        })
+                                      }
 
-                                </tbody>
-                              </table>
+                                    </tbody>
+                                  </table>
+                                 </div> 
                             </div>
                           </div>
                         ) : null}
 
                         <div
                         className="card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg"
+                          // className={btn1?"card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg content-active":"card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg"}
                           data-toggle-body="true"
                           data-content="userAside"
                           data-toggle-screen="lg"
@@ -180,25 +171,25 @@ const AccountSettings = () => {
                           <div className="card-inner-group">
                             <div className="card-inner">
                               <div className="user-card">
-                                <div className="user-avatar bg-primary">
+                                <div className="user-avatar bg-teal">
                                   <span>{userInfo?.username?.charAt(0)?.toUpperCase()}</span>
                                 </div>
                                 <div className="user-info">
-                                  <span className="lead-text">
+                                  <span className="lead-text text-uppercase">
                                     {userInfo?.username}
                                   </span>
-                                  <span className="sub-text">{userInfo?.user_id}</span>
+                                  <span className="text-grey">{userInfo?.user_id}</span>
                                 </div>
-                                <div className="user-action">
+                                {/* <div className="user-action">
                                   <div className="dropdown">
-                                    <Link
+                                    <a
                                       className="btn btn-icon btn-trigger me-n2"
                                       data-bs-toggle="dropdown"
-                                      to=''
+                                      href="#"
                                     >
                                       <em className="icon ni ni-arrow-left" onClick={profileMenuRemove}></em>
-                                    </Link> 
-                                     {/* <div className="dropdown-menu dropdown-menu-end">
+                                    </a> 
+                                     <div className="dropdown-menu dropdown-menu-end">
                                       <ul className="link-list-opt no-bdr">
                                         <li>
                                           <a href="#">
@@ -213,9 +204,9 @@ const AccountSettings = () => {
                                           </a>
                                         </li>
                                       </ul>
-                                    </div>  */}
+                                    </div>  
                                    </div>
-                                </div> 
+                                </div> */}
                               </div>
                             </div>
                             <div className="card-inner">
@@ -223,13 +214,13 @@ const AccountSettings = () => {
                                 <h6 className="overline-title-alt p-2">
                                   Analog Wallet Balance
                                 </h6>
-                                <div className="user-balance p-2">
-                                  {totalAna&&totalAna?.toFixed(3)} ANA
-                                  {/* <small className="currency currency-btc p-2">
+                                <div className="user-balance text-warning p-2">
+                                  12.395769
+                                  <small className="currency currency-btc p-2">
                                     BTC
-                                  </small> */}
+                                  </small>
                                 </div>
-                                {/* <div className="user-balance-sub">
+                                <div className="user-balance-sub px-2">
                                   Locked
                                   <span className="p-2">
                                     0.344939
@@ -237,7 +228,7 @@ const AccountSettings = () => {
                                       BTC
                                     </span>
                                   </span>
-                                </div> */}
+                                </div>
                               </div>
                             </div>
                             <div className="card-inner p-0">
@@ -256,10 +247,6 @@ const AccountSettings = () => {
                                         ipWhiteListing: false
                                       }
                                       dispatch(setSettingPage({settingPages: obj5}))
-                                      go()
-                                      // getSetti(email)
-                                      // dispatch(setUserInfo({currency_prefrence: userInfo?.currency_prefrence}))
-                                      // dispatch(setUserInfo({ currency_prefrence: "inr" }))
                                     }}
                                   >
                                     <em className="icon ni ni-user-fill-c"></em>
@@ -318,7 +305,7 @@ const AccountSettings = () => {
                                       dispatch(setSettingPage({settingPages: obj2}))
                                     }}>
                                     <em className="icon ni ni-lock-alt-fill"></em>
-                                    <span>Security Settings</span>
+                                    <span> Security Settings</span>
                                   </Link>
                                 </li>
                                 <li>

@@ -1,3 +1,37 @@
+.text-grey{
+    color: #8094ae;
+}
+.card.dark-green {
+  background: #07523d;
+}
+.valign {
+  vertical-align: middle;
+}
+.bg-login {
+  background-color: #fff; 
+  background:url("assets/blockchain-bg.png") no-repeat 0 50%;
+  background-position: left bottom; 
+  height: 100vh;
+  
+}
+.sidebar-bg {   
+  background:url("assets/sidebar-bg.png") no-repeat 0 50%;
+  background-position: center bottom;
+  
+}
+
+.link-list-menu a.active,
+.link-list-menu a:hover,
+.link-list-menu a:hover .icon,
+.link-list-menu a.active .icon {
+  color: #20c997 !important;
+}
+.nk-menu-link:hover,
+.active > .nk-menu-link,
+.nk-menu-link:hover .nk-menu-icon {
+  color: #20c997 !important;
+}
+
 .App {
   text-align: center;
 }
@@ -44,8 +78,9 @@
   color: white;
 }
 .passvalid {
-  font-size: 10px;
+  font-size: 12px;
   padding-bottom: -14px;
+  line-height: 20px;
 }
 div h6 {
   margin-bottom: -10px;
@@ -84,9 +119,11 @@ h6 {
 } */
 @media (max-width: 992px) {
   .nk-auth-container {
-    width: 100%;
+    width: 35%;
   }
- 
+  .countdown {
+    padding-left: 270px;
+  }
  
 }
 .react-slideshow-container {
@@ -148,6 +185,11 @@ h6 {
 .first-card:hover {
   transform: scale(1.02, 1.02);
 }
+@media (max-width: 900px) {
+    .bg-login {   
+    background:none;    
+  }
+}
 @media (max-width: 460px) {
   .first-card {
     width: 93%;
@@ -158,6 +200,10 @@ h6 {
   .react-multiple-carousel__arrow {
     display: none;
   }
+  .bg-login {   
+    background:none;    
+  }
+
 }
 @media (max-width: 383px) {
   .nk-quick-nav > li {
@@ -190,7 +236,13 @@ h6 {
   .nk-block-head-content {
     right: 36px;
   }
- 
+  .countdown {
+    padding-left: 90px;
+    /* padding-top: 30px; */
+  }
+  .duration {
+    padding-left: 150px;
+  }
   .react-multiple-carousel__arrow {
     display: none;
   }
@@ -230,7 +282,13 @@ h6 {
   .react-multiple-carousel__arrow {
     display: none;
   }
- 
+  .duration {
+    padding-left: 90px;
+  }
+  .countdown {
+    /* padding-left: 100px !important; */
+    margin-left: 40px;
+  }
   .coinqty {
     width: 192px !important;
   }
@@ -239,41 +297,107 @@ h6 {
   .react-multiple-carousel__arrow {
     display: none;
   }
-  
-  
+  .countdown {
+    padding-left: 290px;
+  }
+  .duration {
+    padding-left: 100px;
+  }
   .nk-quick-nav > li {
     right: 50px;
   }
 }
-
+@media (max-width: 378px) {
+  .duration {
+    padding-left: 87px;
+  }
+  .countdown {
+    padding-left: 200px;
+  }
+}
 @media (max-width: 426px) {
   .react-multiple-carousel__arrow {
     display: none;
   }
-  
+  .countdown {
+    padding-left: 100px;
+  }
 }
 
-
-
+@media (max-width: 1700px) {
+  .duration {
+    padding-left: 88px;
+  }
+  .countdown {
+    padding-left: 247px;
+  }
+  /* .coinqty {
+    width: 192px !important;
+  } */
+}
+@media (max-width: 1025px) {
+  .duration {
+    padding-left: 60px;
+  }
+  .countdown {
+    padding-left: 247px;
+  }
+}
+@media (max-width: 847px) {
+  .countdown {
+    padding-left: 200px;
+  }
+}
 @media (max-width: 441px) {
- 
- 
+  .countdown {
+    padding-left: 270px;
+  }
+  .duration {
+    padding-left: 120px;
+  }
   .nk-quick-nav > li {
     right: 40px;
   }
 }
 
 @media (max-width: 820px) {
-  
+  .countdown {
+    padding-left: 520px;
+  }
+  .duration {
+    padding-left: 200px;
+  }
   .nk-quick-nav > li {
     right: 10px;
   }
 }
 @media (max-width: 912px) {
-  
+  .countdown {
+    padding-left: 630px;
+  }
+  .duration {
+    padding-left: 280px;
+  }
   .nk-quick-nav > li {
     right: 10px;
   }
+}
+
+@media (max-width: 1200px) {
+  .countdown {
+    padding-left: 16px;
+  }
+  .duration {
+    padding-left: 6px;
+  }
+  /* .nk-quick-nav > li {
+    right: 10px;
+  } */
+}
+
+.countdown {
+  /* padding-left: 290px; */
+  padding-top: 10px;
 }
 
 .btn-outline-light {
@@ -439,3 +563,4 @@ body {
   background-color: #242526;
   font-family: sans-serif;
 }
+

@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import "./MultiRangeSlider.css";
-import { useSelector} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { prototype } from "react-copy-to-clipboard";
 
 const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
   const [minVal, setMinVal] = useState(min);
@@ -9,12 +10,13 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
   const minValRef = useRef(min);
   const maxValRef = useRef(max);
   const range = useRef(null);
+  const dispatch = useDispatch();
 
 
   
 
   // Dispatch
-  const { userInfo,theme } = useSelector((state) => state.user.value);
+  const { userInfo,totalAna,oneUsdPrice } = useSelector((state) => state.user.value);
 
 
 
@@ -60,7 +62,7 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
         max={max}
         value={minVal}
         onChange={(event) => {
-          const value = Math.min(Number(event.target.value), maxVal);
+          const value = Math.min(Number(event.target.value), maxVal - 1);
           setMinVal(value);
           minValRef.current = value;
         }}
@@ -77,7 +79,7 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
         max={max}
         value={maxVal}
         onChange={(event) => {
-          const value = Math.max(Number(event.target.value), minVal);
+          const value = Math.max(Number(event.target.value), minVal + 1);
           setMaxVal(value);
           maxValRef.current = value;
         }}
@@ -88,8 +90,7 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
         <div className="slider__track" />
         <div ref={range} className="slider__range"  />
         <div className="slider__left-value" style={{ left: "25px",color:"green",fontWeight:"bold" }}>
-          { minVal && minVal?.toFixed(2)}
-         
+          {minVal && minVal?.toFixed(2)}
         </div>
         <div
           className="slider__right-value"
@@ -97,62 +98,45 @@ const MultiRangeSlider = ({ fixedmax, min, max, onChange }) => {
         >
           {maxVal && maxVal?.toFixed(2)}
         </div>
-        <div className="slider__right-value" style={{color:"green",fontWeight:"bold",paddingRight:"20px" }}>
-          {fixedmax && fixedmax?.toFixed(2)}
-         
-          </div>
+        <div className="slider__right-value" style={{color:"green",fontWeight:"bold" }}>{fixedmax && fixedmax?.toFixed(2)}</div>
         <div
           className="slider__left-value "
           style={{ left: "0px", fontWeight: "bold" }}
         >
           {userInfo?.currency_preference && userInfo?.currency_preference == "usd" ? (
-             <img
-             src="./images/Usdt.png"
-             style={{ width: "15px" }}
-             alt="usdt"
-             className="tradeUsdIcon"
-           />
-         ) : theme == 0 ? (
-           <img
-             src="./images/Inrx_black.png"
-             style={{ width: "17px" }}
-             alt="inrx"
-             className="img"
-           />
-         ) : (
-           <img
-             src="./images/Inrx_white.png"
-             style={{ width: "17px" }}
-             alt="inrx"
-             className="img"
-           />
+            <img
+              src="./images/Usdt.png"
+              style={{ width: "17px", marginTop: "-7px" }}
+              alt="usdt"
+              className="img"
+            />
+          ) : (
+            <img
+              src="./images/Inrx_black.png"
+              style={{ width: "17px", marginTop: "-7px" }}
+              alt="inrx"
+              className="img"
+            />
           )}
         </div>
         <div
           className="slider__right-value "
-          style={{ fontWeight: "bold" }}
+          style={{ right: "60px", fontWeight: "bold" }}
         >
           {userInfo?.currency_preference && userInfo?.currency_preference == "usd" ? (
-             <img
-             src="./images/Usdt.png"
-             style={{ width: "15px" }}
-             alt="usdt"
-             className="tradeUsdIcon"
-           />
-         ) : theme == 0 ? (
-           <img
-             src="./images/Inrx_black.png"
-             style={{ width: "17px" }}
-             alt="inrx"
-             className="img"
-           />
-         ) : (
-           <img
-             src="./images/Inrx_white.png"
-             style={{ width: "17px" }}
-             alt="inrx"
-             className="img"
-           />
+            <img
+              src="./images/Usdt.png"
+              style={{ width: "17px", marginTop: "-3px" }}
+              alt="usdt"
+              className="img"
+            />
+          ) : (
+            <img
+              src="./images/Inrx_black.png"
+              style={{ width: "17px", marginTop: "-7px" }}
+              alt="inrx"
+              className="img"
+            />
           )}
         </div>
       </div>

@@ -1,27 +1,22 @@
-import React, {useEffect, useState } from "react";
-
+import React, { Component, useEffect, useState } from "react";
+import Particles from "react-particles-js";
 import Menu from "../components/Menu";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "react-slideshow-image/dist/styles.css";
 import { Slide } from "react-slideshow-image";
-
+import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Getpresale from "../components/Getpresale";
 import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { useSelector} from "react-redux";
-
-import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setBalance } from "../redux/reducer/user";
+import { useNavigate } from "react-router-dom";
 import { Triangle } from "react-loader-spinner";
 import { Line } from "react-chartjs-2";
-import Chart from 'chart.js/auto';
-
-import { RWebShare } from "react-web-share";
-
-
-
+import Chart from "chart.js/auto";
 
 const Home = () => {
   const { user, userInfo, oneUsdPrice } = useSelector(
@@ -48,12 +43,35 @@ const Home = () => {
   const [i, setI] = useState([]);
   const [recentLoad, setRecentLoad] = useState(true);
   const [chartAmt, setChartAmt] = useState([]);
-  const [chartLabel, setChartLabel] = useState([])
+  const [Backk, setBackk] = useState("light");
+  const theme = localStorage.getItem("theme");
+  const [loader, setLoader] = useState(false);
 
+  useEffect(() => {
+    console.log("mytheme",theme);
+    if (theme) {
+      setBackk("dark");
+    } else {
+      setBackk("light");
+    }
+  }, [theme]);
 
 
   const summaryBalance = {
-    labels: chartLabel,
+    labels: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
     dataUnit: "BTC",
     datasets: [
       {
@@ -73,27 +91,17 @@ const Home = () => {
         pointHoverBackgroundColor: "#0d6efd",
         pointHoverBorderColor: "rgba(220,220,220,1)",
         pointHoverBorderWidth: 2,
-        pointRadius: 3,
+        pointRadius: 1,
         pointHitRadius: 10,
         data: chartAmt,
       },
     ],
   };
 
-  var total = [];
-  var year = [];
   const chartData = async () => {
     try {
       const res = await axios.post(`${BASE_URL}/buyChart`, { email: email });
-      const arr = res.data.data;
-      console.log(arr, 'orid');
-      arr.map((element, index)=>{
-        total.push(element.total)
-        year.push(`${element.month}/${element.year}`)
-        console.log(`${element.month}/${element.year}`, "element");     
-      })
-      setChartAmt(total)
-      setChartLabel(year)
+      setChartAmt(res.data.data);
     } catch (error) {
       console.log(error);
     }
@@ -138,6 +146,7 @@ const Home = () => {
       setRecentLoad(false);
       const img = await axios.post(`${BASE_URL}/bannerData`);
       setI(img?.data?.message);
+      // setLoader(false);
     } catch (error) {
       console.log(" Error in recent Activity API " + error);
     }
@@ -166,15 +175,16 @@ const Home = () => {
     reffetalData();
     chartData();
   }, [oneUsdPrice, userInfo]);
-
+ 
+     
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
-      items: 2,
+      items: 5,
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 2,
+      items: 3,
     },
     smlap: {
       breakpoint: { max: 1024, min: 768 },
@@ -186,28 +196,34 @@ const Home = () => {
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 2,
+      items: 1,
     },
   };
 
   return (
     <div>
-      <div className="nk-app-root">
-        <div className="nk-main ">
+       {loader ? (<>
+          <div style={{ position: "absolute", zIndex: "99", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+            <Triangle ariaLabel="loading-indicator" color="green" />
+          </div>
+
+        </>) :
+        (<div className="nk-app-root">
+        <div className="nk-main">
           <Menu />
 
           <div className="nk-wrap ">
             <Header />
             {/* Add this code  */}
-            <div className="slide-container">
+           {/* <div className="slide-container ">
               <Slide>
                 {i?.map((slideImage, index) => {
                   return (
-                    <div className="each-slide" key={index}>
+                    <div className="each-slide border border-" key={index}>
                       <div
                         style={{
                           backgroundImage: `url(http://localhost:3001${slideImage.banner})`,
-                          height: "250px",
+                          // height: "250px",
                           width: "100%",
                           backgroundSize: "cover",
                           backgroundRepeat: "no-repeat",
@@ -228,35 +244,25 @@ const Home = () => {
                   );
                 })}
               </Slide>
-            </div>
+              </div>*/}
             {/* Add Slide small card */}
-            <div className="row">
-              <div className="row row-cols-md-2 row-cols-lg-2 row-cols-xl-2 mx-auto align-items-center">
-                {/* <Carousel
-                  className="react-multi-carousel-list"
-                  responsive={responsive}
-                  arrows={false}
-                  centerMode={true}
-                  itemclassName=""
-                  containerclassName="carousel-container"
-                > */}
-                  {data.map((data) => {
-                    return (
-                      <Getpresale
-                        levelname={data.levelname}
-                        coinPrice={data.price}
-                        coinQty={data.coinquantity}
-                        duration={data.duration}
-                        persent={data.persentsold}
-                      />
-                    );
-                  })}
-                {/* </Carousel> */}
+            <div className="container">
+              <div className="row g-3 mt-4">
+                {data.map((data) => {
+                  return (
+                    <Getpresale
+                      levelname={data.levelname}
+                      coinPrice={data.price}
+                      coinQty={data.coinquantity}
+                      duration={data.duration}
+                      persent={data.persentsold}
+                    />
+                  );
+                })}
               </div>
             </div>
-
-            <div className="nk-content nk-content-fluid">
-              <div className="container-xl wide-lg">
+            <div className="nk-content nk-content-fluid pt-0">
+              <div className="container">
                 <div className="nk-content-body">
                   <div className="nk-block-between-md g-4">
                     <div className="nk-block-head-content"></div>
@@ -269,39 +275,39 @@ const Home = () => {
                       <div className="nk-block">
                         <div className="nk-block-head-xs">
                           <div className="nk-block-head-content">
-                            <h5 className="nk-block-title title">Overview</h5>
+                            <h5 className="nk-block-title title text-uppercase">Overflow</h5>
                           </div>
                         </div>
                         <div className="nk-block">
-                          <div className="card card-bordered text-light is-dark h-100">
+                          <div className="card card-bordered dark-green text-light shadow-sm h-100">
                             <div className="card-inner">
                               <div className="nk-wg7">
                                 <div className="nk-wg7-stats">
-                                  <div className="nk-wg7-title">
-                                    TOTAL ANOLOG BUY
+                                  <div className="nk-wg7-title text-teal">
+                                    TOTAL ANOLOG BUY  
                                   </div>
-                                  <div className="number-lg amount">
+                                  <div className="number-lg amount text-white">
                                     {totalAnalogBuy.toFixed(2)}
                                   </div>
                                 </div>
                                 <div className="nk-wg7-stats-group">
                                   <div className="nk-wg7-stats w-50">
-                                    <div className="nk-wg7-title">Wallets</div>
-                                    <div className="number-lg">
+                                    <div className="nk-wg7-title text-teal">Wallets</div>
+                                    <div className="number-lg text-white">
                                       {totalWallet}
                                     </div>
                                   </div>
-                                  <div className="nk-wg7-stats w-50">
-                                    <div className="nk-wg7-title">
+                                  <div   className="nk-wg7-stats w-50" >
+                                    <div className="nk-wg7-title text-teal">
                                       Transactions
                                     </div>
-                                    <div className="number">
+                                    <div className="number text-white">
                                       {totalTransaction}
                                     </div>
                                   </div>
                                 </div>
                                 <div className="nk-wg7-foot">
-                                  <span className="nk-wg7-note">
+                                  <span className="nk-wg7-note text-teal">
                                     Last activity at{" "}
                                     <span>
                                       {date} {time}
@@ -319,24 +325,24 @@ const Home = () => {
                         <div className="nk-block-head-xs">
                           <div className="nk-block-between-md g-2">
                             <div className="nk-block-head-content">
-                              <h5 className="nk-block-title title">
-                                INCEPTIVE WALLETS
+                              <h5 className="nk-block-title title text-uppercase">
+                                Inceptive Wallets
                               </h5>
                             </div>
                             <div className="nk-block-head-content"></div>
                           </div>
                         </div>
-                        <div className="row g-2">
+                        <div className="row">
                           <div className="col-sm-4">
-                            <div className="card bg-light">
+                            <div className="card bg-light shadow-sm">
                               <div className="nk-wgw sm">
-                                <Link className="nk-wgw-inner" to="">
+                                <a className="nk-wgw-inner" href="#">
                                   <div className="nk-wgw-name">
-                                    <div className="nk-wgw-icon">
+                                    <div className="nk-wgw-icon bg-teal">
                                       <em className="icon ni ni-sign-btc"></em>
                                     </div>
-                                    <h5 className="nk-wgw-title title">
-                                      INCEPTIVE
+                                    <h5 className="nk-wgw-title title text-uppercase">
+                                      Inceptive
                                     </h5>
                                   </div>
                                   <div className="nk-wgw-balance">
@@ -351,7 +357,7 @@ const Home = () => {
                                       </span>
                                     </div>
                                   </div>
-                                </Link>
+                                </a>
                               </div>
                             </div>
                           </div>
@@ -360,11 +366,11 @@ const Home = () => {
                             onClick={() => navigate("/Airdrop")}
                             style={{ cursor: "pointer" }}
                           >
-                            <div className="card bg-light">
+                            <div className="card bg-light shadow-sm">
                               <div className="nk-wgw sm">
-                                <Link to="" className="nk-wgw-inner">
+                                <a className="nk-wgw-inner">
                                   <div className="nk-wgw-name">
-                                    <div className="nk-wgw-icon">
+                                    <div className="nk-wgw-icon bg-teal">
                                       <em className="icon ni ni-sign-btc"></em>
                                     </div>
                                     <h5 className="nk-wgw-title title">
@@ -383,7 +389,7 @@ const Home = () => {
                                       </span>
                                     </div>
                                   </div>
-                                </Link>
+                                </a>
                               </div>
                             </div>
                           </div>
@@ -394,11 +400,11 @@ const Home = () => {
                             }
                             style={{ cursor: "pointer" }}
                           >
-                            <div className="card bg-light">
+                            <div className="card bg-light shadow-sm">
                               <div className="nk-wgw sm">
-                                <Link to="" className="nk-wgw-inner">
+                                <a className="nk-wgw-inner">
                                   <div className="nk-wgw-name">
-                                    <div className="nk-wgw-icon">
+                                    <div className="nk-wgw-icon bg-teal">
                                       <em className="icon ni ni-sign-eth"></em>
                                     </div>
                                     <h5 className="nk-wgw-title title">
@@ -406,7 +412,7 @@ const Home = () => {
                                     </h5>
                                   </div>
                                   <div className="nk-wgw-balance">
-                                    <div className="amount">
+                                    <div className="amount ">
                                       {userInfo?.currency_preference == "inr"
                                         ? (affiliates * oneUsdPrice)?.toFixed(2)
                                         : affiliates?.toFixed(2)}
@@ -417,7 +423,7 @@ const Home = () => {
                                       </span>
                                     </div>
                                   </div>
-                                </Link>
+                                </a>
                               </div>
                             </div>
                           </div>
@@ -427,18 +433,18 @@ const Home = () => {
                         <div className="nk-block-head-xs">
                           <div className="nk-block-between-md g-2">
                             <div className="nk-block-head-content">
-                              <h6 className="nk-block-title title">GROWTH</h6>
+                              <h5 className="nk-block-title title">GROWTH</h5>
                             </div>
                             <div className="nk-block-head-content"></div>
                           </div>
                         </div>
-                        <div className="row g-2">
+                        <div className="row">
                           <div className="col-sm-4">
-                            <div className="card bg-light">
+                            <div className="card bg-light shadow-sm">
                               <div className="nk-wgw sm">
-                                <Link className="nk-wgw-inner" to="">
+                                <a className="nk-wgw-inner" href="#">
                                   <div className="nk-wgw-name">
-                                    <div className="nk-wgw-icon">
+                                    <div className="nk-wgw-icon bg-teal">
                                       <em className="icon ni ni-sign-btc"></em>
                                     </div>
                                     <h5 className="nk-wgw-title title">
@@ -446,7 +452,7 @@ const Home = () => {
                                     </h5>
                                   </div>
                                   <div className="nk-wgw-balance">
-                                    <div className="amount">
+                                    <div className="amount ">
                                       {userInfo?.currency_preference == "inr"
                                         ? (inherited * oneUsdPrice)?.toFixed(2)
                                         : inherited?.toFixed(2)}
@@ -457,7 +463,7 @@ const Home = () => {
                                       </span>
                                     </div>
                                   </div>
-                                </Link>
+                                </a>
                               </div>
                             </div>
                           </div>
@@ -466,11 +472,11 @@ const Home = () => {
                             onClick={() => navigate("/Bounty")}
                             style={{ cursor: "pointer" }}
                           >
-                            <div className="card bg-light">
+                            <div className="card bg-light shadow-sm">
                               <div className="nk-wgw sm">
-                                <Link  to="" className="nk-wgw-inner">
+                                <a className="nk-wgw-inner">
                                   <div className="nk-wgw-name">
-                                    <div className="nk-wgw-icon">
+                                    <div className="nk-wgw-icon bg-teal">
                                       <em className="icon ni ni-sign-btc"></em>
                                     </div>
                                     <h5 className="nk-wgw-title title">
@@ -479,7 +485,7 @@ const Home = () => {
                                   </div>
                                   <div className="nk-wgw-balance">
                                     <div
-                                      className="amount"
+                                      className="amount "
                                       // style={{ fontSize: "10px" }}
                                     >
                                       {/* [L<sup>1</sup> / L<sup>2</sup> / L
@@ -495,16 +501,16 @@ const Home = () => {
                                       </span>
                                     </div>
                                   </div>
-                                </Link>
+                                </a>
                               </div>
                             </div>
                           </div>
                           <div className="col-sm-4">
-                            <div className="card bg-light">
+                            <div className="card bg-light shadow-sm">
                               <div className="nk-wgw sm">
-                                <Link className="nk-wgw-inner" to="">
+                                <a className="nk-wgw-inner" href="#">
                                   <div className="nk-wgw-name">
-                                    <div className="nk-wgw-icon">
+                                    <div className="nk-wgw-icon bg-teal">
                                       <em className="icon ni ni-sign-eth"></em>
                                     </div>
                                     <h5 className="nk-wgw-title title">
@@ -512,7 +518,7 @@ const Home = () => {
                                     </h5>
                                   </div>
                                   <div className="nk-wgw-balance">
-                                    <div className="amount">
+                                    <div className="amount ">
                                       {userInfo?.currency_preference == "inr"
                                         ? (handOut * oneUsdPrice)?.toFixed(2)
                                         : handOut?.toFixed(2)}
@@ -524,7 +530,7 @@ const Home = () => {
                                       </span>
                                     </div>
                                   </div>
-                                </Link>
+                                </a>
                               </div>
                             </div>
                           </div>
@@ -537,8 +543,8 @@ const Home = () => {
                   <div className="row gy-gs">
                     <div className="col-md-6">
                       <div className="card-head">
-                        <div className="card-title  mb-0">
-                          <h5 className="title">Recent Activities</h5>
+                        <div className="card-title mb-0">
+                          <h5 className="title text-uppercase">Recent Activities</h5>
                         </div>
                       </div>
 
@@ -555,7 +561,7 @@ const Home = () => {
                           >
                             <Triangle
                               ariaLabel="loading-indicator"
-                              color="blue"
+                              color="green"
                             />
                           </div>
                         ) : recentActivities.length > 0 ? (
@@ -653,15 +659,15 @@ const Home = () => {
                     <div className="col-md-6">
                       <div className="card-head">
                         <div className="card-title mb-0">
-                          <h5 className="title">Balance Flow</h5>
+                          <h5 className="title text-uppercase">Balance Flow</h5>
                         </div>
                         {/* <div className="card-tools">
                             <ul className="card-tools-nav">
                               <li>
-                                <Link to="">This Month</Link>
+                                <a href="#">This Month</a>
                               </li>
                               <li className="active">
-                                <Link to="">This Years</Link>
+                                <a href="#">This Years</a>
                               </li>
                             </ul>
                           </div> */}
@@ -718,27 +724,15 @@ const Home = () => {
                       <div className="nk-refwg-invite card-inner">
                         <div className="nk-refwg-head g-3">
                           <div className="nk-refwg-title">
-                            <h5 className="title">Refer Us & Earn</h5>
-                            <div className="title-sub">
-                              Use the bellow link to invite your friends.
+                            <h5 className="title">Refer Us &amp; Earn</h5>
+                            <div className="text-soft">
+                            Click on "Invite" Button &amp; share below  link to invite your friends
                             </div>
                           </div>
                           <div className="nk-refwg-action">
-                             <div>
-                              <RWebShare
-                                data={{
-                                  text: "Like humans, flamingos make friends for life",
-                                  url: `http://localhost:3000/signup?ref=${userInfo?.user_id}`,
-                                  title: "Flamingos",
-                                }}
-                                onClick={() => console.log("shared successfully!")}
-                              >
-                                <button style={{border:"none"}} className="btn btn-primary">Invite 🔗</button>
-                              </RWebShare>
-                            </div>
-                            {/* <Link to="" className="btn btn-primary">
+                            <a href="#" className="btn btn-dim btn-outline-success">
                               Invite
-                            </Link> */}
+                            </a>
                           </div>
                         </div>
                         <div className="nk-refwg-url">
@@ -768,15 +762,16 @@ const Home = () => {
                                     <p
                                       className=" position-absolute"
                                       style={{
-                                        fontSize: "14px",
+                                        fontSize: "13px",
                                         top: "-21px",
-                                        left: "17px",
-                                        padding: "0px 5px",
-                                        backgroundColor: "transparent",
-                                        color: "grey",
+                                        left: "10px",
+                                        padding: "3px 4px",
+                                        borderRadius: "3px",
+                                        backgroundColor: "#1ee0ac",
+                                        color: "white",
                                       }}
                                     >
-                                      copied!
+                                      Copied
                                     </p>
                                   ) : null}
                                 </div>
@@ -832,22 +827,22 @@ const Home = () => {
                           </div>
                           <div className="nk-refwg-more dropdown mt-n1 mr-n1">
                             {/* <a
-                                to=""
+                                href="#"
                                 className="btn btn-icon btn-trigger"
                                 data-toggle="dropdown"
                               >
                                 <em className="icon ni ni-more-h"></em>
-                              </Link> */}
+                              </a> */}
                             {/* <div className="dropdown-menu dropdown-menu-xs dropdown-menu-right">
                                 <ul className="link-list-plain sm">
                                   <li>
-                                    <Link to="">7 days</Link>
+                                    <a href="#">7 days</a>
                                   </li>
                                   <li>
-                                    <Link to="">15 Days</Link>
+                                    <a href="#">15 Days</a>
                                   </li>
                                   <li>
-                                    <Link to="">30 Days</Link>
+                                    <a href="#">30 Days</a>
                                   </li>
                                 </ul>
                               </div> */}
@@ -867,196 +862,26 @@ const Home = () => {
                   <div className="card card-bordered">
                     <div className="card-inner card-inner-lg">
                       <div className="align-center flex-wrap flex-md-nowrap g-4">
-                        <div className="nk-block-image w-120px flex-shrink-0">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 120 118"
-                          >
-                            <path
-                              d="M8.916,94.745C-.318,79.153-2.164,58.569,2.382,40.578,7.155,21.69,19.045,9.451,35.162,4.32,46.609.676,58.716.331,70.456,1.845,84.683,3.68,99.57,8.694,108.892,21.408c10.03,13.679,12.071,34.71,10.747,52.054-1.173,15.359-7.441,27.489-19.231,34.494-10.689,6.351-22.92,8.733-34.715,10.331-16.181,2.192-34.195-.336-47.6-12.281A47.243,47.243,0,0,1,8.916,94.745Z"
-                              transform="translate(0 -1)"
-                              fill="#f6faff"
-                            />
-                            <rect
-                              x="18"
-                              y="32"
-                              width="84"
-                              height="50"
-                              rx="4"
-                              ry="4"
-                              fill="#fff"
-                            />
-                            <rect
-                              x="26"
-                              y="44"
-                              width="20"
-                              height="12"
-                              rx="1"
-                              ry="1"
-                              fill="#e5effe"
-                            />
-                            <rect
-                              x="50"
-                              y="44"
-                              width="20"
-                              height="12"
-                              rx="1"
-                              ry="1"
-                              fill="#e5effe"
-                            />
-                            <rect
-                              x="74"
-                              y="44"
-                              width="20"
-                              height="12"
-                              rx="1"
-                              ry="1"
-                              fill="#e5effe"
-                            />
-                            <rect
-                              x="38"
-                              y="60"
-                              width="20"
-                              height="12"
-                              rx="1"
-                              ry="1"
-                              fill="#e5effe"
-                            />
-                            <rect
-                              x="62"
-                              y="60"
-                              width="20"
-                              height="12"
-                              rx="1"
-                              ry="1"
-                              fill="#e5effe"
-                            />
-                            <path
-                              d="M98,32H22a5.006,5.006,0,0,0-5,5V79a5.006,5.006,0,0,0,5,5H52v8H45a2,2,0,0,0-2,2v4a2,2,0,0,0,2,2H73a2,2,0,0,0,2-2V94a2,2,0,0,0-2-2H66V84H98a5.006,5.006,0,0,0,5-5V37A5.006,5.006,0,0,0,98,32ZM73,94v4H45V94Zm-9-2H54V84H64Zm37-13a3,3,0,0,1-3,3H22a3,3,0,0,1-3-3V37a3,3,0,0,1,3-3H98a3,3,0,0,1,3,3Z"
-                              transform="translate(0 -1)"
-                              fill="#798bff"
-                            />
-                            <path
-                              d="M61.444,41H40.111L33,48.143V19.7A3.632,3.632,0,0,1,36.556,16H61.444A3.632,3.632,0,0,1,65,19.7V37.3A3.632,3.632,0,0,1,61.444,41Z"
-                              transform="translate(0 -1)"
-                              fill="#6576ff"
-                            />
-                            <path
-                              d="M61.444,41H40.111L33,48.143V19.7A3.632,3.632,0,0,1,36.556,16H61.444A3.632,3.632,0,0,1,65,19.7V37.3A3.632,3.632,0,0,1,61.444,41Z"
-                              transform="translate(0 -1)"
-                              fill="none"
-                              stroke="#6576ff"
-                              stroke-miterlimit="10"
-                              strokeWidth="2"
-                            />
-                            <line
-                              x1="40"
-                              y1="22"
-                              x2="57"
-                              y2="22"
-                              fill="none"
-                              stroke="#fffffe"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              strokeWidth="2"
-                            />
-                            <line
-                              x1="40"
-                              y1="27"
-                              x2="57"
-                              y2="27"
-                              fill="none"
-                              stroke="#fffffe"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              strokeWidth="2"
-                            />
-                            <line
-                              x1="40"
-                              y1="32"
-                              x2="50"
-                              y2="32"
-                              fill="none"
-                              stroke="#fffffe"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              strokeWidth="2"
-                            />
-                            <line
-                              x1="30.5"
-                              y1="87.5"
-                              x2="30.5"
-                              y2="91.5"
-                              fill="none"
-                              stroke="#9cabff"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                            />
-                            <line
-                              x1="28.5"
-                              y1="89.5"
-                              x2="32.5"
-                              y2="89.5"
-                              fill="none"
-                              stroke="#9cabff"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                            />
-                            <line
-                              x1="79.5"
-                              y1="22.5"
-                              x2="79.5"
-                              y2="26.5"
-                              fill="none"
-                              stroke="#9cabff"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                            />
-                            <line
-                              x1="77.5"
-                              y1="24.5"
-                              x2="81.5"
-                              y2="24.5"
-                              fill="none"
-                              stroke="#9cabff"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                            />
-                            <circle
-                              cx="90.5"
-                              cy="97.5"
-                              r="3"
-                              fill="none"
-                              stroke="#9cabff"
-                              stroke-miterlimit="10"
-                            />
-                            <circle
-                              cx="24"
-                              cy="23"
-                              r="2.5"
-                              fill="none"
-                              stroke="#9cabff"
-                              stroke-miterlimit="10"
-                            />
-                          </svg>
+                        <div className="nk-block-image flex-shrink-0">
+                        <div class="text-teal"><span className="ni ni-headphone-fill fs-1"></span></div>
                         </div>
                         <div className="nk-block-content">
                           <div className="nk-block-content-head px-lg-4">
-                            <h5>We’re here to help you!</h5>
+                            <h5>Help and Support !</h5>
                             <p className="text-soft">
-                              Ask a question or file a support ticket, mANAge
-                              request, report an issues. Our team support team
+                              Ask a question or file a support ticket, manage
+                              request or report an issues. Our support team
                               will get back to you by email.
                             </p>
                           </div>
                         </div>
                         <div className="nk-block-content flex-shrink-0">
-                          <Link
-                            to=""
-                            className="btn btn-lg btn-outline-primary"
+                          <a
+                            href="#"
+                            className="btn btn btn-dim btn-outline-success"
                           >
                             Get Support Now
-                          </Link>
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -1068,7 +893,8 @@ const Home = () => {
 
           <Footer />
         </div>
-      </div>
+      </div>)
+      }
     </div>
     // </div>
   );

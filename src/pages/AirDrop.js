@@ -2,15 +2,18 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Menu from "../components/Menu";
+import { useLocation, useParams } from "react-router-dom";
 import axios from 'axios'
-import { useSelector} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserInfo } from "../redux/reducer/user";
 import { BASE_URL } from "../Api_connection/config";
-import { Link} from "react-router-dom";
+import { getSettings } from "../Api_connection/ApiFunction";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const AirDrop = () => {
-  const {user } = useSelector((state) => state.user.value)
-  
+  const { userInfo, user } = useSelector((state) => state.user.value)
+  const { state } = useLocation();
   const email = user?.email
   const [tab, setTab] = useState([])
 
@@ -47,12 +50,12 @@ const AirDrop = () => {
                       </div>
                       <div className="nk-block-head-content">
                         <div className="toggle-wrap nk-block-tools-toggle">
-                          <Link
-                            to=""
+                          <a
+                            href="#"
                             className="btn btn-icon btn-trigger toggle-expand me-n1"
                             data-target="pageMenu"
                           ><em className="icon ni ni-menu-alt-r"></em
-                          ></Link>
+                          ></a>
                           <div
                             className="toggle-expand-content"
                             data-content="pageMenu"
@@ -61,7 +64,7 @@ const AirDrop = () => {
                                 <li>
                                   <Link
                                    to={'/Withdrawal'}
-                                    className="btn btn-white btn-primary btn-outline-light">
+                                    className="btn btn-outline-danger">
                                     
                                     <span>Withdraw</span></Link>
                                 </li>
@@ -103,18 +106,220 @@ const AirDrop = () => {
                               <h5 className="title">Airdrop</h5>
                             </div>
                             <div className="card-tools me-n1">
-                               
+                              {/* <ul className="btn-toolbar gx-1">
+                                  <li>
+                                    <a
+                                      href="#"
+                                      className="search-toggle toggle-search btn btn-icon"
+                                      data-target="search"
+                                    ><em className="icon ni ni-search"></em
+                                    ></a>
+                                  </li>
+                                  <li className="btn-toolbar-sep"></li>
+                                   <li>
+                                    <div className="dropdown">
+                                      <a
+                                        href="#"
+                                        className="btn btn-trigger btn-icon dropdown-toggle"
+                                        data-bs-toggle="dropdown"
+                                      ><div className="badge badge-circle bg-primary">
+                                          4
+                                        </div>
+                                        <em className="icon ni ni-filter-alt"></em
+                                        ></a>
+                                      <div
+                                        className="filter-wg dropdown-menu dropdown-menu-xl dropdown-menu-end"
+                                      >
+                                        <div className="dropdown-head">
+                                          <span className="sub-title dropdown-title"
+                                          >Advance Filter</span
+                                          >
+                                          <div className="dropdown">
+                                            <a href="#" className="link link-light"
+                                            ><em className="icon ni ni-more-h"></em
+                                            ></a>
+                                          </div>
+                                        </div>
+                                        <div className="dropdown-body dropdown-body-rg">
+                                          <div className="row gx-6 gy-4">
+                                            <div className="col-6">
+                                              <div className="form-group">
+                                                <label
+                                                  className="overline-title overline-title-alt"
+                                                >Type</label
+                                                ><select
+                                                  className="form-select js-select2"
+                                                >
+                                                  <option value="any">
+                                                    Any Type
+                                                  </option>
+                                                  <option value="deposit">
+                                                    Deposit
+                                                  </option>
+                                                  <option value="buy">
+                                                    Buy Coin
+                                                  </option>
+                                                  <option value="sell">
+                                                    Sell Coin
+                                                  </option>
+                                                  <option value="transfer">
+                                                    Transfer
+                                                  </option>
+                                                  <option value="withdraw">
+                                                    Withdraw
+                                                  </option>
+                                                </select>
+                                              </div>
+                                            </div>
+                                            <div className="col-6">
+                                              <div className="form-group">
+                                                <label
+                                                  className="overline-title overline-title-alt"
+                                                >Status</label
+                                                ><select
+                                                  className="form-select js-select2"
+                                                >
+                                                  <option value="any">
+                                                    Any Status
+                                                  </option>
+                                                  <option value="pending">
+                                                    Pending
+                                                  </option>
+                                                  <option value="cancel">
+                                                    Cancel
+                                                  </option>
+                                                  <option value="process">
+                                                    Process
+                                                  </option>
+                                                  <option value="completed">
+                                                    Completed
+                                                  </option>
+                                                </select>
+                                              </div>
+                                            </div>
+                                            <div className="col-6">
+                                              <div className="form-group">
+                                                <label
+                                                  className="overline-title overline-title-alt"
+                                                >Pay Currency</label
+                                                ><select
+                                                  className="form-select js-select2"
+                                                >
+                                                  <option value="any">
+                                                    Any Coin
+                                                  </option>
+                                                  <option value="bitcoin">
+                                                    Bitcoin
+                                                  </option>
+                                                  <option value="ethereum">
+                                                    Ethereum
+                                                  </option>
+                                                  <option value="litecoin">
+                                                    Litecoin
+                                                  </option>
+                                                </select>
+                                              </div>
+                                            </div>
+                                            <div className="col-6">
+                                              <div className="form-group">
+                                                <label
+                                                  className="overline-title overline-title-alt"
+                                                >Method</label
+                                                ><select
+                                                  className="form-select js-select2"
+                                                >
+                                                  <option value="any">
+                                                    Any Method
+                                                  </option>
+                                                  <option value="paypal">
+                                                    PayPal
+                                                  </option>
+                                                  <option value="bank">Bank</option>
+                                                </select>
+                                              </div>
+                                            </div>
+                                            <div className="col-6">
+                                              <div className="form-group">
+                                                <div
+                                                  className="custom-control custom-control-sm custom-checkbox"
+                                                >
+                                                  <input
+                                                    type="checkbox"
+                                                    className="custom-control-input"
+                                                    id="includeDel"
+                                                  /><label
+                                                    className="custom-control-label"
+                                                    for="includeDel"
+                                                  >
+                                                    Including Deleted</label
+                                                  >
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div className="col-12">
+                                              <div className="form-group">
+                                                <button
+                                                  type="button"
+                                                  className="btn btn-secondary"
+                                                >
+                                                  Filter
+                                                </button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div className="dropdown-foot between">
+                                          <a className="clickable" href="#"
+                                          >Reset Filter</a
+                                          ><a
+                                            href="#savedFilter"
+                                            data-bs-toggle="modal"
+                                          >Save Filter</a
+                                          >
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </li> 
+                                   <li>
+                                    <div className="dropdown">
+                                      <a
+                                        href="#"
+                                        className="btn btn-trigger btn-icon dropdown-toggle"
+                                        data-bs-toggle="dropdown"
+                                      ><em className="icon ni ni-setting"></em
+                                      ></a>
+                                      <div
+                                        className="dropdown-menu dropdown-menu-xs dropdown-menu-end"
+                                      >
+                                        <ul className="link-check">
+                                          <li><span>Show</span></li>
+                                          <li className="active"><a href="#">10</a></li>
+                                          <li><a href="#">20</a></li>
+                                          <li><a href="#">50</a></li>
+                                        </ul>
+                                        <ul className="link-check">
+                                          <li><span>Order</span></li>
+                                          <li className="active">
+                                            <a href="#">DESC</a>
+                                          </li>
+                                          <li><a href="#">ASC</a></li>
+                                        </ul>
+                                      </div>
+                                    </div>
+                                  </li> 
+                                </ul> */}
                             </div>
                             <div
                               className="card-search search-wrap"
                               data-search="search"
                             >
                               <div className="search-content">
-                                <Link
-                                  to=""
+                                <a
+                                  href="#"
                                   className="search-back btn btn-icon toggle-search"
                                   data-target="search"
-                                ><em className="icon ni ni-arrow-left"></em></Link><input
+                                ><em className="icon ni ni-arrow-left"></em></a
+                                ><input
                                   type="text"
                                   className="form-control border-transparent form-focus-none"
                                   placeholder="Quick search by transaction"
@@ -144,7 +349,7 @@ const AirDrop = () => {
                             </div>
                             {
                               tab.map((element, index) => {
-                                // const a = new Date(element.createdAt)
+                                const a = new Date(element.createdAt)
                                 return (
 
                                   <div className="nk-tb-item">
@@ -284,10 +489,1014 @@ const AirDrop = () => {
                                 )
                               })
                             }
-                            
-                            
-                             
-                              
+                            {/* <div className="nk-tb-item">
+                                <div className="nk-tb-col">
+                                  <div className="nk-tnx-type">
+                                    <div
+                                      className="nk-tnx-type-icon bg-success-dim text-success"
+                                    >
+                                      <em className="icon ni ni-arrow-up-right"></em>
+                                    </div>
+                                    <div className="nk-tnx-type-text">
+                                      <span className="tb-lead">Deposited Funds</span
+                                      ><span className="tb-date"
+                                      >18/10/2019 12:04 PM</span
+                                      >
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="nk-tb-col tb-col-xxl">
+                                  <span className="tb-lead-sub"
+                                  >Using PayPal Account</span
+                                  ><span className="tb-sub">mypay*****com</span>
+                                </div>
+                                <div className="nk-tb-col tb-col-lg">
+                                  <span className="tb-lead-sub">YWLX52JG73</span
+                                  ><span className="badge badge-dot bg-success"
+                                  >Deposit</span
+                                  >
+                                </div>
+                                <div className="nk-tb-col text-end">
+                                  <span className="tb-amount"
+                                  >+ 0.010201 <span>BTC</span></span
+                                  ><span className="tb-amount-sm">1290.49 USD</span>
+                                </div>
+                                <div className="nk-tb-col text-end tb-col-sm">
+                                  <span className="tb-amount"
+                                  >1.30910201 <span>BTC</span></span
+                                  ><span className="tb-amount-sm">101290.49 USD</span>
+                                </div>
+                                <div className="nk-tb-col nk-tb-col-status">
+                                  <div className="dot dot-success d-md-none"></div>
+                                  <span
+                                    className="badge badge-sm badge-dim bg-outline-success d-none d-md-inline-flex"
+                                  >Completed</span
+                                  >
+                                </div>
+                                <div className="nk-tb-col nk-tb-col-tools">
+                                  <ul className="nk-tb-actions gx-2">
+                                    <li className="nk-tb-action-hidden">
+                                      <a
+                                        href="#"
+                                        className="bg-white btn btn-sm btn-outline-light btn-icon"
+                                        data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        title="Approve"
+                                      ><em className="icon ni ni-done"></em
+                                      ></a>
+                                    </li>
+                                    <li className="nk-tb-action-hidden">
+                                      <a
+                                        href="#tranxDetails"
+                                        data-bs-toggle="modal"
+                                        className="bg-white btn btn-sm btn-outline-light btn-icon btn-tooltip"
+                                        title="Details"
+                                      ><em className="icon ni ni-eye"></em
+                                      ></a>
+                                    </li>
+                                    <li>
+                                      <div className="dropdown">
+                                        <a
+                                          href="#"
+                                          className="dropdown-toggle bg-white btn btn-sm btn-outline-light btn-icon"
+                                          data-bs-toggle="dropdown"
+                                        ><em className="icon ni ni-more-h"></em
+                                        ></a>
+                                        <div
+                                          className="dropdown-menu dropdown-menu-end"
+                                        >
+                                          <ul className="link-list-opt">
+                                            <li>
+                                              <a href="#"
+                                              ><em className="icon ni ni-done"></em
+                                              ><span>Approve</span></a
+                                              >
+                                            </li>
+                                            <li>
+                                              <a href="#"
+                                              ><em
+                                                className="icon ni ni-cross-round"
+                                              ></em
+                                                ><span>Reject</span></a
+                                              >
+                                            </li>
+                                            <li>
+                                              <a href="#"
+                                              ><em className="icon ni ni-repeat"></em
+                                              ><span>Check</span></a
+                                              >
+                                            </li>
+                                            <li>
+                                              <a
+                                                href="#tranxDetails"
+                                                data-bs-toggle="modal"
+                                              ><em className="icon ni ni-eye"></em
+                                              ><span>View Details</span></a
+                                              >
+                                            </li>
+                                          </ul>
+                                        </div>
+                                      </div>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div> */}
+                            {/* <div className="nk-tb-item">
+                            <div className="nk-tb-col">
+                              <div className="nk-tnx-type">
+                                <div
+                                  className="nk-tnx-type-icon bg-warning-dim text-warning"
+                                >
+                                  <em className="icon ni ni-arrow-up-right"></em>
+                                </div>
+                                <div className="nk-tnx-type-text">
+                                  <span className="tb-lead">Withdrawal Funds</span
+                                  ><span className="tb-date"
+                                    >18/10/2019 12:04 PM</span
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                            <div className="nk-tb-col tb-col-xxl">
+                              <span className="tb-lead-sub"
+                                >Using PayPal Account</span
+                              ><span className="tb-sub">mypay*****com</span>
+                            </div>
+                            <div className="nk-tb-col tb-col-lg">
+                              <span className="tb-lead-sub">YWLX52JG73</span
+                              ><span className="badge badge-dot bg-warning"
+                                >Withdrawal</span
+                              >
+                            </div>
+                            <div className="nk-tb-col text-end">
+                              <span className="tb-amount"
+                                ><span>BTC</span></span
+                              ><span className="tb-amount-sm">1290.49 USD</span>
+                            </div>
+                            <div className="nk-tb-col text-end tb-col-sm">
+                              <span className="tb-amount"
+                                >1.30910201 <span>BTC</span></span
+                              ><span className="tb-amount-sm">101290.49 USD</span>
+                            </div>
+                            <div className="nk-tb-col nk-tb-col-status">
+                              <div className="dot dot-success d-md-none"></div>
+                              <span
+                                className="badge badge-sm badge-dim bg-outline-warning d-none d-md-inline-flex"
+                                >Upcoming</span
+                              >
+                            </div>
+                            <div className="nk-tb-col nk-tb-col-tools">
+                              <ul className="nk-tb-actions gx-2">
+                                <li className="nk-tb-action-hidden">
+                                  <a
+                                    href="#"
+                                    className="bg-white btn btn-sm btn-outline-light btn-icon"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="Approve"
+                                    ><em className="icon ni ni-done"></em
+                                  ></a>
+                                </li>
+                                <li className="nk-tb-action-hidden">
+                                  <a
+                                    href="#tranxDetails"
+                                    data-bs-toggle="modal"
+                                    className="bg-white btn btn-sm btn-outline-light btn-icon btn-tooltip"
+                                    title="Details"
+                                    ><em className="icon ni ni-eye"></em
+                                  ></a>
+                                </li>
+                                <li>
+                                  <div className="dropdown">
+                                    <a
+                                      href="#"
+                                      className="dropdown-toggle bg-white btn btn-sm btn-outline-light btn-icon"
+                                      data-bs-toggle="dropdown"
+                                      ><em className="icon ni ni-more-h"></em
+                                    ></a>
+                                    <div
+                                      className="dropdown-menu dropdown-menu-end"
+                                    >
+                                      <ul className="link-list-opt">
+                                        <li>
+                                          <a href="#"
+                                            ><em className="icon ni ni-done"></em
+                                            ><span>Approve</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a href="#"
+                                            ><em
+                                              className="icon ni ni-cross-round"
+                                            ></em
+                                            ><span>Reject</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a href="#"
+                                            ><em className="icon ni ni-repeat"></em
+                                            ><span>Check</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a
+                                            href="#tranxDetails"
+                                            data-bs-toggle="modal"
+                                            ><em className="icon ni ni-eye"></em
+                                            ><span>View Details</span></a
+                                          >
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                          </div> */}
+                            {/* <div className="nk-tb-item">
+                            <div className="nk-tb-col">
+                              <div className="nk-tnx-type">
+                                <div
+                                  className="nk-tnx-type-icon bg-info-dim text-info"
+                                >
+                                  <em className="icon ni ni-arrow-up-right"></em>
+                                </div>
+                                <div className="nk-tnx-type-text">
+                                  <span className="tb-lead">Credited Profits</span
+                                  ><span className="tb-date"
+                                    >18/10/2019 12:04 PM</span
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                            <div className="nk-tb-col tb-col-xxl">
+                              <span className="tb-lead-sub"
+                                >Using PayPal Account</span
+                              ><span className="tb-sub">mypay*****com</span>
+                            </div>
+                            <div className="nk-tb-col tb-col-lg">
+                              <span className="tb-lead-sub">YWLX52JG73</span
+                              ><span className="badge badge-dot bg-info"
+                                >Profit</span
+                              >
+                            </div>
+                            <div className="nk-tb-col text-end">
+                              <span className="tb-amount"
+                                >+ 0.010201 <span>BTC</span></span
+                              ><span className="tb-amount-sm">1290.49 USD</span>
+                            </div>
+                            <div className="nk-tb-col text-end tb-col-sm">
+                              <span className="tb-amount"
+                                >1.30910201 <span>BTC</span></span
+                              ><span className="tb-amount-sm">101290.49 USD</span>
+                            </div>
+                            <div className="nk-tb-col nk-tb-col-status">
+                              <div className="dot dot-info d-md-none"></div>
+                              <span
+                                className="badge badge-sm badge-dim bg-outline-info d-none d-md-inline-flex"
+                                >Pending</span
+                              >
+                            </div>
+                            <div className="nk-tb-col nk-tb-col-tools">
+                              <ul className="nk-tb-actions gx-2">
+                                <li className="nk-tb-action-hidden">
+                                  <a
+                                    href="#"
+                                    className="bg-white btn btn-sm btn-outline-light btn-icon"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="Approve"
+                                    ><em className="icon ni ni-done"></em
+                                  ></a>
+                                </li>
+                                <li className="nk-tb-action-hidden">
+                                  <a
+                                    href="#tranxDetails"
+                                    data-bs-toggle="modal"
+                                    className="bg-white btn btn-sm btn-outline-light btn-icon btn-tooltip"
+                                    title="Details"
+                                    ><em className="icon ni ni-eye"></em
+                                  ></a>
+                                </li>
+                                <li>
+                                  <div className="dropdown">
+                                    <a
+                                      href="#"
+                                      className="dropdown-toggle bg-white btn btn-sm btn-outline-light btn-icon"
+                                      data-bs-toggle="dropdown"
+                                      ><em className="icon ni ni-more-h"></em
+                                    ></a>
+                                    <div
+                                      className="dropdown-menu dropdown-menu-end"
+                                    >
+                                      <ul className="link-list-opt">
+                                        <li>
+                                          <a href="#"
+                                            ><em className="icon ni ni-done"></em
+                                            ><span>Approve</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a href="#"
+                                            ><em
+                                              className="icon ni ni-cross-round"
+                                            ></em
+                                            ><span>Reject</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a href="#"
+                                            ><em className="icon ni ni-repeat"></em
+                                            ><span>Check</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a
+                                            href="#tranxDetails"
+                                            data-bs-toggle="modal"
+                                            ><em className="icon ni ni-eye"></em
+                                            ><span>View Details</span></a
+                                          >
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                          </div> */}
+                            {/*  <div className="nk-tb-item">
+                            <div className="nk-tb-col">
+                              <div className="nk-tnx-type">
+                                <div
+                                  className="nk-tnx-type-icon bg-danger-dim text-danger"
+                                >
+                                  <em className="icon ni ni-arrow-up-right"></em>
+                                </div>
+                                <div className="nk-tnx-type-text">
+                                  <span className="tb-lead">Withdrawal Funds</span
+                                  ><span className="tb-date"
+                                    >18/10/2019 12:04 PM</span
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                            <div className="nk-tb-col tb-col-xxl">
+                              <span className="tb-lead-sub"
+                                >Using PayPal Account</span
+                              ><span className="tb-sub">mypay*****com</span>
+                            </div>
+                            <div className="nk-tb-col tb-col-lg">
+                              <span className="tb-lead-sub">YWLX52JG73</span
+                              ><span className="badge badge-dot bg-danger"
+                                >Withdrawal</span
+                              >
+                            </div>
+                            <div className="nk-tb-col text-end">
+                              <span className="tb-amount"
+                                >+ 0.010201 <span>BTC</span></span
+                              ><span className="tb-amount-sm">1290.49 USD</span>
+                            </div>
+                            <div className="nk-tb-col text-end tb-col-sm">
+                              <span className="tb-amount"
+                                >1.30910201 <span>BTC</span></span
+                              ><span className="tb-amount-sm">101290.49 USD</span>
+                            </div>
+                            <div className="nk-tb-col nk-tb-col-status">
+                              <div className="dot dot-success d-md-none"></div>
+                              <span
+                                className="badge badge-sm badge-dim bg-outline-danger d-none d-md-inline-flex"
+                                >Rejected</span
+                              >
+                            </div>
+                            <div className="nk-tb-col nk-tb-col-tools">
+                              <ul className="nk-tb-actions gx-2">
+                                <li className="nk-tb-action-hidden">
+                                  <a
+                                    href="#"
+                                    className="bg-white btn btn-sm btn-outline-light btn-icon"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="Approve"
+                                    ><em className="icon ni ni-done"></em
+                                  ></a>
+                                </li>
+                                <li className="nk-tb-action-hidden">
+                                  <a
+                                    href="#tranxDetails"
+                                    data-bs-toggle="modal"
+                                    className="bg-white btn btn-sm btn-outline-light btn-icon btn-tooltip"
+                                    title="Details"
+                                    ><em className="icon ni ni-eye"></em
+                                  ></a>
+                                </li>
+                                <li>
+                                  <div className="dropdown">
+                                    <a
+                                      href="#"
+                                      className="dropdown-toggle bg-white btn btn-sm btn-outline-light btn-icon"
+                                      data-bs-toggle="dropdown"
+                                      ><em className="icon ni ni-more-h"></em
+                                    ></a>
+                                    <div
+                                      className="dropdown-menu dropdown-menu-end"
+                                    >
+                                      <ul className="link-list-opt">
+                                        <li>
+                                          <a href="#"
+                                            ><em className="icon ni ni-done"></em
+                                            ><span>Approve</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a href="#"
+                                            ><em
+                                              className="icon ni ni-cross-round"
+                                            ></em
+                                            ><span>Reject</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a href="#"
+                                            ><em className="icon ni ni-repeat"></em
+                                            ><span>Check</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a
+                                            href="#tranxDetails"
+                                            data-bs-toggle="modal"
+                                            ><em className="icon ni ni-eye"></em
+                                            ><span>View Details</span></a
+                                          >
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div className="nk-tb-item">
+                            <div className="nk-tb-col">
+                              <div className="nk-tnx-type">
+                                <div
+                                  className="nk-tnx-type-icon bg-warning-dim text-warning"
+                                >
+                                  <em className="icon ni ni-arrow-up-right"></em>
+                                </div>
+                                <div className="nk-tnx-type-text">
+                                  <span className="tb-lead">Deposited Funds</span
+                                  ><span className="tb-date"
+                                    >18/10/2019 12:04 PM</span
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                            <div className="nk-tb-col tb-col-xxl">
+                              <span className="tb-lead-sub"
+                                >Using PayPal Account</span
+                              ><span className="tb-sub">mypay*****com</span>
+                            </div>
+                            <div className="nk-tb-col tb-col-lg">
+                              <span className="tb-lead-sub">YWLX52JG73</span
+                              ><span className="badge badge-dot bg-warning"
+                                >Deposit</span
+                              >
+                            </div>
+                            <div className="nk-tb-col text-end">
+                              <span className="tb-amount"
+                                >+ 0.010201 <span>BTC</span></span
+                              ><span className="tb-amount-sm">1290.49 USD</span>
+                            </div>
+                            <div className="nk-tb-col text-end tb-col-sm">
+                              <span className="tb-amount"
+                                >1.30910201 <span>BTC</span></span
+                              ><span className="tb-amount-sm">101290.49 USD</span>
+                            </div>
+                            <div className="nk-tb-col nk-tb-col-status">
+                              <div className="dot dot-warning d-md-none"></div>
+                              <span
+                                className="badge badge-sm badge-dim bg-outline-warning d-none d-md-inline-flex"
+                                >Pending</span
+                              >
+                            </div>
+                            <div className="nk-tb-col nk-tb-col-tools">
+                              <ul className="nk-tb-actions gx-2">
+                                <li className="nk-tb-action-hidden">
+                                  <a
+                                    href="#"
+                                    className="bg-white btn btn-sm btn-outline-light btn-icon"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="Approve"
+                                    ><em className="icon ni ni-done"></em
+                                  ></a>
+                                </li>
+                                <li className="nk-tb-action-hidden">
+                                  <a
+                                    href="#tranxDetails"
+                                    data-bs-toggle="modal"
+                                    className="bg-white btn btn-sm btn-outline-light btn-icon btn-tooltip"
+                                    title="Details"
+                                    ><em className="icon ni ni-eye"></em
+                                  ></a>
+                                </li>
+                                <li>
+                                  <div className="dropdown">
+                                    <a
+                                      href="#"
+                                      className="dropdown-toggle bg-white btn btn-sm btn-outline-light btn-icon"
+                                      data-bs-toggle="dropdown"
+                                      ><em className="icon ni ni-more-h"></em
+                                    ></a>
+                                    <div
+                                      className="dropdown-menu dropdown-menu-end"
+                                    >
+                                      <ul className="link-list-opt">
+                                        <li>
+                                          <a href="#"
+                                            ><em className="icon ni ni-done"></em
+                                            ><span>Approve</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a href="#"
+                                            ><em
+                                              className="icon ni ni-cross-round"
+                                            ></em
+                                            ><span>Reject</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a href="#"
+                                            ><em className="icon ni ni-repeat"></em
+                                            ><span>Check</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a
+                                            href="#tranxDetails"
+                                            data-bs-toggle="modal"
+                                            ><em className="icon ni ni-eye"></em
+                                            ><span>View Details</span></a
+                                          >
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div className="nk-tb-item">
+                            <div className="nk-tb-col">
+                              <div className="nk-tnx-type">
+                                <div
+                                  className="nk-tnx-type-icon bg-warning-dim text-warning"
+                                >
+                                  <em className="icon ni ni-arrow-up-right"></em>
+                                </div>
+                                <div className="nk-tnx-type-text">
+                                  <span className="tb-lead">Withdrawal Funds</span
+                                  ><span className="tb-date"
+                                    >18/10/2019 12:04 PM</span
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                            <div className="nk-tb-col tb-col-xxl">
+                              <span className="tb-lead-sub"
+                                >Using PayPal Account</span
+                              ><span className="tb-sub">mypay*****com</span>
+                            </div>
+                            <div className="nk-tb-col tb-col-lg">
+                              <span className="tb-lead-sub">YWLX52JG73</span
+                              ><span className="badge badge-dot bg-warning"
+                                >Withdrawal</span
+                              >
+                            </div>
+                            <div className="nk-tb-col text-end">
+                              <span className="tb-amount"
+                                >+ 0.010201 <span>BTC</span></span
+                              ><span className="tb-amount-sm">1290.49 USD</span>
+                            </div>
+                            <div className="nk-tb-col text-end tb-col-sm">
+                              <span className="tb-amount"
+                                >1.30910201 <span>BTC</span></span
+                              ><span className="tb-amount-sm">101290.49 USD</span>
+                            </div>
+                            <div className="nk-tb-col nk-tb-col-status">
+                              <div className="dot dot-success d-md-none"></div>
+                              <span
+                                className="badge badge-sm badge-dim bg-outline-warning d-none d-md-inline-flex"
+                                >Upcoming</span
+                              >
+                            </div>
+                            <div className="nk-tb-col nk-tb-col-tools">
+                              <ul className="nk-tb-actions gx-2">
+                                <li className="nk-tb-action-hidden">
+                                  <a
+                                    href="#"
+                                    className="bg-white btn btn-sm btn-outline-light btn-icon"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="Approve"
+                                    ><em className="icon ni ni-done"></em
+                                  ></a>
+                                </li>
+                                <li className="nk-tb-action-hidden">
+                                  <a
+                                    href="#tranxDetails"
+                                    data-bs-toggle="modal"
+                                    className="bg-white btn btn-sm btn-outline-light btn-icon btn-tooltip"
+                                    title="Details"
+                                    ><em className="icon ni ni-eye"></em
+                                  ></a>
+                                </li>
+                                <li>
+                                  <div className="dropdown">
+                                    <a
+                                      href="#"
+                                      className="dropdown-toggle bg-white btn btn-sm btn-outline-light btn-icon"
+                                      data-bs-toggle="dropdown"
+                                      ><em className="icon ni ni-more-h"></em
+                                    ></a>
+                                    <div
+                                      className="dropdown-menu dropdown-menu-end"
+                                    >
+                                      <ul className="link-list-opt">
+                                        <li>
+                                          <a href="#"
+                                            ><em className="icon ni ni-done"></em
+                                            ><span>Approve</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a href="#"
+                                            ><em
+                                              className="icon ni ni-cross-round"
+                                            ></em
+                                            ><span>Reject</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a href="#"
+                                            ><em className="icon ni ni-repeat"></em
+                                            ><span>Check</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a
+                                            href="#tranxDetails"
+                                            data-bs-toggle="modal"
+                                            ><em className="icon ni ni-eye"></em
+                                            ><span>View Details</span></a
+                                          >
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div className="nk-tb-item">
+                            <div className="nk-tb-col">
+                              <div className="nk-tnx-type">
+                                <div
+                                  className="nk-tnx-type-icon bg-info-dim text-info"
+                                >
+                                  <em className="icon ni ni-arrow-up-right"></em>
+                                </div>
+                                <div className="nk-tnx-type-text">
+                                  <span className="tb-lead">Credited Profits</span
+                                  ><span className="tb-date"
+                                    >18/10/2019 12:04 PM</span
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                            <div className="nk-tb-col tb-col-xxl">
+                              <span className="tb-lead-sub"
+                                >Using PayPal Account</span
+                              ><span className="tb-sub">mypay*****com</span>
+                            </div>
+                            <div className="nk-tb-col tb-col-lg">
+                              <span className="tb-lead-sub">YWLX52JG73</span
+                              ><span className="badge badge-dot bg-info"
+                                >Profit</span
+                              >
+                            </div>
+                            <div className="nk-tb-col text-end">
+                              <span className="tb-amount"
+                                >+ 0.010201 <span>BTC</span></span
+                              ><span className="tb-amount-sm">1290.49 USD</span>
+                            </div>
+                            <div className="nk-tb-col text-end tb-col-sm">
+                              <span className="tb-amount"
+                                >1.30910201 <span>BTC</span></span
+                              ><span className="tb-amount-sm">101290.49 USD</span>
+                            </div>
+                            <div className="nk-tb-col nk-tb-col-status">
+                              <div className="dot dot-info d-md-none"></div>
+                              <span
+                                className="badge badge-sm badge-dim bg-outline-info d-none d-md-inline-flex"
+                                >Pending</span
+                              >
+                            </div>
+                            <div className="nk-tb-col nk-tb-col-tools">
+                              <ul className="nk-tb-actions gx-2">
+                                <li className="nk-tb-action-hidden">
+                                  <a
+                                    href="#"
+                                    className="bg-white btn btn-sm btn-outline-light btn-icon"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="Approve"
+                                    ><em className="icon ni ni-done"></em
+                                  ></a>
+                                </li>
+                                <li className="nk-tb-action-hidden">
+                                  <a
+                                    href="#tranxDetails"
+                                    data-bs-toggle="modal"
+                                    className="bg-white btn btn-sm btn-outline-light btn-icon btn-tooltip"
+                                    title="Details"
+                                    ><em className="icon ni ni-eye"></em
+                                  ></a>
+                                </li>
+                                <li>
+                                  <div className="dropdown">
+                                    <a
+                                      href="#"
+                                      className="dropdown-toggle bg-white btn btn-sm btn-outline-light btn-icon"
+                                      data-bs-toggle="dropdown"
+                                      ><em className="icon ni ni-more-h"></em
+                                    ></a>
+                                    <div
+                                      className="dropdown-menu dropdown-menu-end"
+                                    >
+                                      <ul className="link-list-opt">
+                                        <li>
+                                          <a href="#"
+                                            ><em className="icon ni ni-done"></em
+                                            ><span>Approve</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a href="#"
+                                            ><em
+                                              className="icon ni ni-cross-round"
+                                            ></em
+                                            ><span>Reject</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a href="#"
+                                            ><em className="icon ni ni-repeat"></em
+                                            ><span>Check</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a
+                                            href="#tranxDetails"
+                                            data-bs-toggle="modal"
+                                            ><em className="icon ni ni-eye"></em
+                                            ><span>View Details</span></a
+                                          >
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div className="nk-tb-item">
+                            <div className="nk-tb-col">
+                              <div className="nk-tnx-type">
+                                <div
+                                  className="nk-tnx-type-icon bg-danger-dim text-danger"
+                                >
+                                  <em className="icon ni ni-arrow-up-right"></em>
+                                </div>
+                                <div className="nk-tnx-type-text">
+                                  <span className="tb-lead">Withdrawal Funds</span
+                                  ><span className="tb-date"
+                                    >18/10/2019 12:04 PM</span
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                            <div className="nk-tb-col tb-col-xxl">
+                              <span className="tb-lead-sub"
+                                >Using PayPal Account</span
+                              ><span className="tb-sub">mypay*****com</span>
+                            </div>
+                            <div className="nk-tb-col tb-col-lg">
+                              <span className="tb-lead-sub">YWLX52JG73</span
+                              ><span className="badge badge-dot bg-danger"
+                                >Withdrawal</span
+                              >
+                            </div>
+                            <div className="nk-tb-col text-end">
+                              <span className="tb-amount"
+                                >+ 0.010201 <span>BTC</span></span
+                              ><span className="tb-amount-sm">1290.49 USD</span>
+                            </div>
+                            <div className="nk-tb-col text-end tb-col-sm">
+                              <span className="tb-amount"
+                                >1.30910201 <span>BTC</span></span
+                              ><span className="tb-amount-sm">101290.49 USD</span>
+                            </div>
+                            <div className="nk-tb-col nk-tb-col-status">
+                              <div className="dot dot-success d-md-none"></div>
+                              <span
+                                className="badge badge-sm badge-dim bg-outline-danger d-none d-md-inline-flex"
+                                >Rejected</span
+                              >
+                            </div>
+                            <div className="nk-tb-col nk-tb-col-tools">
+                              <ul className="nk-tb-actions gx-2">
+                                <li className="nk-tb-action-hidden">
+                                  <a
+                                    href="#"
+                                    className="bg-white btn btn-sm btn-outline-light btn-icon"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="Approve"
+                                    ><em className="icon ni ni-done"></em
+                                  ></a>
+                                </li>
+                                <li className="nk-tb-action-hidden">
+                                  <a
+                                    href="#tranxDetails"
+                                    data-bs-toggle="modal"
+                                    className="bg-white btn btn-sm btn-outline-light btn-icon btn-tooltip"
+                                    title="Details"
+                                    ><em className="icon ni ni-eye"></em
+                                  ></a>
+                                </li>
+                                <li>
+                                  <div className="dropdown">
+                                    <a
+                                      href="#"
+                                      className="dropdown-toggle bg-white btn btn-sm btn-outline-light btn-icon"
+                                      data-bs-toggle="dropdown"
+                                      ><em className="icon ni ni-more-h"></em
+                                    ></a>
+                                    <div
+                                      className="dropdown-menu dropdown-menu-end"
+                                    >
+                                      <ul className="link-list-opt">
+                                        <li>
+                                          <a href="#"
+                                            ><em className="icon ni ni-done"></em
+                                            ><span>Approve</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a href="#"
+                                            ><em
+                                              className="icon ni ni-cross-round"
+                                            ></em
+                                            ><span>Reject</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a href="#"
+                                            ><em className="icon ni ni-repeat"></em
+                                            ><span>Check</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a
+                                            href="#tranxDetails"
+                                            data-bs-toggle="modal"
+                                            ><em className="icon ni ni-eye"></em
+                                            ><span>View Details</span></a
+                                          >
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div className="nk-tb-item">
+                            <div className="nk-tb-col">
+                              <div className="nk-tnx-type">
+                                <div
+                                  className="nk-tnx-type-icon bg-warning-dim text-warning"
+                                >
+                                  <em className="icon ni ni-arrow-up-right"></em>
+                                </div>
+                                <div className="nk-tnx-type-text">
+                                  <span className="tb-lead">Deposited Funds</span
+                                  ><span className="tb-date"
+                                    >18/10/2019 12:04 PM</span
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                            <div className="nk-tb-col tb-col-xxl">
+                              <span className="tb-lead-sub"
+                                >Using PayPal Account</span
+                              ><span className="tb-sub">mypay*****com</span>
+                            </div>
+                            <div className="nk-tb-col tb-col-lg">
+                              <span className="tb-lead-sub">YWLX52JG73</span
+                              ><span className="badge badge-dot bg-warning"
+                                >Deposit</span
+                              >
+                            </div>
+                            <div className="nk-tb-col text-end">
+                              <span className="tb-amount"
+                                >+ 0.010201 <span>BTC</span></span
+                              ><span className="tb-amount-sm">1290.49 USD</span>
+                            </div>
+                            <div className="nk-tb-col text-end tb-col-sm">
+                              <span className="tb-amount"
+                                >1.30910201 <span>BTC</span></span
+                              ><span className="tb-amount-sm">101290.49 USD</span>
+                            </div>
+                            <div className="nk-tb-col nk-tb-col-status">
+                              <div className="dot dot-warning d-md-none"></div>
+                              <span
+                                className="badge badge-sm badge-dim bg-outline-warning d-none d-md-inline-flex"
+                                >Pending</span
+                              >
+                            </div>
+                            <div className="nk-tb-col nk-tb-col-tools">
+                              <ul className="nk-tb-actions gx-2">
+                                <li className="nk-tb-action-hidden">
+                                  <a
+                                    href="#"
+                                    className="bg-white btn btn-sm btn-outline-light btn-icon"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="Approve"
+                                    ><em className="icon ni ni-done"></em
+                                  ></a>
+                                </li>
+                                <li className="nk-tb-action-hidden">
+                                  <a
+                                    href="#tranxDetails"
+                                    data-bs-toggle="modal"
+                                    className="bg-white btn btn-sm btn-outline-light btn-icon btn-tooltip"
+                                    title="Details"
+                                    ><em className="icon ni ni-eye"></em
+                                  ></a>
+                                </li>
+                                <li>
+                                  <div className="dropdown">
+                                    <a
+                                      href="#"
+                                      className="dropdown-toggle bg-white btn btn-sm btn-outline-light btn-icon"
+                                      data-bs-toggle="dropdown"
+                                      ><em className="icon ni ni-more-h"></em
+                                    ></a>
+                                    <div
+                                      className="dropdown-menu dropdown-menu-end"
+                                    >
+                                      <ul className="link-list-opt">
+                                        <li>
+                                          <a href="#"
+                                            ><em className="icon ni ni-done"></em
+                                            ><span>Approve</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a href="#"
+                                            ><em
+                                              className="icon ni ni-cross-round"
+                                            ></em
+                                            ><span>Reject</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a href="#"
+                                            ><em className="icon ni ni-repeat"></em
+                                            ><span>Check</span></a
+                                          >
+                                        </li>
+                                        <li>
+                                          <a
+                                            href="#tranxDetails"
+                                            data-bs-toggle="modal"
+                                            ><em className="icon ni ni-eye"></em
+                                            ><span>View Details</span></a
+                                          >
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                          </div> */}
                           </div>
                         </div>
                         <div className="card-inner">
@@ -295,7 +1504,7 @@ const AirDrop = () => {
                             className="pagination justify-content-center justify-content-md-center"
                           >
                             <li className="page-item">
-                              <Link className="page-link" to="">Prev</Link>
+                              <a className="page-link" href="#">Prev</a>
                             </li>
 
 
@@ -309,7 +1518,7 @@ const AirDrop = () => {
                             </li>
 
                             <li className="page-item">
-                              <Link className="page-link" to="">Next</Link>
+                              <a className="page-link" href="#">Next</a>
                             </li>
                           </ul>
                         </div>

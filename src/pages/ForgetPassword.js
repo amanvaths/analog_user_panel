@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BASE_URL } from "../Api_connection/config";
-import { Link} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
 import swal from "sweetalert";
 
@@ -10,12 +10,20 @@ const ForgetPassword = (props) => {
 
   const [email, setEmail] = useState("");
   const [emailerror, setEmailerror] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
   const [showNewMessage, setShowNewMessage] = useState(false);
-  
+  const navigate = useNavigate();
 
+  // console.log(otp, "otpp");
+
+  //   var LocalEmail = localStorage.setItem("email", email);
+  //   console.log(LocalEmail, "LocalEmal");
+  //   if (LocalEmail == "t") {
+  //     navigate("/");
+  //   }
   async function forgetPass(e) {
     e.preventDefault();
-    await fetch(`${BASE_URL}/forget`, {
+    await fetch("http://localhost:3001/api/forget", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -66,22 +74,27 @@ const ForgetPassword = (props) => {
   };
 
   return (
-    <div>
-      <div className="nk-content">
-        <div className="nk-split nk-split-page nk-split-md">
-          <div className="nk-split-content nk-block-area nk-block-area-column nk-auth-container bg-white">
-            <div className="absolute-top-right d-lg-none p-3 p-sm-5">
-              <Link
-                to=""
-                className="toggle btn-white btn btn-icon btn-light"
-                data-target="athPromo"
-              >
-                <em className="icon ni ni-info"></em>
-              </Link>
+    <div class="bg-login">
+      <div className="nk-apps-root">
+        <div className="nk-content container mt-lg-5 pt-lg-5 align-items-center">
+          <div className="row justify-content-md-center">
+            <div class="col-md-4 bg-teal shadow  d-flex align-items-center">
+              <div class="card-inner text-white"> 
+                <div className="nk-block-head-content">
+                  <h2 className="nk-block-title">Forgot Password ?</h2>
+                  <div className="lead">
+                    <p>
+                    No worries ! Enter your <b>Email Address</b> and we will send you a{" "}
+                      <b>Reset</b>.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="nk-block nk-block-middle nk-auth-body">
+            <div className="col-md-6 bg-light border shadow">
+              <div className="card-inner">
               <div className="brand-logo pb-5">
-                <Link to="" className="logo-link">
+                <a href="#" className="logo-link">
                   <img
                     className="logo-light logo-img logo-img-lg"
                     src="./images/logo.png"
@@ -94,19 +107,9 @@ const ForgetPassword = (props) => {
                     srcSet="./images/logo-dark2x.png 2x"
                     alt="logo-dark"
                   />
-                </Link>
+                </a>
               </div>
-              <div className="nk-block-head">
-                <div className="nk-block-head-content">
-                  <h5 className="nk-block-title">Reset Password </h5>
-                  <div className="nk-block-des">
-                    <p>
-                      Connect with <b>Analog Inceptive</b> of{" "}
-                      <b>INRX Blockchain</b>.
-                    </p>
-                  </div>
-                </div>
-              </div>
+            
               {/*  {showNewMessage ? (
                 <div>
                   {showMessage == true ? (
@@ -141,7 +144,7 @@ const ForgetPassword = (props) => {
                   <input
                     id="user"
                     type="email"
-                    className="form-control form-control-lg"
+                    className="form-control"
                     placeholder="Enter your email address"
                     value={email}
                     onChange={(e) => {
@@ -151,14 +154,14 @@ const ForgetPassword = (props) => {
                   />
                 </div>
                 {emailerror == true ? (
-                  <p style={{ color: "red", marginTop: -20 }}>
-                    Email Is Requierd *
+                  <p className="text-danger mt-n3">
+                    Email is requierd !
                   </p>
                 ) : null}
 
                 <div className="form-group">
                   <button
-                    className="btn btn-lg btn-primary btn-block"
+                    className="btn btn-dim  text-white bg-teal btn-block"
                     // // onClick={() => (window.location.href = "/faq")}
                     onClick={(e) => {
                       forgetPass(e);
@@ -170,15 +173,15 @@ const ForgetPassword = (props) => {
                   </button>
                 </div>
               </form>
-              <div className="form-note-s2 pt-4">
+              <div className="form-note-s2 pt-2 text-right">
                 {" "}
-                New on our platform? <Link href="/signup">Create an account</Link>
-                {/* New on our platform? <Link href="/ResetPassword">Reset Password</Link> */}
+                New User? <a class="text-teal" href="/signup">Create an account</a>
+                {/* New on our platform? <a href="/ResetPassword">Reset Password</a> */}
               </div>
               <div className="text-center pt-4 pb-3">
-                <h6 className="overline-title overline-title-sap">
+                <span className="overline-title overline-title-sap">
                   <span>OR</span>
-                </h6>
+                </span>
               </div>
               <ul className="nav justify-center gx-4">
                 <li className="nav-item ">
@@ -211,118 +214,88 @@ const ForgetPassword = (props) => {
                   />
                 </li>
               </ul>
+              </div>
             </div>
 
-            <div className="nk-block nk-auth-footer">
-              <div className="nk-block-between">
-                <ul className="nav nav-sm">
+            <div className="nk-content text-center mt-lg-2">
+              <div className="container container justify-content-center d-flex">
+                {/*<ul className="nav nav-sm">
                   <li className="nav-item">
-                    <Link className="nav-link" to="">
-                      Terms & Condition
-                    </Link>
+                    <a className="nav-link" href="#">
+                      Terms &amp; Condition
+                    </a>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="">
+                    <a className="nav-link" href="#">
                       Privacy Policy
-                    </Link>
+                    </a>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="">
+                    <a className="nav-link" href="#">
                       Help
-                    </Link>
+                    </a>
                   </li>
                   <li className="nav-item dropup">
-                    <Link
+                    <a
                       className="dropdown-toggle dropdown-indicator has-indicator nav-link"
                       data-toggle="dropdown"
                       data-offset="0,10"
                     >
                       <small>English</small>
-                    </Link>
+                    </a>
                     <div className="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                       <ul className="language-list">
                         <li>
-                          <Link to="" className="language-item">
+                          <a href="#" className="language-item">
                             <img
                               src="./images/flags/english.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">English</span>
-                          </Link>
+                          </a>
                         </li>
                         <li>
-                          <Link to="" className="language-item">
+                          <a href="#" className="language-item">
                             <img
                               src="./images/flags/spanish.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">Español</span>
-                          </Link>
+                          </a>
                         </li>
                         <li>
-                          <Link to="" className="language-item">
+                          <a href="#" className="language-item">
                             <img
                               src="./images/flags/french.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">Français</span>
-                          </Link>
+                          </a>
                         </li>
                         <li>
-                          <Link to="" className="language-item">
+                          <a href="#" className="language-item">
                             <img
                               src="./images/flags/turkey.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">Türkçe</span>
-                          </Link>
+                          </a>
                         </li>
                       </ul>
                     </div>
                   </li>
-                </ul>
+                </ul>*/}
               </div>
               <div className="mt-3">
-                <p>&copy; 2021 INRX ECOSYSTEM. All Rights Reserved.</p>
+                <p>&copy; 2022 INRX ECOSYSTEM. All Rights Reserved.</p>
               </div>
             </div>
           </div>
-          <div
-            className="nk-split-content nk-split-stretch bg-lighter d-flex toggle-break-lg toggle-slide toggle-slide-right"
-            data-content="athPromo"
-            data-toggle-screen="lg"
-            data-toggle-overlay="true"
-          >
-            <div className="slider-wrap w-100 w-max-550px p-3 p-sm-5 m-auto">
-              <div
-                className="slider-init"
-                data-slick='{"dots":true, "arrows":false}'
-              >
-                <div className="slider-item">
-                  <div className="nk-feature nk-feature-center">
-                    <div className="nk-feature-img">
-                      <img
-                        className="round"
-                        src="./images/slides/slide-a.png"
-                        srcSet="./images/slides/promo-a2x.png 2x"
-                        alt=""
-                      />
-                    </div>
-                    <div className="nk-feature-content py-4 p-sm-5">
-                      <h4>INRX NETWORK</h4>
-                      <p>INCEPTIVE ANALOG</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="slider-dots"></div>
-              <div className="slider-arrows"></div>
-            </div>
-          </div>
+         
         </div>
       </div>
     </div>

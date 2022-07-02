@@ -1,45 +1,45 @@
-// import React, {Component} from 'react';
-// import Particles from 'react-particles-js';
-// import Menu from '../components/Menu';
-// import Header from '../components/Header';
-// import Footer from '../components/Footer';
-// class Terms extends React.Component{
-//    render(){
-//        return (
-//            <div>
+import React, {Component} from 'react';
+import Particles from 'react-particles-js';
+import Menu from '../components/Menu';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+class Terms extends React.Component{
+   render(){
+       return (
+           <div>
 
 
 
 
 
-// <div className="nk-app-root">
+<div className="nk-app-root">
        
-//        <div className="nk-main ">
+       <div className="nk-main ">
  
  
-//  <Menu/>
+ <Menu/>
  
  
  
-//            <div className="nk-wrap ">
+           <div className="nk-wrap ">
  
 
 
-// <Header/>
+<Header/>
 
 
-// <Footer/>
+<Footer/>
 
 
 
 
-//             </div>
+            </div>
 
            
 
-//         </div>
+        </div>
        
-//     </div>
+    </div>
 
 
 
@@ -47,8 +47,8 @@
 
 
 
-//            </div>
-//              )
-//             }
-//          }
-//          export default Terms
+           </div>
+             )
+            }
+         }
+         export default Terms

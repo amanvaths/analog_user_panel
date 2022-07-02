@@ -14,12 +14,12 @@ export default function () {
             <div className="container-fluid">
                 <div className="container mx-auto,px-md-5" style={{display: "flex", height: "100vh"}}>
                 <form action="" style={{width:"100%",paddingTop:"20%"}}>
-                <div className="form-group">
-                    <div className="form-group">
+                <div class="form-group">
+                    <div class="form-group">
                         <label for="inputOtp">Enter OTP:</label>
-                        <input type="text" className="form-control" id="inputOtp"  placeholder="Enter Otp" onChange={(e)=>setOtp(e.target.value)} />
+                        <input type="text" class="form-control" id="inputOtp"  placeholder="Enter Otp" onChange={(e)=>setOtp(e.target.value)} />
                     </div>
-                    <button type="button" className="btn btn-primary px-2" style={{width:"150px"}} onClick={()=>{
+                    <button type="button" class="btn btn-primary px-2" style={{width:"150px"}} onClick={()=>{
                          axios.post('http://localhost:3001/api/verifyauthtoken', { email:email,token:otp }).then((resp)=>{
                              if(resp.data.status==1){
                                

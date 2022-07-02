@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../Api_connection/config";
+import { Signupn } from "../Api_connection/ApiFunction";
 import { GoogleLogin } from "react-google-login";
 import swal from "sweetalert";
 import {AiOutlineEyeInvisible, AiOutlineEye} from 'react-icons/ai'
@@ -12,7 +13,9 @@ const ResetPassword = (props) => {
   const location = useLocation();
   const resetCode = location.search;
   const resetCode1 = resetCode.substring(11);
+  console.log(resetCode1, "reset code");
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [response, setResponse] = useState("");
@@ -155,17 +158,17 @@ const ResetPassword = (props) => {
         <div className="nk-split nk-split-page nk-split-md">
           <div className="nk-split-content nk-block-area nk-block-area-column nk-auth-container bg-white">
             <div className="absolute-top-right d-lg-none p-3 p-sm-5">
-              <Link
-                to=""
+              <a
+                href="#"
                 className="toggle btn-white btn btn-icon btn-light"
                 data-target="athPromo"
               >
                 <em className="icon ni ni-info"></em>
-              </Link>
+              </a>
             </div>
             <div className="nk-block nk-block-middle nk-auth-body">
               <div className="brand-logo pb-5">
-                <Link to="" className="logo-link">
+                <a href="#" className="logo-link">
                   <img
                     className="logo-light logo-img logo-img-lg"
                     src="./images/logo.png"
@@ -178,7 +181,7 @@ const ResetPassword = (props) => {
                     srcSet="./images/logo-dark2x.png 2x"
                     alt="logo-dark"
                   />
-                </Link>
+                </a>
               </div>
               <div className="nk-block-head">
                 <div className="nk-block-head-content">
@@ -223,16 +226,16 @@ const ResetPassword = (props) => {
                     </label>
                   </div>
                   <div className="form-control-wrap">
-                    <Link
+                    <a
                       tabIndex="-1"
-                      to=""
+                      href="#"
                       className="form-icon form-icon-right passcode-switch"
                       data-target="password"
                     >
                       {
                         oldPasswordShown == false ? <AiOutlineEyeInvisible onClick={togglePassword1} /> : <AiOutlineEye onClick={togglePassword1} />
                       }
-                    </Link>
+                    </a>
                     <input
                       type={oldPasswordShown ? "text" : "password"}
                       className="form-control form-control-lg"
@@ -282,16 +285,16 @@ const ResetPassword = (props) => {
                     </label>
                   </div>
                   <div className="form-control-wrap">
-                    <Link
+                    <a
                       tabIndex="-1"
-                      to=""
+                      href="#"
                       className="form-icon form-icon-right passcode-switch"
                       data-target="confirm-password"
                     >
                       {
                         newPasswordShown == false ? <AiOutlineEyeInvisible onClick={togglePassword2} /> : <AiOutlineEye onClick={togglePassword2} />
                       }
-                    </Link>
+                    </a>
                     <input
                       type={newPasswordShown ? "text" : "password"}
                       className="form-control form-control-lg"
@@ -327,14 +330,14 @@ const ResetPassword = (props) => {
               </form>
               <div className="form-note-s2 pt-4">
                 {" "}
-                Already Interact <Link href="/login">Sign in</Link>
-                {/* Otp Interact <Link href="/EmailOtp">Resend Otp</Link> */}
+                Already Interact <a href="/login">Sign in</a>
+                {/* Otp Interact <a href="/EmailOtp">Resend Otp</a> */}
               </div>
 
               <div className="text-center pt-4 pb-3">
-                <h6 className="overline-title overline-title-sap">
+                <span className="overline-title overline-title-sap">
                   <span>OR</span>
-                </h6>
+                </span>
               </div>
               <ul className="nav justify-center gx-4">
                 <li className="nav-item ">
@@ -372,69 +375,69 @@ const ResetPassword = (props) => {
               <div className="nk-block-between">
                 <ul className="nav nav-sm">
                   <li className="nav-item">
-                    <Link className="nav-link" to="">
+                    <a className="nav-link" href="#">
                       Terms & Condition
-                    </Link>
+                    </a>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="">
+                    <a className="nav-link" href="#">
                       Privacy Policy
-                    </Link>
+                    </a>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="">
+                    <a className="nav-link" href="#">
                       Help
-                    </Link>
+                    </a>
                   </li>
                   <li className="nav-item dropup">
-                    <Link
+                    <a
                       className="dropdown-toggle dropdown-indicator has-indicator nav-link"
                       data-toggle="dropdown"
                       data-offset="0,10"
                     >
                       <small>English</small>
-                    </Link>
+                    </a>
                     <div className="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                       <ul className="language-list">
                         <li>
-                          <Link to="" className="language-item">
+                          <a href="#" className="language-item">
                             <img
                               src="./images/flags/english.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">English</span>
-                          </Link>
+                          </a>
                         </li>
                         <li>
-                          <Link to="" className="language-item">
+                          <a href="#" className="language-item">
                             <img
                               src="./images/flags/spanish.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">Español</span>
-                          </Link>
+                          </a>
                         </li>
                         <li>
-                          <Link to="" className="language-item">
+                          <a href="#" className="language-item">
                             <img
                               src="./images/flags/french.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">Français</span>
-                          </Link>
+                          </a>
                         </li>
                         <li>
-                          <Link to="" className="language-item">
+                          <a href="#" className="language-item">
                             <img
                               src="./images/flags/turkey.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">Türkçe</span>
-                          </Link>
+                          </a>
                         </li>
                       </ul>
                     </div>
@@ -442,7 +445,7 @@ const ResetPassword = (props) => {
                 </ul>
               </div>
               <div className="mt-3">
-                <p>&copy; 2021 INRX ECOSYSTEM. All Rights Reserved.</p>
+                <p>&copy; 2022 INRX ECOSYSTEM. All Rights Reserved.</p>
               </div>
             </div>
           </div>

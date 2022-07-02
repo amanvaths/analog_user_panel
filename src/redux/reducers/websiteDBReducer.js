@@ -8,7 +8,7 @@ import {
     webData: [],
   };
   const initial = false;
-  // const initials = false;
+  const initials = false;
   
   export default function websiteDBReducer(state = initialState, action) {
     switch (action.type) {

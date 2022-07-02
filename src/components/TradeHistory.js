@@ -3,26 +3,14 @@ import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
 import "./tradehistory.css";
 import { Triangle } from "react-loader-spinner";
-import { useSelector} from "react-redux";
 
 export default function TradeHistory() {
-  // const dispatch = useDispatch();
   const [history, setHistory] = useState([]);
   const [loader, setLoader] = useState(true);
-  
-  
-
-  const { userInfo, theme } = useSelector(
-    (state) => state.user.value
-  );
- 
-
-  
 
   useEffect(() => {
-    console.log(userInfo?.currency_preference,"userInfo?");    
     axios
-      .get(`${BASE_URL}/getAllOrder?type=Buy&compair_currency=${userInfo?.currency_preference}`)
+      .get(`${BASE_URL}/getAllOrder`)
       .then((res) => {
         setHistory(res.data.order);
         setLoader(false);
@@ -31,17 +19,17 @@ export default function TradeHistory() {
         console.log(error.message);
       });
 
-  }, [userInfo]);
+  }, []);
   return (
-    <div className="card mt-2">
-      <div className="card-header justify-content-between align-items-center">
-        <h6 className="card-title font-weight-bold"> TRADE HISTORY</h6>
+    <div class="card mt-5">
+      <div class="card-header bg-teal-dim text-teal">
+        <h6 class="card-title"> TRADE HISTORY</h6>
       </div>
-      <div className="card-body table-responsive  p-0">
-        <table className="table  mb-0">
+      <div class="card-body table-responsive  p-0">
+        <table class="table table-hover mb-0">
           <div style={{ display: "contents" }}>
             <thead >
-              <tr className="historyorder">
+              <tr className="historyorder text-gray font-weight-100">
                 <th style={{ width: "20%" }}>Total Analog</th>
                 <th style={{ width: "20%" }}>Total Amount Pay</th>
                 <th style={{ width: "20%" }}>Buying Price</th>
@@ -49,7 +37,7 @@ export default function TradeHistory() {
                 <th style={{ width: "20%" }}>Time</th>
               </tr>
             </thead>
-            <div style={{ height: "450px", overflowX:"hidden", display: "table-caption" }}>
+            <div style={{ height: "450px", overflow: "auto", display: "table-caption" }}>
               <tbody>
               {loader && (<>
           <div style={{ position: "absolute", zIndex: "99", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
@@ -58,89 +46,41 @@ export default function TradeHistory() {
         </>) 
             }
                 {history.map((h) => {
-                  let a= new Date(h.date).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})
                   return (
                     <>
-                      <tr className="zoom  historyorder" style={{fontSize:"16.6px",cursor:"pointer"}}>
-                        <td className="TradeHistorySize" style={{ width: "16.6%" }}>
-
-                           {h.cVolume.toFixed(2)}
+                      <tr class="historyorder" style={{fontSize:"13.76px"}}>
+                        <td className="TradeHistorySize" style={{ width: "20%" }}> {h.cVolume.toFixed(2)}
                           <img
-                            alt="analog"
                             src="./images/Analog.png"
                             style={{ width: "24px" }}
-                            className="tradeAnaIcon"/>
 
-                            </td>
-                        <td className="text-danger TradeHistorySize" style={{ width: "16.6%" }}>
-
+                          /></td>
+                        <td class="text-danger TradeHistorySize" style={{ width: "20%" }}>
                           {h.preferred_currency_amount?.toFixed(2)}{" "}
                           {h.compair_currency == "usd" ? (
-                           <img
-                           src="./images/usdt_icon.png"
-                           style={{ width: "15px" }}
-                           alt="usdt"
-                           className="tradeUsdIcon"
-                         />
-                       ) : theme == 0 ? (
-                         <img
-                           src="./images/Inrx_black.png"
-                           style={{ width: "17px" }}
-                           alt="inrx"
-                           className="img"
-                         />
-                       ) : (
-                         <img
-                           src="./images/Inrx_white.png"
-                           style={{ width: "17px" }}
-                           alt="inrx"
-                           className="img"
-                         />
-                          )} 
-
-                          <i className="ion ion-arrow-graph-up-right"></i>
+                            <img
+                              src="./images/Usdt.png"
+                              style={{ width: "17px" }}
+                              alt="usdt"
+                            />
+                          ) : (
+                            <img
+                              src="./images/Inrx_black.png"
+                              style={{ width: "17px" }}
+                              alt="inrx"
+                            />
+                          )}
+                          <i class="ion ion-arrow-graph-up-right"></i>
                         </td>
-                        <td className=" TradeHistorySize" style={{ width: "16.6%" }}>
-
+                        <td class="text-success TradeHistorySize" style={{ width: "20%" }}>
+                          {/* {h.pref_raw_price.toFixed(8)} */}
                           {h.compair_currency == "usd"
                             ? h.pref_raw_price.toFixed(8)
                             : h.pref_raw_price.toFixed(8)}
-                            {" "}
-                            {h.compair_currency == "usd" ? (
-                           <img
-                           src="./images/usdt_icon.png"
-                           style={{ width: "15px" }}
-                           alt="usdt"
-                           className="tradeUsdIcon"
-                         />
-                       ) : theme == 0 ? (
-                         <img
-                           src="./images/Inrx_black.png"
-                           style={{ width: "17px" }}
-                           alt="inrx"
-                           className="img"
-                         />
-                       ) : (
-                         <img
-                           src="./images/Inrx_white.png"
-                           style={{ width: "17px" }}
-                           alt="inrx"
-                           className="img"
-                         />
-                          )}
-
-                          <i className="ion ion-arrow-graph-down-right"></i>
+                          <i class="ion ion-arrow-graph-down-right"></i>
                         </td>
-                        <td className="TradeHistorySize" style={{ width: "16.6%" }}>
-
-                          {h.presalelevel}
-
-                          </td>
-                        <td className="TradeHistorySize" style={{ width: "16.6%" }}>
-                          
-                          {a}
-                          
-                          </td>
+                        <td className="TradeHistorySize" style={{ width: "20%" }}>{h.presalelevel}</td>
+                        <td className="TradeHistorySize" style={{ width: "20%" }}>{h.date}</td>
                       </tr>
                     </>
                   );
@@ -153,35 +93,35 @@ export default function TradeHistory() {
     </div>
 
     // <div>
-    //   <div className="overflow-hidden" style={{marginTop:"5px"}}>
+    //   <div class="overflow-hidden" style={{marginTop:"5px"}}>
     //     <div
-    //       className="coinsfather-theme-color mt-2 mt-md-0 mt-lg-0"
+    //       class="coinsfather-theme-color mt-2 mt-md-0 mt-lg-0"
     //       //   style={{overflow: "hidden"}}
     //     >
     //       <div style={{ height: "58px", width: "100%" }}>
     //         <div
-    //           className="tab-header  d-flex align-items-center h-50 p-0 px-2"
+    //           class="tab-header  d-flex align-items-center h-50 p-0 px-2"
     //           style={{ background: "rgba(0, 0, 0, 0.1)",color:"black" }}
     //         >
     //           TRADE HISTORY
     //         </div>
-    //         <div className="row m-0 py-1 pair-border mt-1"
+    //         <div class="row m-0 py-1 pair-border mt-1"
     //         style={{color:"black"}}
     //         >
 
-    //           <div className="col-3 text-center" style={{ fontSize: "12px", color:"black",fontWeight:"bold" }}>
+    //           <div class="col-3 text-center" style={{ fontSize: "12px", color:"black",fontWeight:"bold" }}>
     //            Total Anolog
     //           </div>
-    //           <div className="col-2 text-center" style={{ fontSize: "12px", color:"black",fontWeight:"bold" }}>
+    //           <div class="col-2 text-center" style={{ fontSize: "12px", color:"black",fontWeight:"bold" }}>
     //            Total Amount Pay
     //           </div>
-    //           <div className="col-3 text-center" style={{ fontSize: "12px", color:"black",fontWeight:"bold" }}>
+    //           <div class="col-3 text-center" style={{ fontSize: "12px", color:"black",fontWeight:"bold" }}>
     //             Buying Price
     //           </div>
-    //           <div className="col-2 text-center" style={{ fontSize: "12px", color:"black",fontWeight:"bold" }}>
+    //           <div class="col-2 text-center" style={{ fontSize: "12px", color:"black",fontWeight:"bold" }}>
     //              Pool
     //           </div>
-    //           <div className="col-2 text-center" style={{ fontSize: "12px", color:"black",fontWeight:"bold" }}>
+    //           <div class="col-2 text-center" style={{ fontSize: "12px", color:"black",fontWeight:"bold" }}>
     //             Time
     //           </div>
     //         </div>
@@ -190,7 +130,7 @@ export default function TradeHistory() {
     //   {history.map((h) => (
     //     <div className="zoom">
     //       <div
-    //         className="row  m-0"
+    //         class="row  m-0"
     //         style={{
     //           // background: "rgba(241, 67, 47, 0.1)",
     //           color: "rgb(240, 0, 0)",
@@ -200,31 +140,31 @@ export default function TradeHistory() {
     //         }}
     //       >
     //         <div
-    //           className="col-3 text-center text-dark"
+    //           class="col-3 text-center text-dark"
     //           style={{ fontSize: "13px",color:"black" }}
     //         >
     //           {h.cVolume}
     //         </div>
     //         <div
-    //           className="col-2 text-center text-secondary"
+    //           class="col-2 text-center text-secondary"
     //           style={{ fontSize: "13px",color:"black" }}
     //         >
     //           {h.currency_type}
     //         </div>
     //         <div
-    //           className="col-3 text-center text-secondary timeZone"
+    //           class="col-3 text-center text-secondary timeZone"
     //           style={{ fontSize: "13px",color:"black" }}
     //         >
     //           14:54:12
     //         </div>
     //         <div
-    //           className="col-2 text-center text-secondary timeZone"
+    //           class="col-2 text-center text-secondary timeZone"
     //           style={{ fontSize: "13px",color:"black" }}
     //         >
     //           14:54:12
     //         </div>
     //         <div
-    //           className="col-2 text-center text-secondary timeZone"
+    //           class="col-2 text-center text-secondary timeZone"
     //           style={{ fontSize: "13px",color:"black" }}
     //         >
     //           14:54:12

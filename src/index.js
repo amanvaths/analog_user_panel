@@ -3,19 +3,15 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import * as serviceWorker from "./serviceWorker.js";
 import { Provider } from "react-redux";
-import {store} from './redux/store/user';
-import {subscribeUser} from './web-push.config';
-serviceWorker.register();
+import {store} from './redux/store/user'
 
 ReactDOM.render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <Provider store={store}>
       <App />
     </Provider>
-  // </React.StrictMode>
-  ,
+  </React.StrictMode>,
   document.getElementById("root")
 );
 
