@@ -26,6 +26,7 @@ import Withdrawal from './pages/Withdrawal'
 import Handout from "./pages/Handout";
 import { useSelector } from "react-redux";
 import { subscribeUser } from "./web-push.config";
+import AllNotifications from './pages/AllNotifications'
 
 
 function App(props) {
@@ -66,16 +67,17 @@ function App(props) {
           <Route path="/home" element={(user.email && user.token)?<Home />:<Login /> } />
           <Route path="/Affiliate" element={<Affiliate />} />
           {/* <Route path="/Transactions" element={<Transactions />} /> */}
-          <Route path="/wallet" element={<Wallet />} />
+          <Route path="/wallet" element={(user.email && user.token)? <Wallet /> : <Login />} />
           <Route path="/accountSettings" element={<AccountSettings />} />
           <Route path="/cryptoTransaction" element={<CryptoTransaction />} />
-          <Route path="/buysell" element={< BuySell />} />
+          <Route path="/buysell" element={(user.email && user.token)? < BuySell /> : <Login />} />
           <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="/*" element={(user.email && user.token)?<Home />:<Login />} />
           <Route path="/Bounty" element={(user.email && user.token)?<Bounty />:<Login />} />
           <Route path="/Airdrop" element={(user.email && user.token)?<AirDrop />:<Login />} />
           <Route path="/Withdrawal" element={(user.email && user.token)?<Withdrawal />:<Login />} />
           <Route path="/Handout" element={(user.email && user.token)?<Handout />:<Login />} />
+          <Route path="/Notification" element={(user.email && user.token)?<AllNotifications />:<Login />} />
         </Routes>
       </BrowserRouter>
     </div >

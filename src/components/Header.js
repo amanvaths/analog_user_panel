@@ -281,8 +281,8 @@ const Header = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="dropdown-foot center">
-                      <b>View All</b>
+                    <div className="dropdown-foot center" >
+                      <Link to="/Notification">View All</Link>
                     </div>
                   </div>
                 </li>

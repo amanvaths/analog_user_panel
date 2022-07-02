@@ -22,7 +22,7 @@ const Wallet = (props) => {
   const [coinData, setCoinData] = useState([]);
   const [walletDetails, setWalletDetails] = useState([]);
   const [coinWW, setCoinWW] = useState([]);
-  const [loader, setLoader] = useState(true)
+  const [loader, setLoader] = useState(false)
   const [totalSpendINR, setTotalSpendINR] = useState(0)
   const [totalSpendUSDT, setTotalSpendUSDT] = useState(0)
 
@@ -155,7 +155,7 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
         cd.push({ ...coind, wallet: w[0] });
       }
       setCoinWW([...cd]);
-      setLoader(false)
+      // setLoader(false)
     }
   }, [coinData, walletDetails]);
 
