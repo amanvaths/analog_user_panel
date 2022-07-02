@@ -7,7 +7,7 @@ class Footer extends React.Component{
             <div className="nk-footer nk-footer-fluid">
                     <div className="container-fluid">
                         <div className="nk-footer-wrap">
-                            <div className="nk-footer-copyright"> &copy; 2021 ANALOG  INCEPTIVE BY <a href="#">INRX NETWORK</a>
+                            <div className="nk-footer-copyright"> &copy; 2022 ANALOG  INCEPTIVE BY <a href="#">INRX NETWORK</a>
                             </div>
                             <div className="nk-footer-links">
                                 <ul className="nav nav-sm">

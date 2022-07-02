@@ -148,9 +148,9 @@ const EmailOtp = (props) => {
                 New on our platform? <a href="/signup">Create an account</a>
               </div>
               <div className="text-center pt-4 pb-3">
-                <h6 className="overline-title overline-title-sap">
+                <span className="overline-title overline-title-sap">
                   <span>OR</span>
-                </h6>
+                </span>
               </div>
             </div>
             <div className="nk-block nk-auth-footer">
@@ -158,7 +158,7 @@ const EmailOtp = (props) => {
                 <ul className="nav nav-sm">
                   <li className="nav-item">
                     <a className="nav-link" href="#">
-                      Terms & Condition
+                      Terms &amp; Condition
                     </a>
                   </li>
                   <li className="nav-item">

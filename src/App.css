@@ -14,8 +14,7 @@
   height: 100vh;
   
 }
-.sidebar-bg {
-   
+.sidebar-bg {   
   background:url("assets/sidebar-bg.png") no-repeat 0 50%;
   background-position: center bottom;
   
@@ -186,6 +185,11 @@ h6 {
 .first-card:hover {
   transform: scale(1.02, 1.02);
 }
+@media (max-width: 900px) {
+    .bg-login {   
+    background:none;    
+  }
+}
 @media (max-width: 460px) {
   .first-card {
     width: 93%;
@@ -196,6 +200,10 @@ h6 {
   .react-multiple-carousel__arrow {
     display: none;
   }
+  .bg-login {   
+    background:none;    
+  }
+
 }
 @media (max-width: 383px) {
   .nk-quick-nav > li {
@@ -555,3 +563,4 @@ body {
   background-color: #242526;
   font-family: sans-serif;
 }
+
