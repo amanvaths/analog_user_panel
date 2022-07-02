@@ -107,10 +107,10 @@ const IPwhiteListing = () => {
 
                     <div className="row">
                         <div className="col-6">
-                            <div class="form-group">
-                                <label class="form-label" for="default-01">IP Address</label>
-                                <div class="form-control-wrap w-50">
-                                    <input type="text" class="form-control" id="default-01"
+                            <div className="form-group">
+                                <label className="form-label" for="default-01">IP Address</label>
+                                <div className="form-control-wrap w-50">
+                                    <input type="text" className="form-control" id="default-01"
                                         placeholder="Enter IP Address" style={{ fontSize: "13px" }}
                                         value={ip}
                                         onChange={(e) => setIp(e.target.value)} />

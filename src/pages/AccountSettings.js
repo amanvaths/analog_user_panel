@@ -21,7 +21,7 @@ import { BASE_URL } from "../Api_connection/config";
 
 const AccountSettings = () => {
   const dispatch = useDispatch()
-  const { userInfo, settingPages, user } = useSelector((state) => state.user.value)
+  const { userInfo, settingPages, user, totalAna } = useSelector((state) => state.user.value)
   const [logData, setLogData] = useState([])
   const email = user.email
 
@@ -52,6 +52,8 @@ const AccountSettings = () => {
   useEffect( () => {
    go()
   }, [])
+
+  console.log(totalAna);
 
   const profileMenuRemove = ()=>{
     var element = document.getElementById("myBody"); 
@@ -222,12 +224,12 @@ const AccountSettings = () => {
                                   Analog Wallet Balance
                                 </h6>
                                 <div className="user-balance p-2">
-                                  12.395769
-                                  <small className="currency currency-btc p-2">
+                                  {totalAna&&totalAna?.toFixed(3)} ANA
+                                  {/* <small className="currency currency-btc p-2">
                                     BTC
-                                  </small>
+                                  </small> */}
                                 </div>
-                                <div className="user-balance-sub">
+                                {/* <div className="user-balance-sub">
                                   Locked
                                   <span className="p-2">
                                     0.344939
@@ -235,7 +237,7 @@ const AccountSettings = () => {
                                       BTC
                                     </span>
                                   </span>
-                                </div>
+                                </div> */}
                               </div>
                             </div>
                             <div className="card-inner p-0">

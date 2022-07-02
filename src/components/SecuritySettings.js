@@ -99,10 +99,10 @@ const SecuritySettings = () => {
                   <div className="nk-block-actions">
                     <ul className="align-center gx-3">
                       <li className="order-md-last">
-                        <div class="custom-control custom-switch me-n2">
+                        <div className="custom-control custom-switch me-n2">
                           <input
                             type="checkbox"
-                            class="custom-control-input"
+                            className="custom-control-input"
                             id="log"
                             checked={userInfo?.login_activity}
                             // name='log'
@@ -114,7 +114,7 @@ const SecuritySettings = () => {
                               handelLog(e)
                             }}
                           />
-                          <label class="custom-control-label" for="log" ></label>
+                          <label className="custom-control-label" for="log" ></label>
                         </div>
                       </li>
                     </ul>
@@ -241,12 +241,12 @@ const SecuritySettings = () => {
                         </div>
                         <div className='col-6'>
                           <form action="" style={{}}>
-                            <div class="form-group">
-                              <div class="form-group">
+                            <div className="form-group">
+                              <div className="form-group">
                                 <label for="inputOtp">Enter OTP:</label>
-                                <input type="text" class="form-control" id="inputOtp" placeholder="Enter Otp" onChange={(e) => setOtp(e.target.value)} />
+                                <input type="text" className="form-control" id="inputOtp" placeholder="Enter Otp" onChange={(e) => setOtp(e.target.value)} />
                               </div>
-                              <button type="button" class="btn btn-primary px-2" style={{ width: "150px" }} onClick={() => {
+                              <button type="button" className="btn btn-primary px-2" style={{ width: "150px" }} onClick={() => {
                                 axios.post(`${BASE_URL}/generateauthtoken`, { email: email, token: otp }).then((resp) => {
                                   if (resp.data.status == 1) {
 
@@ -294,12 +294,12 @@ const SecuritySettings = () => {
                         
                         <div className='col-12'>
                           <form action="" style={{}}>
-                            <div class="form-group">
-                              <div class="form-group">
+                            <div className="form-group">
+                              <div className="form-group">
                                 <label for="inputOtp">Enter OTP to disable 2FA</label>
-                                <input type="text" class="form-control" id="inputOtp" placeholder="Enter Otp" onChange={(e) => setOtpD(e.target.value)} />
+                                <input type="text" className="form-control" id="inputOtp" placeholder="Enter Otp" onChange={(e) => setOtpD(e.target.value)} />
                               </div>
-                              <button type="button" class="btn btn-primary px-2" style={{ width: "150px" }} onClick={() => {
+                              <button type="button" className="btn btn-primary px-2" style={{ width: "150px" }} onClick={() => {
                                 axios.post(`${BASE_URL}/generateauthtoken`, { email: email, token2: otpD }).then((resp) => {
                                   if (resp.data.status == 1) {
 
