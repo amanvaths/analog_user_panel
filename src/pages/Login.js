@@ -148,21 +148,26 @@ const Login = (props) => {
   return (
     <div>
       <div class="bg-login">
-        <div className="nk-apps-root">
-          <div className="nk-content container mt-lg-5 pt-lg-5 align-items-center">
-            <div className="row justify-content-md-center">
-              <Link
-                to=""
-                className="toggle btn-white btn btn-icon btn-light"
-                data-target="athPromo"
-              >
-                <em className="icon ni ni-info"></em>
-              </Link>
+      <div className="nk-apps-root">
+        <div className="nk-content container mt-lg-5 pt-lg-5 align-items-center">
+          <div className="row justify-content-md-center">
+            <div class="col-md-4 bg-teal shadow  d-flex align-items-center">
+              <div class="card-inner text-white"> 
+                <div className="nk-block-head-content">
+                  <h2 className="nk-block-title">SIGN UP</h2>
+                  <div className="lead">
+                    <p>
+                    Connect with <strong>Analog Inceptive</strong> of{" "}
+                      <strong>INRX Blockchain.</strong></p>
+                  </div>
+                </div>
+              </div>
             </div>
+              
             {ii == ""? null : <img src={ii} alt="" />}
             
-            <div className="nk-block nk-block-middle nk-auth-body">
-              <div className="brand-logo pb-5">
+            <div className="col-md-6 bg-light border shadow">
+              <div className="card-inner">
                 <Link to="" className="logo-link">
                   <img
                     className="logo-light logo-img logo-img-lg"
@@ -177,18 +182,7 @@ const Login = (props) => {
                     alt="logo-dark"
                   />
                 </Link>
-              </div>
-              <div className="nk-block-head">
-                <div className="nk-block-head-content">
-                  <h5 className="nk-block-title">Sign-In</h5>
-                  <div className="nk-block-des">
-                    <p>
-                      Connect with <b>Analog Inceptive</b> of{" "}
-                      <b>INRX Blockchain</b>.
-                    </p>
-                  </div>
-                </div>
-              </div>
+              
               {/* {res.status == true ? (
                 <h1 style={{ color: "green", fontSize: 20 }}>{res.message}</h1>
               ) : (
@@ -205,9 +199,9 @@ const Login = (props) => {
                     <label className="form-label" for="default-01">
                       Email
                     </label>
-                    <Link className="link link-teal link-sm" tabindex="-1" to="">
+                    {/* <Link className="link link-teal link-sm" tabindex="-1" to="">
                       Need Help?
-                    </Link>
+                    </Link> */}
                   </div>
                   <input
                     type="email"
@@ -231,14 +225,14 @@ const Login = (props) => {
                     <label className="form-label" for="password">
                       Password
                     </label>
-                    <Link to="/ForgetPassword">Forget Password</Link>
+                    <Link className="text-teal" to="/ForgetPassword">Forget Password</Link>
                     {/* <Link to={ForgetPassword}>Forget Password</Link> */}
                   </div>
                   <div className="form-control-wrap">
                     <Link
                       tabIndex="-1"
                       to=""
-                      className="form-icon form-icon-right passcode-switch"
+                      className="form-icon form-icon-right passcode-switch text-dark"
                       data-target="password"
                     >
                       {
@@ -321,7 +315,9 @@ const Login = (props) => {
                   {/* </a> */}
                 </li>
               </ul>
+              </div>              
               </div>
+            </div>            
             </div>
             <div className="nk-content text-center">
               <div className="container container justify-content-center d-flex">
