@@ -163,11 +163,11 @@ const Withdrawal = () => {
                                                                                     setfromWalletAddress(element.name)
                                                                                 }}
                                                                             >
-                                                                                <div className={active.index == index ? "card bg-dark " : "card bg-light "}>
+                                                                                <div className="bg-light border rounded shadow-sm">
                                                                                     <div className="nk-wgw sm">
                                                                                         <Link className="nk-wgw-inner" to="">
                                                                                             <div className="nk-wgw-name">
-                                                                                                <div className="nk-wgw-icon">
+                                                                                                <div className="nk-wgw-icon bg-teal">
                                                                                                     <em className="icon ni ni-sign-btc"></em>
                                                                                                 </div>
                                                                                                 <h5 className="nk-wgw-title title">
