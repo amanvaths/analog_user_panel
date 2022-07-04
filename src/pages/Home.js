@@ -385,7 +385,7 @@ const Home = () => {
                           >
                             <div className="card bg-light shadow-sm">
                               <div className="nk-wgw sm">
-                                <a className="nk-wgw-inner">
+                                <Link className="nk-wgw-inner" to="">
                                   <div className="nk-wgw-name">
                                     <div className="nk-wgw-icon bg-teal">
                                       <em className="icon ni ni-sign-eth"></em>
@@ -425,7 +425,7 @@ const Home = () => {
                           <div className="col-sm-4">
                             <div className="card bg-light shadow-sm">
                               <div className="nk-wgw sm">
-                                <a className="nk-wgw-inner" to="">
+                                <Link className="nk-wgw-inner" to="">
                                   <div className="nk-wgw-name">
                                     <div className="nk-wgw-icon bg-teal">
                                       <em className="icon ni ni-sign-btc"></em>
