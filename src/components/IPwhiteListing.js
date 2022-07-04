@@ -77,7 +77,7 @@ const IPwhiteListing = () => {
     return (
         <>
          <NotificationContainer/>
-            <div className="card-inner card-inner-lg">
+            <div className="card-inner card-inner-lg bg-light">
                 <div className="nk-block-head nk-block-head-lg">
 
                     <div className="nk-block-between">
@@ -136,9 +136,9 @@ const IPwhiteListing = () => {
 
                 </div>
                 <div className="nk-block card card-bordered">
-                    <div className="table-responsive">
-                        <table className="table table-hover table-ulogs">
-                            <thead className="bg-teal-dim text-teal">
+                    <div className="">
+                        <table className="table table-ulogs">
+                            <thead className="bg-gray text-white">
                                 <tr>
                                     <th className="tb-col-ip">
                                         <span>IP</span>
@@ -157,7 +157,7 @@ const IPwhiteListing = () => {
                                     whiteIP.map((element, index) => {
                                         const a = new Date(element.createdAt)
                                         return (
-                                            <tr>
+                                            <tr className="zoom_on_table">
                                                 <td className="tb-col-ip">{element.ip}</td>
                                                 <td className="tb-col-action">
                                                     {/* <span className="sub-text">{a.toDateString()} {a.toLocaleTimeString()}</span> */}

@@ -56,7 +56,7 @@ const SecuritySettings = () => {
 
   return (
     <>
-      <div className="card-inner card-inner-lg">
+      <div className="card-inner card-inner-lg bg-light">
         <div className="nk-block-head nk-block-head-lg">
           <div className="nk-block-between">
             <div className="nk-block-head-content">
@@ -88,9 +88,9 @@ const SecuritySettings = () => {
                 <div
                   className="between-center flex-wrap flex-md-nowrap g-3"
                 >
-                  <div className="nk-block-text">
-                    <h6 className='p-1'>Save my Activity Logs</h6>
-                    <p className='p-1'>
+                  <div>
+                    <h5 className='text-teal'>Save my Activity Logs</h5>
+                    <p>
                       You can save your all activity logs
                       including unusual activity detected.
                     </p>
@@ -123,7 +123,7 @@ const SecuritySettings = () => {
               <div className="card-inner">
                 <div className="between-center flex-wrap g-3">
                   <div>
-                    <h5>Change Password</h5>
+                  <h5 className='text-teal'>Change Password</h5>
                     <p>
                       Set a unique password to protect your
                       account.
@@ -170,7 +170,7 @@ const SecuritySettings = () => {
                   className="between-center flex-wrap flex-md-nowrap g-3"
                 >
                   <div>
-                    <h5>
+                  <h5 className='text-teal'>
                       2 Factor Auth &nbsp;
                       {
                     Object?.values(userInfo)?.length > 0 ?

@@ -87,7 +87,7 @@ const AccountSettings = () => {
                         {settingPages.personalInfo == true && <PersonalInfo />}
 
                         {settingPages.activity == true ? (
-                          <div className="card-inner card-inner-lg">
+                          <div className="card-inner card-inner-lg bg-light">
                             <div className="nk-block-head nk-block-head-lg">
                               <div className="nk-block-between">
                                 <div className="nk-block-head-content">
@@ -115,9 +115,9 @@ const AccountSettings = () => {
                               </div>
                             </div>
                             <div className="nk-block card card-bordered">
-                              <div className="table-responsive">    
-                                <table className="table table-hover table-ulogs">
-                                    <thead className="bg-teal-dim text-teal">
+                              <div className="">    
+                                <table className="table table-ulogs">
+                                    <thead className="bg-gray text-white">
                                       <tr>
                                         <th className="tb-col-os">
                                           <span>
@@ -144,16 +144,16 @@ const AccountSettings = () => {
                                         logData.map((element, index) => {
                                           const a = new Date(element.createdAt)
                                           return (
-                                            <tr>
-                                              <td className="tb-col-os">{element.browser_name}</td>
-                                              <td className="tb-col-os text-capitalize">{element.request_device}</td>
+                                            <tr className="zoom_on_table">
+                                              <td className="tb-col-os text-danger">{element.browser_name}</td>
+                                              <td className="tb-col-os text-capitalize text-teal">{element.request_device}</td>
                                               <td className="tb-col-ip">
                                               <span class="badge bg-light">
                                                   {element.request_address}
                                                 </span>
                                               </td>
                                               <td className="tb-col-time">
-                                              <span className="text-grey"> <em class="icon text-teal ni ni-clock valign"></em> {a.toDateString()} {a.toLocaleTimeString()}</span>
+                                              <span className="text-dark"> <em class="icon ni ni-clock valign"></em> {a.toDateString()} {a.toLocaleTimeString()}</span>
                                               </td>
                                               <td className="tb-col-action">{ }</td>
                                             </tr>
@@ -188,7 +188,7 @@ const AccountSettings = () => {
                                   </span>
                                   <span className="sub-text">{userInfo?.user_id}</span>
                                 </div>
-                                <div className="user-action">
+                                {/* <div className="user-action">
                                   <div className="dropdown">
                                     <Link
                                       className="btn btn-icon btn-trigger me-n2"
@@ -197,7 +197,7 @@ const AccountSettings = () => {
                                     >
                                       <em className="icon ni ni-arrow-left" onClick={profileMenuRemove}></em>
                                     </Link> 
-                                     {/* <div className="dropdown-menu dropdown-menu-end">
+                                      <div className="dropdown-menu dropdown-menu-end">
                                       <ul className="link-list-opt no-bdr">
                                         <li>
                                           <a href="#">
@@ -212,9 +212,9 @@ const AccountSettings = () => {
                                           </a>
                                         </li>
                                       </ul>
-                                    </div>  */}
+                                    </div>  
                                    </div>
-                                </div> 
+                                </div>  */}
                               </div>
                             </div>
                             <div className="card-inner">

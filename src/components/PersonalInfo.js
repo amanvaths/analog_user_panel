@@ -147,7 +147,7 @@ const PersonalInfo = () => {
   return (
     <>
 
-      <div className="card-inner card-inner-lg">
+      <div className="card-inner card-inner-lg bg-light">
         <div className="nk-block-head nk-block-head-lg">
           <div className="nk-block-between">
             <div className="nk-block-head-content">
@@ -167,7 +167,7 @@ const PersonalInfo = () => {
             </div>
           </div>
         </div>
-        <div className="nk-block">
+        <div className="card nk-block">
           <div className="nk-data data-list">
             <div className="data-head kanban-board-header kanban-success bg-lighter">
               <span className="overline-title">Basics</span>
@@ -205,7 +205,7 @@ const PersonalInfo = () => {
                         setShowUser(false);
                       }
                     }}>Update</Link> :
-                      <em className="icon ni ni-lock-alt"></em>
+                      <em className="icon ni ni-lock-alt text-dark"></em>
 
                     }
 
@@ -227,7 +227,7 @@ const PersonalInfo = () => {
               <div className="col-4 d-flex justify-content-end">
                 <div className="">
                   <span className=" disable">
-                    <em className="ni ni-lock-alt"></em>
+                    <em className="ni ni-lock-alt text-dark"></em>
                   </span>
                 </div>
               </div>
@@ -269,7 +269,7 @@ const PersonalInfo = () => {
                         setShowUser1(false);
                       }
                     }}>Update</Link> : <span className=" disable">
-                      <em className="icon ni ni-lock-alt"></em>
+                      <em className="icon ni ni-lock-alt text-dark"></em>
                     </span>
                     }
 
@@ -373,7 +373,7 @@ const PersonalInfo = () => {
                 <div className="">
                   <span className="">
                     {userInfo?.refferal ? <span className=" disable">
-                      <em className="ni ni-lock-alt"></em>
+                      <em className="ni ni-lock-alt text-dark"></em>
                     </span> : <button class="btn btn-outline-success" onClick={() => {
                       updateReferral();
                     }}>Update</button>

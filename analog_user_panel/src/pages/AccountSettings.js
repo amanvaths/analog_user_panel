@@ -76,7 +76,7 @@ const AccountSettings = () => {
                             </div>
                             <div className="nk-block card card-bordered">
                               <div className="table-responsive">    
-                                  <table className="table table-hover table-ulogs">
+                                  <table className="table table-ulogs">
                                       <thead className="bg-teal-dim text-teal">
                                         <tr>
                                           <th className="tb-col-os">

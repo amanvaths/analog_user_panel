@@ -55,7 +55,7 @@ const Notification = () => {
 
     return (
         <>
-            <div class="card-inner card-inner-lg">
+            <div class="card-inner card-inner-lg bg-light">
                 <div class="nk-block-head nk-block-head-lg">
                     <div class="nk-block-between">
                         <div class="nk-block-head-content">
@@ -77,7 +77,7 @@ const Notification = () => {
                 </div>
                 <div class="nk-block-head nk-block-head-sm">
                     <div class="nk-block-head-content">
-                        <h5>Security Alerts</h5>
+                        <h4>Security Alerts</h4>
                         <p>You will get only those email notification what you want.</p>
                        
                     </div>
@@ -136,7 +136,7 @@ const Notification = () => {
                 </div>
                 <div class="nk-block-head nk-block-head-sm">
                     <div class="nk-block-head-content">
-                    <h5>News</h5>
+                    <h4>News</h4>
                         <p>You will get only those email notification what you want.</p>
                     </div>
                 </div>

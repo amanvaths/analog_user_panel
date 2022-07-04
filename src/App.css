@@ -35,7 +35,8 @@
 .nk-tb-head .nk-tb-col {
   color: #444!important;
 }
-.nk-tb-item:not(.nk-tb-head):hover, .nk-tb-item:not(.nk-tb-head).seleted {
+.nk-tb-item:not(.nk-tb-head):hover, .nk-tb-item:not(.nk-tb-head).seleted,
+.zoom_on_table:hover {
   background: #fff!important;
   transform: scale(1.01);
   -webkit-box-shadow: 0 4px 6px 0 rgb(85 85 85 / 8%), 0 1px 20px 0 rgb(0 0 0 / 7%), 0px 1px 11px 0px rgb(0 0 0 / 7%);
