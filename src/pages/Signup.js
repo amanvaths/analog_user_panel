@@ -195,7 +195,7 @@ const Signup = (props) => {
                   <div className="lead">
                     <p>
                     Create an account with <b>Analog Inceptive</b> of{" "}
-                      <b>INRX Blockchain</b> and discover a great amount of opportunities
+                      <b>INRX Blockchain</b> and discover a great amount of opportunities.
                     </p>
                   </div>
                 </div>
@@ -204,14 +204,14 @@ const Signup = (props) => {
             <div className="col-md-6 bg-light border shadow">
               <div className="card-inner">
                 <div className="brand-logo pb-3">
-                  <a href="#" className="logo-link">                    
+                  <Link to="" className="logo-link">                    
                     <img
                       className="logo-dark logo-img logo-img-lg"
                       src="./images/logo-dark.png"
                       srcSet="./images/logo-dark2x.png 2x"
                       alt="logo-dark"
                     />
-                  </a>
+                  </Link>
                 </div>
               
                 <form
@@ -227,9 +227,9 @@ const Signup = (props) => {
                       <label className="form-label" for="default-01">
                         Email
                       </label> 
-                      <Link to="" className="link link-primary link-sm" tabindex="-1">
+                      {/* <Link to="" className="link link-primary link-sm" tabindex="-1">
                       Need Help?
-                    </Link>                     
+                    </Link>*/}
                     </div>
 
                     <input

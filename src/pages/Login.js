@@ -154,7 +154,7 @@ const Login = (props) => {
             <div class="col-md-4 bg-teal shadow  d-flex align-items-center">
               <div class="card-inner text-white"> 
                 <div className="nk-block-head-content">
-                  <h2 className="nk-block-title">SIGN UP</h2>
+                  <h2 className="nk-block-title">SIGN IN</h2>
                   <div className="lead">
                     <p>
                     Connect with <strong>Analog Inceptive</strong> of{" "}
@@ -168,21 +168,22 @@ const Login = (props) => {
             
             <div className="col-md-6 bg-light border shadow">
               <div className="card-inner">
-                <Link to="" className="logo-link">
-                  <img
-                    className="logo-light logo-img logo-img-lg"
-                    src="./images/logo.png"
-                    srcSet="./images/logo2x.png 2x"
-                    alt="logo"
-                  />
-                  <img
-                    className="logo-dark logo-img logo-img-lg"
-                    src="./images/logo.png"
-                    srcSet="./images/logo-dark2x.png 2x"
-                    alt="logo-dark"
-                  />
-                </Link>
-              
+                <div className="brand-logo pb-3">
+                  <Link to="" className="logo-link">
+                    <img
+                      className="logo-light logo-img logo-img-lg"
+                      src="./images/logo.png"
+                      srcSet="./images/logo2x.png 2x"
+                      alt="logo"
+                    />
+                    <img
+                      className="logo-dark logo-img logo-img-lg"
+                      src="./images/logo.png"
+                      srcSet="./images/logo-dark2x.png 2x"
+                      alt="logo-dark"
+                    />
+                  </Link>
+                </div>              
               {/* {res.status == true ? (
                 <h1 style={{ color: "green", fontSize: 20 }}>{res.message}</h1>
               ) : (
