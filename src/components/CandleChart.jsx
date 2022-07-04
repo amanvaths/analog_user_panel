@@ -10,7 +10,6 @@ class TVChartContainer extends React.PureComponent  {
 			
 		};
 	}
-//   just check
 	 getLanguageFromURL() {
 		const regex = new RegExp('[\\?&]lang=([^&#]*)');
 		const results = regex.exec(window.location.search);
@@ -124,7 +123,7 @@ class TVChartContainer extends React.PureComponent  {
 }
 function mapStateToProps(state) {
 	return {
-		theme:"Light",
+		theme:"Dark",
 	}
 	
   }

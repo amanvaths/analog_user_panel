@@ -104,10 +104,10 @@ class Psecurity extends React.Component{
                             <div className="nk-block-actions flex-shrink-sm-0">
                                 <ul className="align-center flex-wrap flex-sm-nowrap gx-3 gy-2">
                                     <li className="order-md-last">
-                                        <a href="#" className="btn btn-outline-success">Change Password</a>
+                                        <a href="#" className="btn-outline-success">Change Password</a>
                                     </li>
                                     <li>
-                                        <em className="text-soft text-date fs-12px">Last changed : <span> Oct 2, 2019</span></em>
+                                        <em className="text-soft text-date fs-12px">Last changed: <span>Oct 2, 2019</span></em>
                                     </li>
                                 </ul>
                             </div>
@@ -120,7 +120,7 @@ class Psecurity extends React.Component{
                                 <p>Secure your account with 2FA security. When it is activated you will need to enter not only your password, but also a special code using app. You can receive this code by in mobile app. </p>
                             </div>
                             <div className="nk-block-actions">
-                                <a href="#" className="btn btn-danger">Disable</a>
+                                <a href="#" className="btn btn-primary">Disable</a>
                             </div>
                         </div>
                     </div>

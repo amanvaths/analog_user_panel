@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./order.css";
 import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
@@ -6,146 +6,127 @@ import { useSelector, useDispatch } from "react-redux";
 import { data } from "jquery";
 import swal from "sweetalert";
 import "../App.css";
-import MultiRangeSlider from "./multiRangeSlider/MultiRangeSlider";
+// import MultiRangeSlider from "./multiRangeSlider/MultiRangeSlider";
 import { Triangle } from "react-loader-spinner";
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import { FcPlus } from "react-icons/fc";
-import { FaMinusCircle } from "react-icons/fa";
+import { setBuyLoader } from "../redux/reducer/user";
 
 export default function Orders() {
   const dispatch = useDispatch();
-  const [buy, setBuy] = useState(true);
-  const [coinData, setCoinData] = useState({});
+  const refValue = useRef();
   const [atprice, setAtprice] = useState(0);
   const [ammount, setAmmount] = useState(0);
   const [total, setTotal] = useState(0);
-
   const [history, setHistory] = useState("");
-  const [wallets, setWallets] = useState([]);
   const [walletbalance, setWalletBalance] = useState("");
-  const [walletsymbol, setWalletsymbol] = useState("");
   const [loader, setLoader] = useState(true);
-  const [buyamt, setBuyAmt] = useState("");
+  const [balance, setBalance] = useState("");
+  const [rangeValue, setRangeValue] = useState(0);
 
-  const { user, userInfo, oneUsdPrice, totalAna } = useSelector(
+  useEffect(() => {
+    const sliserVal = document.querySelector("#slider").value;
+  });
+  const { user, userInfo, oneUsdPrice, totalAna, theme } = useSelector(
     (state) => state.user.value
   );
   const email = user?.email;
-  // const symbolState = useSelector((store) => store);
-
-  // setAmmount(userInfo?.currency_preference == "usd"?(total/(atprice / oneUsdPrice))?.toFixed(4):
-  // (total/atprice)?.toFixed(4));
-
-
-
+  //  GetCoinData
   const getData = async () => {
     try {
       const res = await axios.post(`${BASE_URL}/getCoinData`, {
         currency: userInfo?.currency_preference,
       });
-      setCoinData({ ...res.data });
     } catch (error) {
       console.log(error);
     }
   };
 
-  console.log(userInfo?.currency_preference, "userInfo?.currency_preference");
-
-
-
+  //  GetWalletData
 
   const getWalletData = async () => {
     try {
-      const res = await axios.post(`${BASE_URL}/getWalletData`, {email: email});
-      let walletData = res.data;
-      const d = walletData.find((data, i) => data.symbol == "USDT");
-      const data = {
-        balance: d.usdt_balance,
-
-        // inrxsymbol: walletData[5]?.symbol,
-      };
-
-      setWalletBalance(
-        userInfo?.currency_preference == "usd"
-          ? d.usdt_balance
-          : Number(d.usdt_balance * oneUsdPrice)
-      );
-      walletData = walletData.filter((wallet) => wallet?.balance > 0);
-      setWallets([...walletData]);
+      const res = await axios.post(`${BASE_URL}/getWalletData`, {
+        email: email,
+      });
+      if (res) {
+        let walletData = res.data;
+        const d = walletData.find((data, i) => data.symbol == "USDT");
+        setBalance(d.usdt_balance);
+        setWalletBalance(
+          userInfo?.currency_preference == "usd"
+            ? Number(d.usdt_balance)
+            : Number(d.usdt_balance * oneUsdPrice)
+        );
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
   // Ana price
-  // setAtprice(totalAna )
 
   const AnaPrice = async () => {
     try {
       const res = await axios.post(`${BASE_URL}/anaPrice`, {});
-      let Anadata = res.data;
       setAtprice(res.data._data.price);
     } catch (error) {
       console.log(error);
     }
   };
-
   useEffect(() => {
     getWalletData();
     getData();
     AnaPrice();
-    selectedCoin();
-    setTotal();
-    setAmmount()
-    // setWalletsymbol(userInfo?.currency_preference=="usd"?"USDT":"INRX")
-  }, [totalAna, oneUsdPrice, userInfo, data.balance]);
 
-  const trxInAna = atprice / coinData[walletsymbol]?.quote?.USD?.price;
+    // setAmmount(
+    //   userInfo?.currency_preference == "inr"
+    //     ? total / atprice
+    //     : total / (atprice / oneUsdPrice)
+    // );
+  }, []);
+  useEffect(() => {
+    setTotal(
+      userInfo?.currency_preference == "inr" ? 5000 : (5000 / oneUsdPrice).toFixed(2)
+    );
+  }, [userInfo?.currency_preference, oneUsdPrice]);
 
-  const inTrx = ammount * trxInAna;
-
-  function selectedCoin() {
-    if (walletsymbol == "BUSD") {
-      return atprice;
-    }
-  }
-
-  console.log(coinData[walletsymbol]?.quote?.USD?.price, "total total total total total");
+  // Order
 
   function TotalAmt() {
-    if (ammount == 0) {
-      swal("Please Enter A Valid ammount", "Enter Ammount", "error");
-    } else {
-      let params = {
-        amount:
-          userInfo?.currency_preference == "usd"
-            ? total / (atprice / oneUsdPrice)
-            : total / atprice,
-        raw_price: trxInAna,
-        currencyType: userInfo?.currency_preference == "usd" ? "USDT" : "INRX",
-        compairCurrency: userInfo?.currency_preference,
-        TotalTrx: inTrx,
-        email: email,
-      };
-      axios
-        .post(`${BASE_URL}/order`, params)
-        .then((res) => {
-          if (res.data.status == true) {
-            swal(`${res.data.message}`, "Welcome", "success");
-          }
-        })
-        .catch((error) => {
-          console.log(error, "::ERROR_>>>>>");
-          swal(`${error?.response?.data?.message}`, "Sorry", "error");
-        });
-    }
+    let params = {
+      amount:
+        userInfo?.currency_preference == "usd"
+          ? total / (atprice / oneUsdPrice)
+          : total / atprice,
+      raw_price: "",
+      currencyType: userInfo?.currency_preference == "usd" ? "USDT" : "INRX",
+      compairCurrency: userInfo?.currency_preference,
+      TotalTrx: "",
+      email: email,
+    };
+    axios
+      .post(`${BASE_URL}/order`, params)
+      .then((res) => {
+        if (res.data.status == true) {
+          swal(`${res.data.message}`, "", "success");
+          getWalletData();
+          dispatch(setBuyLoader({ buyloader: false }));
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        swal(`${error?.response?.data?.message}`, "", "error");
+        dispatch(setBuyLoader({ buyloader: false }));
+      });
   }
+
+  // GetAllOrder
 
   useEffect(() => {
     if (email) {
       axios
         .get(
-          `${BASE_URL}/getAllOrder?email=${email}&& compair_currency=${userInfo?.currency_preference}`
+          `${BASE_URL}/getAllOrder?email=${email}&type=Buy&compair_currency=${userInfo?.currency_preference}`
         )
         .then((res) => {
           const orderrespons = res.data;
@@ -164,18 +145,18 @@ export default function Orders() {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: "btn btn-success",
-        cancelButton: "btn btn-danger",
+        cancelButton: "btn btn-danger outline",
       },
       buttonsStyling: false,
     });
-
     swalWithBootstrapButtons
       .fire({
         title: "Are you sure?",
-        text: `Buyint Amount : ${total} , Quantity : ${userInfo?.currency_preference == "usd"
-            ? total / (atprice / oneUsdPrice)
-            : total / atprice
-          }`,
+        text: `Buying Amount : ${Number(total)?.toFixed(2)} , Quantity : ${
+          userInfo?.currency_preference == "usd"
+            ? Number(total / (atprice / oneUsdPrice)?.toFixed(2))
+            : Number(total / atprice)?.toFixed(2)
+        }`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Yes, confirm it!",
@@ -184,21 +165,10 @@ export default function Orders() {
       })
       .then((result) => {
         if (result.isConfirmed) {
+          dispatch(setBuyLoader({ buyloader: true }));
           TotalAmt();
-          swalWithBootstrapButtons.fire(
-            "Confirm!",
-            "Your file has been confirm.",
-            "success"
-          );
-        } else if (
-          /* Read more about handling dismissals below */
-          result.dismiss === Swal.DismissReason.cancel
-        ) {
-          swalWithBootstrapButtons.fire(
-            "Cancelled",
-            "Your imaginary file is safe :)",
-            "error"
-          );
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire("Cancelled", "", "error");
         }
       });
   }
@@ -333,210 +303,402 @@ export default function Orders() {
         </div>
       </div>
 
-      {/* Buy Sell */}
-      <div>
-       <nav
-          class="coinsfather-theme-color border border-bottom-0 card-header bg-teal-dim mt-5">            
-            BUY
-        </nav>
-
-        {/* Buy */}
-
-        {buy && (
+      {/* Buy */}
+      <div style={{border: "0.5px solid rgba(0,0,0,.125)" ,marginTop:"6px",borderRadius:"3px"}}>
+        <nav
+          class="coinsfather-theme-color"
+          style={{
+            border: "0.3px solid rgba(255, 255, 255, 0.2)",
+            // marginTop: "6px",
+          }}
+        >
           <div
-            className="tab-content orders"
-            style={{ borderColor: "rgba(25, 32, 87, 0.2)" }}
+            className="card-header"
+            style={{
+              textAlign: "center",
+              fontWeight: "bold",
+              // background: "rgb(241, 241, 241)",
+              // margin: "4px 0px",
+            }}
           >
+            BUY
+          </div>
+        </nav>
+        <div
+          className=" tab-content orders"
+          style={{ borderColor: "rgba(25, 32, 87, 0.2)" }}
+        >
+         
             <div
-              className="d-flex justify-content-center border    align-items-center"
-              style={{ background: "" }}
+              className="card sing-up-button"
+              style={{
+                textAlign: "center",
+                height: "460px",
+                justifyContent: "center",
+                alignItems: "center",
+                display: " flex",
+                flexDirection: "column",
+              }}
             >
-              <div
-                className="sing-up-button"
-                style={{
-                  textAlign: "center",
-                  height: "460px",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  display: " flex",
-                  flexDirection: "column",
-                }}
-              >
-                {/* Buy Btex Option  */}
-
-                <div class="p-3 screenfix" style={{ width: "450px" }}>
-                  <div class="input-group mb-3" style={{ margin: "0px" }}>
-                    <div class="input-group-prepend">
-                      <span
-                        class="input-group-text buy-sell-form-bg buy-sell-theme"
-                        style={{
-                          fontSize: " 10px",
-                          borderColor: " rgb(202, 202, 204)",
-                        }}
-                      >
-                        AMOUNT
-                        <br />
-                        Qty
-                      </span>
-                    </div>
-                    <input
-                      type="number"
-                      class="form-control buy-sell-form-bg buy-sell-theme"
-                      value={ammount?.toFixed(2)}
+              <div class="p-3 screenfix" style={{ width: "450px" }}>
+                <div class="input-group mb-3" style={{ margin: "0px" }}>
+                  <div class="input-group-prepend">
+                    <span
+                      class="input-group-text buy-sell-form-bg buy-sell-theme"
                       style={{
-                        borderColor: "rgb(202, 202, 204)",
-                        height: "54px",
-                        color: "#008000",
-                        fontWeight: "bold",
+                        fontSize: " 10px",
+                        borderColor: " rgb(202, 202, 204)",
                       }}
-                    />
+                    >
+                      AMOUNT
+                      <br />
+                      Qty
+                    </span>
                   </div>
+                  <input
+                    disabled
+                    type="number"
+                    class="form-control buy-sell-form-bg buy-sell-theme"
+                    value={
+                      oneUsdPrice && ammount
+                        ? ammount?.toFixed(2)
+                        : userInfo?.currency_preference == "inr"
+                        ? (5000 / atprice)?.toFixed(2)
+                        : (5000 / oneUsdPrice / (atprice / oneUsdPrice))?.toFixed(2)
+                    }
+                    style={{
+                      borderColor: "rgb(202, 202, 204)",
+                      height: "54px",
+                      color: "#008000",
+                      fontWeight: "bold",
+                    }}
+                  />
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "end",
+                    fontSize: "13px",
+                    marginBottom: "35px",
+                  }}
+                >
                   <div
                     style={{
-                      display: "flex",
-                      justifyContent: "end",
-                      fontSize: "13px",
-                      marginBottom: "35px",
+                      marginTop: "-15px",
                     }}
                   >
-                    {/* <div style={{ marginTop: "-15px" }}>
-                      <div style={{ fontWeight: "bold" }}>
-                        Buying Amount{" "}
-                        <span style={{ color: "#008000", fontWeight: "bold" }}>
-                          {total && total?.toFixed(2)}
-                        </span>{" "}
-                        {userInfo?.currency_preference && userInfo?.currency_preference == "usd" ? (
+                    <div style={{ fontWeight: "bold" }}>
+                      ANA PRICE{"  "}
+                      <span style={{ color: "#008000", fontWeight: "bold" }}>
+                        {oneUsdPrice == ""
+                          ? 0
+                          : userInfo?.currency_preference == "usd"
+                          ? Number(atprice / oneUsdPrice)?.toFixed(8)
+                          : Number(atprice)?.toFixed(8)}
+                        {}{" "}
+                        {userInfo?.currency_preference &&
+                        userInfo?.currency_preference == "usd" ? (
                           <img
                             src="./images/Usdt.png"
                             style={{ width: "15px" }}
                             alt="usdt"
+                            className="tradeUsdIcon"
+                          />
+                        ) : theme == 0 ? (
+                          <img
+                            src="./images/Inrx_black.png"
+                            style={{ width: "17px" }}
+                            alt="inrx"
+                            className="img"
                           />
                         ) : (
                           <img
-                            src="./images/Inrx_black.png"
-                            style={{ width: "15px" }}
+                            src="./images/Inrx_white.png"
+                            style={{ width: "17px" }}
                             alt="inrx"
+                            className="img"
                           />
                         )}
-                      </div>
-                    </div> */}
-                    <div
-                      style={{
-                        marginTop: "-15px",
-                      }}
-                    >
-                      <div style={{ fontWeight: "bold" }}>
-                        ANA PRICE{"  "}
-                        <span style={{ color: "#008000", fontWeight: "bold" }}>
-                          {userInfo?.currency_preference == "usd"
-                            ? (atprice / oneUsdPrice)?.toFixed(8)
-                            : atprice?.toFixed(8)}{" "}
-                          <img
-                            src={
-                              userInfo?.currency_preference &&
-                                userInfo?.currency_preference == "usd" &&
-                                userInfo?.currency_preference &&
-                                userInfo?.currency_preference != null
-                                ? "./images/Usdt.png"
-                                : "./images/Inrx_black.png"
-                            }
-                            style={{ width: "15px" }}
-                            alt="usdt"
-                          />
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="input-group mb-3" style={{ margin: "0px" }}>
-                    <div class="input-group-prepend">
-                      <span
-                        class="input-group-text buy-sell-form-bg buy-sell-theme"
-                        style={{
-                          fontSize: " 10px",
-                          borderColor: " rgb(202, 202, 204)",
-                        }}
-                      >
-                        BUYING
-                        <br />
-                        AMOUNT
                       </span>
                     </div>
-                    <input
-                      type="number"
-                      class="form-control buy-sell-form-bg buy-sell-theme"
-                      value={total?.toFixed(2)}
+                  </div>
+                </div>
+                <div
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: "bold",
+                    display: "flex",
+                  }}
+                >
+                  Minimum Buying Amount {" "}
+                  <span style={{ color: "green",marginLeft:"5px"}}>
+                    {oneUsdPrice == ""
+                      ? 0
+                      :userInfo?.currency_preference == "inr"
+                      ? 5000
+                      : (5000 / oneUsdPrice)?.toFixed(2)}{" "}
+                  </span> 
+                  <div style={{marginLeft:"5px"}}>
+                    {userInfo?.currency_preference &&
+                    userInfo?.currency_preference == "usd" ? (
+                      <img
+                        src="./images/Usdt.png"
+                        style={{ width: "15px"}}
+                        alt="usdt"
+                        className="tradeUsdIcon"
+                      />
+                    ) : theme == 0 ? (
+                      <img
+                        src="./images/Inrx_black.png"
+                        style={{ width: "17px" }}
+                        alt="inrx"
+                        className="img"
+                      />
+                    ) : (
+                      <img
+                        src="./images/Inrx_white.png"
+                        style={{ width: "17px" }}
+                        alt="inrx"
+                        className="img"
+                      />
+                    )}
+                  </div>
+                </div>
+                <div class="input-group mb-3" style={{ margin: "0px" }}>
+                  <div class="input-group-prepend">
+                    <span
+                      class="input-group-text buy-sell-form-bg buy-sell-theme"
                       style={{
-                        borderColor: "rgb(202, 202, 204)",
-                        height: "54px",
-                        color: "#008000",
-                        fontWeight: "bold",
+                        fontSize: " 10px",
+                        borderColor: " rgb(202, 202, 204)",
                       }}
-                      onChange={(e) => {
-                        // setTotal(e.target.value);
-                        setAmmount(userInfo?.currency_preference == "inr" ? e.target.value / atprice : e.target.value / (atprice / oneUsdPrice))
+                    >
+                      BUYING
+                      <br />
+                      AMOUNT
+                    </span>
+                  </div>
+                  <input
+                    type="number"
+                    id="total"
+                    class="form-control buy-sell-form-bg buy-sell-theme"
+                    value={total}
+                    // defaultValue={total?total: userInfo?.currency_preference == "inr"?5000:5000/oneUsdPrice}
+                    style={{
+                      borderColor: "rgb(202, 202, 204)",
+                      height: "54px",
+                      color: "#008000",
+                      fontWeight: "bold",
+                    }}
+                    onChange={(e) => {
+                      if (e.target.value) {
+                        let val;
 
+                        if (e.target.value.startsWith(0))
+                          val = e.target.value.substring(1, e.target.length);
+                        else val = e.target.value;
+                        setRangeValue(val);
+                        setTotal(val);
+                        setAmmount(
+                          userInfo?.currency_preference == "inr"
+                            ? val / atprice
+                            : val / (atprice / oneUsdPrice)
+                        );
+                        console.log(ammount, "Ammount ");
+                        console.log(val, "val aval");
+                      } else {
+                        setRangeValue(0);
+                        setTotal(0);
+                        setAmmount(0);
+                      }
+                    }}
+                  />
+                </div>
+                <div style={{ margin: "30px 0px" }}></div>
+                {/* 
+                 <div>
+                  {walletbalance && userInfo?.currency_preference ? (
+                    <MultiRangeSlider
+                   
+                      min={
+                        oneUsdPrice == ""
+                          ? 0
+                          : userInfo?.currency_preference == "inr"
+                          ? 5000
+                          : 5000 / oneUsdPrice
+                      }
+                      symbol={
+                        userInfo?.currency_preference == "usd" ? "USDT" : "INRX"
+                      }
+                      fixedmax={
+                        oneUsdPrice == ""
+                          ? 0
+                          : userInfo?.currency_preference == "usd"
+                          ? Number(balance)
+                          : Number(balance * oneUsdPrice)
+                      }
+                  
+                      max={
+                        oneUsdPrice == ""
+                          ? 0
+                          : userInfo?.currency_preference == "usd"
+                          ? Number(balance)
+                          : Number(balance * oneUsdPrice)
+                      }
+                      
+                      onChange={({ min, max, symbol }) => {
+                        console.log(`min = ${min}, max = ${max}`);
+                        if (userInfo?.currency_preference == "inr") {
+                          setAmmount(atprice && max / atprice);
+                          setTotal(max);
+                        } else if (userInfo?.currency_preference == "usd") {
+                          setAmmount(
+                            atprice &&
+                              oneUsdPrice &&
+                              max / (atprice / oneUsdPrice)
+                          );
+                          setTotal(max);
+                        }
                       }}
                     />
-                  </div>
-                  {/* Increment Button  */}
-                  <div>
-                    {/* <FcPlus style={{color:"green"}} onClick={()=>setBtnInc( walletbalance  + 1)}/>
-          <FaMinusCircle style={{color:"green"}} onClick={()=>setBtnInc(walletbalance  - 1)}/> */}
-                  </div>
-                  <div style={{ margin: "30px 0px" }}></div>
-                  <div>
-                    {
-                      // totalAna &&
-                      // userInfo &&
-                      // oneUsdPrice &&
-                      walletbalance && userInfo?.currency_preference ? (
-                        <MultiRangeSlider
-                          min={
-                            userInfo?.currency_preference == "inr"
-                              ? 5000
-                              : 5000 / oneUsdPrice
-                          }
-                          // min={200}
-                          symbol={
-                            userInfo?.currency_preference == "usd"
-                              ? "USDT"
-                              : "INRX"
-                          }
-                          max={walletbalance}
-                          fixedmax={walletbalance}
-                          onChange={({ min, max, symbol }) => {
-                            // console.log(`min = ${min}, max = ${max}`);
-                            if (userInfo?.currency_preference == "inr") {
-                              setAmmount(max / atprice);
-                              setTotal(max);
-                            } else {
-                              setAmmount(max / (atprice / oneUsdPrice));
-                              setTotal(max);
-                            }
-                          }}
+                  ) : null}
+                </div>  */}
+
+                <input
+                  type="range"
+                  id="slider"
+                  value={rangeValue}
+                  min={
+                    oneUsdPrice == ""
+                      ? 0
+                      : userInfo?.currency_preference == "inr"
+                      ? 5000
+                      : 5000 / oneUsdPrice
+                  }
+                  max={
+                    oneUsdPrice == ""
+                      ? 0
+                      : userInfo?.currency_preference == "usd"
+                      ? Number(balance)
+                      : Number(balance * oneUsdPrice)
+                  }
+                  // value={"6000"}
+                  onChange={(e) => {
+                    setRangeValue(e.target.value);
+                    console.log(rangeValue, "range value");
+                    if (userInfo?.currency_preference == "inr") {
+                      setAmmount(
+                        document.querySelector("#slider").value / atprice
+                      );
+                      setTotal(Number(document.querySelector("#slider").value).toFixed(2));
+                    } else if (userInfo?.currency_preference == "usd") {
+                      setAmmount(
+                        atprice &&
+                          oneUsdPrice &&
+                          document.querySelector("#slider").value /
+                            (atprice / oneUsdPrice)
+                      );
+                      console.log(
+                        document.querySelector("#slider").value,
+                        "value"
+                      );
+                      setTotal(Number(document.querySelector("#slider").value).toFixed(2));
+                    }
+                  }}
+                />
+                <div
+                  className="details"
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <span>
+                    {oneUsdPrice == ""
+                      ? 0
+                      : userInfo?.currency_preference == "inr"
+                      ? 5000
+                      : (5000 / oneUsdPrice)?.toFixed(2)}{" "}
+                    <span>
+                      {userInfo?.currency_preference &&
+                      userInfo?.currency_preference == "usd" ? (
+                        <img
+                          src="./images/Usdt.png"
+                          style={{ width: "15px" }}
+                          alt="usdt"
+                          className="tradeUsdIcon"
                         />
-                      ) : null
-                    }
-                  </div>
-                  <button
-                    class="btn text-light btn-block my-2"
-                    style={{ background: "rgb(108, 183, 125)", top: "60px" }}
-                    onClick={
-                      // TotalAmt
-                      ConfirmBox
-                    }
-                    disabled={
-                      walletbalance <= (userInfo?.currency_preference == "inr" ? 5000 : 5000 / oneUsdPrice)
-                    }
-                  >
-                    BUY ANA
-                  </button>
+                      ) : theme == 0 ? (
+                        <img
+                          src="./images/Inrx_black.png"
+                          style={{ width: "17px" }}
+                          alt="inrx"
+                          className="img"
+                        />
+                      ) : (
+                        <img
+                          src="./images/Inrx_white.png"
+                          style={{ width: "17px" }}
+                          alt="inrx"
+                          className="img"
+                        />
+                      )}
+                    </span>
+                  </span>
+
+                  <span>
+                    {oneUsdPrice == ""
+                      ? 0
+                      : userInfo?.currency_preference == "usd"
+                      ? Number(balance)?.toFixed(2)
+                      : Number(balance * oneUsdPrice)?.toFixed(2)}{" "}
+                    <span>
+                      {userInfo?.currency_preference &&
+                      userInfo?.currency_preference == "usd" ? (
+                        <img
+                          src="./images/Usdt.png"
+                          style={{ width: "15px" }}
+                          alt="usdt"
+                          className="tradeUsdIcon"
+                        />
+                      ) : theme == 0 ? (
+                        <img
+                          src="./images/Inrx_black.png"
+                          style={{ width: "17px" }}
+                          alt="inrx"
+                          className="img"
+                        />
+                      ) : (
+                        <img
+                          src="./images/Inrx_white.png"
+                          style={{ width: "17px" }}
+                          alt="inrx"
+                          className="img"
+                        />
+                      )}
+                    </span>
+                  </span>
                 </div>
+
+                <button
+                  class="btn btn-block my-2"
+                  style={{
+                    background: "rgb(108, 183, 125)",
+                    top: "40px",
+                    color: "white",
+                  }}
+                  onClick={ConfirmBox}
+                  disabled={
+                    walletbalance &&
+                    walletbalance <=
+                      (userInfo?.currency_preference == "inr"
+                        ? 5000
+                        : 5000 / oneUsdPrice)
+                  }
+                >
+                  BUY ANA
+                </button>
               </div>
             </div>
-          </div>
-        )}
+         
+        </div>
       </div>
     </div>
   );

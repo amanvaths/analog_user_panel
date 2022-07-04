@@ -22,7 +22,9 @@ const initialValue = {
   } ,
   oneUsdPrice: '',
   totalAna: '',
-  walletBalance: ''
+  walletBalance: '',
+  theme: 0,
+  buyloader:false,
 };
 
 export const userSlice = createSlice({
@@ -66,9 +68,14 @@ export const userSlice = createSlice({
     setTotalWalletBalance: (state, action) => {
       state.value.walletBalance = action.payload.walletBalance
     },
-
+    setTheme: (state, action) => {
+      state.value.theme = action.payload.theme
+    },
+    setBuyLoader:(state,action)=>{
+      state.value.buyloader=action.payload.buyloader
+    }
   },
 });
 
-export const {setIsLoggedIn, setUserInfo, setSettingPage, setOneUsdPrice, setTotalAna, logout, sendOtp, setOneCoinPrice, setTotalWalletBalance} = userSlice.actions;
+export const {setIsLoggedIn, setUserInfo, setSettingPage, setOneUsdPrice, setTotalAna, logout, sendOtp, setOneCoinPrice, setTotalWalletBalance, setTheme,setBuyLoader} = userSlice.actions;
 export default userSlice.reducer;

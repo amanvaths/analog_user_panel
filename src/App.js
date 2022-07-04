@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import React, {useEffect} from "react";
+import { BrowserRouter, Routes, Route} from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
-import Profile from "./pages/Profile";
+// import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Terms from "./pages/Terms";
-import Faq from "./pages/Faq";
+// import Terms from "./pages/Terms";
+// import Faq from "./pages/Faq";
 import Affiliate from "./pages/Affiliate";
-import Transactions from "./pages/Transactions";
-import Projects from "./pages/Projects";
+// import Transactions from "./pages/Transactions";
+// import Projects from "./pages/Projects";
 import EmailOtp from "./pages/EmailOtp";
 import ForgetPassword from "./pages/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword";
@@ -23,12 +23,29 @@ import OtpTFA from "./pages/OtpTFA";
 import Bounty from "./pages/Bounty";
 import AirDrop from "./pages/AirDrop";
 import Withdrawal from './pages/Withdrawal'
+import Handout from "./pages/Handout";
 import { useSelector } from "react-redux";
+import { subscribeUser } from "./web-push.config";
+import AllNotifications from './pages/AllNotifications'
 
 
 function App(props) {
-  const {user, } = useSelector((state)=> state.user.value)
-  console.log("user", user);
+  const {userInfo, user} = useSelector((state)=> state.user.value)
+  // console.log(userInfo.webPush_Private_Key, 'USER');
+  // console.log(user, "USER1");
+
+  useEffect(()=>{
+    if(userInfo?.webPush_Public_Key && user?.email){
+      // console.log(user?.email, ":; USER EMASIOL I N APP>JS");
+      // console.log("user public key :",userInfo.webPush_Public_Key);
+    subscribeUser(userInfo?.webPush_Public_Key, user?.email);
+    } else {
+      console.log("User public key not found!");
+    }
+
+  },[{...user}])
+
+  // console.log("user", user);
   return (
     <div>
       <BrowserRouter>
@@ -42,26 +59,25 @@ function App(props) {
           <Route path="/2faAuthentication" element={<OtpTFA />} />
 
 
-          <Route path="/Profile" element={<Profile />} />
-          <Route path="/Terms" element={<Terms />} />
-          <Route path="/Faq" element={<Faq />} />
-          <Route path="/Projects" element={<Projects />} />
+          {/* <Route path="/Profile" element={<Profile />} /> */}
+          {/* <Route path="/Terms" element={<Terms />} /> */}
+          {/* <Route path="/Faq" element={<Faq />} /> */}
+          {/* <Route path="/Projects" element={<Projects />} /> */}
 
-          
-         
           <Route path="/home" element={(user.email && user.token)?<Home />:<Login /> } />
           <Route path="/Affiliate" element={<Affiliate />} />
-          <Route path="/Transactions" element={<Transactions />} />
-          <Route path="/wallet" element={<Wallet />} />
+          {/* <Route path="/Transactions" element={<Transactions />} /> */}
+          <Route path="/wallet" element={(user.email && user.token)? <Wallet /> : <Login />} />
           <Route path="/accountSettings" element={<AccountSettings />} />
           <Route path="/cryptoTransaction" element={<CryptoTransaction />} />
-          <Route path="/buysell" element={< BuySell />} />
+          <Route path="/buysell" element={(user.email && user.token)? < BuySell /> : <Login />} />
           <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="/*" element={(user.email && user.token)?<Home />:<Login />} />
           <Route path="/Bounty" element={(user.email && user.token)?<Bounty />:<Login />} />
           <Route path="/Airdrop" element={(user.email && user.token)?<AirDrop />:<Login />} />
           <Route path="/Withdrawal" element={(user.email && user.token)?<Withdrawal />:<Login />} />
-        
+          <Route path="/Handout" element={(user.email && user.token)?<Handout />:<Login />} />
+          <Route path="/Notification" element={(user.email && user.token)?<AllNotifications />:<Login />} />
         </Routes>
       </BrowserRouter>
     </div >

@@ -4,11 +4,7 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 // import Countdown from "react-countdown";
 
 const Getpresale = (props) => {
-  const { levelname, coinQty, coinPrice, duration, persent } = props;
-  const [hours, setHours] = useState("");
-  const [minutes, setMinutes] = useState("");
-  const [seconds, setSeconds] = useState("");
-  const [day, setDay] = useState("");
+  const { levelname, coinQty, coinPrice, duration ,persent} = props;
   const [timer, setTimer] = useState({
     days: "",
     hour: "",
@@ -16,26 +12,12 @@ const Getpresale = (props) => {
     second: "",
   });
 
-  const [Backk, setBackk] = useState("light");
-  const theme = localStorage.getItem("theme");
-
-  useEffect(() => {
-    console.log("mytheme",theme);
-    if (theme) {
-      setBackk("dark");
-    } else {
-      setBackk("light");
-    }
-  }, [theme]);
-
-
-
   useEffect(() => {
     countdowntimer();
   }, []);
 
   function countdowntimer() {
-    var day = 20;
+    
     var se = 86400 * duration;
     var x = setInterval(function () {
       let days = Math.floor(se / 86400);

@@ -3,25 +3,29 @@ import Menu from "../components/Menu";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Card1 from "../components/Card";
+import 'react-notifications/lib/notifications.css';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 
 import axios from "axios";
 import { Triangle } from 'react-loader-spinner'
 import { useSelector, useDispatch } from 'react-redux';
 import { BASE_URL } from "../Api_connection/config";
-import { setUserInfo, setOneCoinPrice, setTotalWalletBalance } from "../redux/reducer/user";
+import { setUserInfo } from "../redux/reducer/user";
 import { Link, useNavigate } from "react-router-dom";
-import swal from "sweetalert";
+const { io } = require("socket.io-client");
+
 
 
 const Wallet = (props) => {
   const { userInfo, oneUsdPrice, totalAna, user,  } = useSelector((state) => state.user.value)
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [coinData, setCoinData] = useState([]);
   const [walletDetails, setWalletDetails] = useState([]);
   const [coinWW, setCoinWW] = useState([]);
-  const [loader, setLoader] = useState(true)
-  const [usdPrice, setUsdPrice] = useState()
+  const [loader, setLoader] = useState(false)
+  const [totalSpendINR, setTotalSpendINR] = useState(0)
+  const [totalSpendUSDT, setTotalSpendUSDT] = useState(0)
+
   const [inceptive, setInceptive] = useState(0)
   const [airdrop, setAirDrop] = useState(0)
   const [affiliates, setffiliates] = useState(0)
@@ -29,73 +33,121 @@ const Wallet = (props) => {
   const [bounty, setBounty] = useState(0)
   const [handOut, setHandOut] = useState(0)
 
+
+
   const email = user.email;
+  const socket = io(`http://localhost:8080`)
+  // var status = 0;
+  useEffect(()=>{
+  socket.on('connect',()=>{
+    console.log("Socket Connected");
+    socket.emit('join', {email: email });
+    socket.on('balance',(data)=>{
+      console.log("BALANCE EVENT", data)
+      setWalletDetails([...data]);
+    })
+
+    socket.on("msg",(data)=>{
+      console.log(data, "MESSAGE DATA");
+      // if(status == 0){
+      //   status = 1
+     
+        NotificationManager.success('Added',data)
+      // }
+     
+    })
+
+      socket.on('notification',(data)=>{
+        console.log(data, "Notification data");
+      })
+  })
+},[])
+
+
+// setInterval(() => {
+//   if(status == 0){
+//     status = 1
+//   }
+  
+// }, 5000);
+
+
+
+
+
+
+  // const test = ()=>{
+  //   try {
+  //       axios.post(`http://localhost:3001/get`, {email:email})
+  //       console.log("GET API DATA");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
+  // useEffect(()=>{
+  //   test()
+  // },[])
 
   const getUserAllWallletData = async () => {
     try {
         const res = await axios.get(`${BASE_URL}/userAllRecords?email=${email}&bonus_type=Level`)
-        //console.warn(res.data +"Reff data ");
         setInceptive(res?.data?.income[0]?.inceptive_wallet)
         setAirDrop(res?.data?.income[0]?.airdrop_wallet)
         setffiliates(res?.data?.income[1]?.total_bonus?.toFixed(2))
-        setInherited(res.data?.income[0].inherited_wallet)
-        setBounty(res?.data?.income[0].total_bonus)
-        setHandOut(res?.data?.income[0].handout_wallet)
+        setInherited(res.data?.income[0]?.inherited_wallet)
+        setBounty(res?.data?.income[0]?.total_bonus)
+        setHandOut(res?.data?.income[0]?.handout_wallet)
+        setTotalSpendINR(res?.data?.income[0]?.total_spend_inrx)
+        setTotalSpendUSDT(res?.data?.income[0]?.total_spend_usdt)
     } catch (error) {
         console.log("Error in refferal Data API " + error);
     }
 }
-const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + Number(inherited) + Number(bounty) + Number(handOut);
+
+const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)  + Number(affiliates ? affiliates:0)  + Number(inherited ? inherited : 0) + Number(bounty ? bounty : 0) + Number(handOut ? handOut : 0);
   const getData = async () => {
     try {
-      console.log(":: cp in ", userInfo?.currency_preference);
+      
       const cp = userInfo?.currency_preference?.toUpperCase()
       const res = await axios.post(`${BASE_URL}/getCoinData`, { currency: cp });
       const cd = [];
-      console.log(res.data, "::res.data");
+      // console.log(res.data, "::res.data");
       for (let coin of Object.entries(res.data)) {
         cd.push(coin[1]);
       }
       setCoinData([...cd]);
     } catch (error) {
+      getData() 
       console.log(error);
     }
   };
 
-  async function getWalletDetails() {
-    const walletAddress = await axios.post(
-      `${BASE_URL}/getwalletdata`, { email: email });
-    console.log(walletAddress, "wallet address")
-    setWalletDetails([...walletAddress.data]);
-  }
 
-  const updateWallet = async () => {
-    try {
-      const data = await axios.post(`${BASE_URL}/transaction_update`, { email: email })
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  useEffect(async () => {
-    const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
-    if (data) {
-      dispatch(setUserInfo({ userInfo: data.data }))
-      getUserAllWallletData()
-     
-      getData();
-      getWalletDetails();
-    }
-  }, [])
-
-  useEffect(()=>{
-    setTimeout(() => {
-      updateWallet()
-    }, 20000);
-   
-  },[])
+  
+ 
+    // console.log(walletDetails, "WALLET DETAILS");
 
   useEffect(() => {
+    const conSetting = async()=>{
+      const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
+    if (data) {
+      // getWalletDetails()
+      dispatch(setUserInfo({ userInfo: data.data }))
+      getUserAllWallletData()     
+      
+    }
+    }
+    conSetting()
+    
+  }, [])
+  useEffect(()=>{
+    getData()  
+  },[userInfo])
+
+// console.log(walletDetails, "WALLET DETAILS");
+  useEffect(() => {
+    // console.log(walletDetails.length);
     if (coinData.length > 0 && walletDetails.length > 0) {
       const cd = [];
       for (let coind of coinData) {
@@ -103,9 +155,9 @@ const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + 
         cd.push({ ...coind, wallet: w[0] });
       }
       setCoinWW([...cd]);
-      setLoader(false)
+      // setLoader(false)
     }
-  }, [walletDetails, coinData]);
+  }, [coinData, walletDetails]);
 
 
   return (
@@ -196,18 +248,21 @@ const totalBonus = Number(inceptive) + Number(airdrop)  + Number(affiliates)  + 
                             address={element?.wallet?.walletAddr}
                             logo={`https://s2.coinmarketcap.com/static/img/coins/64x64/${element.id}.png`}
                             cp={Object.values(userInfo).length > 0 ? userInfo.currency_preference.toUpperCase() : 'USD'}
+                            
                            />
                         </div>
                       );
                     })}
                   </div>
+                  <NotificationContainer />
                 </div>
                 <Footer />
               </div>
             </div>
-          </div>) 
-          }
-      </div>
+          </div>
+           ) 
+          } 
+       </div>
     </>
   );
 };

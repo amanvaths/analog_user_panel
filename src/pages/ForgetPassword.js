@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BASE_URL } from "../Api_connection/config";
-import { useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
 import swal from "sweetalert";
 
@@ -10,20 +10,12 @@ const ForgetPassword = (props) => {
 
   const [email, setEmail] = useState("");
   const [emailerror, setEmailerror] = useState(false);
-  const [showMessage, setShowMessage] = useState(false);
   const [showNewMessage, setShowNewMessage] = useState(false);
-  const navigate = useNavigate();
+  
 
-  // console.log(otp, "otpp");
-
-  //   var LocalEmail = localStorage.setItem("email", email);
-  //   console.log(LocalEmail, "LocalEmal");
-  //   if (LocalEmail == "t") {
-  //     navigate("/");
-  //   }
   async function forgetPass(e) {
     e.preventDefault();
-    await fetch("http://localhost:3001/api/forget", {
+    await fetch(`${BASE_URL}/forget`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -219,76 +211,76 @@ const ForgetPassword = (props) => {
 
             <div className="nk-content text-center mt-lg-2">
               <div className="container container justify-content-center d-flex">
-                {/*<ul className="nav nav-sm">
-                  <li className="nav-item">
-                    <a className="nav-link" href="#">
+                <ul className="nav nav-sm">
+                <li className="nav-item">
+                    <Link className="nav-link" to="">
                       Terms &amp; Condition
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className="nav-link" to="">
                       Privacy Policy
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className="nav-link" to="">
                       Help
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item dropup">
-                    <a
+                    <Link
                       className="dropdown-toggle dropdown-indicator has-indicator nav-link"
                       data-toggle="dropdown"
                       data-offset="0,10"
                     >
                       <small>English</small>
-                    </a>
+                    </Link>
                     <div className="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                       <ul className="language-list">
                         <li>
-                          <a href="#" className="language-item">
+                          <Link to="" className="language-item">
                             <img
                               src="./images/flags/english.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">English</span>
-                          </a>
+                          </Link>
                         </li>
                         <li>
-                          <a href="#" className="language-item">
+                          <Link to="" className="language-item">
                             <img
                               src="./images/flags/spanish.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">Español</span>
-                          </a>
+                          </Link>
                         </li>
                         <li>
-                          <a href="#" className="language-item">
+                          <Link to="" className="language-item">
                             <img
                               src="./images/flags/french.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">Français</span>
-                          </a>
+                          </Link>
                         </li>
                         <li>
-                          <a href="#" className="language-item">
+                          <Link to="" className="language-item">
                             <img
                               src="./images/flags/turkey.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">Türkçe</span>
-                          </a>
+                          </Link>
                         </li>
                       </ul>
                     </div>
                   </li>
-                </ul>*/}
+                </ul>
               </div>
               <div className="mt-3">
                 <p>&copy; 2022 INRX ECOSYSTEM. All Rights Reserved.</p>

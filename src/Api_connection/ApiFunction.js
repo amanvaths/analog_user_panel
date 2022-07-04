@@ -28,8 +28,8 @@ export function getSettings(email) {
 export function profileMenu (){  
   var element = document.getElementById("myBody"); 
   element.classList.toggle("toggle-shown"); 
-  var element = document.getElementById("toggleBtn"); 
+   element = document.getElementById("toggleBtn"); 
   element.classList.toggle("active");                                 
-  var element = document.getElementById("cardAside"); 
+   element = document.getElementById("cardAside"); 
   element.classList.toggle("content-active");          
 }

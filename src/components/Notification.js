@@ -4,6 +4,7 @@ import { BASE_URL } from "../Api_connection/config";
 import { useSelector, useDispatch } from "react-redux";
 import { profileMenu } from "../Api_connection/ApiFunction";
 import { setUserInfo} from "../redux/reducer/user";
+import { Link } from "react-router-dom";
 
 const Notification = () => {
     const { userInfo, user } = useSelector((state) => state.user.value)
@@ -12,7 +13,7 @@ const Notification = () => {
     const [isInit, setInit] = useState(false);
     const dispatch = useDispatch()
     
-    const [pMenu, setPMenu] = useState(0);
+   
 
     const setNotification = async (e) => {
         try {
@@ -40,11 +41,16 @@ const Notification = () => {
         }
     },[reflect]);
 
-    useEffect(async()=>{
-        const data = await axios.post(`${BASE_URL}/configSettings`, {email: email})
+    useEffect(()=>{
+        const conSetting = async()=>{
+            const data = await axios.post(`${BASE_URL}/configSettings`, {email: email})
         if(data){
             dispatch(setUserInfo({userInfo: data.data}))
         }
+        }
+
+        conSetting()
+        
     },[])
 
     return (

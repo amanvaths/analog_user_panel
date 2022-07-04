@@ -29,7 +29,7 @@ const ChangePassword = () => {
         try {
             const data = await axios.post('http://localhost:3001/api/change_password',{email: email, old_password: oldPassword, new_password: newPassword})
             console.log(data.data)
-            if(data.data.status == 1){
+            if(data.data.status === 1){
                 swal("Password Changed Successfully", "Please Login", "success");
           setTimeout(() => {
             navigate("/login");
@@ -119,13 +119,13 @@ const ChangePassword = () => {
 
     const handelFormSubmit = (oldPassword, newPassword, confirmPassword) => {
 
-        if (oldPassword == "") {
+        if (oldPassword === "") {
             setOldPasswordError(true);
         }
-        if (newPassword == '') {
+        if (newPassword === '') {
             setNewPasswordError(true)
         }
-        if (confirmPassword == "") {
+        if (confirmPassword === "") {
             setConfirmPasswordError(true);
         }
         if (oldPassword !== "" && newPassword !== "" && confirmPassword !== "") {

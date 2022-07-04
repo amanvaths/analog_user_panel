@@ -4,16 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { getSettings } from "../Api_connection/ApiFunction";
 import { setUserInfo } from "../redux/reducer/user";
-import { Triangle } from 'react-loader-spinner'
+
 import swal from "sweetalert";
 import 'react-notifications/lib/notifications.css';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
+import { Link } from "react-router-dom";
 
 const PersonalInfo = () => {
   const dispatch = useDispatch()
   const { userInfo, user } = useSelector((state) => state.user.value)
   const email = user.email;
-  const [load, setLoad] = useState({})
   const [showUser, setShowUser] = useState(true)
   const [showUser1, setShowUser1] = useState(true)
   const [showUser2, setShowUser2] = useState(true);
@@ -24,7 +24,7 @@ const PersonalInfo = () => {
   const [updatedUserName, setUpdatedUserName] = useState('')
   const [updatedPhone, setUpdatedPhone] = useState('')
   const [pMenu, setPMenu] = useState(0);
-  const [loader, setLoader] = useState(true)
+  // const [loader, setLoader] = useState(true)
 
   const handelReferralChange = (e) => {
     setRefferal(e.target.value)
@@ -49,14 +49,17 @@ const PersonalInfo = () => {
     if (apidata.email && apidata.task && apidata[task]) {
       try {
         const data = await axios.post(`${BASE_URL}/settings`, apidata)
-        if(data.data.status == 1){
+        if (data.data.status == 1) {
           setUpdatedUserName(apidata['username']);
           setUpdatedPhone(apidata['contact'])
-          setMyCurrency(myCurrency);
-          updateSetting();
+          setMyCurrency(apidata['currency']);
+          setValue("");
+          setMyCurrency("");
+          setPhone("");
+          updateSetting(); 
         }
-        else if(data.data.status == -1){
-          NotificationManager.error('Refferal Added', data.data.message)
+        else if (data.data.status == -1) {
+          NotificationManager.error(data.data.message)
         }
       } catch (error) {
         console.log(error);
@@ -102,10 +105,10 @@ const PersonalInfo = () => {
       }
       console.log(data.data.status, ":: response from update Referaal API ");
     } catch (error) {
-      if(error.response.data.status == 2){
+      if (error.response.data.status == 2) {
         swal("Invalid refferal Code or Already updated", "", "error")
       }
-      else if(error.response.data.status == 0){
+      else if (error.response.data.status == 0) {
         swal("Something Went wrong 1", "", "error")
       }
       console.log(error.response.data.status);
@@ -118,17 +121,17 @@ const PersonalInfo = () => {
     if (pMenu == 0) {
       var element = document.getElementById("myBody");
       element.classList.add("toggle-shown");
-      var element = document.getElementById("toggleBtn");
+       element = document.getElementById("toggleBtn");
       element.classList.add("active");
-      var element = document.getElementById("cardAside");
+       element = document.getElementById("cardAside");
       element.classList.add("content-active");
       setPMenu(1)
     } else {
-      var element = document.getElementById("myBody");
+       element = document.getElementById("myBody");
       element.classList.remove("toggle-shown");
-      var element = document.getElementById("toggleBtn");
+       element = document.getElementById("toggleBtn");
       element.classList.remove("active");
-      var element = document.getElementById("cardAside");
+       element = document.getElementById("cardAside");
       element.classList.remove("content-active");
       setPMenu(0)
     }
@@ -136,12 +139,10 @@ const PersonalInfo = () => {
 
   useEffect(() => {
     getData();
-    setLoader(false)
+    // setLoader(false)
   }, [])
 
-  // useEffect(() => {
-  //   getData();
-  // }, [myCurrency])
+
 
   return (
     <>
@@ -155,14 +156,14 @@ const PersonalInfo = () => {
               </div>
             </div>
             <div className="nk-block-head-content align-self-start d-lg-none">
-              <a
-                href="#"
+              <Link
+                to=""
                 className="toggle btn btn-icon btn-trigger mt-n1"
                 data-target="userAside"
                 id="toggleBtn"
               >
                 <em className="icon ni ni-menu-alt-r" onClick={profileMenu}></em>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -198,13 +199,13 @@ const PersonalInfo = () => {
                 <div className="">
 
                   <span className="">
-                    {showUser ? <a href="#" class="btn btn-outline-success" onClick={() => {
+                    {showUser ? <Link to="" className="btn btn-dim btn-primary" onClick={() => {
                       if (value) {
                         updateData();
                         setShowUser(false);
                       }
-                    }}>Update</a> :
-                      <em className="ni ni-lock-alt"></em>
+                    }}>Update</Link> :
+                      <em className="icon ni ni-lock-alt"></em>
 
                     }
 
@@ -239,8 +240,8 @@ const PersonalInfo = () => {
                 </div>
               </div>
               <div className="col-4">
-                {showUser1 == true ? <div class="input-group-sm">
-                  <input type="text" class="form-control" aria-label="Phone" aria-describedby="basic-addon2"
+                {showUser1 == true ? <div className="input-group-sm">
+                  <input type="text" className="form-control" aria-label="Phone" aria-describedby="basic-addon2"
                     value={phone}
                     onChange={(e) => {
                       const ph = e.target.value
@@ -262,13 +263,13 @@ const PersonalInfo = () => {
               <div className="col-4 d-flex justify-content-end">
                 <div className="">
                   <span className="">
-                    {showUser1 ? <a href="#" class="btn btn-outline-success" onClick={() => {
+                    {showUser1 ? <Link to="" className="btn btn-dim btn-primary" onClick={() => {
                       if (phone) {
                         updateData();
                         setShowUser1(false);
                       }
-                    }}>Update</a> : <span className=" disable">
-                      <em className="ni ni-lock-alt"></em>
+                    }}>Update</Link> : <span className=" disable">
+                      <em className="icon ni ni-lock-alt"></em>
                     </span>
                     }
 
@@ -288,11 +289,11 @@ const PersonalInfo = () => {
                   <div className="data-col">
                     <span className="data-label">INRX</span>
                   </div>
-                  <div class="nk-block-actions">
-                    <div class="custom-control custom-switch me-n2">
+                  <div className="nk-block-actions">
+                    <div className="custom-control custom-switch me-n2">
                       <input
                         type="radio"
-                        class="custom-control-input"
+                        className="custom-control-input"
                         id="inrx"
                         name="currency"
                         value="inr"
@@ -302,7 +303,7 @@ const PersonalInfo = () => {
                           dispatch(setUserInfo({ currency_prefrence: "inr" }))
                         }}
                       />
-                      <label class="custom-control-label" for="inrx" ></label>
+                      <label className="custom-control-label" for="inrx" ></label>
                     </div>
                   </div>
                 </div>
@@ -313,11 +314,11 @@ const PersonalInfo = () => {
                     <span className="data-label">USDT</span>
 
                   </div>
-                  <div class="nk-block-actions">
-                    <div class="custom-control custom-switch me-n2">
+                  <div className="nk-block-actions">
+                    <div className="custom-control custom-switch me-n2">
                       <input
                         type="radio"
-                        class="custom-control-input"
+                        className="custom-control-input"
                         id="usdt"
                         name="currency"
                         value="usd"
@@ -327,14 +328,14 @@ const PersonalInfo = () => {
                           updateData("usd")
                           dispatch(setUserInfo({ currency_prefrence: "usd" }))
                         }}
-                      /><label class="custom-control-label" for="usdt" ></label>
+                      /><label className="custom-control-label" for="usdt" ></label>
                     </div>
                   </div>
                 </div>
               </> : null
             }
 
- <NotificationContainer/>
+            <NotificationContainer />
 
           </div>
 

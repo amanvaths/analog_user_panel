@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import swal from "sweetalert";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ResendOtp = (props) => {
   const [email, setEmail] = useState("");
@@ -61,17 +61,17 @@ const ResendOtp = (props) => {
         <div className="nk-split nk-split-page nk-split-md">
           <div className="nk-split-content nk-block-area nk-block-area-column nk-auth-container bg-white">
             <div className="absolute-top-right d-lg-none p-3 p-sm-5">
-              <a
-                href="#"
+              <Link
+                to=""
                 className="toggle btn-white btn btn-icon btn-light"
                 data-target="athPromo"
               >
                 <em className="icon ni ni-info"></em>
-              </a>
+              </Link>
             </div>
             <div className="nk-block nk-block-middle nk-auth-body">
               <div className="brand-logo pb-5">
-                <a href="#" className="logo-link">
+                <Link to="" className="logo-link">
                   <img
                     className="logo-light logo-img logo-img-lg"
                     src="./images/logo.png"
@@ -84,7 +84,7 @@ const ResendOtp = (props) => {
                     srcSet="./images/logo-dark2x.png 2x"
                     alt="logo-dark"
                   />
-                </a>
+                </Link>
               </div>
               <div className="nk-block-head">
                 <div className="nk-block-head-content">
@@ -158,81 +158,81 @@ const ResendOtp = (props) => {
               </form>
               <div className="form-note-s2 pt-4">
                 {" "}
-                New on our platform? <a href="/signup">Create an account</a>
+                New on our platform? <Link to="/signup">Create an account</Link>
               </div>
               <div className="text-center pt-4 pb-3">
-                <span className="overline-title overline-title-sap">
+                <h6 className="overline-title overline-title-sap">
                   <span>OR</span>
-                </span>
+                </h6>
               </div>
             </div>
             <div className="nk-block nk-auth-footer">
               <div className="nk-block-between">
                 <ul className="nav nav-sm">
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className="nav-link" to="">
                       Terms & Condition
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className="nav-link" to="">
                       Privacy Policy
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className="nav-link" to="">
                       Help
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item dropup">
-                    <a
+                    <Link
                       className="dropdown-toggle dropdown-indicator has-indicator nav-link"
                       data-toggle="dropdown"
                       data-offset="0,10"
                     >
                       <small>English</small>
-                    </a>
+                    </Link>
                     <div className="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                       <ul className="language-list">
                         <li>
-                          <a href="#" className="language-item">
+                          <Link to="" className="language-item">
                             <img
                               src="./images/flags/english.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">English</span>
-                          </a>
+                          </Link>
                         </li>
                         <li>
-                          <a href="#" className="language-item">
+                          <Link to="" className="language-item">
                             <img
                               src="./images/flags/spanish.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">Español</span>
-                          </a>
+                          </Link>
                         </li>
                         <li>
-                          <a href="#" className="language-item">
+                          <Link to="" className="language-item">
                             <img
                               src="./images/flags/french.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">Français</span>
-                          </a>
+                          </Link>
                         </li>
                         <li>
-                          <a href="#" className="language-item">
+                          <Link to="" className="language-item">
                             <img
                               src="./images/flags/turkey.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">Türkçe</span>
-                          </a>
+                          </Link>
                         </li>
                       </ul>
                     </div>
@@ -240,7 +240,7 @@ const ResendOtp = (props) => {
                 </ul>
               </div>
               <div className="mt-3">
-                <p>&copy; 2021 INRX ECOSYSTEM. All Rights Reserved.</p>
+                <p>&copy; 2022 INRX ECOSYSTEM. All Rights Reserved.</p>
               </div>
             </div>
           </div>

@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { isIP } from 'is-ip'
 import { BASE_URL } from '../Api_connection/config'
-import swal from "sweetalert";
+
 import { useSelector } from "react-redux";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import { profileMenu } from "../Api_connection/ApiFunction";
+import { Link } from "react-router-dom";
 
 
 const IPwhiteListing = () => {
@@ -14,7 +15,7 @@ const IPwhiteListing = () => {
     const [whiteIP, setWhiteIP] = useState([])
     const [ip, setIp] = useState('')
     const [ipError, setipError] = useState(false)
-    const [pMenu, setPMenu] = useState(0);
+    
 
     const getCurrentAPI = async()=>{
         try {
@@ -71,7 +72,6 @@ const IPwhiteListing = () => {
     }
 
     useEffect(() => {
-
         getWhiteIP()
     }, [])
     return (
@@ -94,23 +94,23 @@ const IPwhiteListing = () => {
                         </div>
 
                         <div className="nk-block-head-content align-self-start d-lg-none">
-                            <a
-                                href="#"
+                            <b
+                                
                                 className="toggle btn btn-icon btn-trigger mt-n1"
                                 data-target="userAside"
                                 id = "toggleBtn"
                             >
                                 <em className="icon ni ni-menu-alt-r" onClick={profileMenu }></em>
-                            </a>
+                            </b>
                         </div>
                     </div>
 
                     <div className="row">
                         <div className="col-6">
-                            <div class="form-group">
-                                <label class="form-label" for="default-01">IP Address</label>
-                                <div class="form-control-wrap w-50">
-                                    <input type="text" class="form-control" id="default-01"
+                            <div className="form-group">
+                                <label className="form-label" for="default-01">IP Address</label>
+                                <div className="form-control-wrap w-50">
+                                    <input type="text" className="form-control" id="default-01"
                                         placeholder="Enter IP Address" style={{ fontSize: "13px" }}
                                         value={ip}
                                         onChange={(e) => setIp(e.target.value)} />
@@ -123,10 +123,10 @@ const IPwhiteListing = () => {
                         </div>
                         <div className="col-6 d-flex pt-4 justify-content-end">
                             <div className="mr-3">
-                                <button href="#" className="btn btn-dim btn-outline-warning btn-sm" onClick={()=> getCurrentAPI()}>Add Current IP</button>
+                                <button href="#" className="btn btn-dim btn-light btn-sm" onClick={()=> getCurrentAPI()}>Add Current IP</button>
                             </div>
                             <div>
-                                <a href="#" className="btn btn-dim btn-outline-success btn-sm" onClick={() => handelSubmit()}>Add IP</a>
+                                <Link to="" className="btn btn-dim btn-light btn-sm" onClick={() => handelSubmit()}>Add IP</Link>
                             </div>
 
 

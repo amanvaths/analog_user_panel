@@ -10,7 +10,7 @@ import { profileMenu } from '../Api_connection/ApiFunction';
 import swal from 'sweetalert'
 
 const SecuritySettings = () => {
-  const { userInfo, settingPages, user } = useSelector((state) => state.user.value)
+  const { userInfo, user } = useSelector((state) => state.user.value)
   console.log(":: USER INFO::::", userInfo);
   const [otp, setOtp] = useState("");
   const [otpD, setOtpD] = useState("");
@@ -19,12 +19,11 @@ const SecuritySettings = () => {
   
 
   const email = user.email
-  const [lable, setLable] = useState(false);
+ 
   const [security, setSecurityKey] = useState("")
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [pMenu, setPMenu] = useState(0);
 
   const handleClose1 = () => setShow1(false);
   const  handleShow1 = () => setShow1(true);
@@ -43,11 +42,16 @@ const SecuritySettings = () => {
     }
   }
 
-  useEffect(async()=>{
-    const data = await axios.post(`${BASE_URL}/configSettings`, {email: email})
-    if(data){
-      dispatch(setUserInfo({userInfo: data.data}))
+  useEffect(()=>{
+    const conSetting = async()=>{
+      const data = await axios.post(`${BASE_URL}/configSettings`, {email: email})
+      if(data){
+        dispatch(setUserInfo({userInfo: data.data}))
+      }
     }
+
+    conSetting()
+    
   },[])
 
   return (
@@ -67,13 +71,13 @@ const SecuritySettings = () => {
             <div
               className="nk-block-head-content align-self-start d-lg-none"
             >
-              <a
-                href="#"
+              <Link
+                to=""
                 className="toggle btn btn-icon btn-trigger mt-n1"
                 data-target="userAside"
                 id = "toggleBtn"
               ><em className="icon ni ni-menu-alt-r" onClick={ profileMenu }></em
-              ></a>
+              ></Link>
             </div>
           </div>
         </div>
@@ -84,9 +88,9 @@ const SecuritySettings = () => {
                 <div
                   className="between-center flex-wrap flex-md-nowrap g-3"
                 >
-                  <div>
-                    <h5>Save my Activity Logs</h5>
-                    <p>
+                  <div className="nk-block-text">
+                    <h6 className='p-1'>Save my Activity Logs</h6>
+                    <p className='p-1'>
                       You can save your all activity logs
                       including unusual activity detected.
                     </p>
@@ -94,10 +98,10 @@ const SecuritySettings = () => {
                   <div className="nk-block-actions">
                     <ul className="align-center gx-3">
                       <li className="order-md-last">
-                        <div class="custom-control custom-switch me-n2">
+                        <div className="custom-control custom-switch me-n2">
                           <input
                             type="checkbox"
-                            class="custom-control-input"
+                            className="custom-control-input"
                             id="log"
                             checked={userInfo?.login_activity}
                             // name='log'
@@ -109,7 +113,7 @@ const SecuritySettings = () => {
                               handelLog(e)
                             }}
                           />
-                          <label class="custom-control-label" for="log" ></label>
+                          <label className="custom-control-label" for="log" ></label>
                         </div>
                       </li>
                     </ul>
@@ -225,9 +229,10 @@ const SecuritySettings = () => {
                     </Modal.Header>
                     <Modal.Body>
                       <div className='row d-flex justify-content-around flex-row align-items-center py-2'>
-                        <div className='col-5'>
+                        <div className='col-6'>
                           <div className=''>
                             <img
+                            alt='qr'
                               src={security.qr_url}
                               style={{ height: "150px" }}
                             />
@@ -288,8 +293,8 @@ const SecuritySettings = () => {
                         
                         <div className='col-12'>
                           <form action="" style={{}}>
-                            <div class="form-group">
-                              <div class="form-group">
+                            <div className="form-group">
+                              <div className="form-group">
                                 <label for="inputOtp">Enter OTP to disable 2FA</label>
                                 <input type="text" class="form-control" id="inputOtp" placeholder="Enter Otp" onChange={(e) => setOtpD(e.target.value)} />
                               </div>

@@ -11,7 +11,6 @@ import IPwhiteListing from "../components/IPwhiteListing";
 
 import { navsetters } from "../redux/actions/websiteDBAction";
 
-
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { IoLocation } from 'react-icons/io5'
@@ -22,10 +21,12 @@ import { BASE_URL } from "../Api_connection/config";
 
 const AccountSettings = () => {
   const dispatch = useDispatch()
-  const { userInfo, settingPages, user } = useSelector((state) => state.user.value)
+  const { userInfo, settingPages, user, totalAna } = useSelector((state) => state.user.value)
   const [logData, setLogData] = useState([])
   const email = user.email
-  const [pMenu, setPMenu] = useState(0);
+
+  const btn1 = useSelector((store) => store.navsetters)
+
 
   const getLoginLog = async () => {
     try {
@@ -36,23 +37,31 @@ const AccountSettings = () => {
     }
   }
 
-
-  useEffect(async () => {
-    const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
-    if (data) {
-      dispatch(setUserInfo({ userInfo: data.data }))
-      getLoginLog()
+  const go = async()=>{
+    try {
+      const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
+      if (data) {
+        dispatch(setUserInfo({ userInfo: data.data }))
+        getLoginLog()
     }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
+  useEffect( () => {
+   go()
   }, [])
+
+  console.log(totalAna);
 
   const profileMenuRemove = ()=>{
     var element = document.getElementById("myBody"); 
-  element.classList.remove("toggle-shown"); 
-  var element = document.getElementById("toggleBtn"); 
-  element.classList.remove("active");                                 
-  var element = document.getElementById("cardAside"); 
-  element.classList.remove("content-active"); 
+    element.classList.remove("toggle-shown"); 
+    element = document.getElementById("toggleBtn"); 
+    element.classList.remove("active");                                 
+    element = document.getElementById("cardAside"); 
+    element.classList.remove("content-active"); 
   }
 
  
@@ -161,7 +170,6 @@ const AccountSettings = () => {
 
                         <div
                         className="card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg"
-                          // className={btn1?"card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg content-active":"card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg"}
                           data-toggle-body="true"
                           data-content="userAside"
                           data-toggle-screen="lg"
@@ -175,21 +183,21 @@ const AccountSettings = () => {
                                   <span>{userInfo?.username?.charAt(0)?.toUpperCase()}</span>
                                 </div>
                                 <div className="user-info">
-                                  <span className="lead-text text-uppercase">
+                                  <span className="lead-text">
                                     {userInfo?.username}
                                   </span>
-                                  <span className="text-grey">{userInfo?.user_id}</span>
+                                  <span className="sub-text">{userInfo?.user_id}</span>
                                 </div>
-                                {/* <div className="user-action">
+                                <div className="user-action">
                                   <div className="dropdown">
-                                    <a
+                                    <Link
                                       className="btn btn-icon btn-trigger me-n2"
                                       data-bs-toggle="dropdown"
-                                      href="#"
+                                      to=''
                                     >
                                       <em className="icon ni ni-arrow-left" onClick={profileMenuRemove}></em>
-                                    </a> 
-                                     <div className="dropdown-menu dropdown-menu-end">
+                                    </Link> 
+                                     {/* <div className="dropdown-menu dropdown-menu-end">
                                       <ul className="link-list-opt no-bdr">
                                         <li>
                                           <a href="#">
@@ -204,9 +212,9 @@ const AccountSettings = () => {
                                           </a>
                                         </li>
                                       </ul>
-                                    </div>  
+                                    </div>  */}
                                    </div>
-                                </div> */}
+                                </div> 
                               </div>
                             </div>
                             <div className="card-inner">
@@ -214,13 +222,13 @@ const AccountSettings = () => {
                                 <h6 className="overline-title-alt p-2">
                                   Analog Wallet Balance
                                 </h6>
-                                <div className="user-balance text-warning p-2">
-                                  12.395769
-                                  <small className="currency currency-btc p-2">
+                                <div className="user-balance p-2">
+                                  {totalAna&&totalAna?.toFixed(3)} ANA
+                                  {/* <small className="currency currency-btc p-2">
                                     BTC
-                                  </small>
+                                  </small> */}
                                 </div>
-                                <div className="user-balance-sub px-2">
+                                {/* <div className="user-balance-sub">
                                   Locked
                                   <span className="p-2">
                                     0.344939
@@ -228,7 +236,7 @@ const AccountSettings = () => {
                                       BTC
                                     </span>
                                   </span>
-                                </div>
+                                </div> */}
                               </div>
                             </div>
                             <div className="card-inner p-0">
@@ -247,6 +255,10 @@ const AccountSettings = () => {
                                         ipWhiteListing: false
                                       }
                                       dispatch(setSettingPage({settingPages: obj5}))
+                                      go()
+                                      // getSetti(email)
+                                      // dispatch(setUserInfo({currency_prefrence: userInfo?.currency_prefrence}))
+                                      // dispatch(setUserInfo({ currency_prefrence: "inr" }))
                                     }}
                                   >
                                     <em className="icon ni ni-user-fill-c"></em>
@@ -305,7 +317,7 @@ const AccountSettings = () => {
                                       dispatch(setSettingPage({settingPages: obj2}))
                                     }}>
                                     <em className="icon ni ni-lock-alt-fill"></em>
-                                    <span> Security Settings</span>
+                                    <span>Security Settings</span>
                                   </Link>
                                 </li>
                                 <li>

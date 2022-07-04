@@ -20,8 +20,8 @@ const Paginate = (props) => {
                 totalItemsCount={props.data}
                 pageRangeDisplayed={2}
                 onChange={(e) => handlePageChange(e)}
-                itemClass="page-item"
-                linkClass="page-link"
+                itemclassName="page-item"
+                linkclassName="page-link"
             />
         </>
     )

@@ -1,17 +1,14 @@
-import React, { useState } from "react";
+/* global google */
+import React, { useEffect, useState } from "react";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import { BASE_URL, GOOGLE_ID } from "../Api_connection/config";
-
-
-// import ForgetPassword from "./ForgetPassword";
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
 import swal from "sweetalert";
-import axios from "axios";
-
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setUserInfo, setIsLoggedIn, setSettingPage, sendOtp } from "../redux/reducer/user";
-
+import {setIsLoggedIn,sendOtp } from "../redux/reducer/user";
+import jwt_decode from 'jwt-decode'
+import axios from "axios";
 
 // import FacebookLogin from "react-facebook-login";
 
@@ -23,9 +20,49 @@ const Login = (props) => {
   const [emailerror, setEmailerror] = useState(false);
   const [passworderror, setPassworderror] = useState(false);
   const [shown, setShown] = useState(false)
+  const [ii, setII] = useState('')
 
 
-  // console.log(settings.google_authenticator, " In Login apge");
+
+  useEffect(()=>{
+    google.accounts.id.initialize({
+      client_id: "879223788790-mhj4ntd15ashepqn5h4ec4hu4fncmr8t.apps.googleusercontent.com",
+      callback: handleCallback
+    });
+
+    google.accounts.id.renderButton(
+      document.getElementById('googleLogin'),
+      {theme: "outline", size: "large"}
+    );
+
+    google.accounts.id.prompt()
+  },[google])
+
+  const handleCallback = async(response)=>{
+    let obj = jwt_decode(response.credential)
+    console.log(obj)
+    // setII(obj.picture)
+    console.log(email,"email");
+    const data  = await axios.post(`${BASE_URL}/signInWithGoogle`, { email: obj.email, password: obj.sub})
+    if(data){
+      console.log(data, "API RESPONSE");
+      if(data.data.status === 1)
+      {
+        console.log(data.data.status, "status");
+        if(data.data.googleAuth === 0){
+          console.log(data.data.googleAuth, "GoogleAuth");
+          dispatch(setIsLoggedIn({ LoginDetails: data.data }))
+            navigate('/home')
+        }else{
+          navigate('/2faAuthentication', { state: { email: data.data.email, token: data.data.token } })
+        }
+      }
+    }else{
+      swal("Something Went Wrong",
+      "He he hehehe",
+      "error")
+    }
+  }
 
   const onLoginSuccess = (res) => {
     console.log(res.profileObj);
@@ -106,51 +143,52 @@ const Login = (props) => {
     }
   };
 
+  
+
   return (
-    <div class="bg-login">
-      <div className="nk-apps-root">
-        <div className="nk-content container mt-lg-5 pt-lg-5 align-items-center">
-          <div className="row justify-content-md-center">
-           {/*} <div className="absolute-top-right d-lg-none p-3 p-sm-5">
-              <a
-                href="#"
+    <div>
+      <div class="bg-login">
+        <div className="nk-apps-root">
+          <div className="nk-content container mt-lg-5 pt-lg-5 align-items-center">
+            <div className="row justify-content-md-center">
+              <Link
+                to=""
                 className="toggle btn-white btn btn-icon btn-light"
                 data-target="athPromo"
               >
                 <em className="icon ni ni-info"></em>
-              </a>
-            </div>*/}
-            <div class="col-md-4 bg-teal shadow  d-flex align-items-center">
-              <div class="card-inner text-white"> 
+              </Link>
+            </div>
+            {ii == ""? null : <img src={ii} alt="" />}
+            
+            <div className="nk-block nk-block-middle nk-auth-body">
+              <div className="brand-logo pb-5">
+                <Link to="" className="logo-link">
+                  <img
+                    className="logo-light logo-img logo-img-lg"
+                    src="./images/logo.png"
+                    srcSet="./images/logo2x.png 2x"
+                    alt="logo"
+                  />
+                  <img
+                    className="logo-dark logo-img logo-img-lg"
+                    src="./images/logo.png"
+                    srcSet="./images/logo-dark2x.png 2x"
+                    alt="logo-dark"
+                  />
+                </Link>
+              </div>
+              <div className="nk-block-head">
                 <div className="nk-block-head-content">
-                  <h2 className="nk-block-title">Sign In</h2>
-                  <div className="lead">
+                  <h5 className="nk-block-title">Sign-In</h5>
+                  <div className="nk-block-des">
                     <p>
-                      Welcome back to  <b>Analog Inceptive</b> of{" "}
-                      <b>INRX Blockchain</b>. Login in to your account
+                      Connect with <b>Analog Inceptive</b> of{" "}
+                      <b>INRX Blockchain</b>.
                     </p>
                   </div>
-                </div></div>
-            </div>
-            <div className="col-md-6 bg-light border shadow">
-              <div class="card-inner">
-              <div className="brand-logo pb-5">
-                <a href="#" className="logo-link">
-                    <img
-                      className="logo-light logo-img logo-img-lg"
-                      src="./images/logo.png"
-                      srcSet="./images/logo2x.png 2x"
-                      alt="logo"
-                    />
-                    <img
-                      className="logo-dark logo-img logo-img-lg"
-                      src="./images/logo-dark.png"
-                      srcSet="./images/logo-dark2x.png 2x"
-                      alt="logo-dark"
-                    />
-                  </a>
+                </div>
               </div>
-            
               {/* {res.status == true ? (
                 <h1 style={{ color: "green", fontSize: 20 }}>{res.message}</h1>
               ) : (
@@ -167,9 +205,9 @@ const Login = (props) => {
                     <label className="form-label" for="default-01">
                       Email
                     </label>
-                    {/*<a className="link link-primary link-sm" tabindex="-1" href="#">
+                    <Link className="link link-teal link-sm" tabindex="-1" to="">
                       Need Help?
-                    </a>*/}
+                    </Link>
                   </div>
                   <input
                     type="email"
@@ -193,26 +231,27 @@ const Login = (props) => {
                     <label className="form-label" for="password">
                       Password
                     </label>
-                    <a class="text-teal small" href="/ForgetPassword">Forget Password ?</a>
+                    <Link to="/ForgetPassword">Forget Password</Link>
                     {/* <Link to={ForgetPassword}>Forget Password</Link> */}
                   </div>
                   <div className="form-control-wrap">
-                    <a
+                    <Link
                       tabIndex="-1"
-                      href="#"
-                      className="form-icon form-icon-right text-dark passcode-switch"
+                      to=""
+                      className="form-icon form-icon-right passcode-switch"
                       data-target="password"
                     >
                       {
                         shown == false ? <AiOutlineEyeInvisible onClick={togglePassword1} /> : <AiOutlineEye onClick={togglePassword1} />
                       }
-                    </a>
+                    </Link>
                     <input
                       type={shown ? "text" : 'password'}
                       className="form-control form-control-lg"
                       id="password"
                       placeholder="Enter password"
                       minLength={8}
+                      autoComplete="on"
                       onChange={(e) => {
                         setPassword(e.target.value);
                         setPassworderror(false);
@@ -235,10 +274,10 @@ const Login = (props) => {
                   </button>
                 </div>
               </form>
-              <div className="form-note-s2 pt-2 text-right small">
-                {" "}
-                Don't have an account yet? <a className="text-teal" href="/signup">Create an account</a>
-              </div>
+                <div className="form-note-s2 pt-2 text-right small">
+                  {" "}
+                  Don't have an account yet? <a className="text-teal" href="/signup">Create an account</a>
+                </div>
               <div className="text-center pt-4 pb-3">
                 <span className="overline-title overline-title-sap">
                   <span>OR</span>
@@ -257,14 +296,16 @@ const Login = (props) => {
                   /> */}
                 </li>
                 <li className="nav-item">
-                  <GoogleLogin
+                  <div id="googleLogin"></div>
+                  {/* {google.accounts.id.renderButton()} */}
+                  {/* <GoogleLogin
                     clientId={GOOGLE_ID}
                     buttonText="Sign in with Google"
                     onSuccess={onLoginSuccess}
                     onFailure={onLoginFailure}
                     cookiePolicy={"single_host_origin"}
-                  />
-                  {/* <a className="nav-link" href="#"> */}{" "}
+                  /> */}
+                  {/* <Link className="nav-link" to=""> */}{" "}
                   {/* <GoogleLogin
                     clientId={clientId}
                     buttonText="Login"
@@ -359,11 +400,10 @@ const Login = (props) => {
                 <p>&copy; 2022  INRX ECOSYSTEM. All Rights Reserved.</p>
               </div>
             </div>
-          </div>
-         
         </div>
+         
       </div>
-    </div>
+      </div>
   );
 };
 

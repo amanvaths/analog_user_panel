@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setUserInfo, logout } from "../redux/reducer/user";
+import { setUserInfo, logout, setTheme } from "../redux/reducer/user";
 import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
-
+import { navsetter } from "../redux/actions/websiteDBAction";
 
 const Header = () => {
-  var flag=0;
-  const [isopen, setIsopen] = useState(0);
+
   const { user, userInfo } = useSelector((state) => state.user.value)
   const email = user.email;
   const btn = useSelector((store) => store.navsetter)
@@ -16,47 +15,45 @@ const Header = () => {
   const navigate = useNavigate();
 
   const sidebarMenu = async () => {
-   
-  
-   if(flag==0){
-    var element = document.getElementById("nk-sidebar");
+
+    var element = document.getElementById("myBody");
+    element.classList.add("nav-shown");
+    element = document.getElementById("nk-sidebar");
     element.classList.add("nk-sidebar-active");
-    document.getElementById("nk-sidebar").style.visibility="visible"
-    flag++; 
-    console.log("uppper - hello");
-   }
+    element = document.getElementById("nk-nav-toggle");
+    element.classList.add("toggle-active");
 
+    var element1 = document.getElementById("myBody");
+    if (element1.classList.contains("toggle-shown")) {
+      element1.classList.remove("toggle-shown")
+    }
+    var element2 = document.getElementById("toggleBtn");
+    if (element2) {
+      if (element2.classList.contains("active")) {
+        element2.classList.remove("active")
+      }
+    }
+    var element3 = document.getElementById("cardAside")
+    if (element3) {
+      if (element3.classList.contains("content-active")) {
+        element3.classList.remove("content-active")
+      }
 
-  else if(flag==1){
-  
+    }
 
-    var element2 = document.getElementById("nk-sidebar");
-      element2.classList.remove("nk-sidebar-active");
-      document.getElementById("nk-sidebar").style.display="hidden"
-      console.log("hello");
-      flag=0;
-   
   }
 
-      
-  }
+
   const mode = localStorage.getItem("theme")
   if (mode == 1) {
     var element = document.getElementById("myBody");
     element.classList.add("dark-mode")
   } else {
-    var element = document.getElementById("myBody");
+    element = document.getElementById("myBody");
     element.classList.remove("dark-mode")
   }
-  
 
-//    if(flag==0){
-//     document.getElementById("nk-sidebar").style.display="block";
-// flag++
-//    } 
 
- 
-  
 
 
 
@@ -67,11 +64,14 @@ const Header = () => {
     navigate("/login")
   };
 
-  useEffect(async () => {
-    const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
-    if (data) {
-      dispatch(setUserInfo({ userInfo: data.data }))
+  useEffect(() => {
+    const fetchdata = async () => {
+      const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
+      if (data) {
+        dispatch(setUserInfo({ userInfo: data.data }))
+      }
     }
+    fetchdata().catch(console.error)
   }, [])
 
 
@@ -369,10 +369,16 @@ const Header = () => {
                         <li>
                           {
                             mode == 0 ? <Link to=""
-                              onClick={() => mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")}>
+                              onClick={() => {
+                                dispatch(setTheme({ theme: 1 }))
+                                mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")
+                              }}>
                               <em className="icon ni ni-moon mr-1"></em>
                               <span className="mr-1">Dark Mode</span>
-                            </Link> : <Link to="" onClick={() => mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")}>
+                            </Link> : <Link to="" onClick={() => {
+                              dispatch(setTheme({ theme: 0 }))
+                              mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")
+                            }}>
                               <em className="icon ni ni-sun mr-1"></em>
                               <span className="mr-1">Light Mode</span>
                             </Link>
@@ -383,10 +389,10 @@ const Header = () => {
                     <div className="dropdown-inner">
                       <ul className="link-list">
                         <li>
-                          <a href="#">
+                          <b  style={{cursor: "pointer"}}>
                             <em className="icon ni ni-signout"></em>
                             <span onClick={() => signOut()}>Sign out</span>
-                          </a>
+                          </b>
                         </li>
                       </ul>
                     </div>

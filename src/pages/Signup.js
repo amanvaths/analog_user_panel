@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../Api_connection/config";
-import { Signupn } from "../Api_connection/ApiFunction";
 import { GoogleLogin } from "react-google-login";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 // import { setReferralCode } from "../redux/reducer/user";
 // import { FacebookLogin } from "react-facebook-login";
 import swal from "sweetalert";
-import {AiOutlineEyeInvisible, AiOutlineEye} from 'react-icons/ai'
+import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
 import { sendOtp } from "../redux/reducer/user";
 
 // import FacebookLogin from "react-facebook-login";
@@ -15,8 +14,6 @@ const Signup = (props) => {
   const dispatch = useDispatch();
   const queryParams = new URLSearchParams(window.location.search);
   const reff = queryParams.get('ref');
-
-  const { userInfo } = useSelector((state) => state.user.value)
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,7 +29,7 @@ const Signup = (props) => {
 
 
   async function Signup() {
-    await fetch(BASE_URL + "/signup", {
+    await fetch(`${BASE_URL}/signup`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -174,8 +171,8 @@ const Signup = (props) => {
     if (confirmPassword == "") {
       setConfirmPassworderror(true);
     }
-    if(password !== confirmPassword){
-      return  swal(
+    if (password !== confirmPassword) {
+      return swal(
         "Password and Confirm password not matched",
         "Enter correct password",
         "error"
@@ -229,7 +226,10 @@ const Signup = (props) => {
                     <div className="form-label-group ">
                       <label className="form-label" for="default-01">
                         Email
-                      </label>                      
+                      </label> 
+                      <Link to="" className="link link-primary link-sm" tabindex="-1">
+                      Need Help?
+                    </Link>                     
                     </div>
 
                     <input
@@ -449,11 +449,11 @@ const Signup = (props) => {
                       data-offset="0,10"
                     >
                       <small>English</small>
-                    </a>
+                    </Link>
                     <div className="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                       <ul className="language-list">
                         <li>
-                          <a href="#" className="language-item">
+                          <Link to="" className="language-item">
                             <img
                               src="./images/flags/english.png"
                               alt=""
@@ -463,7 +463,7 @@ const Signup = (props) => {
                           </a>
                         </li>
                         <li>
-                          <a href="#" className="language-item">
+                          <Link to="" className="language-item">
                             <img
                               src="./images/flags/spanish.png"
                               alt=""
@@ -473,7 +473,7 @@ const Signup = (props) => {
                           </a>
                         </li>
                         <li>
-                          <a href="#" className="language-item">
+                          <Link to=""" className="language-item">
                             <img
                               src="./images/flags/french.png"
                               alt=""
@@ -483,14 +483,14 @@ const Signup = (props) => {
                           </a>
                         </li>
                         <li>
-                          <a href="#" className="language-item">
+                          <Link to="" className="language-item">
                             <img
                               src="./images/flags/turkey.png"
                               alt=""
                               className="language-flag"
                             />
                             <span className="language-name">Türkçe</span>
-                          </a>
+                          </Link>
                         </li>
                       </ul>
                     </div>
