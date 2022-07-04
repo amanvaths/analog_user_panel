@@ -211,7 +211,7 @@ const ForgetPassword = (props) => {
 
             <div className="nk-content text-center mt-lg-2">
               <div className="container container justify-content-center d-flex">
-                <ul className="nav nav-sm">
+                {/* <ul className="nav nav-sm">
                 <li className="nav-item">
                     <Link className="nav-link" to="">
                       Terms &amp; Condition
@@ -229,6 +229,7 @@ const ForgetPassword = (props) => {
                   </li>
                   <li className="nav-item dropup">
                     <Link
+                      to=""
                       className="dropdown-toggle dropdown-indicator has-indicator nav-link"
                       data-toggle="dropdown"
                       data-offset="0,10"
@@ -280,7 +281,7 @@ const ForgetPassword = (props) => {
                       </ul>
                     </div>
                   </li>
-                </ul>
+                </ul> */}
               </div>
               <div className="mt-3">
                 <p>&copy; 2022 INRX ECOSYSTEM. All Rights Reserved.</p>

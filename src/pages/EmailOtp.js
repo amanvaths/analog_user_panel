@@ -70,48 +70,51 @@ const EmailOtp = (props) => {
   return (
     <div>
      
-      <div className="nk-content">
-        <div className="nk-split nk-split-page nk-split-md">
-          <div className="nk-split-content nk-block-area nk-block-area-column nk-auth-container bg-white">
-            <div className="absolute-top-right d-lg-none p-3 p-sm-5">
+     <div class="bg-login">
+      <div className="nk-apps-root">
+        <div className="nk-content container mt-lg-5 pt-lg-5 align-items-center">
+          <div className="row justify-content-md-center">
+            <div class="col-md-4 bg-teal shadow  d-flex align-items-center">
+                <div class="card-inner text-white"> 
+                  <div className="nk-block-head-content">
+                    <h2 className="nk-block-title">OTP Verification</h2>
+                    <div className="lead">
+                      <p>
+                      Enter One-Time Password to <strong> verify</strong> your
+                        <strong> Account</strong> 
+                      </p>
+                    </div>
+                  </div>
+                </div>
+            </div>
             
-            
-              <Link
+              {/* <Link
                 to=""
                 className="toggle btn-white btn btn-icon btn-light"
                 data-target="athPromo"
               >
                 <em className="icon ni ni-info"></em>
-              </Link>
-            </div>
-            <div className="nk-block nk-block-middle nk-auth-body">
-              <div className="brand-logo pb-5">
-                <Link to="" className="logo-link">
-                  <img
-                    className="logo-light logo-img logo-img-lg"
-                    src="./images/logo.png"
-                    srcSet="./images/logo2x.png 2x"
-                    alt="logo"
-                  />
-                  <img
-                    className="logo-dark logo-img logo-img-lg"
-                    src="./images/logo.png"
-                    srcSet="./images/logo-dark2x.png 2x"
-                    alt="logo-dark"
-                  />
-                </Link>
-              </div>
-              <div className="nk-block-head">
-                <div className="nk-block-head-content">
-                  <h5 className="nk-block-title">OTP Verification </h5>
-                  <div className="nk-block-des">
-                    <p>
-                      Connect with <b>Analog Inceptive</b> of{" "}
-                      <b>INRX Blockchain</b>.
-                    </p>
+              </Link> */}
+            
+            <div className="col-md-6 bg-light border shadow">
+              <div className="card-inner py-5">
+                <div className="brand-logo pb-3">
+                  <Link to="" className="logo-link">
+                    <img
+                      className="logo-light logo-img logo-img-lg"
+                      src="./images/logo.png"
+                      srcSet="./images/logo2x.png 2x"
+                      alt="logo"
+                    />
+                    <img
+                      className="logo-dark logo-img logo-img-lg"
+                      src="./images/logo.png"
+                      srcSet="./images/logo-dark2x.png 2x"
+                      alt="logo-dark"
+                    />
+                  </Link>
                   </div>
-                </div>
-              </div>
+              
               {res.status == true ? (
                 <h1 style={{ color: "green", fontSize: 20 }}>{res.messege}</h1>
               ) : (
@@ -119,7 +122,7 @@ const EmailOtp = (props) => {
               )}
               <form>
                 <h6 className="nk-block-title alert alert-primary alert_box_messege">
-                  OTP is shared on your registered email id
+                  OTP has been sent on your registered email id
                 </h6>
                 <div className="form-group">
                   <div className="form-label-group">
@@ -129,7 +132,7 @@ const EmailOtp = (props) => {
                   </div>
                   <input
                     type="text"
-                    className="form-control form-control-lg"
+                    className="form-control"
                     id="default-01"
                     placeholder="Enter OTP"
                     value={otp}
@@ -141,7 +144,7 @@ const EmailOtp = (props) => {
 
                 <div className="form-group">
                   <button
-                    className="btn btn-dim btn-success btn-block"
+                    className="btn text-white bg-teal btn-block"
                     // // onClick={() => (window.location.href = "/faq")}
                     onClick={(e) => {
                       OtpApi(e);
@@ -153,29 +156,18 @@ const EmailOtp = (props) => {
                        <Bars height="10" width="10" ariaLabel="loading-indicator" color="white" />
                        </span>
                      }
-                    
-                   
-                    
-                    
                   </button>
                 </div>
-              </form>
-              <div className="form-note-s2 pt-4">
-                {" "}
-                New on our platform? <Link to="/signup">Create an account</Link>
-              </div>
-              <div className="text-center pt-4 pb-3">
-                <h6 className="overline-title overline-title-sap">
-                  <span>OR</span>
-                </h6>
+              </form>              
               </div>
             </div>
-            <div className="nk-block nk-auth-footer">
-              <div className="nk-block-between">
-                <ul className="nav nav-sm">
+            </div>
+            <div className="nk-content text-center mt-lg-2">
+              <div className="container container justify-content-center d-flex">
+                {/* <ul className="nav nav-sm">
                   <li className="nav-item">
                     <Link className="nav-link" to="">
-                      Terms & Condition
+                      Terms &amp; Condition
                     </Link>
                   </li>
                   <li className="nav-item">
@@ -242,45 +234,14 @@ const EmailOtp = (props) => {
                       </ul>
                     </div>
                   </li>
-                </ul>
+                </ul> */}
               </div>
               <div className="mt-3">
-                <p>&copy; 2021 INRX ECOSYSTEM. All Rights Reserved.</p>
+                <p>&copy; 2022 INRX ECOSYSTEM. All Rights Reserved.</p>
               </div>
             </div>
           </div>
-          <div
-            className="nk-split-content nk-split-stretch bg-lighter d-flex toggle-break-lg toggle-slide toggle-slide-right"
-            data-content="athPromo"
-            data-toggle-screen="lg"
-            data-toggle-overlay="true"
-          >
-            <div className="slider-wrap w-100 w-max-550px p-3 p-sm-5 m-auto">
-              <div
-                className="slider-init"
-                data-slick='{"dots":true, "arrows":false}'
-              >
-                <div className="slider-item">
-                  <div className="nk-feature nk-feature-center">
-                    <div className="nk-feature-img">
-                      <img
-                        className="round"
-                        src="./images/slides/slide-a.png"
-                        srcSet="./images/slides/promo-a2x.png 2x"
-                        alt=""
-                      />
-                    </div>
-                    <div className="nk-feature-content py-4 p-sm-5">
-                      <h4>INRX NETWORK</h4>
-                      <p>INCEPTIVE ANALOG</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="slider-dots"></div>
-              <div className="slider-arrows"></div>
-            </div>
-          </div>
+         
         </div>
       </div>
     </div>

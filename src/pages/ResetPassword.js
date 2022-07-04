@@ -151,46 +151,50 @@ const ResetPassword = (props) => {
   console.log(params.restcode, "params");
   return (
     <div>
-      <div className="nk-content ">
-        <div className="nk-split nk-split-page nk-split-md">
-          <div className="nk-split-content nk-block-area nk-block-area-column nk-auth-container bg-white">
-            <div className="absolute-top-right d-lg-none p-3 p-sm-5">
-              <Link
+      <div class="bg-login">
+        <div className="nk-apps-root">
+          <div className="nk-content container mt-lg-5 pt-lg-5 align-items-center">
+            <div className="row justify-content-md-center">
+              <div class="col-md-4 bg-teal shadow  d-flex align-items-center">
+                <div class="card-inner text-white"> 
+                  <div className="nk-block-head-content">
+                    <h2 className="nk-block-title">Forgot Password ?</h2>
+                    <div className="lead">
+                      <p>
+                      No worries ! Enter your <b>Email Address</b> and we will send you a{" "}
+                        <b>Reset</b>.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* <Link
                 to=""
                 className="toggle btn-white btn btn-icon btn-light"
                 data-target="athPromo"
               >
                 <em className="icon ni ni-info"></em>
-              </Link>
-            </div>
-            <div className="nk-block nk-block-middle nk-auth-body">
-              <div className="brand-logo pb-5">
-                <Link to="" className="logo-link">
-                  <img
-                    className="logo-light logo-img logo-img-lg"
-                    src="./images/logo.png"
-                    srcSet="./images/logo2x.png 2x"
-                    alt="logo"
-                  />
-                  <img
-                    className="logo-dark logo-img logo-img-lg"
-                    src="./images/logo-dark.png"
-                    srcSet="./images/logo-dark2x.png 2x"
-                    alt="logo-dark"
-                  />
-                </Link>
-              </div>
-              <div className="nk-block-head">
-                <div className="nk-block-head-content">
-                  <h5 className="nk-block-title">Choose a new password.</h5>
-                  <div className="nk-block-des">
-                    <p>
-                      Connect with <b>Analog Inceptive</b> of{" "}
-                      <b>INRX Blockchain</b>.
-                    </p>
-                  </div>
+              </Link> */}
+            <div className="col-md-6 bg-light border shadow">
+              <div className="card-inner">
+                <div className="brand-logo pb-5">
+                  <a href="#" className="logo-link">
+                    <img
+                      className="logo-light logo-img logo-img-lg"
+                      src="./images/logo.png"
+                      srcSet="./images/logo2x.png 2x"
+                      alt="logo"
+                    />
+                    <img
+                      className="logo-dark logo-img logo-img-lg"
+                      src="./images/logo.png"
+                      srcSet="./images/logo-dark2x.png 2x"
+                      alt="logo-dark"
+                    />
+                  </a>
                 </div>
-              </div>
+             
+              
 
               {/* {res.status == true ? (
                 <h1 style={{ color: "green", fontSize: 20 }}>{res.message}</h1>
@@ -226,7 +230,7 @@ const ResetPassword = (props) => {
                     <Link
                       tabIndex="-1"
                       to=""
-                      className="form-icon form-icon-right passcode-switch"
+                      className="form-icon form-icon-right passcode-switch text-gray"
                       data-target="password"
                     >
                       {
@@ -235,7 +239,7 @@ const ResetPassword = (props) => {
                     </Link>
                     <input
                       type={oldPasswordShown ? "text" : "password"}
-                      className="form-control form-control-lg"
+                      className="form-control"
                       id="password"
                       placeholder="Enter your password"
                       value={password}
@@ -255,23 +259,13 @@ const ResetPassword = (props) => {
                   </div>
 
                   <div id="validation-box">
-                    <h6 className="passvalid" id="capital">
-                      1 Uppercase Character
-                    </h6>
-                    <h6 className="passvalid" id="number">
-                      1 Numeric Value
-                    </h6>
-                    <h6 className="passvalid" id="letter">
-                      1 Special Symbol eg:@#
-                    </h6>
-                    <h6 className="passvalid" id="length">
-                      length should be greater than 8
-                    </h6>
+                    <p class="text-soft small">We suggest having at least one capital and one lower-case letter (Aa-Zz), 
+                    one special symbol (#, &amp;, % etc) and one number (0-9) in your password for the best strength</p>
                   </div>
                 </div>
                 {passworderror == true ? (
-                  <p style={{ color: "red", marginTop: -20 }}>
-                    Password Is Requierd *
+                  <p className="text-danger mt-n3">
+                    Password is requierd !
                   </p>
                 ) : null}
 
@@ -285,7 +279,7 @@ const ResetPassword = (props) => {
                     <Link
                       tabIndex="-1"
                       to=""
-                      className="form-icon form-icon-right passcode-switch"
+                      className="form-icon form-icon-right passcode-switch text-gray"
                       data-target="confirm-password"
                     >
                       {
@@ -294,7 +288,7 @@ const ResetPassword = (props) => {
                     </Link>
                     <input
                       type={newPasswordShown ? "text" : "password"}
-                      className="form-control form-control-lg"
+                      className="form-control"
                       id="confirm-password"
                       placeholder="Confirm your password"
                       value={confirmPassword}
@@ -311,24 +305,24 @@ const ResetPassword = (props) => {
                   </div>
                 </div>
                 {confirmPassworderror == true ? (
-                  <p style={{ color: "red", marginTop: -20 }}>
-                    Password Is Requierd *
+                  <p className="text-danger mt-n3">
+                    Password is requierd !
                   </p>
                 ) : null}
 
                 <div className="form-group">
                   <button
-                    className="btn btn-lg btn-primary btn-block"
+                    className="btn bg-teal text-white btn-block"
                     onClick={ResetPasswordApi}
                   >
                     Reset Password
                   </button>
                 </div>
               </form>
-              <div className="form-note-s2 pt-4">
+              <div className="form-note-s2 pt-4 text-right">
                 {" "}
-                Already Interact <Link href="/login">Sign in</Link>
-                {/* Otp Interact <Link href="/EmailOtp">Resend Otp</Link> */}
+                {/* Already Interact <Link href="/login">Sign in</Link> */}
+                Otp Interact <Link to="/EmailOtp" className="text-teal">Resend Otp</Link>
               </div>
 
               <div className="text-center pt-4 pb-3">
@@ -367,13 +361,15 @@ const ResetPassword = (props) => {
                   />
                 </li>
               </ul>
+              </div>
+            </div>            
             </div>
-            <div className="nk-block nk-auth-footer">
-              <div className="nk-block-between">
-                <ul className="nav nav-sm">
+            <div className="nk-content text-center mt-lg-2">
+              <div className="container container justify-content-center d-flex">
+                {/* <ul className="nav nav-sm">
                   <li className="nav-item">
                     <Link className="nav-link" to="">
-                      Terms & Condition
+                      Terms &amp; Condition
                     </Link>
                   </li>
                   <li className="nav-item">
@@ -388,6 +384,7 @@ const ResetPassword = (props) => {
                   </li>
                   <li className="nav-item dropup">
                     <Link
+                      to=""
                       className="dropdown-toggle dropdown-indicator has-indicator nav-link"
                       data-toggle="dropdown"
                       data-offset="0,10"
@@ -439,45 +436,14 @@ const ResetPassword = (props) => {
                       </ul>
                     </div>
                   </li>
-                </ul>
+                </ul> */}
               </div>
               <div className="mt-3">
                 <p>&copy; 2022 INRX ECOSYSTEM. All Rights Reserved.</p>
               </div>
             </div>
           </div>
-          <div
-            className="nk-split-content nk-split-stretch bg-lighter d-flex toggle-break-lg toggle-slide toggle-slide-right"
-            data-content="athPromo"
-            data-toggle-screen="lg"
-            data-toggle-overlay="true"
-          >
-            <div className="slider-wrap w-100 w-max-550px p-3 p-sm-5 m-auto">
-              <div
-                className="slider-init"
-                data-slick='{"dots":true, "arrows":false}'
-              >
-                <div className="slider-item">
-                  <div className="nk-feature nk-feature-center">
-                    <div className="nk-feature-img">
-                      <img
-                        className="round"
-                        src="./images/slides/promo-a.png"
-                        srcSet="./images/slides/promo-a2x.png 2x"
-                        alt=""
-                      />
-                    </div>
-                    <div className="nk-feature-content py-4 p-sm-5">
-                      <h4>INRX NETWORK</h4>
-                      <p>INCEPTIVE ANALOG</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="slider-dots"></div>
-              <div className="slider-arrows"></div>
-            </div>
-          </div>
+         
         </div>
       </div>
     </div>
