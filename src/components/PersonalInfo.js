@@ -169,7 +169,7 @@ const PersonalInfo = () => {
         </div>
         <div className="card nk-block">
           <div className="nk-data data-list">
-            <div className="data-head kanban-board-header kanban-success bg-lighter">
+            <div className="data-head kanban-board-header kanban-success bg-lighter rounded-0">
               <span className="overline-title">Basics</span>
             </div>
             {/* -------------- */}
@@ -279,13 +279,13 @@ const PersonalInfo = () => {
             </div>
           </div>
 
-          <div className="nk-data data-list">
-            <div className="data-head kanban-board-header kanban-success bg-lighter">
+          <div className="nk-data data-list mt-3">
+            <div className="data-head kanban-board-header kanban-success bg-lighter rounded-0">
               <span className="overline-title">Currency Preferences</span>
             </div>
             {
               showUser2 ? <>
-                <div className="data-item">
+                <div className="data-item p-2 border-0">
                   <div className="data-col">
                     <span className="data-label">INRX</span>
                   </div>
@@ -309,7 +309,7 @@ const PersonalInfo = () => {
                 </div>
 
 
-                <div className="data-item">
+                <div className="data-item p-2 border-0">
                   <div className="data-col">
                     <span className="data-label">USDT</span>
 
@@ -339,8 +339,8 @@ const PersonalInfo = () => {
 
           </div>
 
-          <div className="nk-data data-list">
-            <div className="data-head kanban-board-header kanban-success bg-lighter">
+          <div className="nk-data data-list mt-2">
+            <div className="data-head kanban-board-header kanban-success bg-lighter rounded-0">
               <span className="overline-title">Referral</span>
             </div>
             <div className="row mx-auto mt-3">
