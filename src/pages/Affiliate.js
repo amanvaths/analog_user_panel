@@ -58,67 +58,58 @@ const Affiliate = (props) => {
 
   }
 
-  console.log(tab, ":: DATA IN TAB");
-
   useEffect(() => {
+    setLevel(1)
     getAffiliate();
+    getAffiliateList(level, 0)
   }, []);
 
 
-  console.log(tab,"tqabbbbb")
 
   return (
     <div>
-      {loader ? (<>
-          <div style={{ position: "absolute", zIndex: "99", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
-            <Triangle ariaLabel="loading-indicator" color="green" />
-          </div>
-
-        </>) :
-          (
-      <div class="nk-app-root">
-        <div class="nk-main ">
+      <div className="nk-app-root">
+        <div className="nk-main ">
           <Menu />
-          <div class="nk-wrap ">
+          <div className="nk-wrap ">
             <Header />
             {/* Add This Line  */}
 
-            <div class="container-xl tableContainer">
-              <div class="nk-content-body" style={{ marginTop: 50, width: "100%", padding: "10px -70%" }}>
-                <div class="nk-block-head nk-block-head-sm">
-                  <div class="nk-block-between position-relative">
-                    <div class="nk-block-head-content ">
-                      <h3 class="nk-block-title page-title">
+            <div className="container-xl tableContainer">
+              <div className="nk-content-body" style={{ marginTop: 50, width: "100%", padding: "10px -70%" }}>
+                <div className="nk-block-head nk-block-head-sm">
+                  <div className="nk-block-between position-relative">
+                    <div className="nk-block-head-content ">
+                      <h3 className="nk-block-title page-title">
                         Affiliates
                       </h3>
-                      {/*<div class="nk-block-des text-soft">
+                      <div className="nk-block-des text-soft">
 
                         <p>{`Your affiliates.`}</p>
                       </div>
-                      */}
                     </div>
-                    <div class="nk-block-head-content affiliates">
-                      <div class="toggle-wrap nk-block-tools-toggle">
-                        <a
-                          href="#"
-                          class="btn btn-icon btn-trigger toggle-expand me-n1"
+                    <div className="nk-block-head-content affiliates">
+                      <div className="toggle-wrap nk-block-tools-toggle">
+                        <Link
+                          to=""
+                          className="btn btn-icon btn-trigger toggle-expand me-n1"
                           data-target="pageMenu"
                         >
-                          <em class="icon ni ni-menu-alt-r"></em>
-                        </a>
+                          <em className="icon ni ni-menu-alt-r"></em>
+                        </Link>
                         <div
-                          class="toggle-expand-content"
+                          className="toggle-expand-content"
                           data-content="pageMenu"
                         >
-                          {/* <ul class="nk-block-tools g-3">
+                          {/* <ul className="nk-block-tools g-3">
                             <li
                             >
-                              <span class="d-none d-md-block">
+                              <span className="d-none d-md-block">
                                 <button
-                                  class="btn btn-dim btn-outline-light"
+                                  className="btn btn-dim btn-outline-light"
                                   style={{ padding: "8px 35px" }}
                                 >
-                                  <em class="icon ni ni-download-cloud"></em>
+                                  <em className="icon ni ni-download-cloud"></em>
                                   <span>Export</span>
                                 </button>
                               </span>
@@ -129,9 +120,7 @@ const Affiliate = (props) => {
                     </div>
                   </div>
                 </div>
-                <div className="row ">
-
-                  {
+                <div className="row">{
                     load ? affiliates.length > 0 ?
                       affiliates[0].map((item, index) => {
                         return (
@@ -139,56 +128,64 @@ const Affiliate = (props) => {
                             level={`Level ${index + 1}`}
                             totalUser={affiliates[1][item].totalUsers}
                             totalAnalogBuy={`${affiliates[1][item].totalAna.toFixed(2)} ANA`}
-                            totalExpence={userInfo?.currency_preference == 'usd'? `${affiliates[1][item].totalExpense.toFixed(2)} USDT` : `${(affiliates[1][item].totalExpense * oneUsdPrice).toFixed(3)} INRX`}
-                            totalAffiliates={userInfo?.currency_preference == 'usd'?  `${affiliates[1][item].totalInc.toFixed(3)} USDT` : `${(affiliates[1][item].totalInc * oneUsdPrice).toFixed(3)} INRX`}
+                            totalExpence={userInfo.currency_preference == 'usd'? `${affiliates[1][item].totalExpense.toFixed(2)} USDT` : `${(affiliates[1][item].totalExpense * oneUsdPrice).toFixed(3)} INRX`}
+                            totalAffiliates={userInfo.currency_preference == 'usd'?  `${affiliates[1][item].totalInc.toFixed(3)} USDT` : `${(affiliates[1][item].totalInc * oneUsdPrice).toFixed(3)} INRX`}
                             widthdrawl={0}
                             toalRemaining={0}
                           />
                         )
                       }) :
-                      <p class="lead text-danger text-center">No Record Found</p>
-                      :null}
+                      <h3>No Record Found</h3>
+                      :
+
+                      <div style={{ position: "absolute", zIndex: "99", top: "29%", left: "108%", transform: "translate(-50%, -50%)" }}>
+                        <Bars heigth="100" width="100" color="#0b3175" ariaLabel="loading-indicator" />
+                      </div>
+}
                 </div>
 
-                <div className="row my-4">
+                <div className="row my-1" >
                   <div className="nk-content-wrap">
                     <div className="nk-block-head">
                       <div className="nk-block-between">
                         <div className="nk-block-head-content">
-                          <h3 className="nk-block-title page-title pb-3 mt-4">
+                          <h3 className="nk-block-title page-title">
                             Affiliate List
                           </h3>
                           <div className="nk-block-des text-soft">
-                            <ul class="nk-block-tools g-3" style={{ paddingLeft: "0px" }}>
+                            <ul className="nk-block-tools g-3" style={{ paddingLeft: "0px" }}>
                               <li>
-                                <a className={level1 ? 'btn btn-white btn-dim btn-outline-success active' :
-                                  "btn btn-white btn-dim btn-outline-success"} onClick={() => {
+                                <Link to="" className={level1 ? 'btn btn-white btn-dim btn-outline-light active' :
+                                  "btn btn-white btn-dim btn-outline-light"} onClick={() => {
                                     setLevel1(true)
                                     setLevel2(false)
                                     setLevel3(false)
-                                    getAffiliateList(1)
+                                    setTab([])
+                                    getAffiliateList(1,0)
                                   }}>
-                                  <span>Level 1</span></a>
+                                  <span>Level 1</span></Link>
                               </li>
                               <li>
-                                <a className={level2 ? 'btn btn-white btn-dim btn-outline-success active' :
-                                  "btn btn-white btn-dim btn-outline-success"} onClick={() => {
+                                <Link to="" className={level2 ? 'btn btn-white btn-dim btn-outline-light active' :
+                                  "btn btn-white btn-dim btn-outline-light"} onClick={() => {
                                     setLevel1(false)
                                     setLevel2(true)
                                     setLevel3(false)
-                                    getAffiliateList(2)
+                                    setTab([])
+                                    getAffiliateList(2, 0)
                                   }}>
-                                  <span>Level 2</span></a>
+                                  <span>Level 2</span></Link>
                               </li>
                               <li>
-                                <a className={level3 ? 'btn btn-white btn-dim btn-outline-success active' :
-                                  "btn btn-white btn-dim btn-outline-success"} onClick={() => {
+                                <Link to="" className={level3 ? 'btn btn-white btn-dim btn-outline-light active' :
+                                  "btn btn-white btn-dim btn-outline-light"} onClick={() => {
                                     setLevel1(false)
                                     setLevel2(false)
                                     setLevel3(true)
-                                    getAffiliateList(3)
+                                    setTab([])
+                                    getAffiliateList(3, 0)
                                   }}>
-                                  <span>Level 3</span></a>
+                                  <span>Level 3</span></Link>
                               </li>
                             </ul>
                           </div>
@@ -209,10 +206,10 @@ const Affiliate = (props) => {
                                     <li>
                                       <Link
                                         to={'/Withdrawal'}
-                                        className="btn btn-outline-danger"
+                                        className="btn btn-primary btn-outline-light"
                                       >
                                         
-                                        <span>Withdraw</span>
+                                        <span>Withdrwa</span>
                                       </Link>
                                     </li>
                                     {/* <li className="nk-block-tools-opt">
@@ -256,45 +253,46 @@ const Affiliate = (props) => {
                     {level1 == true ?
                       <div className="nk-block">
                         <div className="card card-bordered card-stretch">
-                          <div className="card-inner-group bg-light">
+                          <div className="card-inner-group">
                             <div className="card-inner">
                               <div className="card-title-group">
                                 <div className="card-tools">
                                   <div className="form-inline flex-nowrap gx-3">
-                                    <h4>Level 1</h4>
+                                    <h5>Level 1</h5>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                            <div className="card-inner bg-white">
-                              <div className="nk-tb-list nk-tb-ulist" >
+                            <div className="card-inner">
+                              <div className="nk-tb-list nk-tb-ulist is-compact" >
                                 <div className="nk-tb-item nk-tb-head">
                                   <div className="nk-tb-col tb-col-sm">
-                                    {/* <span className="">S. N.</span> */}
+                                    {/* <span className="sub-text">S. N.</span> */}
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="lead">S. N.</span>
+                                    <span className="sub-text">S. N.</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="lead">Email</span>
+                                    <span className="sub-text">Email</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="lead">Total Purchased</span>
+                                    <span className="sub-text">Total Purchased</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="lead">Total Expense</span>
+                                    <span className="sub-text">Total Expense</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="lead">Affiliate Rcvd (5%)</span>
+                                    <span className="sub-text">Affiliate Rcvd (5%)</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="lead">Handout</span>
+                                    <span className="sub-text">Handout</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="lead">View</span>
+                                    <span className="sub-text">View</span>
                                   </div>
                                 </div>
                                 {
+                                  status == 2 ? <h5>Record Not Found</h5> :
                                   tab.length > 0 ?
                                     tab.map((element, index) => {
                                       console.log(index, "::INDEx");
@@ -304,17 +302,17 @@ const Affiliate = (props) => {
                                           <div className="nk-tb-col tb-col-sm">
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
-                                            <span className="nk-activity-media user-avatar sm bg-success-dim">{(((currentPage - 1) * 5) + index + 1)}</span>
+                                            <span className="">{(((currentPage - 1) * 5) + index + 1)}</span>
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
                                             <span className="">{element.email}</span>
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
-                                            <span>{element?.totalBuy?.toFixed(2)} ANA</span>
-                                            <img src="./images/Analog.png" style={{ width: "24px" }} />
+                                            <span style={{ color: "green" }}>{element?.totalBuy?.toFixed(2)} ANA</span>
+                                            <img alt="analog" src="./images/Analog.png" style={{ width: "24px" }} />
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
-                                            <span>
+                                            <span style={{ color: "red" }}>
                                               {
                                                 userInfo?.currency_preference == 'usd' ? `${element?.totalExp?.toFixed(2)} USDT` : `${(element?.totalExp * oneUsdPrice)?.toFixed(2)} INRX`
 
@@ -335,7 +333,7 @@ const Affiliate = (props) => {
 
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
-                                            <span>
+                                            <span style={{ color: "green" }}>
                                               {
                                                 userInfo?.currency_preference == 'usd' ? `${element?.totalAff?.toFixed(2)} USDT` : `${(element?.totalAff * oneUsdPrice).toFixed(2)} INRX`
                                               }
@@ -354,7 +352,7 @@ const Affiliate = (props) => {
                                             </span>
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
-                                            <span>
+                                            <span style={{ color: "green" }}>
                                               {
                                                 userInfo?.currency_preference == 'usd' ? `${element?.totalHandout?.toFixed(2)} USDT` : `${(element?.totalHandout * oneUsdPrice).toFixed(2)} INRX`
                                               }
@@ -892,9 +890,7 @@ const Affiliate = (props) => {
           <Footer />
         </div>
       </div>
-      ) 
-    }
-</div>
+    </div>
   );
 };
 
