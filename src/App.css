@@ -43,6 +43,12 @@
   box-shadow: 0 4px 6px 0 rgb(85 85 85 / 8%), 0 1px 20px 0 rgb(0 0 0 / 7%), 0px 1px 11px 0px rgb(0 0 0 / 7%);
 }
 
+.hover_on_card:hover {
+  background-color: #ebf5f2!important;
+  border-color:#96f6dc!important;
+  transition: background 200ms ease;
+  
+}
 
 .nk-tb-item {
   transition: transform 200ms ease;

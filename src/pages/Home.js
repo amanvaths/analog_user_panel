@@ -317,7 +317,7 @@ const Home = () => {
                         </div>
                         <div className="row">
                           <div className="col-sm-4">
-                            <div className="card bg-light shadow-sm">
+                            <div className="card bg-light shadow-sm hover_on_card">
                               <div className="nk-wgw sm">
                               <Link className="nk-wgw-inner" to="">
                                   <div className="nk-wgw-name">
@@ -349,7 +349,7 @@ const Home = () => {
                             onClick={() => navigate("/Airdrop")}
                             style={{ cursor: "pointer" }}
                           >
-                            <div className="card bg-light shadow-sm">
+                            <div className="card bg-light shadow-sm hover_on_card">
                               <div className="nk-wgw sm">
                               <Link to="" className="nk-wgw-inner">
                                   <div className="nk-wgw-name">
@@ -383,7 +383,7 @@ const Home = () => {
                             }
                             style={{ cursor: "pointer" }}
                           >
-                            <div className="card bg-light shadow-sm">
+                            <div className="card bg-light shadow-sm hover_on_card">
                               <div className="nk-wgw sm">
                                 <Link className="nk-wgw-inner" to="">
                                   <div className="nk-wgw-name">
@@ -423,7 +423,7 @@ const Home = () => {
                         </div>
                         <div className="row">
                           <div className="col-sm-4">
-                            <div className="card bg-light shadow-sm">
+                            <div className="card bg-light shadow-sm hover_on_card">
                               <div className="nk-wgw sm">
                                 <Link className="nk-wgw-inner" to="">
                                   <div className="nk-wgw-name">
@@ -455,7 +455,7 @@ const Home = () => {
                             onClick={() => navigate("/Bounty")}
                             style={{ cursor: "pointer" }}
                           >
-                            <div className="card bg-light shadow-sm">
+                            <div className="card bg-light shadow-sm hover_on_card">
                               <div className="nk-wgw sm">
                               <Link  to="" className="nk-wgw-inner">
                                   <div className="nk-wgw-name">
@@ -489,7 +489,7 @@ const Home = () => {
                             </div>
                           </div>
                           <div className="col-sm-4">
-                            <div className="card bg-light shadow-sm">
+                            <div className="card bg-light shadow-sm hover_on_card">
                               <div className="nk-wgw sm">
                                 <Link className="nk-wgw-inner" to="">
                                   <div className="nk-wgw-name">
@@ -722,7 +722,7 @@ const Home = () => {
                                 }}
                                 onClick={() => console.log("shared successfully!")}
                               >
-                                <button style={{border:"none"}} className="btn btn-primary">Invite 🔗</button>
+                                <button className="btn btn-outline-success">Invite</button>
                               </RWebShare>
                             </div>
                             {/* <Link to="" className="btn btn-primary">
@@ -1033,8 +1033,8 @@ const Home = () => {
                           <div className="nk-block-content-head px-lg-4">
                             <h5>We’re here to help you!</h5>
                             <p className="text-soft">
-                              Ask a question or file a support ticket, mANAge
-                              request, report an issues. Our team support team
+                              Ask a question or file a support ticket, manage
+                              request, report an issues. Our support team
                               will get back to you by email.
                             </p>
                           </div>
@@ -1042,7 +1042,7 @@ const Home = () => {
                         <div className="nk-block-content flex-shrink-0">
                           <Link
                             to=""
-                            className="btn btn-lg btn-outline-primary"
+                            className="btn btn-outline-success"
                           >
                             Get Support Now
                           </Link>
