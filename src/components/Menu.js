@@ -104,7 +104,7 @@ function Menu (){
                 <div className="nk-sidebar-widget d-none d-xl-block">
                   <div className="user-account-info between-center">
                     <div className="user-account-main">
-                      <h6 className="overline-title-alt " style={{paddingBottom:14}}  >Available Balance</h6>
+                      <h2 className="overline-title-alt text-teal fs-6">Available Balance</h2>
                       <div className="user-balance">
                       { Number(anaBalancce)?.toFixed(2)}{" "}
                         <small className="currency currency-btc">ANA</small>
@@ -170,7 +170,7 @@ function Menu (){
                           <span>{userInfo?.username?.charAt(0)?.toUpperCase()}</span>
                         </div>
                         <div className="user-info">
-                          <span className="lead-text">
+                          <span className="fw-500 h4">
                             {userInfo?.username}
                           </span>
                           <span className="sub-text">{userInfo?.user_id}</span>
@@ -191,7 +191,7 @@ function Menu (){
                 <div className="nk-sidebar-menu">
                   <ul className="nk-menu">
                     <li className="nk-menu-heading">
-                      <h6 className="overline-title">Inceptive</h6>
+                      <h6 className="overline-title-alt text-teal fs-6">Inceptive</h6>
                     </li>
                     <li className="nk-menu-item">
                       <Link to="/home" className="nk-menu-link">
@@ -246,35 +246,36 @@ function Menu (){
                 </div>
                 <div className="nk-sidebar-widget">
                   <div className="widget-title">
-                    <h6 className="overline-title">
+                    <h6 className="overline-title-alt text-teal fs-6">
                       Crypto Accounts <span></span>
                     </h6>
                     {/* <a href="#" className="link">
                       View All
                     </a> */}
                   </div>
-                  <ul className="wallet-list">
-                    <li className="wallet-item">
-                      <Link to="">
-                        <div className="wallet-icon">
-                          <em className="icon ni ni-sign-kobo"></em>
-                        </div>
-                        <div className="wallet-text">
-                          <h6 className="wallet-name">{userInfo?.currency_preference == 'inr'? 'INRX' : "USDT"} Wallet</h6>
-                          <span className="wallet-balance">
+                  <div class="card card-bordered shadow-sm bg-success-dim">
+                    <div class="pricing-head p-2">
+                      <div class="pricing-title">                      
+                        <div className="text-dark wallet-name">
+                          <em className="icon ni ni-sign-kobo"></em> {userInfo?.currency_preference == 'inr'? 'INRX' : "USDT"} WALLET</div>                          
+                      </div>                      
+                    </div>
+                    <div className="pricing-body p-3">
+                      <div class="card-text">
+                        <div class="text-center">
+                          <span className="h6 fw-500 text-teal wallet-balance">
                             {userInfo?.currency_preference == 'usd' ? Number(walletBalance)?.toFixed(3) : (walletBalance * oneUsdPrice)?.toFixed(3)}
                             {" "}
-                            <span className="currency currency-nio">
+                            <span className="text-white rounded px-2 bg-teal currency currency-nio">
                             {userInfo?.currency_preference == 'inr'? 'INRX' : "USDT"}
                             </span>
-                          </span>
+                          </span>                          
                         </div>
-                      </Link>
-                    </li>
-                    
-                  </ul>
+                      </div>  
+                    </div>                   
+                  </div>
                 </div>
-                <div className="nk-sidebar-footer">
+                <div className="nk-sidebar-footer sidebar-bg">
                   <ul className="nk-menu nk-menu-footer">
                     <li className="nk-menu-item">
                       <Link to="" className="nk-menu-link">

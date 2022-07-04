@@ -389,10 +389,10 @@ const Header = () => {
                     <div className="dropdown-inner">
                       <ul className="link-list">
                         <li>
-                          <b  style={{cursor: "pointer"}}>
+                          <span className="text-danger" style={{cursor: "pointer"}}>
                             <em className="icon ni ni-signout"></em>
                             <span onClick={() => signOut()}>Sign out</span>
-                          </b>
+                          </span>
                         </li>
                       </ul>
                     </div>

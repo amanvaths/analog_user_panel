@@ -34,8 +34,8 @@ export default function TradeHistory() {
   }, [userInfo]);
   return (
     <div className="card mt-5">
-      <div className="card-header bg-teal-dim text-teal">
-        <h6 className="card-title font-weight-bold"> TRADE HISTORY</h6>
+      <div className="card-header bg-teal-dim font-weight-bold">
+        TRADE HISTORY
       </div>
       <div className="card-body table-responsive  p-0">
         <table className="table  mb-0">

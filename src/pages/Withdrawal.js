@@ -143,9 +143,9 @@ const Withdrawal = () => {
                                                             <div className="nk-block-head-xs">
                                                                 <div className="nk-block-between-md g-2">
                                                                     <div className="nk-block-head-content">
-                                                                        <h5 className="nk-block-title title">
+                                                                        <h3 className="nk-block-title title">
                                                                             Inceptive Wallets
-                                                                        </h5>
+                                                                        </h3>
                                                                     </div>
                                                                     <div className="nk-block-head-content"></div>
                                                                 </div>
@@ -208,7 +208,7 @@ const Withdrawal = () => {
                                                                             <div className="card card-bordered h-100">
                                                                                 <div className="card-inner">
                                                                                     <div className="card-head">
-                                                                                        <h5 className="card-title">{fromWalletAddress}</h5>
+                                                                                        <h4 className="card-title text-title text-teal">{fromWalletAddress}</h4>
                                                                                     </div>
                                                                                     <form action="#">
                                                                                         <div className="form-group">

@@ -177,7 +177,7 @@ export default function Orders() {
     <div className="order">
       <div class="card mt-4">
         <div class="card-header bg-teal-dim justify-content-between align-items-center">
-          <h6 class="card-title "> ORDER</h6>
+          <span class="card-title font-weight-bold"> ORDER</span>
         </div>
         <div class="card-body table-responsive p-0">
           <table class="table table-hover mb-0">
@@ -239,7 +239,7 @@ export default function Orders() {
                     history.map((h) => {
                       return (
                         <>
-                          <tr class="zoom" style={{ fontSize: "9.5px" }}>
+                          <tr class="zoom_on_table" style={{ fontSize: "9.5px" }}>
                             <td
                               className="OrderhistorySize"
                               style={{ width: "25%" }}
@@ -304,9 +304,9 @@ export default function Orders() {
       </div>
 
       {/* Buy */}
-      <div style={{border: "0.5px solid rgba(0,0,0,.125)" ,marginTop:"6px",borderRadius:"3px"}}>
+      <div className="mt-4" style={{border: "0.5px solid rgba(0,0,0,.125)" ,marginTop:"6px",borderRadius:"3px"}}>
         <nav
-          class="coinsfather-theme-color"
+          class="coinsfather-theme-color bg-teal-dim"
           style={{
             border: "0.3px solid rgba(255, 255, 255, 0.2)",
             // marginTop: "6px",
@@ -315,7 +315,7 @@ export default function Orders() {
           <div
             className="card-header"
             style={{
-              textAlign: "center",
+              textAlign: "left",
               fontWeight: "bold",
               // background: "rgb(241, 241, 241)",
               // margin: "4px 0px",

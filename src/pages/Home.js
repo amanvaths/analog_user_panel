@@ -195,7 +195,7 @@ const Home = () => {
         <div className="nk-main ">
           <Menu />
 
-          <div className="nk-wrap ">
+          <div className="nk-wrap bg-light">
             <Header />
             {/* Add this code  */}
            {/* <div className="slide-container ">
@@ -317,7 +317,7 @@ const Home = () => {
                         </div>
                         <div className="row">
                           <div className="col-sm-4">
-                            <div className="card bg-light shadow-sm hover_on_card">
+                            <div className="card bg-white shadow-sm hover_on_card">
                               <div className="nk-wgw sm">
                               <Link className="nk-wgw-inner" to="">
                                   <div className="nk-wgw-name">
@@ -349,7 +349,7 @@ const Home = () => {
                             onClick={() => navigate("/Airdrop")}
                             style={{ cursor: "pointer" }}
                           >
-                            <div className="card bg-light shadow-sm hover_on_card">
+                            <div className="card bg-white shadow-sm hover_on_card">
                               <div className="nk-wgw sm">
                               <Link to="" className="nk-wgw-inner">
                                   <div className="nk-wgw-name">
@@ -383,7 +383,7 @@ const Home = () => {
                             }
                             style={{ cursor: "pointer" }}
                           >
-                            <div className="card bg-light shadow-sm hover_on_card">
+                            <div className="card bg-white shadow-sm hover_on_card">
                               <div className="nk-wgw sm">
                                 <Link className="nk-wgw-inner" to="">
                                   <div className="nk-wgw-name">
@@ -423,7 +423,7 @@ const Home = () => {
                         </div>
                         <div className="row">
                           <div className="col-sm-4">
-                            <div className="card bg-light shadow-sm hover_on_card">
+                            <div className="card bg-white shadow-sm hover_on_card">
                               <div className="nk-wgw sm">
                                 <Link className="nk-wgw-inner" to="">
                                   <div className="nk-wgw-name">
@@ -455,7 +455,7 @@ const Home = () => {
                             onClick={() => navigate("/Bounty")}
                             style={{ cursor: "pointer" }}
                           >
-                            <div className="card bg-light shadow-sm hover_on_card">
+                            <div className="card bg-white shadow-sm hover_on_card">
                               <div className="nk-wgw sm">
                               <Link  to="" className="nk-wgw-inner">
                                   <div className="nk-wgw-name">
@@ -489,7 +489,7 @@ const Home = () => {
                             </div>
                           </div>
                           <div className="col-sm-4">
-                            <div className="card bg-light shadow-sm hover_on_card">
+                            <div className="card bg-white shadow-sm hover_on_card">
                               <div className="nk-wgw sm">
                                 <Link className="nk-wgw-inner" to="">
                                   <div className="nk-wgw-name">

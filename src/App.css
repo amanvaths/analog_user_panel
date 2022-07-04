@@ -60,6 +60,15 @@
   border-color:#1ee0ac!important;
 
 }
+.user-balance {
+  color: #ffa353!important;
+}
+.nk-footer-links > .nav-link,
+.link-list a:hover,
+.nk-menu-footer .nk-menu-icon {
+color: #0fcf9b;
+}
+ 
 .App {
   text-align: center;
 }
