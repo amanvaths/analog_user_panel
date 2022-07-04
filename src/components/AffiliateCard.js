@@ -20,13 +20,13 @@ const AffiliatCard = (props) => {
 
   return (
     <>
-      <div className="col-md-6 col-lg-4 col-12 shadow-none u-align-center">
+      <div className="col-md-6 col-lg-4 col-12 shadow-none u-align-center mb-3">
         
         <div
           id="set_back"
           class={`card card-bordered shadow-sm`}>
-            <div class="bg-lighter text-dark kanban-board-header kanban-success mb-0 rounded-0">{props.level}</div>
-            <div class="card-inner py-3">
+            <div class="bg-gray text-white kanban-board-header kanban-success mb-0 rounded-0">{props.level}</div>
+            <div class="card-inner bg-light">
                 <div className="row">
                   <div className="col-6 border-right">
                     <h6 class="badge bg-light mb-2">Total User</h6>{" "}
