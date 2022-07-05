@@ -196,37 +196,60 @@ const Home = () => {
           <Menu />
 
           <div className="nk-wrap bg-light">
-            <Header />           
-           <div className="slide-container ">
-              <Slide>
-                {i?.map((slideImage, index) => {
-                  return (
-                    <div className="each-slide border border-" key={index}>
-                      <div
-                        style={{
-                          backgroundImage: `url(http://localhost:3001${slideImage.banner})`,
-                          // height: "250px",
-                          width: "100%",
-                          backgroundSize: "cover",
-                          backgroundRepeat: "no-repeat",
-                          backgroundAttachment: "fixed",
-                        }}
-                      >
-                        <span
+            <Header />
+            <div className="container">           
+              <div className="slide-container shadow mt-3">
+              <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img class="d-block w-100" src="images/slides/2.png" alt="First slide"/>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100" src="images/slides/3.png" alt="Second slide" />
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100" src="images/slides/4.png" alt="Third slide"/>
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+                {/* <Slide>
+                  {i?.map((slideImage, index) => {
+                    return (
+                      <div className="each-slide border border-" key={index}>
+                        <div
                           style={{
-                            height: "250px",
-                            display: "inline-block",
-                            marginTop: "60px",
+                            backgroundImage: `url(http://localhost:3001${slideImage.banner})`,
+                            // height: "250px",
+                            width: "100%",
+                            backgroundSize: "cover",
+                            backgroundRepeat: "no-repeat",
+                            backgroundAttachment: "fixed",
                           }}
                         >
-                          {slideImage.caption}
-                        </span>
+                          <span
+                            style={{
+                              height: "250px",
+                              display: "inline-block",
+                             // marginTop: "20px",
+                            }}
+                          >
+                            {slideImage.caption}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
-              </Slide>
+                    );
+                  })}
+                </Slide> */}
               </div>
+            </div>
             {/* Add Slide small card */}
             <div className="container">
               <div className="row g-3 mt-4">

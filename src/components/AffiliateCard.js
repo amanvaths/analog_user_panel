@@ -25,7 +25,7 @@ const AffiliatCard = (props) => {
         <div
           id="set_back"
           class={`card card-bordered shadow-sm`}>
-            <div class="bg-gray text-white kanban-board-header kanban-success mb-0 rounded-0">{props.level}</div>
+            <div class="bg-teal-dim kanban-board-header kanban-success mb-0 rounded-0">{props.level}</div>
             <div class="card-inner bg-light">
                 <div className="row">
                   <div className="col-6 border-right">
