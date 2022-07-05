@@ -1,9 +1,11 @@
 import { BASE_URL } from "./config";
 import axios from "axios";
 
+const abortController =new AbortController();
 export function Signupn(data) {
   return fetch(BASE_URL + "signup", {
     method: "POST",
+    signal:abortController.signal,
     headers: {
       "content-type": "application/json",
       "allow-access-origin-control": "*",

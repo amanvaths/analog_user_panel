@@ -262,16 +262,16 @@ const Signup = (props) => {
                       </label>
                     </div>
                     <div className="form-control-wrap">
-                      <a
+                      <Link
                         tabIndex="-1"
-                        href="#"
+                        to=""
                         className="form-icon form-icon-right passcode-switch text-dark"
                         data-target="password"
                       >
                         {
                           passwordShone == false ? <AiOutlineEyeInvisible onClick={togglePassword1} /> : <AiOutlineEye onClick={togglePassword1} />
                         }
-                      </a>
+                      </Link>
                       <input
                         type={passwordShone ? "text" : "password"}
                         className="form-control"
@@ -292,7 +292,7 @@ const Signup = (props) => {
                             setPassworderror(true);
                           }
                         }}
-                        onKeyUp={() => _onkeyup()}
+                        // onKeyUp={() => _onkeyup()}
                         style={{ fontSize: "15px" }} />
                     </div>
 
