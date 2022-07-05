@@ -253,25 +253,17 @@ function Menu (){
                       View All
                     </a> */}
                   </div>
-                  <div class="card card-bordered shadow-sm bg-success-dim">
-                    <div class="pricing-head p-2">
-                      <div class="pricing-title">                      
+                  <div class="">
                         <div className="text-dark wallet-name">
-                          <em className="icon ni ni-sign-kobo"></em> {userInfo?.currency_preference == 'inr'? 'INRX' : "USDT"} WALLET</div>                          
-                      </div>                      
-                    </div>
-                    <div className="pricing-body p-3">
-                      <div class="card-text">
-                        <div class="text-center">
-                          <span className="h6 fw-500 text-teal wallet-balance">
-                            {userInfo?.currency_preference == 'usd' ? Number(walletBalance)?.toFixed(3) : (walletBalance * oneUsdPrice)?.toFixed(3)}
-                            {" "}
-                            <span className="text-white rounded px-2 bg-teal currency currency-nio">
-                            {userInfo?.currency_preference == 'inr'? 'INRX' : "USDT"}
-                            </span>
-                          </span>                          
-                        </div>
-                      </div>  
+                          <em className="icon ni ni-sign-kobo"></em> {userInfo?.currency_preference == 'inr'? 'INRX' : "USDT"} WALLET</div>
+                    <div>
+                        <span className="h6 fw-500 text-teal wallet-balance">
+                          {userInfo?.currency_preference == 'usd' ? Number(walletBalance)?.toFixed(3) : (walletBalance * oneUsdPrice)?.toFixed(3)}
+                          {" "}
+                          <span className="text-white rounded px-2 bg-teal currency currency-nio">
+                          {userInfo?.currency_preference == 'inr'? 'INRX' : "USDT"}
+                          </span>
+                        </span>  
                     </div>                   
                   </div>
                 </div>

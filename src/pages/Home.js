@@ -196,9 +196,8 @@ const Home = () => {
           <Menu />
 
           <div className="nk-wrap bg-light">
-            <Header />
-            {/* Add this code  */}
-           {/* <div className="slide-container ">
+            <Header />           
+           <div className="slide-container ">
               <Slide>
                 {i?.map((slideImage, index) => {
                   return (
@@ -227,7 +226,7 @@ const Home = () => {
                   );
                 })}
               </Slide>
-              </div>*/}
+              </div>
             {/* Add Slide small card */}
             <div className="container">
               <div className="row g-3 mt-4">
@@ -266,7 +265,7 @@ const Home = () => {
                             <div className="card-inner">
                               <div className="nk-wg7">
                                 <div className="nk-wg7-stats">
-                                  <div className="nk-wg7-title text-teal">
+                                  <div className="nk-wg7-title">
                                     TOTAL ANOLOG BUY  
                                   </div>
                                   <div className="number-lg amount text-white">
@@ -275,13 +274,13 @@ const Home = () => {
                                 </div>
                                 <div className="nk-wg7-stats-group">
                                   <div className="nk-wg7-stats w-50">
-                                    <div className="nk-wg7-title text-teal">Wallets</div>
+                                    <div className="nk-wg7-title">Wallets</div>
                                     <div className="number-lg text-white">
                                       {totalWallet}
                                     </div>
                                   </div>
                                   <div   className="nk-wg7-stats w-50" >
-                                    <div className="nk-wg7-title text-teal">
+                                    <div className="nk-wg7-title">
                                       Transactions
                                     </div>
                                     <div className="number text-white">
@@ -290,7 +289,7 @@ const Home = () => {
                                   </div>
                                 </div>
                                 <div className="nk-wg7-foot">
-                                  <span className="nk-wg7-note text-teal">
+                                  <span className="nk-wg7-note">
                                     Last activity at{" "}
                                     <span>
                                       {date} {time}

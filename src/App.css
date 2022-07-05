@@ -2,8 +2,14 @@
     color: #8094ae;
 }
 .card.dark-green {
-  background: #07523d;
+  background: #10ad83;
+  
 }
+.card.dark-green .nk-wg7-title,
+.card.dark-green .nk-wg7-note {
+  color: #7dffdc;
+}
+
 .valign {
   vertical-align: middle;
 }
@@ -44,6 +50,11 @@
   box-shadow: 0 4px 6px 0 rgb(85 85 85 / 8%), 0 1px 20px 0 rgb(0 0 0 / 7%), 0px 1px 11px 0px rgb(0 0 0 / 7%);
 }
 
+.dark-mode .hover_on_card:hover {
+  background-color: #1f2b3a!important;
+  border-color:#666!important;
+
+}
 .hover_on_card:hover {
   background-color: #ebf5f2!important;
   border-color:#96f6dc!important;
