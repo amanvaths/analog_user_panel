@@ -183,7 +183,7 @@ const AccountSettings = () => {
                                   <span>{userInfo?.username?.charAt(0)?.toUpperCase()}</span>
                                 </div>
                                 <div className="user-info">
-                                  <span className="lead-text">
+                                  <span className="fw-500 h4">
                                     {userInfo?.username}
                                   </span>
                                   <span className="sub-text">{userInfo?.user_id}</span>

@@ -174,7 +174,7 @@ const PersonalInfo = () => {
             </div>
             {/* -------------- */}
 
-            <div className="row mx-auto mt-3">
+            <div className="row mx-auto mt-3 pb-3">
               <div className="col-4">
                 <div className="">
                   <span className="data-label">User Name</span>
@@ -199,13 +199,13 @@ const PersonalInfo = () => {
                 <div className="">
 
                   <span className="">
-                    {showUser ? <Link to="" className="btn btn-dim btn-primary" onClick={() => {
+                    {showUser ? <Link to="" className="btn btn-dim btn-outline-success" onClick={() => {
                       if (value) {
                         updateData();
                         setShowUser(false);
                       }
                     }}>Update</Link> :
-                      <em className="icon ni ni-lock-alt text-dark"></em>
+                      <em className="icon ni ni-lock-alt text-gray"></em>
 
                     }
 
@@ -214,7 +214,7 @@ const PersonalInfo = () => {
               </div>
             </div>
 
-            <div className="row mx-auto mt-3">
+            <div className="row mx-auto mt-3 pb-3">
               <div className="col-4">
                 <div className="">
                   <span className="data-label">Email</span>
@@ -227,7 +227,7 @@ const PersonalInfo = () => {
               <div className="col-4 d-flex justify-content-end">
                 <div className="">
                   <span className=" disable">
-                    <em className="ni ni-lock-alt text-dark"></em>
+                    <em className="ni ni-lock-alt text-gray"></em>
                   </span>
                 </div>
               </div>
@@ -263,13 +263,13 @@ const PersonalInfo = () => {
               <div className="col-4 d-flex justify-content-end">
                 <div className="">
                   <span className="">
-                    {showUser1 ? <Link to="" className="btn btn-dim btn-primary" onClick={() => {
+                    {showUser1 ? <Link to="" className="btn btn-dim btn-outline-success" onClick={() => {
                       if (phone) {
                         updateData();
                         setShowUser1(false);
                       }
                     }}>Update</Link> : <span className=" disable">
-                      <em className="icon ni ni-lock-alt text-dark"></em>
+                      <em className="icon ni ni-lock-alt text-gray"></em>
                     </span>
                     }
 
@@ -343,7 +343,7 @@ const PersonalInfo = () => {
             <div className="data-head kanban-board-header kanban-success bg-lighter rounded-0">
               <span className="overline-title">Referral</span>
             </div>
-            <div className="row mx-auto mt-3">
+            <div className="row mx-auto mt-3 pb-3">
               <div className="col-4 ">
                 <div className="">
                   <span className="data-label">Referral Code</span>
@@ -373,8 +373,8 @@ const PersonalInfo = () => {
                 <div className="">
                   <span className="">
                     {userInfo?.refferal ? <span className=" disable">
-                      <em className="ni ni-lock-alt text-dark"></em>
-                    </span> : <button class="btn btn-outline-success" onClick={() => {
+                      <em className="ni ni-lock-alt text-gray"></em>
+                    </span> : <button class="btn btn-outline-success btn-sm" onClick={() => {
                       updateReferral();
                     }}>Update</button>
 
