@@ -54,13 +54,14 @@ const Header = () => {
   }
 
 
-
+  
 
 
 
   const signOut = () => {
     // navigate("/", { replace: true });
     dispatch(logout())
+   
     navigate("/login")
   };
 

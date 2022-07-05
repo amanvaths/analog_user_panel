@@ -167,8 +167,8 @@ const ForgetPassword = (props) => {
               </form>
               <div className="form-note-s2 pt-2 text-right">
                 {" "}
-                New User? <a class="text-teal" href="/signup">Create an account</a>
-                {/* New on our platform? <a href="/ResetPassword">Reset Password</a> */}
+                {/* New on our platform? <Link to="/Signup">Create an account</Link> */}
+                New on our platform? <Link to="/ResetPassword">Reset Password</Link>
               </div>
               <div className="text-center pt-4 pb-3">
                 <span className="overline-title overline-title-sap">
@@ -218,12 +218,12 @@ const ForgetPassword = (props) => {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="">
+                    <Link to="" className="nav-link" >
                       Privacy Policy
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="">
+                    <Link to="" className="nav-link" >
                       Help
                     </Link>
                   </li>
