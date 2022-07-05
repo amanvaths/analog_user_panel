@@ -63,12 +63,17 @@
 .user-balance {
   color: #ffa353!important;
 }
-.nk-footer-links > .nav-link,
+
+.nk-footer-links .nav-link,
 .link-list a:hover,
 .nk-menu-footer .nk-menu-icon {
-color: #0fcf9b;
+  color: #0fcf9b!important;
 }
- 
+
+.min-height {
+  min-height: 85vh;
+}
+
 .App {
   text-align: center;
 }
