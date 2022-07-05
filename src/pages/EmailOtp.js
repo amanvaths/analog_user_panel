@@ -98,22 +98,16 @@ const EmailOtp = (props) => {
             
             <div className="col-md-6 bg-light border shadow">
               <div className="card-inner py-5">
-                <div className="brand-logo pb-3">
-                  <Link to="" className="logo-link">
-                    <img
-                      className="logo-light logo-img logo-img-lg"
-                      src="./images/logo.png"
-                      srcSet="./images/logo2x.png 2x"
-                      alt="logo"
-                    />
-                    <img
+              <div className="brand-logo pb-3">
+                  <Link to="" className="logo-link">                    
+                  <img
                       className="logo-dark logo-img logo-img-lg"
                       src="./images/logo.png"
                       srcSet="./images/logo-dark2x.png 2x"
                       alt="logo-dark"
                     />
                   </Link>
-                  </div>
+                </div>
               
               {res.status == true ? (
                 <h1 style={{ color: "green", fontSize: 20 }}>{res.messege}</h1>
@@ -160,15 +154,15 @@ const EmailOtp = (props) => {
                   </button>
                 </div>
               </form>
-              <div className="form-note-s2 pt-4">
+              <div className="form-note-s2 pt-2 text-right">
                 {" "}
-                New on our platform? <Link to="/Signup">Create an account</Link>
+                New on our platform? <Link className="text-teal" to="/Signup">Create an account</Link>
               </div>
-              <div className="text-center pt-4 pb-3">
-                <h6 className="overline-title overline-title-sap">
+              {/* <div className="text-center pt-4 pb-3">
+                <span className="overline-title overline-title-sap">
                   <span>OR</span>
-                </h6>
-              </div>
+                </span>
+              </div> */}
             </div>
             </div>
             <div className="nk-content text-center mt-lg-2">

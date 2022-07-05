@@ -177,11 +177,11 @@ const ResetPassword = (props) => {
               </Link> */}
             <div className="col-md-6 bg-light border shadow">
               <div className="card-inner">
-                <div className="brand-logo pb-5">
+                <div className="brand-logo pb-3">
                   <a href="#" className="logo-link">
                     <img
                       className="logo-light logo-img logo-img-lg"
-                      src="./images/logo.png"
+                      src="./images/logo-dark.png"
                       srcSet="./images/logo2x.png 2x"
                       alt="logo"
                     />

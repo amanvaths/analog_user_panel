@@ -85,11 +85,11 @@ const ForgetPassword = (props) => {
             </div>
             <div className="col-md-6 bg-light border shadow">
               <div className="card-inner">
-              <div className="brand-logo pb-5">
+              <div className="brand-logo pb-3">
                 <a href="#" className="logo-link">
                   <img
                     className="logo-light logo-img logo-img-lg"
-                    src="./images/logo.png"
+                    src="./images/logo-dark.png"
                     srcSet="./images/logo2x.png 2x"
                     alt="logo"
                   />
@@ -168,7 +168,7 @@ const ForgetPassword = (props) => {
               <div className="form-note-s2 pt-2 text-right">
                 {" "}
                 {/* New on our platform? <Link to="/Signup">Create an account</Link> */}
-                New on our platform? <Link to="/ResetPassword">Reset Password</Link>
+                New on our platform? <Link className="text-teal" to="/ResetPassword">Reset Password</Link>
               </div>
               <div className="text-center pt-4 pb-3">
                 <span className="overline-title overline-title-sap">

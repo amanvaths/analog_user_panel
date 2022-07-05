@@ -205,9 +205,9 @@ const Signup = (props) => {
               <div className="card-inner">
                 <div className="brand-logo pb-3">
                   <Link to="" className="logo-link">                    
-                    <img
+                  <img
                       className="logo-dark logo-img logo-img-lg"
-                      src="./images/logo-dark.png"
+                      src="./images/logo.png"
                       srcSet="./images/logo-dark2x.png 2x"
                       alt="logo-dark"
                     />
@@ -292,7 +292,7 @@ const Signup = (props) => {
                             setPassworderror(true);
                           }
                         }}
-                        onKeyUp={() => _onkeyup()}
+                        // onKeyUp={() => _onkeyup()}
                         style={{ fontSize: "15px" }} />
                     </div>
 
