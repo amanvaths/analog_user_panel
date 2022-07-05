@@ -75,13 +75,13 @@ function Menu (){
               >
                 <img
                   className="logo-light logo-img"
-                  src="images/logo.png"
+                  src="images/logo-dark.png"
                   // srcSet="images/logo-dark.png 2x"
                   alt="logo"                 
                 />
                 <img
                   className="logo-dark logo-img"
-                  src="images/logo-dark.png"
+                  src="images/logo.png"
                   // srcSet="images/logo-dark.png 2x"
                   alt="logo-dark"                
                 />
