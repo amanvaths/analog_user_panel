@@ -33,7 +33,7 @@ const AirDrop = () => {
           <div className="nk-wrap">
             <Header />
             <div className="nk-content nk-content-fluid">
-              <div className="container-xl wide-lg">
+              <div className="container-xl">
                 <div className="nk-content-body">
                   <div className="nk-block-head nk-block-head-sm">
                     <div className="nk-block-between g-3">
@@ -51,8 +51,7 @@ const AirDrop = () => {
                             to=""
                             className="btn btn-icon btn-trigger toggle-expand me-n1"
                             data-target="pageMenu"
-                          ><em className="icon ni ni-menu-alt-r"></em
-                          ></Link>
+                          ><em className="icon ni ni-menu-alt-r"></em></Link>
                           <div
                             className="toggle-expand-content"
                             data-content="pageMenu"
@@ -61,7 +60,7 @@ const AirDrop = () => {
                                 <li>
                                   <Link
                                    to={'/Withdrawal'}
-                                    className="btn btn-white btn-primary btn-outline-light">
+                                    className="btn btn-outline-success">
                                     
                                     <span>Withdraw</span></Link>
                                 </li>
@@ -94,7 +93,7 @@ const AirDrop = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="nk-block">
+                  <div className="nk-block bg-light p-3 border rounded">
                     <div className="card card-bordered card-stretch">
                       <div className="card-inner-group">
                         <div className="card-inner">
@@ -125,21 +124,20 @@ const AirDrop = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="card-inner p-0">
-                          <div className="nk-tb-list nk-tb-tnx">
+                        <div className="card-inner p-0 bg-white">
+                          <div className="nk-tb-list nk-tb-tnx is-compact">
                             <div className="nk-tb-item nk-tb-head">
-                              <div className="nk-tb-col"><span>Sr. No</span></div>
-                              <div className="nk-tb-col"><span>Social Activity</span></div>
+                              <div className="nk-tb-col"><span className="font-weight-bold">Sr. No</span></div>
+                              <div className="nk-tb-col"><span className="font-weight-bold">Social Activity</span></div>
                               <div className="nk-tb-col nk-tb-col-status">
-                                <span className="sub-text d-none d-md-block">Status</span>
+                                <span className="d-none d-md-block"><span className="font-weight-bold">Status</span></span>
                               </div>
-                              <div className="nk-tb-col text-end">
-                                <span>Airdrop</span>
+                              <div className="nk-tb-col">
+                                <span className="font-weight-bold">Airdrop</span>
                               </div>
                               <div className="nk-tb-col text-end tb-col-sm">
-                                <span>View</span>
+                                <span className="font-weight-bold">View</span>
                               </div>
-
                               <div className="nk-tb-col nk-tb-col-tools"></div>
                             </div>
                             {
@@ -150,8 +148,7 @@ const AirDrop = () => {
                                   <div className="nk-tb-item">
                                     <div className="nk-tb-col">
                                       <div className="nk-tnx-type">
-
-                                        <span>{index + 1}</span>
+                                        <span className="nk-activity-media user-avatar xs bg-teal">{index + 1}</span>
                                       </div>
                                     </div>
                                     {/* <div className="nk-tb-col">
@@ -187,7 +184,7 @@ const AirDrop = () => {
 
                                     </div>
 
-                                    <div className="nk-tb-col text-end">
+                                    <div className="nk-tb-col">
                                       <span className="tb-amount">
                                         {element.airdrop}
                                       </span>
@@ -289,8 +286,11 @@ const AirDrop = () => {
                              
                               
                           </div>
-                        </div>
-                        <div className="card-inner">
+                        </div>                        
+                      </div>
+                    </div>                    
+                  </div>
+                  <div className="card-inner">
                           <ul
                             className="pagination justify-content-center justify-content-md-center"
                           >
@@ -313,9 +313,6 @@ const AirDrop = () => {
                             </li>
                           </ul>
                         </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>

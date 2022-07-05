@@ -262,7 +262,7 @@ const Affiliate = (props) => {
                                 </div>
                               </div>
                             </div>
-                              <div className="nk-tb-list nk-tb-ulist">
+                              <div className="nk-tb-list nk-tb-ulist is-compact">
                                 <div className="nk-tb-item nk-tb-head">
                                   <div className="nk-tb-col tb-col-sm">
                                     {/* <span className="font-weight-bold">S. N.</span> */}
@@ -300,7 +300,7 @@ const Affiliate = (props) => {
                                           <div className="nk-tb-col tb-col-sm">
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
-                                            <span className="">{(((currentPage - 1) * 5) + index + 1)}</span>
+                                            <span className="nk-activity-media user-avatar xs bg-teal">{(((currentPage - 1) * 5) + index + 1)}</span>
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
                                             <span className="">{element.email}</span>
@@ -428,7 +428,7 @@ const Affiliate = (props) => {
                                 </div>
                               </div>
 
-                                <div className="nk-tb-list nk-tb-ulist">                          
+                                <div className="nk-tb-list nk-tb-ulist is-compact">                          
                                 <div className="nk-tb-item nk-tb-head">
                                   <div className="nk-tb-col tb-col-sm">
                                     {/* <span className="font-weight-bold">S. N.</span> */}
@@ -467,7 +467,7 @@ const Affiliate = (props) => {
                                           <div className="nk-tb-col tb-col-sm">
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
-                                            <span className="tb-text">{(((currentPage - 1) * 5) + index + 1)}</span>
+                                            <span className="nk-activity-media user-avatar xs bg-teal">{(((currentPage - 1) * 5) + index + 1)}</span>
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
                                             <span className="tb-text">{element.email}</span>
@@ -588,7 +588,7 @@ const Affiliate = (props) => {
                                   </div>
                                 </div>
                               </div>
-                              <div className="nk-tb-list nk-tb-ulist">
+                              <div className="nk-tb-list nk-tb-ulist is-compact">
                                 <div className="nk-tb-item nk-tb-head">
                                   <div className="nk-tb-col tb-col-sm">
                                     {/* <span className="font-weight-bold">S. N.</span> */}
@@ -631,7 +631,7 @@ const Affiliate = (props) => {
                                             <div className="nk-tb-col tb-col-sm">
                                             </div>
                                             <div className="nk-tb-col tb-col-sm">
-                                              <span className="tb-text">{(((currentPage - 1) * 5) + index + 1)}</span>
+                                              <span className="nk-activity-media user-avatar xs bg-teal">{(((currentPage - 1) * 5) + index + 1)}</span>
                                             </div>
                                             <div className="nk-tb-col tb-col-sm">
                                               <span className="tb-text">{element.email}</span>
