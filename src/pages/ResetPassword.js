@@ -326,9 +326,9 @@ const ResetPassword = (props) => {
               </div>
 
               <div className="text-center pt-4 pb-3">
-                <h6 className="overline-title overline-title-sap">
+                <span className="overline-title overline-title-sap">
                   <span>OR</span>
-                </h6>
+                </span>
               </div>
               <ul className="nav justify-center gx-4">
                 <li className="nav-item ">
