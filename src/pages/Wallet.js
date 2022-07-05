@@ -64,6 +64,8 @@ const Wallet = (props) => {
 },[])
 
 
+
+
 // setInterval(() => {
 //   if(status == 0){
 //     status = 1
@@ -76,18 +78,19 @@ const Wallet = (props) => {
 
 
 
-  // const test = ()=>{
-  //   try {
-  //       axios.post(`http://localhost:3001/get`, {email:email})
-  //       console.log("GET API DATA");
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+  const test = async()=>{
+    try {
+       const data = await axios.post(`${BASE_URL}/getUserWallet`, {email:email})
+          console.log(data.data, "YRSSJSJSJSJSJS");
+          setWalletDetails([...data.data]);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-  // useEffect(()=>{
-  //   test()
-  // },[])
+  useEffect(()=>{
+    test()
+  },[])
 
   const getUserAllWallletData = async () => {
     try {
