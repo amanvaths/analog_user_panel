@@ -30,7 +30,7 @@ const Card1 = (props) => {
       <div className="my-3" onClick={props.onClick} style={{zIndex:100}} >
         <div className="row" style={{ padding: "0px" }}>
           <div className="">
-            <div className="card bg-light shadow-sm horizontal">
+            <div className="card bg-light shadow horizontal hover_on_card">
               <div className="nk-wgw">
                 <div className="nk-wgw-inner">
                   <div className="row">
