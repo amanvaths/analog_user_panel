@@ -158,7 +158,7 @@ const ResendOtp = (props) => {
               </form>
               <div className="form-note-s2 pt-4">
                 {" "}
-                New on our platform? <Link to="/signup">Create an account</Link>
+                New on our platform? <Link to="/Signup">Create an account</Link>
               </div>
               <div className="text-center pt-4 pb-3">
                 <h6 className="overline-title overline-title-sap">
@@ -186,6 +186,7 @@ const ResendOtp = (props) => {
                   </li>
                   <li className="nav-item dropup">
                     <Link
+                    to=""
                       className="dropdown-toggle dropdown-indicator has-indicator nav-link"
                       data-toggle="dropdown"
                       data-offset="0,10"

@@ -118,9 +118,9 @@ const Login = (props) => {
         if (resp.status == 3) {
           swal("Email is not varified", "Verify Email before Login", "error");
           dispatch(sendOtp(({ LoginDetails: resp })))
-          setTimeout(() => {
-            navigate("/EmailOtp");
-          }, 3000);
+          // setTimeout(() => {
+          //   navigate("/EmailOtp");
+          // }, 3000);
           navigate("/ResendOtp");
         }
         if (resp.status == 4) {

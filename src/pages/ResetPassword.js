@@ -327,8 +327,8 @@ const ResetPassword = (props) => {
               </form>
               <div className="form-note-s2 pt-4">
                 {" "}
-                Already Interact <Link href="/login">Sign in</Link>
-                {/* Otp Interact <Link href="/EmailOtp">Resend Otp</Link> */}
+                {/* Already Interact <Link to="/login">Sign in</Link> */}
+                Otp Interact <Link to="/EmailOtp">Resend Otp</Link>
               </div>
 
               <div className="text-center pt-4 pb-3">
@@ -388,6 +388,7 @@ const ResetPassword = (props) => {
                   </li>
                   <li className="nav-item dropup">
                     <Link
+                    to=""
                       className="dropdown-toggle dropdown-indicator has-indicator nav-link"
                       data-toggle="dropdown"
                       data-offset="0,10"

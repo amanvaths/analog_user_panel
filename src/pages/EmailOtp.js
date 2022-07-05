@@ -11,7 +11,7 @@ const EmailOtp = (props) => {
   // const [otpError, setOtpError] = useState(false);
   const [res, setResponse] = useState("");
   const navigate = useNavigate();
-  const [load , setLoad] = useState(true)
+  // const [load , setLoad] = useState(true)
 
   // console.log(otp, "otpp");
   console.log(otpSend, ":: IS OTP SEND");
@@ -36,7 +36,7 @@ const EmailOtp = (props) => {
       .then((res) => res.json())
      
       .then((resp) => {
-        setLoad(false)
+        // setLoad(false)
         // console.log(email);
         console.log(res, "resp");
         if (resp.status == "1") {
@@ -148,10 +148,11 @@ const EmailOtp = (props) => {
                     }}
                   >
                      {
-                       load == true ? <span>Verify</span> 
-                       :  <span style={{position: "relative", left: "50%" }}>
-                       <Bars height="10" width="10" ariaLabel="loading-indicator" color="white" />
-                       </span>
+                      //  load == true ?
+                        <span>Verify</span> 
+                      //  :  <span style={{position: "relative", left: "50%" }}>
+                      //  <Bars height="10" width="10" ariaLabel="loading-indicator" color="white" />
+                      //  </span>
                      }
                     
                    
@@ -162,7 +163,7 @@ const EmailOtp = (props) => {
               </form>
               <div className="form-note-s2 pt-4">
                 {" "}
-                New on our platform? <Link to="/signup">Create an account</Link>
+                New on our platform? <Link to="/Signup">Create an account</Link>
               </div>
               <div className="text-center pt-4 pb-3">
                 <h6 className="overline-title overline-title-sap">
@@ -174,17 +175,17 @@ const EmailOtp = (props) => {
               <div className="nk-block-between">
                 <ul className="nav nav-sm">
                   <li className="nav-item">
-                    <Link className="nav-link" to="">
+                    <Link to="" className="nav-link">
                       Terms & Condition
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="">
+                    <Link to="" className="nav-link" >
                       Privacy Policy
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="">
+                    <Link to="" className="nav-link" >
                       Help
                     </Link>
                   </li>

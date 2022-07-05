@@ -58,6 +58,7 @@ const PersonalInfo = () => {
           setMyCurrency("");
           setPhone("");
           updateSetting(); 
+          NotificationManager.success("User Name updated")
         }
         else if (data.data.status == -1) {
           NotificationManager.error(data.data.message)
