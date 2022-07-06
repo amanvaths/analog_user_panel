@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import axios from "axios";
 
-const NewsPR = () => {
+const BlockChain = () => {
  
 
   return (
@@ -31,4 +31,4 @@ const NewsPR = () => {
   );
 
 }
-export default NewsPR;
+export default BlockChain;

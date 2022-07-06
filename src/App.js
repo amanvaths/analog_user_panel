@@ -28,7 +28,10 @@ import { useSelector } from "react-redux";
 import { subscribeUser } from "./web-push.config";
 import AllNotifications from './pages/AllNotifications';
 import NewsPR from './pages/NewsPR';
-import offer from './pages/Offer';
+import Offer from './pages/Offer';
+import TeamMember from './pages/TeamMember';
+import BlockChain from './pages/BlockChain';
+import RoadMap from './pages/RoadMap';
 
 
 function App(props) {
@@ -67,6 +70,7 @@ function App(props) {
           {/* <Route path="/Projects" element={<Projects />} /> */}
 
           <Route path="/home" element={(user.email && user.token)?<Home />:<Login /> } />
+         
           <Route path="/Affiliate" element={<Affiliate />} />
           {/* <Route path="/Transactions" element={<Transactions />} /> */}
           <Route path="/wallet" element={(user.email && user.token)? <Wallet /> : <Login />} />
@@ -80,6 +84,12 @@ function App(props) {
           <Route path="/Withdrawal" element={(user.email && user.token)?<Withdrawal />:<Login />} />
           <Route path="/Handout" element={(user.email && user.token)?<Handout />:<Login />} />
           <Route path="/Notification" element={(user.email && user.token)?<AllNotifications />:<Login />} />
+          <Route path="/NewsPR" element={(user.email && user.token)?<NewsPR />:<Login />} />
+          <Route path="/Offer" element={(user.email && user.token)?<Offer />:<Login />} />
+          <Route path="/TeamMember" element={(user.email && user.token)?<TeamMember />:<Login />} />
+          <Route path="/BlockChain" element={(user.email && user.token)?<BlockChain />:<Login />} />
+          <Route path="/RoadMap" element={(user.email && user.token)?<RoadMap />:<Login />} />
+          
         </Routes>
       </BrowserRouter>
     </div >

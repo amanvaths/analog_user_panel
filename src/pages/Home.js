@@ -198,35 +198,10 @@ const Home = () => {
           <div className="nk-wrap bg-light">
             <Header />
             <div className="container">           
-              <div className="shadow mt-3">              
-              <div id="carouselFade" class="carousel slide carousel-fade" data-ride="carousel"  data-interval="2000">
-                <div class="carousel-inner" role="listbox">
-                  <div class="carousel-item active">
-                    <img class="d-block w-100" src="images/slides/d.png" alt="First slide"/>
-                  </div>
-                  <div class="carousel-item">
-                    <img class="d-block w-100" src="images/slides/e.png" alt="Second slide" />
-                  </div>
-                  <div class="carousel-item">
-                    <img class="d-block w-100" src="images/slides/h.png" alt="Third slide"/>
-                  </div>
-                  <div class="carousel-item">
-                    <img class="d-block w-100" src="images/slides/l.png" alt="Third slide"/>
-                  </div>
-                  <div class="carousel-item">
-                    <img class="d-block w-100" src="images/slides/j.png" alt="Third slide"/>
-                  </div>
+              <div className="shadow mt-3">
+                <div class="">
+                    <img class="d-block w-100 img-responsive border rounded border-teal" src="images/slides/1.png" alt="Analog Inceptive Banner"/>
                 </div>
-             
-                 <a class="carousel-control-prev left carousel-control" href="#carouselFade" role="button" data-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next right carousel-control" href="#carouselFade" role="button" data-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Next</span>
-                </a> 
-              </div>
                 {/* <Slide>
                   {i?.map((slideImage, index) => {
                     return (
