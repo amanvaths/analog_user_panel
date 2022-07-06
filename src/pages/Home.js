@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Menu from "../components/Menu";
 import Header from "../components/Header";
@@ -10,7 +10,7 @@ import Getpresale from "../components/Getpresale";
 import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 import { Link, useNavigate } from "react-router-dom";
 import { Triangle } from "react-loader-spinner";
@@ -86,10 +86,10 @@ const Home = () => {
       const res = await axios.post(`${BASE_URL}/buyChart`, { email: email });
       const arr = res.data.data;
       console.log(arr, 'orid');
-      arr.map((element, index)=>{
+      arr.map((element, index) => {
         total.push(element.total)
         year.push(`${element.month}/${element.year}`)
-        console.log(`${element.month}/${element.year}`, "element");     
+        console.log(`${element.month}/${element.year}`, "element");
       })
       setChartAmt(total)
       setChartLabel(year)
@@ -194,14 +194,56 @@ const Home = () => {
       <div className="nk-app-root">
         <div className="nk-main ">
           <Menu />
-
           <div className="nk-wrap bg-light">
             <Header />
-            <div className="container">           
+            <div className="container">
               <div className="shadow mt-3">
-                <div class="">
-                    <img class="d-block w-100 img-responsive border rounded border-teal" src="images/slides/1.png" alt="Analog Inceptive Banner"/>
+                <div id="carouselExConInd" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                  <ol class="carousel-indicators">
+                    <li data-bs-target="#carouselExConInd" data-bs-slide-to="0" class="active"></li>
+                    <li data-bs-target="#carouselExConInd" data-bs-slide-to="1"></li>
+                  </ol>
+                  <div class="carousel-inner">
+                    <div class="carousel-item active"> <img src="images/slides/2.gif" class="d-block w-100" alt="carousel" />
+                    </div>
+                    <div class="carousel-item"> <img src="images/slides/1.png" class="d-block w-100"
+                      alt="carousel" /> 
+                    </div>
+                  </div> 
+                  <Link class="carousel-control-prev" to="#carouselExConInd" role="button" data-bs-slide="prev"> <span
+                    class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
+                  </Link> <Link class="carousel-control-next" to="#carouselExConInd" role="button" data-bs-slide="next"> <span
+                    class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span> </Link>
                 </div>
+                {/* <div class="carousel-item active">
+                  <img class="d-block w-100" src="images/slides/1.png" alt="Analog Inceptive" />
+                </div> */}
+                {/* <div id="carouselFade" class="carousel slide carousel-fade" data-ride="carousel"  data-interval="2000">
+                <div class="carousel-inner" role="listbox">
+                  <div class="carousel-item active">
+                    <img class="d-block w-100" src="images/slides/1.png" alt="First slide"/>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100" src="images/slides/1.png" alt="Second slide" />
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100" src="images/slides/h.png" alt="Third slide"/>
+                  </div>
+                  
+                  <div class="carousel-item">
+                    <img class="d-block w-100" src="images/slides/j.png" alt="Third slide"/>
+                  </div>
+                </div>
+             
+                 <a class="carousel-control-prev left carousel-control" href="#carouselFade" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next right carousel-control" href="#carouselFade" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a> 
+              </div> */}
                 {/* <Slide>
                   {i?.map((slideImage, index) => {
                     return (
@@ -271,7 +313,7 @@ const Home = () => {
                               <div className="nk-wg7">
                                 <div className="nk-wg7-stats">
                                   <div className="nk-wg7-title">
-                                    TOTAL ANOLOG BUY  
+                                    TOTAL ANOLOG BUY
                                   </div>
                                   <div className="number-lg amount text-white">
                                     {totalAnalogBuy.toFixed(2)}
@@ -284,7 +326,7 @@ const Home = () => {
                                       {totalWallet}
                                     </div>
                                   </div>
-                                  <div   className="nk-wg7-stats w-50" >
+                                  <div className="nk-wg7-stats w-50" >
                                     <div className="nk-wg7-title">
                                       Transactions
                                     </div>
@@ -323,7 +365,7 @@ const Home = () => {
                           <div className="col-sm-4">
                             <div className="card bg-white shadow-sm hover_on_card">
                               <div className="nk-wgw sm">
-                              <Link className="nk-wgw-inner" to="">
+                                <Link className="nk-wgw-inner" to="">
                                   <div className="nk-wgw-name">
                                     <div className="nk-wgw-icon bg-teal">
                                       <em className="icon ni ni-sign-btc"></em>
@@ -355,7 +397,7 @@ const Home = () => {
                           >
                             <div className="card bg-white shadow-sm hover_on_card">
                               <div className="nk-wgw sm">
-                              <Link to="" className="nk-wgw-inner">
+                                <Link to="" className="nk-wgw-inner">
                                   <div className="nk-wgw-name">
                                     <div className="nk-wgw-icon bg-teal">
                                       <em className="icon ni ni-sign-btc"></em>
@@ -461,7 +503,7 @@ const Home = () => {
                           >
                             <div className="card bg-white shadow-sm hover_on_card">
                               <div className="nk-wgw sm">
-                              <Link  to="" className="nk-wgw-inner">
+                                <Link to="" className="nk-wgw-inner">
                                   <div className="nk-wgw-name">
                                     <div className="nk-wgw-icon bg-teal">
                                       <em className="icon ni ni-sign-btc"></em>
@@ -473,7 +515,7 @@ const Home = () => {
                                   <div className="nk-wgw-balance">
                                     <div
                                       className="amount "
-                                      // style={{ fontSize: "10px" }}
+                                    // style={{ fontSize: "10px" }}
                                     >
                                       {/* [L<sup>1</sup> / L<sup>2</sup> / L
                                         <sup>3</sup>][1% / 0.5% / 0.2% ] */}
@@ -711,13 +753,13 @@ const Home = () => {
                       <div className="nk-refwg-invite card-inner">
                         <div className="nk-refwg-head g-3">
                           <div className="nk-refwg-title">
-                          <h5 className="title">Refer Us &amp; Earn</h5>
+                            <h5 className="title">Refer Us &amp; Earn</h5>
                             <div className="text-soft">
-                            Click on "Invite" Button &amp; share below  link to invite your friends
+                              Click on "Invite" Button &amp; share below  link to invite your friends
                             </div>
                           </div>
                           <div className="nk-refwg-action">
-                             <div>
+                            <div>
                               <RWebShare
                                 data={{
                                   text: "Like humans, flamingos make friends for life",
@@ -766,7 +808,7 @@ const Home = () => {
                                         left: "15px",
                                         padding: "3px 3px",
                                         backgroundColor: "#20c997",
-                                        borderRadius:"3px",
+                                        borderRadius: "3px",
                                         color: "white",
                                       }}
                                     >
@@ -814,8 +856,8 @@ const Home = () => {
                                 ? userInfo?.currency_preference == "inr"
                                   ? `${totalRefIncome?.toFixed(2)}`
                                   : `${(totalRefIncome / oneUsdPrice)?.toFixed(
-                                      2
-                                    )}`
+                                    2
+                                  )}`
                                 : 0}{" "}
                               &nbsp;&nbsp;
                               {userInfo?.currency_preference == "inr"
@@ -862,7 +904,7 @@ const Home = () => {
                     <div className="card-inner card-inner-lg">
                       <div className="align-center flex-wrap flex-md-nowrap g-4">
                         <div className="nk-block-image flex-shrink-0 bg-teal border rounded">
-                        <div class="text-white"><span className="ni ni-headphone-fill fs-1"></span></div>
+                          <div class="text-white"><span className="ni ni-headphone-fill fs-1"></span></div>
                         </div>
                         <div className="nk-block-content">
                           <div className="nk-block-content-head px-lg-4">

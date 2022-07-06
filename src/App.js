@@ -32,6 +32,7 @@ import Offer from './pages/Offer';
 import TeamMember from './pages/TeamMember';
 import BlockChain from './pages/BlockChain';
 import RoadMap from './pages/RoadMap';
+import NewsArticle from './pages/NewsArticle';
 
 
 function App(props) {
@@ -89,6 +90,7 @@ function App(props) {
           <Route path="/TeamMember" element={(user.email && user.token)?<TeamMember />:<Login />} />
           <Route path="/BlockChain" element={(user.email && user.token)?<BlockChain />:<Login />} />
           <Route path="/RoadMap" element={(user.email && user.token)?<RoadMap />:<Login />} />
+          <Route path="/NewsArticle" element={(user.email && user.token)?<NewsArticle />:<Login />} />
           
         </Routes>
       </BrowserRouter>
