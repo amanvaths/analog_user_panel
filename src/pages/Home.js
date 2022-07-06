@@ -198,27 +198,34 @@ const Home = () => {
           <div className="nk-wrap bg-light">
             <Header />
             <div className="container">           
-              <div className="slide-container shadow mt-3">
-              <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
+              <div className="shadow mt-3">              
+              <div id="carouselFade" class="carousel slide carousel-fade" data-ride="carousel"  data-interval="2000">
+                <div class="carousel-inner" role="listbox">
                   <div class="carousel-item active">
-                    <img class="d-block w-100" src="images/slides/2.png" alt="First slide"/>
+                    <img class="d-block w-100" src="images/slides/d.png" alt="First slide"/>
                   </div>
                   <div class="carousel-item">
-                    <img class="d-block w-100" src="images/slides/3.png" alt="Second slide" />
+                    <img class="d-block w-100" src="images/slides/e.png" alt="Second slide" />
                   </div>
                   <div class="carousel-item">
-                    <img class="d-block w-100" src="images/slides/4.png" alt="Third slide"/>
+                    <img class="d-block w-100" src="images/slides/h.png" alt="Third slide"/>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100" src="images/slides/l.png" alt="Third slide"/>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100" src="images/slides/j.png" alt="Third slide"/>
                   </div>
                 </div>
-                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+             
+                 <a class="carousel-control-prev left carousel-control" href="#carouselFade" role="button" data-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                   <span class="sr-only">Previous</span>
                 </a>
-                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <a class="carousel-control-next right carousel-control" href="#carouselFade" role="button" data-slide="next">
                   <span class="carousel-control-next-icon" aria-hidden="true"></span>
                   <span class="sr-only">Next</span>
-                </a>
+                </a> 
               </div>
                 {/* <Slide>
                   {i?.map((slideImage, index) => {

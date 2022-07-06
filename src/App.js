@@ -26,7 +26,9 @@ import Withdrawal from './pages/Withdrawal'
 import Handout from "./pages/Handout";
 import { useSelector } from "react-redux";
 import { subscribeUser } from "./web-push.config";
-import AllNotifications from './pages/AllNotifications'
+import AllNotifications from './pages/AllNotifications';
+import NewsPR from './pages/NewsPR';
+import offer from './pages/Offer';
 
 
 function App(props) {
