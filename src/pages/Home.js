@@ -198,7 +198,7 @@ const Home = () => {
           <div className="nk-wrap bg-light">
             <Header />
             {/* Add this code  */}
-           {/* <div className="slide-container ">
+            <div className="slide-container ">
               <Slide>
                 {i?.map((slideImage, index) => {
                   return (
@@ -227,7 +227,7 @@ const Home = () => {
                   );
                 })}
               </Slide>
-              </div>*/}
+              </div>
             {/* Add Slide small card */}
             <div className="container">
               <div className="row g-3 mt-4">

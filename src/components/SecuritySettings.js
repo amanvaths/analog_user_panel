@@ -181,12 +181,12 @@ const SecuritySettings = () => {
 
                     </h5>
                     <p>
-                      Secure your account with 2FA security.
+                      Secure your account with Google 2FA security.
                       <p>When it is activated you will need to
                         enter not only your password, but also a
-                        special code using app.
-                        <p>You can receive
-                          this code by in mobile app.</p>
+                        special code using google Authenticator mobile app.
+                        {/* <p>You can receive
+                          this code by in mobile app.</p> */}
                       </p>
 
                     </p>
@@ -228,7 +228,9 @@ const SecuritySettings = () => {
                       <Modal.Title>Google Authentication</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
+                    
                       <div className='row d-flex justify-content-around flex-row align-items-center py-2'>
+                      
                         <div className='col-6'>
                           <div className=''>
                             <img
@@ -266,7 +268,7 @@ const SecuritySettings = () => {
                       </div>
                     </Modal.Body>
                     <Modal.Footer>
-                      <Button variant="success" onClick={() => {
+                      {/* <Button variant="success" onClick={() => {
                         if (Object?.values(userInfo)?.length > 0) {
                           handleClose()
                           const obj = {userInfo}
@@ -275,7 +277,7 @@ const SecuritySettings = () => {
                         }
                       }}>
                         Close
-                      </Button>
+                      </Button> */}
                     </Modal.Footer>
 
                   </Modal>

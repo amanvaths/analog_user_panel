@@ -29,15 +29,23 @@ const ChangePassword = () => {
         try {
             const data = await axios.post('http://localhost:3001/api/change_password',{email: email, old_password: oldPassword, new_password: newPassword})
             console.log(data.data)
-            if(data.data.status === 1){
-                swal("Password Changed Successfully", "Please Login", "success");
-          setTimeout(() => {
-            navigate("/login");
-          }, 2000);
-            setOldPassword(" ")
-            setNewPassword(" ")
-            setConfirmPassword(" ")
-        }
+            if(confirmPassword === newPassword){
+                if(data.data.status === 1){
+                    swal("Password Changed Successfully", "Please Login", "success");
+              setTimeout(() => {
+                navigate("/login");
+              }, 2000);
+                setOldPassword(" ")
+                setNewPassword(" ")
+                setConfirmPassword(" ")
+            }
+            else if(data.data.status === 0){
+                swal("Password Incorrect", "Enter Correct Password", "error");
+            }
+            }else{
+                swal("Password and confirm password does not match", "Enter identical password", "error");
+            }
+           
 
         } catch (error) {
             console.log(error);
@@ -165,16 +173,15 @@ const ChangePassword = () => {
                                 </label>
                             </div>
                             <div className="form-control-wrap">
-                                <a
+                                <b
                                     tabIndex="-1"
-                                    href="#"
                                     className="form-icon form-icon-right passcode-switch text-dark"
                                     data-target="password"
                                 >
                                     {
                                         oldPasswordShown == false ? <AiOutlineEyeInvisible onClick={togglePassword1}/> : <AiOutlineEye onClick={togglePassword1}/>
                                     }
-                                </a>
+                                </b>
                                 <input
                                     type={oldPasswordShown ? "text" : "password"}
                                     className="form-control form-control-lg"
@@ -192,7 +199,7 @@ const ChangePassword = () => {
                                             setOldPasswordError(true);
                                         }
                                     }}
-                                    onKeyUp={() => _onkeyup()}
+                                    // onKeyUp={() => _onkeyup()}
                                     style={{ fontSize: "15px" }} />
                             </div>
 
@@ -215,9 +222,8 @@ const ChangePassword = () => {
                                 </label>
                             </div>
                             <div className="form-control-wrap">
-                                <a
+                                <b
                                     tabIndex="-1"
-                                    href="#"
                                     className="form-icon form-icon-right passcode-switch text-dark"
                                     data-target="password"
                                 >
@@ -226,7 +232,7 @@ const ChangePassword = () => {
                                     }
                                     
                 
-                                </a>
+                                </b>
                                 <input
                                     type={newPasswordShown ? "text" : "password"}
                                     className="form-control form-control-lg"
@@ -245,7 +251,7 @@ const ChangePassword = () => {
                                             setNewPasswordError(true);
                                         }
                                     }}
-                                    onKeyUp={() => _onkeyup()}
+                                    // onKeyUp={() => _onkeyup()}
                                     style={{ fontSize: "15px" }} />
                             </div>
 
@@ -270,16 +276,16 @@ const ChangePassword = () => {
                                 </label>
                             </div>
                             <div className="form-control-wrap">
-                                <a
+                                <b
                                     tabIndex="-1"
-                                    href="#"
+                                  
                                     className="form-icon form-icon-right passcode-switch text-dark"
                                     data-target="confirm-password"
                                 >
                                     {
                                         confirmPasswordShown == false ? <AiOutlineEyeInvisible onClick={togglePassword3}/> : <AiOutlineEye onClick={togglePassword3}/>
                                     }
-                                </a>
+                                </b>
                                 <input 
                                     
                                     type={confirmPasswordShown ? "text" : "password"}
