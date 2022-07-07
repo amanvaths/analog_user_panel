@@ -268,25 +268,25 @@ const Affiliate = (props) => {
                                     {/* <span className="font-weight-bold">S. N.</span> */}
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="font-weight-bold">S. N.</span>
+                                    <span className="font-weight-bold text-dark">S. N.</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="font-weight-bold">Email</span>
+                                    <span className="font-weight-bold text-dark">Email</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="font-weight-bold">Total Purchased</span>
+                                    <span className="font-weight-bold text-dark">Total Purchased</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="font-weight-bold">Total Expense</span>
+                                    <span className="font-weight-bold text-dark">Total Expense</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="font-weight-bold">Affiliate Rcvd (5%)</span>
+                                    <span className="font-weight-bold text-dark">Affiliate Rcvd (5%)</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="font-weight-bold">Handout</span>
+                                    <span className="font-weight-bold text-dark">Handout</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="font-weight-bold">View</span>
+                                    <span className="font-weight-bold text-dark">View</span>
                                   </div>
                                 </div>
                                 {
@@ -303,14 +303,14 @@ const Affiliate = (props) => {
                                             <span className="nk-activity-media user-avatar xs bg-teal">{(((currentPage - 1) * 5) + index + 1)}</span>
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
-                                            <span className="">{element.email}</span>
+                                            <span className="text-dark">{element.email}</span>
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
-                                            <span style={{ color: "green" }}>{element?.totalBuy?.toFixed(2)} ANA</span>
+                                            <span className="text-danger">{element?.totalBuy?.toFixed(2)} ANA</span>
                                             <img alt="analog" src="./images/Analog.png" style={{ width: "24px" }} />
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
-                                            <span style={{ color: "red" }}>
+                                            <span className="text-danger">
                                               {
                                                 userInfo?.currency_preference == 'usd' ? `${element?.totalExp?.toFixed(2)} USDT` : `${(element?.totalExp * oneUsdPrice)?.toFixed(2)} INRX`
 
@@ -331,7 +331,7 @@ const Affiliate = (props) => {
 
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
-                                            <span style={{ color: "green" }}>
+                                            <span className="text-danger">
                                               {
                                                 userInfo?.currency_preference == 'usd' ? `${element?.totalAff?.toFixed(2)} USDT` : `${(element?.totalAff * oneUsdPrice).toFixed(2)} INRX`
                                               }
@@ -350,7 +350,7 @@ const Affiliate = (props) => {
                                             </span>
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
-                                            <span style={{ color: "green" }}>
+                                            <span className="text-success">
                                               {
                                                 userInfo?.currency_preference == 'usd' ? `${element?.totalHandout?.toFixed(2)} USDT` : `${(element?.totalHandout * oneUsdPrice).toFixed(2)} INRX`
                                               }
@@ -369,7 +369,7 @@ const Affiliate = (props) => {
                                             </span>
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
-                                            <span>Action</span>
+                                            <span className="text-dark">Action</span>
                                           </div>
 
                                         </div>
@@ -431,28 +431,28 @@ const Affiliate = (props) => {
                                 <div className="nk-tb-list nk-tb-ulist is-compact">                          
                                 <div className="nk-tb-item nk-tb-head">
                                   <div className="nk-tb-col tb-col-sm">
-                                    {/* <span className="font-weight-bold">S. N.</span> */}
+                                    {/* <span className="font-weight-bold text-dark">S. N.</span> */}
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="font-weight-bold">S. N.</span>
+                                    <span className="font-weight-bold text-dark">S. N.</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="font-weight-bold">Email</span>
+                                    <span className="font-weight-bold text-dark">Email</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="font-weight-bold">Total Purchased</span>
+                                    <span className="font-weight-bold text-dark">Total Purchased</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="font-weight-bold">Total Expense</span>
+                                    <span className="font-weight-bold text-dark">Total Expense</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="font-weight-bold">Affiliate Rcvd (3%)</span>
+                                    <span className="font-weight-bold text-dark">Affiliate Rcvd (3%)</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="font-weight-bold">Handout</span>
+                                    <span className="font-weight-bold text-dark">Handout</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="font-weight-bold">View</span>
+                                    <span className="font-weight-bold text-dark">View</span>
                                   </div>
                                 </div>
 
@@ -470,7 +470,7 @@ const Affiliate = (props) => {
                                             <span className="nk-activity-media user-avatar xs bg-teal">{(((currentPage - 1) * 5) + index + 1)}</span>
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
-                                            <span className="tb-text">{element.email}</span>
+                                            <span className="text-dark">{element.email}</span>
                                           </div>
                                           <div className="nk-tb-col tb-col-sm text-success">
                                             <span className="tb-text">{element?.totalBuy?.toFixed(2)} ANA</span>
@@ -495,7 +495,7 @@ const Affiliate = (props) => {
                                               />)}
                                             </span>
                                           </div>
-                                          <div className="nk-tb-col tb-col-sm" style={{color: "green"}}>
+                                          <div className="nk-tb-col tb-col-sm text-success">
                                             <span className="tb-text">
                                               {
                                                 userInfo?.currency_preference == 'usd' ? `${element?.totalAff?.toFixed(2)} USDT` : `${(element?.totalAff * oneUsdPrice).toFixed(2)} INRX`
@@ -514,7 +514,7 @@ const Affiliate = (props) => {
                                               />)}
                                             </span>
                                           </div>
-                                          <div className="nk-tb-col tb-col-sm" style={{color: "green"}}>
+                                          <div className="nk-tb-col tb-col-sm text-success">
                                             <span style={{ color: "green" }}>
                                               {
                                                 userInfo?.currency_preference == 'usd' ? `${element?.totalHandout?.toFixed(2)} USDT` : `${(element?.totalHandout * oneUsdPrice).toFixed(2)} INRX`
@@ -534,7 +534,7 @@ const Affiliate = (props) => {
                                             </span>
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
-                                            <span className="tb-text">Action</span>
+                                            <span className="text-dark">Action</span>
                                           </div>
 
                                         </div>
@@ -591,31 +591,31 @@ const Affiliate = (props) => {
                               <div className="nk-tb-list nk-tb-ulist is-compact">
                                 <div className="nk-tb-item nk-tb-head">
                                   <div className="nk-tb-col tb-col-sm">
-                                    {/* <span className="font-weight-bold">S. N.</span> */}
+                                    {/* <span className="font-weight-bold text-dark">S. N.</span> */}
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="font-weight-bold">S. N.</span>
+                                    <span className="font-weight-bold text-dark">S. N.</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="font-weight-bold">Email</span>
+                                    <span className="font-weight-bold text-dark">Email</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="font-weight-bold">Sponsor</span>
+                                    <span className="font-weight-bold text-dark">Sponsor</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="font-weight-bold">Total Purchased</span>
+                                    <span className="font-weight-bold text-dark">Total Purchased</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="font-weight-bold">Total Expense</span>
+                                    <span className="font-weight-bold text-dark">Total Expense</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="font-weight-bold">Affiliate Rcvd (2%)</span>
+                                    <span className="font-weight-bold text-dark">Affiliate Rcvd (2%)</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="font-weight-bold">Handout</span>
+                                    <span className="font-weight-bold text-dark">Handout</span>
                                   </div>
                                   <div className="nk-tb-col tb-col-sm">
-                                    <span className="font-weight-bold">View</span>
+                                    <span className="font-weight-bold text-dark">View</span>
                                   </div>
                                 </div>
                                 
@@ -634,10 +634,10 @@ const Affiliate = (props) => {
                                               <span className="nk-activity-media user-avatar xs bg-teal">{(((currentPage - 1) * 5) + index + 1)}</span>
                                             </div>
                                             <div className="nk-tb-col tb-col-sm">
-                                              <span className="tb-text">{element.email}</span>
+                                              <span className="text-dark">{element.email}</span>
                                             </div>
                                             <div className="nk-tb-col tb-col-sm">
-                                              <span className="tb-text">{element.sponsor}</span>
+                                              <span className="text-dark">{element.sponsor}</span>
                                             </div>
                                             <div className="nk-tb-col tb-col-sm text-success">
                                               <span className="tb-text">{element?.totalBuy?.toFixed(2)} ANA</span>
@@ -703,7 +703,7 @@ const Affiliate = (props) => {
                                               </span>
                                             </div>
                                             <div className="nk-tb-col tb-col-sm">
-                                              <span className="tb-text">
+                                              <span className="text-dark">
                                                 < MdMoreHoriz />
                                               </span>
                                             </div>

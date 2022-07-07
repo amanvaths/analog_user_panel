@@ -32,7 +32,7 @@ const AirDrop = () => {
           <Menu />
           <div className="nk-wrap">
             <Header />
-            <div className="nk-content nk-content-fluid">
+            <div className="nk-content nk-content-fluid min-height bg-light">
               <div className="container-xl">
                 <div className="nk-content-body">
                   <div className="nk-block-head nk-block-head-sm">
@@ -93,7 +93,7 @@ const AirDrop = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="nk-block bg-light p-3 border rounded">
+                  <div className="nk-block">
                     <div className="card card-bordered card-stretch">
                       <div className="card-inner-group">
                         <div className="card-inner">

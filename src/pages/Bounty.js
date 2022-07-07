@@ -51,8 +51,8 @@ const Bounty = () => {
         <Menu />
         <div className="nk-wrap">
           <Header />
-          <div className="nk-content nk-content-fluid">
-            <div className="container-xl wide-lg">
+          <div className="nk-content nk-content-fluid bg-light min-height">
+            <div className="container-xl">
               <div className="nk-content-body">
                 <div className="nk-block-head nk-block-head-sm">
                   <div className="nk-block-between g-3">
@@ -80,7 +80,7 @@ const Bounty = () => {
                               <Link
                                 to={'/Withdrawal'}
                                 // onClick={()=> navigate('/Withdrawal')}
-                                className="btn btn-white btn-primary btn-outline-light">
+                                className="btn bg-teal text-white">
                                 <span>Withdrawal</span></Link>
                             </li>
                             {/* <li className="nk-block-tools-opt">
@@ -115,7 +115,7 @@ const Bounty = () => {
                 <div className="nk-block">
                   <div className="card card-bordered card-stretch">
                     <div className="card-inner-group">
-                      <div className="card-inner">
+                      <div className="card-inner py-1">
                         <div className="card-title-group">
                           <div className="card-title">
                             <h5 className="title">Bounty</h5>
@@ -124,11 +124,11 @@ const Bounty = () => {
                           <div className="card-tools me-n1">
                             <ul className="btn-toolbar gx-1">
                               <li>
-                                <div className="dropdown">
+                                <div className="dropdown align-middle h-50">
                                   <Link
                                     to=""
                                     className="btn btn-trigger btn-icon dropdown-toggle"
-                                    data-bs-toggle="dropdown"><em className="icon ni ni-setting"></em></Link>
+                                    data-bs-toggle="dropdown"><em className="icon ni ni-setting text-teal"></em></Link>
                                   <div className="dropdown-menu dropdown-menu-xs dropdown-menu-end">
                                     <ul className="link-check">
                                       <li><span>Show</span></li>
@@ -151,32 +151,32 @@ const Bounty = () => {
                         </div>
                       </div>
                       <div className="card-inner p-0">
-                        <div className="nk-tb-list nk-tb-tnx">
+                        <div className="nk-tb-list nk-tb-tnx is-compact">
                           <div className="nk-tb-item nk-tb-head">
                             <div className="nk-tb-col">
-                              <span className="tb-lead">Sr. No</span>
+                              <span className="font-weight-bold">Sr. No</span>
                             </div>
                             <div className="nk-tb-col">
-                              <span className="tb-lead">Price</span>
+                              <span className="font-weight-bold">Price</span>
                             </div>
                             <div className="nk-tb-col">
-                              <span className="tb-lead">Pool</span>
+                              <span className="font-weight-bold">Pool</span>
                             </div>
                             <div className="nk-tb-col tb-col-sm">
-                              <span className="tb-lead">Purchased</span>
+                              <span className="font-weight-bold">Purchased</span>
                             </div>
                             <div className="nk-tb-col">
-                              <span className="tb-lead d-none d-md-block">
+                              <span className="font-weight-bold d-none d-md-block">
                                 Expense
                               </span>
                             </div>
                             <div className="nk-tb-col ">
-                              <span className="tb-lead d-none d-md-block">
+                              <span className="font-weight-bold d-none d-md-block">
                                 Inherited 5 %
                               </span>
                             </div>
                             <div className="nk-tb-col ">
-                              <span className="tb-lead d-none d-md-block">
+                              <span className="font-weight-bold d-none d-md-block">
                                 Time
                               </span>
                             </div>
@@ -190,7 +190,7 @@ const Bounty = () => {
                                     <div className="nk-tb-item">
                                       <div className="nk-tb-col">
                                         <div className="nk-tnx-type">
-                                          <span>{(((currentPage - 1) * 10) + index + 1)}</span>
+                                          <span className="nk-activity-media user-avatar xs bg-teal">{(((currentPage - 1) * 10) + index + 1)}</span>
                                         </div>
                                       </div>
                                       <div className="nk-tb-col">
@@ -262,33 +262,33 @@ const Bounty = () => {
                                   <Bars heigth="100" width="100" color="#0b3175" ariaLabel="loading-indicator" style={{textAlign: 'center'}}/>
                                 </div>}
                         </div>
-                      </div>
-                      <div className="card-inner">
-                        <ReactPaginate
-                          previousLabel={'Prev'}
-                          nextLabel={'Next'}
-                          breakLabel={"..."}
-                          pageCount={Math.ceil(totalBounty / 10)}
-                          marginPagesDisplayed={2}
-                          pageRangeDisplayed={2}
-                          onPageChange={fun}
-                          containerClassName={'pagination justify-content-center'}
-                          pageClassName={'page-item'}
-                          pageLinkClassName={'page-link'}
-                          previousClassName={'page-item'}
-                          previousLinkClassName={'page-link'}
-                          nextClassName={'page-item'}
-                          nextLinkClassName={'page-link'}
-                          breakClassName={'page-item'}
-                          breakLinkClassName={'page-link'}
-                          activeClassName={"active"}
-                        />
-
-                        {/* <PaginatedItems itemsPerPage={4}/> */}
-                      </div>
+                      </div>                      
                     </div>
                   </div>
                 </div>
+                <div className="card-inner">
+                    <ReactPaginate
+                      previousLabel={'Prev'}
+                      nextLabel={'Next'}
+                      breakLabel={"..."}
+                      pageCount={Math.ceil(totalBounty / 10)}
+                      marginPagesDisplayed={2}
+                      pageRangeDisplayed={2}
+                      onPageChange={fun}
+                      containerClassName={'pagination justify-content-center'}
+                      pageClassName={'page-item'}
+                      pageLinkClassName={'page-link'}
+                      previousClassName={'page-item'}
+                      previousLinkClassName={'page-link'}
+                      nextClassName={'page-item'}
+                      nextLinkClassName={'page-link'}
+                      breakClassName={'page-item'}
+                      breakLinkClassName={'page-link'}
+                      activeClassName={"active"}
+                    />
+
+                    {/* <PaginatedItems itemsPerPage={4}/> */}
+                  </div>
               </div>
             </div>
           </div>
