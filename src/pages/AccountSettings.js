@@ -117,7 +117,7 @@ const AccountSettings = () => {
                             <div className="nk-block card card-bordered">
                               <div className="">    
                                 <table className="table table-ulogs">
-                                    <thead className="bg-gray text-white">
+                                    <thead className="tb-tnx-head">
                                       <tr>
                                         <th className="tb-col-os">
                                           <span>

@@ -71,6 +71,23 @@
   transition: background 200ms ease;
   
 }
+
+.tb-tnx-head {
+  font-size: 12.5px!important;
+  font-weight: bold!important;
+  border-bottom: 2px solid #e5e9f2 !important;
+  letter-spacing: 1.2px;
+  background: #fff!important;
+}
+
+.tb-tnx-head th {
+  color: #333!important;
+}
+
+.alert_div .lead-text + .sub-text {
+    font-size: 15px!important;
+}
+
 .carousel-indicators [data-bs-target] {
   background-color: #198754!important;
 }
