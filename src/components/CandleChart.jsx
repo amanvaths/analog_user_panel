@@ -10,7 +10,6 @@ class TVChartContainer extends React.PureComponent  {
 			
 		};
 	}
-
 	 getLanguageFromURL() {
 		const regex = new RegExp('[\\?&]lang=([^&#]*)');
 		const results = regex.exec(window.location.search);

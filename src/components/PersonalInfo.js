@@ -14,7 +14,6 @@ const PersonalInfo = () => {
   const dispatch = useDispatch()
   const { userInfo, user } = useSelector((state) => state.user.value)
   const email = user.email;
-
   const [showUser, setShowUser] = useState(true)
   const [showUser1, setShowUser1] = useState(true)
   const [showUser2, setShowUser2] = useState(true);
@@ -58,6 +57,8 @@ const PersonalInfo = () => {
           setMyCurrency("");
           setPhone("");
           updateSetting(); 
+          setShowUser1(false);
+          NotificationManager.success(data.data.message)
         }
         else if (data.data.status == -1) {
           NotificationManager.error(data.data.message)
@@ -148,7 +149,7 @@ const PersonalInfo = () => {
   return (
     <>
 
-      <div className="card-inner card-inner-lg">
+      <div className="card-inner card-inner-lg bg-light">
         <div className="nk-block-head nk-block-head-lg">
           <div className="nk-block-between">
             <div className="nk-block-head-content">
@@ -168,14 +169,14 @@ const PersonalInfo = () => {
             </div>
           </div>
         </div>
-        <div className="nk-block">
+        <div className="card nk-block">
           <div className="nk-data data-list">
-            <div className="data-head">
-              <h6 className="overline-title">Basics</h6>
+            <div className="data-head kanban-board-header kanban-success bg-lighter rounded-0">
+              <span className="overline-title">Basics</span>
             </div>
             {/* -------------- */}
 
-            <div className="row mx-auto mt-3">
+            <div className="row mx-auto mt-3 pb-3">
               <div className="col-4">
                 <div className="">
                   <span className="data-label">User Name</span>
@@ -183,8 +184,8 @@ const PersonalInfo = () => {
                 </div>
               </div>
               <div className="col-4 ">
-                {showUser == true ? <div className="input-group-sm">
-                  <input type="text" className="form-control" aria-label="Username" aria-describedby="basic-addon1"
+                {showUser == true ? <div class="input-group-sm">
+                  <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1"
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
                     style={{
@@ -200,13 +201,13 @@ const PersonalInfo = () => {
                 <div className="">
 
                   <span className="">
-                    {showUser ? <Link to="" className="btn btn-dim btn-primary" onClick={() => {
+                    {showUser ? <Link to="" className="btn btn-dim btn-outline-success" onClick={() => {
                       if (value) {
                         updateData();
                         setShowUser(false);
                       }
                     }}>Update</Link> :
-                      <em className="icon ni ni-lock-alt"></em>
+                      <em className="icon ni ni-lock-alt text-gray"></em>
 
                     }
 
@@ -215,7 +216,7 @@ const PersonalInfo = () => {
               </div>
             </div>
 
-            <div className="row mx-auto mt-3">
+            <div className="row mx-auto mt-3 pb-3">
               <div className="col-4">
                 <div className="">
                   <span className="data-label">Email</span>
@@ -228,7 +229,7 @@ const PersonalInfo = () => {
               <div className="col-4 d-flex justify-content-end">
                 <div className="">
                   <span className=" disable">
-                    <em className="icon ni ni-lock-alt"></em>
+                    <em className="ni ni-lock-alt text-gray"></em>
                   </span>
                 </div>
               </div>
@@ -241,7 +242,8 @@ const PersonalInfo = () => {
                 </div>
               </div>
               <div className="col-4">
-                {showUser1 == true ? <div className="input-group-sm">
+                {showUser1 == true ? 
+                <div className="input-group-sm">
                   <input type="text" className="form-control" aria-label="Phone" aria-describedby="basic-addon2"
                     value={phone}
                     onChange={(e) => {
@@ -259,18 +261,19 @@ const PersonalInfo = () => {
                       borderRightStyle: "hidden",
                       borderBottomStyle: "groove"
                     }} />
-                </div> : <span className="data-value">{updatedPhone}</span>}
+                </div> :
+                 <span className="data-value">{updatedPhone}</span>}
               </div>
               <div className="col-4 d-flex justify-content-end">
                 <div className="">
                   <span className="">
-                    {showUser1 ? <Link to="" className="btn btn-dim btn-primary" onClick={() => {
+                    {showUser1 ? <Link to="" className="btn btn-dim btn-outline-success" onClick={() => {
                       if (phone) {
                         updateData();
-                        setShowUser1(false);
+                        
                       }
                     }}>Update</Link> : <span className=" disable">
-                      <em className="icon ni ni-lock-alt"></em>
+                      <em className="icon ni ni-lock-alt text-gray"></em>
                     </span>
                     }
 
@@ -280,13 +283,13 @@ const PersonalInfo = () => {
             </div>
           </div>
 
-          <div className="nk-data data-list">
-            <div className="data-head">
-              <h6 className="overline-title">Currency Preferences</h6>
+          <div className="nk-data data-list mt-3">
+            <div className="data-head kanban-board-header kanban-success bg-lighter rounded-0">
+              <span className="overline-title">Currency Preferences</span>
             </div>
             {
               showUser2 ? <>
-                <div className="data-item">
+                <div className="data-item p-2 border-0">
                   <div className="data-col">
                     <span className="data-label">INRX</span>
                   </div>
@@ -310,7 +313,7 @@ const PersonalInfo = () => {
                 </div>
 
 
-                <div className="data-item">
+                <div className="data-item p-2 border-0">
                   <div className="data-col">
                     <span className="data-label">USDT</span>
 
@@ -340,11 +343,11 @@ const PersonalInfo = () => {
 
           </div>
 
-          <div className="nk-data data-list">
-            <div className="data-head">
-              <h6 className="overline-title">Referral</h6>
+          <div className="nk-data data-list mt-2">
+            <div className="data-head kanban-board-header kanban-success bg-lighter rounded-0">
+              <span className="overline-title">Referral</span>
             </div>
-            <div className="row mx-auto mt-3">
+            <div className="row mx-auto mt-3 pb-3">
               <div className="col-4 ">
                 <div className="">
                   <span className="data-label">Referral Code</span>
@@ -354,9 +357,9 @@ const PersonalInfo = () => {
               <div className="col-4">
                 {userInfo?.refferal ?
                   <span className="data-value">{userInfo?.refferal}</span> :
-                  <div className="input-group-sm">
+                  <div class="input-group-sm">
                     <input type="text"
-                      className="form-control"
+                      class="form-control"
                       aria-label="Username"
                       aria-describedby="basic-addon1"
                       value={ref}
@@ -374,8 +377,8 @@ const PersonalInfo = () => {
                 <div className="">
                   <span className="">
                     {userInfo?.refferal ? <span className=" disable">
-                      <em className="icon ni ni-lock-alt"></em>
-                    </span> : <button className="btn btn-dim btn-primary" onClick={() => {
+                      <em className="ni ni-lock-alt text-gray"></em>
+                    </span> : <button class="btn btn-outline-success btn-sm" onClick={() => {
                       updateReferral();
                     }}>Update</button>
 

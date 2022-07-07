@@ -143,9 +143,9 @@ const Withdrawal = () => {
                                                             <div className="nk-block-head-xs">
                                                                 <div className="nk-block-between-md g-2">
                                                                     <div className="nk-block-head-content">
-                                                                        <h5 className="nk-block-title title">
-                                                                            INCEPTIVE WALLETS
-                                                                        </h5>
+                                                                        <h3 className="nk-block-title title">
+                                                                            Inceptive Wallets
+                                                                        </h3>
                                                                     </div>
                                                                     <div className="nk-block-head-content"></div>
                                                                 </div>
@@ -163,11 +163,11 @@ const Withdrawal = () => {
                                                                                     setfromWalletAddress(element.name)
                                                                                 }}
                                                                             >
-                                                                                <div className={active.index == index ? "card bg-dark " : "card bg-light "}>
+                                                                                <div className={active.index == index ? "card bg-teal-dim" : "card bg-light "}>
                                                                                     <div className="nk-wgw sm">
                                                                                         <Link className="nk-wgw-inner" to="">
                                                                                             <div className="nk-wgw-name">
-                                                                                                <div className="nk-wgw-icon">
+                                                                                                <div className="nk-wgw-icon bg-teal">
                                                                                                     <em className="icon ni ni-sign-btc"></em>
                                                                                                 </div>
                                                                                                 <h5 className="nk-wgw-title title">
@@ -193,167 +193,139 @@ const Withdrawal = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                <div className="row gy-gs">
-                                                    <div className="col-lg-12 col-xl-12">
-                                                        <div className="row gy-gs">
-                                                            <div className="col-lg-12 col-xl-12">
-                                                                <div className="nk-block">
-                                                                    <div className="nk-block-head-xs">
-                                                                        <div className="nk-block-between-md g-2">
-                                                                            <div className="nk-block-head-content">
-                                                                                <h5 className="nk-block-title title">
-                                                                                    WITHDRAWAL
-                                                                                </h5>
-                                                                            </div>
-                                                                            <div className="nk-block-head-content"></div>
-
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="nk-content nk-content-fluid">
-                                                                        <div className="container-xl wide-lg">
-                                                                            <div className="nk-content-body">
-                                                                                <div className="components-preview wide-md mx-auto">
-                                                                                    <div className="nk-block nk-block-lg">
-                                                                                        <div className="nk-block-head">
-                                                                                            <div className="nk-block-head-content">
-                                                                                                <h4 className="title nk-block-title">Withdrawal Form</h4>
-                                                                                                <div className="nk-block-des">
-                                                                                                    {/* <p>Below example helps you to build your own form nice way.</p> */}
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div className="row g-gs">
-                                                                                            <div className="col-lg-12">
-                                                                                                <div className="card card-bordered h-100">
-                                                                                                    <div className="card-inner">
-                                                                                                        <div className="card-head">
-                                                                                                            <h5 className="card-title">{fromWalletAddress}</h5>
-                                                                                                        </div>
-                                                                                                        <form action="#">
-                                                                                                            <div className="form-group">
-
-                                                                                                                <label className="form-label" for="full-name">Amount - {`${userInfo?.currency_preference == 'inr' ? 'INRX' : 'USDT'}`}</label>
-                                                                                                                <div className="form-control-wrap">
-                                                                                                                    <input type="text" className="form-control" id="full-name" value={balanceB ? balanceB?.toFixed(3) : balanceC}
-                                                                                                                        onChange={(e) => setBalanceB(setBalanceC(Number(e.target.value.replace(/[^0-9.]/g, "")
-                                                                                                                            .replace(/(\..*?)\..*/g, "$1"))))} />
-                                                                                                                    <span className="m-1 float-right">
-                                                                                                                        <label className="form-label p-1" for="full-name" onClick={() => setBalanceB((balanceA * 25) / 100)?.toFixed(3)}>25%</label>
-                                                                                                                        <label className="form-label p-1" for="full-name" onClick={() => setBalanceB((balanceA * 50) / 100)?.toFixed(3)}>50%</label>
-                                                                                                                        <label className="form-label p-1" for="full-name" onClick={() => setBalanceB((balanceA * 75) / 100)?.toFixed(3)}>75%</label>
-                                                                                                                        <label className="form-label p-1" for="full-name" onClick={() => setBalanceB((balanceA * 100) / 100)?.toFixed(3)}>100%</label>
-                                                                                                                    </span>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                            <div className="form-group">
-                                                                                                                <label className="form-label"
-                                                                                                                    for="email-address">Wallet Address</label>
-                                                                                                                <div className="form-control-wrap">
-                                                                                                                    <input type="text" className="form-control" id="email-address" value={toWalletAddress}
-                                                                                                                        onChange={(e) => setToWalletAddress(e.target.value)}
-                                                                                                                    /></div>
-                                                                                                            </div>
-                                                                                                            <div className="form-group">
-                                                                                                                <label className="form-label" for="phone-no">Fees- {`${userInfo?.currency_preference == 'inr' ? 'INRX' : 'USDT'}`}</label>
-                                                                                                                <div className="form-control-wrap">
-                                                                                                                    <input type="text" className="form-control" id="phone-no" value={userInfo?.currency_preference == 'inr' ? inrFees : usdFees} readOnly />
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                            {/* <div className="form-group">
-                                                                                                        <label className="form-label">Communication</label>
-                                                                                                        <ul className="custom-control-group g-3 align-center">
-                                                                                                            <li>
-                                                                                                                <div
-                                                                                                                    className="custom-control custom-control-sm custom-checkbox">
-                                                                                                                    <input type="checkbox"
-                                                                                                                        className="custom-control-input"
-                                                                                                                        id="com-email" /><label
-                                                                                                                            className="custom-control-label"
-                                                                                                                            for="com-email">Email</label></div>
-                                                                                                            </li>
-                                                                                                            <li>
-                                                                                                                <div
-                                                                                                                    className="custom-control custom-control-sm custom-checkbox">
-                                                                                                                    <input type="checkbox"
-                                                                                                                        className="custom-control-input"
-                                                                                                                        id="com-sms" /><label
-                                                                                                                            className="custom-control-label"
-                                                                                                                            for="com-sms">SMS</label></div>
-                                                                                                            </li>
-                                                                                                            <li>
-                                                                                                                <div
-                                                                                                                    className="custom-control custom-control-sm custom-checkbox">
-                                                                                                                    <input type="checkbox"
-                                                                                                                        className="custom-control-input"
-                                                                                                                        id="com-phone" /><label
-                                                                                                                            className="custom-control-label"
-                                                                                                                            for="com-phone">Phone</label></div>
-                                                                                                            </li>
-                                                                                                        </ul>
-                                                                                                    </div>
-                                                                                                    <div className="form-group"><label className="form-label"
-                                                                                                        for="pay-amount">Amount</label>
-                                                                                                        <div className="form-control-wrap">
-                                                                                                            <input type="number"
-                                                                                                                className="form-control" id="pay-amount" /></div>
-                                                                                                    </div>
-                                                                                                    <div className="form-group"><label className="form-label">Payment
-                                                                                                        Methods</label>
-                                                                                                        <ul className="custom-control-group g-3 align-center">
-                                                                                                            <li>
-                                                                                                                <div
-                                                                                                                    className="custom-control custom-control-sm custom-checkbox">
-                                                                                                                    <input type="checkbox"
-                                                                                                                        className="custom-control-input"
-                                                                                                                        id="pay-card" />
-                                                                                                                    <label
-                                                                                                                        className="custom-control-label"
-                                                                                                                        for="pay-card">Card</label></div>
-                                                                                                            </li>
-                                                                                                            <li>
-                                                                                                                <div
-                                                                                                                    className="custom-control custom-control-sm custom-checkbox">
-                                                                                                                    <input type="checkbox"
-                                                                                                                        className="custom-control-input"
-                                                                                                                        id="pay-bitcoin" />
-                                                                                                                    <label
-                                                                                                                        className="custom-control-label"
-                                                                                                                        for="pay-bitcoin">Bitcoin</label></div>
-                                                                                                            </li>
-                                                                                                            <li>
-                                                                                                                <div
-                                                                                                                    className="custom-control custom-control-sm custom-checkbox">
-                                                                                                                    <input type="checkbox"
-                                                                                                                        className="custom-control-input"
-                                                                                                                        id="pay-cash" />
-                                                                                                                    <label
-                                                                                                                        className="custom-control-label"
-                                                                                                                        for="pay-cash">Cash</label></div>
-                                                                                                            </li>
-                                                                                                        </ul>
-                                                                                                    </div> */}
-                                                                                                            <div className="form-group">
-                                                                                                                <button type="button"
-                                                                                                                    className="btn btn-lg btn-primary"
-                                                                                                                    onClick={() => {
-                                                                                                                        console.log(email, toWalletAddress, fromWalletAddress, balanceB ? balanceB : balanceC, usdFees ? usdFees : inrFees)
-
-                                                                                                                        ConfirmBox()
-
-                                                                                                                    }}
-                                                                                                                    disabled={balanceB ? balanceB <= 0 : balanceC <= 0}
-                                                                                                                >
-                                                                                                                    Withdraw</button>
-                                                                                                            </div>
-                                                                                                        </form>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-
-
-                                                                                        </div>
+                                                <div className="mt-5">
+                                                    <div class="card card-bordered h-100 bg-lighter">
+                                                        <div class="card-inner">
+                                                            <div className="mb-4">
+                                                                <h3 class="text-center title">Withdrawal</h3>
+                                                                <p class="email-title text-center">Use below form to withdraw</p>
+                                                                <div className="nk-block-head-content"></div>
+                                                            </div>                                                            
+                                                            <div className="components-preview wide-md mx-auto">
+                                                                <div className="nk-block nk-block-lg">                                                                                       
+                                                                    <div className="row g-gs">
+                                                                        <div className="col-lg-12">
+                                                                            <div className="card card-bordered h-100">
+                                                                                <div className="card-inner">
+                                                                                    <div className="card-head">
+                                                                                        <h4 className="card-title text-title text-teal">{fromWalletAddress}</h4>
                                                                                     </div>
+                                                                                    <form action="#">
+                                                                                        <div className="form-group">
+                                                                                            <label className="form-label" for="full-name">Amount - {`${userInfo?.currency_preference == 'inr' ? 'INRX' : 'USDT'}`}</label>
+                                                                                            <div className="form-control-wrap">
+                                                                                                <input type="text" className="form-control" id="full-name" value={balanceB ? balanceB?.toFixed(3) : balanceC}
+                                                                                                    onChange={(e) => setBalanceB(setBalanceC(Number(e.target.value.replace(/[^0-9.]/g, "")
+                                                                                                        .replace(/(\..*?)\..*/g, "$1"))))} />
+                                                                                                <span className="m-1 float-right">
+                                                                                                    <label className="form-label p-1" for="full-name" onClick={() => setBalanceB((balanceA * 25) / 100)?.toFixed(3)}>25%</label>
+                                                                                                    <label className="form-label p-1" for="full-name" onClick={() => setBalanceB((balanceA * 50) / 100)?.toFixed(3)}>50%</label>
+                                                                                                    <label className="form-label p-1" for="full-name" onClick={() => setBalanceB((balanceA * 75) / 100)?.toFixed(3)}>75%</label>
+                                                                                                    <label className="form-label p-1" for="full-name" onClick={() => setBalanceB((balanceA * 100) / 100)?.toFixed(3)}>100%</label>
+                                                                                                </span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div className="form-group">
+                                                                                            <label className="form-label"
+                                                                                                for="email-address">Wallet Address</label>
+                                                                                            <div className="form-control-wrap">
+                                                                                                <input type="text" className="form-control" id="email-address" value={toWalletAddress}
+                                                                                                    onChange={(e) => setToWalletAddress(e.target.value)}
+                                                                                                /></div>
+                                                                                        </div>
+                                                                                        <div className="form-group">
+                                                                                            <label className="form-label" for="phone-no">Fees- {`${userInfo?.currency_preference == 'inr' ? 'INRX' : 'USDT'}`}</label>
+                                                                                            <div className="form-control-wrap">
+                                                                                                <input type="text" className="form-control" id="phone-no" value={userInfo?.currency_preference == 'inr' ? inrFees : usdFees} readOnly />
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        {/* <div className="form-group">
+                                                                                    <label className="form-label">Communication</label>
+                                                                                    <ul className="custom-control-group g-3 align-center">
+                                                                                        <li>
+                                                                                            <div
+                                                                                                className="custom-control custom-control-sm custom-checkbox">
+                                                                                                <input type="checkbox"
+                                                                                                    className="custom-control-input"
+                                                                                                    id="com-email" /><label
+                                                                                                        className="custom-control-label"
+                                                                                                        for="com-email">Email</label></div>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <div
+                                                                                                className="custom-control custom-control-sm custom-checkbox">
+                                                                                                <input type="checkbox"
+                                                                                                    className="custom-control-input"
+                                                                                                    id="com-sms" /><label
+                                                                                                        className="custom-control-label"
+                                                                                                        for="com-sms">SMS</label></div>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <div
+                                                                                                className="custom-control custom-control-sm custom-checkbox">
+                                                                                                <input type="checkbox"
+                                                                                                    className="custom-control-input"
+                                                                                                    id="com-phone" /><label
+                                                                                                        className="custom-control-label"
+                                                                                                        for="com-phone">Phone</label></div>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                                <div className="form-group"><label className="form-label"
+                                                                                    for="pay-amount">Amount</label>
+                                                                                    <div className="form-control-wrap">
+                                                                                        <input type="number"
+                                                                                            className="form-control" id="pay-amount" /></div>
+                                                                                </div>
+                                                                                <div className="form-group"><label className="form-label">Payment
+                                                                                    Methods</label>
+                                                                                    <ul className="custom-control-group g-3 align-center">
+                                                                                        <li>
+                                                                                            <div
+                                                                                                className="custom-control custom-control-sm custom-checkbox">
+                                                                                                <input type="checkbox"
+                                                                                                    className="custom-control-input"
+                                                                                                    id="pay-card" />
+                                                                                                <label
+                                                                                                    className="custom-control-label"
+                                                                                                    for="pay-card">Card</label></div>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <div
+                                                                                                className="custom-control custom-control-sm custom-checkbox">
+                                                                                                <input type="checkbox"
+                                                                                                    className="custom-control-input"
+                                                                                                    id="pay-bitcoin" />
+                                                                                                <label
+                                                                                                    className="custom-control-label"
+                                                                                                    for="pay-bitcoin">Bitcoin</label></div>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <div
+                                                                                                className="custom-control custom-control-sm custom-checkbox">
+                                                                                                <input type="checkbox"
+                                                                                                    className="custom-control-input"
+                                                                                                    id="pay-cash" />
+                                                                                                <label
+                                                                                                    className="custom-control-label"
+                                                                                                    for="pay-cash">Cash</label></div>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div> */}
+                                                                                        <div className="form-group text-right">
+                                                                                            <button type="button"
+                                                                                                className="btn btn-outline-success"
+                                                                                                onClick={() => {
+                                                                                                    console.log(email, toWalletAddress, fromWalletAddress, balanceB ? balanceB : balanceC, usdFees ? usdFees : inrFees)
+
+                                                                                                    ConfirmBox()
+
+                                                                                                }}
+                                                                                                disabled={balanceB ? balanceB <= 0 : balanceC <= 0}
+                                                                                            >
+                                                                                                Withdraw</button>
+                                                                                        </div>
+                                                                                    </form>
                                                                                 </div>
                                                                             </div>
                                                                         </div>

@@ -77,7 +77,7 @@ const IPwhiteListing = () => {
     return (
         <>
          <NotificationContainer/>
-            <div className="card-inner card-inner-lg">
+            <div className="card-inner card-inner-lg bg-light">
                 <div className="nk-block-head nk-block-head-lg">
 
                     <div className="nk-block-between">
@@ -136,39 +136,43 @@ const IPwhiteListing = () => {
 
                 </div>
                 <div className="nk-block card card-bordered">
-                    <table className="table table-ulogs">
-                        <thead className="table-light">
-                            <tr>
-                                <th className="tb-col-ip">
-                                    <span className="overline-title">IP</span>
-                                </th>
+                    <div className="">
+                        <table className="table table-ulogs">
+                            <thead className="bg-gray text-white">
+                                <tr>
+                                    <th className="tb-col-ip">
+                                        <span>IP</span>
+                                    </th>
 
-                                <th className="tb-col-action">
-                                    <span className="overline-title">Actions</span>
-                                </th>
+                                    <th className="tb-col-action">
+                                        <span>Actions</span>
+                                    </th>
+                                    <th className="">                                        
+                                    </th>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                whiteIP.map((element, index) => {
-                                    // const a = new Date(element.createdAt)
-                                    return (
-                                        <tr key={index}>
-                                            <td className="tb-col-ip">{element.ip}</td>
-                                            <td className="tb-col-action">
-                                                {/* <span className="sub-text">{a.toDateString()} {a.toLocaleTimeString()}</span> */}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    whiteIP.map((element, index) => {
+                                        const a = new Date(element.createdAt)
+                                        return (
+                                            <tr className="zoom_on_table">
+                                                <td className="tb-col-ip">{element.ip}</td>
+                                                <td className="tb-col-action">
+                                                    {/* <span className="sub-text">{a.toDateString()} {a.toLocaleTimeString()}</span> */}
 
-                                                <button className="btn btn-dim btn-light btn-sm" onClick={() => deleteWhiteIP(element._id)}>Delete</button>
-                                            </td>
-                                            <td className="tb-col-action">{ }</td>
-                                        </tr>
-                                    )
-                                })
-                            }
+                                                    <button className="btn btn-dim btn-outline-success btn-sm" onClick={() => deleteWhiteIP(element._id)}>Delete</button>
+                                                </td>
+                                                <td className="tb-col-action">{ }</td>
+                                            </tr>
+                                        )
+                                    })
+                                }
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 

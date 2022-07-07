@@ -87,7 +87,7 @@ const AccountSettings = () => {
                         {settingPages.personalInfo == true && <PersonalInfo />}
 
                         {settingPages.activity == true ? (
-                          <div className="card-inner card-inner-lg">
+                          <div className="card-inner card-inner-lg bg-light">
                             <div className="nk-block-head nk-block-head-lg">
                               <div className="nk-block-between">
                                 <div className="nk-block-head-content">
@@ -101,70 +101,69 @@ const AccountSettings = () => {
                                     </p>
                                   </div>
                                 </div>
-                                <div 
-                                onClick={()=>dispatch(navsetters())} 
-                                className="nk-block-head-content align-self-start d-lg-none">
-                                  <Link
-                                    to=""
-                                    // className="toggle btn btn-icon btn-trigger mt-n1"
+                                <div onClick={()=>dispatch(navsetters())} className="nk-block-head-content align-self-start d-lg-none">
+                                  <a
+                                  
+                                    className="toggle btn btn-icon btn-trigger mt-n1"
                                     id = "toggleBtn"
-                                    className={btn1?"toggle btn btn-icon btn-trigger mt-n1 active":"toggle btn btn-icon btn-trigger mt-n1"}
+                                    // className={btn1?"toggle btn btn-icon btn-trigger mt-n1 active":"toggle btn btn-icon btn-trigger mt-n1"}
                                     data-target="userAside"                                  
                                   >
                                     <em className="icon ni ni-menu-alt-r" onClick={()=>profileMenuRemove()}  ></em>
-                                  </Link>
+                                  </a>
                                 </div>
                               </div>
                             </div>
                             <div className="nk-block card card-bordered">
-                              <table className="table table-ulogs">
-                                <thead className="table-light">
-                                  <tr>
-                                    <th className="tb-col-os">
-                                      <span className="overline-title">
-                                        Browser
-                                        <span className="d-sm-none">/ IP</span>
-                                      </span>
-                                    </th>
-                                    <th className="tb-col-ip">
-                                      <span className="overline-title">Device</span>
-                                    </th>
-                                    <th className="tb-col-ip">
-                                      <span className="overline-title">IP</span>
-                                    </th>
-                                    <th className="tb-col-time">
-                                      <span className="overline-title">Time</span>
-                                    </th>
-                                    <th className="tb-col-action">
-                                      <span className="overline-title">&nbsp;</span>
-                                    </th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {
-                                    logData.map((element, index) => {
-                                      const a = new Date(element.createdAt)
-                                      return (
-                                      
-                                        <tr key={index}>
-                                          <td className="tb-col-os">{element.browser_name}</td>
-                                          <td className="tb-col-os">{element.request_device}</td>
-                                          <td className="tb-col-ip">
-                                            <span className="sub-text">
-                                              {element.request_address}
-                                            </span>
-                                          </td>
-                                          <td className="tb-col-time">
-                                            <span className="sub-text">{a.toDateString()} {a.toLocaleTimeString()}</span>
-                                          </td>
-                                          <td className="tb-col-action">{ }</td>
-                                        </tr>
-                                      )
-                                    })
-                                  }
+                              <div className="">    
+                                <table className="table table-ulogs">
+                                    <thead className="bg-gray text-white">
+                                      <tr>
+                                        <th className="tb-col-os">
+                                          <span>
+                                            Browser
+                                            <span className="d-sm-none">/ IP</span>
+                                          </span>
+                                        </th>
+                                        <th className="tb-col-ip">
+                                          <span>Device</span>
+                                        </th>
+                                        <th className="tb-col-ip">
+                                          <span>IP</span>
+                                        </th>
+                                        <th className="tb-col-time">
+                                          <span>Time</span>
+                                        </th>
+                                        <th className="tb-col-action">
+                                          <span>&nbsp;</span>
+                                        </th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {
+                                        logData.map((element, index) => {
+                                          const a = new Date(element.createdAt)
+                                          return (
+                                            <tr className="zoom_on_table">
+                                              <td className="tb-col-os text-danger">{element.browser_name}</td>
+                                              <td className="tb-col-os text-capitalize text-teal">{element.request_device}</td>
+                                              <td className="tb-col-ip">
+                                              <span class="badge bg-light">
+                                                  {element.request_address}
+                                                </span>
+                                              </td>
+                                              <td className="tb-col-time">
+                                              <span className="text-dark"> <em class="icon ni ni-clock valign"></em> {a.toDateString()} {a.toLocaleTimeString()}</span>
+                                              </td>
+                                              <td className="tb-col-action">{ }</td>
+                                            </tr>
+                                          )
+                                        })
+                                      }
 
-                                </tbody>
-                              </table>
+                                    </tbody>
+                                  </table>
+                                 </div> 
                             </div>
                           </div>
                         ) : null}
@@ -180,16 +179,16 @@ const AccountSettings = () => {
                           <div className="card-inner-group">
                             <div className="card-inner">
                               <div className="user-card">
-                                <div className="user-avatar bg-primary">
+                                <div className="user-avatar bg-teal">
                                   <span>{userInfo?.username?.charAt(0)?.toUpperCase()}</span>
                                 </div>
                                 <div className="user-info">
-                                  <span className="lead-text">
+                                  <span className="fw-500 h4">
                                     {userInfo?.username}
                                   </span>
                                   <span className="sub-text">{userInfo?.user_id}</span>
                                 </div>
-                                <div className="user-action">
+                                {/* <div className="user-action">
                                   <div className="dropdown">
                                     <Link
                                       className="btn btn-icon btn-trigger me-n2"
@@ -198,7 +197,7 @@ const AccountSettings = () => {
                                     >
                                       <em className="icon ni ni-arrow-left" onClick={profileMenuRemove}></em>
                                     </Link> 
-                                     {/* <div className="dropdown-menu dropdown-menu-end">
+                                      <div className="dropdown-menu dropdown-menu-end">
                                       <ul className="link-list-opt no-bdr">
                                         <li>
                                           <a href="#">
@@ -213,9 +212,9 @@ const AccountSettings = () => {
                                           </a>
                                         </li>
                                       </ul>
-                                    </div>  */}
+                                    </div>  
                                    </div>
-                                </div> 
+                                </div>  */}
                               </div>
                             </div>
                             <div className="card-inner">

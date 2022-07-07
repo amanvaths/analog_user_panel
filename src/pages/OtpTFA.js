@@ -64,11 +64,11 @@ const OtpTFA = (props) => {
               </Link>
             </div>
             <div className="nk-block nk-block-middle nk-auth-body">
-              <div className="brand-logo pb-5">
+              <div className="brand-logo pb-3">
                 <Link to="" className="logo-link">
                   <img
                     className="logo-light logo-img logo-img-lg"
-                    src="./images/logo.png"
+                    src="./images/logo-dark.png"
                     srcSet="./images/logo2x.png 2x"
                     alt="logo"
                   />
@@ -219,7 +219,7 @@ const OtpTFA = (props) => {
                 </ul>
               </div>
               <div className="mt-3">
-                <p>&copy; 2021 INRX ECOSYSTEM. All Rights Reserved.</p>
+                <p>&copy; 2022 INRX ECOSYSTEM. All Rights Reserved.</p>
               </div>
             </div>
           </div>

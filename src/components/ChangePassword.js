@@ -29,15 +29,23 @@ const ChangePassword = () => {
         try {
             const data = await axios.post('http://localhost:3001/api/change_password',{email: email, old_password: oldPassword, new_password: newPassword})
             console.log(data.data)
-            if(data.data.status === 1){
-                swal("Password Changed Successfully", "Please Login", "success");
-          setTimeout(() => {
-            navigate("/login");
-          }, 2000);
-            setOldPassword(" ")
-            setNewPassword(" ")
-            setConfirmPassword(" ")
-        }
+            if(confirmPassword === newPassword){
+                if(data.data.status === 1){
+                    swal("Password Changed Successfully", "Please Login", "success");
+              setTimeout(() => {
+                navigate("/login");
+              }, 2000);
+                setOldPassword(" ")
+                setNewPassword(" ")
+                setConfirmPassword(" ")
+            }
+            else if(data.data.status === 0){
+                swal("Password Incorrect", "Enter Correct Password", "error");
+            }
+            }else{
+                swal("Password and confirm password does not match", "Enter identical password", "error");
+            }
+           
 
         } catch (error) {
             console.log(error);
@@ -136,19 +144,20 @@ const ChangePassword = () => {
     return (
         <>
 
-            <div className="card-inner card-inner-lg">
-                <div className="nk-block-head nk-block-head-lg">
-                    <div className="nk-block-between">
-                        <div className="nk-block-head-content">
-                            <h4 className="nk-block-title">Change Password</h4>
-                            <div className="nk-block-des">
-                                <p></p>
+            <div class="card-inner card-inner-lg">
+                <div class="nk-block-head nk-block-head-lg">
+                    <div class="nk-block-between">
+                        <div class="nk-block-head-content">
+                            <h4 class="nk-block-title">Change Password</h4>
+                            <div class="nk-block-des">
+                                <p>You may update your password any time. We suggest you choose a strong password and update it regularly</p>
                             </div>
+                            <hr></hr>
                         </div>
-                        <div className="nk-block-head-content align-self-start d-lg-none"><b
-                             className="toggle btn btn-icon btn-trigger mt-n1"
+                        <div class="nk-block-head-content align-self-start d-lg-none"><a
+                            href="#" class="toggle btn btn-icon btn-trigger mt-n1"
                             data-target="userAside"><em
-                                className="icon ni ni-menu-alt-r"></em></b></div>
+                                class="icon ni ni-menu-alt-r"></em></a></div>
                     </div>
                 </div>
                 <div className='container w-80'>
@@ -157,7 +166,7 @@ const ChangePassword = () => {
                             e.preventDefault();
                             handelFormSubmit(newPassword, oldPassword, confirmPassword);
                         }}>
-                        <div className="form-group w-50">
+                        <div className="form-group">
                             <div className="form-label-group">
                                 <label className="form-label" for="password">
                                     Old Password
@@ -166,8 +175,7 @@ const ChangePassword = () => {
                             <div className="form-control-wrap">
                                 <b
                                     tabIndex="-1"
-                                    
-                                    className="form-icon form-icon-right passcode-switch"
+                                    className="form-icon form-icon-right passcode-switch text-dark"
                                     data-target="password"
                                 >
                                     {
@@ -178,7 +186,7 @@ const ChangePassword = () => {
                                     type={oldPasswordShown ? "text" : "password"}
                                     className="form-control form-control-lg"
                                     id="password"
-                                    placeholder="Enter your password"
+                                    placeholder="Enter old password"
                                     value={oldPassword}
                                     minLength={8}
                                     onChange={(e) => {
@@ -191,22 +199,14 @@ const ChangePassword = () => {
                                             setOldPasswordError(true);
                                         }
                                     }}
-                                    onKeyUp={() => _onkeyup()}
+                                    // onKeyUp={() => _onkeyup()}
                                     style={{ fontSize: "15px" }} />
                             </div>
 
                             <div id="validation-box">
                                 <h6 className="passvalid" id="capital">
-                                    1 Uppercase Character
-                                </h6>
-                                <h6 className="passvalid" id="number">
-                                    1 Numeric Value
-                                </h6>
-                                <h6 className="passvalid" id="letter">
-                                    1 Special Symbol eg:@#
-                                </h6>
-                                <h6 className="passvalid" id="length">
-                                    length should be greater than 8
+                                We suggest having at least one capital and one lower-case letter (Aa-Zz), 
+                                one special symbol (#, &amp;, % etc) and one number (0-9) in your password for the best strength
                                 </h6>
                             </div>
                         </div>
@@ -215,7 +215,7 @@ const ChangePassword = () => {
                                 Password is requierd *
                             </p>
                         ) : null}
-                        <div className="form-group w-50">
+                        <div className="form-group">
                             <div className="form-label-group">
                                 <label className="form-label" for="password">
                                     New Password
@@ -224,8 +224,7 @@ const ChangePassword = () => {
                             <div className="form-control-wrap">
                                 <b
                                     tabIndex="-1"
-                                  
-                                    className="form-icon form-icon-right passcode-switch"
+                                    className="form-icon form-icon-right passcode-switch text-dark"
                                     data-target="password"
                                 >
                                     {
@@ -238,7 +237,7 @@ const ChangePassword = () => {
                                     type={newPasswordShown ? "text" : "password"}
                                     className="form-control form-control-lg"
                                     id="npassword"
-                                    placeholder="Enter your password"
+                                    placeholder="Enter new password"
                                     value={newPassword}
                                     minLength={8}
                                     onChange={(e) => {
@@ -252,22 +251,14 @@ const ChangePassword = () => {
                                             setNewPasswordError(true);
                                         }
                                     }}
-                                    onKeyUp={() => _onkeyup()}
+                                    // onKeyUp={() => _onkeyup()}
                                     style={{ fontSize: "15px" }} />
                             </div>
 
                             <div id="validation-box1">
-                                <h6 className="passvalid" id="capital">
-                                    1 Uppercase Character
-                                </h6>
-                                <h6 className="passvalid" id="number">
-                                    1 Numeric Value
-                                </h6>
-                                <h6 className="passvalid" id="letter">
-                                    1 Special Symbol eg:@#
-                                </h6>
-                                <h6 className="passvalid" id="length">
-                                    length should be greater than 8
+                            <h6 className="passvalid" id="capital">
+                            We suggest having at least one capital and one lower-case letter (Aa-Zz),
+                             one special symbol (#, &amp;, % etc) and one number (0-9) in your password for the best strength
                                 </h6>
                             </div>
 
@@ -278,7 +269,7 @@ const ChangePassword = () => {
                             </p>
                         ) : null}
 
-                        <div className="form-group w-50">
+                        <div className="form-group">
                             <div className="form-label-group">
                                 <label className="form-label" for="confirm-password">
                                     Confirm Password
@@ -287,8 +278,8 @@ const ChangePassword = () => {
                             <div className="form-control-wrap">
                                 <b
                                     tabIndex="-1"
-                                   
-                                    className="form-icon form-icon-right passcode-switch"
+                                  
+                                    className="form-icon form-icon-right passcode-switch text-dark"
                                     data-target="confirm-password"
                                 >
                                     {
@@ -332,7 +323,7 @@ const ChangePassword = () => {
 
                         <div className="form-group">
                             <button
-                                className="btn btn-lg btn-primary btn-block w-50"
+                                className="btn btn-dim btn-outline-success btn-block"
                             // onClick={Signup}
                             >
                                 Save

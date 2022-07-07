@@ -22,7 +22,7 @@ const Wallet = (props) => {
   const [coinData, setCoinData] = useState([]);
   const [walletDetails, setWalletDetails] = useState([]);
   const [coinWW, setCoinWW] = useState([]);
-  const [loader, setLoader] = useState(true)
+  const [loader, setLoader] = useState(false)
   const [totalSpendINR, setTotalSpendINR] = useState(0)
   const [totalSpendUSDT, setTotalSpendUSDT] = useState(0)
 
@@ -64,6 +64,8 @@ const Wallet = (props) => {
 },[])
 
 
+
+
 // setInterval(() => {
 //   if(status == 0){
 //     status = 1
@@ -76,18 +78,19 @@ const Wallet = (props) => {
 
 
 
-  // const test = ()=>{
-  //   try {
-  //       axios.post(`http://localhost:3001/get`, {email:email})
-  //       console.log("GET API DATA");
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+  const test = async()=>{
+    try {
+       const data = await axios.post(`${BASE_URL}/getUserWallet`, {email:email})
+          console.log(data.data, "YRSSJSJSJSJSJS");
+          setWalletDetails([...data.data]);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-  // useEffect(()=>{
-  //   test()
-  // },[])
+  useEffect(()=>{
+    test()
+  },[])
 
   const getUserAllWallletData = async () => {
     try {
@@ -155,7 +158,7 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
         cd.push({ ...coind, wallet: w[0] });
       }
       setCoinWW([...cd]);
-      setLoader(false)
+      // setLoader(false)
     }
   }, [coinData, walletDetails]);
 
@@ -163,98 +166,107 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
   return (
     <>
       <div>
-        {loader ? 
-        (
+        {loader ? (<>
           <div style={{ position: "absolute", zIndex: "99", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
-            <Triangle ariaLabel="loading-indicator" color="blue" />
-          </div>) :(
-          <div className="nk-app-root">
-            <div className="nk-main ">
+            <Triangle ariaLabel="loading-indicator" color="green" />
+          </div>
+
+        </>) :
+          (<div className="nk-app-root ms-5">
+            <div className="nk-main" style={{ overflowWrap: "break-word" }}>
               <Menu />
               <div className="nk-wrap">
                 <Header />
-                <div className="contianer">
-                  <div className="row py-3">
+                <div className="nk-content nk-content-fluid">
+                  <div className="row">
                     <div className="col-6">
-                      <h4 style={{ padding: "0 24px" }}>Wallet / Assets </h4>
+                      {/* <h4 style={{ padding: "px-5" }}>Wallet / Assets </h4> */}
                     </div>
                     <div className="col-6">
                       <label
                         className="float-right"
-                        style={{ padding: "0 30px" }}
+                        style={{ padding: "" }}
                       >
-                        <h6>
-                          Total Balance:&nbsp;&nbsp;
-                          {userInfo.currency_preference == "usd" ? `${coinWW[8]?.wallet?.usdt_balance?.toFixed(2)} USDT` : `${(oneUsdPrice * coinWW[8]?.wallet?.usdt_balance).toFixed(2)} INRX`}
-                        </h6>
+                        <span class="badge bg-outline-dark text-dark fs-5">
+                          Total Balance: 
+                          <span className="text-teal"> 
+                          { coinWW.length > 0
+                            ? <>
+                              { userInfo.currency_preference == "usd" 
+                                  ? `${coinWW[8]?.wallet?.usdt_balance?.toFixed(2)} USDT` 
+                                  : `${(oneUsdPrice * coinWW[8]?.wallet?.usdt_balance).toFixed(2)} INRX`
+                               } 
+                              </>
+                            : 0
+                          }
+                               
+                          </span>
+                        </span>
                       </label>
                     </div>
                   </div>
-                  <div className="row py-5">
-                    <div className="container mt-1 px-5">
-                      <div className="row" style={{ padding: "0px" }}>
-                        <div className="">
-                          <div className="card card-bordered is-dark">
-                            <div className="nk-wgw">
-                              <div className="nk-wgw-inner">
-                                <div className="row" style={{color: "white"}}>
-                                  <div className="col-sm-12 col-md-6 d-flex justify-content-center">
-                                    <div className="w-50" style={{fontSize: "1.1rem", fontWeight: "500px"}}>
-                                    <p className="p-1 space123">
-                                      <span>Total Fund: </span>
-                                      <span >&nbsp;&nbsp;{totalAna? totalAna?.toFixed(2): 0} ANA </span>
-                                    </p>
-                                    <p className="p-1 space123" >
-                                      <span>Total Spend: </span>
-                                      <span>{userInfo?.currency_preference == 'inr'? `${totalSpendINR?.toFixed(3)} INRX` : `${totalSpendUSDT.toFixed(3)} USDT`}</span>
-                                    </p>
-                                    <p className="p-1 space123">
-                                      <span>Current Balance: </span>
-                                      <span>&nbsp;&nbsp;{userInfo?.currency_preference == "usd" ? `${coinWW[8]?.wallet?.usdt_balance?.toFixed(2)} USDT` : `${(oneUsdPrice * coinWW[8]?.wallet?.usdt_balance).toFixed(2)} INRX`}</span>
-                                    </p>
-                                    </div>
-                                  </div>
-                                  <div className="col-sm-12 col-md-6 d-flex justify-content-center">
-                                  <div className="w-50" style={{fontSize: "1.1rem", fontWeight: "500px"}}>
-                                    <p className="p-1 space123">
-                                      <span>Analog Value: </span>
-                                      <span>&nbsp;&nbsp;
-                                        {
-                                          userInfo?.currency_preference == 'inr' ? `${(userInfo?.anaPrice).toFixed(3)} INRX` : `${(userInfo?.anaPrice / oneUsdPrice)?.toFixed(3)} USDT`
-                                        }
-                                  
-                                        </span>
-                                    </p>
-                                    <p className="p-1 space123">
-                                      <span>Bonus:</span>
-                                      <span>&nbsp;&nbsp;
-                                        {totalBonus? userInfo?.currency_preference == 'usd' ? `${totalBonus?.toFixed(2)} USDT`: `${(totalBonus * oneUsdPrice).toFixed(3)} INRX` : 0}
-                                     
-                                      </span>
-                                    </p>
-                                    <p className="p-1 space123">
-                                      <span>Total API: </span>
-                                      <span>&nbsp;&nbsp;0</span>
-                                    </p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                  <div class="mb-4">
+                    <div class="row">
+                      <div class="col-md-6 col-lg-6 col-12">
+                        <div className="kanban-board-header kanban-success shadow-sm">
+                          <div className="card-inner">
+                            <p className="kanban-item-title">
+                              <span className="badge bg-light rounded-pill">Total Fund  </span>
+                              <span className="text-teal"> {totalAna? totalAna?.toFixed(2): ""} ANA </span>
+                            </p>
+                            <p className="kanban-item-title">
+                              <span className="badge bg-light rounded-pill">Total Spend  </span>
+                              <span className="text-teal"> 0</span>
+                            </p>
+                            <p className="kanban-item-title">
+                              <span className="badge bg-light rounded-pill">Current Balance  </span>
+                              <span className="text-teal">
+                              { coinWW.length > 0
+                                ? <>
+                                  { userInfo.currency_preference == "usd" 
+                                      ? `${coinWW[8]?.wallet?.usdt_balance?.toFixed(2)} USDT` 
+                                      : `${(oneUsdPrice * coinWW[8]?.wallet?.usdt_balance).toFixed(2)} INRX`
+                                  } 
+                                  </>
+                                : 0
+                              }                                                               
+                              </span>
+                            </p>
+                          </div>                                                
                         </div>
                       </div>
+                      <div class="col-md-6 col-lg-6 col-12">
+                          <div className="kanban-board-header kanban-success shadow-sm">
+                            <div className="card-inner">
+                              <p className="kanban-item-title">
+                                <span className="badge bg-light rounded-pill">Analog Value </span>
+                                <span className="text-teal"> {userInfo?.anaPrice} {userInfo?.currency_preference == 'inr' ? "INRX" : "USDT"}</span>
+                              </p>
+                              <p className="kanban-item-title">
+                                <span className="badge bg-light rounded-pill">Bonus </span>
+                                <span className="text-teal"> 
+                                  {totalBonus?.toFixed(2)}&nbsp;&nbsp;{
+                                                  userInfo?.currency_preference == 'inr' ? "INRX" : "USDT"
+                                              }
+                                </span>
+                              </p>
+                              <p className="kanban-item-title">
+                                <span className="badge bg-light rounded-pill">Total API  </span>
+                                <span className="text-teal"> 0</span>
+                              </p>
+                            </div>
+                        </div>
+                      </div>                    
                     </div>
                   </div>
-                  <div className="row" style={{ marginBottom: "15vh" }}>
-                    {coinWW.map((element, index) => {
-                   
+                  <div className="row">
+                    {coinWW.map((element, index) => {                     
                       return (
-                        <div className="walletCard col-md-6 col-lg-4 col-12">
-                           <Card1
+                        <div className="col-md-6 col-lg-4 col-12">
+                          <Card1
                             title={element.name}
-                            priceInUsd={(element?.quote?.[userInfo?.currency_preference?.toUpperCase()]?.price)?.toFixed(20).match(/^-?\d*\.?0*\d{0,2}/)[0]}
-                            price={element?.wallet?.balance.toFixed(3) }
+                            priceInUsd={(element?.quote?.[userInfo?.currency_preference.toUpperCase()]?.price)?.toFixed(2)}
+                            price={element?.wallet?.balance.toFixed(2)}
                             lable={element?.symbol}
                             wallet={element?.wallet}
                             address={element?.wallet?.walletAddr}

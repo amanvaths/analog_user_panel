@@ -206,45 +206,46 @@ export default function Orders(props) {
 
   return (
     <div className="order">
-      <div class="card">
-        <div class="card-header justify-content-between align-items-center">
-          <h6 class="card-title font-weight-bold "> ORDER</h6>
+      <div class="card mt-4">
+        <div class="card-header bg-teal-dim justify-content-between align-items-center">
+          <span class="card-title font-weight-bold"> ORDER</span>
         </div>
-        <div class="card-body table-responsive  p-0">
-          <table class="table  mb-0">
+        <div class="card-body table-responsive p-0">
+          <table class="table table-hover mb-0">
             <div style={{ display: "contents" }}>
               <thead>
                 <tr style={{ fontSize: "10px" }}>
                   <th
-                    className="OrderHistoryHedding"
+                    className="OrderHistoryHedding text-success"
                     style={{ width: "25%", padding: "7px 7px" }}
                   >
                     Total Analog
                   </th>
                   <th
-                    className="OrderHistoryHedding"
+                    className="OrderHistoryHedding text-success"
                     style={{ width: "25%", padding: "7px 7px" }}
                   >
                     Total Amount Pay
                   </th>
                   <th
-                    className="OrderHistoryHedding"
+                    className="OrderHistoryHedding text-success"
                     style={{ width: "25%", padding: "7px 7px" }}
                   >
                     Buying Price
                   </th>
                   <th
-                    className="OrderHistoryHedding"
+                    className="OrderHistoryHedding text-success"
                     style={{ width: "25%", padding: "7px 7px" }}
                   >
                     Pool
                   </th>
+                  {/* <th>Time</th> */}
                 </tr>
               </thead>
               <div
                 style={{
                   height: "373px",
-                  overflowX: "hidden",
+                  overflow: "auto",
                   display: "table-caption",
                 }}
                 className="OrderHistoryContainer"
@@ -269,10 +270,7 @@ export default function Orders(props) {
                     history.map((h) => {
                       return (
                         <>
-                          <tr
-                            class="zoom UserOrderHistory"
-                            style={{ fontSize: "10px", cursor: "pointer" }}
-                          >
+                          <tr class="zoom_on_table" style={{ fontSize: "9.5px" }}>
                             <td
                               className="OrderhistorySize"
                               style={{ width: "25%" }}
@@ -280,35 +278,32 @@ export default function Orders(props) {
                               {" "}
                               {h.cVolume?.toFixed(2)}
                               <img
-                                alt="analog"
                                 src="./images/Analog.png"
-                                style={{ width: "17px" }}
+                                style={{ width: "20px" }}
                                 className="img"
                               />
                             </td>
                             <td
+<<<<<<< HEAD
                               className="OrderhistorySize text-danger"
+=======
+                              className="OrderhistorySize"
+                              class="text-danger"
+>>>>>>> 0fb9774a5036b19e6ca5c30bda3775abab682f15
                               style={{ width: "25%" }}
                             >
                               {h.preferred_currency_amount?.toFixed(2)}{" "}
                               {h.compair_currency == "usd" ? (
                                 <img
-                                  src="./images/usdt_icon.png"
-                                  style={{ width: "12px" }}
+                                  src="./images/Usdt.png"
+                                  style={{ width: "15px" }}
                                   alt="usdt"
-                                  className="tradeUsdIcon"
-                                />
-                              ) : theme == 0 ? (
-                                <img
-                                  src="./images/Inrx_black.png"
-                                  style={{ width: "17px" }}
-                                  alt="inrx"
                                   className="img"
                                 />
                               ) : (
                                 <img
-                                  src="./images/Inrx_white.png"
-                                  style={{ width: "17px" }}
+                                  src="./images/Inrx_black.png"
+                                  style={{ width: "25px" }}
                                   alt="inrx"
                                   className="img"
                                 />
@@ -318,41 +313,20 @@ export default function Orders(props) {
                             <td
                               className="OrderhistorySize"
                               class="text-success"
-                              style={{ width: "24%" }}
+                              style={{ width: "25%" }}
                             >
                               {h.compair_currency == "usd"
                                 ? h.pref_raw_price.toFixed(8)
-                                : h.pref_raw_price.toFixed(8)}{" "}
-                              {h.compair_currency == "usd" ? (
-                                <img
-                                  src="./images/usdt_icon.png"
-                                  style={{ width: "12px" }}
-                                  alt="usdt"
-                                  className="tradeUsdIcon"
-                                />
-                              ) : theme == 0 ? (
-                                <img
-                                  src="./images/Inrx_black.png"
-                                  style={{ width: "17px" }}
-                                  alt="inrx"
-                                  className="img"
-                                />
-                              ) : (
-                                <img
-                                  src="./images/Inrx_white.png"
-                                  style={{ width: "17px" }}
-                                  alt="inrx"
-                                  className="img"
-                                />
-                              )}
+                                : h.pref_raw_price.toFixed(8)}
                               <i class="ion ion-arrow-graph-down-right"></i>
                             </td>
                             <td
                               className="OrderhistorySize"
-                              style={{ width: "26%", padding: "8px 6.5px" }}
+                              style={{ width: "25%", padding: "8px 6.5px" }}
                             >
                               {h.presalelevel}
                             </td>
+                            {/* <td>{h.date}</td> */}
                           </tr>
                         </>
                       );
@@ -365,6 +339,7 @@ export default function Orders(props) {
       </div>
 
       {/* Buy */}
+<<<<<<< HEAD
       <div
         style={{
           border: "0.5px solid rgba(0,0,0,.125)",
@@ -372,8 +347,11 @@ export default function Orders(props) {
           borderRadius: "3px",
         }}
       >
+=======
+      <div className="mt-4" style={{border: "0.5px solid rgba(0,0,0,.125)" ,marginTop:"6px",borderRadius:"3px"}}>
+>>>>>>> 0fb9774a5036b19e6ca5c30bda3775abab682f15
         <nav
-          class="coinsfather-theme-color"
+          class="coinsfather-theme-color bg-teal-dim"
           style={{
             border: "0.3px solid rgba(255, 255, 255, 0.2)",
             // marginTop: "6px",
@@ -382,7 +360,7 @@ export default function Orders(props) {
           <div
             className="card-header"
             style={{
-              textAlign: "center",
+              textAlign: "left",
               fontWeight: "bold",
               // background: "rgb(241, 241, 241)",
               // margin: "4px 0px",

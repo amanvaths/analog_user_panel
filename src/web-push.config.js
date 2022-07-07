@@ -20,11 +20,14 @@ function urlBase64ToUint8Array(base64String) {
   }
   return outputArray
 }
-
+let abortController =new AbortController();
 function sendSubscription(subscription, email) {
+  abortController.abort();
+  abortController =new AbortController();
   console.log("API CALEED", email);
   return fetch(`${BASE_URL}/notifications/subscribe`, {
     method: 'POST',
+    signal:abortController.signal,
     body: JSON.stringify({
       email: email,
       subscription:subscription, 
@@ -57,7 +60,7 @@ export function subscribeUser(convertedVapidKey, email) {
             userVisibleOnly: true,
           }).then(function(newSubscription) {
              console.log('New subscription added.',newSubscription)
-            sendSubscription(newSubscription)
+            sendSubscription(newSubscription,email)
           }).catch(function(e) {
             if (Notification.permission !== 'granted') {
               console.log('Permission was not granted.')

@@ -55,38 +55,40 @@ const Notification = () => {
 
     return (
         <>
-            <div className="card-inner card-inner-lg">
-                <div className="nk-block-head nk-block-head-lg">
-                    <div className="nk-block-between">
-                        <div className="nk-block-head-content">
-                            <h4 className="nk-block-title">Notification Settings</h4>
-                            <div className="nk-block-des">
+            <div class="card-inner card-inner-lg bg-light">
+                <div class="nk-block-head nk-block-head-lg">
+                    <div class="nk-block-between">
+                        <div class="nk-block-head-content">
+                            <h4 class="nk-block-title">Notification Settings</h4>
+                            <div class="nk-block-des">
                                 <p>You will get only notification what have enabled.</p>
                             </div>
                         </div>
-                        <div className="nk-block-head-content align-self-start d-lg-none">
-                            <Link
-                            to="" className="toggle btn btn-icon btn-trigger mt-n1"
+                        <div class="nk-block-head-content align-self-start d-lg-none">
+                            <a
+                            href="#" class="toggle btn btn-icon btn-trigger mt-n1"
                             data-target="userAside"   id = "toggleBtn">
                                 <em
-                                className="icon ni ni-menu-alt-r" onClick={ profileMenu }></em>
-                               </Link>
+                                class="icon ni ni-menu-alt-r" onClick={ profileMenu }></em>
+                               </a>
                                </div>
                     </div>
+                    <hr class="mb-0"></hr>
                 </div>
-                <div className="nk-block-head nk-block-head-sm">
-                    <div className="nk-block-head-content">
-                        <h6 className="p-2">Security Alerts</h6>
-                        <p className="p-2">You will get only those email notification what you want.</p>
+                <div class="nk-block-head nk-block-head-sm">
+                    <div class="nk-block-head-content">
+                        <h4>Security Alerts</h4>
+                        <p>You will get only those email notification what you want.</p>
+                       
                     </div>
                 </div>
-                <div className="nk-block-content">
-                    <div className="gy-3">
-                        <div className="g-item">
-                            <div className="custom-control custom-switch">
+                <div class="nk-block-content">
+                    <div class="gy-3">
+                        <div class="g-item">
+                            <div class="custom-control custom-switch">
                                 <input
                                     type="checkbox"
-                                    className="custom-control-input"
+                                    class="custom-control-input"
                                     id="unusual-activity"
                                     checked={userInfo?.unusual_activity}
                                     onChange={(e) => {
@@ -103,15 +105,15 @@ const Notification = () => {
                                     }}
                                 />
                                 <label
-                                    className="custom-control-label"
+                                    class="custom-control-label"
                                     for="unusual-activity">
                                     Email me whenever encounterunusual activity</label>
                             </div>
                         </div>
-                        <div className="g-item">
-                            <div className="custom-control custom-switch">
+                        <div class="g-item">
+                            <div class="custom-control custom-switch">
                                 <input type="checkbox"
-                                    className="custom-control-input"
+                                    class="custom-control-input"
                                     id="new-browser"
                                     checked={userInfo?.new_browser}
                                     onChange={() => {
@@ -127,24 +129,24 @@ const Notification = () => {
                                     }}
                                 />
                                 <label
-                                    className="custom-control-label" for="new-browser">Email me
+                                    class="custom-control-label" for="new-browser">Email me
                                     if new browser is used to sign in</label></div>
                         </div>
                     </div>
                 </div>
-                <div className="nk-block-head nk-block-head-sm">
-                    <div className="nk-block-head-content">
-                        <h6 className="p-2">News</h6>
-                        <p className="p-2">You will get only those email notification what you want.</p>
+                <div class="nk-block-head nk-block-head-sm">
+                    <div class="nk-block-head-content">
+                    <h4>News</h4>
+                        <p>You will get only those email notification what you want.</p>
                     </div>
                 </div>
-                <div className="nk-block-content">
-                    <div className="gy-3">
-                        <div className="g-item">
-                            <div className="custom-control custom-switch">
+                <div class="nk-block-content">
+                    <div class="gy-3">
+                        <div class="g-item">
+                            <div class="custom-control custom-switch">
                                 <input
                                     type="checkbox"
-                                    className="custom-control-input"
+                                    class="custom-control-input"
                                     id="latest-sale"
                                    
                                     checked={userInfo?.sales_latest_news}
@@ -160,15 +162,15 @@ const Notification = () => {
                                         setReflect(!reflect);
                                     }}
                                 />
-                                <label className="custom-control-label"
+                                <label class="custom-control-label"
                                     for="latest-sale">
                                     Notify me by email about sales and latest news</label></div>
                         </div>
-                        <div className="g-item">
-                            <div className="custom-control custom-switch">
+                        <div class="g-item">
+                            <div class="custom-control custom-switch">
                                 <input
                                     type="checkbox"
-                                    className="custom-control-input"
+                                    class="custom-control-input"
                                     id="feature-update"
                                     checked={userInfo?.new_features_updates}
                                     onChange={() => {
@@ -184,14 +186,14 @@ const Notification = () => {
                                     }}
                                 />
                                 <label
-                                    className="custom-control-label" for="feature-update">Email
+                                    class="custom-control-label" for="feature-update">Email
                                     me about new features and updates</label></div>
                         </div>
-                        <div className="g-item">
-                            <div className="custom-control custom-switch">
+                        <div class="g-item">
+                            <div class="custom-control custom-switch">
                                 <input
                                     type="checkbox"
-                                    className="custom-control-input"
+                                    class="custom-control-input"
                                     id="account-tips"
                                     checked={userInfo?.tips}
                                     onChange={() => {
@@ -205,7 +207,7 @@ const Notification = () => {
                                         }
                                         setReflect(!reflect);
                                     }}
-                                /><label className="custom-control-label"
+                                /><label class="custom-control-label"
                                     for="account-tips">Email me about tips on using
                                     account</label></div>
                         </div>
