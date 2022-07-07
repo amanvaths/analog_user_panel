@@ -27,10 +27,10 @@ const Card1 = (props) => {
   return (
     <>
       <ReactTooltip />
-      <div className="container mt-1" onClick={props.onClick} style={{zIndex:100}} >
+      <div className="my-3" onClick={props.onClick} style={{zIndex:100}} >
         <div className="row" style={{ padding: "0px" }}>
           <div className="">
-            <div className="card card-bordered is-dark">
+            <div className="card bg-light shadow horizontal hover_on_card">
               <div className="nk-wgw">
                 <div className="nk-wgw-inner">
                   <div className="row">
@@ -57,7 +57,7 @@ const Card1 = (props) => {
                       </b>
                       <div className="nk-wgw-balance">
                         <div className="amount">
-                          {props.price}
+                          <span className="text-teal">{props.price}</span>
                           <span className="currency currency-nio" style={{fontSize: "10px"}}>{props.lable}</span>
                           <span style={{fontSize: "10px"}}> &nbsp;/&nbsp;{props.priceInUsd}</span>
                              
@@ -81,9 +81,9 @@ const Card1 = (props) => {
                   <div className="row d-flex align-items-around">
                     <div className="col-10 d-flex ">
                       <span
-                        className="amount-sm"
+                        className="amount-sm text-gray"
                         style={{
-                          color: "white",
+                          
                           marginTop: "5px",
                           marginBottom: "0px",
                           fontSize: "14px",
@@ -94,7 +94,7 @@ const Card1 = (props) => {
                       </span>
                     </div>
                     <div className="col-2">
-                      <div className="">
+                      <div className="text-gray">
 
                         <CopyToClipboard text={props.address}
                           onCopy={() => {
@@ -104,9 +104,9 @@ const Card1 = (props) => {
                             }, 800);
                           }}>
                           <div>
-                            <MdOutlineContentCopy color="white" />
+                            <MdOutlineContentCopy />
                             {copied ?
-                              <p className="text-light position-absolute" style={{ fontSize: "14px", top: "3px", left: "25px", padding: "0px 5px", backgroundColor: "transparent" }}>copied!</p> : null}
+                              <p className="text-teal position-absolute" style={{ fontSize: "14px", top: "3px", left: "25px", padding: "0px 5px", backgroundColor: "transparent" }}>Copied</p> : null}
                           </div>
                         </CopyToClipboard>
 

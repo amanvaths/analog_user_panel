@@ -177,11 +177,11 @@ const ResetPassword = (props) => {
               </Link> */}
             <div className="col-md-6 bg-light border shadow">
               <div className="card-inner">
-                <div className="brand-logo pb-5">
-                  <a href="#" className="logo-link">
+                <div className="brand-logo pb-5">     
+                  <Link to="/home" className="logo-link">
                     <img
                       className="logo-light logo-img logo-img-lg"
-                      src="./images/logo.png"
+                      src="./images/logo-dark.png"
                       srcSet="./images/logo2x.png 2x"
                       alt="logo"
                     />
@@ -191,7 +191,7 @@ const ResetPassword = (props) => {
                       srcSet="./images/logo-dark2x.png 2x"
                       alt="logo-dark"
                     />
-                  </a>
+                  </Link>
                 </div>
              
               
@@ -227,16 +227,16 @@ const ResetPassword = (props) => {
                     </label>
                   </div>
                   <div className="form-control-wrap">
-                    <Link
+                    <b
                       tabIndex="-1"
-                      to=""
+                      
                       className="form-icon form-icon-right passcode-switch text-gray"
                       data-target="password"
                     >
                       {
                         oldPasswordShown == false ? <AiOutlineEyeInvisible onClick={togglePassword1} /> : <AiOutlineEye onClick={togglePassword1} />
                       }
-                    </Link>
+                    </b>
                     <input
                       type={oldPasswordShown ? "text" : "password"}
                       className="form-control"
@@ -254,7 +254,7 @@ const ResetPassword = (props) => {
                       //   }
                       // }}
                       onFocus={() => _onfocus()}
-                      onKeyUp={() => _onkeyup()}
+                      // onKeyUp={() => _onkeyup()}
                     />
                   </div>
 
@@ -276,16 +276,16 @@ const ResetPassword = (props) => {
                     </label>
                   </div>
                   <div className="form-control-wrap">
-                    <Link
+                    <b
                       tabIndex="-1"
-                      to=""
+                      
                       className="form-icon form-icon-right passcode-switch text-gray"
                       data-target="confirm-password"
                     >
                       {
                         newPasswordShown == false ? <AiOutlineEyeInvisible onClick={togglePassword2} /> : <AiOutlineEye onClick={togglePassword2} />
                       }
-                    </Link>
+                    </b>
                     <input
                       type={newPasswordShown ? "text" : "password"}
                       className="form-control"
@@ -326,9 +326,9 @@ const ResetPassword = (props) => {
               </div>
 
               <div className="text-center pt-4 pb-3">
-                <h6 className="overline-title overline-title-sap">
+                <span className="overline-title overline-title-sap">
                   <span>OR</span>
-                </h6>
+                </span>
               </div>
               <ul className="nav justify-center gx-4">
                 <li className="nav-item ">

@@ -2,8 +2,14 @@
     color: #8094ae;
 }
 .card.dark-green {
-  background: #07523d;
+  background: #10ad83;
+  
 }
+.card.dark-green .nk-wg7-title,
+.card.dark-green .nk-wg7-note {
+  color: #7dffdc;
+}
+
 .valign {
   vertical-align: middle;
 }
@@ -42,15 +48,32 @@
   -webkit-box-shadow: 0 4px 6px 0 rgb(85 85 85 / 8%), 0 1px 20px 0 rgb(0 0 0 / 7%), 0px 1px 11px 0px rgb(0 0 0 / 7%);
   -moz-box-shadow: 0 4px 6px 0 rgba(85, 85, 85, 0.08), 0 1px 20px 0 rgba(0, 0, 0, 0.07), 0px 1px 11px 0px rgba(0, 0, 0, 0.07);
   box-shadow: 0 4px 6px 0 rgb(85 85 85 / 8%), 0 1px 20px 0 rgb(0 0 0 / 7%), 0px 1px 11px 0px rgb(0 0 0 / 7%);
+  z-index: 0;
+}
+.dark-mode .zoom_on_table:hover,
+.dark-mode .nk-tb-item:not(.nk-tb-head):hover, .nk-tb-item:not(.nk-tb-head).seleted {
+  background: #364a63!important;
+  transform: scale(1.01);
+  -webkit-box-shadow: 0 4px 6px 0 rgb(85 85 85 / 8%), 0 1px 20px 0 rgb(0 0 0 / 7%), 0px 1px 11px 0px rgb(0 0 0 / 7%);
+  -moz-box-shadow: 0 4px 6px 0 rgba(85, 85, 85, 0.08), 0 1px 20px 0 rgba(0, 0, 0, 0.07), 0px 1px 11px 0px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 4px 6px 0 rgb(85 85 85 / 8%), 0 1px 20px 0 rgb(0 0 0 / 7%), 0px 1px 11px 0px rgb(0 0 0 / 7%);
+  z-index: 0;
 }
 
+.dark-mode .hover_on_card:hover {
+  background-color: #1f2b3a!important;
+  border-color:#666!important;
+
+}
 .hover_on_card:hover {
   background-color: #ebf5f2!important;
   border-color:#96f6dc!important;
   transition: background 200ms ease;
   
 }
-
+.carousel-indicators [data-bs-target] {
+  background-color: #198754!important;
+}
 .nk-tb-item {
   transition: transform 200ms ease;
 }
@@ -63,12 +86,26 @@
 .user-balance {
   color: #ffa353!important;
 }
-.nk-footer-links > .nav-link,
+
+.nk-footer-links .nav-link,
 .link-list a:hover,
 .nk-menu-footer .nk-menu-icon {
-color: #0fcf9b;
+  color: #0fcf9b!important;
 }
- 
+
+.min-height {
+  min-height: 85vh;
+}
+
+.overline-title-alt {
+  letter-spacing: 1pt!important;
+}
+
+.news_img_div {
+  height: 8.75rem;
+  width: 100%;
+}
+
 .App {
   text-align: center;
 }
@@ -77,9 +114,7 @@ color: #0fcf9b;
   height: 40vmin;
   pointer-events: none;
 }
-.nk-sidebar{
-  background-color: #f0f2fb!important;
-}
+
 .nk-tb-list {  
   color: #0d1116!important;
 }

@@ -26,7 +26,13 @@ import Withdrawal from './pages/Withdrawal'
 import Handout from "./pages/Handout";
 import { useSelector } from "react-redux";
 import { subscribeUser } from "./web-push.config";
-import AllNotifications from './pages/AllNotifications'
+import AllNotifications from './pages/AllNotifications';
+import NewsPR from './pages/NewsPR';
+import Offer from './pages/Offer';
+import TeamMember from './pages/TeamMember';
+import BlockChain from './pages/BlockChain';
+import RoadMap from './pages/RoadMap';
+import NewsArticle from './pages/NewsArticle';
 
 
 function App(props) {
@@ -65,6 +71,7 @@ function App(props) {
           {/* <Route path="/Projects" element={<Projects />} /> */}
 
           <Route path="/home" element={(user.email && user.token)?<Home />:<Login /> } />
+         
           <Route path="/Affiliate" element={<Affiliate />} />
           {/* <Route path="/Transactions" element={<Transactions />} /> */}
           <Route path="/wallet" element={(user.email && user.token)? <Wallet /> : <Login />} />
@@ -78,6 +85,13 @@ function App(props) {
           <Route path="/Withdrawal" element={(user.email && user.token)?<Withdrawal />:<Login />} />
           <Route path="/Handout" element={(user.email && user.token)?<Handout />:<Login />} />
           <Route path="/Notification" element={(user.email && user.token)?<AllNotifications />:<Login />} />
+          <Route path="/NewsPR" element={(user.email && user.token)?<NewsPR />:<Login />} />
+          <Route path="/Offer" element={(user.email && user.token)?<Offer />:<Login />} />
+          <Route path="/TeamMember" element={(user.email && user.token)?<TeamMember />:<Login />} />
+          <Route path="/BlockChain" element={(user.email && user.token)?<BlockChain />:<Login />} />
+          <Route path="/RoadMap" element={(user.email && user.token)?<RoadMap />:<Login />} />
+          <Route path="/NewsArticle" element={(user.email && user.token)?<NewsArticle />:<Login />} />
+          
         </Routes>
       </BrowserRouter>
     </div >
