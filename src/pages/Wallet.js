@@ -189,7 +189,18 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                       >
                         <span class="badge bg-outline-dark text-dark fs-5">
                           Total Balance: 
-                          <span className="text-teal"> {userInfo.currency_preference == "usd" ? `${coinWW[8]?.wallet?.usdt_balance?.toFixed(2)} USDT` : `${(oneUsdPrice * coinWW[8]?.wallet?.usdt_balance).toFixed(2)} INRX`} </span>
+                          <span className="text-teal"> 
+                          { coinWW.length > 0
+                            ? <>
+                              { userInfo.currency_preference == "usd" 
+                                  ? `${coinWW[8]?.wallet?.usdt_balance?.toFixed(2)} USDT` 
+                                  : `${(oneUsdPrice * coinWW[8]?.wallet?.usdt_balance).toFixed(2)} INRX`
+                               } 
+                              </>
+                            : 0
+                          }
+                               
+                          </span>
                         </span>
                       </label>
                     </div>
@@ -209,7 +220,17 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                             </p>
                             <p className="kanban-item-title">
                               <span className="badge bg-light rounded-pill">Current Balance  </span>
-                              <span className="text-teal"> {userInfo?.currency_preference == "usd" ? `${coinWW[8]?.wallet?.usdt_balance?.toFixed(2)} USDT` : `${(oneUsdPrice * coinWW[8]?.wallet?.usdt_balance).toFixed(2)} INRX`}</span>
+                              <span className="text-teal">
+                              { coinWW.length > 0
+                                ? <>
+                                  { userInfo.currency_preference == "usd" 
+                                      ? `${coinWW[8]?.wallet?.usdt_balance?.toFixed(2)} USDT` 
+                                      : `${(oneUsdPrice * coinWW[8]?.wallet?.usdt_balance).toFixed(2)} INRX`
+                                  } 
+                                  </>
+                                : 0
+                              }                                                               
+                              </span>
                             </p>
                           </div>                                                
                         </div>

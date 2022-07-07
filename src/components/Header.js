@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserInfo, logout, setTheme } from "../redux/reducer/user";
@@ -13,7 +13,7 @@ const Header = () => {
   const btn = useSelector((store) => store.navsetter)
   const dispatch = useDispatch()
   const navigate = useNavigate();
-
+  const [notification, setNotification] = useState([]);
   const sidebarMenu = async () => {
 
     var element = document.getElementById("myBody");
@@ -65,6 +65,14 @@ const Header = () => {
     navigate("/login")
   };
 
+  const userNotification = async () => {
+    const data = await axios.post(`${BASE_URL}/notification`, { email: email })
+    if (data) {
+      //console.log(data.data, ":: notification");
+      setNotification(data.data);
+    }
+  }
+
   useEffect(() => {
     const fetchdata = async () => {
       const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
@@ -73,6 +81,7 @@ const Header = () => {
       }
     }
     fetchdata().catch(console.error)
+    userNotification();
   }, [])
 
 
@@ -200,11 +209,49 @@ const Header = () => {
                       <span className="sub-title nk-dropdown-title">
                         Notifications
                       </span>
-                      <a href="#">Mark All as Read</a>
+                      {/* <a href="#">Mark All as Read</a> */}
                     </div>
                     <div className="dropdown-body">
                       <div className="nk-notification">
+                        {/* <div className="nk-notification-item dropdown-inner">
+                          <div className="nk-notification-icon">
+                            <em className="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
+                          </div>
+                          <div className="nk-notification-content">
+                            <div className="nk-notification-text">
+                              You have requested to <span>Widthdrawl</span>
+                            </div>
+                            <div className="nk-notification-time">
+                              2 hrs ago
+                            </div>
+                          </div>
+                        </div> */}
+
+                        {notification.map((element, index) => {                     
+                      return (
                         <div className="nk-notification-item dropdown-inner">
+                          <div className="nk-notification-icon">
+                            {
+                               element.type ==1 ?
+                                 <em className="icon icon-circle bg-success-dim ni ni-curve-down-left"></em> 
+                               :   
+                                <em className="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
+                                    
+                            }
+                           
+                          </div>
+                          <div className="nk-notification-content">
+                            <div className="nk-notification-text">
+                              {/* Your <span>Deposit Order</span> is placed */}
+                              { element.message }
+                            </div>
+                            <div className="nk-notification-time">
+                              2 hrs ago
+                            </div>
+                          </div>
+                        </div>
+                      ) }) }
+                        {/* <div className="nk-notification-item dropdown-inner">
                           <div className="nk-notification-icon">
                             <em className="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
                           </div>
@@ -255,33 +302,7 @@ const Header = () => {
                               2 hrs ago
                             </div>
                           </div>
-                        </div>
-                        <div className="nk-notification-item dropdown-inner">
-                          <div className="nk-notification-icon">
-                            <em className="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
-                          </div>
-                          <div className="nk-notification-content">
-                            <div className="nk-notification-text">
-                              You have requested to <span>Widthdrawl</span>
-                            </div>
-                            <div className="nk-notification-time">
-                              2 hrs ago
-                            </div>
-                          </div>
-                        </div>
-                        <div className="nk-notification-item dropdown-inner">
-                          <div className="nk-notification-icon">
-                            <em className="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
-                          </div>
-                          <div className="nk-notification-content">
-                            <div className="nk-notification-text">
-                              Your <span>Deposit Order</span> is placed
-                            </div>
-                            <div className="nk-notification-time">
-                              2 hrs ago
-                            </div>
-                          </div>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                     <div className="dropdown-foot center">

@@ -329,11 +329,19 @@ const Home = () => {
                                     </h5>
                                   </div>
                                   <div className="nk-wgw-balance">
-                                    <div className="amount">
-                                      {userInfo?.currency_preference == "inr"
-                                        ? inceptive
-                                        : (inceptive / oneUsdPrice).toFixed(2)}
-                                      <span className="currency currency-nio">
+                                    <div className="amount">  
+                                          {
+                                            inceptive 
+                                            ? <>
+                                              {
+                                                userInfo?.currency_preference == "inr"
+                                                ? inceptive
+                                                : (inceptive / oneUsdPrice).toFixed(2)
+                                              }
+                                              </>
+                                            : 0
+                                          }
+                                       <span className="currency currency-nio">
                                         {userInfo?.currency_preference == "inr"
                                           ? "INRX"
                                           : "USDT"}
@@ -362,9 +370,19 @@ const Home = () => {
                                   </div>
                                   <div className="nk-wgw-balance">
                                     <div className="amount">
-                                      {userInfo?.currency_preference == "inr"
-                                        ? airdrop
-                                        : (airdrop / oneUsdPrice).toFixed(2)}
+                                   
+                                       {
+                                            airdrop 
+                                            ? <>
+                                              {
+                                                userInfo?.currency_preference == "inr"
+                                                ? airdrop
+                                                : (airdrop / oneUsdPrice).toFixed(2)
+                                              }
+                                              </>
+                                            : 0
+                                          }                                      
+                                      
                                       <span className="currency currency-btc">
                                         {userInfo?.currency_preference == "inr"
                                           ? "INRX"
