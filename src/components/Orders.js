@@ -30,9 +30,9 @@ export default function Orders(props) {
 
   // Images
   const img =
-  userInfo?.currency_preference == "usd" ? (
+    userInfo?.currency_preference == "usd" ? (
       <img
-        src="./images/Usdt.png"
+        src="./images/usdt_icon.png"
         style={{ width: "15px" }}
         alt="usdt"
         className="tradeUsdIcon"
@@ -52,9 +52,6 @@ export default function Orders(props) {
         className="img"
       />
     );
-   
-
-    console.log(walletbalance ,"walletbalance walletbalance");
 
   // Minimum amount
   const MinAmount =
@@ -91,7 +88,6 @@ export default function Orders(props) {
             ? Number(d.usdt_balance)
             : Number(d.usdt_balance * oneUsdPrice)
         );
-        console.log(d.usdt_balance,"d.usdt_balance d.usdt_balance d.usdt_balance");
       }
     } catch (error) {
       console.log(error);
@@ -185,9 +181,9 @@ export default function Orders(props) {
     swalWithBootstrapButtons
       .fire({
         title: "Are you sure?",
-        text: `Buying Amount : ${Number(total)?.toFixed(2)} , Quantity : ${
-         ammount?.toFixed(2)
-        }`,
+        text: `Buying Amount : ${Number(total)?.toFixed(
+          2
+        )} , Quantity : ${ammount?.toFixed(2)}`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Yes, confirm it!",
@@ -206,7 +202,7 @@ export default function Orders(props) {
 
   return (
     <div className="order">
-      <div class="card mt-4">
+      <div class="card">
         <div class="card-header bg-teal-dim justify-content-between align-items-center">
           <span class="card-title font-weight-bold"> ORDER</span>
         </div>
@@ -270,7 +266,10 @@ export default function Orders(props) {
                     history.map((h) => {
                       return (
                         <>
-                          <tr class="zoom_on_table" style={{ fontSize: "9.5px" }}>
+                          <tr
+                            class="zoom_on_table"
+                            style={{ fontSize: "9.5px" }}
+                          >
                             <td
                               className="OrderhistorySize"
                               style={{ width: "25%" }}
@@ -290,14 +289,21 @@ export default function Orders(props) {
                               {h.preferred_currency_amount?.toFixed(2)}{" "}
                               {h.compair_currency == "usd" ? (
                                 <img
-                                  src="./images/Usdt.png"
+                                  src="./images/usdt_icon.png"
                                   style={{ width: "15px" }}
                                   alt="usdt"
+                                  className="tradeUsdIcon"
+                                />
+                              ) : theme == 0 ? (
+                                <img
+                                  src="./images/Inrx_black.png"
+                                  style={{ width: "17px" }}
+                                  alt="inrx"
                                   className="img"
                                 />
                               ) : (
                                 <img
-                                  src="./images/Inrx_black.png"
+                                  src="./images/Inrx_white.png"
                                   style={{ width: "17px" }}
                                   alt="inrx"
                                   className="img"
@@ -489,7 +495,7 @@ export default function Orders(props) {
                         userInfo?.currency_preference == "inr"
                           ? val / atprice
                           : val / (atprice / oneUsdPrice)
-                      );  
+                      );
                     } else {
                       setRangeValue(0);
                       setTotal(0);
@@ -564,7 +570,7 @@ export default function Orders(props) {
                     ? 0
                     : userInfo?.currency_preference == "usd"
                     ? Number(balance)
-                    : Math.round(balance * oneUsdPrice)
+                    : balance * oneUsdPrice
                 }
                 // value={"6000"}
                 onChange={(e) => {
@@ -580,7 +586,8 @@ export default function Orders(props) {
                     setAmmount(
                       atprice &&
                         oneUsdPrice &&
-                        document.querySelector("#slider").value /(atprice / oneUsdPrice)
+                        document.querySelector("#slider").value /
+                          (atprice / oneUsdPrice)
                     );
                     setTotal(
                       Number(document.querySelector("#slider").value).toFixed(2)
@@ -604,7 +611,6 @@ export default function Orders(props) {
                   <span>{img}</span>
                 </span>
               </div>
-            
 
               <button
                 class="btn btn-block my-2"
@@ -614,8 +620,9 @@ export default function Orders(props) {
                   color: "white",
                 }}
                 onClick={ConfirmBox}
-                disabled={oneUsdPrice && walletbalance && userInfo?.currency_preference &&
-                  walletbalance >=
+                disabled={
+                  oneUsdPrice &&
+                  walletbalance <=
                     (userInfo?.currency_preference == "inr"
                       ? 5000
                       : 5000 / oneUsdPrice)
