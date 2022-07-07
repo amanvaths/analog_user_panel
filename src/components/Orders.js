@@ -284,12 +284,7 @@ export default function Orders(props) {
                               />
                             </td>
                             <td
-<<<<<<< HEAD
                               className="OrderhistorySize text-danger"
-=======
-                              className="OrderhistorySize"
-                              class="text-danger"
->>>>>>> 0fb9774a5036b19e6ca5c30bda3775abab682f15
                               style={{ width: "25%" }}
                             >
                               {h.preferred_currency_amount?.toFixed(2)}{" "}
@@ -303,7 +298,7 @@ export default function Orders(props) {
                               ) : (
                                 <img
                                   src="./images/Inrx_black.png"
-                                  style={{ width: "25px" }}
+                                  style={{ width: "17px" }}
                                   alt="inrx"
                                   className="img"
                                 />
@@ -313,7 +308,7 @@ export default function Orders(props) {
                             <td
                               className="OrderhistorySize"
                               class="text-success"
-                              style={{ width: "25%" }}
+                              style={{ width: "17%" }}
                             >
                               {h.compair_currency == "usd"
                                 ? h.pref_raw_price.toFixed(8)
@@ -339,7 +334,6 @@ export default function Orders(props) {
       </div>
 
       {/* Buy */}
-<<<<<<< HEAD
       <div
         style={{
           border: "0.5px solid rgba(0,0,0,.125)",
@@ -347,9 +341,6 @@ export default function Orders(props) {
           borderRadius: "3px",
         }}
       >
-=======
-      <div className="mt-4" style={{border: "0.5px solid rgba(0,0,0,.125)" ,marginTop:"6px",borderRadius:"3px"}}>
->>>>>>> 0fb9774a5036b19e6ca5c30bda3775abab682f15
         <nav
           class="coinsfather-theme-color bg-teal-dim"
           style={{
