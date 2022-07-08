@@ -20,7 +20,7 @@ export default function TradeHistory() {
   
 
   useEffect(() => {
-    console.log(userInfo?.currency_preference,"userInfo?");    
+      
     axios
       .get(`${BASE_URL}/getAllOrder?type=Buy&compair_currency=${userInfo?.currency_preference}`)
       .then((res) => {

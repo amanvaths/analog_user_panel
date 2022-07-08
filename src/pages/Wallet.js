@@ -251,7 +251,7 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                                 </span>
                               </p>
                               <p className="kanban-item-title">
-                                <span className="badge bg-light rounded-pill">Total API  </span>
+                                <span className="badge bg-light rounded-pill">Total APY  </span>
                                 <span className="text-teal"> 0</span>
                               </p>
                             </div>
