@@ -246,7 +246,7 @@ const Header = () => {
                               { element.message }
                             </div>
                             <div className="nk-notification-time">
-                              2 hrs ago
+                              {element.timeDifference}
                             </div>
                           </div>
                         </div>
