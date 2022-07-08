@@ -306,7 +306,7 @@ const Header = () => {
                       </div>
                     </div>
                     <div className="dropdown-foot center">
-                      <a href="#">View All</a>
+                      <a href="/NotificationAlert">View All</a>
                     </div>
                   </div>
                 </li>
