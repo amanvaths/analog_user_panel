@@ -47,14 +47,8 @@ const Wallet = (props) => {
       setWalletDetails([...data]);
     })
 
-    socket.on("msg",(data)=>{
-      console.log(data, "MESSAGE DATA");
-      // if(status == 0){
-      //   status = 1
-     
+    socket.on("msg",(data)=>{    
         NotificationManager.success('Added',data)
-      // }
-     
     })
 
       socket.on('notification',(data)=>{
@@ -64,33 +58,27 @@ const Wallet = (props) => {
 },[])
 
 
-
-
-// setInterval(() => {
-//   if(status == 0){
-//     status = 1
-//   }
-  
-// }, 5000);
-
-
-
-
-
-
   const test = async()=>{
     try {
        const data = await axios.post(`${BASE_URL}/getUserWallet`, {email:email})
-          console.log(data.data, "YRSSJSJSJSJSJS");
           setWalletDetails([...data.data]);
     } catch (error) {
+      console.log(error);
+    }
+  }
+  const updateWallet = () =>{
+    try{
+       axios.post(`http://localhost:3001/updateWallet`, {email:email});    
+    }catch (error){
       console.log(error);
     }
   }
 
   useEffect(()=>{
     test()
+    updateWallet();
   },[])
+
 
   const getUserAllWallletData = async () => {
     try {
