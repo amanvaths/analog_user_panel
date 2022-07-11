@@ -17,6 +17,7 @@
     "jquery": "^3.6.0",
     "jwt-decode": "^3.1.2",
     "lightweight-charts": "^3.8.0",
+    "multicoin-address-validator": "^0.5.10",
     "query-string": "^7.1.1",
     "react": "^17.0.1",
     "react-bootstrap": "^2.3.1",

@@ -57,7 +57,7 @@ const PersonalInfo = () => {
           setMyCurrency("");
           setPhone("");
           updateSetting(); 
-          setShowUser1(false);
+          // setShowUser1(false);
           NotificationManager.success(data.data.message)
         }
         else if (data.data.status == -1) {
@@ -184,7 +184,8 @@ const PersonalInfo = () => {
                 </div>
               </div>
               <div className="col-4 ">
-                {showUser == true ? <div class="input-group-sm">
+                {showUser == true ? 
+                <div class="input-group-sm">
                   <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1"
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
@@ -195,7 +196,8 @@ const PersonalInfo = () => {
                       borderRightStyle: "hidden",
                       borderBottomStyle: "groove"
                     }} />
-                </div> : <span className="data-value">{updatedUserName}</span>}
+                </div> :
+                 <span className="data-value">{updatedUserName}</span>}
               </div>
               <div className="col-4 d-flex justify-content-end">
                 <div className="">
@@ -270,7 +272,7 @@ const PersonalInfo = () => {
                     {showUser1 ? <Link to="" className="btn btn-dim btn-outline-success" onClick={() => {
                       if (phone) {
                         updateData();
-                        
+                        // setShowUser2(false)
                       }
                     }}>Update</Link> : <span className=" disable">
                       <em className="icon ni ni-lock-alt text-gray"></em>

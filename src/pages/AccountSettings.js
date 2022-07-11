@@ -53,7 +53,7 @@ const AccountSettings = () => {
    go()
   }, [])
 
-  console.log(totalAna);
+  // console.log(totalAna);
 
   const profileMenuRemove = ()=>{
     var element = document.getElementById("myBody"); 

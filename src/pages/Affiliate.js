@@ -6,7 +6,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { BASE_URL } from "../Api_connection/config";
 import AffiliatCard from "../components/AffiliateCard";
-import { Bars} from 'react-loader-spinner'
+import { Bars, ThreeDots} from 'react-loader-spinner'
 import { MdMoreHoriz } from 'react-icons/md'
 import ReactPaginate from 'react-paginate';
 import { Link} from "react-router-dom";
@@ -22,11 +22,16 @@ const Affiliate = (props) => {
   const [level1, setLevel1] = useState(true)
   const [level2, setLevel2] = useState(false)
   const [level3, setLevel3] = useState(false)
-  const [tab, setTab] = useState([]);
+  const [tab1, setTab1] = useState([]);
+  const [tab2, setTab2] = useState([]);
+  const [tab3, setTab3] = useState([]);
   const [loader, setLoader] = useState(true)
   const [status, setStatus] = useState()
   const [total, setTotal] = useState(0)
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage1, setCurrentPage1] = useState(1)
+  const [currentPage2, setCurrentPage2] = useState(1)
+  const [currentPage3, setCurrentPage3] = useState(1)
+  const [tableData, setTableData] = useState(false)
 
   const [load, setLoad] = useState(false)
 
@@ -51,9 +56,12 @@ const Affiliate = (props) => {
       setTotal(data.data.data)
       const startIndex = (selelcted + 1) * limit - limit;
       const endIndex = (startIndex + limit)
-      setTab((data.data.data).slice(startIndex, endIndex));
+      setTab1((data.data.data).slice(startIndex, endIndex));
+      setTab2((data.data.data).slice(startIndex, endIndex));
+      setTab3((data.data.data).slice(startIndex, endIndex));
       setStatus(data.data.status)
       setLoader(false)
+      setTableData(true)
     }
 
   }
@@ -63,8 +71,6 @@ const Affiliate = (props) => {
     getAffiliate();
     getAffiliateList(level, 0)
   }, []);
-
-
 
   return (
     <div>
@@ -158,7 +164,8 @@ const Affiliate = (props) => {
                                     setLevel1(true)
                                     setLevel2(false)
                                     setLevel3(false)
-                                    setTab([])
+                                    setTab1([])
+                                    setCurrentPage1(1)
                                     getAffiliateList(1,0)
                                   }}>
                                   <span>Level 1</span></Link>
@@ -169,7 +176,8 @@ const Affiliate = (props) => {
                                     setLevel1(false)
                                     setLevel2(true)
                                     setLevel3(false)
-                                    setTab([])
+                                    setTab2([])
+                                    setCurrentPage2(1)
                                     getAffiliateList(2, 0)
                                   }}>
                                   <span>Level 2</span></Link>
@@ -180,7 +188,8 @@ const Affiliate = (props) => {
                                     setLevel1(false)
                                     setLevel2(false)
                                     setLevel3(true)
-                                    setTab([])
+                                    setTab3([])
+                                    setCurrentPage3(1)
                                     getAffiliateList(3, 0)
                                   }}>
                                   <span>Level 3</span></Link>
@@ -291,8 +300,8 @@ const Affiliate = (props) => {
                                 </div>
                                 {
                                   status == 2 ? <h5>Record Not Found</h5> :
-                                  tab.length > 0 ?
-                                    tab.map((element, index) => {
+                                  tab1.length > 0 ?
+                                    tab1.map((element, index) => {
                                       console.log(index, "::INDEx");
                                       return (
                                         <div className="nk-tb-item ">
@@ -300,7 +309,7 @@ const Affiliate = (props) => {
                                           <div className="nk-tb-col tb-col-sm">
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
-                                            <span className="nk-activity-media user-avatar xs bg-teal">{(((currentPage - 1) * 5) + index + 1)}</span>
+                                            <span className="nk-activity-media user-avatar xs bg-teal">{tableData ? (((currentPage1 - 1) * 5) + index + 1) : null}</span>
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
                                             <span className="text-dark">{element.email}</span>
@@ -313,6 +322,7 @@ const Affiliate = (props) => {
                                             <span className="text-danger">
                                               {
                                                 userInfo?.currency_preference == 'usd' ? `${element?.totalExp?.toFixed(2)} USDT` : `${(element?.totalExp * oneUsdPrice)?.toFixed(2)} INRX`
+                                               
 
                                               }
                                               {userInfo?.currency_preference == "usd" ? (
@@ -375,7 +385,7 @@ const Affiliate = (props) => {
                                         </div>
                                       )
                                     }) :
-                                    <Bars heigth="20" width="20 " color="#0b3175" ariaLabel="loading-indicator" />
+                                    <ThreeDots heigth="20" width="40 " color="#1ee0ac" ariaLabel="loading-indicator" />
                                 }
 
                                 
@@ -386,7 +396,7 @@ const Affiliate = (props) => {
                             
                           </div>
                           <div className="card-inner">
-                            <ReactPaginate
+                          <ReactPaginate
                           previousLabel={'Prev'}
                           nextLabel={'Next'}
                           breakLabel={"..."}
@@ -395,7 +405,10 @@ const Affiliate = (props) => {
                           pageRangeDisplayed={2}
                           onPageChange={(data)=>{
                             getAffiliateList(level,data.selected)
-                             setCurrentPage(data.selected +1)}}
+                            // total
+                             setCurrentPage1(data.selected +1)
+                            //  setTableData()
+                            }}
                           containerClassName={'pagination justify-content-center'}
                           pageClassName={'page-item'}
                           pageLinkClassName={'page-link'}
@@ -458,8 +471,8 @@ const Affiliate = (props) => {
 
                                 {
                                   status == 2 ? <h5>Record Not Found</h5> : 
-                                  tab.length > 0 ?
-                                    tab.map((element, index) => {
+                                  tab2.length > 0 ?
+                                    tab2.map((element, index) => {
                                       console.log(index, "::INDEx");
                                       return (
                                         <div className="nk-tb-item ">
@@ -467,7 +480,7 @@ const Affiliate = (props) => {
                                           <div className="nk-tb-col tb-col-sm">
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
-                                            <span className="nk-activity-media user-avatar xs bg-teal">{(((currentPage - 1) * 5) + index + 1)}</span>
+                                            <span className="nk-activity-media user-avatar xs bg-teal">{(((currentPage2 - 1) * 5) + index + 1)}</span>
                                           </div>
                                           <div className="nk-tb-col tb-col-sm">
                                             <span className="text-dark">{element.email}</span>
@@ -540,7 +553,7 @@ const Affiliate = (props) => {
                                         </div>
                                       )
                                     }) :
-                                    <Bars heigth="20" width="20 " color="#0b3175" ariaLabel="loading-indicator" />
+                                    <ThreeDots heigth="20" width="40 " color="#1ee0ac" ariaLabel="loading-indicator" />
                                 }
                             </div>
                             </div>
@@ -551,12 +564,12 @@ const Affiliate = (props) => {
                           previousLabel={'Prev'}
                           nextLabel={'Next'}
                           breakLabel={"..."}
-                          pageCount={Math.ceil(tab.length / 5)}
+                          pageCount={Math.ceil(tab2.length / 5)}
                           marginPagesDisplayed={2}
                           pageRangeDisplayed={2}
                           onPageChange={(data)=>{
                             getAffiliateList(level,data.selected)
-                             setCurrentPage(data.selected +1)}}
+                             setCurrentPage2(data.selected +1)}}
                           containerClassName={'pagination justify-content-center'}
                           pageClassName={'page-item'}
                           pageLinkClassName={'page-link'}
@@ -621,8 +634,8 @@ const Affiliate = (props) => {
                                 
                                 {
                                   status == 2 ? <h5>Record Not Found</h5> :
-                                  tab.length > 0 ?
-                                    tab.map((element, index) => {
+                                  tab3.length > 0 ?
+                                    tab3.map((element, index) => {
                                       console.log(index, "::INDEx");
                                       return (
                                         <>
@@ -631,7 +644,7 @@ const Affiliate = (props) => {
                                             <div className="nk-tb-col tb-col-sm">
                                             </div>
                                             <div className="nk-tb-col tb-col-sm">
-                                              <span className="nk-activity-media user-avatar xs bg-teal">{(((currentPage - 1) * 5) + index + 1)}</span>
+                                              <span className="nk-activity-media user-avatar xs bg-teal">{(((currentPage3 - 1) * 5) + index + 1)}</span>
                                             </div>
                                             <div className="nk-tb-col tb-col-sm">
                                               <span className="text-dark">{element.email}</span>
@@ -712,7 +725,7 @@ const Affiliate = (props) => {
                                         </>
                                       )
                                     }) :  
-                                    <Bars heigth="20" width="20 " color="#0b3175" ariaLabel="loading-indicator" />  
+                                    <ThreeDots heigth="20" width="40 " color="#1ee0ac" ariaLabel="loading-indicator" />  
                                 }
                                {/*  <div className="nk-tb-item">
                                                 <div className="nk-tb-col nk-tb-col-check">
@@ -864,12 +877,12 @@ const Affiliate = (props) => {
                           previousLabel={'Prev'}
                           nextLabel={'Next'}
                           breakLabel={"..."}
-                          pageCount={Math.ceil(tab.length / 5)}
+                          pageCount={Math.ceil(tab3.length / 5)}
                           marginPagesDisplayed={2}
                           pageRangeDisplayed={2}
                           onPageChange={(data)=>{
                             getAffiliateList(level,data.selected)
-                             setCurrentPage(data.selected +1)}}
+                             setCurrentPage3(data.selected +1)}}
                           containerClassName={'pagination justify-content-center'}
                           pageClassName={'page-item'}
                           pageLinkClassName={'page-link'}
