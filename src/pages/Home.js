@@ -81,9 +81,12 @@ const Home = () => {
 
   var total = [];
   var year = [];
+  let abortController =new AbortController();
   const chartData = async () => {
     try {
-      const res = await axios.post(`${BASE_URL}/buyChart`, { email: email });
+      abortController.abort();
+      abortController =new AbortController();
+      const res = await axios.post(`${BASE_URL}/buyChart`, { email: email, signal:abortController.signal });
       const arr = res.data.data;
       console.log(arr, 'orid');
       arr.map((element, index) => {

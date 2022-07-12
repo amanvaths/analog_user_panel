@@ -11,7 +11,7 @@ import { Triangle } from 'react-loader-spinner'
 import { useSelector, useDispatch } from 'react-redux';
 import { BASE_URL } from "../Api_connection/config";
 import { setUserInfo } from "../redux/reducer/user";
-import { Link, useNavigate } from "react-router-dom";
+
 const { io } = require("socket.io-client");
 
 

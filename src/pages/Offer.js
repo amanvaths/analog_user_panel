@@ -2,12 +2,27 @@ import React, { useEffect, useState } from "react";
 import Menu from "../components/Menu";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-
 import "react-multi-carousel/lib/styles.css";
 import axios from "axios";
+import { BASE_URL } from "../Api_connection/config";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 
 const Offer = () => {
 
+  const [offers, setOffers] = useState([])
+  const [ind, setInd] = useState(0)
+  const getOffers = async () => {
+    try {
+      const data = await axios.post(`${BASE_URL}/offers`)
+      console.log(data.data, "Offer API");
+      setOffers(data.data)
+    } catch (error) {
+    }
+  }
+  useEffect(() => {
+    getOffers()
+  }, [])
 
   return (
     <div className="nk-app-root">
@@ -28,13 +43,47 @@ const Offer = () => {
                 </div>
                 <div className="container">
                   <div className="shadow mt-3">
-                    <div id="carouselExFade" class="carousel slide carousel-fade" data-ride="carousel" data-interval="2000">
-                    <ol class="carousel-indicators mb-n5">
+                    <Carousel
+                    showThumbs={false}
+                    infiniteLoop={true}
+                    autoPlay={true}
+                    swipeable={true}
+                    >
+                      {
+                        offers.map((element, index) => {
+                          return (
+                            <div>
+                              <img src={`http://localhost:3001${element.image}`} />
+                              {/* <p className="legend">Legend 1</p> */}
+                            </div>
+                          )
+                        })
+                      }
+                      {/* <div>
+                        <img src="assets/1.jpeg" />
+                        <p className="legend">Legend 1</p>
+                      </div>
+                      <div>
+                        <img src="assets/2.jpeg" />
+                        <p className="legend">Legend 2</p>
+                      </div>
+                      <div>
+                        <img src="assets/3.jpeg" />
+                        <p className="legend">Legend 3</p>
+                      </div> */}
+                    </Carousel>
+
+                    {/* <div id="carouselExFade" class="carousel slide carousel-fade" data-ride="carousel" data-interval="2000">
+
+                      < ol class="carousel-indicators mb-n5">
                         <li data-bs-target="#carouselExFade" data-bs-slide-to="0" class="active"></li>
                         <li data-bs-target="#carouselExFade" data-bs-slide-to="1"></li>
                         <li data-bs-target="#carouselExFade" data-bs-slide-to="2"></li>
-                    </ol>
+                      </ol>
                       <div class="carousel-inner">
+                        {
+
+                        }
                         <div class="carousel-item active">
                           <img class="d-block w-100" src="images/offer/offer1.jpg" alt="First Offer" />
                         </div>
@@ -51,7 +100,7 @@ const Offer = () => {
                         class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
                       </a> <a class="carousel-control-next" href="#carouselExFade" role="button" data-bs-slide="next"> <span
                         class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span> </a>
-                    </div>
+                    </div> */}
                     {/* <Slide>
                   {i?.map((slideImage, index) => {
                     return (
