@@ -48,10 +48,10 @@ const Affiliate = (props) => {
       console.log("Error in getting data Affililate :" + error);
     }
   }
-
+  const limit = 5
   const getAffiliateList = async (level, selelcted) => {
     const data = await axios.post(`${BASE_URL}/levelWiseList`, { email: email, level: level })
-    let limit = 5
+    
     if (data) {
       setTotal(data.data.data)
       setStatus(data.data.status)
@@ -166,6 +166,7 @@ const Affiliate = (props) => {
                                     setLevel1(true)
                                     setLevel2(false)
                                     setLevel3(false)
+                                    setTotal(0)
                                     setTab([])
                                     setCurrentPage1(1)
                                     getAffiliateList(1, 0)
@@ -179,6 +180,7 @@ const Affiliate = (props) => {
                                     setLevel2(true)
                                     setLevel3(false)
                                     setTab([])
+                                    setTotal(0)
                                     setCurrentPage2(1)
                                     getAffiliateList(2, 0)
                                   }}>
@@ -190,6 +192,7 @@ const Affiliate = (props) => {
                                     setLevel1(false)
                                     setLevel2(false)
                                     setLevel3(true)
+                                    setTotal(0)
                                     setTab([])
                                     setCurrentPage3(1)
                                     getAffiliateList(3, 0)
@@ -362,7 +365,8 @@ const Affiliate = (props) => {
                                 } </div>
                             </div>
                           </div>
-                          <div className="card-inner">
+                          {
+                            total.length > 5 ? <div className="card-inner">
                             <ReactPaginate
                               previousLabel={'Prev'}
                               nextLabel={'Next'}
@@ -385,7 +389,9 @@ const Affiliate = (props) => {
                               breakLinkClassName={'page-link'}
                               activeClassName={"active"}
                             />
-                          </div>
+                          </div> : null
+                          }
+                          
                         </div>
                       </div>
                       : null}
@@ -524,7 +530,8 @@ const Affiliate = (props) => {
                             </div>
 
                           </div>
-                          <div className="card-inner">
+                          {
+                            total.length > 5 ? <div className="card-inner">
                             <ReactPaginate
                               previousLabel={'Prev'}
                               nextLabel={'Next'}
@@ -547,7 +554,9 @@ const Affiliate = (props) => {
                               breakLinkClassName={'page-link'}
                               activeClassName={"active"}
                             />
-                          </div>
+                          </div> : null
+                          }
+                          
                         </div>
                       </div>
                       : null}
@@ -698,7 +707,8 @@ const Affiliate = (props) => {
 
                           </div>
                         </div>
-                        <div className="card-inner">
+                        {
+                          total.length > 5 ? <div className="card-inner">
                           <ReactPaginate
                             previousLabel={'Prev'}
                             nextLabel={'Next'}
@@ -721,7 +731,9 @@ const Affiliate = (props) => {
                             breakLinkClassName={'page-link'}
                             activeClassName={"active"}
                           />
-                        </div>
+                        </div> : null
+                        }
+                        
                       </div>
                       : null}
 
