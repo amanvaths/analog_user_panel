@@ -17,7 +17,7 @@ const PersonalInfo = () => {
   const [showUser, setShowUser] = useState(true)
   const [showUser1, setShowUser1] = useState(true)
   const [showUser2, setShowUser2] = useState(true);
-  const [value, setValue] = useState('')
+  const [localUserName, setLocalUserName] = useState('')
   const [phone, setPhone] = useState('')
   const [ref, setRefferal] = useState('')
   const [myCurrency, setMyCurrency] = useState('');
@@ -37,12 +37,12 @@ const PersonalInfo = () => {
   }
 
   const updateData = async (myCurrency) => {
-    const task = value ? "username" : phone ? "contact" : myCurrency ? "currency" : '';
+    const task = localUserName ? "username" : phone ? "contact" : myCurrency ? "currency" : '';
     const apidata = {
       email: email,
       task: task,
     };
-    apidata[task] = task === "username" ? value : task === "currency" ? myCurrency : task === "contact" ? phone : '';
+    apidata[task] = task === "username" ? localUserName : task === "currency" ? myCurrency : task === "contact" ? phone : '';
     console.log(myCurrency, "data befor api call");
     console.log("mpobj::", apidata);
 
@@ -50,13 +50,33 @@ const PersonalInfo = () => {
       try {
         const data = await axios.post(`${BASE_URL}/settings`, apidata)
         if (data.data.status == 1) {
-          setUpdatedUserName(apidata['username']);
-          setUpdatedPhone(apidata['contact'])
-          setMyCurrency(apidata['currency']);
-          setValue("");
+          console.log(task, "TASK");
+          const obj = {...userInfo}
+          if(task === "username"){
+            obj['username'] = localUserName;
+            dispatch(setUserInfo({ userInfo: obj }))
+          }
+          if(task === "contact"){
+            obj['phone'] = phone;
+            dispatch(setUserInfo({ userInfo: obj }))
+          }
+          if(task === "currency"){
+            obj['currency_preference']= myCurrency
+            dispatch(setUserInfo({ userInfo: obj }))
+          }
+         
+          // obj['username'] = localUserName
+          // obj['phone'] = phone
+          // obj['currency_preference']= myCurrency
+          // dispatch(setUserInfo({userInfo: obj}))
+          // setUpdatedUserName(apidata['username']);
+          // setUpdatedPhone(apidata['contact'])
+          // setMyCurrency(apidata['currency']);
+          setLocalUserName("");
           setMyCurrency("");
+
           setPhone("");
-          updateSetting(); 
+          // updateSetting(); 
           // setShowUser1(false);
           NotificationManager.success(data.data.message)
         }
@@ -70,13 +90,13 @@ const PersonalInfo = () => {
       alert("please fill all the required data!")
     }
 
-    getData()
+    // getData()
   }
 
   async function getData() {
     const data1 = await axios.post(`${BASE_URL}/settings`, { email: email, task: "personal_information" })
-    setUpdatedUserName(data1.data.username)
-    setUpdatedPhone(data1.data.contact_no)
+    // setUpdatedUserName(data1.data.username)
+    // setUpdatedPhone(data1.data.contact_no)
 
     if (data1?.data?.username?.length > 0) {
       setShowUser(false);
@@ -97,15 +117,17 @@ const PersonalInfo = () => {
   const updateReferral = async () => {
     try {
       const data = await axios.post(`${BASE_URL}/update_refferal`, { email: email, refferalCode: ref })
-      console.log(data.data.status, "::DATA>STATUS");
+      // console.log(data.data.status, "::DATA>STATUS");
       if (data.data.status == 1) {
-        const res = await axios.post(`${BASE_URL}/configSettings`, { email: email })
-        dispatch(setUserInfo({ userInfo: res.data }))
+        const obj = {...userInfo}
+        obj['refferal'] = ref;
+        // const res = await axios.post(`${BASE_URL}/configSettings`, { email: email })
+        // dispatch(setUserInfo({ userInfo: res.data }))
         NotificationManager.success('Refferal Added', '')
-        console.log(userInfo, ":: User info after update");
-        updateSetting();
+        // console.log(userInfo, ":: User info after update");
+        // updateSetting();
       }
-      console.log(data.data.status, ":: response from update Referaal API ");
+      // console.log(data.data.status, ":: response from update Referaal API ");
     } catch (error) {
       if (error.response.data.status == 2) {
         swal("Invalid refferal Code or Already updated", "", "error")
@@ -113,8 +135,8 @@ const PersonalInfo = () => {
       else if (error.response.data.status == 0) {
         swal("Something Went wrong 1", "", "error")
       }
-      console.log(error.response.data.status);
-      console.log(error.response.data.message);
+      // console.log(error.response.data.status);
+      // console.log(error.response.data.message);
     }
   }
 
@@ -140,9 +162,13 @@ const PersonalInfo = () => {
   }
 
   useEffect(() => {
-    getData();
-    // setLoader(false)
-  }, [])
+  if(userInfo?.username?.length > 0){
+      setShowUser(false);
+    }
+    if (userInfo?.phone?.toString()?.length > 0) {
+      setShowUser1(false)
+    }
+  }, [userInfo])
 
 
 
@@ -187,8 +213,8 @@ const PersonalInfo = () => {
                 {showUser == true ? 
                 <div class="input-group-sm">
                   <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1"
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
+                    // value={userInfo?.username}
+                    onChange={(e) => setLocalUserName(e.target.value)}
                     style={{
                       borderRadius: "0",
                       borderTopStyle: "hidden",
@@ -197,14 +223,14 @@ const PersonalInfo = () => {
                       borderBottomStyle: "groove"
                     }} />
                 </div> :
-                 <span className="data-value">{updatedUserName}</span>}
+                 <span className="data-value">{userInfo?.username}</span>}
               </div>
               <div className="col-4 d-flex justify-content-end">
                 <div className="">
 
                   <span className="">
                     {showUser ? <Link to="" className="btn btn-dim btn-outline-success" onClick={() => {
-                      if (value) {
+                      if (localUserName) {
                         updateData();
                         setShowUser(false);
                       }
@@ -247,7 +273,7 @@ const PersonalInfo = () => {
                 {showUser1 == true ? 
                 <div className="input-group-sm">
                   <input type="text" className="form-control" aria-label="Phone" aria-describedby="basic-addon2"
-                    value={phone}
+                    // value={userInfo?.phone}
                     onChange={(e) => {
                       const ph = e.target.value
                         .replace(/[^0-9.]/g, "")
@@ -264,7 +290,7 @@ const PersonalInfo = () => {
                       borderBottomStyle: "groove"
                     }} />
                 </div> :
-                 <span className="data-value">{updatedPhone}</span>}
+                 <span className="data-value">{userInfo?.phone}</span>}
               </div>
               <div className="col-4 d-flex justify-content-end">
                 <div className="">
@@ -303,10 +329,12 @@ const PersonalInfo = () => {
                         id="inrx"
                         name="currency"
                         value="inr"
-                        checked={myCurrency === "inr"}
+                        checked={userInfo?.currency_preference === "inr"}
                         onChange={(e) => {
                           updateData("inr")
-                          dispatch(setUserInfo({ currency_prefrence: "inr" }))
+                          const obj = {...userInfo}
+                          obj['currency_preference'] = "inr"
+                          dispatch(setUserInfo({ userInfo: obj }))
                         }}
                       />
                       <label className="custom-control-label" for="inrx" ></label>
@@ -328,11 +356,13 @@ const PersonalInfo = () => {
                         id="usdt"
                         name="currency"
                         value="usd"
-                        checked={myCurrency === "usd"}
+                        checked={userInfo?.currency_preference === "usd"}
                         onChange={(e) => {
 
                           updateData("usd")
-                          dispatch(setUserInfo({ currency_prefrence: "usd" }))
+                          const obj = {...userInfo}
+                          obj['currency_preference'] = "usd"
+                          dispatch(setUserInfo({ userInfo: obj }))
                         }}
                       /><label className="custom-control-label" for="usdt" ></label>
                     </div>
