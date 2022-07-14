@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../Api_connection/config";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { getSettings } from "../Api_connection/ApiFunction";
 import { setUserInfo } from "../redux/reducer/user";
 
 import swal from "sweetalert";
@@ -21,19 +20,10 @@ const PersonalInfo = () => {
   const [phone, setPhone] = useState('')
   const [ref, setRefferal] = useState('')
   const [myCurrency, setMyCurrency] = useState('');
-  const [updatedUserName, setUpdatedUserName] = useState('')
-  const [updatedPhone, setUpdatedPhone] = useState('')
   const [pMenu, setPMenu] = useState(0);
-  // const [loader, setLoader] = useState(true)
 
   const handelReferralChange = (e) => {
     setRefferal(e.target.value)
-  }
-
-  function updateSetting() {
-    getSettings(email).then((res) => {
-      dispatch(setUserInfo({ userInfo: res.data }));
-    }).catch((er) => { console.log(er) })
   }
 
   const updateData = async (myCurrency) => {
@@ -64,20 +54,9 @@ const PersonalInfo = () => {
             obj['currency_preference']= myCurrency
             dispatch(setUserInfo({ userInfo: obj }))
           }
-         
-          // obj['username'] = localUserName
-          // obj['phone'] = phone
-          // obj['currency_preference']= myCurrency
-          // dispatch(setUserInfo({userInfo: obj}))
-          // setUpdatedUserName(apidata['username']);
-          // setUpdatedPhone(apidata['contact'])
-          // setMyCurrency(apidata['currency']);
           setLocalUserName("");
           setMyCurrency("");
-
           setPhone("");
-          // updateSetting(); 
-          // setShowUser1(false);
           NotificationManager.success(data.data.message)
         }
         else if (data.data.status == -1) {
@@ -89,45 +68,17 @@ const PersonalInfo = () => {
     } else {
       alert("please fill all the required data!")
     }
-
-    // getData()
-  }
-
-  async function getData() {
-    const data1 = await axios.post(`${BASE_URL}/settings`, { email: email, task: "personal_information" })
-    // setUpdatedUserName(data1.data.username)
-    // setUpdatedPhone(data1.data.contact_no)
-
-    if (data1?.data?.username?.length > 0) {
-      setShowUser(false);
-    }
-    if (data1?.data?.contact_no) {
-      setShowUser1(false)
-    }
-    if (data1.data.currency == 'usd') {
-      setMyCurrency("usd");
-    }
-    if (data1.data.currency == 'inr') {
-      setMyCurrency("inr");
-    }
-
-    dispatch(setUserInfo({ currency_prefrence: data1.data.currency }))
   }
 
   const updateReferral = async () => {
     try {
       const data = await axios.post(`${BASE_URL}/update_refferal`, { email: email, refferalCode: ref })
-      // console.log(data.data.status, "::DATA>STATUS");
       if (data.data.status == 1) {
         const obj = {...userInfo}
         obj['refferal'] = ref;
-        // const res = await axios.post(`${BASE_URL}/configSettings`, { email: email })
-        // dispatch(setUserInfo({ userInfo: res.data }))
+        dispatch(setUserInfo({ userInfo: obj }))
         NotificationManager.success('Refferal Added', '')
-        // console.log(userInfo, ":: User info after update");
-        // updateSetting();
       }
-      // console.log(data.data.status, ":: response from update Referaal API ");
     } catch (error) {
       if (error.response.data.status == 2) {
         swal("Invalid refferal Code or Already updated", "", "error")
@@ -135,8 +86,6 @@ const PersonalInfo = () => {
       else if (error.response.data.status == 0) {
         swal("Something Went wrong 1", "", "error")
       }
-      // console.log(error.response.data.status);
-      // console.log(error.response.data.message);
     }
   }
 
