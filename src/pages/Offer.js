@@ -2,12 +2,27 @@ import React, { useEffect, useState } from "react";
 import Menu from "../components/Menu";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-
 import "react-multi-carousel/lib/styles.css";
 import axios from "axios";
+import { BASE_URL } from "../Api_connection/config";
+import Carousel from 'react-bootstrap/Carousel';
 
 const Offer = () => {
 
+  const [offers, setOffers] = useState([])
+
+  const getOffers = async () => {
+    try {
+      const data = await axios.post(`${BASE_URL}/offers`)
+      console.log(data.data, "Offer API");
+      setOffers(data.data)
+    } catch (error) {
+    }
+  }
+
+  useEffect(() => {
+    getOffers()
+  }, [])
 
   return (
     <div className="nk-app-root">
@@ -28,62 +43,24 @@ const Offer = () => {
                 </div>
                 <div className="container">
                   <div className="shadow mt-3">
-                    <div id="carouselExFade" class="carousel slide carousel-fade" data-ride="carousel" data-interval="2000">
-                    <ol class="carousel-indicators mb-n5">
-                        <li data-bs-target="#carouselExFade" data-bs-slide-to="0" class="active"></li>
-                        <li data-bs-target="#carouselExFade" data-bs-slide-to="1"></li>
-                        <li data-bs-target="#carouselExFade" data-bs-slide-to="2"></li>
-                    </ol>
-                      <div class="carousel-inner">
-                        <div class="carousel-item active">
-                          <img class="d-block w-100" src="images/offer/offer1.jpg" alt="First Offer" />
-                        </div>
-
-                        <div class="carousel-item">
-                          <img class="d-block w-100" src="images/offer/offer5.jpg" alt="Third Offer" />
-                        </div>
-                        <div class="carousel-item">
-                          <img class="d-block w-100" src="images/offer/offer3.jpg" alt="Third Offer" />
-                        </div>
-                      </div>
-
-                      <a class="carousel-control-prev" href="#carouselExFade" role="button" data-bs-slide="prev"> <span
-                        class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
-                      </a> <a class="carousel-control-next" href="#carouselExFade" role="button" data-bs-slide="next"> <span
-                        class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span> </a>
-                    </div>
-                    {/* <Slide>
-                  {i?.map((slideImage, index) => {
-                    return (
-                      <div className="each-slide border border-" key={index}>
-                        <div
-                          style={{
-                            backgroundImage: `url(http://localhost:3001${slideImage.banner})`,
-                            // height: "250px",
-                            width: "100%",
-                            backgroundSize: "cover",
-                            backgroundRepeat: "no-repeat",
-                            backgroundAttachment: "fixed",
-                          }}
-                        >
-                          <span
-                            style={{
-                              height: "250px",
-                              display: "inline-block",
-                             // marginTop: "20px",
-                            }}
-                          >
-                            {slideImage.caption}
-                          </span>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </Slide> */}
+                    <Carousel fade>
+                      {
+                        offers.map((element, index) => {
+                          return (
+                            <Carousel.Item key={index}>
+                              <img
+                                style={{ height: "471px", width: "1000px" }}
+                                className="d-block w-100"
+                                src={`http://localhost:3001${element.image}`}
+                                alt={index+1}
+                              />
+                            </Carousel.Item>
+                          )
+                        })
+                      }
+                    </Carousel>
                   </div>
                 </div>
-
-
               </div>
             </div>
           </div>

@@ -7,14 +7,19 @@ import * as serviceWorker from "./serviceWorker.js";
 import { Provider } from "react-redux";
 import {store} from './redux/store/user';
 import {subscribeUser} from './web-push.config';
+import { PersistGate } from 'redux-persist/integration/react'
+import { persistStore } from 'redux-persist'
 serviceWorker.register();
-
+let persistor = persistStore(store);
+console.log(persistor, "persistor");
 ReactDOM.render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
       <App />
+      </PersistGate>
     </Provider>
-  // </React.StrictMode>
+ </React.StrictMode>
   ,
   document.getElementById("root")
 );

@@ -206,12 +206,7 @@
   NioApp.coms.docReady.push(function () {
     referStats();
   }); //////// for developer - accountSummary //////// 
-  // Avilable options to pass from outside 
-  // labels: array,
-  // dataUnit: string, (Used in tooltip or other section for display) 
-  // datasets: [{label : string, color: string (color code with # or other format), data: array}]
-  // const data = await axios.post(`${BASE_URL}/buyChart`, {email: "rahulnacab@byom.de"})
-  // console.log(data, "::CHART DATA");
+
   var summaryBalance = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     dataUnit: 'BTC',

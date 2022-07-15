@@ -20,8 +20,8 @@ const Header = () => {
     element.classList.add("nav-shown");
     element = document.getElementById("nk-sidebar");
     element.classList.add("nk-sidebar-active");
-    element = document.getElementById("nk-nav-toggle");
-    element.classList.add("toggle-active");
+    // element = document.getElementById("nk-nav-toggle");
+    // element.classList.add("toggle-active");
 
     var element1 = document.getElementById("myBody");
     if (element1.classList.contains("toggle-shown")) {
@@ -246,73 +246,20 @@ const Header = () => {
                               { element.message }
                             </div>
                             <div className="nk-notification-time">
-                              2 hrs ago
+                              {element.timeDifference}
                             </div>
                           </div>
-                        </div>
-                      ) }) }
-                        {/* <div className="nk-notification-item dropdown-inner">
-                          <div className="nk-notification-icon">
-                            <em className="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
-                          </div>
-                          <div className="nk-notification-content">
-                            <div className="nk-notification-text">
-                              You have requested to <span>Widthdrawl</span>
-                            </div>
-                            <div className="nk-notification-time">
-                              2 hrs ago
-                            </div>
-                          </div>
-                        </div>
-                        <div className="nk-notification-item dropdown-inner">
-                          <div className="nk-notification-icon">
-                            <em className="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
-                          </div>
-                          <div className="nk-notification-content">
-                            <div className="nk-notification-text">
-                              Your <span>Deposit Order</span> is placed
-                            </div>
-                            <div className="nk-notification-time">
-                              2 hrs ago
-                            </div>
-                          </div>
-                        </div>
-                        <div className="nk-notification-item dropdown-inner">
-                          <div className="nk-notification-icon">
-                            <em className="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
-                          </div>
-                          <div className="nk-notification-content">
-                            <div className="nk-notification-text">
-                              You have requested to <span>Widthdrawl</span>
-                            </div>
-                            <div className="nk-notification-time">
-                              2 hrs ago
-                            </div>
-                          </div>
-                        </div>
-                        <div className="nk-notification-item dropdown-inner">
-                          <div className="nk-notification-icon">
-                            <em className="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
-                          </div>
-                          <div className="nk-notification-content">
-                            <div className="nk-notification-text">
-                              Your <span>Deposit Order</span> is placed
-                            </div>
-                            <div className="nk-notification-time">
-                              2 hrs ago
-                            </div>
-                          </div>
-                        </div> */}
+                        </div>) }) }
                       </div>
                     </div>
                     <div className="dropdown-foot center">
-                      <a href="#">View All</a>
+                      <Link to="/NotificationAlert">View All</Link>
                     </div>
                   </div>
                 </li>
                 <li className="dropdown user-dropdown">
-                  <a
-                    href="#"
+                  <Link
+                    to="#"
                     className="dropdown-toggle"
                     data-toggle="dropdown"
                   >
@@ -329,7 +276,7 @@ const Header = () => {
                           </div>
                         </div> */}
                     </div>
-                  </a>
+                  </Link>
 
 
                   {/* Amit */}

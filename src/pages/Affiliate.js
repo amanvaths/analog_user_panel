@@ -6,10 +6,10 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { BASE_URL } from "../Api_connection/config";
 import AffiliatCard from "../components/AffiliateCard";
-import { Bars} from 'react-loader-spinner'
+import { Bars, ThreeDots } from 'react-loader-spinner'
 import { MdMoreHoriz } from 'react-icons/md'
 import ReactPaginate from 'react-paginate';
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 const Affiliate = (props) => {
@@ -23,10 +23,15 @@ const Affiliate = (props) => {
   const [level2, setLevel2] = useState(false)
   const [level3, setLevel3] = useState(false)
   const [tab, setTab] = useState([]);
-  const [loader, setLoader] = useState(true)
+  // const [tab2, setTab2] = useState([]);
+  // const [tab3, setTab3] = useState([]);
+  const [loader, setLoader] = useState(false)
   const [status, setStatus] = useState()
   const [total, setTotal] = useState(0)
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage1, setCurrentPage1] = useState(1)
+  const [currentPage2, setCurrentPage2] = useState(1)
+  const [currentPage3, setCurrentPage3] = useState(1)
+  // const [tableData, setTableData] = useState(false)
 
   const [load, setLoad] = useState(false)
 
@@ -43,28 +48,44 @@ const Affiliate = (props) => {
       console.log("Error in getting data Affililate :" + error);
     }
   }
-
+  const limit = 5
   const getAffiliateList = async (level, selelcted) => {
     const data = await axios.post(`${BASE_URL}/levelWiseList`, { email: email, level: level })
-    let limit = 5
+    
     if (data) {
       setTotal(data.data.data)
+      setStatus(data.data.status)
+      // setLoader(false)
       const startIndex = (selelcted + 1) * limit - limit;
       const endIndex = (startIndex + limit)
       setTab((data.data.data).slice(startIndex, endIndex));
-      setStatus(data.data.status)
-      setLoader(false)
+      // setTab2((data.data.data).slice(startIndex, endIndex));
+      // setTab3((data.data.data).slice(startIndex, endIndex));
+      // setStatus(data.data.status)
+      // setLoader(false)
+      // setTableData(true)
     }
+  }
 
+  const handelPagination = (selelcted) => {
+    // console.log(selelcted);
+    let limit = 5
+    const startIndex = (selelcted + 1) * limit - limit;
+    const endIndex = (startIndex + limit)
+    setTab((total).slice(startIndex, endIndex));
+    // setTab2((total).slice(startIndex, endIndex));
+    // setTab3((total).slice(startIndex, endIndex));
+
+
+    // setTableData(true)
   }
 
   useEffect(() => {
     setLevel(1)
-    getAffiliate();
+    getAffiliate(level);
     getAffiliateList(level, 0)
+    // handelPagination()
   }, []);
-
-
 
   return (
     <div>
@@ -100,35 +121,22 @@ const Affiliate = (props) => {
                           className="toggle-expand-content"
                           data-content="pageMenu"
                         >
-                          {/* <ul className="nk-block-tools g-3">
-                            <li
-                            >
-                              <span className="d-none d-md-block">
-                                <button
-                                  className="btn btn-dim btn-outline-light"
-                                  style={{ padding: "8px 35px" }}
-                                >
-                                  <em className="icon ni ni-download-cloud"></em>
-                                  <span>Export</span>
-                                </button>
-                              </span>
-                            </li>
-                          </ul> */}
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="row">{
-                    load ? affiliates.length > 0 ?
+                  load ?
+                    affiliates.length > 0 ?
                       affiliates[0].map((item, index) => {
                         return (
                           <AffiliatCard
                             level={`Level ${index + 1}`}
                             totalUser={affiliates[1][item].totalUsers}
                             totalAnalogBuy={`${affiliates[1][item].totalAna.toFixed(2)} ANA`}
-                            totalExpence={userInfo.currency_preference == 'usd'? `${affiliates[1][item].totalExpense.toFixed(2)} USDT` : `${(affiliates[1][item].totalExpense * oneUsdPrice).toFixed(3)} INRX`}
-                            totalAffiliates={userInfo.currency_preference == 'usd'?  `${affiliates[1][item].totalInc.toFixed(3)} USDT` : `${(affiliates[1][item].totalInc * oneUsdPrice).toFixed(3)} INRX`}
+                            totalExpence={userInfo.currency_preference == 'usd' ? `${affiliates[1][item].totalExpense.toFixed(2)} USDT` : `${(affiliates[1][item].totalExpense * oneUsdPrice).toFixed(3)} INRX`}
+                            totalAffiliates={userInfo.currency_preference == 'usd' ? `${affiliates[1][item].totalInc.toFixed(3)} USDT` : `${(affiliates[1][item].totalInc * oneUsdPrice).toFixed(3)} INRX`}
                             widthdrawl={0}
                             toalRemaining={0}
                           />
@@ -137,10 +145,10 @@ const Affiliate = (props) => {
                       <div className="nk-tb-item">
                         <h3 className="text-center">No Record Found</h3>
                       </div>
-                      :
-                      <div style={{ position: "absolute", zIndex: "99", top: "29%", left: "108%", transform: "translate(-50%, -50%)" }}>
-                        <Bars heigth="100" width="100" color="#0b3175" ariaLabel="loading-indicator" />
-                      </div>}
+                    :
+                    <div style={{ position: "absolute", zIndex: "99", top: "29%", left: "108%", transform: "translate(-50%, -50%)" }}>
+                      <Bars heigth="100" width="100" color="#0b3175" ariaLabel="loading-indicator" />
+                    </div>}
                 </div>
                 <div className="row my-4">
                   <div className="nk-content-wrap">
@@ -158,8 +166,10 @@ const Affiliate = (props) => {
                                     setLevel1(true)
                                     setLevel2(false)
                                     setLevel3(false)
+                                    setTotal(0)
                                     setTab([])
-                                    getAffiliateList(1,0)
+                                    setCurrentPage1(1)
+                                    getAffiliateList(1, 0)
                                   }}>
                                   <span>Level 1</span></Link>
                               </li>
@@ -170,6 +180,8 @@ const Affiliate = (props) => {
                                     setLevel2(true)
                                     setLevel3(false)
                                     setTab([])
+                                    setTotal(0)
+                                    setCurrentPage2(1)
                                     getAffiliateList(2, 0)
                                   }}>
                                   <span>Level 2</span></Link>
@@ -180,7 +192,9 @@ const Affiliate = (props) => {
                                     setLevel1(false)
                                     setLevel2(false)
                                     setLevel3(true)
+                                    setTotal(0)
                                     setTab([])
+                                    setCurrentPage3(1)
                                     getAffiliateList(3, 0)
                                   }}>
                                   <span>Level 3</span></Link>
@@ -200,47 +214,16 @@ const Affiliate = (props) => {
                             <div
                               className="toggle-expand-content"
                               data-content="pageMenu">
-                               <ul className="nk-block-tools g-3">
-                                    <li>
-                                      <Link
-                                        to={'/Withdrawal'}
-                                        className="btn btn-outline-warning"
-                                      >
-                                        
-                                        <span>Withdraw</span>
-                                      </Link>
-                                    </li>
-                                    {/* <li className="nk-block-tools-opt">
-                                      <div className="drodown">
-                                        <a
-                                          href="#"
-                                          className="dropdown-toggle btn btn-icon btn-primary"
-                                          data-toggle="dropdown"
-                                        >
-                                          <em className="icon ni ni-plus"></em>
-                                        </a>
-                                        <div className="dropdown-menu dropdown-menu-right">
-                                          <ul className="link-list-opt no-bdr">
-                                            <li>
-                                              <a href="#">
-                                                <span>Add User</span>
-                                              </a>
-                                            </li>
-                                            <li>
-                                              <a href="#">
-                                                <span>Add Team</span>
-                                              </a>
-                                            </li>
-                                            <li>
-                                              <a href="#">
-                                                <span>Import User</span>
-                                              </a>
-                                            </li>
-                                          </ul>
-                                        </div>
-                                      </div>
-                                    </li> */}
-                                  </ul> 
+                              <ul className="nk-block-tools g-3">
+                                <li>
+                                  <Link
+                                    to={'/Withdrawal'}
+                                    className="btn btn-outline-warning"
+                                  > <span>Withdraw</span>
+                                  </Link>
+                                </li>
+
+                              </ul>
                             </div>
                           </div>
                         </div>
@@ -251,17 +234,17 @@ const Affiliate = (props) => {
                     {level1 == true ?
                       <div className="nk-block">
                         <div className="card border-0 card-stretch">
-                          <div className="card-inner-group bg-light border rounded p-4">                            
+                          <div className="card-inner-group bg-light border rounded p-4">
                             <div className="card bg-white shadow-sm">
-                            <div className="card-inner py-3">
-                              <div className="card-title-group">
-                                <div className="card-tools">
-                                  <div className="form-inline flex-nowrap gx-3">
-                                    <h5>Level 1</h5>
+                              <div className="card-inner py-3">
+                                <div className="card-title-group">
+                                  <div className="card-tools">
+                                    <div className="form-inline flex-nowrap gx-3">
+                                      <h5>Level 1</h5>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
                               <div className="nk-tb-list nk-tb-ulist is-compact">
                                 <div className="nk-tb-item nk-tb-head">
                                   <div className="nk-tb-col tb-col-sm">
@@ -291,123 +274,124 @@ const Affiliate = (props) => {
                                 </div>
                                 {
                                   status == 2 ? <h5>Record Not Found</h5> :
-                                  tab.length > 0 ?
-                                    tab.map((element, index) => {
-                                      console.log(index, "::INDEx");
-                                      return (
-                                        <div className="nk-tb-item ">
+                                    tab.length > 0 ?
 
-                                          <div className="nk-tb-col tb-col-sm">
+                                      tab.map((element, index) => {
+                                        console.log(index, "::INDEx");
+                                        return (
+                                          <div className="nk-tb-item ">
+
+                                            <div className="nk-tb-col tb-col-sm">
+                                            </div>
+                                            <div className="nk-tb-col tb-col-sm">
+                                              <span className="nk-activity-media user-avatar xs bg-teal">{(((currentPage1 - 1) * 5) + index + 1)}</span>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-sm">
+                                              <span className="text-dark">{element.email}</span>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-sm">
+                                              <span className="text-danger">{element?.totalBuy?.toFixed(2)} ANA</span>
+                                              <img alt="analog" src="./images/Analog.png" style={{ width: "24px" }} />
+                                            </div>
+                                            <div className="nk-tb-col tb-col-sm">
+                                              <span className="text-danger">
+                                                {
+                                                  userInfo?.currency_preference == 'usd' ? `${element?.totalExp?.toFixed(2)} USDT` : `${(element?.totalExp * oneUsdPrice)?.toFixed(2)} INRX`
+
+
+                                                }
+                                                {userInfo?.currency_preference == "usd" ? (
+                                                  <img
+                                                    src="./images/usdt_icon.png"
+                                                    style={{ width: "17px", paddingLeft: "1px" }}
+                                                    alt="usdt"
+
+                                                  />) : (
+                                                  <img
+                                                    src="./images/Inrx_black.png"
+                                                    style={{ width: "17px", marginLeft: "5px" }}
+                                                    alt="inrx"
+                                                  />)}
+                                              </span>
+
+                                            </div>
+                                            <div className="nk-tb-col tb-col-sm">
+                                              <span className="text-danger">
+                                                {
+                                                  userInfo?.currency_preference == 'usd' ? `${element?.totalAff?.toFixed(2)} USDT` : `${(element?.totalAff * oneUsdPrice).toFixed(2)} INRX`
+                                                }
+                                                {userInfo?.currency_preference == "usd" ? (
+                                                  <img
+                                                    src="./images/usdt_icon.png"
+                                                    style={{ width: "17px", paddingLeft: "1px" }}
+                                                    alt="usdt"
+
+                                                  />) : (
+                                                  <img
+                                                    src="./images/Inrx_black.png"
+                                                    style={{ width: "17px", marginLeft: "5px" }}
+                                                    alt="inrx"
+                                                  />)}
+                                              </span>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-sm">
+                                              <span className="text-success">
+                                                {
+                                                  userInfo?.currency_preference == 'usd' ? `${element?.totalHandout?.toFixed(2)} USDT` : `${(element?.totalHandout * oneUsdPrice).toFixed(2)} INRX`
+                                                }
+                                                {userInfo?.currency_preference == "usd" ? (
+                                                  <img
+                                                    src="./images/usdt_icon.png"
+                                                    style={{ width: "17px", paddingLeft: "1px" }}
+                                                    alt="usdt"
+
+                                                  />) : (
+                                                  <img
+                                                    src="./images/Inrx_black.png"
+                                                    style={{ width: "17px", marginLeft: "5px" }}
+                                                    alt="inrx"
+                                                  />)}
+                                              </span>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-sm">
+                                              <span className="text-dark">Action</span>
+                                            </div>
+
                                           </div>
-                                          <div className="nk-tb-col tb-col-sm">
-                                            <span className="nk-activity-media user-avatar xs bg-teal">{(((currentPage - 1) * 5) + index + 1)}</span>
-                                          </div>
-                                          <div className="nk-tb-col tb-col-sm">
-                                            <span className="text-dark">{element.email}</span>
-                                          </div>
-                                          <div className="nk-tb-col tb-col-sm">
-                                            <span className="text-danger">{element?.totalBuy?.toFixed(2)} ANA</span>
-                                            <img alt="analog" src="./images/Analog.png" style={{ width: "24px" }} />
-                                          </div>
-                                          <div className="nk-tb-col tb-col-sm">
-                                            <span className="text-danger">
-                                              {
-                                                userInfo?.currency_preference == 'usd' ? `${element?.totalExp?.toFixed(2)} USDT` : `${(element?.totalExp * oneUsdPrice)?.toFixed(2)} INRX`
-
-                                              }
-                                              {userInfo?.currency_preference == "usd" ? (
-                                              <img
-                                                src="./images/usdt_icon.png"
-                                                style={{ width: "17px", paddingLeft: "1px" }}
-                                                alt="usdt"
-
-                                              />) : (
-                                              <img
-                                                src="./images/Inrx_black.png"
-                                                style={{ width: "17px", marginLeft: "5px" }}
-                                                alt="inrx"
-                                              />)}
-                                            </span>
-
-                                          </div>
-                                          <div className="nk-tb-col tb-col-sm">
-                                            <span className="text-danger">
-                                              {
-                                                userInfo?.currency_preference == 'usd' ? `${element?.totalAff?.toFixed(2)} USDT` : `${(element?.totalAff * oneUsdPrice).toFixed(2)} INRX`
-                                              }
-                                              {userInfo?.currency_preference == "usd" ? (
-                                              <img
-                                                src="./images/usdt_icon.png"
-                                                style={{ width: "17px", paddingLeft: "1px" }}
-                                                alt="usdt"
-
-                                              />) : (
-                                              <img
-                                                src="./images/Inrx_black.png"
-                                                style={{ width: "17px", marginLeft: "5px" }}
-                                                alt="inrx"
-                                              />)}
-                                            </span>
-                                          </div>
-                                          <div className="nk-tb-col tb-col-sm">
-                                            <span className="text-success">
-                                              {
-                                                userInfo?.currency_preference == 'usd' ? `${element?.totalHandout?.toFixed(2)} USDT` : `${(element?.totalHandout * oneUsdPrice).toFixed(2)} INRX`
-                                              }
-                                              {userInfo?.currency_preference == "usd" ? (
-                                              <img
-                                                src="./images/usdt_icon.png"
-                                                style={{ width: "17px", paddingLeft: "1px" }}
-                                                alt="usdt"
-
-                                              />) : (
-                                              <img
-                                                src="./images/Inrx_black.png"
-                                                style={{ width: "17px", marginLeft: "5px" }}
-                                                alt="inrx"
-                                              />)}
-                                            </span>
-                                          </div>
-                                          <div className="nk-tb-col tb-col-sm">
-                                            <span className="text-dark">Action</span>
-                                          </div>
-
-                                        </div>
-                                      )
-                                    }) :
-                                    <Bars heigth="20" width="20 " color="#0b3175" ariaLabel="loading-indicator" />
-                                }
-
-                                
-
-                              </div>
+                                        )
+                                      })
+                                      :
+                                      <ThreeDots heigth="20" width="40 " color="#1ee0ac" ariaLabel="loading-indicator" />
+                                } </div>
                             </div>
-                            
-                            
                           </div>
-                          <div className="card-inner">
+                          {
+                            total.length > 5 ? <div className="card-inner">
                             <ReactPaginate
-                          previousLabel={'Prev'}
-                          nextLabel={'Next'}
-                          breakLabel={"..."}
-                          pageCount={Math.ceil(total.length / 5)}
-                          marginPagesDisplayed={2}
-                          pageRangeDisplayed={2}
-                          onPageChange={(data)=>{
-                            getAffiliateList(level,data.selected)
-                             setCurrentPage(data.selected +1)}}
-                          containerClassName={'pagination justify-content-center'}
-                          pageClassName={'page-item'}
-                          pageLinkClassName={'page-link'}
-                          previousClassName={'page-item'}
-                          previousLinkClassName={'page-link'}
-                          nextClassName={'page-item'}
-                          nextLinkClassName={'page-link'}
-                          breakClassName={'page-item'}
-                          breakLinkClassName={'page-link'}
-                          activeClassName={"active"}
-                        />
-                            </div>
+                              previousLabel={'Prev'}
+                              nextLabel={'Next'}
+                              breakLabel={"..."}
+                              pageCount={Math.ceil(total.length / 5)}
+                              marginPagesDisplayed={3}
+                              pageRangeDisplayed={3}
+                              onPageChange={(data) => {
+                                handelPagination(data.selected)
+                                setCurrentPage1(data.selected + 1)
+                              }}
+                              containerClassName={'pagination justify-content-center'}
+                              pageClassName={'page-item'}
+                              pageLinkClassName={'page-link'}
+                              previousClassName={'page-item'}
+                              previousLinkClassName={'page-link'}
+                              nextClassName={'page-item'}
+                              nextLinkClassName={'page-link'}
+                              breakClassName={'page-item'}
+                              breakLinkClassName={'page-link'}
+                              activeClassName={"active"}
+                            />
+                          </div> : null
+                          }
+                          
                         </div>
                       </div>
                       : null}
@@ -416,19 +400,19 @@ const Affiliate = (props) => {
                     {level2 == true ?
                       <div className="nk-block">
                         <div className="card border-0 card-stretch">
-                          <div className="card-inner-group bg-light border rounded p-4">                            
-                            <div className="card bg-white shadow-sm"> 
+                          <div className="card-inner-group bg-light border rounded p-4">
+                            <div className="card bg-white shadow-sm">
                               <div className="card-inner py-3">
                                 <div className="card-title-group">
                                   <div className="card-tools">
                                     <div className="form-inline flex-nowrap gx-3">
-                                      <h5>Level 2</h5> 
+                                      <h5>Level 2</h5>
                                     </div>
                                   </div>
                                 </div>
                               </div>
 
-                                <div className="nk-tb-list nk-tb-ulist is-compact">                          
+                              <div className="nk-tb-list nk-tb-ulist is-compact">
                                 <div className="nk-tb-item nk-tb-head">
                                   <div className="nk-tb-col tb-col-sm">
                                     {/* <span className="font-weight-bold text-dark">S. N.</span> */}
@@ -457,118 +441,122 @@ const Affiliate = (props) => {
                                 </div>
 
                                 {
-                                  status == 2 ? <h5>Record Not Found</h5> : 
-                                  tab.length > 0 ?
-                                    tab.map((element, index) => {
-                                      console.log(index, "::INDEx");
-                                      return (
-                                        <div className="nk-tb-item ">
+                                  status == 2 ? <h5>Record Not Found</h5> :
+                                    tab.length > 0 ?
+                                      tab.map((element, index) => {
+                                        console.log(index, "::INDEx");
+                                        return (
+                                          <div className="nk-tb-item ">
 
-                                          <div className="nk-tb-col tb-col-sm">
-                                          </div>
-                                          <div className="nk-tb-col tb-col-sm">
-                                            <span className="nk-activity-media user-avatar xs bg-teal">{(((currentPage - 1) * 5) + index + 1)}</span>
-                                          </div>
-                                          <div className="nk-tb-col tb-col-sm">
-                                            <span className="text-dark">{element.email}</span>
-                                          </div>
-                                          <div className="nk-tb-col tb-col-sm text-success">
-                                            <span className="tb-text">{element?.totalBuy?.toFixed(2)} ANA</span>
-                                            <img alt="analog" src="./images/Analog.png" style={{ width: "24px" }} />
-                                          </div>
-                                          <div className="nk-tb-col tb-col-sm text-danger">
-                                            <span className="tb-text">
-                                              {
-                                                userInfo?.currency_preference == 'usd' ? `${element?.totalExp?.toFixed(2)} USDT` : `${(element?.totalExp * oneUsdPrice)?.toFixed(2)} INRX`
-                                              }
-                                              {userInfo?.currency_preference == "usd" ? (
-                                              <img
-                                                src="./images/usdt_icon.png"
-                                                style={{ width: "17px", paddingLeft: "1px" }}
-                                                alt="usdt"
+                                            <div className="nk-tb-col tb-col-sm">
+                                            </div>
+                                            <div className="nk-tb-col tb-col-sm">
+                                              <span className="nk-activity-media user-avatar xs bg-teal">{(((currentPage2 - 1) * 5) + index + 1)}</span>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-sm">
+                                              <span className="text-dark">{element.email}</span>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-sm text-success">
+                                              <span className="tb-text">{element?.totalBuy?.toFixed(2)} ANA</span>
+                                              <img alt="analog" src="./images/Analog.png" style={{ width: "24px" }} />
+                                            </div>
+                                            <div className="nk-tb-col tb-col-sm text-danger">
+                                              <span className="tb-text">
+                                                {
+                                                  userInfo?.currency_preference == 'usd' ? `${element?.totalExp?.toFixed(2)} USDT` : `${(element?.totalExp * oneUsdPrice)?.toFixed(2)} INRX`
+                                                }
+                                                {userInfo?.currency_preference == "usd" ? (
+                                                  <img
+                                                    src="./images/usdt_icon.png"
+                                                    style={{ width: "17px", paddingLeft: "1px" }}
+                                                    alt="usdt"
 
-                                              />) : (
-                                              <img
-                                                src="./images/Inrx_black.png"
-                                                style={{ width: "17px", marginLeft: "5px" }}
-                                                alt="inrx"
-                                              />)}
-                                            </span>
-                                          </div>
-                                          <div className="nk-tb-col tb-col-sm text-success">
-                                            <span className="tb-text">
-                                              {
-                                                userInfo?.currency_preference == 'usd' ? `${element?.totalAff?.toFixed(2)} USDT` : `${(element?.totalAff * oneUsdPrice).toFixed(2)} INRX`
-                                              }
-                                              {userInfo?.currency_preference == "usd" ? (
-                                              <img
-                                                src="./images/usdt_icon.png"
-                                                style={{ width: "17px", paddingLeft: "1px" }}
-                                                alt="usdt"
+                                                  />) : (
+                                                  <img
+                                                    src="./images/Inrx_black.png"
+                                                    style={{ width: "17px", marginLeft: "5px" }}
+                                                    alt="inrx"
+                                                  />)}
+                                              </span>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-sm text-success">
+                                              <span className="tb-text">
+                                                {
+                                                  userInfo?.currency_preference == 'usd' ? `${element?.totalAff?.toFixed(2)} USDT` : `${(element?.totalAff * oneUsdPrice).toFixed(2)} INRX`
+                                                }
+                                                {userInfo?.currency_preference == "usd" ? (
+                                                  <img
+                                                    src="./images/usdt_icon.png"
+                                                    style={{ width: "17px", paddingLeft: "1px" }}
+                                                    alt="usdt"
 
-                                              />) : (
-                                              <img
-                                                src="./images/Inrx_black.png"
-                                                style={{ width: "17px", marginLeft: "5px" }}
-                                                alt="inrx"
-                                              />)}
-                                            </span>
-                                          </div>
-                                          <div className="nk-tb-col tb-col-sm text-success">
-                                            <span style={{ color: "green" }}>
-                                              {
-                                                userInfo?.currency_preference == 'usd' ? `${element?.totalHandout?.toFixed(2)} USDT` : `${(element?.totalHandout * oneUsdPrice).toFixed(2)} INRX`
-                                              }
-                                              {userInfo?.currency_preference == "usd" ? (
-                                              <img
-                                                src="./images/usdt_icon.png"
-                                                style={{ width: "17px", paddingLeft: "1px" }}
-                                                alt="usdt"
+                                                  />) : (
+                                                  <img
+                                                    src="./images/Inrx_black.png"
+                                                    style={{ width: "17px", marginLeft: "5px" }}
+                                                    alt="inrx"
+                                                  />)}
+                                              </span>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-sm text-success">
+                                              <span style={{ color: "green" }}>
+                                                {
+                                                  userInfo?.currency_preference == 'usd' ? `${element?.totalHandout?.toFixed(2)} USDT` : `${(element?.totalHandout * oneUsdPrice).toFixed(2)} INRX`
+                                                }
+                                                {userInfo?.currency_preference == "usd" ? (
+                                                  <img
+                                                    src="./images/usdt_icon.png"
+                                                    style={{ width: "17px", paddingLeft: "1px" }}
+                                                    alt="usdt"
 
-                                              />) : (
-                                              <img
-                                                src="./images/Inrx_black.png"
-                                                style={{ width: "17px", marginLeft: "5px" }}
-                                                alt="inrx"
-                                              />)}
-                                            </span>
-                                          </div>
-                                          <div className="nk-tb-col tb-col-sm">
-                                            <span className="text-dark">Action</span>
-                                          </div>
+                                                  />) : (
+                                                  <img
+                                                    src="./images/Inrx_black.png"
+                                                    style={{ width: "17px", marginLeft: "5px" }}
+                                                    alt="inrx"
+                                                  />)}
+                                              </span>
+                                            </div>
+                                            <div className="nk-tb-col tb-col-sm">
+                                              <span className="text-dark">Action</span>
+                                            </div>
 
-                                        </div>
-                                      )
-                                    }) :
-                                    <Bars heigth="20" width="20 " color="#0b3175" ariaLabel="loading-indicator" />
+                                          </div>
+                                        )
+                                      }) :
+                                      <ThreeDots heigth="20" width="40 " color="#1ee0ac" ariaLabel="loading-indicator" />
                                 }
+                              </div>
                             </div>
-                            </div>
-                            
+
                           </div>
-                          <div className="card-inner">
+                          {
+                            total.length > 5 ? <div className="card-inner">
                             <ReactPaginate
-                          previousLabel={'Prev'}
-                          nextLabel={'Next'}
-                          breakLabel={"..."}
-                          pageCount={Math.ceil(tab.length / 5)}
-                          marginPagesDisplayed={2}
-                          pageRangeDisplayed={2}
-                          onPageChange={(data)=>{
-                            getAffiliateList(level,data.selected)
-                             setCurrentPage(data.selected +1)}}
-                          containerClassName={'pagination justify-content-center'}
-                          pageClassName={'page-item'}
-                          pageLinkClassName={'page-link'}
-                          previousClassName={'page-item'}
-                          previousLinkClassName={'page-link'}
-                          nextClassName={'page-item'}
-                          nextLinkClassName={'page-link'}
-                          breakClassName={'page-item'}
-                          breakLinkClassName={'page-link'}
-                          activeClassName={"active"}
-                        />
-                        </div>
+                              previousLabel={'Prev'}
+                              nextLabel={'Next'}
+                              breakLabel={"..."}
+                              pageCount={Math.ceil(total.length / 5)}
+                              marginPagesDisplayed={2}
+                              pageRangeDisplayed={2}
+                              onPageChange={(data) => {
+                                handelPagination(data.selected)
+                                setCurrentPage2(data.selected + 1)
+                              }}
+                              containerClassName={'pagination justify-content-center'}
+                              pageClassName={'page-item'}
+                              pageLinkClassName={'page-link'}
+                              previousClassName={'page-item'}
+                              previousLinkClassName={'page-link'}
+                              nextClassName={'page-item'}
+                              nextLinkClassName={'page-link'}
+                              breakClassName={'page-item'}
+                              breakLinkClassName={'page-link'}
+                              activeClassName={"active"}
+                            />
+                          </div> : null
+                          }
+                          
                         </div>
                       </div>
                       : null}
@@ -577,13 +565,13 @@ const Affiliate = (props) => {
                     {level3 == true ?
                       <div className="nk-block">
                         <div className="card border-0 card-stretch">
-                          <div className="card-inner-group bg-light border rounded p-4">                            
-                            <div className="card bg-white shadow-sm"> 
+                          <div className="card-inner-group bg-light border rounded p-4">
+                            <div className="card bg-white shadow-sm">
                               <div className="card-inner py-3">
                                 <div className="card-title-group">
                                   <div className="card-tools">
                                     <div className="form-inline flex-nowrap gx-3">
-                                      <h5>Level 3</h5> 
+                                      <h5>Level 3</h5>
                                     </div>
                                   </div>
                                 </div>
@@ -618,275 +606,138 @@ const Affiliate = (props) => {
                                     <span className="font-weight-bold text-dark">View</span>
                                   </div>
                                 </div>
-                                
+
                                 {
                                   status == 2 ? <h5>Record Not Found</h5> :
-                                  tab.length > 0 ?
-                                    tab.map((element, index) => {
-                                      console.log(index, "::INDEx");
-                                      return (
-                                        <>
-                                          <div className="nk-tb-item ">
+                                    tab.length > 0 ?
+                                      tab.map((element, index) => {
+                                        console.log(index, "::INDEx");
+                                        return (
+                                          <>
+                                            <div className="nk-tb-item ">
 
-                                            <div className="nk-tb-col tb-col-sm">
-                                            </div>
-                                            <div className="nk-tb-col tb-col-sm">
-                                              <span className="nk-activity-media user-avatar xs bg-teal">{(((currentPage - 1) * 5) + index + 1)}</span>
-                                            </div>
-                                            <div className="nk-tb-col tb-col-sm">
-                                              <span className="text-dark">{element.email}</span>
-                                            </div>
-                                            <div className="nk-tb-col tb-col-sm">
-                                              <span className="text-dark">{element.sponsor}</span>
-                                            </div>
-                                            <div className="nk-tb-col tb-col-sm text-success">
-                                              <span className="tb-text">{element?.totalBuy?.toFixed(2)} ANA</span>
-                                              <img alt="analog" src="./images/Analog.png" style={{ width: "24px" }} />
-                                            </div>
-                                            <div className="nk-tb-col tb-col-sm text-danger">
-                                              <span className="tb-text">
-                                                {
-                                                  userInfo?.currency_preference == 'usd' ? `${element?.totalExp?.toFixed(2)} USDT` : `${(element?.totalExp * oneUsdPrice)?.toFixed(2)} INRX`
-                                                }
-                                                {userInfo?.currency_preference == "usd" ? (
-                                              <img
-                                                src="./images/usdt_icon.png"
-                                                style={{ width: "17px", paddingLeft: "1px" }}
-                                                alt="usdt"
-
-                                              />) : (
-                                              <img
-                                                src="./images/Inrx_black.png"
-                                                style={{ width: "17px", marginLeft: "5px" }}
-                                                alt="inrx"
-                                              />)}
-                                              </span>
-                                            </div>
-                                            <div className="nk-tb-col tb-col-sm text-danger">
-                                              <span className="tb-text">
-                                                {
-                                                  userInfo?.currency_preference == 'usd' ? `${element?.totalAff?.toFixed(2)} USDT` : `${(element?.totalAff * oneUsdPrice).toFixed(2)} INRX`
-                                                }
-                                                {userInfo?.currency_preference == "usd" ? (
-                                              <img
-                                                src="./images/usdt_icon.png"
-                                                style={{ width: "17px", paddingLeft: "1px" }}
-                                                alt="usdt"
-
-                                              />) : (
-                                              <img
-                                                src="./images/Inrx_black.png"
-                                                style={{ width: "17px", marginLeft: "5px" }}
-                                                alt="inrx"
-                                              />)}
-                                              </span>
-                                            </div>
-                                            <div className="nk-tb-col tb-col-sm text-danger">
-                                              <span className="tb-text">
+                                              <div className="nk-tb-col tb-col-sm">
+                                              </div>
+                                              <div className="nk-tb-col tb-col-sm">
+                                                <span className="nk-activity-media user-avatar xs bg-teal">{(((currentPage3 - 1) * 5) + index + 1)}</span>
+                                              </div>
+                                              <div className="nk-tb-col tb-col-sm">
+                                                <span className="text-dark">{element.email}</span>
+                                              </div>
+                                              <div className="nk-tb-col tb-col-sm">
+                                                <span className="text-dark">{element.sponsor}</span>
+                                              </div>
+                                              <div className="nk-tb-col tb-col-sm text-success">
+                                                <span className="tb-text">{element?.totalBuy?.toFixed(2)} ANA</span>
+                                                <img alt="analog" src="./images/Analog.png" style={{ width: "24px" }} />
+                                              </div>
+                                              <div className="nk-tb-col tb-col-sm text-danger">
                                                 <span className="tb-text">
                                                   {
-                                                    userInfo?.currency_preference == 'usd' ? `${element?.totalHandout?.toFixed(2)} USDT` : `${(element?.totalHandout * oneUsdPrice).toFixed(2)} INRX`
+                                                    userInfo?.currency_preference == 'usd' ? `${element?.totalExp?.toFixed(2)} USDT` : `${(element?.totalExp * oneUsdPrice)?.toFixed(2)} INRX`
                                                   }
                                                   {userInfo?.currency_preference == "usd" ? (
-                                              <img
-                                                src="./images/usdt_icon.png"
-                                                style={{ width: "17px", paddingLeft: "1px" }}
-                                                alt="usdt"
+                                                    <img
+                                                      src="./images/usdt_icon.png"
+                                                      style={{ width: "17px", paddingLeft: "1px" }}
+                                                      alt="usdt"
 
-                                              />) : (
-                                              <img
-                                                src="./images/Inrx_black.png"
-                                                style={{ width: "17px", marginLeft: "5px" }}
-                                                alt="inrx"
-                                              />)}
+                                                    />) : (
+                                                    <img
+                                                      src="./images/Inrx_black.png"
+                                                      style={{ width: "17px", marginLeft: "5px" }}
+                                                      alt="inrx"
+                                                    />)}
                                                 </span>
-                                              </span>
-                                            </div>
-                                            <div className="nk-tb-col tb-col-sm">
-                                              <span className="text-dark">
-                                                < MdMoreHoriz />
-                                              </span>
-                                            </div>
+                                              </div>
+                                              <div className="nk-tb-col tb-col-sm text-danger">
+                                                <span className="tb-text">
+                                                  {
+                                                    userInfo?.currency_preference == 'usd' ? `${element?.totalAff?.toFixed(2)} USDT` : `${(element?.totalAff * oneUsdPrice).toFixed(2)} INRX`
+                                                  }
+                                                  {userInfo?.currency_preference == "usd" ? (
+                                                    <img
+                                                      src="./images/usdt_icon.png"
+                                                      style={{ width: "17px", paddingLeft: "1px" }}
+                                                      alt="usdt"
 
-                                          </div>
-                                        </>
-                                      )
-                                    }) :  
-                                    <Bars heigth="20" width="20 " color="#0b3175" ariaLabel="loading-indicator" />  
-                                }
-                               {/*  <div className="nk-tb-item">
-                                                <div className="nk-tb-col nk-tb-col-check">
-                                                  <div className="custom-control custom-control-sm custom-checkbox notext">
-                                                    <input
-                                                      type="checkbox"
-                                                      className="custom-control-input"
-                                                      id="uid2"
-                                                    />
-                                                    <label
-                                                      className="custom-control-label"
-                                                      for="uid2"
-                                                    ></label>
-                                                  </div>
-                                                </div>
-                                                <div className="nk-tb-col">
-                                                  <div className="user-card">
-                                                    <div className="user-avatar xs bg-warning">
-                                                      <span>PN</span>
-                                                    </div>
-                                                    <div className="user-name">
-                                                      <span className="font-weight-bold">
-                                                        Patrick Newman
-                                                      </span>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                                <div className="nk-tb-col tb-col-md">
-                                                  <span>Investor</span>
-                                                </div>
-                                                <div className="nk-tb-col tb-col-sm">
-                                                  <span>patrick@example.com</span>
-                                                </div>
-                                                <div className="nk-tb-col tb-col-md">
-                                                  <span>+942 238-4474</span>
-                                                </div>
-                                                <div className="nk-tb-col tb-col-xl">
-                                                  <span>United States</span>
-                                                </div>
-                                                <div className="nk-tb-col tb-col-xl">
-                                                  <ul className="list-status">
-                                                    <li>
-                                                      <em className="icon text-success ni ni-check-circle"></em>{" "}
-                                                      <span>Email</span>
-                                                    </li>
-                                                  </ul>
-                                                </div>
-                                                <div className="nk-tb-col tb-col-xl">
-                                                  <span>06 Feb 2020</span>
-                                                </div>
-                                                <div className="nk-tb-col">
-                                                  <span className="tb-status text-success">
-                                                    Active
+                                                    />) : (
+                                                    <img
+                                                      src="./images/Inrx_black.png"
+                                                      style={{ width: "17px", marginLeft: "5px" }}
+                                                      alt="inrx"
+                                                    />)}
+                                                </span>
+                                              </div>
+                                              <div className="nk-tb-col tb-col-sm text-danger">
+                                                <span className="tb-text">
+                                                  <span className="tb-text">
+                                                    {
+                                                      userInfo?.currency_preference == 'usd' ? `${element?.totalHandout?.toFixed(2)} USDT` : `${(element?.totalHandout * oneUsdPrice).toFixed(2)} INRX`
+                                                    }
+                                                    {userInfo?.currency_preference == "usd" ? (
+                                                      <img
+                                                        src="./images/usdt_icon.png"
+                                                        style={{ width: "17px", paddingLeft: "1px" }}
+                                                        alt="usdt"
+
+                                                      />) : (
+                                                      <img
+                                                        src="./images/Inrx_black.png"
+                                                        style={{ width: "17px", marginLeft: "5px" }}
+                                                        alt="inrx"
+                                                      />)}
                                                   </span>
-                                                </div>
-                                                <div className="nk-tb-col nk-tb-col-tools">
-                                                  <ul className="nk-tb-actions gx-2">
-                                                    <li className="nk-tb-action-hidden">
-                                                      <a
-                                                        href="#"
-                                                        className="btn btn-sm btn-icon btn-trigger"
-                                                        data-toggle="tooltip"
-                                                        data-placement="top"
-                                                        title="Wallet"
-                                                      >
-                                                        <em className="icon ni ni-wallet-fill"></em>
-                                                      </a>
-                                                    </li>
-                                                    <li className="nk-tb-action-hidden">
-                                                      <a
-                                                        href="#"
-                                                        className="btn btn-sm btn-icon btn-trigger"
-                                                        data-toggle="tooltip"
-                                                        data-placement="top"
-                                                        title="Send Email"
-                                                      >
-                                                        <em className="icon ni ni-mail-fill"></em>
-                                                      </a>
-                                                    </li>
-                                                    <li className="nk-tb-action-hidden">
-                                                      <a
-                                                        href="#"
-                                                        className="btn btn-sm btn-icon btn-trigger"
-                                                        data-toggle="tooltip"
-                                                        data-placement="top"
-                                                        title="Suspend"
-                                                      >
-                                                        <em className="icon ni ni-user-cross-fill"></em>
-                                                      </a>
-                                                    </li>
-                                                    <li>
-                                                      <div className="drodown">
-                                                        <a
-                                                          href="#"
-                                                          className="btn btn-sm btn-icon btn-trigger dropdown-toggle"
-                                                          data-toggle="dropdown"
-                                                        >
-                                                          <em className="icon ni ni-more-h"></em>
-                                                        </a>
-                                                        <div className="dropdown-menu dropdown-menu-right">
-                                                          <ul className="link-list-opt no-bdr">
-                                                            <li>
-                                                              <a href="#">
-                                                                <em className="icon ni ni-eye"></em>
-                                                                <span>View Details</span>
-                                                              </a>
-                                                            </li>
-                                                            <li>
-                                                              <a href="#">
-                                                                <em className="icon ni ni-repeat"></em>
-                                                                <span>Orders</span>
-                                                              </a>
-                                                            </li>
-                                                            <li className="divider"></li>
-                                                            <li>
-                                                              <a href="#">
-                                                                <em className="icon ni ni-shield-star"></em>
-                                                                <span>Reset Pass</span>
-                                                              </a>
-                                                            </li>
-                                                            <li>
-                                                              <a href="#">
-                                                                <em className="icon ni ni-shield-off"></em>
-                                                                <span>Reset 2FA</span>
-                                                              </a>
-                                                            </li>
-                                                            <li>
-                                                              <a href="#">
-                                                                <em className="icon ni ni-na"></em>
-                                                                <span>Suspend User</span>
-                                                              </a>
-                                                            </li>
-                                                          </ul>
-                                                        </div>
-                                                      </div>
-                                                    </li>
-                                                  </ul>
-                                                </div>
-                                              </div> */}
+                                                </span>
+                                              </div>
+                                              <div className="nk-tb-col tb-col-sm">
+                                                <span className="text-dark">
+                                                  < MdMoreHoriz />
+                                                </span>
+                                              </div>
 
+                                            </div>
+                                          </>
+                                        )
+                                      }) :
+                                      <ThreeDots heigth="20" width="40 " color="#1ee0ac" ariaLabel="loading-indicator" />
+                                }
                               </div>
                             </div>
-                            
+
                           </div>
-                          
                         </div>
-                        <div className="card-inner">
-                            <ReactPaginate
-                          previousLabel={'Prev'}
-                          nextLabel={'Next'}
-                          breakLabel={"..."}
-                          pageCount={Math.ceil(tab.length / 5)}
-                          marginPagesDisplayed={2}
-                          pageRangeDisplayed={2}
-                          onPageChange={(data)=>{
-                            getAffiliateList(level,data.selected)
-                             setCurrentPage(data.selected +1)}}
-                          containerClassName={'pagination justify-content-center'}
-                          pageClassName={'page-item'}
-                          pageLinkClassName={'page-link'}
-                          previousClassName={'page-item'}
-                          previousLinkClassName={'page-link'}
-                          nextClassName={'page-item'}
-                          nextLinkClassName={'page-link'}
-                          breakClassName={'page-item'}
-                          breakLinkClassName={'page-link'}
-                          activeClassName={"active"}
-                        /> 
-                        </div>
+                        {
+                          total.length > 5 ? <div className="card-inner">
+                          <ReactPaginate
+                            previousLabel={'Prev'}
+                            nextLabel={'Next'}
+                            breakLabel={"..."}
+                            pageCount={Math.ceil(total.length / 5)}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={2}
+                            onPageChange={(data) => {
+                              handelPagination(data.selected)
+                              setCurrentPage3(data.selected + 1)
+                            }}
+                            containerClassName={'pagination justify-content-center'}
+                            pageClassName={'page-item'}
+                            pageLinkClassName={'page-link'}
+                            previousClassName={'page-item'}
+                            previousLinkClassName={'page-link'}
+                            nextClassName={'page-item'}
+                            nextLinkClassName={'page-link'}
+                            breakClassName={'page-item'}
+                            breakLinkClassName={'page-link'}
+                            activeClassName={"active"}
+                          />
+                        </div> : null
+                        }
+                        
                       </div>
                       : null}
 
                   </div>
-
                 </div>
               </div>
             </div>

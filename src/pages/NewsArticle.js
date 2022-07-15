@@ -3,10 +3,12 @@ import Menu from "../components/Menu";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
+
 
 const NewsArticle = () => {
- 
-
+  const location = useLocation()
+  console.log(location.state, "STATE");
   return (
     <div className="nk-app-root">
       <div className="nk-main ">
@@ -28,8 +30,10 @@ const NewsArticle = () => {
                     <div class="card card-bordered">
                         <div class="card-inner card-inner-xl">
                             <article class="entry">
-                                <h3>Blockchain PR - Everything You Need to Know (2022)</h3>
-                                <p>Learn all you need to know about Blockchain PR by reading this definitive guide. Fuga eius ipsam blanditiis
+                                <h3>{location.state.title}</h3>
+                                <img src={location.state.image} alt="" srcset="" />
+                                <p>{location.state.message}</p>
+                                {/* <p>Learn all you need to know about Blockchain PR by reading this definitive guide. Fuga eius ipsam blanditiis
                                     voluptatem mollitia dolores asperiores ipsum rerum repellendus. Ullam et, quam eos
                                     blanditiis ipsum tempore minus quis laborum praesentium.</p>
                                 <p>Popsam blanditiis voluptatem mollitia dolores asperiores ipsum rerum repellendus.
@@ -55,7 +59,7 @@ const NewsArticle = () => {
                                 <h5>Perspiciatis unde omnis iste natus error sit voluptatem</h5>
                                 <p>Mollitia dolores asperiores ipsum rerum repellendus Sed ut accusantium doloremque
                                     laudantium, totam rem aperiam, eaque ipsa quae ab illoveritatis et quasi architecto
-                                    beatae vitae dicta sunt explicabo. </p>
+                                    beatae vitae dicta sunt explicabo. </p> */}
                             </article>
                         </div>
                     </div>

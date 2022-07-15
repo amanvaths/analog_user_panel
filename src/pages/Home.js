@@ -4,7 +4,6 @@ import Menu from "../components/Menu";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "react-slideshow-image/dist/styles.css";
-import { Slide } from "react-slideshow-image";
 import "react-multi-carousel/lib/styles.css";
 import Getpresale from "../components/Getpresale";
 import axios from "axios";
@@ -23,10 +22,9 @@ import { RWebShare } from "react-web-share";
 
 
 const Home = () => {
-  const { user, userInfo, oneUsdPrice } = useSelector(
-    (state) => state.user.value
-  );
+  const { user, userInfo, oneUsdPrice } = useSelector((state) => state.user.value);
   const email = user?.email;
+
   const navigate = useNavigate();
 
   const [totalAnalogBuy, setTotalAnalogBuy] = useState(0);
@@ -48,7 +46,7 @@ const Home = () => {
   const [recentLoad, setRecentLoad] = useState(true);
   const [chartAmt, setChartAmt] = useState([]);
   const [chartLabel, setChartLabel] = useState([])
-
+  const [api, setApi] = useState(false)
 
 
   const summaryBalance = {
@@ -59,17 +57,17 @@ const Home = () => {
         label: "Buy",
         fill: false,
         lineTension: 0.5,
-        backgroundColor: "#6baafe",
-        borderColor: "#6baafe",
+        backgroundColor: "#10ad83",
+        borderColor: "#10ad83",
         borderCapStyle: "butt",
         borderDash: [],
         borderDashOffset: 0.0,
         borderJoinStyle: "miter",
-        pointBorderColor: "#0d6efd",
+        pointBorderColor: "#10ad83",
         pointBackgroundColor: "#fff",
         pointBorderWidth: 1,
         pointHoverRadius: 5,
-        pointHoverBackgroundColor: "#0d6efd",
+        pointHoverBackgroundColor: "#10ad83",
         pointHoverBorderColor: "rgba(220,220,220,1)",
         pointHoverBorderWidth: 2,
         pointRadius: 3,
@@ -81,11 +79,18 @@ const Home = () => {
 
   var total = [];
   var year = [];
+  // let abortController = new AbortController();
   const chartData = async () => {
     try {
-      const res = await axios.post(`${BASE_URL}/buyChart`, { email: email });
+      // console.log(abortController, "ABORT");
+      // abortController.abort();
+      // abortController = new AbortController();
+      if(api == false){
+      setApi(true);
+      console.log("called..........");
+      const res = await axios.post(`${BASE_URL}/buyChart`, { email: email});
       const arr = res.data.data;
-      console.log(arr, 'orid');
+      setApi(false)
       arr.map((element, index) => {
         total.push(element.total)
         year.push(`${element.month}/${element.year}`)
@@ -93,11 +98,16 @@ const Home = () => {
       })
       setChartAmt(total)
       setChartLabel(year)
+    }else{
+      console.log("cancelled..........");
+    }
+      // controller.abort()
     } catch (error) {
       console.log(error);
     }
+   
   };
-
+  // abortController.abort();
   const getPreSale = async () => {
     try {
       const res = axios.get(`${BASE_URL}/getpresale`);
@@ -162,9 +172,16 @@ const Home = () => {
     getUserWalletData();
     getPreSale();
     recentActivity();
-    reffetalData();
-    chartData();
-  }, [oneUsdPrice, userInfo]);
+    reffetalData();   
+      // chartData();  
+    
+  }, []);
+
+  useEffect(() => {
+      
+      chartData();  
+    
+  }, []);
 
   const responsive = {
     superLargeDesktop: {
@@ -215,63 +232,7 @@ const Home = () => {
                   </Link> <Link class="carousel-control-next" to="#carouselExConInd" role="button" data-bs-slide="next"> <span
                     class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span> </Link>
                 </div>
-                {/* <div class="carousel-item active">
-                  <img class="d-block w-100" src="images/slides/1.png" alt="Analog Inceptive" />
-                </div> */}
-                {/* <div id="carouselFade" class="carousel slide carousel-fade" data-ride="carousel"  data-interval="2000">
-                <div class="carousel-inner" role="listbox">
-                  <div class="carousel-item active">
-                    <img class="d-block w-100" src="images/slides/1.png" alt="First slide"/>
-                  </div>
-                  <div class="carousel-item">
-                    <img class="d-block w-100" src="images/slides/1.png" alt="Second slide" />
-                  </div>
-                  <div class="carousel-item">
-                    <img class="d-block w-100" src="images/slides/h.png" alt="Third slide"/>
-                  </div>
-                  
-                  <div class="carousel-item">
-                    <img class="d-block w-100" src="images/slides/j.png" alt="Third slide"/>
-                  </div>
-                </div>
-             
-                 <a class="carousel-control-prev left carousel-control" href="#carouselFade" role="button" data-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next right carousel-control" href="#carouselFade" role="button" data-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Next</span>
-                </a> 
-              </div> */}
-                {/* <Slide>
-                  {i?.map((slideImage, index) => {
-                    return (
-                      <div className="each-slide border border-" key={index}>
-                        <div
-                          style={{
-                            backgroundImage: `url(http://localhost:3001${slideImage.banner})`,
-                            // height: "250px",
-                            width: "100%",
-                            backgroundSize: "cover",
-                            backgroundRepeat: "no-repeat",
-                            backgroundAttachment: "fixed",
-                          }}
-                        >
-                          <span
-                            style={{
-                              height: "250px",
-                              display: "inline-block",
-                             // marginTop: "20px",
-                            }}
-                          >
-                            {slideImage.caption}
-                          </span>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </Slide> */}
+              
               </div>
             </div>
             {/* Add Slide small card */}

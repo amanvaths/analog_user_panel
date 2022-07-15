@@ -74,6 +74,8 @@ export default function Orders(props) {
 
   //  GetWalletData
 
+  console.log(userInfo?.currency_preference, "::REACT PERSISTENT CURRENCY PREFRENCE");
+
   const getWalletData = async () => {
     try {
       const res = await axios.post(`${BASE_URL}/getWalletData`, {

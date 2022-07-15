@@ -11,7 +11,7 @@ import { Triangle } from 'react-loader-spinner'
 import { useSelector, useDispatch } from 'react-redux';
 import { BASE_URL } from "../Api_connection/config";
 import { setUserInfo } from "../redux/reducer/user";
-import { Link, useNavigate } from "react-router-dom";
+
 const { io } = require("socket.io-client");
 
 
@@ -47,14 +47,8 @@ const Wallet = (props) => {
       setWalletDetails([...data]);
     })
 
-    socket.on("msg",(data)=>{
-      console.log(data, "MESSAGE DATA");
-      // if(status == 0){
-      //   status = 1
-     
+    socket.on("msg",(data)=>{    
         NotificationManager.success('Added',data)
-      // }
-     
     })
 
       socket.on('notification',(data)=>{
@@ -64,33 +58,27 @@ const Wallet = (props) => {
 },[])
 
 
-
-
-// setInterval(() => {
-//   if(status == 0){
-//     status = 1
-//   }
-  
-// }, 5000);
-
-
-
-
-
-
   const test = async()=>{
     try {
        const data = await axios.post(`${BASE_URL}/getUserWallet`, {email:email})
-          console.log(data.data, "YRSSJSJSJSJSJS");
           setWalletDetails([...data.data]);
     } catch (error) {
+      console.log(error);
+    }
+  }
+  const updateWallet = () =>{
+    try{
+       axios.post(`http://localhost:3001/updateWallet`, {email:email});    
+    }catch (error){
       console.log(error);
     }
   }
 
   useEffect(()=>{
     test()
+    updateWallet();
   },[])
+
 
   const getUserAllWallletData = async () => {
     try {
@@ -251,7 +239,7 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                                 </span>
                               </p>
                               <p className="kanban-item-title">
-                                <span className="badge bg-light rounded-pill">Total API  </span>
+                                <span className="badge bg-light rounded-pill">Total APY  </span>
                                 <span className="text-teal"> 0</span>
                               </p>
                             </div>

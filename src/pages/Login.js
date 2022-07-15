@@ -75,10 +75,14 @@ const Login = (props) => {
     setShown(!shown)
 
   };
+  let abortController = new AbortController();
+  
   async function Login() {
-
+    abortController.abort();
+    abortController =new AbortController();
     await fetch(BASE_URL + "/signin", {
       method: "POST",
+      signal:abortController.signal,
       headers: {
         "content-type": "application/json",
         "allow-access-origin-control": "*",
