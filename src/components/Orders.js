@@ -135,6 +135,9 @@ export default function Orders(props) {
           swal(`${res.data.message}`, "", "success");
           getWalletData();
           dispatch(setBuyLoader({ buyloader: false }));
+          setTotal(MinAmount);
+          setRangeValue(0);
+          setAmmount(0);
         }
       })
       .catch((error) => {
@@ -166,6 +169,7 @@ export default function Orders(props) {
   // sweetAlert
 
   function ConfirmBox() {
+   
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: "btn btn-success",
@@ -176,14 +180,15 @@ export default function Orders(props) {
     swalWithBootstrapButtons
       .fire({
         title: "Are you sure?",
-        text: `Buying Amount : ${Number(total)?.toFixed(
-          2
-        )} , Quantity : ${ammount?.toFixed(2)}`,
+        text: `Buying Amount : ${Number(total)?.toFixed(2)
+          
+        } , Quantity : ${ammount?.toFixed(2)}`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Yes, confirm it!",
         cancelButtonText: "No, cancel!",
         reverseButtons: true,
+        
       })
       .then((result) => {
         if (result.isConfirmed) {
@@ -558,7 +563,7 @@ export default function Orders(props) {
                     ? 0
                     : userInfo?.currency_preference == "inr"
                     ? 5000
-                    : Math.floor(5000 / oneUsdPrice)
+                    : 5000 / oneUsdPrice
                 }
                 max={
                   oneUsdPrice == ""
