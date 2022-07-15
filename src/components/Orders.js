@@ -62,15 +62,15 @@ export default function Orders(props) {
       : (5000 / oneUsdPrice)?.toFixed(2);
 
   //  GetCoinData
-  const getData = async () => {
-    try {
-      const res = await axios.post(`${BASE_URL}/getCoinData`, {
-        currency: userInfo?.currency_preference,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const getData = async () => {
+  //   try {
+  //     const res = await axios.post(`${BASE_URL}/getCoinData`, {
+  //       currency: userInfo?.currency_preference,
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   //  GetWalletData
 
@@ -106,14 +106,7 @@ export default function Orders(props) {
   };
   useEffect(() => {
     getWalletData();
-    getData();
     AnaPrice();
-
-    // setAmmount(
-    //   userInfo?.currency_preference == "inr"
-    //     ? total / atprice
-    //     : total / (atprice / oneUsdPrice)
-    // );
   }, []);
   useEffect(() => {
     setTotal(MinAmount);
@@ -563,14 +556,14 @@ export default function Orders(props) {
                     ? 0
                     : userInfo?.currency_preference == "inr"
                     ? 5000
-                    : Number(5000 / oneUsdPrice).toFixed(0)
+                    : Math.floor(5000 / oneUsdPrice)
                 }
                 max={
                   oneUsdPrice == ""
                     ? 0
                     : userInfo?.currency_preference == "usd"
                     ? Number(balance)
-                    : balance * oneUsdPrice
+                    : Math.floor(balance * oneUsdPrice)
                 }
                 // value={"6000"}
                 onChange={(e) => {
