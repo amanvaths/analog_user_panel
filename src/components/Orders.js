@@ -62,15 +62,15 @@ export default function Orders(props) {
       : (5000 / oneUsdPrice)?.toFixed(2);
 
   //  GetCoinData
-  const getData = async () => {
-    try {
-      const res = await axios.post(`${BASE_URL}/getCoinData`, {
-        currency: userInfo?.currency_preference,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const getData = async () => {
+  //   try {
+  //     const res = await axios.post(`${BASE_URL}/getCoinData`, {
+  //       currency: userInfo?.currency_preference,
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   //  GetWalletData
 
@@ -108,14 +108,7 @@ export default function Orders(props) {
   };
   useEffect(() => {
     getWalletData();
-    getData();
     AnaPrice();
-
-    // setAmmount(
-    //   userInfo?.currency_preference == "inr"
-    //     ? total / atprice
-    //     : total / (atprice / oneUsdPrice)
-    // );
   }, []);
   useEffect(() => {
     setTotal(MinAmount);
@@ -145,6 +138,9 @@ export default function Orders(props) {
           swal(`${res.data.message}`, "", "success");
           getWalletData();
           dispatch(setBuyLoader({ buyloader: false }));
+          setTotal(MinAmount);
+          setRangeValue(0);
+          setAmmount(0);
         }
       })
       .catch((error) => {
@@ -177,6 +173,7 @@ export default function Orders(props) {
   // sweetAlert
 
   function ConfirmBox() {
+   
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: "btn btn-success",
@@ -187,14 +184,15 @@ export default function Orders(props) {
     swalWithBootstrapButtons
       .fire({
         title: "Are you sure?",
-        text: `Buying Amount : ${Number(total)?.toFixed(
-          2
-        )} , Quantity : ${ammount?.toFixed(2)}`,
+        text: `Buying Amount : ${Number(total)?.toFixed(2)
+          
+        } , Quantity : ${ammount?.toFixed(2)}`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Yes, confirm it!",
         cancelButtonText: "No, cancel!",
         reverseButtons: true,
+        
       })
       .then((result) => {
         if (result.isConfirmed) {
@@ -569,14 +567,14 @@ export default function Orders(props) {
                     ? 0
                     : userInfo?.currency_preference == "inr"
                     ? 5000
-                    : Number(5000 / oneUsdPrice).toFixed(0)
+                    : 5000 / oneUsdPrice
                 }
                 max={
                   oneUsdPrice == ""
                     ? 0
                     : userInfo?.currency_preference == "usd"
                     ? Number(balance)
-                    : balance * oneUsdPrice
+                    : Math.floor(balance * oneUsdPrice)
                 }
                 // value={"6000"}
                 onChange={(e) => {
