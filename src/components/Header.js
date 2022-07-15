@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Redirect} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserInfo, logout, setTheme } from "../redux/reducer/user";
 import axios from "axios";
@@ -60,8 +60,15 @@ const Header = () => {
 
   const signOut = () => {
     // navigate("/", { replace: true });
-    dispatch(logout())
-   
+    dispatch(logout());
+    // return(
+    //   <>
+    //   <Redirect to="/login" />
+    //   </>
+    // )
+    // window
+    // window.location.replace('/login')
+    // <Redirect to="/somewhere/else" />
     navigate("/login")
   };
 

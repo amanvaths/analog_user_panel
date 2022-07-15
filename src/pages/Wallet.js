@@ -253,8 +253,8 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                         <div className="col-md-6 col-lg-4 col-12">
                           <Card1
                             title={element.name}
-                            priceInUsd={(element?.quote?.[userInfo?.currency_preference.toUpperCase()]?.price)?.toFixed(2)}
-                            price={element?.wallet?.balance.toFixed(2)}
+                            priceInUsd={(element?.quote?.[userInfo?.currency_preference.toUpperCase()]?.price)?.toFixed(20).match(/^-?\d*\.?0*\d{0,2}/)[0]}
+                            price={element?.wallet?.balance.toFixed(3)}
                             lable={element?.symbol}
                             wallet={element?.wallet}
                             address={element?.wallet?.walletAddr}

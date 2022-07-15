@@ -73,11 +73,11 @@ function App(props) {
 
           <Route path="/home" element={(user.email && user.token)?<Home />:<Login /> } />
          
-          <Route path="/Affiliate" element={<Affiliate />} />
+          <Route path="/Affiliate" element={(user.email && user.token)?<Affiliate />:<Login />} />
           {/* <Route path="/Transactions" element={<Transactions />} /> */}
           <Route path="/wallet" element={(user.email && user.token)? <Wallet /> : <Login />} />
-          <Route path="/accountSettings" element={<AccountSettings />} />
-          <Route path="/cryptoTransaction" element={<CryptoTransaction />} />
+          <Route path="/accountSettings" element={(user.email && user.token)? <AccountSettings/> : <Login /> } />
+          <Route path="/cryptoTransaction" element={(user.email && user.token)? <CryptoTransaction />:<Login />} />
           <Route path="/buysell" element={(user.email && user.token)? < BuySell /> : <Login />} />
           <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="/*" element={(user.email && user.token)?<Home />:<Login />} />

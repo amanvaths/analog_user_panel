@@ -8,7 +8,7 @@ import { setOneUsdPrice, setTotalAna } from "../redux/reducer/user";
 
 function Menu (){
   const dispatch = useDispatch()
-  const {user, oneUsdPrice} = useSelector((state)=> state.user.value)
+  const {user, oneUsdPrice, totalAna, userInfo} = useSelector((state)=> state.user.value)
   const email = user.email;
   const [anaBalancce, setAnaBalance] = useState('')
   const [usdPrice, setUsdPrice] = useState('')
@@ -57,7 +57,7 @@ function Menu (){
     gettotalWalletFund()
   },[])
    const btn = useSelector(store=>store.navsetter);
-   const {userInfo} = useSelector((state)=> state.user.value)
+  //  const {userInfo} = useSelector((state)=> state.user.value)
   
  
 
@@ -106,7 +106,7 @@ function Menu (){
                     <div className="user-account-main">
                       <h2 className="overline-title-alt text-teal fs-6">Available Balance</h2>
                       <div className="user-balance">
-                      { Number(anaBalancce)?.toFixed(2)}{" "}
+                      { Number(totalAna)?.toFixed(2)}{" "}
                         <small className="currency currency-btc">ANA</small>
                       </div>
                       <div className="user-balance-alt">

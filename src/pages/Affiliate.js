@@ -6,7 +6,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { BASE_URL } from "../Api_connection/config";
 import AffiliatCard from "../components/AffiliateCard";
-import { Bars, ThreeDots } from 'react-loader-spinner'
+import {ThreeDots } from 'react-loader-spinner'
 import { MdMoreHoriz } from 'react-icons/md'
 import ReactPaginate from 'react-paginate';
 import { Link } from "react-router-dom";
@@ -147,7 +147,7 @@ const Affiliate = (props) => {
                       </div>
                     :
                     <div style={{ position: "absolute", zIndex: "99", top: "29%", left: "108%", transform: "translate(-50%, -50%)" }}>
-                      <Bars heigth="100" width="100" color="#0b3175" ariaLabel="loading-indicator" />
+                      <ThreeDots heigth="100" width="100" color="#1ee0ac" ariaLabel="loading-indicator" />
                     </div>}
                 </div>
                 <div className="row my-4">

@@ -9,7 +9,7 @@ import "../App.css";
 // import MultiRangeSlider from "./multiRangeSlider/MultiRangeSlider";
 import { Triangle } from "react-loader-spinner";
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import { setBuyLoader } from "../redux/reducer/user";
+import { setBuyLoader, setTotalAna } from "../redux/reducer/user";
 
 export default function Orders(props) {
   const dispatch = useDispatch();
@@ -138,7 +138,10 @@ export default function Orders(props) {
     axios
       .post(`${BASE_URL}/order`, params)
       .then((res) => {
+        console.log(res.data, "RESULT");
         if (res.data.status == true) {
+          console.log(res.data.totalAna, "ANA BALANCE");
+          dispatch(setTotalAna({totalAna: res.data.totalAna}))
           swal(`${res.data.message}`, "", "success");
           getWalletData();
           dispatch(setBuyLoader({ buyloader: false }));
@@ -162,6 +165,7 @@ export default function Orders(props) {
         .then((res) => {
           const orderrespons = res.data;
           setHistory(orderrespons.order);
+          console.log(orderrespons.order, "Email");
           setLoader(false);
         })
         .catch((error) => {
