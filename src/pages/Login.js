@@ -1,6 +1,6 @@
 /* global google */
 import React, { useEffect, useState } from "react";
-import { GoogleLogin, GoogleLogout } from "react-google-login";
+// import { GoogleLogin, GoogleLogout } from "react-google-login";
 import { BASE_URL, GOOGLE_ID } from "../Api_connection/config";
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
 import swal from "sweetalert";
@@ -64,13 +64,6 @@ const Login = (props) => {
     }
   }
 
-  const onLoginSuccess = (res) => {
-    console.log(res.profileObj);
-  };
-  const onLoginFailure = (res) => {
-    console.log(res);
-  };
-
   const togglePassword1 = () => {
     setShown(!shown)
 
@@ -106,25 +99,13 @@ const Login = (props) => {
           if (resp.googleAuth == 1) {
             navigate('/2faAuthentication', { state: { email: email, token: resp.token } })
           } else {
-            // localStorage.setItem("email", email);
-            // localStorage.setItem("token", resp.token);
-            // localStorage.setItem("theme", "0")
             dispatch(setIsLoggedIn({ LoginDetails: resp }))
             navigate('/home')
-            // const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
-            // if (data) {
-            //   swal(`${resp.message}`, "Welcome", "success");
-            //   dispatch(setUserInfo({ userInfo: data.data }))
-            //   navigate('/home')
-            // }
           }
         }
         if (resp.status == 3) {
           swal("Email is not varified", "Verify Email before Login", "error");
           dispatch(sendOtp(({ LoginDetails: resp })))
-          // setTimeout(() => {
-          //   navigate("/EmailOtp");
-          // }, 3000);
           navigate("/ResendOtp");
         }
         if (resp.status == 4) {
@@ -133,7 +114,6 @@ const Login = (props) => {
       });
   }
   const handelFormSubmit = (email, password) => {
-    // setValida(false);
     if (email == "") {
       setEmailerror(true);
     }
@@ -296,27 +276,9 @@ const Login = (props) => {
                 </li>
                 <li className="nav-item">
                   <div id="googleLogin"></div>
-                  {/* {google.accounts.id.renderButton()} */}
-                  {/* <GoogleLogin
-                    clientId={GOOGLE_ID}
-                    buttonText="Sign in with Google"
-                    onSuccess={onLoginSuccess}
-                    onFailure={onLoginFailure}
-                    cookiePolicy={"single_host_origin"}
-                  /> */}
-                  {/* <Link className="nav-link" to=""> */}{" "}
-                  {/* <GoogleLogin
-                    clientId={clientId}
-                    buttonText="Login"
-                    onSuccess={onLoginSuccess}
-                    onFailure={onLoginFailure}
-                    cookiePolicy={"single_host_origin"}
-                    render={() => (
-                      <a className="nav-link" onClick={onLoginSuccess}>
-                        Google
-                      </a>
-                    )}
-                  /> */}
+                 
+                 {" "}
+                 
                   {/* </a> */}
                 </li>
               </ul>
@@ -398,7 +360,7 @@ const Login = (props) => {
                 </ul>*/}
               </div>
               <div className="mt-3">
-                <p>&copy; 2022  INRX ECOSYSTEM. All Rights Reserved.</p>
+                <p>&copy;{` ${new Date().getFullYear()}  INRX ECOSYSTEM. All Rights Reserved.`}</p>
               </div>
             </div>
         </div>

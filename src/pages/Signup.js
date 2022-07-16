@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+/* global google */
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../Api_connection/config";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch } from "react-redux";
-// import { setReferralCode } from "../redux/reducer/user";
-// import { FacebookLogin } from "react-facebook-login";
+import jwt_decode from 'jwt-decode'
+import axios from "axios";
 import swal from "sweetalert";
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
-import { sendOtp } from "../redux/reducer/user";
+import { sendOtp, setIsLoggedIn } from "../redux/reducer/user";
 
 // import FacebookLogin from "react-facebook-login";
 const Signup = (props) => {
@@ -75,6 +76,47 @@ const Signup = (props) => {
       });
   }
 
+
+  useEffect(()=>{
+    google.accounts.id.initialize({
+      client_id: "879223788790-mhj4ntd15ashepqn5h4ec4hu4fncmr8t.apps.googleusercontent.com",
+      callback: handleCallback
+    });
+
+    google.accounts.id.renderButton(
+      document.getElementById('googleLogin'),
+      {theme: "outline", size: "large"}
+    );
+
+    google.accounts.id.prompt()
+  },[google])
+
+  const handleCallback = async(response)=>{
+    let obj = jwt_decode(response.credential)
+    console.log(obj)
+    // setII(obj.picture)
+    console.log(email,"email");
+    const data  = await axios.post(`${BASE_URL}/signInWithGoogle`, { email: obj.email, password: obj.sub})
+    if(data){
+      console.log(data, "API RESPONSE");
+      if(data.data.status === 1)
+      {
+        console.log(data.data.status, "status");
+        if(data.data.googleAuth === 0){
+          console.log(data.data.googleAuth, "GoogleAuth");
+          dispatch(setIsLoggedIn({ LoginDetails: data.data }))
+            navigate('/home')
+        }else{
+          navigate('/2faAuthentication', { state: { email: data.data.email, token: data.data.token } })
+        }
+      }
+    }else{
+      swal("Something Went Wrong",
+      "He he hehehe",
+      "error")
+    }
+  }
+
   const togglePassword1 = () => {
     setPasswordShone(!passwordShone)
   };
@@ -110,11 +152,6 @@ const Signup = (props) => {
     document.getElementById("validation-box").style.display = "block";
   }
 
-  // hide the Validation Box
-
-  // function _onblur() {
-  //   document.getElementById("validation-box").style.display = "none";
-  // }
 
   // when User Start To type letter Validation
 
@@ -411,13 +448,7 @@ const Signup = (props) => {
                     /> */}
                   </li>
                   <li className="nav-item">
-                    <GoogleLogin
-                      clientId={GoogleId}
-                      buttonText="Sign up with Google"
-                      onSuccess={onLoginSuccess}
-                      onFailure={onLoginFailure}
-                      cookiePolicy={"single_host_origin"}
-                    />
+                  <div id="googleLogin"></div>
                   </li>
                 </ul>
               </div>

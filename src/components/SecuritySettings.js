@@ -41,7 +41,7 @@ const SecuritySettings = () => {
       console.log(error);
     }
   }
-
+      // console.log(userInfo?.password_updated_at, "PASS UPDATED AT");
   useEffect(()=>{
     const conSetting = async()=>{
       const data = await axios.post(`${BASE_URL}/configSettings`, {email: email})
@@ -158,7 +158,7 @@ const SecuritySettings = () => {
                       <li>
                         <em className="text-soft text-date fs-12px"
                         >Last changed :
-                          <span> Oct 2, 2019</span></em
+                          <span> {new Date(userInfo?.password_updated_at).toDateString()}</span></em
                         >
                       </li>
                     </ul>

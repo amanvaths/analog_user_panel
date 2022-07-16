@@ -272,7 +272,8 @@ const Header = () => {
                   >
                     <div className="user-toggle">
                       <div className="user-avatar sm bg-success">
-                        <em className="icon ni ni-user-alt"></em>
+                      <span>{(userInfo?.username)?.charAt(0)?.toUpperCase()}</span>
+                        {/* <em className="icon ni ni-user-alt"></em> */}
                       </div>
                       {/* <div className="user-info d-none d-md-block">
                           <div className="user-status user-status-unverified">

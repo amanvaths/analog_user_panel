@@ -254,7 +254,7 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                           <Card1
                             title={element.name}
                             priceInUsd={(element?.quote?.[userInfo?.currency_preference.toUpperCase()]?.price)?.toFixed(20).match(/^-?\d*\.?0*\d{0,2}/)[0]}
-                            price={element?.wallet?.balance.toFixed(3)}
+                            price={element?.wallet?.balance.toFixed(4)}
                             lable={element?.symbol}
                             wallet={element?.wallet}
                             address={element?.wallet?.walletAddr}

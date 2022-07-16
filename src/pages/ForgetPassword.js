@@ -1,8 +1,15 @@
-import React, { useState } from "react";
+/* global google */
+import React, { useState, useEffect} from "react";
+import { useNavigate} from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { BASE_URL } from "../Api_connection/config";
 import { Link} from "react-router-dom";
-import { GoogleLogin } from "react-google-login";
 import swal from "sweetalert";
+import jwt_decode from 'jwt-decode'
+import axios from "axios";
+import { setIsLoggedIn } from "../redux/reducer/user";
+
+
 
 
 const ForgetPassword = (props) => {
@@ -12,7 +19,8 @@ const ForgetPassword = (props) => {
   const [emailerror, setEmailerror] = useState(false);
   const [showNewMessage, setShowNewMessage] = useState(false);
   const [linkSent, setLinkSent] = useState(true)
-  
+  const navigate = useNavigate()
+  const dispatch = useDispatch();
 
   async function forgetPass(e) {
     e.preventDefault();
@@ -59,13 +67,45 @@ const ForgetPassword = (props) => {
   const clientId =
     "28253347908-l3f5pge45v4avpv50ppksjlkvvap6t35.apps.googleusercontent.com";
 
-  const onLoginSuccess = (res) => {
-    console.log(res.profileObj);
-  };
+    useEffect(()=>{
+      google.accounts.id.initialize({
+        client_id: "879223788790-mhj4ntd15ashepqn5h4ec4hu4fncmr8t.apps.googleusercontent.com",
+        callback: handleCallback
+      });
+  
+      google.accounts.id.renderButton(
+        document.getElementById('googleLogin'),
+        {theme: "outline", size: "large"}
+      );
+  
+      google.accounts.id.prompt()
+    },[google])
 
-  const onLoginFailure = (res) => {
-    console.log(res);
-  };
+    const handleCallback = async(response)=>{
+      let obj = jwt_decode(response.credential)
+      console.log(obj)
+      // setII(obj.picture)
+      console.log(email,"email");
+      const data  = await axios.post(`${BASE_URL}/signInWithGoogle`, { email: obj.email, password: obj.sub})
+      if(data){
+        console.log(data, "API RESPONSE");
+        if(data.data.status === 1)
+        {
+          console.log(data.data.status, "status");
+          if(data.data.googleAuth === 0){
+            console.log(data.data.googleAuth, "GoogleAuth");
+            dispatch(setIsLoggedIn({ LoginDetails: data.data }))
+              navigate('/home')
+          }else{
+            navigate('/2faAuthentication', { state: { email: data.data.email, token: data.data.token } })
+          }
+        }
+      }else{
+        swal("Something Went Wrong",
+        "He he hehehe",
+        "error")
+      }
+    }
 
   return (
     <div class="bg-login">
@@ -170,8 +210,8 @@ const ForgetPassword = (props) => {
                   </form>
                   <div className="form-note-s2 pt-2 text-right">
                     {" "}
-                    {/* New on our platform? <Link to="/Signup">Create an account</Link> */}
-                    New on our platform? <Link to="/ResetPassword">Reset Password</Link>
+                    New on our platform? <Link to="/Signup" className="text-teal">Create an account</Link>
+                    {/* New on our platform? <Link to="/Si">Reset Password</Link> */}
                   </div>
                   <div className="text-center pt-4 pb-3">
                     <span className="overline-title overline-title-sap">
@@ -180,33 +220,10 @@ const ForgetPassword = (props) => {
                   </div>
                   <ul className="nav justify-center gx-4">
                     <li className="nav-item ">
-                      {/* <FacebookLogin
-                          className="facebook-button"
-                          appId="1088597931155576"
-                          autoLoad={true}
-                          //   cssclassName="my-facebook-button-class"
-                          fields="name,email,picture"
-                          scope="public_profile,user_friends,user_actions.books"
-                          callback={this.responseFacebook}
-                        /> */}
-                      {/* <FacebookLogin
-                        appId="1088597931155576"
-                        autoLoad={true}
-                        fields="name,email,picture"
-                        callback={props.SocialSignUp}
-                        cssclassName="btnFacebook"
-                        icon={<i className="fa fa-facebook" className="logo-fb"></i>}
-                        textButton="Sign up with Facebook"
-                      /> */}
+                      
                     </li>
                     <li className="nav-item">
-                      <GoogleLogin
-                        clientId={clientId}
-                        buttonText="Sign up with Google"
-                        onSuccess={onLoginSuccess}
-                        onFailure={onLoginFailure}
-                        cookiePolicy={"single_host_origin"}
-                      />
+                    <div id="googleLogin"></div>
                     </li>
                   </ul>
                   </div> : 

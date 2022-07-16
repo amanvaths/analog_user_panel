@@ -41,7 +41,8 @@ const ResetPassword = (props) => {
     console.log(res);
   };
 
-  async function ResetPasswordApi() {
+ const ResetPasswordApi = async()=>  {
+    console.log("Called", "d");
     await fetch(BASE_URL + "/reset", {
       method: "POST",
       headers: {
@@ -56,20 +57,18 @@ const ResetPassword = (props) => {
     })
       .then((res) => res.json())
       .then((resp) => {
-        // localStorage.setItem("email", "");
-
         console.log(resp, "response..");
-        if (resp.status == "true") {
-          swal(resp.message);
+        if (resp.status === 1) {
+          swal(resp.msg);
           setTimeout(() => {
             navigate("/login");
           }, 2000);
-
-          // return <Navigate to="/dashboard" />;
-        } else {
-          setResponse(resp);
+        } else if(resp.status === 0){
+          swal(resp.msg, "Click on Forget Password again")
         }
-      });
+      }).catch((error)=>{
+        console.log(error);
+      })
   }
 
   //Login With Google
@@ -313,17 +312,17 @@ const ResetPassword = (props) => {
                 <div className="form-group">
                   <button
                     className="btn bg-teal text-white btn-block"
-                    onClick={ResetPasswordApi}
+                    onClick={()=>ResetPasswordApi()}
                   >
                     Reset Password
                   </button>
                 </div>
               </form>
-              <div className="form-note-s2 pt-4 text-right">
+              {/* <div className="form-note-s2 pt-4 text-right">
                 {" "}
-                {/* Already Interact <Link href="/login">Sign in</Link> */}
+                Already Interact <Link href="/login">Sign in</Link>
                 Otp Interact <Link to="/EmailOtp" className="text-teal">Resend Otp</Link>
-              </div>
+              </div> */}
 
               <div className="text-center pt-4 pb-3">
                 <span className="overline-title overline-title-sap">
@@ -331,26 +330,6 @@ const ResetPassword = (props) => {
                 </span>
               </div>
               <ul className="nav justify-center gx-4">
-                <li className="nav-item ">
-                  {/* <FacebookLogin
-                      className="facebook-button"
-                      appId="1088597931155576"
-                      autoLoad={true}
-                      //   cssclassName="my-facebook-button-class"
-                      fields="name,email,picture"
-                      scope="public_profile,user_friends,user_actions.books"
-                      callback={this.responseFacebook}
-                    /> */}
-                  {/* <FacebookLogin
-                    appId="1088597931155576"
-                    autoLoad={true}
-                    fields="name,email,picture"
-                    callback={props.SocialSignUp}
-                    cssclassName="btnFacebook"
-                    icon={<i className="fa fa-facebook" className="logo-fb"></i>}
-                    textButton="Sign up with Facebook"
-                  /> */}
-                </li>
                 <li className="nav-item">
                   <GoogleLogin
                     clientId={clientId}
