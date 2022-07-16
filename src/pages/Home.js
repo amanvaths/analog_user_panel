@@ -17,6 +17,8 @@ import { Line } from "react-chartjs-2";
 import Chart from 'chart.js/auto';
 
 import { RWebShare } from "react-web-share";
+import firebase from "../firebase";
+
 
 
 
@@ -164,24 +166,32 @@ const Home = () => {
     }
   };
 
-  const a = new Date(lastActivity);
-  const date = a.toDateString();
-  const time = a.toLocaleTimeString();
+  // const a = new Date(lastActivity);
+  // const date = a.toDateString();
+  // const time = a.toLocaleTimeString();
 
   useEffect(() => {
     getUserWalletData();
     getPreSale();
     recentActivity();
     reffetalData();   
-      // chartData();  
-    
-  }, []);
-
-  useEffect(() => {
-      
       chartData();  
     
   }, []);
+
+//   useEffect(() => {
+//     console.log(firebase, "::OBJ");
+// // const initMessaging = firebase.messaging();
+
+//     const messaging = firebase.messaging();
+//     messaging.requestPermission().then(()=>{
+//       return messaging.getToken()
+//     }).then(token=>{
+//       console.log(token, "::TOKEN FIREBASE");
+//     }).catch(error=> {
+//       console.log(error);
+//     })
+//   }, []);
 
   const responsive = {
     superLargeDesktop: {
@@ -300,7 +310,7 @@ const Home = () => {
                                   <span className="nk-wg7-note">
                                     Last activity at{" "}
                                     <span>
-                                      {date} {time}
+                                      {/* {date} {time} */}
                                     </span>
                                   </span>
                                 </div>

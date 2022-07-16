@@ -7,7 +7,7 @@ import { BASE_URL } from "../Api_connection/config";
 import { useSelector } from "react-redux";
 import ReactPaginate from 'react-paginate';
 import { Link } from "react-router-dom";
-import { Bars } from 'react-loader-spinner'
+import { ThreeDots } from 'react-loader-spinner'
 
 
 const Bounty = () => {
@@ -259,7 +259,7 @@ const Bounty = () => {
                                   )
                                 }) :
                                 <div className="">
-                                  <Bars heigth="100" width="100" color="#0b3175" ariaLabel="loading-indicator" style={{textAlign: 'center'}}/>
+                                  <ThreeDots heigth="20" width="40" color="#1ee0ac" ariaLabel="loading-indicator" style={{textAlign: 'center'}}/>
                                 </div>}
                         </div>
                       </div>                      
