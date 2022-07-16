@@ -361,7 +361,10 @@ const Affiliate = (props) => {
                                         )
                                       })
                                       :
-                                      <ThreeDots heigth="20" width="40 " color="#1ee0ac" ariaLabel="loading-indicator" />
+                                      <div className="w-100">
+                                        <ThreeDots heigth="20" width="40 " color="#1ee0ac" ariaLabel="loading-indicator" />
+                                        </div>
+                                      
                                 } </div>
                             </div>
                           </div>
