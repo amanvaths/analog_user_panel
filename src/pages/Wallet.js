@@ -40,10 +40,10 @@ const Wallet = (props) => {
   // var status = 0;
   useEffect(()=>{
   socket.on('connect',()=>{
-    console.log("Socket Connected");
+    // console.log("Socket Connected");
     socket.emit('join', {email: email });
     socket.on('balance',(data)=>{
-      console.log("BALANCE EVENT", data)
+      // console.log("BALANCE EVENT", data)
       setWalletDetails([...data]);
     })
 
@@ -52,7 +52,7 @@ const Wallet = (props) => {
     })
 
       socket.on('notification',(data)=>{
-        console.log(data, "Notification data");
+        // console.log(data, "Notification data");
       })
   })
 },[])
@@ -145,11 +145,12 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
         const w = walletDetails.filter((w) => w.symbol == coind.symbol);
         cd.push({ ...coind, wallet: w[0] });
       }
+
       setCoinWW([...cd]);
       // setLoader(false)
     }
   }, [coinData, walletDetails]);
-
+  console.log(coinWW ,"COIN WW");
 
   return (
     <>
@@ -204,7 +205,9 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                             </p>
                             <p className="kanban-item-title">
                               <span className="badge bg-light rounded-pill">Total Spend  </span>
-                              <span className="text-teal"> 0</span>
+                              <span className="text-teal"> {
+                                userInfo.currency_preference === 'inr' ? `${totalSpendINR.toFixed(3)} INRX` : `${totalSpendUSDT.toFixed(3)} USDT`
+                              }</span>
                             </p>
                             <p className="kanban-item-title">
                               <span className="badge bg-light rounded-pill">Current Balance  </span>
@@ -228,7 +231,8 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                             <div className="card-inner">
                               <p className="kanban-item-title">
                                 <span className="badge bg-light rounded-pill">Analog Value </span>
-                                <span className="text-teal"> {userInfo?.anaPrice} {userInfo?.currency_preference == 'inr' ? "INRX" : "USDT"}</span>
+                                <span className="text-teal">{userInfo.currency_preference ==='inr' ? `${(userInfo?.anaPrice).toFixed(4)} INRX` : `${(userInfo?.anaPrice/ oneUsdPrice).toFixed(4)} USDT`}
+                                </span>
                               </p>
                               <p className="kanban-item-title">
                                 <span className="badge bg-light rounded-pill">Bonus </span>

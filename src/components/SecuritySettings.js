@@ -155,12 +155,14 @@ const SecuritySettings = () => {
                             // dispatch(setIpWhiteListing({ ipWhiteListing: false }))
                           }}>Change Password</Link>
                       </li>
-                      <li>
+                       {
+                         userInfo?.password_updated_at ? 
+                         <li>
                         <em className="text-soft text-date fs-12px"
                         >Last changed :
-                          <span> {new Date(userInfo?.password_updated_at).toDateString()}</span></em
-                        >
-                      </li>
+                          <span> {new Date(userInfo?.password_updated_at).toDateString()}</span></em>
+                      </li> : null
+                       }
                     </ul>
                   </div>
                 </div>

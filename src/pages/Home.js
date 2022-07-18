@@ -591,7 +591,7 @@ const Home = () => {
                                   <div className="tranx-info">
                                     <div className="tranx-data">
                                       <div className="tranx-label">
-                                        {data?.type}
+                                        {data?.type}&nbsp;
                                         {data?.compair_currency == "usd"
                                           ? "USDT"
                                           : "INRX"}
