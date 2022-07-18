@@ -287,7 +287,7 @@ const Home = () => {
                                     TOTAL ANOLOG BUY
                                   </div>
                                   <div className="number-lg amount text-white">
-                                    {totalAnalogBuy.toFixed(2)}
+                                    {totalAnalogBuy.toFixed(3)}
                                   </div>
                                 </div>
                                 <div className="nk-wg7-stats-group">
@@ -352,8 +352,8 @@ const Home = () => {
                                             ? <>
                                               {
                                                 userInfo?.currency_preference == "inr"
-                                                ? inceptive
-                                                : (inceptive / oneUsdPrice).toFixed(2)
+                                                ? inceptive.toFixed(3)
+                                                : (inceptive / oneUsdPrice).toFixed(3)
                                               }
                                               </>
                                             : 0
@@ -393,8 +393,8 @@ const Home = () => {
                                             ? <>
                                               {
                                                 userInfo?.currency_preference == "inr"
-                                                ? airdrop
-                                                : (airdrop / oneUsdPrice).toFixed(2)
+                                                ? airdrop?.toFixed(3)
+                                                : (airdrop / oneUsdPrice).toFixed(3)
                                               }
                                               </>
                                             : 0
@@ -432,8 +432,8 @@ const Home = () => {
                                   <div className="nk-wgw-balance">
                                     <div className="amount">
                                       {userInfo?.currency_preference == "inr"
-                                        ? (affiliates * oneUsdPrice)?.toFixed(2)
-                                        : affiliates?.toFixed(2)}
+                                        ? (affiliates * oneUsdPrice)?.toFixed(3)
+                                        : affiliates?.toFixed(3)}
                                       <span className="currency currency-eth">
                                         {userInfo?.currency_preference == "inr"
                                           ? "INRX"
@@ -472,8 +472,8 @@ const Home = () => {
                                   <div className="nk-wgw-balance">
                                     <div className="amount ">
                                       {userInfo?.currency_preference == "inr"
-                                        ? (inherited * oneUsdPrice)?.toFixed(2)
-                                        : inherited?.toFixed(2)}
+                                        ? (inherited * oneUsdPrice)?.toFixed(3)
+                                        : inherited?.toFixed(3)}
                                       <span className="currency currency-nio">
                                         {userInfo?.currency_preference == "inr"
                                           ? "INRX"
@@ -510,8 +510,8 @@ const Home = () => {
                                         <sup>3</sup>][1% / 0.5% / 0.2% ] */}
 
                                       {userInfo?.currency_preference == "inr"
-                                        ? (bounty * oneUsdPrice)?.toFixed(2)
-                                        : bounty?.toFixed(2)}
+                                        ? (bounty * oneUsdPrice)?.toFixed(3)
+                                        : bounty?.toFixed(3)}
                                       <span className="currency currency-btc">
                                         {userInfo?.currency_preference == "inr"
                                           ? "INRX"
@@ -538,8 +538,8 @@ const Home = () => {
                                   <div className="nk-wgw-balance">
                                     <div className="amount">
                                       {userInfo?.currency_preference == "inr"
-                                        ? (handOut * oneUsdPrice)?.toFixed(2)
-                                        : handOut?.toFixed(2)}
+                                        ? (handOut * oneUsdPrice)?.toFixed(3)
+                                        : handOut?.toFixed(3)}
 
                                       <span className="currency currency-eth">
                                         {userInfo?.currency_preference == "inr"
@@ -631,7 +631,7 @@ const Home = () => {
                                         </span>
                                       </div>
                                       <div className="number-sm">
-                                        @ {data?.pref_raw_price?.toFixed(2)}
+                                        @ {data?.pref_raw_price?.toFixed(3)}
                                         <span className="currency currency-usd">
                                           {" "}
                                           {data?.compair_currency == "inr"
@@ -843,9 +843,9 @@ const Home = () => {
                               }</div> */}
                               {totalRefIncome > 0
                                 ? userInfo?.currency_preference == "inr"
-                                  ? `${totalRefIncome?.toFixed(2)}`
+                                  ? `${totalRefIncome?.toFixed(3)}`
                                   : `${(totalRefIncome / oneUsdPrice)?.toFixed(
-                                    2
+                                    3
                                   )}`
                                 : 0}{" "}
                               &nbsp;&nbsp;

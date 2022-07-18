@@ -201,12 +201,12 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                           <div className="card-inner">
                             <p className="kanban-item-title">
                               <span className="badge bg-light rounded-pill">Total Fund  </span>
-                              <span className="text-teal"> {totalAna? totalAna?.toFixed(2): ""} ANA </span>
+                              <span className="text-teal"> {totalAna? totalAna?.toFixed(2): 0} ANA </span>
                             </p>
                             <p className="kanban-item-title">
                               <span className="badge bg-light rounded-pill">Total Spend  </span>
                               <span className="text-teal"> {
-                                userInfo.currency_preference === 'inr' ? `${totalSpendINR.toFixed(3)} INRX` : `${totalSpendUSDT.toFixed(3)} USDT`
+                               totalSpendINR ?  userInfo?.currency_preference === 'inr' ? `${totalSpendINR?.toFixed(3)} INRX` : `${totalSpendUSDT?.toFixed(3)} USDT` : `0 ${userInfo?.currency_preference === 'inr'? "INRX" : "USDT"}`
                               }</span>
                             </p>
                             <p className="kanban-item-title">

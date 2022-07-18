@@ -166,8 +166,8 @@ const Withdrawal = () => {
                                                                     <div className="col-sm-4"
                                                                         key={element.index}
                                                                         onClick={() => {
-                                                                            setBalanceA(userInfo?.currency_preference == 'usd' ? (element?.balance) : (element?.balance * oneUsdPrice))
-                                                                            setBalanceB(userInfo?.currency_preference == 'usd' ? (element?.balance) : (element?.balance * oneUsdPrice))
+                                                                            setBalanceA(userInfo?.currency_preference == 'inr' ? (element?.balance) : (element?.balance * oneUsdPrice))
+                                                                            setBalanceB(userInfo?.currency_preference == 'inr' ? (element?.balance) : (element?.balance * oneUsdPrice))
                                                                             setActive({ index: index })
                                                                             setfromWalletAddress(element.name)
                                                                         }}
@@ -185,7 +185,7 @@ const Withdrawal = () => {
                                                                                     </div>
                                                                                     <div className="nk-wgw-balance">
                                                                                         <div className="amount">
-                                                                                            {userInfo?.currency_preference == 'usd' ? (element?.balance)?.toFixed(3) : (element?.balance * oneUsdPrice).toFixed(3)}
+                                                                                            {userInfo?.currency_preference === 'inr' ? (element?.balance)?.toFixed(3) : (element?.balance * oneUsdPrice).toFixed(3)}
                                                                                             <span className="currency currency-nio">
                                                                                                 {userInfo?.currency_preference == "inr" ? "INRX" : "USDT"}
                                                                                             </span>
