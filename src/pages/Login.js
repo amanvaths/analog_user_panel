@@ -1,7 +1,7 @@
 /* global google */
 import React, { useEffect, useState } from "react";
 // import { GoogleLogin, GoogleLogout } from "react-google-login";
-import { BASE_URL, GOOGLE_ID } from "../Api_connection/config";
+import { BASE_URL} from "../Api_connection/config";
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
 import swal from "sweetalert";
 import { Link, useNavigate } from "react-router-dom";

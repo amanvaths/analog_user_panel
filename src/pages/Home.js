@@ -352,8 +352,8 @@ const Home = () => {
                                             ? <>
                                               {
                                                 userInfo?.currency_preference == "inr"
-                                                ? inceptive.toFixed(3)
-                                                : (inceptive / oneUsdPrice).toFixed(3)
+                                                ? (inceptive * oneUsdPrice).toFixed(3)
+                                                : inceptive.toFixed(3)
                                               }
                                               </>
                                             : 0
@@ -393,8 +393,8 @@ const Home = () => {
                                             ? <>
                                               {
                                                 userInfo?.currency_preference == "inr"
-                                                ? airdrop?.toFixed(3)
-                                                : (airdrop / oneUsdPrice).toFixed(3)
+                                                ? (airdrop * oneUsdPrice).toFixed(3)
+                                                : airdrop?.toFixed(3) 
                                               }
                                               </>
                                             : 0
