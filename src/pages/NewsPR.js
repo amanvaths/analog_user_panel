@@ -3,7 +3,7 @@ import Menu from "../components/Menu";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import axios from "axios";
-import { BASE_URL } from "../Api_connection/config";
+import { BASE_URL, BASE_URL_2 } from "../Api_connection/config";
 import { Link, useNavigate } from "react-router-dom";
 
 
@@ -52,7 +52,7 @@ const NewsPR = () => {
                         <div class="row g-gs">
                           <div class="col-lg-5">
                             <div class="video">
-                              <img class="news_img_div w-100" src={`http://localhost:3001${element.image}`} alt="" />
+                              <img class="news_img_div w-100" src={`${BASE_URL_2}${element.image}`} alt="" />
                             </div>
                           </div>
                           <div class="col-lg-7">
@@ -62,7 +62,7 @@ const NewsPR = () => {
                               <p>{element.message}</p>
                               
                               <b onClick={()=>{
-                                  navigate('/NewsArticle', {state: {title: element.title, message: element.message, image: `http://localhost:3001${element.image}`}})
+                                  navigate('/NewsArticle', {state: {title: element.title, message: element.message, image: `${BASE_URL_2}${element.image}`}})
                               }} target="_blank" class="btn btn-sm btn-outline-success">Read More</b>
                             </div>
                           </div>

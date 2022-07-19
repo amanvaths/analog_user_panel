@@ -219,7 +219,7 @@ const OtpTFA = (props) => {
                 </ul>
               </div>
               <div className="mt-3">
-                <p>&copy; 2022 INRX ECOSYSTEM. All Rights Reserved.</p>
+                <p>&copy; {new Date().getFullYear()} INRX ECOSYSTEM. All Rights Reserved.</p>
               </div>
             </div>
           </div>

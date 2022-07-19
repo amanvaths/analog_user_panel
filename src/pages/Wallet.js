@@ -9,7 +9,7 @@ import { NotificationContainer, NotificationManager } from 'react-notifications'
 import axios from "axios";
 import { Triangle } from 'react-loader-spinner'
 import { useSelector, useDispatch } from 'react-redux';
-import { BASE_URL } from "../Api_connection/config";
+import { BASE_URL, BASE_URL_2 } from "../Api_connection/config";
 import { setUserInfo } from "../redux/reducer/user";
 
 const { io } = require("socket.io-client");
@@ -68,7 +68,7 @@ const Wallet = (props) => {
   }
   const updateWallet = () =>{
     try{
-       axios.post(`http://localhost:3001/updateWallet`, {email:email});    
+       axios.post(`${BASE_URL_2}/updateWallet`, {email:email});    
     }catch (error){
       console.log(error);
     }

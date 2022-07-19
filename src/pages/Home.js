@@ -7,7 +7,7 @@ import "react-slideshow-image/dist/styles.css";
 import "react-multi-carousel/lib/styles.css";
 import Getpresale from "../components/Getpresale";
 import axios from "axios";
-import { BASE_URL } from "../Api_connection/config";
+import { BASE_URL, FRONT_URL } from "../Api_connection/config";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useSelector } from "react-redux";
 
@@ -752,7 +752,7 @@ const Home = () => {
                               <RWebShare
                                 data={{
                                   text: "Like humans, flamingos make friends for life",
-                                  url: `http://localhost:3000/signup?ref=${userInfo?.user_id}`,
+                                  url: `${FRONT_URL}/signup?ref=${userInfo?.user_id}`,
                                   title: "Flamingos",
                                 }}
                                 onClick={() => console.log("shared successfully!")}
@@ -776,7 +776,7 @@ const Home = () => {
                               {/* <em className="clipboard-icon icon ni ni-copy"></em>{" "}
                               <span className="clipboard-text">Copy Link</span> */}
                               <CopyToClipboard
-                                text={`http://localhost:3000/signup?ref=${userInfo?.user_id}`}
+                                text={`${FRONT_URL}/signup?ref=${userInfo?.user_id}`}
                                 onCopy={() => {
                                   setCopied(true);
                                   setTimeout(() => {
@@ -814,7 +814,7 @@ const Home = () => {
                               type="text"
                               className="form-control copy-text"
                               id="refUrl"
-                              value={`http://localhost:3000/signup?ref=${userInfo?.user_id}`}
+                              value={`${FRONT_URL}/signup?ref=${userInfo?.user_id}`}
                             />
                           </div>
                         </div>

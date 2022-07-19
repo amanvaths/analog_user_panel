@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
-
+import { BASE_URL } from "../Api_connection/config";
 export default function () {
     const navigate =useNavigate();
     const[otp,setOtp]=useState("")
@@ -20,7 +20,7 @@ export default function () {
                         <input type="text" class="form-control" id="inputOtp"  placeholder="Enter Otp" onChange={(e)=>setOtp(e.target.value)} />
                     </div>
                     <button type="button" class="btn btn-primary px-2" style={{width:"150px"}} onClick={()=>{
-                         axios.post('http://localhost:3001/api/verifyauthtoken', { email:email,token:otp }).then((resp)=>{
+                         axios.post(`${BASE_URL}/verifyauthtoken`, { email:email,token:otp }).then((resp)=>{
                              if(resp.data.status==1){
                                
                                 swal(`Verified Succesfully.`, "Welcome", "success");

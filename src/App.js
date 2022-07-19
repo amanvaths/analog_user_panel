@@ -2,14 +2,10 @@ import React, {useEffect} from "react";
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
-// import Profile from "./pages/Profile";
+
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-// import Terms from "./pages/Terms";
-// import Faq from "./pages/Faq";
 import Affiliate from "./pages/Affiliate";
-// import Transactions from "./pages/Transactions";
-// import Projects from "./pages/Projects";
 import EmailOtp from "./pages/EmailOtp";
 import ForgetPassword from "./pages/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword";
@@ -38,13 +34,9 @@ import NotificationAlert from './pages/NotificationAlert';
 
 function App(props) {
   const {userInfo, user} = useSelector((state)=> state.user.value)
-  // console.log(userInfo.webPush_Private_Key, 'USER');
-  // console.log(user, "USER1");
 
   useEffect(()=>{
     if(userInfo?.webPush_Public_Key && user?.email){
-      // console.log(user?.email, ":; USER EMASIOL I N APP>JS");
-      // console.log("user public key :",userInfo.webPush_Public_Key);
     subscribeUser(userInfo?.webPush_Public_Key, user?.email);
     } else {
       console.log("User public key not found!");
@@ -52,7 +44,6 @@ function App(props) {
 
   },[{...user}])
 
-  // console.log("user", user);
   return (
     <div>
       <BrowserRouter>
@@ -64,17 +55,8 @@ function App(props) {
           <Route path="/ResetPassword" element={<ResetPassword />} />
           <Route path="/ResendOtp" element={<ResendOtp />} />
           <Route path="/2faAuthentication" element={<OtpTFA />} />
-
-
-          {/* <Route path="/Profile" element={<Profile />} /> */}
-          {/* <Route path="/Terms" element={<Terms />} /> */}
-          {/* <Route path="/Faq" element={<Faq />} /> */}
-          {/* <Route path="/Projects" element={<Projects />} /> */}
-
           <Route path="/home" element={(user.email && user.token)?<Home />:<Login /> } />
-         
           <Route path="/Affiliate" element={(user.email && user.token)?<Affiliate />:<Login />} />
-          {/* <Route path="/Transactions" element={<Transactions />} /> */}
           <Route path="/wallet" element={(user.email && user.token)? <Wallet /> : <Login />} />
           <Route path="/accountSettings" element={(user.email && user.token)? <AccountSettings/> : <Login /> } />
           <Route path="/cryptoTransaction" element={(user.email && user.token)? <CryptoTransaction />:<Login />} />
@@ -93,7 +75,6 @@ function App(props) {
           <Route path="/RoadMap" element={(user.email && user.token)?<RoadMap />:<Login />} />
           <Route path="/NewsArticle" element={(user.email && user.token)?<NewsArticle />:<Login />} />
           <Route path="/NotificationAlert" element={(user.email && user.token)?<NotificationAlert />:<Login />} />
-          
         </Routes>
       </BrowserRouter>
     </div >

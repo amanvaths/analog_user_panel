@@ -428,24 +428,7 @@ const Signup = (props) => {
                 </div>
                 <ul className="nav justify-center gx-4">
                   <li className="nav-item ">
-                    {/* <FacebookLogin
-                        className="facebook-button"
-                        appId="1088597931155576"
-                        autoLoad={true}
-                        //   cssclassName="my-facebook-button-class"
-                        fields="name,email,picture"
-                        scope="public_profile,user_friends,user_actions.books"
-                        callback={this.responseFacebook}
-                      /> */}
-                    {/* <FacebookLogin
-                      appId="1088597931155576"
-                      autoLoad={true}
-                      fields="name,email,picture"
-                      callback={props.SocialSignUp}
-                      cssclassName="btnFacebook"
-                      icon={<i className="fa fa-facebook" className="logo-fb"></i>}
-                      textButton="Sign up with Facebook"
-                    /> */}
+                    
                   </li>
                   <li className="nav-item">
                   <div id="googleLogin"></div>
@@ -457,76 +440,7 @@ const Signup = (props) => {
           </div>
           <div className="nk-content text-center mt-lg-2">
               <div className="container container justify-content-center d-flex">
-               {/*<ul className="nav nav-sm">
-                  <li className="nav-item">
-                    <a className="nav-link" href="#">
-                      Terms &amp; Condition
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="#">
-                      Privacy Policy
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="#">
-                      Help
-                    </a>
-                  </li>
-                  <li className="nav-item dropup">
-                    <a
-                      className="dropdown-toggle dropdown-indicator has-indicator nav-link"
-                      data-toggle="dropdown"
-                      data-offset="0,10"
-                    >
-                      <small>English</small>
-                    </Link>
-                    <div className="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                      <ul className="language-list">
-                        <li>
-                          <Link to="" className="language-item">
-                            <img
-                              src="./images/flags/english.png"
-                              alt=""
-                              className="language-flag"
-                            />
-                            <span className="language-name">English</span>
-                          </a>
-                        </li>
-                        <li>
-                          <Link to="" className="language-item">
-                            <img
-                              src="./images/flags/spanish.png"
-                              alt=""
-                              className="language-flag"
-                            />
-                            <span className="language-name">Español</span>
-                          </a>
-                        </li>
-                        <li>
-                          <Link to=""" className="language-item">
-                            <img
-                              src="./images/flags/french.png"
-                              alt=""
-                              className="language-flag"
-                            />
-                            <span className="language-name">Français</span>
-                          </a>
-                        </li>
-                        <li>
-                          <Link to="" className="language-item">
-                            <img
-                              src="./images/flags/turkey.png"
-                              alt=""
-                              className="language-flag"
-                            />
-                            <span className="language-name">Türkçe</span>
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                  </ul>*/}
+               
               </div>
               <div className="mt-3">
                 <p>&copy; 2022 INRX ECOSYSTEM. All Rights Reserved.</p>

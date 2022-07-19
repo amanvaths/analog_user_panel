@@ -5,6 +5,7 @@ import {AiOutlineEyeInvisible, AiOutlineEye} from 'react-icons/ai'
 import swal from 'sweetalert';
 import { useNavigate} from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { BASE_URL } from '../Api_connection/config';
 
 const ChangePassword = () => {
     const {user} = useSelector((state)=> state.user.value)
@@ -27,7 +28,7 @@ const ChangePassword = () => {
 
     const changePassword = async()=>{
         try {
-            const data = await axios.post('http://localhost:3001/api/change_password',{email: email, old_password: oldPassword, new_password: newPassword})
+            const data = await axios.post(`${BASE_URL}/change_password`,{email: email, old_password: oldPassword, new_password: newPassword})
             console.log(data.data)
             if(confirmPassword === newPassword){
                 if(data.data.status === 1){

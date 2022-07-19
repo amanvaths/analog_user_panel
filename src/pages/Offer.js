@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "react-multi-carousel/lib/styles.css";
 import axios from "axios";
-import { BASE_URL } from "../Api_connection/config";
+import { BASE_URL, BASE_URL_2 } from "../Api_connection/config";
 import Carousel from 'react-bootstrap/Carousel';
 
 const Offer = () => {
@@ -51,7 +51,7 @@ const Offer = () => {
                               <img
                                 style={{ height: "471px", width: "1000px" }}
                                 className="d-block w-100"
-                                src={`http://localhost:3001${element.image}`}
+                                src={`${BASE_URL_2}${element.image}`}
                                 alt={index+1}
                               />
                             </Carousel.Item>

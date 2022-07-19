@@ -29,12 +29,12 @@ const Withdrawal = () => {
     // console.log(userInfo.webPush_Public_Key, "PUBLICK KEY ");
 
 
-    const valid = WAValidator.validate('TMzJEW5QtgyU2JuPRyFeFe2tGReoAiY5ha','usdt');
-    if (valid)
-        console.log('This is a valid address');
-    else {
-        console.log('Address INVALID');
-    }
+    // const valid = WAValidator.validate('TMzJEW5QtgyU2JuPRyFeFe2tGReoAiY5ha','usdt');
+    // if (valid)
+    //     console.log('This is a valid address');
+    // else {
+    //     console.log('Address INVALID');
+    // }
 
 
 
@@ -248,79 +248,7 @@ const Withdrawal = () => {
                                                                                         <input type="text" className="form-control" id="phone-no" value={userInfo?.currency_preference == 'inr' ? inrFees : usdFees} readOnly />
                                                                                     </div>
                                                                                 </div>
-                                                                                {/* <div className="form-group">
-                                                                                    <label className="form-label">Communication</label>
-                                                                                    <ul className="custom-control-group g-3 align-center">
-                                                                                        <li>
-                                                                                            <div
-                                                                                                className="custom-control custom-control-sm custom-checkbox">
-                                                                                                <input type="checkbox"
-                                                                                                    className="custom-control-input"
-                                                                                                    id="com-email" /><label
-                                                                                                        className="custom-control-label"
-                                                                                                        for="com-email">Email</label></div>
-                                                                                        </li>
-                                                                                        <li>
-                                                                                            <div
-                                                                                                className="custom-control custom-control-sm custom-checkbox">
-                                                                                                <input type="checkbox"
-                                                                                                    className="custom-control-input"
-                                                                                                    id="com-sms" /><label
-                                                                                                        className="custom-control-label"
-                                                                                                        for="com-sms">SMS</label></div>
-                                                                                        </li>
-                                                                                        <li>
-                                                                                            <div
-                                                                                                className="custom-control custom-control-sm custom-checkbox">
-                                                                                                <input type="checkbox"
-                                                                                                    className="custom-control-input"
-                                                                                                    id="com-phone" /><label
-                                                                                                        className="custom-control-label"
-                                                                                                        for="com-phone">Phone</label></div>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                                <div className="form-group"><label className="form-label"
-                                                                                    for="pay-amount">Amount</label>
-                                                                                    <div className="form-control-wrap">
-                                                                                        <input type="number"
-                                                                                            className="form-control" id="pay-amount" /></div>
-                                                                                </div>
-                                                                                <div className="form-group"><label className="form-label">Payment
-                                                                                    Methods</label>
-                                                                                    <ul className="custom-control-group g-3 align-center">
-                                                                                        <li>
-                                                                                            <div
-                                                                                                className="custom-control custom-control-sm custom-checkbox">
-                                                                                                <input type="checkbox"
-                                                                                                    className="custom-control-input"
-                                                                                                    id="pay-card" />
-                                                                                                <label
-                                                                                                    className="custom-control-label"
-                                                                                                    for="pay-card">Card</label></div>
-                                                                                        </li>
-                                                                                        <li>
-                                                                                            <div
-                                                                                                className="custom-control custom-control-sm custom-checkbox">
-                                                                                                <input type="checkbox"
-                                                                                                    className="custom-control-input"
-                                                                                                    id="pay-bitcoin" />
-                                                                                                <label
-                                                                                                    className="custom-control-label"
-                                                                                                    for="pay-bitcoin">Bitcoin</label></div>
-                                                                                        </li>
-                                                                                        <li>
-                                                                                            <div
-                                                                                                className="custom-control custom-control-sm custom-checkbox">
-                                                                                                <input type="checkbox"
-                                                                                                    className="custom-control-input"
-                                                                                                    id="pay-cash" />
-                                                                                                <label
-                                                                                                    className="custom-control-label"
-                                                                                                    for="pay-cash">Cash</label></div>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div> */}
+                                                                                 
                                                                                 <div className="form-group text-right">
                                                                                     <button type="button"
                                                                                         className="btn btn-outline-success"

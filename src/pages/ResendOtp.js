@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import swal from "sweetalert";
 import { Link, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../Api_connection/config";
 
 const ResendOtp = (props) => {
   const [email, setEmail] = useState("");
@@ -8,15 +9,9 @@ const ResendOtp = (props) => {
   const [response, setResponse] = useState("");
   const navigate = useNavigate();
 
-  // console.log(email, "otpp");
-
-  // var email = localStorage.getItem("email");
-  // if (email == "") {
-  //   navigate("/");
-  // }
   async function ResendOtpApi(e) {
     // e.preventDefault();
-    await fetch("http://localhost:3001/api/sendotp", {
+    await fetch(`${BASE_URL}/sendotp`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

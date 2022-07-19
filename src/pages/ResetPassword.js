@@ -4,10 +4,8 @@ import { BASE_URL } from "../Api_connection/config";
 import { GoogleLogin } from "react-google-login";
 import swal from "sweetalert";
 import {AiOutlineEyeInvisible, AiOutlineEye} from 'react-icons/ai'
-// import queryString from "query-string";
 import { useParams, useLocation } from "react-router-dom";
 
-// import FacebookLogin from "react-facebook-login";
 const ResetPassword = (props) => {
   const location = useLocation();
   const resetCode = location.search;
@@ -345,80 +343,10 @@ const ResetPassword = (props) => {
             </div>
             <div className="nk-content text-center mt-lg-2">
               <div className="container container justify-content-center d-flex">
-                {/* <ul className="nav nav-sm">
-                  <li className="nav-item">
-                    <Link className="nav-link" to="">
-                      Terms &amp; Condition
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link" to="">
-                      Privacy Policy
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link" to="">
-                      Help
-                    </Link>
-                  </li>
-                  <li className="nav-item dropup">
-                    <Link
-                      to=""
-                      className="dropdown-toggle dropdown-indicator has-indicator nav-link"
-                      data-toggle="dropdown"
-                      data-offset="0,10"
-                    >
-                      <small>English</small>
-                    </Link>
-                    <div className="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                      <ul className="language-list">
-                        <li>
-                          <Link to="" className="language-item">
-                            <img
-                              src="./images/flags/english.png"
-                              alt=""
-                              className="language-flag"
-                            />
-                            <span className="language-name">English</span>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="" className="language-item">
-                            <img
-                              src="./images/flags/spanish.png"
-                              alt=""
-                              className="language-flag"
-                            />
-                            <span className="language-name">Español</span>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="" className="language-item">
-                            <img
-                              src="./images/flags/french.png"
-                              alt=""
-                              className="language-flag"
-                            />
-                            <span className="language-name">Français</span>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="" className="language-item">
-                            <img
-                              src="./images/flags/turkey.png"
-                              alt=""
-                              className="language-flag"
-                            />
-                            <span className="language-name">Türkçe</span>
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                </ul> */}
+                
               </div>
               <div className="mt-3">
-                <p>&copy; 2022 INRX ECOSYSTEM. All Rights Reserved.</p>
+                <p>&copy; {new Date().getFullYear()} INRX ECOSYSTEM. All Rights Reserved.</p>
               </div>
             </div>
           </div>
