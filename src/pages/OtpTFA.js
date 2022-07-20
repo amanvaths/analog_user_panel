@@ -73,13 +73,13 @@ const OtpTFA = (props) => {
                   <img
                     className="logo-light logo-img logo-img-lg"
                     src="images/logo-dark.png"
-                    srcSet="images/logo2x.png 2x"
+                    // srcSet="images/logo2x.png 2x"
                     alt="logo"
                   />
                   <img
                     className="logo-dark logo-img logo-img-lg"
                     src="images/logo.png"
-                    srcSet="images/logo-dark2x.png 2x"
+                    // srcSet="images/logo-dark2x.png 2x"
                     alt="logo-dark"
                   />
                 </Link>

@@ -106,7 +106,7 @@ const EmailOtp = (props) => {
                   <img
                       className="logo-dark logo-img logo-img-lg"
                       src="images/logo.png"
-                      srcSet="images/logo-dark2x.png 2x"
+                      // srcSet="images/logo-dark2x.png 2x"
                       alt="logo-dark"
                     />
                   </Link>
