@@ -89,19 +89,19 @@ const Home = () => {
       // abortController = new AbortController();
       if(api == false){
       setApi(true);
-      console.log("called..........");
+      // console.log("called..........");
       const res = await axios.post(`${BASE_URL}/buyChart`, { email: email});
       const arr = res.data.data;
       setApi(false)
       arr.map((element, index) => {
         total.push(element.total)
         year.push(`${element.month}/${element.year}`)
-        console.log(`${element.month}/${element.year}`, "element");
+        // console.log(`${element.month}/${element.year}`, "element");
       })
       setChartAmt(total)
       setChartLabel(year)
     }else{
-      console.log("cancelled..........");
+      // console.log("cancelled..........");
     }
       // controller.abort()
     } catch (error) {

@@ -37,7 +37,7 @@ const Affiliate = (props) => {
 
   const getAffiliate = async () => {
     try {
-      console.log(email, " user email asjljasf")
+      // console.log(email, " user email asjljasf")
       const arr = [];
       const data = await axios.post(`${BASE_URL}/refferalLevelWiseData`, { email: email })
       arr.push(Object.keys(data.data.data))
@@ -45,7 +45,7 @@ const Affiliate = (props) => {
       setLoad(true)
       setAffiliates(arr);
     } catch (error) {
-      console.log("Error in getting data Affililate :" + error);
+      // console.log("Error in getting data Affililate :" + error);
     }
   }
   const limit = 5
@@ -277,7 +277,7 @@ const Affiliate = (props) => {
                                     tab.length > 0 ?
 
                                       tab.map((element, index) => {
-                                        console.log(index, "::INDEx");
+                                        // console.log(index, "::INDEx");
                                         return (
                                           <div className="nk-tb-item ">
 
@@ -447,7 +447,7 @@ const Affiliate = (props) => {
                                   status == 2 ? <h5>Record Not Found</h5> :
                                     tab.length > 0 ?
                                       tab.map((element, index) => {
-                                        console.log(index, "::INDEx");
+                                        // console.log(index, "::INDEx");
                                         return (
                                           <div className="nk-tb-item ">
 
@@ -614,7 +614,7 @@ const Affiliate = (props) => {
                                   status == 2 ? <h5>Record Not Found</h5> :
                                     tab.length > 0 ?
                                       tab.map((element, index) => {
-                                        console.log(index, "::INDEx");
+                                        // console.log(index, "::INDEx");
                                         return (
                                           <>
                                             <div className="nk-tb-item ">

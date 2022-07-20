@@ -32,7 +32,7 @@ const CryptoTransaction = () => {
         setTotalOrder(data.data.count)
         })
       }
-      console.log(data.count, ":: response from tranction api");
+      // console.log(data.count, ":: response from tranction api");
       
     } catch (error) {
       console.log(error);

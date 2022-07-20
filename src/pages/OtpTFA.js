@@ -22,7 +22,7 @@ const OtpTFA = (props) => {
         else{
           // console.log(location.state.email, "email");
           // console.log(location.state.token, "token");
-          console.log(otp, "otp");
+          // console.log(otp, "otp");
           const data = await axios.post(`${BASE_URL}/verifyauthtoken`,{email: location.state.email, token: otp, })
           if(data.data.status == 1){
             toast.success("OTP Verified")

@@ -38,7 +38,7 @@ const IPwhiteListing = () => {
     const addWhiteIP = async () => {
         try {
             const data = await axios.post(`${BASE_URL}/add_whitelisted_ip`, { email: email, ip: ip })
-            console.log(data.data.status, "add");
+            // console.log(data.data.status, "add");
             if(data.data.status == 1){
                 NotificationManager.success('IP Added', '')
             }
@@ -51,7 +51,7 @@ const IPwhiteListing = () => {
     const deleteWhiteIP = async (id) => {
         try {
             const data = await axios.post(`${BASE_URL}/removeWhiteListedIp`, { _id: id })
-            console.log(data, "delete Data");
+            // console.log(data, "delete Data");
             if(data.data.status == 1){
                 NotificationManager.error('IP Removed', '')
             }

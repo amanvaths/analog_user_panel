@@ -29,7 +29,7 @@ const ChangePassword = () => {
     const changePassword = async()=>{
         try {
             const data = await axios.post(`${BASE_URL}/change_password`,{email: email, old_password: oldPassword, new_password: newPassword})
-            console.log(data.data)
+            // console.log(data.data)
             if(confirmPassword === newPassword){
                 if(data.data.status === 1){
                     toast.success("Password Changed Successfully")
@@ -63,7 +63,7 @@ const ChangePassword = () => {
       const togglePassword2 = () => {
         
         setNewPasswordShone(!newPasswordShown)
-        console.log(newPasswordShown);
+        // console.log(newPasswordShown);
     
       };
       const togglePassword3 = () => {
@@ -299,8 +299,8 @@ const ChangePassword = () => {
                                     value={confirmPassword}
                                     minLength={8}
                                     onChange={(e) => {
-                                        console.log(newPassword, "new");
-                                        console.log(e.target.value, "confirm");
+                                        // console.log(newPassword, "new");
+                                        // console.log(e.target.value, "confirm");
                                         if(newPassword == e.target.value){
                                             setMatch(true)
                                         }else{

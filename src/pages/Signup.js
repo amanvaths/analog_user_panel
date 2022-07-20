@@ -98,17 +98,17 @@ const Signup = (props) => {
 
   const handleCallback = async(response)=>{
     let obj = jwt_decode(response.credential)
-    console.log(obj)
+    // console.log(obj)
     // setII(obj.picture)
-    console.log(email,"email");
+    // console.log(email,"email");
     const data  = await axios.post(`${BASE_URL}/signInWithGoogle`, { email: obj.email, password: obj.sub})
     if(data){
-      console.log(data, "API RESPONSE");
+      // console.log(data, "API RESPONSE");
       if(data.data.status === 1)
       {
-        console.log(data.data.status, "status");
+        // console.log(data.data.status, "status");
         if(data.data.googleAuth === 0){
-          console.log(data.data.googleAuth, "GoogleAuth");
+          // console.log(data.data.googleAuth, "GoogleAuth");
           dispatch(setIsLoggedIn({ LoginDetails: data.data }))
             navigate('/home')
         }else{
@@ -137,11 +137,11 @@ const Signup = (props) => {
     "28253347908-l3f5pge45v4avpv50ppksjlkvvap6t35.apps.googleusercontent.com";
 
   const onLoginSuccess = (res) => {
-    console.log(res, "P");
+    // console.log(res, "P");
   };
 
   const onLoginFailure = (res) => {
-    console.log(res, "F");
+    // console.log(res, "F");
   };
 
   //Validation Box

@@ -23,8 +23,8 @@ const ResendOtp = (props) => {
     })
       .then((res) => res.json())
       .then((resp) => {
-        console.log(resp);
-        console.log(response, "resp");
+        // console.log(resp);
+        // console.log(response, "resp");
         if (resp.status == 1) {
           swal(
             "OTP sended successfully",
@@ -34,7 +34,7 @@ const ResendOtp = (props) => {
 
           navigate("/EmailOtp");
 
-          console.log(resp, "resp");
+          // console.log(resp, "resp");
         } else {
           setResponse(resp);
         }

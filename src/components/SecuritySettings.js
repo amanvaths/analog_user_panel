@@ -11,7 +11,7 @@ import swal from 'sweetalert'
 
 const SecuritySettings = () => {
   const { userInfo, user } = useSelector((state) => state.user.value)
-  console.log(":: USER INFO::::", userInfo);
+  // console.log(":: USER INFO::::", userInfo);
   const [otp, setOtp] = useState("");
   const [otpD, setOtpD] = useState("");
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const SecuritySettings = () => {
     try {
       const state = e.target.checked
       const data = await axios.post(`${BASE_URL}/login_activity`, { email: email, login_activity: state })
-      console.log(data, "response from loginActivity api");
+      // console.log(data, "response from loginActivity api");
     } catch (error) {
       console.log(error);
     }

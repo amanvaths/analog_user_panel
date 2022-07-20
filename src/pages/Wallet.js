@@ -36,7 +36,7 @@ const Wallet = (props) => {
 
 
   const email = user.email;
-  const socket = io(`http://localhost:8080`)
+  const socket = io(`https://api.analog.live:8080`,{secure: true})
   // var status = 0;
   useEffect(()=>{
   socket.on('connect',()=>{

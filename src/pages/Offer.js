@@ -14,7 +14,7 @@ const Offer = () => {
   const getOffers = async () => {
     try {
       const data = await axios.post(`${BASE_URL}/offers`)
-      console.log(data.data, "Offer API");
+      // console.log(data.data, "Offer API");
       setOffers(data.data)
     } catch (error) {
     }

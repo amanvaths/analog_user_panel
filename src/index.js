@@ -11,7 +11,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
 serviceWorker.register();
 let persistor = persistStore(store);
-console.log(persistor, "persistor");
+// console.log(persistor, "persistor");
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

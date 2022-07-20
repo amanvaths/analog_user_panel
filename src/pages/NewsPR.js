@@ -15,7 +15,7 @@ const NewsPR = () => {
   const getNews = async()=>{
     try {
       const data = await axios.post(`${BASE_URL}/newspr`)
-      console.log(data.data, "NEWS API");
+      // console.log(data.data, "NEWS API");
       setNews(data.data)
     } catch (error) {   
     }
