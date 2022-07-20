@@ -1,6 +1,5 @@
 /* global google */
 import React, { useEffect, useState } from "react";
-// import { GoogleLogin, GoogleLogout } from "react-google-login";
 import { BASE_URL} from "../Api_connection/config";
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
 import swal from "sweetalert";
@@ -10,7 +9,7 @@ import {setIsLoggedIn,sendOtp } from "../redux/reducer/user";
 import jwt_decode from 'jwt-decode'
 import axios from "axios";
 
-// import FacebookLogin from "react-facebook-login";
+
 
 const Login = (props) => {
   const navigate = useNavigate();
@@ -255,7 +254,7 @@ const Login = (props) => {
               </form>
                 <div className="form-note-s2 pt-2 text-right small">
                   {" "}
-                  Don't have an account yet? <a className="text-teal" href="/signup">Create an account</a>
+                  Don't have an account yet? <Link className="text-teal" to="/Signup">Create an account</Link>
                 </div>
               <div className="text-center pt-4 pb-3">
                 <span className="overline-title overline-title-sap">
