@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { BASE_URL } from "../Api_connection/config";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import swal from "sweetalert";
+// import swal from "sweetalert";
 import axios from "axios";
 import {useDispatch } from "react-redux";
 import { setIsLoggedIn } from "../redux/reducer/user";
-
+import toast from 'react-hot-toast';
 const OtpTFA = (props) => {
   const location = useLocation()
   const dispatch = useDispatch()
@@ -20,12 +20,13 @@ const OtpTFA = (props) => {
           setOtpError(true)
         }
         else{
-          console.log(location.state.email, "email");
-          console.log(location.state.token, "token");
+          // console.log(location.state.email, "email");
+          // console.log(location.state.token, "token");
           console.log(otp, "otp");
           const data = await axios.post(`${BASE_URL}/verifyauthtoken`,{email: location.state.email, token: otp, })
           if(data.data.status == 1){
-            swal("OTP Verified", "", "success");
+            toast.success("OTP Verified")
+            // swal("OTP Verified", "", "success");
             localStorage.setItem("email", location.state.email);
             localStorage.setItem("token", location.state.token);
             const obj ={
@@ -35,11 +36,14 @@ const OtpTFA = (props) => {
             dispatch(setIsLoggedIn({ LoginDetails: obj }))
             navigate('/home')
           }else if(data.data.status == 0){
-            swal("Invalid OTP", "", "error");
+            toast.error("Invalid OTP")
+            // swal("Invalid OTP", "", "error");
           }else if(data.data.status == 2){
-            swal("Google 2FA is not activated", "", "error")
+            toast.error("Google 2FA is not activated")
+            // swal("Google 2FA is not activated", "", "error")
           }else if(data.data.status == 3){
-            swal("Invalid API Call", "", 'error')
+            toast.error("Invalid API Call")
+            // swal("Invalid API Call", "", 'error')
           }
         }
       } catch (error) {
@@ -68,14 +72,14 @@ const OtpTFA = (props) => {
                 <Link to="" className="logo-link">
                   <img
                     className="logo-light logo-img logo-img-lg"
-                    src="./images/logo-dark.png"
-                    srcSet="./images/logo2x.png 2x"
+                    src="images/logo-dark.png"
+                    srcSet="images/logo2x.png 2x"
                     alt="logo"
                   />
                   <img
                     className="logo-dark logo-img logo-img-lg"
-                    src="./images/logo.png"
-                    srcSet="./images/logo-dark2x.png 2x"
+                    src="images/logo.png"
+                    srcSet="images/logo-dark2x.png 2x"
                     alt="logo-dark"
                   />
                 </Link>
@@ -176,7 +180,7 @@ const OtpTFA = (props) => {
                         <li>
                           <Link to="" className="language-item">
                             <img
-                              src="./images/flags/english.png"
+                              src="images/flags/english.png"
                               alt=""
                               className="language-flag"
                             />
@@ -186,7 +190,7 @@ const OtpTFA = (props) => {
                         <li>
                           <Link to="" className="language-item">
                             <img
-                              src="./images/flags/spanish.png"
+                              src="images/flags/spanish.png"
                               alt=""
                               className="language-flag"
                             />
@@ -196,7 +200,7 @@ const OtpTFA = (props) => {
                         <li>
                           <Link to="" className="language-item">
                             <img
-                              src="./images/flags/french.png"
+                              src="images/flags/french.png"
                               alt=""
                               className="language-flag"
                             />
@@ -206,7 +210,7 @@ const OtpTFA = (props) => {
                         <li>
                           <Link to="" className="language-item">
                             <img
-                              src="./images/flags/turkey.png"
+                              src="images/flags/turkey.png"
                               alt=""
                               className="language-flag"
                             />
@@ -239,8 +243,8 @@ const OtpTFA = (props) => {
                     <div className="nk-feature-img">
                       <img
                         className="round"
-                        src="./images/slides/slide-a.png"
-                        srcSet="./images/slides/promo-a2x.png 2x"
+                        src="images/slides/slide-a.png"
+                        srcSet="images/slides/promo-a2x.png 2x"
                         alt=""
                       />
                     </div>
