@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {widget} from '../../src/charting_library'
 import {connect} from "react-redux";
+import { BASE_URL } from '../Api_connection/config';
 class TVChartContainer extends React.PureComponent  {
 	constructor(props) {
 		super(props);
@@ -60,7 +61,7 @@ class TVChartContainer extends React.PureComponent  {
 		containerId: 'tv_chart_container',
 		// datafeedUrl: 'https://demo_feed.tradingview.com',
 		// datafeedUrl: 'https://order.btexapi.cloud/api/chart',
-		datafeedUrl: 'http://localhost:3001/api/chart',
+		datafeedUrl: `${BASE_URL}/chart`,
 		//https://bitflash.io/api/chart
 		// datafeedUrl: 'http://localhost/api/chart',
 		libraryPath: '/charting_library/',

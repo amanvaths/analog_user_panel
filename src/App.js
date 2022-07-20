@@ -1,8 +1,9 @@
 import React, {useEffect} from "react";
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import "./App.css";
-import Home from "./pages/Home";
+import { Toaster } from 'react-hot-toast';
 
+import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Affiliate from "./pages/Affiliate";
@@ -74,9 +75,18 @@ function App(props) {
           <Route path="/BlockChain" element={(user.email && user.token)?<BlockChain />:<Login />} />
           <Route path="/RoadMap" element={(user.email && user.token)?<RoadMap />:<Login />} />
           <Route path="/NewsArticle" element={(user.email && user.token)?<NewsArticle />:<Login />} />
-          <Route path="/NotificationAlert" element={(user.email && user.token)?<NotificationAlert />:<Login />} />
+          <Route path="/NotificationAlert" element={(user.email && user.token)?<NotificationAlert />:<Login />} /> 
         </Routes>
       </BrowserRouter>
+      <Toaster 
+      position="right-bottom"
+      toastOptions={{
+        style: {
+          background: '#363636',
+          color: '#fff',
+        },
+      }}
+      />
     </div >
   );
 }

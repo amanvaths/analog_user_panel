@@ -1,10 +1,10 @@
 import React,{useState} from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import swal from 'sweetalert';
+// import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from "../Api_connection/config";
-export default function () {
+export default function () {  
     const navigate =useNavigate();
     const[otp,setOtp]=useState("")
     const email = localStorage.getItem("email")

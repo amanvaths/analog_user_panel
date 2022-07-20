@@ -69,14 +69,14 @@ const ResendOtp = (props) => {
                 <Link to="" className="logo-link">
                     <img
                       className="logo-light logo-img logo-img-lg"
-                      src="./images/logo-dark.png"
-                      srcSet="./images/logo2x.png 2x"
+                      src="images/logo-dark.png"
+                      srcSet="images/logo2x.png 2x"
                       alt="logo"
                     />
                     <img
                       className="logo-dark logo-img logo-img-lg"
-                      src="./images/logo.png"
-                      srcSet="./images/logo-dark2x.png 2x"
+                      src="images/logo.png"
+                      srcSet="images/logo-dark2x.png 2x"
                       alt="logo-dark"
                     />
                 </Link>
@@ -193,7 +193,7 @@ const ResendOtp = (props) => {
                         <li>
                           <Link to="" className="language-item">
                             <img
-                              src="./images/flags/english.png"
+                              src="images/flags/english.png"
                               alt=""
                               className="language-flag"
                             />
@@ -203,7 +203,7 @@ const ResendOtp = (props) => {
                         <li>
                           <Link to="" className="language-item">
                             <img
-                              src="./images/flags/spanish.png"
+                              src="images/flags/spanish.png"
                               alt=""
                               className="language-flag"
                             />
@@ -213,7 +213,7 @@ const ResendOtp = (props) => {
                         <li>
                           <Link to="" className="language-item">
                             <img
-                              src="./images/flags/french.png"
+                              src="images/flags/french.png"
                               alt=""
                               className="language-flag"
                             />
@@ -223,7 +223,7 @@ const ResendOtp = (props) => {
                         <li>
                           <Link to="" className="language-item">
                             <img
-                              src="./images/flags/turkey.png"
+                              src="images/flags/turkey.png"
                               alt=""
                               className="language-flag"
                             />
@@ -256,8 +256,8 @@ const ResendOtp = (props) => {
                     <div className="nk-feature-img">
                       <img
                         className="round"
-                        src="./images/slides/slide-a.png"
-                        srcSet="./images/slides/promo-a2x.png 2x"
+                        src="images/slides/slide-a.png"
+                        srcSet="images/slides/promo-a2x.png 2x"
                         alt=""
                       />
                     </div>

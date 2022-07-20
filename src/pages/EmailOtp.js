@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BASE_URL } from "../Api_connection/config";
 import { Link, useNavigate } from "react-router-dom";
-import swal from "sweetalert";
+import toast from 'react-hot-toast';
 import { useSelector } from "react-redux";
 import { Bars } from 'react-loader-spinner'     
 
@@ -40,20 +40,23 @@ const EmailOtp = (props) => {
         // console.log(email);
         console.log(res, "resp");
         if (resp.status == "1") {
-       
-          swal(`OTP Verified Successfully`, "You can now Login", "success");
+          toast.success("OTP Verified Successfully")
+          // swal(`OTP Verified Successfully`, "You can now Login", "success");
           setTimeout(() => {
             navigate("/login");
-          }, 3000);
+          }, 1000);
         } 
         else if(resp.status == 2){
-          swal("Inncorrect OTP", "Enter Correct OTP", "error");
+          toast.error("Inncorrect OTP")
+          // swal("Inncorrect OTP", "Enter Correct OTP", "error");
         }
         else if(resp.status == 3){
-          swal("Invalid User", "", "error");
+          toast.error("Invalid User")
+          // swal("Invalid User", "", "error");
         }
         else if(resp.status == 0){
-          swal("Something Went wrong", "", "error");
+          toast.error('Something Went wrong')
+          // swal("Something Went wrong", "", "error");
         }
         else {
           setResponse(resp);
@@ -102,8 +105,8 @@ const EmailOtp = (props) => {
                   <Link to="/Home" className="logo-link">                    
                   <img
                       className="logo-dark logo-img logo-img-lg"
-                      src="./images/logo.png"
-                      srcSet="./images/logo-dark2x.png 2x"
+                      src="images/logo.png"
+                      srcSet="images/logo-dark2x.png 2x"
                       alt="logo-dark"
                     />
                   </Link>

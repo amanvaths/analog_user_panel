@@ -5,6 +5,7 @@ import { setUserInfo, logout, setTheme } from "../redux/reducer/user";
 import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
 import { navsetter } from "../redux/actions/websiteDBAction";
+import toast from 'react-hot-toast';
 
 const Header = () => {
 
@@ -59,16 +60,8 @@ const Header = () => {
 
 
   const signOut = () => {
-    // navigate("/", { replace: true });
     dispatch(logout());
-    // return(
-    //   <>
-    //   <Redirect to="/login" />
-    //   </>
-    // )
-    // window
-    // window.location.replace('/login')
-    // <Redirect to="/somewhere/else" />
+    toast.success("Logout Successfully")
     navigate("/login")
   };
 

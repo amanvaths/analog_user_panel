@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
 import {AiOutlineEyeInvisible, AiOutlineEye} from 'react-icons/ai'
-import swal from 'sweetalert';
+import toast from 'react-hot-toast';
 import { useNavigate} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { BASE_URL } from '../Api_connection/config';
@@ -32,7 +32,8 @@ const ChangePassword = () => {
             console.log(data.data)
             if(confirmPassword === newPassword){
                 if(data.data.status === 1){
-                    swal("Password Changed Successfully", "Please Login", "success");
+                    toast.success("Password Changed Successfully")
+                    // swal("Password Changed Successfully", "Please Login", "success");
               setTimeout(() => {
                 navigate("/login");
               }, 2000);
@@ -41,10 +42,12 @@ const ChangePassword = () => {
                 setConfirmPassword(" ")
             }
             else if(data.data.status === 0){
-                swal("Password Incorrect", "Enter Correct Password", "error");
+                toast.error("Incorrect Password")
+                // swal("Password Incorrect", "Enter Correct Password", "error");
             }
             }else{
-                swal("Password and confirm password does not match", "Enter identical password", "error");
+                toast.error("Password and confirm password do not match")
+                // swal("Password and confirm password does not match", "Enter identical password", "error");
             }
            
 

@@ -3,13 +3,12 @@ import { BASE_URL } from "../Api_connection/config";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setUserInfo } from "../redux/reducer/user";
-
-import swal from "sweetalert";
-import 'react-notifications/lib/notifications.css';
-import { NotificationContainer, NotificationManager } from 'react-notifications';
+import toast from 'react-hot-toast';
 import { Link } from "react-router-dom";
 
+
 const PersonalInfo = () => {
+  
   const dispatch = useDispatch()
   const { userInfo, user } = useSelector((state) => state.user.value)
   const email = user.email;
@@ -33,14 +32,14 @@ const PersonalInfo = () => {
       task: task,
     };
     apidata[task] = task === "username" ? localUserName : task === "currency" ? myCurrency : task === "contact" ? phone : '';
-    console.log(myCurrency, "data befor api call");
-    console.log("mpobj::", apidata);
+    // console.log(myCurrency, "data befor api call");
+    // console.log("mpobj::", apidata);
 
     if (apidata.email && apidata.task && apidata[task]) {
       try {
         const data = await axios.post(`${BASE_URL}/settings`, apidata)
         if (data.data.status == 1) {
-          console.log(task, "TASK");
+          // console.log(task, "TASK");
           const obj = {...userInfo}
           if(task === "username"){
             obj['username'] = localUserName;
@@ -57,16 +56,17 @@ const PersonalInfo = () => {
           setLocalUserName("");
           setMyCurrency("");
           setPhone("");
-          NotificationManager.success(data.data.message)
+          toast.success(data.data.message)
+          // NotificationManager.success(data.data.message)
         }
         else if (data.data.status == -1) {
-          NotificationManager.error(data.data.message)
+          toast.error(data.data.message)
         }
       } catch (error) {
         console.log(error);
       }
     } else {
-      alert("please fill all the required data!")
+      toast.error("please fill all the required data!")
     }
   }
 
@@ -77,14 +77,14 @@ const PersonalInfo = () => {
         const obj = {...userInfo}
         obj['refferal'] = ref;
         dispatch(setUserInfo({ userInfo: obj }))
-        NotificationManager.success('Refferal Added', '')
+        toast.success('Refferal Added', '')
       }
     } catch (error) {
       if (error.response.data.status == 2) {
-        swal("Invalid refferal Code or Already updated", "", "error")
+        toast.error("Invalid refferal Code or Already updated")
       }
       else if (error.response.data.status == 0) {
-        swal("Something Went wrong 1", "", "error")
+        toast.error("Something Went wrong")
       }
     }
   }
@@ -123,7 +123,7 @@ const PersonalInfo = () => {
 
   return (
     <>
-
+  
       <div className="card-inner card-inner-lg bg-light">
         <div className="nk-block-head nk-block-head-lg">
           <div className="nk-block-between">
@@ -150,19 +150,16 @@ const PersonalInfo = () => {
               <span className="overline-title">Basics</span>
             </div>
             {/* -------------- */}
-
             <div className="row mx-auto mt-3 pb-3">
               <div className="col-4">
                 <div className="">
                   <span className="data-label">User Name</span>
-
                 </div>
               </div>
               <div className="col-4 ">
                 {showUser == true ? 
                 <div class="input-group-sm">
                   <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1"
-                    // value={userInfo?.username}
                     onChange={(e) => setLocalUserName(e.target.value)}
                     style={{
                       borderRadius: "0",
@@ -176,7 +173,6 @@ const PersonalInfo = () => {
               </div>
               <div className="col-4 d-flex justify-content-end">
                 <div className="">
-
                   <span className="">
                     {showUser ? <Link to="" className="btn btn-dim btn-outline-success" onClick={() => {
                       if (localUserName) {
@@ -185,19 +181,15 @@ const PersonalInfo = () => {
                       }
                     }}>Update</Link> :
                       <em className="icon ni ni-lock-alt text-gray"></em>
-
                     }
-
                   </span>
                 </div>
               </div>
             </div>
-
             <div className="row mx-auto mt-3 pb-3">
               <div className="col-4">
                 <div className="">
                   <span className="data-label">Email</span>
-
                 </div>
               </div>
               <div className="col-4">
@@ -211,7 +203,6 @@ const PersonalInfo = () => {
                 </div>
               </div>
             </div>
-
             <div className="row mx-auto mt-3">
               <div className="col-4 ">
                 <div className="">
@@ -253,13 +244,11 @@ const PersonalInfo = () => {
                       <em className="icon ni ni-lock-alt text-gray"></em>
                     </span>
                     }
-
                   </span>
                 </div>
               </div>
             </div>
           </div>
-
           <div className="nk-data data-list mt-3">
             <div className="data-head kanban-board-header kanban-success bg-lighter rounded-0">
               <span className="overline-title">Currency Preferences</span>
@@ -290,12 +279,9 @@ const PersonalInfo = () => {
                     </div>
                   </div>
                 </div>
-
-
                 <div className="data-item p-2 border-0">
                   <div className="data-col">
                     <span className="data-label">USDT</span>
-
                   </div>
                   <div className="nk-block-actions">
                     <div className="custom-control custom-switch me-n2">
@@ -319,11 +305,7 @@ const PersonalInfo = () => {
                 </div>
               </> : null
             }
-
-            <NotificationContainer />
-
           </div>
-
           <div className="nk-data data-list mt-2">
             <div className="data-head kanban-board-header kanban-success bg-lighter rounded-0">
               <span className="overline-title">Referral</span>
@@ -332,7 +314,6 @@ const PersonalInfo = () => {
               <div className="col-4 ">
                 <div className="">
                   <span className="data-label">Referral Code</span>
-
                 </div>
               </div>
               <div className="col-4">
@@ -362,16 +343,12 @@ const PersonalInfo = () => {
                     </span> : <button class="btn btn-outline-success btn-sm" onClick={() => {
                       updateReferral();
                     }}>Update</button>
-
                     }
                   </span>
                 </div>
               </div>
             </div>
-
-
           </div>
-
         </div>
       </div>
     </>

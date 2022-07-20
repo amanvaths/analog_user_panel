@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../Api_connection/config";
 import { GoogleLogin } from "react-google-login";
-import swal from "sweetalert";
+import toast from 'react-hot-toast';
 import {AiOutlineEyeInvisible, AiOutlineEye} from 'react-icons/ai'
 import { useParams, useLocation } from "react-router-dom";
 
@@ -57,12 +57,14 @@ const ResetPassword = (props) => {
       .then((resp) => {
         console.log(resp, "response..");
         if (resp.status === 1) {
-          swal(resp.msg);
+          toast.success(resp.msg)
+          // swal(resp.msg);
           setTimeout(() => {
             navigate("/login");
           }, 2000);
         } else if(resp.status === 0){
-          swal(resp.msg, "Click on Forget Password again")
+          toast.error(resp.msg, "Click on Forget Password again")
+          // swal(resp.msg, "Click on Forget Password again")
         }
       }).catch((error)=>{
         console.log(error);
@@ -178,14 +180,14 @@ const ResetPassword = (props) => {
                   <Link to="/home" className="logo-link">
                     <img
                       className="logo-light logo-img logo-img-lg"
-                      src="./images/logo-dark.png"
-                      srcSet="./images/logo2x.png 2x"
+                      src="images/logo-dark.png"
+                      srcSet="images/logo2x.png 2x"
                       alt="logo"
                     />
                     <img
                       className="logo-dark logo-img logo-img-lg"
-                      src="./images/logo.png"
-                      srcSet="./images/logo-dark2x.png 2x"
+                      src="images/logo.png"
+                      srcSet="images/logo-dark2x.png 2x"
                       alt="logo-dark"
                     />
                   </Link>

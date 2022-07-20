@@ -6,9 +6,10 @@ import { GoogleLogin } from "react-google-login";
 import { useDispatch } from "react-redux";
 import jwt_decode from 'jwt-decode'
 import axios from "axios";
-import swal from "sweetalert";
+
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
 import { sendOtp, setIsLoggedIn } from "../redux/reducer/user";
+import toast from 'react-hot-toast';
 
 // import FacebookLogin from "react-facebook-login";
 const Signup = (props) => {
@@ -46,29 +47,33 @@ const Signup = (props) => {
       .then((res) => res.json())
       .then((resp) => {
         if (resp.status == 1) {
-          swal("User Sign Up Successfully", "Please verify OTP", "success");
+          toast.success("User Sign Up Successfully")
+          // swal("User Sign Up Successfully", "Please verify OTP", "success");
           dispatch(sendOtp(({ LoginDetails: resp })))
           setTimeout(() => {
             navigate("/EmailOtp");
           }, 3000);
         }
         if (resp.status == 0) {
-          swal(
-            "Something went wrong",
-            "Try again",
-            "error"
-          );
+          toast.error("Something went wrong")
+          // swal(
+          //   "Something went wrong",
+          //   "Try again",
+          //   "error"
+          // );
         }
         if (resp.status == 3) {
-          swal(
-            "Invalid Refferal Code",
-            "Try again",
-            "error"
-          );
+          toast.error("Invalid Refferal Code")
+          // swal(
+          //   "Invalid Refferal Code",
+          //   "Try again",
+          //   "error"
+          // );
         }
 
         if (resp.status == -1) {
-          swal("Email Already Registerd", "Try with new Email ID", "error");
+          toast.error("Email Already Registerd")
+          // swal("Email Already Registerd", "Try with new Email ID", "error");
         } /* else {
           setResponse(resp);
           // swal(`${resp.message}`, "Try with new email ID", "error");
@@ -111,9 +116,10 @@ const Signup = (props) => {
         }
       }
     }else{
-      swal("Something Went Wrong",
-      "He he hehehe",
-      "error")
+      // swal("Something Went Wrong",
+      // "He he hehehe",
+      // "error")
+      toast.error("Something Went Wrong")
     }
   }
 
@@ -209,11 +215,7 @@ const Signup = (props) => {
       setConfirmPassworderror(true);
     }
     if (password !== confirmPassword) {
-      return swal(
-        "Password and Confirm password not matched",
-        "Enter correct password",
-        "error"
-      );
+      toast.error("Password and Confirm password not matched")
     }
     if (email !== "" && password !== "" && confirmPassword !== "") {
       Signup();
@@ -241,11 +243,11 @@ const Signup = (props) => {
             <div className="col-md-6 bg-light border shadow">
               <div className="card-inner">
                 <div className="brand-logo pb-3">
-                  <Link to="" className="logo-link">                    
+                  <Link to="/home" className="logo-link">                    
                   <img
                       className="logo-dark logo-img logo-img-lg"
-                      src="./images/logo.png"
-                      srcSet="./images/logo-dark2x.png 2x"
+                      src="images/logo.png"
+                      srcSet="images/logo-dark2x.png 2x"
                       alt="logo-dark"
                     />
                   </Link>

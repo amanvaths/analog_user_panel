@@ -2,12 +2,13 @@
 import React, { useEffect, useState } from "react";
 import { BASE_URL} from "../Api_connection/config";
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
-import swal from "sweetalert";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {setIsLoggedIn,sendOtp } from "../redux/reducer/user";
 import jwt_decode from 'jwt-decode'
 import axios from "axios";
+import toast from 'react-hot-toast';
 
 
 
@@ -51,15 +52,17 @@ const Login = (props) => {
         if(data.data.googleAuth === 0){
           console.log(data.data.googleAuth, "GoogleAuth");
           dispatch(setIsLoggedIn({ LoginDetails: data.data }))
+          toast.success("Login Successful")
             navigate('/home')
         }else{
           navigate('/2faAuthentication', { state: { email: data.data.email, token: data.data.token } })
         }
       }
     }else{
-      swal("Something Went Wrong",
-      "He he hehehe",
-      "error")
+      toast.error("Something went wrong")
+      // swal("Something Went Wrong",
+      // "He he hehehe",
+      // "error")
     }
   }
 
@@ -88,27 +91,31 @@ const Login = (props) => {
       .then(async (resp) => {
         console.log(resp, "rerere");
         if (resp.status == 0) {
-          swal(
-            "Incorrect Credentials",
-            "Please Enter Right Credentials",
-            "error"
-          );
+          toast.error("Incorrect Credentials")
+          // swal(
+          //   "Incorrect Credentials",
+          //   "Please Enter Right Credentials",
+          //   "error"
+          // );
         }
         if (resp.status == 1) {
           if (resp.googleAuth == 1) {
             navigate('/2faAuthentication', { state: { email: email, token: resp.token } })
           } else {
+            toast.success("Login Successful")
             dispatch(setIsLoggedIn({ LoginDetails: resp }))
             navigate('/home')
           }
         }
         if (resp.status == 3) {
-          swal("Email is not varified", "Verify Email before Login", "error");
+          toast.error("Email is not varified")
+          // swal("Email is not varified", "Verify Email before Login", "error");
           dispatch(sendOtp(({ LoginDetails: resp })))
           navigate("/ResendOtp");
         }
         if (resp.status == 4) {
-          swal("Email not Registered", "Please signup", "error");
+          toast.error("Email not Registered")
+          // swal("Email not Registered", "Please signup", "error");
         }
       });
   }
@@ -155,14 +162,14 @@ const Login = (props) => {
                   <Link to="" className="logo-link">
                     <img
                       className="logo-light logo-img logo-img-lg"
-                      src="./images/logo-dark.png"
-                      srcSet="./images/logo2x.png 2x"
+                      src="images/logo-dark.png"
+                      srcSet="images/logo2x.png 2x"
                       alt="logo"
                     />
                     <img
                       className="logo-dark logo-img logo-img-lg"
-                      src="./images/logo.png"
-                      srcSet="./images/logo-dark2x.png 2x"
+                      src="images/logo.png"
+                      srcSet="images/logo-dark2x.png 2x"
                       alt="logo-dark"
                     />
                   </Link>
@@ -245,7 +252,7 @@ const Login = (props) => {
                 <div className="form-group">
                   <button
                     className="btn text-white bg-teal btn-dim btn-block"
-                  // onClick={() => (window.location.href = "/faq")}
+                  // onClick={() => toast.success("HIII")}
                   // onClick={Login}
                   >
                     Sign in
@@ -263,15 +270,6 @@ const Login = (props) => {
               </div>
               <ul className="nav justify-center gx-4">
                 <li className="nav-item">
-                  {/* <FacebookLogin
-                    appId="1088597931155576"
-                    autoLoad={true}
-                    fields="name,email,picture"
-                    callback={props.SocialSignUp}
-                    cssclassName="btnFacebook"
-                    icon={<i className="fa fa-facebook" className="logo-fb"></i>}
-                    textButton="Sign up with Facebook"
-                  /> */}
                 </li>
                 <li className="nav-item">
                   <div id="googleLogin"></div>

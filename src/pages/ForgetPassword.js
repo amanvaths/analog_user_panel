@@ -4,7 +4,7 @@ import { useNavigate} from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { BASE_URL } from "../Api_connection/config";
 import { Link} from "react-router-dom";
-import swal from "sweetalert";
+import toast from 'react-hot-toast';
 import jwt_decode from 'jwt-decode'
 import axios from "axios";
 import { setIsLoggedIn } from "../redux/reducer/user";
@@ -42,15 +42,17 @@ const ForgetPassword = (props) => {
         console.log(resp, "resp");
         if (resp.status == 1) {
           //   navigate("/Login");
-          swal(
-            "Reset link is shared on your registerd email id",
-            "Click on Reset button to reset password",
-            "info"
-          );
+          // swal(
+          //   "Reset link is shared on your registerd email id",
+          //   "Click on Reset button to reset password",
+          //   "info"
+          // );
+          toast.success("Reset link is shared on your registerd email id")
           setLinkSent(false)
         }
         if (resp.status == 4) {
-          swal("Email is not registerd", "", "error");
+          toast.error("Email is not registered")
+          // swal("Email is not registerd", "", "error");
         }
       });
   }
@@ -101,9 +103,10 @@ const ForgetPassword = (props) => {
           }
         }
       }else{
-        swal("Something Went Wrong",
-        "He he hehehe",
-        "error")
+        toast.error("Something Went Wrong")
+        // swal("Something Went Wrong",
+        // "He he hehehe",
+        // "error")
       }
     }
 
@@ -132,14 +135,14 @@ const ForgetPassword = (props) => {
                     <Link to="/home" className="logo-link">
                       <img
                         className="logo-light logo-img logo-img-lg"
-                        src="./images/logo.png"
-                        srcSet="./images/logo2x.png 2x"
+                        src="images/logo.png"
+                        srcSet="images/logo2x.png 2x"
                         alt="logo"
                       />
                       <img
                         className="logo-dark logo-img logo-img-lg"
-                        src="./images/logo.png"
-                        srcSet="./images/logo-dark2x.png 2x"
+                        src="images/logo.png"
+                        srcSet="images/logo-dark2x.png 2x"
                         alt="logo-dark"
                       />
                     </Link>
@@ -232,14 +235,14 @@ const ForgetPassword = (props) => {
                 <Link to="/home" className="logo-link">
                   <img
                     className="logo-light logo-img logo-img-lg"
-                    src="./images/logo-dark.png"
-                    srcSet="./images/logo2x.png 2x"
+                    src="images/logo-dark.png"
+                    srcSet="images/logo2x.png 2x"
                     alt="logo"
                   />
                   <img
                     className="logo-dark logo-img logo-img-lg"
-                    src="./images/logo.png"
-                    srcSet="./images/logo-dark2x.png 2x"
+                    src="images/logo.png"
+                    srcSet="images/logo-dark2x.png 2x"
                     alt="logo-dark"
                   />
                 </Link>
