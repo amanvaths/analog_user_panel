@@ -70,13 +70,11 @@ const ResendOtp = (props) => {
                     <img
                       className="logo-light logo-img logo-img-lg"
                       src="images/logo-dark.png"
-                      // srcSet="images/logo2x.png 2x"
                       alt="logo"
                     />
                     <img
                       className="logo-dark logo-img logo-img-lg"
                       src="images/logo.png"
-                      // srcSet="images/logo-dark2x.png 2x"
                       alt="logo-dark"
                     />
                 </Link>
@@ -109,9 +107,6 @@ const ResendOtp = (props) => {
                   handelFormSubmit(email);
                 }}
               >
-                {/* <h6 className="nk-block-title alert alert-primary alert_box_messege">
-                  OTP Is Sended on your Registered Email Id
-                </h6> */}
                 <div className="form-group">
                   <div className="form-label-group">
                     <label className="form-label" for="default-01">

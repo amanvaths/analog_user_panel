@@ -95,7 +95,6 @@ const ForgetPassword = (props) => {
         {
           console.log(data.data.status, "status");
           if(data.data.googleAuth === 0){
-            // console.log(data.data.googleAuth, "GoogleAuth");
             dispatch(setIsLoggedIn({ LoginDetails: data.data }))
               navigate('/home')
           }else{
@@ -104,9 +103,7 @@ const ForgetPassword = (props) => {
         }
       }else{
         toast.error("Something Went Wrong")
-        // swal("Something Went Wrong",
-        // "He he hehehe",
-        // "error")
+       
       }
     }
 
@@ -136,13 +133,11 @@ const ForgetPassword = (props) => {
                       <img
                         className="logo-light logo-img logo-img-lg"
                         src="images/logo.png"
-                        // srcSet="images/logo2x.png 2x"
                         alt="logo"
                       />
                       <img
                         className="logo-dark logo-img logo-img-lg"
                         src="images/logo.png"
-                        // srcSet="images/logo-dark2x.png 2x"
                         alt="logo-dark"
                       />
                     </Link>

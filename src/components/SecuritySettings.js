@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setUserInfo, setSettingPage } from "../redux/reducer/user";
 import { profileMenu } from '../Api_connection/ApiFunction';
 import toast from 'react-hot-toast';
+import OtpInput from 'react-otp-input';
 
 const SecuritySettings = () => {
   const { userInfo, user } = useSelector((state) => state.user.value)
@@ -16,21 +17,21 @@ const SecuritySettings = () => {
   const [otpD, setOtpD] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
 
   const email = user.email
- 
+
   const [security, setSecurityKey] = useState("")
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const handleClose1 = () => setShow1(false);
-  const  handleShow1 = () => setShow1(true);
+  const handleShow1 = () => setShow1(true);
 
 
   const [show1, setShow1] = useState(false);
- 
+
 
   const handelLog = async (e) => {
     try {
@@ -41,18 +42,18 @@ const SecuritySettings = () => {
       console.log(error);
     }
   }
-      // console.log(userInfo?.password_updated_at, "PASS UPDATED AT");
-  useEffect(()=>{
-    const conSetting = async()=>{
-      const data = await axios.post(`${BASE_URL}/configSettings`, {email: email})
-      if(data){
-        dispatch(setUserInfo({userInfo: data.data}))
+  // console.log(userInfo?.password_updated_at, "PASS UPDATED AT");
+  useEffect(() => {
+    const conSetting = async () => {
+      const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
+      if (data) {
+        dispatch(setUserInfo({ userInfo: data.data }))
       }
     }
 
     conSetting()
-    
-  },[])
+
+  }, [])
 
   return (
     <>
@@ -75,8 +76,8 @@ const SecuritySettings = () => {
                 to=""
                 className="toggle btn btn-icon btn-trigger mt-n1"
                 data-target="userAside"
-                id = "toggleBtn"
-              ><em className="icon ni ni-menu-alt-r" onClick={ profileMenu }></em
+                id="toggleBtn"
+              ><em className="icon ni ni-menu-alt-r" onClick={profileMenu}></em
               ></Link>
             </div>
           </div>
@@ -105,10 +106,10 @@ const SecuritySettings = () => {
                             id="log"
                             checked={userInfo?.login_activity}
                             onChange={(e) => {
-                              const obj = {...userInfo}
+                              const obj = { ...userInfo }
                               toast.success(e.target.checked === true ? "Activity logs alert activated" : "Activity logs alert deactivated")
                               obj['login_activity'] = e.target.checked
-                             dispatch(setUserInfo({userInfo: obj}))
+                              dispatch(setUserInfo({ userInfo: obj }))
                               handelLog(e)
                             }}
                           />
@@ -122,7 +123,7 @@ const SecuritySettings = () => {
               <div className="card-inner">
                 <div className="between-center flex-wrap g-3">
                   <div>
-                  <h5 className='text-teal'>Change Password</h5>
+                    <h5 className='text-teal'>Change Password</h5>
                     <p>
                       Set a unique password to protect your
                       account.
@@ -145,17 +146,17 @@ const SecuritySettings = () => {
                               changePassword: true,
                               ipWhiteListing: false
                             }
-                            dispatch(setSettingPage({settingPages: obj }))
+                            dispatch(setSettingPage({ settingPages: obj }))
                           }}>Change Password</Link>
                       </li>
-                       {
-                         userInfo?.password_updated_at ? 
-                         <li>
-                        <em className="text-soft text-date fs-12px"
-                        >Last changed :
-                          <span> {new Date(userInfo?.password_updated_at).toDateString()}</span></em>
-                      </li> : null
-                       }
+                      {
+                        userInfo?.password_updated_at ?
+                          <li>
+                            <em className="text-soft text-date fs-12px"
+                            >Last changed :
+                              <span> {new Date(userInfo?.password_updated_at).toDateString()}</span></em>
+                          </li> : null
+                      }
                     </ul>
                   </div>
                 </div>
@@ -165,13 +166,13 @@ const SecuritySettings = () => {
                   className="between-center flex-wrap flex-md-nowrap g-3"
                 >
                   <div>
-                  <h5 className='text-teal'>
+                    <h5 className='text-teal'>
                       2 Factor Auth &nbsp;
                       {
-                    Object?.values(userInfo)?.length > 0 ?
-                        !userInfo.googleAuth ? <span className="badge badge-danger ms-0">disabled</span>
-                          : <span className="badge badge-success ms-0">enabled</span>
-                        : null
+                        Object?.values(userInfo)?.length > 0 ?
+                          !userInfo.googleAuth ? <span className="badge badge-danger ms-0">disabled</span>
+                            : <span className="badge badge-success ms-0">enabled</span>
+                          : null
                       }
 
                     </h5>
@@ -191,7 +192,7 @@ const SecuritySettings = () => {
                       (
 
                         <div className="nk-block-actions">
-                          <button onClick={async() => {
+                          <button onClick={async () => {
                             handleShow1();
                             await axios.post(`${BASE_URL}/generateauthtoken`, { email: email })
                           }} className="btn btn-danger">Disable</button>
@@ -203,39 +204,45 @@ const SecuritySettings = () => {
                           <button onClick={() => {
                             handleShow();
                             axios.post(`${BASE_URL}/generateauthtoken`, { email: email, google_auth: true }).then((res) => { setSecurityKey(res.data); console.log(res.data, "datat"); })
-                            const obj = {...userInfo}
+                            const obj = { ...userInfo }
                             obj['googleAuth'] = !userInfo.googleAuth
-                            dispatch(setUserInfo({userInfo: obj}))
+                            dispatch(setUserInfo({ userInfo: obj }))
                           }} className="btn btn-outline-success">Enable</button>
                         </div>
                       ) : null
                   }
                   <Modal show={show} onHide={() => {
                     if (Object?.values(userInfo)?.length > 0) {
-                            const obj = {...userInfo}
-                            obj['googleAuth'] = !userInfo.googleAuth
-                            dispatch(setUserInfo({userInfo: obj}))
+                      const obj = { ...userInfo }
+                      obj['googleAuth'] = !userInfo.googleAuth
+                      dispatch(setUserInfo({ userInfo: obj }))
                       handleClose()
-                      
+
                     }
                   }}>
                     <Modal.Header closeButton>
                       <Modal.Title>Google Authentication</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                    
+
                       <div className='row d-flex justify-content-around flex-row align-items-center py-2'>
-                      
+
                         <div className='col-6'>
                           <div className=''>
                             <img
-                            alt='qr'
+                              alt='qr'
                               src={security.qr_url}
                               style={{ height: "150px" }}
                             />
                           </div>
                         </div>
                         <div className='col-7'>
+                          {/* <OtpInput
+                            value={"a"}
+                            onChange={()=> console.log("a")}
+                            numInputs={6}
+                            separator={<span>-</span>}
+                          /> */}
                           <form action="" style={{}}>
                             <div class="form-group">
                               <div class="form-group">
@@ -281,20 +288,20 @@ const SecuritySettings = () => {
                   {/* Model for 2FA Disable */}
 
                   <Modal show={show1} onHide={() => {
-                   handleClose1()
+                    handleClose1()
                   }}>
                     <Modal.Header closeButton>
                       <Modal.Title>Google Authentication</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                       <div className='row d-flex justify-content-around flex-row align-items-center py-2'>
-                        
+
                         <div className='col-12'>
                           <form action="" style={{}}>
                             <div className="form-group">
                               <div className="form-group">
                                 <label for="inputOtp">Enter OTP to disable 2FA</label>
-                                <input type="text" class="form-control" id="inputOtp" placeholder="Enter Otp" onChange={(e) => setOtpD(e.target.value)} />
+                                <input type="text" class="form-control" id="inputOtp" placeholder="Enter OTP" onChange={(e) => setOtpD(e.target.value)} />
                               </div>
                               <button type="button" class="btn btn-outline-danger btn-dim btn-block" onClick={() => {
                                 axios.post(`${BASE_URL}/generateauthtoken`, { email: email, token2: otpD }).then((resp) => {
@@ -303,9 +310,9 @@ const SecuritySettings = () => {
                                     // swal(`2FA Disabled Successfully.`, "", "success")
                                     if (Object?.values(userInfo)?.length > 0) {
                                       handleClose1()
-                                      const obj = {...userInfo}
+                                      const obj = { ...userInfo }
                                       obj['googleAuth'] = !userInfo.googleAuth
-                                      dispatch(setUserInfo({userInfo: obj }))
+                                      dispatch(setUserInfo({ userInfo: obj }))
                                     }
                                   } else {
                                     toast.error("Incorrect Credentials")
@@ -324,7 +331,7 @@ const SecuritySettings = () => {
                     </Modal.Body>
                     <Modal.Footer>
                       <Button variant="success" onClick={() => {
-                       handleClose1()
+                        handleClose1()
                       }}>
                         Close
                       </Button>

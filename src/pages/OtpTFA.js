@@ -20,13 +20,9 @@ const OtpTFA = (props) => {
           setOtpError(true)
         }
         else{
-          // console.log(location.state.email, "email");
-          // console.log(location.state.token, "token");
-          // console.log(otp, "otp");
           const data = await axios.post(`${BASE_URL}/verifyauthtoken`,{email: location.state.email, token: otp, })
           if(data.data.status == 1){
             toast.success("OTP Verified")
-            // swal("OTP Verified", "", "success");
             localStorage.setItem("email", location.state.email);
             localStorage.setItem("token", location.state.token);
             const obj ={
@@ -37,13 +33,10 @@ const OtpTFA = (props) => {
             navigate('/home')
           }else if(data.data.status == 0){
             toast.error("Invalid OTP")
-            // swal("Invalid OTP", "", "error");
           }else if(data.data.status == 2){
             toast.error("Google 2FA is not activated")
-            // swal("Google 2FA is not activated", "", "error")
           }else if(data.data.status == 3){
             toast.error("Invalid API Call")
-            // swal("Invalid API Call", "", 'error')
           }
         }
       } catch (error) {
@@ -73,13 +66,11 @@ const OtpTFA = (props) => {
                   <img
                     className="logo-light logo-img logo-img-lg"
                     src="images/logo-dark.png"
-                    // srcSet="images/logo2x.png 2x"
                     alt="logo"
                   />
                   <img
                     className="logo-dark logo-img logo-img-lg"
                     src="images/logo.png"
-                    // srcSet="images/logo-dark2x.png 2x"
                     alt="logo-dark"
                   />
                 </Link>

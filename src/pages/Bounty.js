@@ -66,11 +66,11 @@ const Bounty = () => {
                     </div>
                     <div className="nk-block-head-content">
                       <div className="toggle-wrap nk-block-tools-toggle">
-                        <Link
+                        {/* <Link
                           to=""
                           className="btn btn-icon btn-trigger toggle-expand me-n1"
                           data-target="pageMenu">
-                          <em className="icon ni ni-menu-alt-r"></em></Link>
+                          <em className="icon ni ni-menu-alt-r"></em></Link> */}
                         <div
                           className="toggle-expand-content"
                           data-content="pageMenu"
