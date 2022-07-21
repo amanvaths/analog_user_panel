@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { profileMenu } from "../Api_connection/ApiFunction";
 import { setUserInfo } from "../redux/reducer/user";
 import { Link } from "react-router-dom";
+import toast from 'react-hot-toast'
 
 const Notification = () => {
     const { userInfo, user } = useSelector((state) => state.user.value)
@@ -95,9 +96,11 @@ const Notification = () => {
                                         if (userInfo?.unusual_activity) {
                                             console.log(obj);
                                             obj['unusual_activity'] = 0;
+                                            toast.success("Unusual Activity alert deactivated")
                                             dispatch(setUserInfo({ userInfo: obj }))
                                         } else {
                                             obj['unusual_activity'] = 1
+                                            toast.success("Unusual Activity alert activated")
                                             dispatch(setUserInfo({ userInfo: obj }))
                                         }
                                         setReflect(!reflect);
@@ -107,7 +110,7 @@ const Notification = () => {
                                 <label
                                     class="custom-control-label"
                                     for="unusual-activity">
-                                    Email me whenever encounterunusual activity</label>
+                                    Email me whenever encounter unusual activity</label>
                             </div>
                         </div>
                         <div class="g-item">
@@ -121,9 +124,11 @@ const Notification = () => {
 
                                         if (userInfo?.new_browser) {
                                             obj['new_browser'] = 0
+                                            toast.success("New Browser alert deactivated")
                                             dispatch(setUserInfo({ userInfo: obj }))
                                         } else {
                                             obj['new_browser'] = 1
+                                            toast.success("New Browser alert activated")
                                             dispatch(setUserInfo({ userInfo: obj }))
                                         }
                                         setReflect(!reflect);
@@ -156,9 +161,11 @@ const Notification = () => {
 
                                         if (userInfo?.sales_latest_news) {
                                             obj['sales_latest_news'] = 0
+                                            toast.success("Sales and News alert deactivated")
                                             dispatch(setUserInfo({ userInfo: obj }))
                                         } else {
                                             obj['sales_latest_news'] = 1
+                                            toast.success("Sales and News alert activated")
                                             dispatch(setUserInfo({ userInfo: obj }))
                                         }
                                         setReflect(!reflect);
@@ -180,9 +187,11 @@ const Notification = () => {
 
                                         if (userInfo?.new_features_updates) {
                                             obj['new_features_updates'] = 0
+                                            toast.success("Features and News alert deactivated")
                                             dispatch(setUserInfo({ userInfo: obj }))
                                         } else {
                                             obj['new_features_updates'] = 1
+                                            toast.success("Features and News alert activated")
                                             dispatch(setUserInfo({ userInfo: obj }))
                                         }
                                         setReflect(!reflect);
@@ -204,9 +213,11 @@ const Notification = () => {
 
                                         if (userInfo?.tips) {
                                             obj['tips'] = 0
+                                            toast.success("Tips alert deactivated")
                                             dispatch(setUserInfo({ userInfo: obj }))
                                         } else {
                                             obj['tips'] = 1
+                                            toast.success("Tips alert activated")
                                             dispatch(setUserInfo({ userInfo: obj }))
                                         }
                                         setReflect(!reflect);

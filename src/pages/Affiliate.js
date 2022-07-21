@@ -110,13 +110,13 @@ const Affiliate = (props) => {
                     </div>
                     <div className="nk-block-head-content affiliates">
                       <div className="toggle-wrap nk-block-tools-toggle">
-                        <Link
+                        {/* <Link
                           to=""
                           className="btn btn-icon btn-trigger toggle-expand me-n1"
                           data-target="pageMenu"
                         >
                           <em className="icon ni ni-menu-alt-r"></em>
-                        </Link>
+                        </Link> */}
                         <div
                           className="toggle-expand-content"
                           data-content="pageMenu"
@@ -204,13 +204,13 @@ const Affiliate = (props) => {
                         </div>
                         <div className="nk-block-head-content">
                           <div className="toggle-wrap nk-block-tools-toggle">
-                            <Link
+                            {/* <Link
                               to=""
                               className="btn btn-icon btn-trigger toggle-expand mr-n1"
                               data-target="pageMenu"
                             >
                               <em className="icon ni ni-menu-alt-r"></em>
-                            </Link>
+                            </Link> */}
                             <div
                               className="toggle-expand-content"
                               data-content="pageMenu">

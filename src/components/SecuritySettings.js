@@ -7,7 +7,7 @@ import { Modal, Button } from "react-bootstrap"
 import { useSelector, useDispatch } from "react-redux";
 import { setUserInfo, setSettingPage } from "../redux/reducer/user";
 import { profileMenu } from '../Api_connection/ApiFunction';
-import swal from 'sweetalert'
+import toast from 'react-hot-toast';
 
 const SecuritySettings = () => {
   const { userInfo, user } = useSelector((state) => state.user.value)
@@ -104,10 +104,9 @@ const SecuritySettings = () => {
                             className="custom-control-input"
                             id="log"
                             checked={userInfo?.login_activity}
-                            // name='log'
-                            // value={"a"}
                             onChange={(e) => {
-                              const obj = {userInfo}
+                              const obj = {...userInfo}
+                              toast.success(e.target.checked === true ? "Activity logs alert activated" : "Activity logs alert deactivated")
                               obj['login_activity'] = e.target.checked
                              dispatch(setUserInfo({userInfo: obj}))
                               handelLog(e)
@@ -147,12 +146,6 @@ const SecuritySettings = () => {
                               ipWhiteListing: false
                             }
                             dispatch(setSettingPage({settingPages: obj }))
-                            // dispatch(setPersonalInfo({ personalInfo: false }))
-                            // dispatch(setActivity({ activity: false }))
-                            // dispatch(setSecuritySettings({ securitySettings: false }))
-                            // dispatch(setNotification({ notification: false }))
-                            // dispatch(setChangePassword({ changePassword: true }))
-                            // dispatch(setIpWhiteListing({ ipWhiteListing: false }))
                           }}>Change Password</Link>
                       </li>
                        {
@@ -210,8 +203,8 @@ const SecuritySettings = () => {
                           <button onClick={() => {
                             handleShow();
                             axios.post(`${BASE_URL}/generateauthtoken`, { email: email, google_auth: true }).then((res) => { setSecurityKey(res.data); console.log(res.data, "datat"); })
-                            const obj = {userInfo}
-                            obj['googleAuth'] = !obj.userInfo.googleAuth
+                            const obj = {...userInfo}
+                            obj['googleAuth'] = !userInfo.googleAuth
                             dispatch(setUserInfo({userInfo: obj}))
                           }} className="btn btn-outline-success">Enable</button>
                         </div>
@@ -219,8 +212,8 @@ const SecuritySettings = () => {
                   }
                   <Modal show={show} onHide={() => {
                     if (Object?.values(userInfo)?.length > 0) {
-                            const obj = {userInfo}
-                            obj['googleAuth'] = !obj.userInfo.googleAuth
+                            const obj = {...userInfo}
+                            obj['googleAuth'] = !userInfo.googleAuth
                             dispatch(setUserInfo({userInfo: obj}))
                       handleClose()
                       
@@ -252,15 +245,16 @@ const SecuritySettings = () => {
                               <button type="button" class="btn btn-outline-success btn-dim btn-block" onClick={() => {
                                 axios.post(`${BASE_URL}/generateauthtoken`, { email: email, token: otp }).then((resp) => {
                                   if (resp.data.status == 1) {
-
-                                    swal(`Verified Succesfully.`, "Welcome", "success");
+                                    toast.success("Verified Succesfully. 2FA Activated")
+                                    // swal(`Verified Succesfully.`, "Welcome", "success");
                                     navigate("/home")
                                   } else {
-                                    swal(
-                                      "Incorrect Credentials",
-                                      "Please Enter Right Credentials",
-                                      "error"
-                                    );
+                                    toast.error("Incorrect OTP")
+                                    // swal(
+                                    //   "Incorrect Credentials",
+                                    //   "Please Enter Right Credentials",
+                                    //   "error"
+                                    // );
                                   }
                                 })
                               }}>Verify</button>
@@ -305,20 +299,21 @@ const SecuritySettings = () => {
                               <button type="button" class="btn btn-outline-danger btn-dim btn-block" onClick={() => {
                                 axios.post(`${BASE_URL}/generateauthtoken`, { email: email, token2: otpD }).then((resp) => {
                                   if (resp.data.status == 1) {
-
-                                    swal(`2FA Disabled Successfully.`, "", "success")
+                                    toast.success("2FA Disabled Successfully")
+                                    // swal(`2FA Disabled Successfully.`, "", "success")
                                     if (Object?.values(userInfo)?.length > 0) {
                                       handleClose1()
-                                      const obj = {userInfo}
-                                      obj['googleAuth'] = !obj.userInfo.googleAuth
+                                      const obj = {...userInfo}
+                                      obj['googleAuth'] = !userInfo.googleAuth
                                       dispatch(setUserInfo({userInfo: obj }))
                                     }
                                   } else {
-                                    swal(
-                                      "Incorrect Credentials",
-                                      "Please Enter Right Credentials",
-                                      "error"
-                                    );
+                                    toast.error("Incorrect Credentials")
+                                    // swal(
+                                    //   "Incorrect Credentials",
+                                    //   "Please Enter Right Credentials",
+                                    //   "error"
+                                    // );
                                   }
                                 })
                               }}>Disable</button>

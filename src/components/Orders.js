@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { data } from "jquery";
 import swal from "sweetalert";
 import "../App.css";
+import toast from 'react-hot-toast'
 // import MultiRangeSlider from "./multiRangeSlider/MultiRangeSlider";
 import { Triangle } from "react-loader-spinner";
 import Swal from "sweetalert2/dist/sweetalert2.js";
@@ -135,7 +136,8 @@ export default function Orders(props) {
         if (res.data.status == true) {
           console.log(res.data.totalAna, "ANA BALANCE");
           dispatch(setTotalAna({totalAna: res.data.totalAna}))
-          swal(`${res.data.message}`, "", "success");
+          toast.success(res.data.message)
+          // swal(`${res.data.message}`, "", "success");
           getWalletData();
           dispatch(setBuyLoader({ buyloader: false }));
           setTotal(MinAmount);
@@ -199,7 +201,8 @@ export default function Orders(props) {
           dispatch(setBuyLoader({ buyloader: true }));
           TotalAmt();
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-          swalWithBootstrapButtons.fire("Cancelled", "", "error");
+          toast.error("Transaction Cancelled")
+          // swalWithBootstrapButtons.fire("Cancelled", "", "error");
         }
       });
   }
