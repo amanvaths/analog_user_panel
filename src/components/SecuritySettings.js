@@ -9,6 +9,7 @@ import { setUserInfo, setSettingPage } from "../redux/reducer/user";
 import { profileMenu } from '../Api_connection/ApiFunction';
 import toast from 'react-hot-toast';
 import OtpInput from 'react-otp-input';
+import './ss.css'
 
 const SecuritySettings = () => {
   const { userInfo, user } = useSelector((state) => state.user.value)
@@ -237,17 +238,20 @@ const SecuritySettings = () => {
                           </div>
                         </div>
                         <div className='col-7'>
-                          {/* <OtpInput
-                            value={"a"}
-                            onChange={()=> console.log("a")}
-                            numInputs={6}
-                            separator={<span>-</span>}
-                          /> */}
+
                           <form action="" style={{}}>
                             <div class="form-group">
                               <div class="form-group">
-                                <label for="inputOtp" className='mb-1'> OTP</label>
-                                <input type="text" class="form-control" id="inputOtp" placeholder="Enter OTP" onChange={(e) => setOtp(e.target.value)} />
+                                {/* <label for="inputOtp" className='mb-1'> OTP</label> */}
+                                {/* <input type="text" class="form-control" id="inputOtp" placeholder="Enter OTP" onChange={(e) => setOtp(e.target.value)} /> */}
+                                <OtpInput
+                                  inputStyle = "amit"
+                                  value={otp}
+                                  onChange={(e)=>setOtp(e)}
+                                  numInputs={6}
+                                  isInputNum={true}
+                                  separator={<span>&nbsp;</span>}
+                                />
                               </div>
                               <button type="button" class="btn btn-outline-success btn-dim btn-block" onClick={() => {
                                 axios.post(`${BASE_URL}/generateauthtoken`, { email: email, token: otp }).then((resp) => {
@@ -300,8 +304,16 @@ const SecuritySettings = () => {
                           <form action="" style={{}}>
                             <div className="form-group">
                               <div className="form-group">
-                                <label for="inputOtp">Enter OTP to disable 2FA</label>
-                                <input type="text" class="form-control" id="inputOtp" placeholder="Enter OTP" onChange={(e) => setOtpD(e.target.value)} />
+                                {/* <label for="inputOtp">Enter OTP to disable 2FA</label> */}
+                                {/* <input type="text" class="form-control" id="inputOtp" placeholder="Enter OTP" onChange={(e) => setOtpD(e.target.value)} /> */}
+                                <OtpInput
+                                  inputStyle = "amit"
+                                  value={otpD}
+                                  onChange={(e)=>setOtpD(e)}
+                                  numInputs={6}
+                                  isInputNum={true}
+                                  separator={<span>&nbsp;</span>}
+                                />
                               </div>
                               <button type="button" class="btn btn-outline-danger btn-dim btn-block" onClick={() => {
                                 axios.post(`${BASE_URL}/generateauthtoken`, { email: email, token2: otpD }).then((resp) => {

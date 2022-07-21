@@ -751,9 +751,9 @@ const Home = () => {
                             <div>
                               <RWebShare
                                 data={{
-                                  text: "Like humans, flamingos make friends for life",
+                                  text: "To Join the Analog , Click this link",
                                   url: `${FRONT_URL}/signup?ref=${userInfo?.user_id}`,
-                                  title: "Flamingos",
+                                  title: "Analog Inceptive",
                                 }}
                                 onClick={() => console.log("shared successfully!")}
                               >
