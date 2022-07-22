@@ -18,33 +18,37 @@ const Header = () => {
   const sidebarMenu = async () => {
 
     var element = document.getElementById("myBody");
+    
     element.classList.add("nav-shown");
     element = document.getElementById("nk-sidebar");
     element.classList.add("nk-sidebar-active");
-    // element = document.getElementById("nk-nav-toggle");
-    // element.classList.add("toggle-active");
+    element = document.getElementById("nk-nav-toggle");
+    element.classList.add("toggle-active");
+    element = document.getElementById("overlay_area");
+    element.classList.add("nk-sidebar-overlay");
 
-    var element1 = document.getElementById("myBody");
+   var element1 = document.getElementById("myBody");
     if (element1.classList.contains("toggle-shown")) {
-      element1.classList.remove("toggle-shown")
+     element1.classList.remove("toggle-shown")
     }
-    var element2 = document.getElementById("toggleBtn");
-    if (element2) {
-      if (element2.classList.contains("active")) {
-        element2.classList.remove("active")
-      }
+   var element2 = document.getElementById("toggleBtn");
+   if (element2) {
+   if (element2.classList.contains("active")) {
+    element2.classList.remove("active")
     }
+   }
     var element3 = document.getElementById("cardAside")
     if (element3) {
       if (element3.classList.contains("content-active")) {
         element3.classList.remove("content-active")
-      }
+      }      
 
     }
 
   }
 
 
+  
   const mode = localStorage.getItem("theme")
   if (mode == 1) {
     var element = document.getElementById("myBody");
@@ -52,14 +56,14 @@ const Header = () => {
   } else {
     element = document.getElementById("myBody");
     element.classList.remove("dark-mode")
-  }
-
-
+  }  
   
 
 
 
-  const signOut = () => {
+
+
+    const signOut = () => {
     dispatch(logout());
     toast.success("Logout Successfully")
     navigate("/login")
@@ -93,10 +97,10 @@ const Header = () => {
           <div className="nk-header-wrap">
             <div className="nk-menu-trigger d-xl-none ml-n1">
               <a
-                href="#"
+                href="#" id="nk-nav-toggle"
                 // onClick={()=>dispatch(navsetter())}
-                // className= "nk-nav-toggle nk-quick-nav-icon toggle-active"
-                className={btn ? "nk-nav-toggle nk-quick-nav-icon toggle-active" : "nk-nav-toggle nk-quick-nav-icon"}
+                 className= "nk-nav-toggle nk-quick-nav-icon"
+                //className={btn ? "nk-nav-toggle nk-quick-nav-icon toggle-active" : "nk-nav-toggle nk-quick-nav-icon"}
                 data-target="sidebarMenu"
               >
                 <em className="icon ni ni-menu"  onClick={sidebarMenu}></em>
@@ -141,7 +145,7 @@ const Header = () => {
             <div className="nk-header-tools">
               <ul className="nk-quick-nav">
                 <li>
-                  <div className="nk-block-head">
+                  <div className="nk-block-head d-none d-sm-block">
                     {/* <div className="nk-block-head-sub">
                         <span>Welcome!</span>
                       </div> */}

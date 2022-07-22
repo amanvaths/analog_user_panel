@@ -233,7 +233,7 @@ const Affiliate = (props) => {
                     {/* Level 1 */}
                     {level1 == true ?
                       <div className="nk-block">
-                        <div className="card border-0 card-stretch">
+                        <div className="card border-0">
                           <div className="card-inner-group bg-light border rounded p-4">
                             <div className="card bg-white shadow-sm">
                               <div className="card-inner py-3">
@@ -245,7 +245,7 @@ const Affiliate = (props) => {
                                   </div>
                                 </div>
                               </div>
-                              <div className="nk-tb-list nk-tb-ulist is-compact">
+                              <div className="nk-tb-list nk-tb-ulist is-compact hor_scroll">
                                 <div className="nk-tb-item nk-tb-head">
                                   <div className="nk-tb-col tb-col-sm">
                                     {/* <span className="font-weight-bold">S. N.</span> */}
@@ -402,7 +402,7 @@ const Affiliate = (props) => {
                     {/* Level 2 */}
                     {level2 == true ?
                       <div className="nk-block">
-                        <div className="card border-0 card-stretch">
+                        <div className="card border-0">
                           <div className="card-inner-group bg-light border rounded p-4">
                             <div className="card bg-white shadow-sm">
                               <div className="card-inner py-3">
@@ -415,7 +415,7 @@ const Affiliate = (props) => {
                                 </div>
                               </div>
 
-                              <div className="nk-tb-list nk-tb-ulist is-compact">
+                              <div className="nk-tb-list nk-tb-ulist is-compact hor_scroll">
                                 <div className="nk-tb-item nk-tb-head">
                                   <div className="nk-tb-col tb-col-sm">
                                     {/* <span className="font-weight-bold text-dark">S. N.</span> */}
@@ -567,7 +567,7 @@ const Affiliate = (props) => {
                     {/* Level 3 */}
                     {level3 == true ?
                       <div className="nk-block">
-                        <div className="card border-0 card-stretch">
+                        <div className="card border-0">
                           <div className="card-inner-group bg-light border rounded p-4">
                             <div className="card bg-white shadow-sm">
                               <div className="card-inner py-3">
@@ -579,7 +579,7 @@ const Affiliate = (props) => {
                                   </div>
                                 </div>
                               </div>
-                              <div className="nk-tb-list nk-tb-ulist is-compact">
+                              <div className="nk-tb-list nk-tb-ulist is-compact hor_scroll">
                                 <div className="nk-tb-item nk-tb-head">
                                   <div className="nk-tb-col tb-col-sm">
                                     {/* <span className="font-weight-bold text-dark">S. N.</span> */}
