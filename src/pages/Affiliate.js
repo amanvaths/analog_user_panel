@@ -10,6 +10,8 @@ import {ThreeDots } from 'react-loader-spinner'
 import { MdMoreHoriz } from 'react-icons/md'
 import ReactPaginate from 'react-paginate';
 import { Link } from "react-router-dom";
+import {BiExport} from 'react-icons/bi'
+import { CSVLink} from "react-csv";
 
 
 const Affiliate = (props) => {
@@ -27,11 +29,12 @@ const Affiliate = (props) => {
   // const [tab3, setTab3] = useState([]);
   const [loader, setLoader] = useState(false)
   const [status, setStatus] = useState()
-  const [total, setTotal] = useState(0)
+  const [total, setTotal] = useState([])
   const [currentPage1, setCurrentPage1] = useState(1)
   const [currentPage2, setCurrentPage2] = useState(1)
   const [currentPage3, setCurrentPage3] = useState(1)
   // const [tableData, setTableData] = useState(false)
+ 
 
   const [load, setLoad] = useState(false)
 
@@ -54,6 +57,7 @@ const Affiliate = (props) => {
     
     if (data) {
       setTotal(data.data.data)
+      // console.log(total, 'TOTAL');
       setStatus(data.data.status)
       // setLoader(false)
       const startIndex = (selelcted + 1) * limit - limit;
@@ -80,11 +84,28 @@ const Affiliate = (props) => {
     // setTableData(true)
   }
 
+  
+
+  // const data1 = {
+  //   details: total
+  // }
+
+    const headers = [
+      { label: "Email", key: "email"},
+      { label: "Total Purchased", key: "totalBuy"},
+      { label: "Total Expense", key: "totalExp"},
+      { label: "Affiliate Rcvd (5%)", key: "totalAff"},
+      { label: "Handout", key: "totalHandout"}
+    ];
+  
+
   useEffect(() => {
+
     setLevel(1)
     getAffiliate(level);
     getAffiliateList(level, 0)
     // handelPagination()
+  
   }, []);
 
   return (
@@ -166,7 +187,7 @@ const Affiliate = (props) => {
                                     setLevel1(true)
                                     setLevel2(false)
                                     setLevel3(false)
-                                    setTotal(0)
+                                    setTotal([])
                                     setTab([])
                                     setCurrentPage1(1)
                                     getAffiliateList(1, 0)
@@ -180,7 +201,7 @@ const Affiliate = (props) => {
                                     setLevel2(true)
                                     setLevel3(false)
                                     setTab([])
-                                    setTotal(0)
+                                    setTotal([])
                                     setCurrentPage2(1)
                                     getAffiliateList(2, 0)
                                   }}>
@@ -192,7 +213,7 @@ const Affiliate = (props) => {
                                     setLevel1(false)
                                     setLevel2(false)
                                     setLevel3(true)
-                                    setTotal(0)
+                                    setTotal([])
                                     setTab([])
                                     setCurrentPage3(1)
                                     getAffiliateList(3, 0)
@@ -215,6 +236,21 @@ const Affiliate = (props) => {
                               className="toggle-expand-content"
                               data-content="pageMenu">
                               <ul className="nk-block-tools g-3">
+                              <li>
+                                
+                              <CSVLink
+                              className="btn btn-outline-warning"
+                              data={total}
+                              filename={"my-file.csv"}
+                              headers={headers}
+                              >   Export <BiExport/>
+                              </CSVLink>
+                                  {/* <Link
+                                    to={'/Withdrawal'}
+                                    className="btn btn-outline-warning"
+                                  > <span>Export <BiExport/></span>
+                                  </Link> */}
+                                </li>
                                 <li>
                                   <Link
                                     to={'/Withdrawal'}

@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import ReactPaginate from 'react-paginate';
 import { Link } from "react-router-dom";
 import { ThreeDots } from 'react-loader-spinner'
+import {BiExport} from 'react-icons/bi'
 
 
 const Bounty = () => {
@@ -76,6 +77,13 @@ const Bounty = () => {
                           data-content="pageMenu"
                         >
                           <ul className="nk-block-tools g-3">
+                          <li>
+                              <Link
+                                to={'/Withdrawal'}
+                                // onClick={()=> navigate('/Withdrawal')}
+                                className="btn bg-teal text-white">
+                                <span>Export <BiExport/></span></Link>
+                            </li>
                             <li>
                               <Link
                                 to={'/Withdrawal'}

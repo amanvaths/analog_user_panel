@@ -12,7 +12,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useSelector } from "react-redux";
 
 import { Link, useNavigate } from "react-router-dom";
-import { Triangle } from "react-loader-spinner";
+import { ThreeDots } from "react-loader-spinner";
 import { Line } from "react-chartjs-2";
 import Chart from 'chart.js/auto';
 
@@ -577,7 +577,7 @@ const Home = () => {
                               transform: "translate(-50%, -50%)",
                             }}
                           >
-                            <Triangle
+                            <ThreeDots
                               ariaLabel="loading-indicator"
                               color="green"
                             />

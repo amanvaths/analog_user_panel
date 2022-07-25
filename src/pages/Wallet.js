@@ -109,7 +109,7 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
       }
       setCoinData([...cd]);
     } catch (error) {
-      getData() 
+      // getData() 
       console.log(error);
     }
   };
