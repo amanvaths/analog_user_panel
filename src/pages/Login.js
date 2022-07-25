@@ -21,6 +21,7 @@ const Login = (props) => {
   const [passworderror, setPassworderror] = useState(false);
   const [shown, setShown] = useState(false)
   const [ii, setII] = useState('')
+  const [captcha, setCaptcha] = useState(false)
 
 
 
@@ -126,25 +127,19 @@ const Login = (props) => {
     if (password == "") {
       setPassworderror(true);
     }
+    if(captcha === false){
+      toast.error("Validate Captcha")
+    }
 
-    if (email !== "" && password !== "") {
+    if (email !== "" && password !== "" && captcha === true) {
       Login();
     }
+
+
   };
 
-  const style = {
-    display: 'inline-block',
-    marginRight: '20px',
-    marginBottom: '20px',
-    width: '100px',
-    padding: '5px 20px',
-    color: '#fff',
-    textAlign: 'center',
-    cursor: 'pointer',
-    background: '#1991FA',
-  };
-
-
+ 
+  
   return (
     <div>
       <div class="bg-login">
@@ -258,14 +253,18 @@ const Login = (props) => {
                       </p>
                     ) : null}
                     {/* <div style={{width: "320px", height: "160px"}}> */}
+                    <div className="abc">
                     <Vertify
+                        
                         width={320}
                         height={160}
                         visible={true}
-                        onSuccess={() => alert('success')}
-                        onFail={() => alert('fail')}
-                        onRefresh={() => alert('refresh')}
+                        onSuccess={() => setCaptcha(true)}
+                        onFail={() => toast.error("Invalid Captcha")}
+                        onRefresh={()=>console.log("")}
                       />
+                    </div>
+                    
                     {/* </div> */}
                      
                     <div className="form-group">

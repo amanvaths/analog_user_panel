@@ -24,6 +24,7 @@ const Bounty = () => {
   const getBounty = async (page) => {
     const data = await axios.post(`${BASE_URL}/bounty`, { email: email, page: page })
     if (data) {
+      console.log(data.data, "BOUNTY TAB");
       setTab(data.data.data)
       setTotalBounty(data.data.count)
       setStatus(data.data.status)
@@ -31,7 +32,7 @@ const Bounty = () => {
     }
   }
 
- 
+ console.log(tab, "BOUNTY TAB");
 
 
   const fun =(data)=>{
