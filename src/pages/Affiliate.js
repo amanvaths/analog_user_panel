@@ -222,27 +222,33 @@ const Affiliate = (props) => {
                             </ul>
                           </div>
                         </div>
-                        <div className="col-md-6 mt-lg-4 mt-sm-0 mt-md-4">
-                          <div className="toggle-wrap nk-block-tools-toggle text-md-right text-sm-left text-lg-right mt-3 mt-lg-0">
-                          <div
-                              className=""
-                              data-content="pageMenu">                               
-                                  <Link
-                                    to={'/Withdrawal'}
-                                    className="btn btn-outline-warning mr-3"
-                                  > <span>Withdraw</span>
-                                  </Link>
-                                      
-                                <CSVLink
-                                className="btn btn-outline-warning"
-                                data={total}
-                                filename={"my-file.xls"}
-                                headers={headers}
-                                >   Export <BiExport/>
+                        <div className="col-md-6 mt-lg-4 mt-sm-0 mt-md-4  text-md-right text-sm-left text-lg-right mt-3 mt-lg-0">
+                          <div class="dropdown mr-2">
+                            <a href="#" class="btn btn-warning d-flex" data-bs-toggle="dropdown" aria-expanded="false">
+                              <span>Download File</span><em class="ni ni-chevron-down fs-0 align-items-baseline"></em></a>                            
+                              <div class="dropdown-menu dropdown-menu-end dropdown-menu-auto mt-1 mr-2">                              
+                                <ul class="link-list-plain m-0 p-0">
+                                  <li> 
+                                    <CSVLink
+                                  className=""
+                                  data={total}
+                                  filename={"my-file.xls"}
+                                  headers={headers}
+                                  > <BiExport/>  Excel 
                                 </CSVLink>
-                            </div>
-                           
+                                </li>
+                                  <li><a href="#"> <em class="ni ni-file-pdf"></em> Pdf</a></li>                               
+                                </ul>
+                              </div>
                           </div>
+
+                        
+                        <Link
+                          to={'/Withdrawal'}
+                          className="btn btn-outline-warning mr-3"> 
+                          <span>Withdraw</span>
+                        </Link>   
+                        
                         </div>
                       </div>
                     </div>
