@@ -78,7 +78,7 @@ const CryptoTransaction = () => {
                           </div>
                         </div>
                         <div className="nk-block-head-content">
-                          <div className="toggle-wrap nk-block-tools-toggle">
+                          <div className="toggle-wrap nk-block-tools-toggle text-right">
                             <Link
                               to=""
                               className="btn btn-icon btn-trigger toggle-expand me-n1"

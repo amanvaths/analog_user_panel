@@ -23,9 +23,7 @@ const Header = () => {
      element = document.getElementById("nk-sidebar");
      element.classList.add("nk-sidebar-active");
      element = document.getElementById("nk-nav-toggle");
-    element.classList.add("toggle-active");
-    element = document.getElementById("overlay_area");
-    element.classList.add("nk-sidebar-overlay");
+     element.classList.add("toggle-active");
 
   var element1 = document.getElementById("myBody");
     if (element1.classList.contains("toggle-shown")) {
