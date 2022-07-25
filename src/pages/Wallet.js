@@ -161,7 +161,7 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
           </div>
 
         </>) :
-          (<div className="nk-app-root ms-5">
+          (<div className="nk-app-root">
             <div className="nk-main" style={{ overflowWrap: "break-word" }}>
               <Menu />
               <div className="nk-wrap">
