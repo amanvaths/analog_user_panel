@@ -45,7 +45,7 @@ const Getpresale = (props) => {
                 <div className="nk-wg7-title is-dark text-work">
                   {levelname}
                 </div>
-                <div className="number-lg amount">{coinPrice}</div>
+                <div className="number-lg amount text-truncate text-wrap">{coinPrice}</div>
               </div>
               <div
                 className="nk-wg7-stats-group mt-1"

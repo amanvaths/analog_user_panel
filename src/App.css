@@ -26,6 +26,7 @@
   
 }
 
+
 .link-list-menu a.active,
 .link-list-menu a:hover,
 .link-list-menu a:hover .icon,
@@ -575,4 +576,18 @@ h6 {
 body {
   background-color: #242526;
   font-family: sans-serif;
+}
+
+
+@media screen and (max-width: 992px) {
+.hor_scroll {
+  white-space: nowrap;
+  display: inline;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+.hide_on_mobile {
+  display: none;
+}
+
 }

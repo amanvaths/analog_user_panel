@@ -46,7 +46,7 @@ const AirDrop = () => {
                         </div>
                       </div>
                       <div className="nk-block-head-content">
-                        <div className="toggle-wrap nk-block-tools-toggle">
+                        <div className="toggle-wrap nk-block-tools-toggle text-right  ">
                           <Link
                             to=""
                             className="btn btn-icon btn-trigger toggle-expand me-n1"
@@ -94,7 +94,7 @@ const AirDrop = () => {
                     </div>
                   </div>
                   <div className="nk-block">
-                    <div className="card card-bordered card-stretch">
+                    <div className="card card-bordered card-stretch hor_scroll">
                       <div className="card-inner-group">
                         <div className="card-inner">
                           <div className="card-title-group">

@@ -229,7 +229,7 @@ const SecuritySettings = () => {
                       <div className='row d-flex justify-content-around flex-row align-items-center py-2'>
 
                         <div className='col-6'>
-                          <div className=''>
+                          <div className='d-flex justify-content-center'>
                             <img
                               alt='qr'
                               src={security.qr_url}
@@ -245,7 +245,7 @@ const SecuritySettings = () => {
                                 {/* <label for="inputOtp" className='mb-1'> OTP</label> */}
                                 {/* <input type="text" class="form-control" id="inputOtp" placeholder="Enter OTP" onChange={(e) => setOtp(e.target.value)} /> */}
                                 <OtpInput
-                                  inputStyle = "amit"
+                                  inputStyle = "auth_style"
                                   value={otp}
                                   onChange={(e)=>setOtp(e)}
                                   numInputs={6}
@@ -307,7 +307,7 @@ const SecuritySettings = () => {
                                 {/* <label for="inputOtp">Enter OTP to disable 2FA</label> */}
                                 {/* <input type="text" class="form-control" id="inputOtp" placeholder="Enter OTP" onChange={(e) => setOtpD(e.target.value)} /> */}
                                 <OtpInput
-                                  inputStyle = "amit"
+                                  inputStyle = "auth_style"
                                   value={otpD}
                                   onChange={(e)=>setOtpD(e)}
                                   numInputs={6}
