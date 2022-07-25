@@ -101,7 +101,7 @@ const Handout= (props) => {
                           <em className="icon ni ni-menu-alt-r"></em>
                         </Link>
                         <div
-                          className="toggle-expand-content"
+                          className=""
                           data-content="pageMenu"
                         >
                           {/* <ul className="nk-block-tools g-3">

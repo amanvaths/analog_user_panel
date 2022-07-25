@@ -17,13 +17,13 @@ const Header = () => {
   const [notification, setNotification] = useState([]);
   const sidebarMenu = async () => {
 
-    var element = document.getElementById("myBody");
+    var element = document.getElementById("myBody"); 
 
      element.classList.add("nav-shown");
      element = document.getElementById("nk-sidebar");
      element.classList.add("nk-sidebar-active");
-     element = document.getElementById("nk-nav-toggle");
-     element.classList.add("toggle-active");
+    element = document.getElementById("nk-nav-toggle");
+    // element.classList.add("toggle-active");
 
   var element1 = document.getElementById("myBody");
     if (element1.classList.contains("toggle-shown")) {
@@ -93,15 +93,15 @@ const Header = () => {
       <div className="nk-header nk-header-fluid is-light mobile_view_setter">
         <div className="container-fluid" >
           <div className="nk-header-wrap">
-            <div className="nk-menu-trigger d-xl-none ml-n1">            
-              <a              
+            <div className="nk-menu-trigger d-xl-none ml-n1">
+              <a
                 href="#" id="nk-nav-toggle"
                 // onClick={()=>dispatch(navsetter())}
                  className= "nk-nav-toggle nk-quick-nav-icon"
-                //className={btn ? "nk-nav-toggle nk-quick-nav-icon" : "nk-nav-toggle nk-quick-nav-icon toggle-active"}
+                //className={btn ? "nk-nav-toggle nk-quick-nav-icon toggle-active" : "nk-nav-toggle nk-quick-nav-icon"}
                 data-target="sidebarMenu"
               >
-                <em className="icon ni ni-menu"  onClick={sidebarMenu} ></em>
+                <em className="icon ni ni-menu"  onClick={sidebarMenu}></em>
               </a>
             </div>
             <div className="nk-header-brand d-xl-none">
