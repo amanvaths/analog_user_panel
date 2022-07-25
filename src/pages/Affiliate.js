@@ -153,13 +153,13 @@ const Affiliate = (props) => {
                 <div className="row my-4">
                   <div className="nk-content-wrap">
                     <div className="nk-block-head">
-                      <div className="nk-block-between">
-                        <div className="nk-block-head-content">
+                      <div className="row nk-block-between">
+                        <div className="col-md-6">
                           <h3 className="nk-block-title page-title">
                             Affiliate List
                           </h3>
                           <div className="nk-block-des text-soft">
-                            <ul className="nk-block-tools g-3" style={{ paddingLeft: "0px" }}>
+                            <ul className="nk-block-tools g-1" style={{ paddingLeft: "0px" }}>
                               <li>
                                 <Link to="" className={level1 ? 'btn btn-white btn-dim btn-outline-success active' :
                                   "btn btn-white btn-dim btn-outline-success"} onClick={() => {
@@ -175,7 +175,7 @@ const Affiliate = (props) => {
                               </li>
                               <li>
                                 <Link to="" className={level2 ? 'btn btn-white btn-dim btn-outline-success active' :
-                                  "btn btn-white btn-dim btn-outline-success"} onClick={() => {
+                                  "btn btn-white btn-dim btn-outline-success m-1"} onClick={() => {
                                     setLevel1(false)
                                     setLevel2(true)
                                     setLevel3(false)
@@ -202,29 +202,23 @@ const Affiliate = (props) => {
                             </ul>
                           </div>
                         </div>
-                        <div className="nk-block-head-content">
-                          <div className="toggle-wrap nk-block-tools-toggle text-right">
-                            {/* <Link
-                              to=""
-                              className="btn btn-icon btn-trigger toggle-expand mr-n1"
-                              data-target="pageMenu"
-                            >
-                              <em className="icon ni ni-menu-alt-r"></em>
-                            </Link> */}
-                            <div
-                              className="toggle-expand-content"
-                              data-content="pageMenu">
-                              <ul className="nk-block-tools g-3">
-                                <li>
+                        <div className="col-md-6 mt-lg-4 mt-sm-0 mt-md-4">
+                          <div className="toggle-wrap nk-block-tools-toggle text-md-right text-sm-left text-lg-right mt-3 mt-lg-0">
+                          <div
+                              className=""
+                              data-content="pageMenu">                               
                                   <Link
                                     to={'/Withdrawal'}
-                                    className="btn btn-outline-warning"
+                                    className="btn btn-outline-warning mr-3"
                                   > <span>Withdraw</span>
                                   </Link>
-                                </li>
-
-                              </ul>
+                                  <Link
+                                    to={'/export'}
+                                    className="btn btn-outline-success"
+                                  > <span>Export</span>
+                                  </Link>
                             </div>
+                           
                           </div>
                         </div>
                       </div>

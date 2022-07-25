@@ -46,14 +46,10 @@ const AirDrop = () => {
                         </div>
                       </div>
                       <div className="nk-block-head-content">
-                        <div className="toggle-wrap nk-block-tools-toggle text-right  ">
-                          <Link
-                            to=""
-                            className="btn btn-icon btn-trigger toggle-expand me-n1"
-                            data-target="pageMenu"
-                          ><em className="icon ni ni-menu-alt-r"></em></Link>
+                        <div className="toggle-wrap nk-block-tools-toggle text-right">
+                         
                           <div
-                            className="toggle-expand-content"
+                            className=""
                             data-content="pageMenu"
                           >
                              <ul className="nk-block-tools g-3">
