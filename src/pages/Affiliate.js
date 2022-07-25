@@ -92,15 +92,14 @@ const Affiliate = (props) => {
 
     const headers = [
       { label: "Email", key: "email"},
-      { label: "Total Purchased", key: "totalBuy"},
-      { label: "Total Expense", key: "totalExp"},
-      { label: "Affiliate Rcvd (5%)", key: "totalAff"},
-      { label: "Handout", key: "totalHandout"}
+      { label: "Total Purchased (ANA)", key: "totalBuy"},
+      { label: `Total Expense (${userInfo?.currency_preference === 'inr' ? "INRX" : "USDT"})`, key: "totalExp"},
+      { label: `Affiliate Rcvd (5%) (${userInfo?.currency_preference === 'inr' ? "INRX" : "USDT"})`, key: "totalAff"},
+      { label: `Handout(${userInfo?.currency_preference === 'inr' ? "INRX" : "USDT"})`, key: "totalHandout"}
     ];
   
 
   useEffect(() => {
-
     setLevel(1)
     getAffiliate(level);
     getAffiliateList(level, 0)
@@ -241,7 +240,7 @@ const Affiliate = (props) => {
                               <CSVLink
                               className="btn btn-outline-warning"
                               data={total}
-                              filename={"my-file.csv"}
+                              filename={"my-file.xls"}
                               headers={headers}
                               >   Export <BiExport/>
                               </CSVLink>
