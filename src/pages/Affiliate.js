@@ -106,6 +106,7 @@ const Affiliate = (props) => {
     // handelPagination()
   
   }, []);
+  console.log(level, "level");
 
   return (
     <div>
@@ -186,6 +187,7 @@ const Affiliate = (props) => {
                                     setLevel1(true)
                                     setLevel2(false)
                                     setLevel3(false)
+                                    setLevel(1)
                                     setTotal([])
                                     setTab([])
                                     setCurrentPage1(1)
@@ -199,6 +201,7 @@ const Affiliate = (props) => {
                                     setLevel1(false)
                                     setLevel2(true)
                                     setLevel3(false)
+                                    setLevel(2)
                                     setTab([])
                                     setTotal([])
                                     setCurrentPage2(1)
@@ -212,6 +215,7 @@ const Affiliate = (props) => {
                                     setLevel1(false)
                                     setLevel2(false)
                                     setLevel3(true)
+                                    setLevel(3)
                                     setTotal([])
                                     setTab([])
                                     setCurrentPage3(1)
@@ -233,10 +237,11 @@ const Affiliate = (props) => {
                                   > <span>Withdraw</span>
                                   </Link>
                                       
+                                  
                                 <CSVLink
                                 className="btn btn-outline-warning"
                                 data={total}
-                                filename={"my-file.xls"}
+                                filename={`Affiliate_List_Level_${level}.xls`}
                                 headers={headers}
                                 >   Export <BiExport/>
                                 </CSVLink>

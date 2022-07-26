@@ -953,7 +953,7 @@ const Home = () => {
           </p>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={()=> handleClose}>Close</Button>
+          <Button onClick={()=> handleClose()}>Close</Button>
         </Modal.Footer>
       </Modal>
       
