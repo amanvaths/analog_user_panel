@@ -943,11 +943,11 @@ const Home = () => {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Modal heading
+          INRX
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h4>Centered Modal</h4>
+          <h4>Ana</h4>
           <p>
             Analog Inceptive 
           </p>
