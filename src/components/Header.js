@@ -108,13 +108,13 @@ const Header = () => {
               <Link to="/home" className="logo-link">
                 <img
                   className="logo-light logo-img"
-                  src="images/logo.png"
+                  src='https://api.analog.live/images/logo_1658832710895-image.svg'
                   srcSet="images/logo.png 2x"
                   alt="logo"
                 />
                 <img
                   className="logo-dark logo-img"
-                  src="images/logo.png"
+                  src="https://api.analog.live/images/logo_1658832710895-image.svg"
                   srcSet="images/logo.png 2x"
                   alt="logo-dark"
                 />

@@ -52,11 +52,9 @@ const Home = () => {
   const [chartLabel, setChartLabel] = useState([])
   const [api, setApi] = useState(false)
 
-  const [modalShow, setModalShow] = useState(false);
-
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // const handleShow = () => setShow(true);
 
   const summaryBalance = {
     labels: chartLabel,
@@ -178,7 +176,6 @@ const Home = () => {
   // const time = a.toLocaleTimeString();
 
   useEffect(() => {
-    setModalShow(true)
     getUserWalletData();
     getPreSale();
     recentActivity();
@@ -932,7 +929,7 @@ const Home = () => {
           <Footer />
         </div>
       </div>
-      {
+      
       
         <Modal
         onHide={handleClose}
@@ -957,7 +954,7 @@ const Home = () => {
         </Modal.Footer>
       </Modal>
       
-      }
+      
     </div>
     // </div>
   );

@@ -2,7 +2,7 @@ import React, {useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
 import axios from "axios";
-import { BASE_URL } from "../Api_connection/config";
+import { BASE_URL, BASE_URL_2 } from "../Api_connection/config";
 import { setOneUsdPrice, setTotalAna } from "../redux/reducer/user";
 
 
@@ -74,14 +74,16 @@ function Menu (){
                 className="logo-link nk-sidebar-logo"
               >
                 <img
+                width={100}
                   className="logo-light logo-img"
-                  src="images/logo-dark.png"
+                  src="https://api.analog.live/images/logo_1658832710895-image.svg"
                   // srcSet="images/logo-dark.png 2x"
                   alt="logo"                 
                 />
                 <img
+                 width={100}
                   className="logo-dark logo-img"
-                  src="images/logo.png"
+                  src="https://api.analog.live/images/dark_logo_1658832710900-image.svg"
                   // srcSet="images/logo-dark.png 2x"
                   alt="logo-dark"                
                 />

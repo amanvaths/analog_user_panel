@@ -23,21 +23,21 @@ const Login = (props) => {
   const [ii, setII] = useState('')
   const [captcha, setCaptcha] = useState(false)
 
-
-
   useEffect(() => {
-    google.accounts.id.initialize({
-      client_id: "879223788790-mhj4ntd15ashepqn5h4ec4hu4fncmr8t.apps.googleusercontent.com",
-      callback: handleCallback
-    });
+    if (window.google) {
+      window.google.accounts.id.initialize({
+        client_id: "879223788790-mhj4ntd15ashepqn5h4ec4hu4fncmr8t.apps.googleusercontent.com",
+        callback: handleCallback
+      });
 
-    google.accounts.id.renderButton(
-      document.getElementById('googleLogin'),
-      { theme: "outline", size: "large" }
-    );
+      window.google.accounts.id.renderButton(
+        document.getElementById('googleLogin'),
+        { theme: "outline", size: "large" }
+      );
 
-    google.accounts.id.prompt()
-  }, [google])
+      window.google.accounts.id.prompt()
+    }
+  }, [window.google])
 
   const handleCallback = async (response) => {
     let obj = jwt_decode(response.credential)
@@ -127,7 +127,7 @@ const Login = (props) => {
     if (password == "") {
       setPassworderror(true);
     }
-    if(captcha === false){
+    if (captcha === false) {
       toast.error("Validate Captcha")
     }
 
@@ -138,8 +138,8 @@ const Login = (props) => {
 
   };
 
- 
-  
+
+
   return (
     <div>
       <div class="bg-login">
@@ -254,21 +254,21 @@ const Login = (props) => {
                     ) : null}
                     {/* <div style={{width: "320px", height: "160px"}}> */}
                     <div className="abc">
-                    <Vertify
-                        
+                      <Vertify
+
                         width={320}
                         height={160}
                         visible={true}
                         onSuccess={() => setCaptcha(true)}
                         onFail={() => toast.error("Invalid Captcha")}
-                        onRefresh={()=>console.log("")}
+                        onRefresh={() => console.log("")}
                       />
                     </div>
-                    
+
                     {/* </div> */}
-                     
+
                     <div className="form-group">
-                     
+
                       <button
                         className="btn text-white bg-teal btn-dim btn-block"
                       // onClick={() => toast.success("HIII")}
