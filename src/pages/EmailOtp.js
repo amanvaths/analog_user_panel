@@ -102,11 +102,15 @@ const EmailOtp = (props) => {
             <div className="col-md-6 bg-light border shadow">
               <div className="card-inner py-5">
               <div className="brand-logo pb-3">
-                  <Link to="/Home" className="logo-link">                    
+                  <Link to="/Home" className="logo-link"> 
+                  <img
+                      className="logo-light logo-img logo-img-lg"
+                      src="images/logo-dark.png"
+                      alt="logo"
+                    />                   
                   <img
                       className="logo-dark logo-img logo-img-lg"
                       src="images/logo.png"
-                      srcSet="images/logo-dark2x.png 2x"
                       alt="logo-dark"
                     />
                   </Link>

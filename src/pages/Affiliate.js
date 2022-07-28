@@ -10,6 +10,8 @@ import {ThreeDots } from 'react-loader-spinner'
 import { MdMoreHoriz } from 'react-icons/md'
 import ReactPaginate from 'react-paginate';
 import { Link } from "react-router-dom";
+import {BiExport} from 'react-icons/bi'
+import { CSVLink} from "react-csv";
 
 
 const Affiliate = (props) => {
@@ -27,17 +29,18 @@ const Affiliate = (props) => {
   // const [tab3, setTab3] = useState([]);
   const [loader, setLoader] = useState(false)
   const [status, setStatus] = useState()
-  const [total, setTotal] = useState(0)
+  const [total, setTotal] = useState([])
   const [currentPage1, setCurrentPage1] = useState(1)
   const [currentPage2, setCurrentPage2] = useState(1)
   const [currentPage3, setCurrentPage3] = useState(1)
   // const [tableData, setTableData] = useState(false)
+ 
 
   const [load, setLoad] = useState(false)
 
   const getAffiliate = async () => {
     try {
-      console.log(email, " user email asjljasf")
+      // console.log(email, " user email asjljasf")
       const arr = [];
       const data = await axios.post(`${BASE_URL}/refferalLevelWiseData`, { email: email })
       arr.push(Object.keys(data.data.data))
@@ -45,7 +48,7 @@ const Affiliate = (props) => {
       setLoad(true)
       setAffiliates(arr);
     } catch (error) {
-      console.log("Error in getting data Affililate :" + error);
+      // console.log("Error in getting data Affililate :" + error);
     }
   }
   const limit = 5
@@ -54,6 +57,7 @@ const Affiliate = (props) => {
     
     if (data) {
       setTotal(data.data.data)
+      // console.log(total, 'TOTAL');
       setStatus(data.data.status)
       // setLoader(false)
       const startIndex = (selelcted + 1) * limit - limit;
@@ -80,12 +84,29 @@ const Affiliate = (props) => {
     // setTableData(true)
   }
 
+  
+
+  // const data1 = {
+  //   details: total
+  // }
+
+    const headers = [
+      { label: "Email", key: "email"},
+      { label: "Total Purchased (ANA)", key: "totalBuy"},
+      { label: `Total Expense (${userInfo?.currency_preference === 'inr' ? "INRX" : "USDT"})`, key: "totalExp"},
+      { label: `Affiliate Rcvd (5%) (${userInfo?.currency_preference === 'inr' ? "INRX" : "USDT"})`, key: "totalAff"},
+      { label: `Handout(${userInfo?.currency_preference === 'inr' ? "INRX" : "USDT"})`, key: "totalHandout"}
+    ];
+  
+
   useEffect(() => {
     setLevel(1)
     getAffiliate(level);
     getAffiliateList(level, 0)
     // handelPagination()
+  
   }, []);
+  console.log(level, "level");
 
   return (
     <div>
@@ -109,14 +130,14 @@ const Affiliate = (props) => {
                       </div>
                     </div>
                     <div className="nk-block-head-content affiliates">
-                      <div className="toggle-wrap nk-block-tools-toggle">
-                        <Link
+                      <div className="toggle-wrap nk-block-tools-toggle text-right">
+                        {/* <Link
                           to=""
                           className="btn btn-icon btn-trigger toggle-expand me-n1"
                           data-target="pageMenu"
                         >
                           <em className="icon ni ni-menu-alt-r"></em>
-                        </Link>
+                        </Link> */}
                         <div
                           className="toggle-expand-content"
                           data-content="pageMenu"
@@ -153,20 +174,21 @@ const Affiliate = (props) => {
                 <div className="row my-4">
                   <div className="nk-content-wrap">
                     <div className="nk-block-head">
-                      <div className="nk-block-between">
-                        <div className="nk-block-head-content">
+                      <div className="row nk-block-between">
+                        <div className="col-md-6">
                           <h3 className="nk-block-title page-title">
                             Affiliate List
                           </h3>
                           <div className="nk-block-des text-soft">
-                            <ul className="nk-block-tools g-3" style={{ paddingLeft: "0px" }}>
+                            <ul className="nk-block-tools g-1" style={{ paddingLeft: "0px" }}>
                               <li>
                                 <Link to="" className={level1 ? 'btn btn-white btn-dim btn-outline-success active' :
                                   "btn btn-white btn-dim btn-outline-success"} onClick={() => {
                                     setLevel1(true)
                                     setLevel2(false)
                                     setLevel3(false)
-                                    setTotal(0)
+                                    setLevel(1)
+                                    setTotal([])
                                     setTab([])
                                     setCurrentPage1(1)
                                     getAffiliateList(1, 0)
@@ -175,12 +197,13 @@ const Affiliate = (props) => {
                               </li>
                               <li>
                                 <Link to="" className={level2 ? 'btn btn-white btn-dim btn-outline-success active' :
-                                  "btn btn-white btn-dim btn-outline-success"} onClick={() => {
+                                  "btn btn-white btn-dim btn-outline-success m-1"} onClick={() => {
                                     setLevel1(false)
                                     setLevel2(true)
                                     setLevel3(false)
+                                    setLevel(2)
                                     setTab([])
-                                    setTotal(0)
+                                    setTotal([])
                                     setCurrentPage2(1)
                                     getAffiliateList(2, 0)
                                   }}>
@@ -192,7 +215,8 @@ const Affiliate = (props) => {
                                     setLevel1(false)
                                     setLevel2(false)
                                     setLevel3(true)
-                                    setTotal(0)
+                                    setLevel(3)
+                                    setTotal([])
                                     setTab([])
                                     setCurrentPage3(1)
                                     getAffiliateList(3, 0)
@@ -202,29 +226,27 @@ const Affiliate = (props) => {
                             </ul>
                           </div>
                         </div>
-                        <div className="nk-block-head-content">
-                          <div className="toggle-wrap nk-block-tools-toggle">
-                            <Link
-                              to=""
-                              className="btn btn-icon btn-trigger toggle-expand mr-n1"
-                              data-target="pageMenu"
-                            >
-                              <em className="icon ni ni-menu-alt-r"></em>
-                            </Link>
-                            <div
-                              className="toggle-expand-content"
-                              data-content="pageMenu">
-                              <ul className="nk-block-tools g-3">
-                                <li>
+                        <div className="col-md-6 mt-lg-4 mt-sm-0 mt-md-4">
+                          <div className="toggle-wrap nk-block-tools-toggle text-md-right text-sm-left text-lg-right mt-3 mt-lg-0">
+                          <div
+                              className=""
+                              data-content="pageMenu">                               
                                   <Link
                                     to={'/Withdrawal'}
-                                    className="btn btn-outline-warning"
+                                    className="btn btn-outline-warning mr-3"
                                   > <span>Withdraw</span>
                                   </Link>
-                                </li>
-
-                              </ul>
+                                      
+                                  
+                                <CSVLink
+                                className="btn btn-outline-warning"
+                                data={total}
+                                filename={`Affiliate_List_Level_${level}.xls`}
+                                headers={headers}
+                                >   Export <BiExport/>
+                                </CSVLink>
                             </div>
+                           
                           </div>
                         </div>
                       </div>
@@ -233,7 +255,7 @@ const Affiliate = (props) => {
                     {/* Level 1 */}
                     {level1 == true ?
                       <div className="nk-block">
-                        <div className="card border-0 card-stretch">
+                        <div className="card border-0">
                           <div className="card-inner-group bg-light border rounded p-4">
                             <div className="card bg-white shadow-sm">
                               <div className="card-inner py-3">
@@ -245,7 +267,7 @@ const Affiliate = (props) => {
                                   </div>
                                 </div>
                               </div>
-                              <div className="nk-tb-list nk-tb-ulist is-compact">
+                              <div className="nk-tb-list nk-tb-ulist is-compact hor_scroll">
                                 <div className="nk-tb-item nk-tb-head">
                                   <div className="nk-tb-col tb-col-sm">
                                     {/* <span className="font-weight-bold">S. N.</span> */}
@@ -277,7 +299,7 @@ const Affiliate = (props) => {
                                     tab.length > 0 ?
 
                                       tab.map((element, index) => {
-                                        console.log(index, "::INDEx");
+                                        // console.log(index, "::INDEx");
                                         return (
                                           <div className="nk-tb-item ">
 
@@ -402,7 +424,7 @@ const Affiliate = (props) => {
                     {/* Level 2 */}
                     {level2 == true ?
                       <div className="nk-block">
-                        <div className="card border-0 card-stretch">
+                        <div className="card border-0">
                           <div className="card-inner-group bg-light border rounded p-4">
                             <div className="card bg-white shadow-sm">
                               <div className="card-inner py-3">
@@ -415,7 +437,7 @@ const Affiliate = (props) => {
                                 </div>
                               </div>
 
-                              <div className="nk-tb-list nk-tb-ulist is-compact">
+                              <div className="nk-tb-list nk-tb-ulist is-compact hor_scroll">
                                 <div className="nk-tb-item nk-tb-head">
                                   <div className="nk-tb-col tb-col-sm">
                                     {/* <span className="font-weight-bold text-dark">S. N.</span> */}
@@ -447,7 +469,7 @@ const Affiliate = (props) => {
                                   status == 2 ? <h5>Record Not Found</h5> :
                                     tab.length > 0 ?
                                       tab.map((element, index) => {
-                                        console.log(index, "::INDEx");
+                                        // console.log(index, "::INDEx");
                                         return (
                                           <div className="nk-tb-item ">
 
@@ -567,7 +589,7 @@ const Affiliate = (props) => {
                     {/* Level 3 */}
                     {level3 == true ?
                       <div className="nk-block">
-                        <div className="card border-0 card-stretch">
+                        <div className="card border-0">
                           <div className="card-inner-group bg-light border rounded p-4">
                             <div className="card bg-white shadow-sm">
                               <div className="card-inner py-3">
@@ -579,7 +601,7 @@ const Affiliate = (props) => {
                                   </div>
                                 </div>
                               </div>
-                              <div className="nk-tb-list nk-tb-ulist is-compact">
+                              <div className="nk-tb-list nk-tb-ulist is-compact hor_scroll">
                                 <div className="nk-tb-item nk-tb-head">
                                   <div className="nk-tb-col tb-col-sm">
                                     {/* <span className="font-weight-bold text-dark">S. N.</span> */}
@@ -614,7 +636,7 @@ const Affiliate = (props) => {
                                   status == 2 ? <h5>Record Not Found</h5> :
                                     tab.length > 0 ?
                                       tab.map((element, index) => {
-                                        console.log(index, "::INDEx");
+                                        // console.log(index, "::INDEx");
                                         return (
                                           <>
                                             <div className="nk-tb-item ">

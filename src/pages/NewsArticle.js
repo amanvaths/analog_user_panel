@@ -8,7 +8,7 @@ import { useLocation } from "react-router-dom";
 
 const NewsArticle = () => {
   const location = useLocation()
-  console.log(location.state, "STATE");
+  // console.log(location.state, "STATE");
   return (
     <div className="nk-app-root">
       <div className="nk-main ">

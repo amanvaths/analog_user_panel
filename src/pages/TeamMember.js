@@ -12,7 +12,7 @@ const TeamMember = () => {
   const getTeamMember = async () => {
     try {
       const data = await axios.post(`${BASE_URL}/teamMember`)
-      console.log(data.data);
+      // console.log(data.data);
       setTeam(data.data)
     } catch (error) {
       console.log(error);

@@ -36,11 +36,11 @@ const ResetPassword = (props) => {
   };
 
   const onLoginFailure = (res) => {
-    console.log(res);
+    // console.log(res);
   };
 
  const ResetPasswordApi = async()=>  {
-    console.log("Called", "d");
+    // console.log("Called", "d");
     await fetch(BASE_URL + "/reset", {
       method: "POST",
       headers: {
@@ -55,7 +55,7 @@ const ResetPassword = (props) => {
     })
       .then((res) => res.json())
       .then((resp) => {
-        console.log(resp, "response..");
+        // console.log(resp, "response..");
         if (resp.status === 1) {
           toast.success(resp.msg)
           // swal(resp.msg);
@@ -147,7 +147,7 @@ const ResetPassword = (props) => {
     }
   };
   const params = useParams();
-  console.log(params.restcode, "params");
+  // console.log(params.restcode, "params");
   return (
     <div>
       <div class="bg-login">
@@ -181,13 +181,11 @@ const ResetPassword = (props) => {
                     <img
                       className="logo-light logo-img logo-img-lg"
                       src="images/logo-dark.png"
-                      srcSet="images/logo2x.png 2x"
                       alt="logo"
                     />
                     <img
                       className="logo-dark logo-img logo-img-lg"
                       src="images/logo.png"
-                      srcSet="images/logo-dark2x.png 2x"
                       alt="logo-dark"
                     />
                   </Link>

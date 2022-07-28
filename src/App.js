@@ -40,7 +40,7 @@ function App(props) {
     if(userInfo?.webPush_Public_Key && user?.email){
     subscribeUser(userInfo?.webPush_Public_Key, user?.email);
     } else {
-      console.log("User public key not found!");
+      // console.log("User public key not found!");
     }
 
   },[{...user}])

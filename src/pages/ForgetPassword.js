@@ -85,17 +85,16 @@ const ForgetPassword = (props) => {
 
     const handleCallback = async(response)=>{
       let obj = jwt_decode(response.credential)
-      console.log(obj)
+      // console.log(obj)
       // setII(obj.picture)
-      console.log(email,"email");
+      // console.log(email,"email");
       const data  = await axios.post(`${BASE_URL}/signInWithGoogle`, { email: obj.email, password: obj.sub})
       if(data){
-        console.log(data, "API RESPONSE");
+        // console.log(data, "API RESPONSE");
         if(data.data.status === 1)
         {
           console.log(data.data.status, "status");
           if(data.data.googleAuth === 0){
-            console.log(data.data.googleAuth, "GoogleAuth");
             dispatch(setIsLoggedIn({ LoginDetails: data.data }))
               navigate('/home')
           }else{
@@ -104,9 +103,7 @@ const ForgetPassword = (props) => {
         }
       }else{
         toast.error("Something Went Wrong")
-        // swal("Something Went Wrong",
-        // "He he hehehe",
-        // "error")
+       
       }
     }
 
@@ -136,13 +133,11 @@ const ForgetPassword = (props) => {
                       <img
                         className="logo-light logo-img logo-img-lg"
                         src="images/logo.png"
-                        srcSet="images/logo2x.png 2x"
                         alt="logo"
                       />
                       <img
                         className="logo-dark logo-img logo-img-lg"
                         src="images/logo.png"
-                        srcSet="images/logo-dark2x.png 2x"
                         alt="logo-dark"
                       />
                     </Link>

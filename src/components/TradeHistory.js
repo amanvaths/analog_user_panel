@@ -16,7 +16,7 @@ export default function TradeHistory() {
       )
       .then((res) => {
         setHistory(res.data.order);
-        console.log(res.data.order, "ALL USER");
+        // console.log(res.data.order, "ALL USER");
         setLoader(false);
       })
       .catch((error) => {

@@ -10,7 +10,7 @@ const AffiliatCard = (props) => {
   const theme = localStorage.getItem("theme");
 
   useEffect(() => {
-    console.log("mytheme",theme);
+    // console.log("mytheme",theme);
     if (theme) {
       setBack("dark");
     } else {

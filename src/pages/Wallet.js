@@ -36,7 +36,7 @@ const Wallet = (props) => {
 
 
   const email = user.email;
-  const socket = io(`http://localhost:8080`)
+  const socket = io(`https://api.analog.live:8080`,{secure: true})
   // var status = 0;
   useEffect(()=>{
   socket.on('connect',()=>{
@@ -109,7 +109,7 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
       }
       setCoinData([...cd]);
     } catch (error) {
-      getData() 
+      // getData() 
       console.log(error);
     }
   };
@@ -161,7 +161,7 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
           </div>
 
         </>) :
-          (<div className="nk-app-root ms-5">
+          (<div className="nk-app-root">
             <div className="nk-main" style={{ overflowWrap: "break-word" }}>
               <Menu />
               <div className="nk-wrap">

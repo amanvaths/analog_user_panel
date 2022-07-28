@@ -98,17 +98,17 @@ const Signup = (props) => {
 
   const handleCallback = async(response)=>{
     let obj = jwt_decode(response.credential)
-    console.log(obj)
+    // console.log(obj)
     // setII(obj.picture)
-    console.log(email,"email");
+    // console.log(email,"email");
     const data  = await axios.post(`${BASE_URL}/signInWithGoogle`, { email: obj.email, password: obj.sub})
     if(data){
-      console.log(data, "API RESPONSE");
+      // console.log(data, "API RESPONSE");
       if(data.data.status === 1)
       {
-        console.log(data.data.status, "status");
+        // console.log(data.data.status, "status");
         if(data.data.googleAuth === 0){
-          console.log(data.data.googleAuth, "GoogleAuth");
+          // console.log(data.data.googleAuth, "GoogleAuth");
           dispatch(setIsLoggedIn({ LoginDetails: data.data }))
             navigate('/home')
         }else{
@@ -137,11 +137,11 @@ const Signup = (props) => {
     "28253347908-l3f5pge45v4avpv50ppksjlkvvap6t35.apps.googleusercontent.com";
 
   const onLoginSuccess = (res) => {
-    console.log(res, "P");
+    // console.log(res, "P");
   };
 
   const onLoginFailure = (res) => {
-    console.log(res, "F");
+    // console.log(res, "F");
   };
 
   //Validation Box
@@ -243,11 +243,15 @@ const Signup = (props) => {
             <div className="col-md-6 bg-light border shadow">
               <div className="card-inner">
                 <div className="brand-logo pb-3">
-                  <Link to="/home" className="logo-link">                    
+                  <Link to="/home" className="logo-link">
+                  <img
+                      className="logo-light logo-img logo-img-lg"
+                      src="images/logo-dark.png"
+                      alt="logo"
+                    />                    
                   <img
                       className="logo-dark logo-img logo-img-lg"
                       src="images/logo.png"
-                      srcSet="images/logo-dark2x.png 2x"
                       alt="logo-dark"
                     />
                   </Link>
@@ -419,8 +423,7 @@ const Signup = (props) => {
                 </form>
                 <div className="form-note-s2 pt-2 text-right">
                   {" "}
-                  Already have an account ? <a class="text-teal" href="/login">Sign in</a>
-                  {/* Otp Interact <a href="/EmailOtp">Resend Otp</a> */}
+                  Already have an account ? <Link class="text-teal" to="/login">Sign in</Link>
                 </div>
 
                 <div className="text-center pt-4 pb-3">

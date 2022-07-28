@@ -61,9 +61,12 @@ const Header = () => {
 
     // }
 
-  }
+   }
+
+ 
 
 
+  
   const mode = localStorage.getItem("theme")
   if (mode == 1) {
     var element = document.getElementById("myBody");
@@ -71,14 +74,14 @@ const Header = () => {
   } else {
     element = document.getElementById("myBody");
     element.classList.remove("dark-mode")
-  }
-
-
+  }  
   
 
 
 
-  const signOut = () => {
+
+
+    const signOut = () => {
     dispatch(logout());
     toast.success("Logout Successfully")
     navigate("/login")
@@ -112,10 +115,10 @@ const Header = () => {
           <div className="nk-header-wrap">
             <div className="nk-menu-trigger d-xl-none ml-n1">
               <a
-                href="#"
+                href="#" id="nk-nav-toggle"
                 // onClick={()=>dispatch(navsetter())}
-                // className= "nk-nav-toggle nk-quick-nav-icon toggle-active"
-                className={btn ? "nk-nav-toggle nk-quick-nav-icon toggle-active" : "nk-nav-toggle nk-quick-nav-icon"}
+                 className= "nk-nav-toggle nk-quick-nav-icon"
+                //className={btn ? "nk-nav-toggle nk-quick-nav-icon toggle-active" : "nk-nav-toggle nk-quick-nav-icon"}
                 data-target="sidebarMenu"
               >
                 <em className="icon ni ni-menu"  onClick={sidebarMenu}></em>
@@ -125,13 +128,13 @@ const Header = () => {
               <Link to="/home" className="logo-link">
                 <img
                   className="logo-light logo-img"
-                  src="images/logo.png"
+                  src='https://api.analog.live/images/logo_1658832710895-image.svg'
                   srcSet="images/logo.png 2x"
                   alt="logo"
                 />
                 <img
                   className="logo-dark logo-img"
-                  src="images/logo.png"
+                  src="https://api.analog.live/images/logo_1658832710895-image.svg"
                   srcSet="images/logo.png 2x"
                   alt="logo-dark"
                 />
@@ -160,7 +163,7 @@ const Header = () => {
             <div className="nk-header-tools">
               <ul className="nk-quick-nav">
                 <li>
-                  <div className="nk-block-head">
+                  <div className="nk-block-head d-none d-sm-block">
                     {/* <div className="nk-block-head-sub">
                         <span>Welcome!</span>
                       </div> */}

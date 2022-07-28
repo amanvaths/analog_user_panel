@@ -31,7 +31,7 @@ const Handout= (props) => {
 
   const getAffiliate = async () => {
     try {
-      console.log(email, " user email asjljasf")
+      // console.log(email, " user email asjljasf")
       const arr = [];
       const data = await axios.post(`${BASE_URL}/refferalLevelWiseData`, { email: email })
       arr.push(Object.keys(data.data.data))
@@ -43,17 +43,17 @@ const Handout= (props) => {
     }
   }
 
-  console.log(props, "::PROPS-->>");
+  // console.log(props, "::PROPS-->>");
 
   const getAffiliateList = async (level) => {
     const data = await axios.post(`${BASE_URL}/levelWiseList`, { email: email, level: level })
-    console.log(data, "::Response from AFFILIATE TABLE API");
+    // console.log(data, "::Response from AFFILIATE TABLE API");
     if (data) {
       setTab(data.data.data);
       setStatus(data.data.status)
       setLoader(false)
       setItems(data.data.status)
-      console.log(data.data.status,"data.data.status data.data.status data.data.status");
+      // console.log(data.data.status,"data.data.status data.data.status data.data.status");
     }
 
   }
@@ -65,7 +65,7 @@ const Handout= (props) => {
   }, []);
 
   const handlePageClick=(data)=>{
-    console.log(data);
+    // console.log(data);
   }
 
 
@@ -92,7 +92,7 @@ const Handout= (props) => {
                       </div> */}
                     </div>
                     <div className="nk-block-head-content affiliates">
-                      <div className="toggle-wrap nk-block-tools-toggle">
+                      <div className="toggle-wrap nk-block-tools-toggle text-right">
                         <Link
                           to=""
                           className="btn btn-icon btn-trigger toggle-expand me-n1"
@@ -101,7 +101,7 @@ const Handout= (props) => {
                           <em className="icon ni ni-menu-alt-r"></em>
                         </Link>
                         <div
-                          className="toggle-expand-content"
+                          className=""
                           data-content="pageMenu"
                         >
                           {/* <ul className="nk-block-tools g-3">
@@ -197,8 +197,8 @@ const Handout= (props) => {
                             </ul>
                           </div>
                         </div>
-                        <div className="nk-block-head-content">
-                          <div className="toggle-wrap nk-block-tools-toggle">
+                        <div className="nk-block-head-content">7
+                          <div className="toggle-wrap nk-block-tools-toggle text-right">
                             <Link
                               to=""
                               className="btn btn-icon btn-trigger toggle-expand mr-n1"
@@ -302,7 +302,7 @@ const Handout= (props) => {
                                   status == 2 ? <h5>Record Not Found</h5> :
                                   tab.length > 0 ?
                                     tab.map((element, index) => {
-                                      console.log(index, "::INDEx");
+                                      // console.log(index, "::INDEx");
                                       return (
                                         <div className="nk-tb-item ">
 
@@ -619,7 +619,7 @@ const Handout= (props) => {
                                   status == 2 ? <h5>Record Not Found</h5> : 
                                   tab.length > 0 ?
                                     tab.map((element, index) => {
-                                      console.log(index, "::INDEx");
+                                      // console.log(index, "::INDEx");
                                       return (
                                         <div className="nk-tb-item ">
 
@@ -937,7 +937,7 @@ const Handout= (props) => {
                                   status == 2 ? <h5>Record Not Found</h5> :
                                   tab.length > 0 ?
                                     tab.map((element, index) => {
-                                      console.log(index, "::INDEx");
+                                      // console.log(index, "::INDEx");
                                       return (
                                         <>
                                           <div className="nk-tb-item ">

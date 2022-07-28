@@ -12,12 +12,14 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useSelector } from "react-redux";
 
 import { Link, useNavigate } from "react-router-dom";
-import { Triangle } from "react-loader-spinner";
+import { ThreeDots } from "react-loader-spinner";
 import { Line } from "react-chartjs-2";
 import Chart from 'chart.js/auto';
 
 import { RWebShare } from "react-web-share";
 import firebase from "../firebase";
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 
 
@@ -50,6 +52,9 @@ const Home = () => {
   const [chartLabel, setChartLabel] = useState([])
   const [api, setApi] = useState(false)
 
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
 
   const summaryBalance = {
     labels: chartLabel,
@@ -89,19 +94,19 @@ const Home = () => {
       // abortController = new AbortController();
       if(api == false){
       setApi(true);
-      console.log("called..........");
+      // console.log("called..........");
       const res = await axios.post(`${BASE_URL}/buyChart`, { email: email});
       const arr = res.data.data;
       setApi(false)
       arr.map((element, index) => {
         total.push(element.total)
         year.push(`${element.month}/${element.year}`)
-        console.log(`${element.month}/${element.year}`, "element");
+        // console.log(`${element.month}/${element.year}`, "element");
       })
       setChartAmt(total)
       setChartLabel(year)
     }else{
-      console.log("cancelled..........");
+      // console.log("cancelled..........");
     }
       // controller.abort()
     } catch (error) {
@@ -577,7 +582,7 @@ const Home = () => {
                               transform: "translate(-50%, -50%)",
                             }}
                           >
-                            <Triangle
+                            <ThreeDots
                               ariaLabel="loading-indicator"
                               color="green"
                             />
@@ -751,9 +756,9 @@ const Home = () => {
                             <div>
                               <RWebShare
                                 data={{
-                                  text: "Like humans, flamingos make friends for life",
+                                  text: "To Join the Analog , Click this link",
                                   url: `${FRONT_URL}/signup?ref=${userInfo?.user_id}`,
-                                  title: "Flamingos",
+                                  title: "Analog Inceptive",
                                 }}
                                 onClick={() => console.log("shared successfully!")}
                               >
@@ -924,6 +929,32 @@ const Home = () => {
           <Footer />
         </div>
       </div>
+      
+      
+        <Modal
+        onHide={handleClose}
+        show={show}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+          INRX
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <h4>Ana</h4>
+          <p>
+            Analog Inceptive 
+          </p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={()=> handleClose()}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+      
+      
     </div>
     // </div>
   );

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { isIP } from 'is-ip'
 import { BASE_URL } from '../Api_connection/config'
-
 import { useSelector } from "react-redux";
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import toast from 'react-hot-toast'
 import { profileMenu } from "../Api_connection/ApiFunction";
 import { Link } from "react-router-dom";
+
 
 
 const IPwhiteListing = () => {
@@ -38,9 +38,8 @@ const IPwhiteListing = () => {
     const addWhiteIP = async () => {
         try {
             const data = await axios.post(`${BASE_URL}/add_whitelisted_ip`, { email: email, ip: ip })
-            console.log(data.data.status, "add");
             if(data.data.status == 1){
-                NotificationManager.success('IP Added', '')
+                toast.success("IP Added")
             }
             getWhiteIP()
         } catch (error) {
@@ -51,9 +50,9 @@ const IPwhiteListing = () => {
     const deleteWhiteIP = async (id) => {
         try {
             const data = await axios.post(`${BASE_URL}/removeWhiteListedIp`, { _id: id })
-            console.log(data, "delete Data");
+            // console.log(data, "delete Data");
             if(data.data.status == 1){
-                NotificationManager.error('IP Removed', '')
+                    toast.success("IP Removed")
             }
             getWhiteIP()
         } catch (error) {
@@ -76,7 +75,6 @@ const IPwhiteListing = () => {
     }, [])
     return (
         <>
-         <NotificationContainer/>
             <div className="card-inner card-inner-lg bg-light">
                 <div className="nk-block-head nk-block-head-lg">
 

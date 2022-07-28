@@ -201,7 +201,7 @@
     });
   } // init chart
 
-  console.log("CHCHCHCHCHCHCHCHCHCHCHCHCH");
+  // console.log("CHCHCHCHCHCHCHCHCHCHCHCHCH");
 
   NioApp.coms.docReady.push(function () {
     referStats();
