@@ -6,7 +6,7 @@ import { BASE_URL } from "./Api_connection/config"
 // );
 // const email = user?.email;
 // console.log(email, "::EMAIL FROM PUSH");
-
+  console.log("amit");
 function urlBase64ToUint8Array(base64String) {
   const padding = "=".repeat((4 - base64String.length % 4) % 4)
   // eslint-disable-next-line
@@ -41,6 +41,7 @@ function sendSubscription(subscription, email) {
 let clicked = true
 
 export function subscribeUser(convertedVapidKey, email) {
+  console.log(convertedVapidKey, email, "IN Suscribe function");
     convertedVapidKey=urlBase64ToUint8Array(convertedVapidKey);
 
   if(clicked) {
@@ -51,10 +52,11 @@ export function subscribeUser(convertedVapidKey, email) {
         console.log('Push manager unavailable.')
         return
       }
-
+      
       registration.pushManager.getSubscription().then(function(existedSubscription) {
+        console.log(existedSubscription, "existed Subscription");
         if (existedSubscription === null) {
-          console.log('No subscription detected, make a request.')
+          console.log('No subscription detected, make a request.', convertedVapidKey)
           registration.pushManager.subscribe({
             applicationServerKey: convertedVapidKey,
             userVisibleOnly: true,

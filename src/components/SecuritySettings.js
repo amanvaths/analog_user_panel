@@ -10,6 +10,7 @@ import { profileMenu } from '../Api_connection/ApiFunction';
 import toast from 'react-hot-toast';
 import OtpInput from 'react-otp-input';
 import './ss.css'
+import SettingButton from './SettingButton';
 
 const SecuritySettings = () => {
   const { userInfo, user } = useSelector((state) => state.user.value)
@@ -73,13 +74,14 @@ const SecuritySettings = () => {
             <div
               className="nk-block-head-content align-self-start d-lg-none"
             >
-              <Link
+               <SettingButton></SettingButton>
+              {/* <Link
                 to=""
                 className="toggle btn btn-icon btn-trigger mt-n1"
                 data-target="userAside"
                 id="toggleBtn"
               ><em className="icon ni ni-menu-alt-r" onClick={profileMenu}></em
-              ></Link>
+              ></Link> */}
             </div>
           </div>
         </div>

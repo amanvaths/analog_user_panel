@@ -36,26 +36,26 @@ const Wallet = (props) => {
 
 
   const email = user.email;
-  const socket = io(`https://api.analog.live:8080`,{secure: true})
-  // var status = 0;
-  useEffect(()=>{
-  socket.on('connect',()=>{
-    // console.log("Socket Connected");
-    socket.emit('join', {email: email });
-    socket.on('balance',(data)=>{
-      // console.log("BALANCE EVENT", data)
-      setWalletDetails([...data]);
-    })
+//   const socket = io(`https://api.analog.live:8080`,{secure: true})
+//   // var status = 0;
+//   useEffect(()=>{
+//   socket.on('connect',()=>{
+//     // console.log("Socket Connected");
+//     socket.emit('join', {email: email });
+//     socket.on('balance',(data)=>{
+//       // console.log("BALANCE EVENT", data)
+//       setWalletDetails([...data]);
+//     })
 
-    socket.on("msg",(data)=>{    
-        NotificationManager.success('Added',data)
-    })
+//     socket.on("msg",(data)=>{    
+//         NotificationManager.success('Added',data)
+//     })
 
-      socket.on('notification',(data)=>{
-        // console.log(data, "Notification data");
-      })
-  })
-},[])
+//       socket.on('notification',(data)=>{
+//         // console.log(data, "Notification data");
+//       })
+//   })
+// },[])
 
 
   const test = async()=>{
@@ -183,7 +183,7 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                             ? <>
                               { userInfo.currency_preference == "usd" 
                                   ? `${coinWW[8]?.wallet?.usdt_balance?.toFixed(2)} USDT` 
-                                  : `${(oneUsdPrice * coinWW[8]?.wallet?.usdt_balance).toFixed(2)} INRX`
+                                  : `${(oneUsdPrice * coinWW[9]?.wallet?.usdt_balance).toFixed(2)} INRX`
                                } 
                               </>
                             : 0

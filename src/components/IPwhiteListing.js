@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import toast from 'react-hot-toast'
 import { profileMenu } from "../Api_connection/ApiFunction";
 import { Link } from "react-router-dom";
+import SettingButton from "./SettingButton";
 
 
 
@@ -92,14 +93,15 @@ const IPwhiteListing = () => {
                         </div>
 
                         <div className="nk-block-head-content align-self-start d-lg-none">
-                            <b
+                            {/* <b
                                 
                                 className="toggle btn btn-icon btn-trigger mt-n1"
                                 data-target="userAside"
                                 id = "toggleBtn"
                             >
                                 <em className="icon ni ni-menu-alt-r" onClick={profileMenu }></em>
-                            </b>
+                            </b> */}
+                             <SettingButton></SettingButton>
                         </div>
                     </div>
 

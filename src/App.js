@@ -35,15 +35,19 @@ import NotificationAlert from './pages/NotificationAlert';
 
 function App(props) {
   const {userInfo, user} = useSelector((state)=> state.user.value)
-
-  useEffect(()=>{
+  // console.log(userInfo?.webPush_Public_Key, "KEY1");
+  // console.log(user?.email, "email1");
+  // useEffect(()=>{
+    console.log(userInfo?.webPush_Public_Key, "KEY");
+    console.log(user?.email, "email");
     if(userInfo?.webPush_Public_Key && user?.email){
+      console.log('Called');
     subscribeUser(userInfo?.webPush_Public_Key, user?.email);
     } else {
-      // console.log("User public key not found!");
+      console.log("User public key not found!");
     }
 
-  },[{...user}])
+  // },[])
 
   return (
     <div>

@@ -17,7 +17,7 @@ import { Line } from "react-chartjs-2";
 import Chart from 'chart.js/auto';
 
 import { RWebShare } from "react-web-share";
-import firebase from "../firebase";
+// import firebase from "../firebase";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 

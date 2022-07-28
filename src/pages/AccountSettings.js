@@ -17,7 +17,7 @@ import { IoLocation } from 'react-icons/io5'
 import { useSelector, useDispatch } from "react-redux";
 import { setUserInfo, setSettingPage } from "../redux/reducer/user";
 import { BASE_URL } from "../Api_connection/config";
-
+import SettingButton from "../components/SettingButton";
 
 const AccountSettings = () => {
   const dispatch = useDispatch()
@@ -102,7 +102,7 @@ const AccountSettings = () => {
                                   </div>
                                 </div>
                                 <div onClick={()=>dispatch(navsetters())} className="nk-block-head-content align-self-start d-lg-none">
-                                  <a
+                                  {/* <a
                                   
                                     className="toggle btn btn-icon btn-trigger mt-n1"
                                     id = "toggleBtn"
@@ -110,7 +110,8 @@ const AccountSettings = () => {
                                     data-target="userAside"                                  
                                   >
                                     <em className="icon ni ni-menu-alt-r" onClick={()=>profileMenuRemove()}  ></em>
-                                  </a>
+                                  </a> */}
+                                   <SettingButton></SettingButton>
                                 </div>
                               </div>
                             </div>

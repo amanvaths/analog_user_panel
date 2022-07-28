@@ -6,6 +6,7 @@ import { profileMenu } from "../Api_connection/ApiFunction";
 import { setUserInfo } from "../redux/reducer/user";
 import { Link } from "react-router-dom";
 import toast from 'react-hot-toast'
+import SettingButton from "./SettingButton";
 
 const Notification = () => {
     const { userInfo, user } = useSelector((state) => state.user.value)
@@ -65,12 +66,13 @@ const Notification = () => {
                             </div>
                         </div>
                         <div class="nk-block-head-content align-self-start d-lg-none">
-                            <a
+                        <SettingButton></SettingButton>
+                            {/* <a
                                 href="#" class="toggle btn btn-icon btn-trigger mt-n1"
                                 data-target="userAside" id="toggleBtn">
                                 <em
                                     class="icon ni ni-menu-alt-r" onClick={profileMenu}></em>
-                            </a>
+                            </a> */}
                         </div>
                     </div>
                     <hr class="mb-0"></hr>

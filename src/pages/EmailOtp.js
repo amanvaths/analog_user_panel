@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { BASE_URL } from "../Api_connection/config";
 import { Link, useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
-import { useSelector } from "react-redux";
-import { Bars } from 'react-loader-spinner'     
+import { useSelector } from "react-redux";  
+import OtpInput from 'react-otp-input';   
 
 const EmailOtp = (props) => {
   const {user, otpSend} = useSelector((state)=> state.user.value)
@@ -126,12 +126,21 @@ const EmailOtp = (props) => {
                   OTP has been sent on your registered email id
                 </h6>
                 <div className="form-group">
-                  <div className="form-label-group">
+                <div className="form-label-group">
                     <label className="form-label" for="default-01">
                       Enter OTP
                     </label>
                   </div>
-                  <input
+                                  <OtpInput
+                                  inputStyle = "auth_style"
+                                  value={otp}
+                                  onChange={(e)=>setOtp(e)}
+                                  numInputs={6}
+                                  isInputNum={true}
+                                  separator={<span>&nbsp;</span>}
+                                />
+                 
+                  {/* <input
                     type="text"
                     className="form-control"
                     id="default-01"
@@ -140,7 +149,7 @@ const EmailOtp = (props) => {
                     onChange={(e) => {
                       setOtp(e.target.value);
                     }}
-                  />
+                  /> */}
                 </div>
 
                 <div className="form-group">
