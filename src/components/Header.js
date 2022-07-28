@@ -15,32 +15,51 @@ const Header = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const [notification, setNotification] = useState([]);
-  const sidebarMenu = async () => {
+  var [count, setCount] = useState(0);
+  
 
+      var element = document.getElementById("myBody");
+        if (element.classList.contains("nav-shown")) {
+          element.classList.remove("nav-shown");
+        }
+
+  const sidebarMenu = () => {
+    setCount(count+1);
+    console.log(count)
     var element = document.getElementById("myBody");
-    element.classList.add("nav-shown");
-    element = document.getElementById("nk-sidebar");
-    element.classList.add("nk-sidebar-active");
+    var element1 = document.getElementById("nk-sidebar");
+   // console.log(count%2, "modulas")
+    if(count%2 == 0 ){
+      // alert("true");
+       element.classList.add("nav-shown");
+       element1.classList.add("nk-sidebar-active");
+    }else{
+      // alert("false");
+       element.classList.remove("nav-shown");
+       element1.classList.remove("nk-sidebar-active");
+    }
+    
+   
     // element = document.getElementById("nk-nav-toggle");
     // element.classList.add("toggle-active");
 
-    var element1 = document.getElementById("myBody");
-    if (element1.classList.contains("toggle-shown")) {
-      element1.classList.remove("toggle-shown")
-    }
-    var element2 = document.getElementById("toggleBtn");
-    if (element2) {
-      if (element2.classList.contains("active")) {
-        element2.classList.remove("active")
-      }
-    }
-    var element3 = document.getElementById("cardAside")
-    if (element3) {
-      if (element3.classList.contains("content-active")) {
-        element3.classList.remove("content-active")
-      }
+    // var element1 = document.getElementById("myBody");
+    // if (element1.classList.contains("toggle-shown")) {
+    //   element1.classList.remove("toggle-shown")
+    // }
+    // var element2 = document.getElementById("toggleBtn");
+    // if (element2) {
+    //   if (element2.classList.contains("active")) {
+    //     element2.classList.remove("active")
+    //   }
+    // }
+    // var element3 = document.getElementById("cardAside")
+    // if (element3) {
+    //   if (element3.classList.contains("content-active")) {
+    //     element3.classList.remove("content-active")
+    //   }
 
-    }
+    // }
 
   }
 
