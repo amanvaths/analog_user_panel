@@ -101,8 +101,8 @@ const AccountSettings = () => {
                                     </p>
                                   </div>
                                 </div>
-                                <div onClick={()=>dispatch(navsetters())} className="nk-block-head-content align-self-start d-lg-none">
-                                  {/* <a
+                                <div className="nk-block-head-content align-self-start d-lg-none">
+                                  {/*<a
                                   
                                     className="toggle btn btn-icon btn-trigger mt-n1"
                                     id = "toggleBtn"
