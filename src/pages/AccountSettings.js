@@ -8,9 +8,8 @@ import SecuritySettings from "../components/SecuritySettings";
 import Notification from "../components/Notification";
 import ChangePassword from "../components/ChangePassword";
 import IPwhiteListing from "../components/IPwhiteListing";
-
 import { navsetters } from "../redux/actions/websiteDBAction";
-
+import { removeSideMenu } from "../Api_connection/ApiFunction";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { IoLocation } from 'react-icons/io5'
@@ -53,18 +52,7 @@ const AccountSettings = () => {
    go()
   }, [])
 
-  // console.log(totalAna);
 
-  const profileMenuRemove = ()=>{
-    var element = document.getElementById("myBody"); 
-    element.classList.remove("toggle-shown"); 
-    element = document.getElementById("toggleBtn"); 
-    element.classList.remove("active");                                 
-    element = document.getElementById("cardAside"); 
-    element.classList.remove("content-active"); 
-  }
-
- 
   return (
     <>
       <div>
@@ -247,6 +235,7 @@ const AccountSettings = () => {
                                     to="#"
                                     className={settingPages.personalInfo ? "active" : " "}
                                     onClick={() => {
+                                      removeSideMenu()
                                       const obj5 = {
                                         personalInfo: true,
                                         activity: false,
@@ -256,7 +245,7 @@ const AccountSettings = () => {
                                         ipWhiteListing: false
                                       }
                                       dispatch(setSettingPage({settingPages: obj5}))
-                                      go()
+                                      go()                                    
                                       // getSetti(email)
                                       // dispatch(setUserInfo({currency_prefrence: userInfo?.currency_prefrence}))
                                       // dispatch(setUserInfo({ currency_prefrence: "inr" }))
@@ -269,6 +258,7 @@ const AccountSettings = () => {
                                 <li>
                                   <Link to="#"
                                     onClick={() => {
+                                      removeSideMenu()
                                       const obj4 = {
                                         personalInfo: false,
                                         activity: false,
@@ -288,6 +278,7 @@ const AccountSettings = () => {
                                     <em className="icon ni ni-activity-round-fill"></em>
                                     <span
                                       onClick={() => {
+                                        removeSideMenu()
                                         const obj3 = {
                                           personalInfo: false,
                                           activity: true,
@@ -297,6 +288,7 @@ const AccountSettings = () => {
                                           ipWhiteListing: false
                                         }
                                         dispatch(setSettingPage({settingPages: obj3}))
+
                                       }}
                                     >
                                       Account Activity
@@ -307,6 +299,7 @@ const AccountSettings = () => {
                                   <Link to="#"
                                     className={settingPages.securitySettings ? "active" : " "}
                                     onClick={() => {
+                                      removeSideMenu()
                                       const obj2 = {
                                         personalInfo: false,
                                         activity: false,
@@ -325,6 +318,7 @@ const AccountSettings = () => {
                                   <Link to="#"
                                     className={settingPages.ipWhiteListing ? "active" : " "}
                                     onClick={() => {
+                                      removeSideMenu()
                                       const obj1 = {
                                         personalInfo: false,
                                         activity: false,

@@ -6,6 +6,7 @@ import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
 import { navsetter } from "../redux/actions/websiteDBAction";
 import toast from 'react-hot-toast';
+import { removeSideMenu } from "../Api_connection/ApiFunction";
 
 const Header = () => {
 
@@ -22,51 +23,26 @@ const Header = () => {
         if (element.classList.contains("nav-shown")) {
           element.classList.remove("nav-shown");
         }
+     
 
   const sidebarMenu = () => {
+    removeSideMenu();
     setCount(count+1);
-    console.log(count)
+ 
     var element = document.getElementById("myBody");
     var element1 = document.getElementById("nk-sidebar");
-   // console.log(count%2, "modulas")
-    if(count%2 == 0 ){
-      // alert("true");
+   
+    if(count%2 == 0 ){    
        element.classList.add("nav-shown");
        element1.classList.add("nk-sidebar-active");
-    }else{
-      // alert("false");
+    }else{    
        element.classList.remove("nav-shown");
        element1.classList.remove("nk-sidebar-active");
-    }
-    
+    }   
    
-    // element = document.getElementById("nk-nav-toggle");
-    // element.classList.add("toggle-active");
-
-    // var element1 = document.getElementById("myBody");
-    // if (element1.classList.contains("toggle-shown")) {
-    //   element1.classList.remove("toggle-shown")
-    // }
-    // var element2 = document.getElementById("toggleBtn");
-    // if (element2) {
-    //   if (element2.classList.contains("active")) {
-    //     element2.classList.remove("active")
-    //   }
-    // }
-    // var element3 = document.getElementById("cardAside")
-    // if (element3) {
-    //   if (element3.classList.contains("content-active")) {
-    //     element3.classList.remove("content-active")
-    //   }
-
-    // }
 
    }
 
- 
-
-
-  
   const mode = localStorage.getItem("theme")
   if (mode == 1) {
     var element = document.getElementById("myBody");

@@ -35,3 +35,31 @@ export function profileMenu (){
    element = document.getElementById("cardAside"); 
   element.classList.toggle("content-active");          
 }
+
+
+export function  removeSideMenu(){
+  var element = document.getElementById("myBody"); 
+  var element1 = document.getElementById("toggleBtn");
+  var element2 = document.getElementById("cardAside");
+  //alert(typeof(element2)); return;
+  if(element){
+   // alert(element.classList.contains("toggle-shown"));
+    if (element.classList.contains("toggle-shown")) {
+        element.classList.remove("toggle-shown");
+    }
+  }
+
+  if(element1){
+    if (element1.classList.contains("active")) {
+      element1.classList.remove("active");
+    }
+  }
+
+  if(element2){
+    if (element2.classList.contains("content-active")) {
+      element2.classList.remove("content-active");
+    }
+  }
+}
+
+ 
