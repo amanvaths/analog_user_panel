@@ -50,7 +50,7 @@ const IPwhiteListing = () => {
 
     const deleteWhiteIP = async (id) => {
         try {
-            const data = await axios.post(`${BASE_URL}/removeWhiteListedIp`, { _id: id })
+            const data = await axios.post(`${BASE_URL}/removeWhiteListedIp`, { _id: id, email : email })
             // console.log(data, "delete Data");
             if(data.data.status == 1){
                     toast.success("IP Removed")
