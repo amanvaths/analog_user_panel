@@ -7,6 +7,8 @@ import { setUserInfo } from "../redux/reducer/user";
 import { Link } from "react-router-dom";
 import toast from 'react-hot-toast'
 import SettingButton from "./SettingButton";
+import { useTranslation } from "react-i18next";
+
 
 const Notification = () => {
     const { userInfo, user } = useSelector((state) => state.user.value)
@@ -14,7 +16,7 @@ const Notification = () => {
     const [reflect, setReflect] = useState(true);
     const [isInit, setInit] = useState(false);
     const dispatch = useDispatch()
-
+    const { t } = useTranslation();
 
     const setNotification = async (e) => {
         try {
@@ -60,9 +62,9 @@ const Notification = () => {
                 <div class="nk-block-head nk-block-head-lg">
                     <div class="nk-block-between">
                         <div class="nk-block-head-content">
-                            <h4 class="nk-block-title">Notification Settings</h4>
+                            <h4 class="nk-block-title">{t('notification_settings')}</h4>
                             <div class="nk-block-des">
-                                <p>You will get only notification what have enabled.</p>
+                                <p>{t('notification_tagline')}</p>
                             </div>
                         </div>
                         <div class="nk-block-head-content align-self-start d-lg-none">
@@ -79,8 +81,8 @@ const Notification = () => {
                 </div>
                 <div class="nk-block-head nk-block-head-sm">
                     <div class="nk-block-head-content">
-                        <h4>Security Alerts</h4>
-                        <p>You will get only those email notification what you want.</p>
+                        <h4>{t('security_alert')}</h4>
+                        <p>{t('notification_tagline2')}</p>
 
                     </div>
                 </div>
@@ -112,7 +114,7 @@ const Notification = () => {
                                 <label
                                     class="custom-control-label"
                                     for="unusual-activity">
-                                    Email me whenever encounter unusual activity</label>
+                                    {t('unusual_activity_alert')}</label>
                             </div>
                         </div>
                         <div class="g-item">
@@ -137,15 +139,15 @@ const Notification = () => {
                                     }}
                                 />
                                 <label
-                                    class="custom-control-label" for="new-browser">Email me
-                                    if new browser is used to sign in</label></div>
+                                    class="custom-control-label" for="new-browser">
+                                        {t('new_browser_alert')}</label></div>
                         </div>
                     </div>
                 </div>
                 <div class="nk-block-head nk-block-head-sm">
                     <div class="nk-block-head-content">
-                        <h4>News</h4>
-                        <p>You will get only those email notification what you want.</p>
+                        <h4>{t('news')}</h4>
+                        <p>{t('notification_tagline2')}</p>
                     </div>
                 </div>
                 <div class="nk-block-content">
@@ -175,7 +177,7 @@ const Notification = () => {
                                 />
                                 <label class="custom-control-label"
                                     for="latest-sale">
-                                    Notify me by email about sales and latest news</label></div>
+                                    {t('news_alert')}</label></div>
                         </div>
                         <div class="g-item">
                             <div class="custom-control custom-switch">
@@ -200,8 +202,7 @@ const Notification = () => {
                                     }}
                                 />
                                 <label
-                                    class="custom-control-label" for="feature-update">Email
-                                    me about new features and updates</label></div>
+                                    class="custom-control-label" for="feature-update">{t('features_update_alert')}</label></div>
                         </div>
                         <div class="g-item">
                             <div class="custom-control custom-switch">
@@ -225,8 +226,7 @@ const Notification = () => {
                                         setReflect(!reflect);
                                     }}
                                 /><label class="custom-control-label"
-                                    for="account-tips">Email me about tips on using
-                                    account</label></div>
+                                    for="account-tips">{t('tips_alert')}</label></div>
                         </div>
                     </div>
                 </div>

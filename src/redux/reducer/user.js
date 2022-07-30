@@ -4,13 +4,13 @@ let email = localStorage.getItem("exchange-inrx-email");
 let token = localStorage.getItem("exchange-inrx-token");
 
 const initialValue = {
-  user : {
-    email:email?email:'',
-    token:token?token:'',
-   
+  user: {
+    email: email ? email : '',
+    token: token ? token : '',
+
   },
   otpSend: false,
-  isLoggedIn:(email && token)?true:false, 
+  isLoggedIn: (email && token) ? true : false,
   userInfo: {},
   settingPages: {
     activity: false,
@@ -19,12 +19,16 @@ const initialValue = {
     notification: false,
     changePassword: false,
     ipWhiteListing: false,
-  } ,
+  },
   oneUsdPrice: '',
   totalAna: '',
   walletBalance: '',
   theme: 0,
-  buyloader:false,
+  buyloader: false,
+  selectedLanguage: {
+    code: "en",
+    name: "English"
+  }
 };
 
 export const userSlice = createSlice({
@@ -33,21 +37,21 @@ export const userSlice = createSlice({
     value: initialValue,
   },
   reducers: {
-    setIsLoggedIn: (state, action)=>{
+    setIsLoggedIn: (state, action) => {
       localStorage.setItem("exchange-inrx-email", action.payload.LoginDetails.email);
       localStorage.setItem("exchange-inrx-token", action.payload.LoginDetails.token);
       state.value.user = action.payload.LoginDetails;
       state.value.isLoggedIn = true
     },
-    sendOtp: (state, action)=>{
+    sendOtp: (state, action) => {
       state.value.user = action.payload.LoginDetails;
       state.value.otpSend = true
     },
     setUserInfo: (state, action) => {
-      
+
       state.value.userInfo = action.payload.userInfo;
     },
-    setSettingPage: (state, action)=> {
+    setSettingPage: (state, action) => {
       state.value.settingPages = action.payload.settingPages
     },
     setOneUsdPrice: (state, action) => {
@@ -59,7 +63,7 @@ export const userSlice = createSlice({
     logout: (state, action) => {
       localStorage.removeItem("exchange-inrx-email");
       localStorage.removeItem("exchange-inrx-token");
-      state.value.user={};
+      state.value.user = {};
       state.value.isLoggedIn = false;
     },
     setOneCoinPrice: (state, action) => {
@@ -71,11 +75,14 @@ export const userSlice = createSlice({
     setTheme: (state, action) => {
       state.value.theme = action.payload.theme
     },
-    setBuyLoader:(state,action)=>{
-      state.value.buyloader=action.payload.buyloader
+    setBuyLoader: (state, action) => {
+      state.value.buyloader = action.payload.buyloader
+    },
+    setLanguage: (state, action) => {
+      state.value.selectedLanguage = action.payload.selectedLanguage
     }
   },
 });
 
-export const {setIsLoggedIn, setUserInfo, setSettingPage, setOneUsdPrice, setTotalAna, logout, sendOtp, setOneCoinPrice, setTotalWalletBalance, setTheme,setBuyLoader} = userSlice.actions;
+export const { setIsLoggedIn, setUserInfo, setSettingPage, setOneUsdPrice, setTotalAna, logout, sendOtp, setOneCoinPrice, setTotalWalletBalance, setTheme, setBuyLoader, setLanguage } = userSlice.actions;
 export default userSlice.reducer;

@@ -20,6 +20,7 @@ import { RWebShare } from "react-web-share";
 // import firebase from "../firebase";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import { useTranslation } from "react-i18next";
 
 
 
@@ -51,6 +52,7 @@ const Home = () => {
   const [chartAmt, setChartAmt] = useState([]);
   const [chartLabel, setChartLabel] = useState([])
   const [api, setApi] = useState(false)
+  const { t } = useTranslation();
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -61,7 +63,7 @@ const Home = () => {
     dataUnit: "BTC",
     datasets: [
       {
-        label: "Buy",
+        label: `${t('buy')}`,
         fill: false,
         lineTension: 0.5,
         backgroundColor: "#10ad83",
@@ -280,7 +282,7 @@ const Home = () => {
                       <div className="nk-block">
                         <div className="nk-block-head-xs">
                           <div className="nk-block-head-content">
-                            <h5 className="nk-block-title title text-uppercase">Overflow</h5>
+                            <h5 className="nk-block-title title text-uppercase">{t('statistics')}</h5>
                           </div>
                         </div>
                         <div className="nk-block">
@@ -289,7 +291,7 @@ const Home = () => {
                               <div className="nk-wg7">
                                 <div className="nk-wg7-stats">
                                   <div className="nk-wg7-title">
-                                    TOTAL ANOLOG BUY
+                                   {t('total_analog_buy')}
                                   </div>
                                   <div className="number-lg amount text-white">
                                     {totalAnalogBuy.toFixed(3)}
@@ -297,14 +299,14 @@ const Home = () => {
                                 </div>
                                 <div className="nk-wg7-stats-group">
                                   <div className="nk-wg7-stats w-50">
-                                    <div className="nk-wg7-title">Wallets</div>
+                                    <div className="nk-wg7-title">{t('wallets')}</div>
                                     <div className="number-lg text-white">
                                       {totalWallet}
                                     </div>
                                   </div>
                                   <div className="nk-wg7-stats w-50" >
                                     <div className="nk-wg7-title">
-                                      Transactions
+                                      {(t('transactions'))}
                                     </div>
                                     <div className="number text-white">
                                       {totalTransaction}
@@ -313,7 +315,7 @@ const Home = () => {
                                 </div>
                                 <div className="nk-wg7-foot">
                                   <span className="nk-wg7-note">
-                                    Last activity at{" "}
+                                    {t('last_activity_at')}{" "}
                                     <span>
                                       {/* {date} {time} */}
                                     </span>
@@ -331,7 +333,7 @@ const Home = () => {
                           <div className="nk-block-between-md g-2">
                             <div className="nk-block-head-content">
                               <h5 className="nk-block-title title">
-                                INCEPTIVE WALLETS
+                                {t('inceptive_wallets')}
                               </h5>
                             </div>
                             <div className="nk-block-head-content"></div>
@@ -347,7 +349,7 @@ const Home = () => {
                                       <em className="icon ni ni-sign-btc"></em>
                                     </div>
                                     <h5 className="nk-wgw-title title text-uppercase">
-                                      Inceptive
+                                      {t('inceptive')}
                                     </h5>
                                   </div>
                                   <div className="nk-wgw-balance">
@@ -387,7 +389,7 @@ const Home = () => {
                                       <em className="icon ni ni-sign-btc"></em>
                                     </div>
                                     <h5 className="nk-wgw-title title">
-                                      AIRDROP
+                                      {t('airdrop')}
                                     </h5>
                                   </div>
                                   <div className="nk-wgw-balance">
@@ -431,7 +433,7 @@ const Home = () => {
                                       <em className="icon ni ni-sign-eth"></em>
                                     </div>
                                     <h5 className="nk-wgw-title title">
-                                      AFFILIATES{" "}
+                                      {t('affiliatesA')}{" "}
                                     </h5>
                                   </div>
                                   <div className="nk-wgw-balance">
@@ -456,7 +458,7 @@ const Home = () => {
                         <div className="nk-block-head-xs">
                           <div className="nk-block-between-md g-2">
                             <div className="nk-block-head-content">
-                              <h5 className="nk-block-title title">GROWTH</h5>
+                              <h5 className="nk-block-title title">{t('growth')}</h5>
                             </div>
                             <div className="nk-block-head-content"></div>
                           </div>
@@ -471,7 +473,7 @@ const Home = () => {
                                       <em className="icon ni ni-sign-btc"></em>
                                     </div>
                                     <h5 className="nk-wgw-title title">
-                                      INHERITED
+                                      {t('inherited')}
                                     </h5>
                                   </div>
                                   <div className="nk-wgw-balance">
@@ -503,7 +505,7 @@ const Home = () => {
                                       <em className="icon ni ni-sign-btc"></em>
                                     </div>
                                     <h5 className="nk-wgw-title title">
-                                      BOUNTY{" "}
+                                      {t('bounty')}{" "}
                                     </h5>
                                   </div>
                                   <div className="nk-wgw-balance">
@@ -537,7 +539,7 @@ const Home = () => {
                                       <em className="icon ni ni-sign-eth"></em>
                                     </div>
                                     <h5 className="nk-wgw-title title">
-                                      HANDOUT{" "}
+                                      {t('handout')}{" "}
                                     </h5>
                                   </div>
                                   <div className="nk-wgw-balance">
@@ -567,7 +569,7 @@ const Home = () => {
                     <div className="col-md-6">
                       <div className="card-head">
                         <div className="card-title mb-0">
-                          <h5 className="title text-uppercase">Recent Activities</h5>
+                          <h5 className="title text-uppercase">{t('recent_activites')}</h5>
                         </div>
                       </div>
 
@@ -617,7 +619,6 @@ const Home = () => {
                                             />
                                           </div>
                                         )}
-                                        {/* <em className="tranx-icon sm icon ni ni-sign-btc"></em> */}
                                       </div>
                                       <div className="tranx-date">
                                         {d.toLocaleDateString()}{" "}
@@ -682,52 +683,12 @@ const Home = () => {
                     <div className="col-md-6">
                       <div className="card-head">
                         <div className="card-title mb-0">
-                          <h5 className="title text-uppercase">Balance Flow</h5>
+                          <h5 className="title text-uppercase">{t('balance_flow')}</h5>
                         </div>
-                        {/* <div className="card-tools">
-                            <ul className="card-tools-nav">
-                              <li>
-                                <Link to="">This Month</Link>
-                              </li>
-                              <li className="active">
-                                <Link to="">This Years</Link>
-                              </li>
-                            </ul>
-                          </div> */}
                       </div>
                       <div className="card card-bordered">
                         <div className="card-inner">
-                          {/* <div className="nk-wg4">
-                            <div className="nk-wg4-group justify-center gy-3 gx-4">
-                              <div className="nk-wg4-item">
-                                <div className="sub-text">
-                                  <div
-                                    className="dot dot-lg sq"
-                                    data-bg="#5ce0aa"
-                                  ></div>{" "}
-                                  <span>Received</span>
-                                </div>
-                              </div>
-                              <div className="nk-wg4-item">
-                                <div className="sub-text">
-                                  <div
-                                    className="dot dot-lg sq"
-                                    data-bg="#798bff"
-                                  ></div>{" "}
-                                  <span>Send</span>
-                                </div>
-                              </div>
-                              <div className="nk-wg4-item">
-                                <div className="sub-text">
-                                  <div
-                                    className="dot dot-lg sq"
-                                    data-bg="#f6ca3e"
-                                  ></div>
-                                  <span>Withdraw</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div> */}
+                           
                           <div className="nk-ck3">
                             {/* <canvas
                               className="chart-account-summary"
@@ -747,9 +708,9 @@ const Home = () => {
                       <div className="nk-refwg-invite card-inner">
                         <div className="nk-refwg-head g-3">
                           <div className="nk-refwg-title">
-                            <h5 className="title">Refer Us &amp; Earn</h5>
+                            <h5 className="title">{t('refer_us_&_earn')}</h5>
                             <div className="text-soft">
-                              Click on "Invite" Button &amp; share below  link to invite your friends
+                              {t('invite_link')}
                             </div>
                           </div>
                           <div className="nk-refwg-action">
@@ -762,7 +723,7 @@ const Home = () => {
                                 }}
                                 onClick={() => console.log("shared successfully!")}
                               >
-                                <button className="btn btn-outline-success">Invite</button>
+                                <button className="btn btn-outline-success">{t('invite')}</button>
                               </RWebShare>
                             </div>
                             {/* <Link to="" className="btn btn-primary">
@@ -806,7 +767,7 @@ const Home = () => {
                                         color: "white",
                                       }}
                                     >
-                                      Copied
+                                      {t('copied')}
                                     </p>
                                   ) : null}
                                 </div>
@@ -828,7 +789,7 @@ const Home = () => {
                         <div className="nk-refwg-group g-3">
                           <div className="nk-refwg-name">
                             <h6 className="title">
-                              My Referral{" "}
+                              {t('my_referral')}{" "}
                               <em
                                 className="icon ni ni-info"
                                 data-toggle="tooltip"
@@ -840,7 +801,7 @@ const Home = () => {
                           <div className="nk-refwg-info g-3">
                             <div className="nk-refwg-sub">
                               <div className="title">{totalRef}</div>
-                              <div className="sub-text">Total Joined</div>
+                              <div className="sub-text">{t('total_joined')}</div>
                             </div>
                             <div className="nk-refwg-sub">
                               {/* <div className="title">{userInfo?.currency_preference == 'inr' ? `${refData?.totalIncome?.toFixed(2)} INRX` : 
@@ -857,7 +818,7 @@ const Home = () => {
                               {userInfo?.currency_preference == "inr"
                                 ? "INRX"
                                 : "USDT"}
-                              <div className="sub-text">Referral Earn</div>
+                              <div className="sub-text">{t('referral_earn')}</div>
                             </div>
                           </div>
                           <div className="nk-refwg-more dropdown mt-n1 mr-n1">
@@ -902,11 +863,9 @@ const Home = () => {
                         </div>
                         <div className="nk-block-content">
                           <div className="nk-block-content-head px-lg-4">
-                            <h5>We’re here to help you!</h5>
+                            <h5>{t('we_are_here_to_help_you')}</h5>
                             <p className="text-soft">
-                              Ask a question or file a support ticket, manage
-                              request, report an issues. Our support team
-                              will get back to you by email.
+                             {t('ask_for_support_support')}
                             </p>
                           </div>
                         </div>
@@ -915,7 +874,7 @@ const Home = () => {
                             to=""
                             className="btn btn-outline-success"
                           >
-                            Get Support Now
+                            {t('get_support_now')}
                           </Link>
                         </div>
                       </div>
@@ -946,7 +905,7 @@ const Home = () => {
         <Modal.Body>
           <h4>Ana</h4>
           <p>
-            Analog Inceptive 
+           {t('dash')}
           </p>
         </Modal.Body>
         <Modal.Footer>

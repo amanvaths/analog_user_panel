@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Suspense} from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
@@ -12,7 +12,11 @@ import { persistStore } from 'redux-persist'
 serviceWorker.register();
 let persistor = persistStore(store);
 // console.log(persistor, "persistor");
+const loadingMarkup = (
+  <div></div>
+)
 ReactDOM.render(
+  <Suspense fallback={loadingMarkup}>
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
@@ -20,6 +24,7 @@ ReactDOM.render(
       </PersistGate>
     </Provider>
  </React.StrictMode>
+ </Suspense>
   ,
   document.getElementById("root")
 );

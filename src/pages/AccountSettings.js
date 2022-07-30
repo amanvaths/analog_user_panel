@@ -17,13 +17,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { setUserInfo, setSettingPage } from "../redux/reducer/user";
 import { BASE_URL } from "../Api_connection/config";
 import SettingButton from "../components/SettingButton";
+import { useTranslation } from "react-i18next";
+
 
 const AccountSettings = () => {
   const dispatch = useDispatch()
   const { userInfo, settingPages, user, totalAna } = useSelector((state) => state.user.value)
   const [logData, setLogData] = useState([])
   const email = user.email
-
+  const { t } = useTranslation();
   const btn1 = useSelector((store) => store.navsetters)
 
 
@@ -79,10 +81,10 @@ const AccountSettings = () => {
                             <div className="nk-block-head nk-block-head-lg">
                               <div className="nk-block-between">
                                 <div className="nk-block-head-content">
-                                  <h4 className="nk-block-title active" >Login Activity</h4>
+                                  <h4 className="nk-block-title active" >{t('login_activity')}</h4>
                                   <div className="nk-block-des">
                                     <p> {` Here is your last ${logData.length} login activities log.`}
-
+                                      {/* {t('login_activity_tagline')} */}
                                       <span className="text-soft">
 
                                       </span>
@@ -110,18 +112,18 @@ const AccountSettings = () => {
                                       <tr>
                                         <th className="tb-col-os">
                                           <span>
-                                            Browser
+                                            {t('browser')}
                                             <span className="d-sm-none">/ IP</span>
                                           </span>
                                         </th>
                                         <th className="tb-col-ip">
-                                          <span>Device</span>
+                                          <span>{t('device')}</span>
                                         </th>
                                         <th className="tb-col-ip">
                                           <span>IP</span>
                                         </th>
                                         <th className="tb-col-time">
-                                          <span>Time</span>
+                                          <span>{t('time')}</span>
                                         </th>
                                         <th className="tb-col-action">
                                           <span>&nbsp;</span>
@@ -209,7 +211,7 @@ const AccountSettings = () => {
                             <div className="card-inner">
                               <div className="user-account-info py-0">
                                 <h6 className="overline-title-alt p-2">
-                                  Analog Wallet Balance
+                                  Analog {t('analog_wallet_balance')}
                                 </h6>
                                 <div className="user-balance p-2">
                                   {totalAna&&totalAna?.toFixed(3)} ANA
@@ -252,7 +254,7 @@ const AccountSettings = () => {
                                     }}
                                   >
                                     <em className="icon ni ni-user-fill-c"></em>
-                                    <span>Personal Infomation</span>
+                                    <span>{t('personal_information')}</span>
                                   </Link>
                                 </li>
                                 <li>
@@ -270,7 +272,7 @@ const AccountSettings = () => {
                                       dispatch(setSettingPage({ settingPages: obj4 }));
                                     }}>
                                     <em className="icon ni ni-bell-fill"></em>
-                                    <span>Notifications</span>
+                                    <span>{t('notification')}</span>
                                   </Link>
                                 </li>
                                 <li>
@@ -291,7 +293,7 @@ const AccountSettings = () => {
 
                                       }}
                                     >
-                                      Account Activity
+                                      {t('account_activity')}
                                     </span>
                                   </Link>
                                 </li>
@@ -311,7 +313,7 @@ const AccountSettings = () => {
                                       dispatch(setSettingPage({settingPages: obj2}))
                                     }}>
                                     <em className="icon ni ni-lock-alt-fill"></em>
-                                    <span>Security Settings</span>
+                                    <span>{t('security_settings')}</span>
                                   </Link>
                                 </li>
                                 <li>
@@ -330,7 +332,7 @@ const AccountSettings = () => {
                                       dispatch(setSettingPage({settingPages: obj1}))
                                     }}>
                                     <IoLocation />&nbsp; &nbsp;
-                                    <span>IP Whitelisting</span>
+                                    <span>IP {t('whitelisting')}</span>
                                   </Link>
                                 </li>
                               </ul>

@@ -105,7 +105,7 @@ const Login = (props) => {
             toast.success("Login Successful")
             dispatch(setIsLoggedIn({ LoginDetails: resp }))
             navigate('/home')
-          }
+          } 
         }
         if (resp.status == 3) {
           toast.error("Email is not varified")

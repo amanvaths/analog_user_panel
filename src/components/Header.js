@@ -7,6 +7,7 @@ import { BASE_URL } from "../Api_connection/config";
 import { navsetter } from "../redux/actions/websiteDBAction";
 import toast from 'react-hot-toast';
 import { removeSideMenu } from "../Api_connection/ApiFunction";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
 
@@ -17,6 +18,7 @@ const Header = () => {
   const navigate = useNavigate();
   const [notification, setNotification] = useState([]);
   var [count, setCount] = useState(0);
+  const { t } = useTranslation();
   
 
       var element = document.getElementById("myBody");
@@ -178,7 +180,7 @@ const Header = () => {
                             <divx></divx>
                           </ul>
                           <div className="energy-container text-right">
-                            [ <span className="text-success font-weight-bold energy-text">{"    "}Energy</span>{" "}
+                            [ <span className="text-success font-weight-bold energy-text">{"    "}{t('energy')}</span>{" "}
                             <span style={{ color: "green" }} className="timer">
                               5,6881.00
                             </span>
@@ -205,7 +207,7 @@ const Header = () => {
                   >
                     <div className="dropdown-head">
                       <span className="sub-title nk-dropdown-title">
-                        Notifications
+                        {t('notification')}
                       </span>
                       {/* <a href="#">Mark All as Read</a> */}
                     </div>
@@ -251,7 +253,7 @@ const Header = () => {
                       </div>
                     </div>
                     <div className="dropdown-foot center">
-                      <Link to="/NotificationAlert">View All</Link>
+                      <Link to="/NotificationAlert">{t('view_all')}</Link>
                     </div>
                   </div>
                 </li>
@@ -325,7 +327,7 @@ const Header = () => {
                         <li>
                           <Link to="/accountSettings">
                             <em className="icon ni ni-setting-alt"></em>
-                            <span>Account Setting</span>
+                            <span>{t('account_settings')}</span>
                           </Link>
                         </li>
                         {/* <li>
