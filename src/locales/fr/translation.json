@@ -160,7 +160,7 @@
     "level_2":"Niveau 2",
     "level_3":"Niveau 3",
     "withdraw":"Se désister",
-    "export":"Exporter",
+    "export_to_excel":"Exporter vers Excel",
     "total_purchased":"Total acheté",
     "total_expense":"Achat total",
     "affiliate_recvd":"Affilié reçu",
@@ -170,5 +170,16 @@
     "total_user":"Nombre total d'utilisateurs",
     "total_withdrawal":"Retrait total",
     "total_remaining":"Total restant",
-    "your_affiliates":"Vos affiliés"
+    "your_affiliates":"Vos affiliés",
+    "total_affiliates":"Nombre total d'affiliés",
+    "previous":"Précédent",
+    "next":"Prochain",
+
+    "withdrawal": "Retrait",
+    "use_below_form_to_withdraw":"Utilisez le formulaire ci-dessous pour vous retirer",
+    "confirm_withdrwal":"Confirmer le retrait",
+    "enter_wallet_address":"Entrez l'adresse du portefeuille",
+    "your_withdraw_request_has_been_sent":"Votre demande de retrait a été envoyée",
+    "wallet_address":"Adresse du portefeuille"
+    
 }

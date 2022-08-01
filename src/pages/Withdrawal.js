@@ -5,10 +5,11 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Menu from "../components/Menu";
 import axios from "axios";
-import WAValidator from 'multicoin-address-validator'
 import { BASE_URL } from "../Api_connection/config";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import swal from "sweetalert";
+import toast from 'react-hot-toast';
+import { useTranslation } from "react-i18next";
 
 const Withdrawal = () => {
     const { user, userInfo, oneUsdPrice } = useSelector((state) => state.user.value)
@@ -23,20 +24,7 @@ const Withdrawal = () => {
     const [fromWalletAddress, setfromWalletAddress] = useState('')
     const [usdFees, setUsdFees] = useState(5)
     const [inrFees, setInrFees] = useState(100)
-    const [sub, setSub] = useState("")
-
-
-    // console.log(userInfo.webPush_Public_Key, "PUBLICK KEY ");
-
-
-    // const valid = WAValidator.validate('TMzJEW5QtgyU2JuPRyFeFe2tGReoAiY5ha','usdt');
-    // if (valid)
-    //     console.log('This is a valid address');
-    // else {
-    //     console.log('Address INVALID');
-    // }
-
-
+    const { t } = useTranslation();
 
 
     function ConfirmBox() {
@@ -51,25 +39,19 @@ const Withdrawal = () => {
         if (toWalletAddress != '') {
             swalWithBootstrapButtons
                 .fire({
-                    title: "Are you sure?",
+                    title: t('are_you_sure'),
                     text: `Confirm Withdrwal`,
                     icon: "warning",
                     showCancelButton: true,
-                    confirmButtonText: "Yes, confirm it!",
-                    cancelButtonText: "No, cancel!",
+                    confirmButtonText: t('yes_confirm_it'),
+                    cancelButtonText: t('no_cancel'),
                     reverseButtons: true,
                 })
                 .then((result) => {
                     if (result.isConfirmed) {
                         console.log("JJ");
-                        withdraw()
-                        //   swalWithBootstrapButtons.fire(
-                        //     "Confirm!",
-                        //     "Your withdrwal request has been sent.",
-                        //     "success"
-                        //   );
+                        withdraw()       
                     } else if (
-
                         /* Read more about handling dismissals below */
                         result.dismiss === Swal.DismissReason.cancel
                     ) {
@@ -81,7 +63,8 @@ const Withdrawal = () => {
                     }
                 });
         } else {
-            swal("Enter Wallet Address", "", "error")
+            toast.error(t('enter_wallet_address'))
+           
         }
 
     }
@@ -102,8 +85,6 @@ const Withdrawal = () => {
     const withdraw = async () => {
         console.table("Called");
         try {
-            
-
             const data = await axios.post(`${BASE_URL}/witdrawl`, {
                 email: email, toWalletAddr: toWalletAddress, fromWallet: fromWalletAddress,
                 amount: userInfo?.currency_preference == 'usd' ? balanceB ? balanceB : balanceC : balanceB ? balanceB / oneUsdPrice : balanceC / oneUsdPrice,
@@ -111,10 +92,11 @@ const Withdrawal = () => {
             })
             console.log(data, "DATA__>>")
             if (data.data.status == 1) {
-                swal({
-                    title: "Your Withdraw request has been sent",
-                    icon: "success",
-                });
+                toast.success(t('your_withdraw_request_has_been_sent'))
+                // swal({
+                //     title: "Your Withdraw request has been sent",
+                //     icon: "success",
+                // });
                 setToWalletAddress('')
                 setfromWalletAddress('')
                 setBalanceA(0)
@@ -153,7 +135,7 @@ const Withdrawal = () => {
                                                         <div className="nk-block-between-md g-2">
                                                             <div className="nk-block-head-content">
                                                                 <h3 className="nk-block-title title">
-                                                                    Inceptive Wallets
+                                                                    {t('inceptive_wallets')}
                                                                 </h3>
                                                             </div>
                                                             <div className="nk-block-head-content"></div>
@@ -206,8 +188,8 @@ const Withdrawal = () => {
                                             <div class="card card-bordered h-100 bg-lighter">
                                                 <div class="card-inner">
                                                     <div className="mb-4">
-                                                        <h3 class="text-center title">Withdrawal</h3>
-                                                        <p class="email-title text-center">Use below form to withdraw</p>
+                                                        <h3 class="text-center title">{t('withdrawal')}</h3>
+                                                        <p class="email-title text-center">{t('use_below_form_to_withdraw')}</p>
                                                         <div className="nk-block-head-content"></div>
                                                     </div>
                                                     <div className="components-preview wide-md mx-auto">
@@ -221,7 +203,7 @@ const Withdrawal = () => {
                                                                             </div>
                                                                             <form action="#">
                                                                                 <div className="form-group">
-                                                                                    <label className="form-label" for="full-name">Amount - {`${userInfo?.currency_preference == 'inr' ? 'INRX' : 'USDT'}`}</label>
+                                                                                    <label className="form-label" for="full-name">{t('amount')} - {`${userInfo?.currency_preference == 'inr' ? 'INRX' : 'USDT'}`}</label>
                                                                                     <div className="form-control-wrap">
                                                                                         <input type="text" className="form-control" id="full-name" value={balanceB ? balanceB?.toFixed(3) : balanceC}
                                                                                             onChange={(e) => setBalanceB(setBalanceC(Number(e.target.value.replace(/[^0-9.]/g, "")
@@ -236,7 +218,7 @@ const Withdrawal = () => {
                                                                                 </div>
                                                                                 <div className="form-group">
                                                                                     <label className="form-label"
-                                                                                        for="email-address">Wallet Address</label>
+                                                                                        for="email-address">{t('wallet_address')}</label>
                                                                                     <div className="form-control-wrap">
                                                                                         <input type="text" className="form-control" id="email-address" value={toWalletAddress}
                                                                                             onChange={(e) => setToWalletAddress(e.target.value)}
@@ -260,7 +242,7 @@ const Withdrawal = () => {
                                                                                         }}
                                                                                         disabled={balanceB ? balanceB <= 0 : balanceC <= 0}
                                                                                     >
-                                                                                        Withdraw</button>
+                                                                                        {t('withdraw')}</button>
                                                                                 </div>
                                                                             </form>
                                                                         </div>

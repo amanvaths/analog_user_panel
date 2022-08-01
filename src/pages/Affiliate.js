@@ -10,7 +10,7 @@ import {ThreeDots } from 'react-loader-spinner'
 import { MdMoreHoriz } from 'react-icons/md'
 import ReactPaginate from 'react-paginate';
 import { Link } from "react-router-dom";
-import {BiExport} from 'react-icons/bi'
+import {RiFileExcel2Line} from 'react-icons/ri'
 import { CSVLink} from "react-csv";
 import { useTranslation } from "react-i18next";
 
@@ -217,7 +217,8 @@ const Affiliate = (props) => {
                                 data={total}
                                 filename={`Affiliate_List_Level_${level}.xls`}
                                 headers={headers}
-                                >   {t('export')} <BiExport/>
+                                >   
+                                {t('export_to_excel')} <RiFileExcel2Line/>
                                 </CSVLink>
                             </div>
                            
@@ -367,8 +368,8 @@ const Affiliate = (props) => {
                           {
                             total.length > 5 ? <div className="card-inner">
                             <ReactPaginate
-                              previousLabel={'Prev'}
-                              nextLabel={'Next'}
+                              previousLabel={t('previous')}
+                              nextLabel={t('next')}
                               breakLabel={"..."}
                               pageCount={Math.ceil(total.length / 5)}
                               marginPagesDisplayed={3}
@@ -532,8 +533,8 @@ const Affiliate = (props) => {
                           {
                             total.length > 5 ? <div className="card-inner">
                             <ReactPaginate
-                              previousLabel={'Prev'}
-                              nextLabel={'Next'}
+                              previousLabel={t('previous')}
+                              nextLabel={t('next')}
                               breakLabel={"..."}
                               pageCount={Math.ceil(total.length / 5)}
                               marginPagesDisplayed={2}
@@ -709,8 +710,8 @@ const Affiliate = (props) => {
                         {
                           total.length > 5 ? <div className="card-inner">
                           <ReactPaginate
-                            previousLabel={'Prev'}
-                            nextLabel={'Next'}
+                            previousLabel={t('previous')}
+                            nextLabel={t('next')}
                             breakLabel={"..."}
                             pageCount={Math.ceil(total.length / 5)}
                             marginPagesDisplayed={2}

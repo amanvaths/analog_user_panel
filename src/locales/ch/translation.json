@@ -162,7 +162,7 @@
     "level_2":"2级",
     "level_3":"3级",
     "withdraw":"提取",
-    "export":"出口",
+    "export_to_excel":"导出到 Excel",
     "total_purchased":"购买总额",
     "total_expense":"总费用",
     "affiliate_recvd":"会员收到",
@@ -172,6 +172,16 @@
     "total_user":"总用户",
     "total_withdrawal":"总提款",
     "total_remaining":"总剩余",
-    "your_affiliates":"您的关联公司"
+    "your_affiliates":"您的关联公司",
+    "total_affiliates":"附属公司总数",
+    "previous":"以前的",
+    "next":"下一个",
+
+    "withdrawal": "退出",
+    "use_below_form_to_withdraw":"使用以下表格提款",
+    "confirm_withdrwal":"确认提款",
+    "enter_wallet_address":"输入钱包地址",
+    "your_withdraw_request_has_been_sent":"您的提款请求已发送",
+    "wallet_address":"钱包地址"
     
 }

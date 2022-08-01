@@ -161,7 +161,7 @@
     "level_2":"Level 2",
     "level_3":"Level 3",
     "withdraw":"Withdraw",
-    "export":"Export",
+    "export_to_excel":"Export to Excel",
     "total_purchased":"Total Purchased",
     "total_expense":"Total Expense",
     "affiliate_recvd":"Affiliate Received",
@@ -171,9 +171,16 @@
     "total_user":"Total User",
     "total_withdrawal":"Total Withdrawal",
     "total_remaining":"Total Remaining",
-    "your_affiliates":"Your Affiliates"
+    "your_affiliates":"Your Affiliates",
+    "total_affiliates":"Total Affiliates",
+    "previous":"Previous",
+    "next":"Next",
+
+    "withdrawal": "Withdrawal",
+    "use_below_form_to_withdraw":"Use below form to withdraw",
+    "confirm_withdrwal":"Confirm Withdrawal",
+    "enter_wallet_address":"Enter Wallet Address",
+    "your_withdraw_request_has_been_sent":"Your Withdrawal request has been sent",
+    "wallet_address":"Wallet Address"
     
-
-     
-
 }

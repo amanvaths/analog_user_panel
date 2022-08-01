@@ -38,7 +38,7 @@ const AffiliatCard = (props) => {
                     <p class="text-teal">{props.totalExpence}</p>
                   </div>
                   <div className="col-6">
-                    <h6 class="badge bg-light mb-2">Total Affiliates</h6>{" "}
+                    <h6 class="badge bg-light mb-2">{t('total_affiliates')}</h6>{" "}
                     <p class="text-teal">{props.totalAffiliates}</p>
                     <h6 class="badge bg-light mb-2">{t('total_withdrawal')}</h6>{" "}
                     <p class="text-teal">{props.widthdrawl}</p>

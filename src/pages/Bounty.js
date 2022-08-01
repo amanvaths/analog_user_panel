@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import { ThreeDots } from 'react-loader-spinner'
 import { BiExport } from 'react-icons/bi'
 import { CSVLink } from "react-csv";
+import { useTranslation } from "react-i18next";
+import {RiFileExcel2Line} from 'react-icons/ri'
 
 
 const Bounty = () => {
@@ -21,6 +23,7 @@ const Bounty = () => {
   const [status, setStatus] = useState()
   const [load, setLoad] = useState(true)
   const [bounty, setBounty] = useState([])
+  const { t } = useTranslation();
 
 
   const getBounty = async (page) => {
@@ -90,10 +93,15 @@ const Bounty = () => {
                               <Link
                                 to={'/Withdrawal'}
                                  className="btn bg-teal text-white">
-                                <span>Withdrawal</span></Link>
+                                <span>{t('withdraw')}</span></Link>
                             </li>
+                            <li>
+                              
+                                <CSVLink className="btn bg-teal text-white" data={bounty} filename={`Bounty.xls`}>{t('export_to_excel')} <RiFileExcel2Line/></CSVLink>
+                               
+                              </li>
                             <li className="nk-block-tools-opt">
-                              <div className="drodown">
+                              {/* <div className="drodown">
                                 <Link
                                   to=""
                                   className="dropdown-toggle btn btn-outline-warning"
@@ -111,7 +119,7 @@ const Bounty = () => {
                                     </li>
                                   </ul>
                                 </div>
-                              </div>
+                              </div> */}
                             </li>
                              </ul>
                         </div>
@@ -275,8 +283,8 @@ const Bounty = () => {
                 </div>
                 <div className="card-inner">
                   <ReactPaginate
-                    previousLabel={'Prev'}
-                    nextLabel={'Next'}
+                    previousLabel={t('previous')}
+                    nextLabel={t('next')}
                     breakLabel={"..."}
                     pageCount={Math.ceil(totalBounty / 10)}
                     marginPagesDisplayed={2}

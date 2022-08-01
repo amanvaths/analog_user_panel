@@ -161,7 +161,7 @@
     "level_2":"المستوي 2",
     "level_3":"مستوى 3",
     "withdraw":"ينسحب",
-    "export":"يصدّر",
+    "export_to_excel":"تصدير إلى Excel",
     "total_purchased":"إجمالي المشتريات",
     "total_expense":"المصاريف الكلية",
     "affiliate_recvd":"تلقى الشركة التابعة",
@@ -171,7 +171,17 @@
     "total_user":"إجمالي المستخدم",
     "total_withdrawal":"إجمالي الانسحاب",
     "total_remaining":"المجموع المتبقي",
-    "your_affiliates":"الشركات التابعة لك"
+    "your_affiliates":"الشركات التابعة لك",
+    "total_affiliates":"إجمالي المسوقين بالعمولة",
+    "previous":"سابق",
+    "next":"التالي",
+
+    "withdrawal": "انسحاب",
+    "use_below_form_to_withdraw":"استخدم النموذج أدناه للسحب",
+    "confirm_withdrwal":"أكد ويذرفال",
+    "enter_wallet_address":"أدخل عنوان المحفظة",
+    "your_withdraw_request_has_been_sent":"تم إرسال طلب السحب الخاص بك",
+    "wallet_address":"عنوان المحفظة"
 
 
 }   
