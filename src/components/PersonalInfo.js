@@ -5,6 +5,8 @@ import axios from "axios";
 import { setUserInfo } from "../redux/reducer/user";
 import toast from 'react-hot-toast';
 import { Link } from "react-router-dom";
+import SettingButton from "./SettingButton";
+import { useTranslation } from "react-i18next";
 
 
 const PersonalInfo = () => {
@@ -20,6 +22,7 @@ const PersonalInfo = () => {
   const [ref, setRefferal] = useState('')
   const [myCurrency, setMyCurrency] = useState('');
   const [pMenu, setPMenu] = useState(0);
+  const { t } = useTranslation();
 
   const handelReferralChange = (e) => {
     setRefferal(e.target.value)
@@ -89,26 +92,26 @@ const PersonalInfo = () => {
     }
   }
 
-  const profileMenu = () => {
-    // alert("hellow" )
-    if (pMenu == 0) {
-      var element = document.getElementById("myBody");
-      element.classList.add("toggle-shown");
-       element = document.getElementById("toggleBtn");
-      element.classList.add("active");
-       element = document.getElementById("cardAside");
-      element.classList.add("content-active");
-      setPMenu(1)
-    } else {
-       element = document.getElementById("myBody");
-      element.classList.remove("toggle-shown");
-       element = document.getElementById("toggleBtn");
-      element.classList.remove("active");
-       element = document.getElementById("cardAside");
-      element.classList.remove("content-active");
-      setPMenu(0)
-    }
-  }
+  // const profileMenu = () => {
+  //   // alert("hellow" )
+  //   if (pMenu == 0) {
+  //     var element = document.getElementById("myBody");
+  //     element.classList.add("toggle-shown");
+  //      element = document.getElementById("toggleBtn");
+  //     element.classList.add("active");
+  //      element = document.getElementById("cardAside");
+  //     element.classList.add("content-active");
+  //     setPMenu(1)
+  //   } else {
+  //      element = document.getElementById("myBody");
+  //     element.classList.remove("toggle-shown");
+  //      element = document.getElementById("toggleBtn");
+  //     element.classList.remove("active");
+  //      element = document.getElementById("cardAside");
+  //     element.classList.remove("content-active");
+  //     setPMenu(0)
+  //   }
+  // }
 
   useEffect(() => {
   if(userInfo?.username?.length > 0){
@@ -128,32 +131,33 @@ const PersonalInfo = () => {
         <div className="nk-block-head nk-block-head-lg">
           <div className="nk-block-between">
             <div className="nk-block-head-content">
-              <h4 className="nk-block-title">Personal Information</h4>
+              <h4 className="nk-block-title">{t('personal_information')}</h4>
               <div className="nk-block-des">
               </div>
             </div>
             <div className="nk-block-head-content align-self-start d-lg-none">
-              <Link
+              <SettingButton></SettingButton>
+              {/* <Link
                 to=""
                 className="toggle btn btn-icon btn-trigger mt-n1"
                 data-target="userAside"
                 id="toggleBtn"
               >
                 <em className="icon ni ni-menu-alt-r" onClick={profileMenu}></em>
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>
         <div className="card nk-block">
           <div className="nk-data data-list">
             <div className="data-head kanban-board-header kanban-success bg-lighter rounded-0">
-              <span className="overline-title">Basics</span>
+              <span className="overline-title">{t('basics')}</span>
             </div>
             {/* -------------- */}
             <div className="row mx-auto mt-3 pb-3">
               <div className="col-4">
                 <div className="">
-                  <span className="data-label">User Name</span>
+                  <span className="data-label">{t('user_name')}</span>
                 </div>
               </div>
               <div className="col-4 ">
@@ -179,7 +183,7 @@ const PersonalInfo = () => {
                         updateData();
                         setShowUser(false);
                       }
-                    }}>Update</Link> :
+                    }}>{t('update')}</Link> :
                       <em className="icon ni ni-lock-alt text-gray"></em>
                     }
                   </span>
@@ -189,7 +193,7 @@ const PersonalInfo = () => {
             <div className="row mx-auto mt-3 pb-3">
               <div className="col-4">
                 <div className="">
-                  <span className="data-label">Email</span>
+                  <span className="data-label">{t('email')}</span>
                 </div>
               </div>
               <div className="col-4">
@@ -206,7 +210,7 @@ const PersonalInfo = () => {
             <div className="row mx-auto mt-3">
               <div className="col-4 ">
                 <div className="">
-                  <span className="data-label">Phone Number</span>
+                  <span className="data-label">{t('phone_number')}</span>
                 </div>
               </div>
               <div className="col-4">
@@ -240,7 +244,7 @@ const PersonalInfo = () => {
                         updateData();
                         // setShowUser2(false)
                       }
-                    }}>Update</Link> : <span className=" disable">
+                    }}>{t('update')}</Link> : <span className=" disable">
                       <em className="icon ni ni-lock-alt text-gray"></em>
                     </span>
                     }
@@ -251,7 +255,7 @@ const PersonalInfo = () => {
           </div>
           <div className="nk-data data-list mt-3">
             <div className="data-head kanban-board-header kanban-success bg-lighter rounded-0">
-              <span className="overline-title">Currency Preferences</span>
+              <span className="overline-title">{t('currency_prefrences')}</span>
             </div>
             {
               showUser2 ? <>
@@ -308,12 +312,12 @@ const PersonalInfo = () => {
           </div>
           <div className="nk-data data-list mt-2">
             <div className="data-head kanban-board-header kanban-success bg-lighter rounded-0">
-              <span className="overline-title">Referral</span>
+              <span className="overline-title">{t('referral')}</span>
             </div>
             <div className="row mx-auto mt-3 pb-3">
               <div className="col-4 ">
                 <div className="">
-                  <span className="data-label">Referral Code</span>
+                  <span className="data-label">{t('referral')} {t('code')}</span>
                 </div>
               </div>
               <div className="col-4">
@@ -325,7 +329,7 @@ const PersonalInfo = () => {
                       aria-label="Username"
                       aria-describedby="basic-addon1"
                       value={ref}
-                      placeholder="Enter Referral Code"
+                      placeholder={(t('enter_referral_code')) }
                       onChange={(e) => {
                         handelReferralChange(e)
                       }}
@@ -342,7 +346,7 @@ const PersonalInfo = () => {
                       <em className="ni ni-lock-alt text-gray"></em>
                     </span> : <button class="btn btn-outline-success btn-sm" onClick={() => {
                       updateReferral();
-                    }}>Update</button>
+                    }}>{t('update')}</button>
                     }
                   </span>
                 </div>

@@ -1,7 +1,8 @@
 import React  from 'react';
 import { Link } from 'react-router-dom';
-class Footer extends React.Component{
-   render(){
+import { useTranslation } from "react-i18next";
+const Footer = ()=>{
+    const { t } = useTranslation();
        return (
            <>
             <div className="nk-footer nk-footer-fluid">
@@ -11,9 +12,9 @@ class Footer extends React.Component{
                             </div>
                             <div className="nk-footer-links">
                                 <ul className="nav nav-sm">
-                                    <li className="nav-item"><a className="nav-link" href="#">Terms</a></li>
-                                    <li className="nav-item"><a className="nav-link" href="#">Privacy</a></li>
-                                    <li className="nav-item"><a className="nav-link" href="#">Help</a></li>
+                                    <li className="nav-item"><Link className="nav-link" to="">{t('term')}</Link></li>
+                                    <li className="nav-item"><Link className="nav-link" to="">{t('privacy')}</Link></li>
+                                    <li className="nav-item"><Link className="nav-link" to="">{t('help')}</Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -22,6 +23,6 @@ class Footer extends React.Component{
    
            </>
        )
-   }
+   
 }
 export default Footer

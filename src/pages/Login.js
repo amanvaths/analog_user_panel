@@ -21,22 +21,23 @@ const Login = (props) => {
   const [passworderror, setPassworderror] = useState(false);
   const [shown, setShown] = useState(false)
   const [ii, setII] = useState('')
-
-
+  const [captcha, setCaptcha] = useState(false)
 
   useEffect(() => {
-    google.accounts.id.initialize({
-      client_id: "879223788790-mhj4ntd15ashepqn5h4ec4hu4fncmr8t.apps.googleusercontent.com",
-      callback: handleCallback
-    });
+    if (window.google) {
+      window.google.accounts.id.initialize({
+        client_id: "879223788790-mhj4ntd15ashepqn5h4ec4hu4fncmr8t.apps.googleusercontent.com",
+        callback: handleCallback
+      });
 
-    google.accounts.id.renderButton(
-      document.getElementById('googleLogin'),
-      { theme: "outline", size: "large" }
-    );
+      window.google.accounts.id.renderButton(
+        document.getElementById('googleLogin'),
+        { theme: "outline", size: "large" }
+      );
 
-    google.accounts.id.prompt()
-  }, [google])
+      window.google.accounts.id.prompt()
+    }
+  }, [window.google])
 
   const handleCallback = async (response) => {
     let obj = jwt_decode(response.credential)
@@ -104,7 +105,7 @@ const Login = (props) => {
             toast.success("Login Successful")
             dispatch(setIsLoggedIn({ LoginDetails: resp }))
             navigate('/home')
-          }
+          } 
         }
         if (resp.status == 3) {
           toast.error("Email is not varified")
@@ -126,23 +127,17 @@ const Login = (props) => {
     if (password == "") {
       setPassworderror(true);
     }
+    if (captcha === false) {
+      toast.error("Validate Captcha")
+    }
 
-    if (email !== "" && password !== "") {
+    if (email !== "" && password !== "" && captcha === true) {
       Login();
     }
+
+
   };
 
-  const style = {
-    display: 'inline-block',
-    marginRight: '20px',
-    marginBottom: '20px',
-    width: '100px',
-    padding: '5px 20px',
-    color: '#fff',
-    textAlign: 'center',
-    cursor: 'pointer',
-    background: '#1991FA',
-  };
 
 
   return (
@@ -258,18 +253,22 @@ const Login = (props) => {
                       </p>
                     ) : null}
                     {/* <div style={{width: "320px", height: "160px"}}> */}
-                    <Vertify
+                    <div className="abc">
+                      <Vertify
+
                         width={320}
                         height={160}
                         visible={true}
-                        onSuccess={() => alert('Successfully Matched !')}
-                        onFail={() => alert('You are Failed ! Please Try Again')}
-                        onRefresh={() => alert('Refreshed successfully ')}
+                        onSuccess={() => setCaptcha(true)}
+                        onFail={() => toast.error("Invalid Captcha")}
+                        onRefresh={() => console.log("")}
                       />
+                    </div>
+
                     {/* </div> */}
-                     
+
                     <div className="form-group">
-                     
+
                       <button
                         className="btn text-white bg-teal btn-dim btn-block"
                       // onClick={() => toast.success("HIII")}

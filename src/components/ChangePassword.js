@@ -6,10 +6,11 @@ import toast from 'react-hot-toast';
 import { useNavigate} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { BASE_URL } from '../Api_connection/config';
+import { useTranslation } from "react-i18next";
 
 const ChangePassword = () => {
     const {user} = useSelector((state)=> state.user.value)
-
+    const { t } = useTranslation();
     const [oldPassword, setOldPassword] = useState("")
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -32,8 +33,7 @@ const ChangePassword = () => {
             // console.log(data.data)
             if(confirmPassword === newPassword){
                 if(data.data.status === 1){
-                    toast.success("Password Changed Successfully")
-                    // swal("Password Changed Successfully", "Please Login", "success");
+                    toast.success(`${t('password_change_succesfully')}`)
               setTimeout(() => {
                 navigate("/login");
               }, 2000);
@@ -42,12 +42,10 @@ const ChangePassword = () => {
                 setConfirmPassword(" ")
             }
             else if(data.data.status === 0){
-                toast.error("Incorrect Password")
-                // swal("Password Incorrect", "Enter Correct Password", "error");
+                toast.error(`${t('incorrect_passeord')}`)
             }
             }else{
-                toast.error("Password and confirm password do not match")
-                // swal("Password and confirm password does not match", "Enter identical password", "error");
+                toast.error(`${t('pasword_and_confirm_password_do_not_match')}`)
             }
            
 
@@ -58,16 +56,11 @@ const ChangePassword = () => {
     
     const togglePassword1 = () => {
         setOldPasswordShone(!oldPasswordShown)
-       
       };
       const togglePassword2 = () => {
-        
         setNewPasswordShone(!newPasswordShown)
-        // console.log(newPasswordShown);
-    
       };
       const togglePassword3 = () => {
-      
         setConfirmPasswordShone(!confirmPasswordShown)
       };
 
@@ -130,7 +123,6 @@ const ChangePassword = () => {
 
 
     const handelFormSubmit = (oldPassword, newPassword, confirmPassword) => {
-
         if (oldPassword === "") {
             setOldPasswordError(true);
         }
@@ -152,9 +144,9 @@ const ChangePassword = () => {
                 <div class="nk-block-head nk-block-head-lg">
                     <div class="nk-block-between">
                         <div class="nk-block-head-content">
-                            <h4 class="nk-block-title">Change Password</h4>
+                            <h4 class="nk-block-title">{t('change_password')}</h4>
                             <div class="nk-block-des">
-                                <p>You may update your password any time. We suggest you choose a strong password and update it regularly</p>
+                                <p>{t('change_password_tagline1')}</p>
                             </div>
                             <hr></hr>
                         </div>
@@ -173,7 +165,7 @@ const ChangePassword = () => {
                         <div className="form-group">
                             <div className="form-label-group">
                                 <label className="form-label" for="password">
-                                    Old Password
+                                    {t('old_password')}
                                 </label>
                             </div>
                             <div className="form-control-wrap">
@@ -190,7 +182,7 @@ const ChangePassword = () => {
                                     type={oldPasswordShown ? "text" : "password"}
                                     className="form-control form-control-lg"
                                     id="password"
-                                    placeholder="Enter old password"
+                                    placeholder={`${t('enter_old_password')}`}
                                     value={oldPassword}
                                     minLength={8}
                                     onChange={(e) => {
@@ -209,20 +201,19 @@ const ChangePassword = () => {
 
                             <div id="validation-box">
                                 <h6 className="passvalid" id="capital">
-                                We suggest having at least one capital and one lower-case letter (Aa-Zz), 
-                                one special symbol (#, &amp;, % etc) and one number (0-9) in your password for the best strength
+                                {t('change_password_suggestion')}
                                 </h6>
                             </div>
                         </div>
                         {oldPasswordError == true ? (
                             <p style={{ color: "red", marginTop: -20, fontSize: "12px"}}>
-                                Password is requierd *
+                                {t('password_is_required')} *
                             </p>
                         ) : null}
                         <div className="form-group">
                             <div className="form-label-group">
                                 <label className="form-label" for="password">
-                                    New Password
+                                    {t('new_password')}
                                 </label>
                             </div>
                             <div className="form-control-wrap">
@@ -241,7 +232,7 @@ const ChangePassword = () => {
                                     type={newPasswordShown ? "text" : "password"}
                                     className="form-control form-control-lg"
                                     id="npassword"
-                                    placeholder="Enter new password"
+                                    placeholder={`${t('enter_new_password')}`}
                                     value={newPassword}
                                     minLength={8}
                                     onChange={(e) => {
@@ -261,22 +252,21 @@ const ChangePassword = () => {
 
                             <div id="validation-box1">
                             <h6 className="passvalid" id="capital">
-                            We suggest having at least one capital and one lower-case letter (Aa-Zz),
-                             one special symbol (#, &amp;, % etc) and one number (0-9) in your password for the best strength
+                            {t('change_password_suggestion')}
                                 </h6>
                             </div>
 
                         </div>
                         {newPasswordError == true ? (
                             <p style={{ color: "red", marginTop: -20, fontSize: "12px" }}>
-                                Password is requierd *
+                                {t('password_is_required')} *
                             </p>
                         ) : null}
 
                         <div className="form-group">
                             <div className="form-label-group">
                                 <label className="form-label" for="confirm-password">
-                                    Confirm Password
+                                   {t('confirm_password')}
                                 </label>
                             </div>
                             <div className="form-control-wrap">
@@ -295,7 +285,7 @@ const ChangePassword = () => {
                                     type={confirmPasswordShown ? "text" : "password"}
                                     className={match == true ? "border-2 border-success form-control form-control-lg" :"form-control form-control-lg"}
                                     id="confirm-password"
-                                    placeholder="Confirm your password"
+                                    placeholder={`${t('confirm_your_password')}`}
                                     value={confirmPassword}
                                     minLength={8}
                                     onChange={(e) => {
@@ -319,7 +309,7 @@ const ChangePassword = () => {
                         </div>
                         {confirmPasswordError == true ? (
                             <p style={{ color: "red", marginTop: -20, fontSize: "12px" }}>
-                                Password is requierd *
+                                {t('password_is_required')} *
                             </p>
                         ) : null}
 
@@ -330,7 +320,7 @@ const ChangePassword = () => {
                                 className="btn btn-dim btn-outline-success btn-block"
                             // onClick={Signup}
                             >
-                                Save
+                                {t('save')}
                             </button>
                         </div>
                     </form>

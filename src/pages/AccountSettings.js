@@ -8,15 +8,16 @@ import SecuritySettings from "../components/SecuritySettings";
 import Notification from "../components/Notification";
 import ChangePassword from "../components/ChangePassword";
 import IPwhiteListing from "../components/IPwhiteListing";
-
 import { navsetters } from "../redux/actions/websiteDBAction";
-
+import { removeSideMenu } from "../Api_connection/ApiFunction";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { IoLocation } from 'react-icons/io5'
 import { useSelector, useDispatch } from "react-redux";
 import { setUserInfo, setSettingPage } from "../redux/reducer/user";
 import { BASE_URL } from "../Api_connection/config";
+import SettingButton from "../components/SettingButton";
+import { useTranslation } from "react-i18next";
 
 
 const AccountSettings = () => {
@@ -24,7 +25,7 @@ const AccountSettings = () => {
   const { userInfo, settingPages, user, totalAna } = useSelector((state) => state.user.value)
   const [logData, setLogData] = useState([])
   const email = user.email
-
+  const { t } = useTranslation();
   const btn1 = useSelector((store) => store.navsetters)
 
 
@@ -52,19 +53,8 @@ const AccountSettings = () => {
   useEffect( () => {
    go()
   }, [])
+console.log(logData, "LLOGDATA");
 
-  // console.log(totalAna);
-
-  const profileMenuRemove = ()=>{
-    var element = document.getElementById("myBody"); 
-    element.classList.remove("toggle-shown"); 
-    element = document.getElementById("toggleBtn"); 
-    element.classList.remove("active");                                 
-    element = document.getElementById("cardAside"); 
-    element.classList.remove("content-active"); 
-  }
-
- 
   return (
     <>
       <div>
@@ -91,18 +81,19 @@ const AccountSettings = () => {
                             <div className="nk-block-head nk-block-head-lg">
                               <div className="nk-block-between">
                                 <div className="nk-block-head-content">
-                                  <h4 className="nk-block-title active" >Login Activity</h4>
+                                  <h4 className="nk-block-title active" >{t('login_activity')}</h4>
                                   <div className="nk-block-des">
-                                    <p> {` Here is your last ${logData.length} login activities log.`}
-
+                                    <p>
+                                       {/* {` Here is your last ${logData.length} login activities log.`} */}
+                                      {t('login_activity_tagline',{logData})}
                                       <span className="text-soft">
 
                                       </span>
                                     </p>
                                   </div>
                                 </div>
-                                <div onClick={()=>dispatch(navsetters())} className="nk-block-head-content align-self-start d-lg-none">
-                                  <a
+                                <div className="nk-block-head-content align-self-start d-lg-none">
+                                  {/*<a
                                   
                                     className="toggle btn btn-icon btn-trigger mt-n1"
                                     id = "toggleBtn"
@@ -110,7 +101,8 @@ const AccountSettings = () => {
                                     data-target="userAside"                                  
                                   >
                                     <em className="icon ni ni-menu-alt-r" onClick={()=>profileMenuRemove()}  ></em>
-                                  </a>
+                                  </a> */}
+                                   <SettingButton></SettingButton>
                                 </div>
                               </div>
                             </div>
@@ -121,18 +113,18 @@ const AccountSettings = () => {
                                       <tr>
                                         <th className="tb-col-os">
                                           <span>
-                                            Browser
+                                            {t('browser')}
                                             <span className="d-sm-none">/ IP</span>
                                           </span>
                                         </th>
                                         <th className="tb-col-ip">
-                                          <span>Device</span>
+                                          <span>{t('device')}</span>
                                         </th>
                                         <th className="tb-col-ip">
                                           <span>IP</span>
                                         </th>
                                         <th className="tb-col-time">
-                                          <span>Time</span>
+                                          <span>{t('time')}</span>
                                         </th>
                                         <th className="tb-col-action">
                                           <span>&nbsp;</span>
@@ -220,7 +212,7 @@ const AccountSettings = () => {
                             <div className="card-inner">
                               <div className="user-account-info py-0">
                                 <h6 className="overline-title-alt p-2">
-                                  Analog Wallet Balance
+                                  Analog {t('analog_wallet_balance')}
                                 </h6>
                                 <div className="user-balance p-2">
                                   {totalAna&&totalAna?.toFixed(3)} ANA
@@ -246,6 +238,7 @@ const AccountSettings = () => {
                                     to="#"
                                     className={settingPages.personalInfo ? "active" : " "}
                                     onClick={() => {
+                                      removeSideMenu()
                                       const obj5 = {
                                         personalInfo: true,
                                         activity: false,
@@ -255,19 +248,20 @@ const AccountSettings = () => {
                                         ipWhiteListing: false
                                       }
                                       dispatch(setSettingPage({settingPages: obj5}))
-                                      go()
+                                      go()                                    
                                       // getSetti(email)
                                       // dispatch(setUserInfo({currency_prefrence: userInfo?.currency_prefrence}))
                                       // dispatch(setUserInfo({ currency_prefrence: "inr" }))
                                     }}
                                   >
                                     <em className="icon ni ni-user-fill-c"></em>
-                                    <span>Personal Infomation</span>
+                                    <span>{t('personal_information')}</span>
                                   </Link>
                                 </li>
                                 <li>
                                   <Link to="#"
                                     onClick={() => {
+                                      removeSideMenu()
                                       const obj4 = {
                                         personalInfo: false,
                                         activity: false,
@@ -279,7 +273,7 @@ const AccountSettings = () => {
                                       dispatch(setSettingPage({ settingPages: obj4 }));
                                     }}>
                                     <em className="icon ni ni-bell-fill"></em>
-                                    <span>Notifications</span>
+                                    <span>{t('notification')}</span>
                                   </Link>
                                 </li>
                                 <li>
@@ -287,6 +281,7 @@ const AccountSettings = () => {
                                     <em className="icon ni ni-activity-round-fill"></em>
                                     <span
                                       onClick={() => {
+                                        removeSideMenu()
                                         const obj3 = {
                                           personalInfo: false,
                                           activity: true,
@@ -296,9 +291,10 @@ const AccountSettings = () => {
                                           ipWhiteListing: false
                                         }
                                         dispatch(setSettingPage({settingPages: obj3}))
+
                                       }}
                                     >
-                                      Account Activity
+                                      {t('account_activity')}
                                     </span>
                                   </Link>
                                 </li>
@@ -306,6 +302,7 @@ const AccountSettings = () => {
                                   <Link to="#"
                                     className={settingPages.securitySettings ? "active" : " "}
                                     onClick={() => {
+                                      removeSideMenu()
                                       const obj2 = {
                                         personalInfo: false,
                                         activity: false,
@@ -317,13 +314,14 @@ const AccountSettings = () => {
                                       dispatch(setSettingPage({settingPages: obj2}))
                                     }}>
                                     <em className="icon ni ni-lock-alt-fill"></em>
-                                    <span>Security Settings</span>
+                                    <span>{t('security_settings')}</span>
                                   </Link>
                                 </li>
                                 <li>
                                   <Link to="#"
                                     className={settingPages.ipWhiteListing ? "active" : " "}
                                     onClick={() => {
+                                      removeSideMenu()
                                       const obj1 = {
                                         personalInfo: false,
                                         activity: false,
@@ -335,7 +333,7 @@ const AccountSettings = () => {
                                       dispatch(setSettingPage({settingPages: obj1}))
                                     }}>
                                     <IoLocation />&nbsp; &nbsp;
-                                    <span>IP Whitelisting</span>
+                                    <span>IP {t('whitelisting')}</span>
                                   </Link>
                                 </li>
                               </ul>

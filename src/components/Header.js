@@ -6,6 +6,8 @@ import axios from "axios";
 import { BASE_URL } from "../Api_connection/config";
 import { navsetter } from "../redux/actions/websiteDBAction";
 import toast from 'react-hot-toast';
+import { removeSideMenu } from "../Api_connection/ApiFunction";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
 
@@ -15,38 +17,34 @@ const Header = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const [notification, setNotification] = useState([]);
-  const sidebarMenu = async () => {
+  var [count, setCount] = useState(0);
+  const { t } = useTranslation();
+  
 
-    var element = document.getElementById("myBody"); 
+      var element = document.getElementById("myBody");
+        if (element.classList.contains("nav-shown")) {
+          element.classList.remove("nav-shown");
+        }
+     
 
-     element.classList.add("nav-shown");
-     element = document.getElementById("nk-sidebar");
-     element.classList.add("nk-sidebar-active");
-    element = document.getElementById("nk-nav-toggle");
-    // element.classList.add("toggle-active");
-
-  var element1 = document.getElementById("myBody");
-    if (element1.classList.contains("toggle-shown")) {
-      element1.classList.remove("toggle-shown")
-    }
-  var element2 = document.getElementById("toggleBtn");
-    if (element2) {
-    if (element2.classList.contains("active")) {
-    element2.classList.remove("active")
-    }
-  }
-  var element3 = document.getElementById("cardAside")
-  if (element3) {
-    if (element3.classList.contains("content-active")) {
-      element3.classList.remove("content-active")
-    }
+  const sidebarMenu = () => {
+    removeSideMenu();
+    setCount(count+1);
+ 
+    var element = document.getElementById("myBody");
+    var element1 = document.getElementById("nk-sidebar");
+   
+    if(count%2 == 0 ){    
+       element.classList.add("nav-shown");
+       element1.classList.add("nk-sidebar-active");
+    }else{    
+       element.classList.remove("nav-shown");
+       element1.classList.remove("nk-sidebar-active");
+    }   
+   
 
    }
 
- }
-
-
-  
   const mode = localStorage.getItem("theme")
   if (mode == 1) {
     var element = document.getElementById("myBody");
@@ -108,13 +106,13 @@ const Header = () => {
               <Link to="/home" className="logo-link">
                 <img
                   className="logo-light logo-img"
-                  src="images/logo.png"
+                  src='https://api.analog.live/images/logo_1658832710895-image.svg'
                   srcSet="images/logo.png 2x"
                   alt="logo"
                 />
                 <img
                   className="logo-dark logo-img"
-                  src="images/logo.png"
+                  src="https://api.analog.live/images/logo_1658832710895-image.svg"
                   srcSet="images/logo.png 2x"
                   alt="logo-dark"
                 />
@@ -182,7 +180,7 @@ const Header = () => {
                             <divx></divx>
                           </ul>
                           <div className="energy-container text-right">
-                            [ <span className="text-success font-weight-bold energy-text">{"    "}Energy</span>{" "}
+                            [ <span className="text-success font-weight-bold energy-text">{"    "}{t('energy')}</span>{" "}
                             <span style={{ color: "green" }} className="timer">
                               5,6881.00
                             </span>
@@ -209,7 +207,7 @@ const Header = () => {
                   >
                     <div className="dropdown-head">
                       <span className="sub-title nk-dropdown-title">
-                        Notifications
+                        {t('notification')}
                       </span>
                       {/* <a href="#">Mark All as Read</a> */}
                     </div>
@@ -255,7 +253,7 @@ const Header = () => {
                       </div>
                     </div>
                     <div className="dropdown-foot center">
-                      <Link to="/NotificationAlert">View All</Link>
+                      <Link to="/NotificationAlert">{t('view_all')}</Link>
                     </div>
                   </div>
                 </li>
@@ -329,7 +327,7 @@ const Header = () => {
                         <li>
                           <Link to="/accountSettings">
                             <em className="icon ni ni-setting-alt"></em>
-                            <span>Account Setting</span>
+                            <span>{t('account_settings')}</span>
                           </Link>
                         </li>
                         {/* <li>

@@ -76486,6 +76486,8 @@ ol.linenums li {
   height: inherit;
   max-width: inherit;
   max-height: inherit;
+  margin: 0px;
+  margin-top: 38px !important;
 }
 .simplebar-mask {
   direction: inherit;

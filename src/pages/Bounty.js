@@ -8,7 +8,8 @@ import { useSelector } from "react-redux";
 import ReactPaginate from 'react-paginate';
 import { Link } from "react-router-dom";
 import { ThreeDots } from 'react-loader-spinner'
-import {BiExport} from 'react-icons/bi'
+import { BiExport } from 'react-icons/bi'
+import { CSVLink } from "react-csv";
 
 
 const Bounty = () => {
@@ -19,11 +20,13 @@ const Bounty = () => {
   const [totalBounty, setTotalBounty] = useState(0)
   const [status, setStatus] = useState()
   const [load, setLoad] = useState(true)
+  const [bounty, setBounty] = useState([])
 
 
   const getBounty = async (page) => {
     const data = await axios.post(`${BASE_URL}/bounty`, { email: email, page: page })
     if (data) {
+      console.log(data.data, "BOUNTY TAB");
       setTab(data.data.data)
       setTotalBounty(data.data.count)
       setStatus(data.data.status)
@@ -31,19 +34,25 @@ const Bounty = () => {
     }
   }
 
- 
+  console.log(tab, "BOUNTY TAB");
 
 
-  const fun =(data)=>{
+  const fun = (data) => {
     setCurrentPage(data.selected + 1)
     getBounty(data.selected + 1)
 
   }
 
+  const exportBounty = async () => {
+    const data = await axios.post(`${BASE_URL}/exportbounty`, { email: email })
+    console.log(data.data, "data");
+    setBounty(data.data)
+  }
 
   useEffect(() => {
     setLoad(false)
     getBounty()
+    exportBounty()
   }, [])
 
   return (
@@ -80,41 +89,31 @@ const Bounty = () => {
                           <li>
                               <Link
                                 to={'/Withdrawal'}
-                                // onClick={()=> navigate('/Withdrawal')}
-                                className="btn bg-teal text-white">
-                                <span>Export <BiExport/></span></Link>
-                            </li>
-                            <li>
-                              <Link
-                                to={'/Withdrawal'}
-                                // onClick={()=> navigate('/Withdrawal')}
-                                className="btn bg-teal text-white">
+                                 className="btn bg-teal text-white">
                                 <span>Withdrawal</span></Link>
                             </li>
-                            {/* <li className="nk-block-tools-opt">
+                            <li className="nk-block-tools-opt">
                               <div className="drodown">
-                                <a
-                                  href="#"
-                                  className="dropdown-toggle btn btn-icon btn-primary"
+                                <Link
+                                  to=""
+                                  className="dropdown-toggle btn btn-outline-warning"
                                   data-bs-toggle="dropdown"
-                                ><em className="icon ni ni-plus"></em
-                                ></a>
+                                >
+                                  Export <BiExport />
+                                </Link>
                                 <div className="dropdown-menu dropdown-menu-end">
                                   <ul className="link-list-opt no-bdr">
                                     <li>
-                                      <a href="#"><span>Add Tranx</span></a>
+                                      <CSVLink data={bounty} filename={`Bounty.xls`}>Download in Excel</CSVLink>
                                     </li>
                                     <li>
-                                      <a href="#"><span>Add Deposit</span></a>
-                                    </li>
-                                    <li>
-                                      <a href="#"><span>Add Withdraw</span></a>
+                                      <Link to=""><span>Download in PDF</span></Link>
                                     </li>
                                   </ul>
                                 </div>
                               </div>
-                            </li> */}
-                          </ul>
+                            </li>
+                             </ul>
                         </div>
                       </div>
                     </div>
@@ -139,17 +138,17 @@ const Bounty = () => {
                                     data-bs-toggle="dropdown"><em className="icon ni ni-setting text-teal"></em></Link>
                                   <div className="dropdown-menu dropdown-menu-xs dropdown-menu-end">
                                     <ul className="link-check">
-                                      <li><span>Show</span></li>
+                                      {/* <li><span>Show</span></li>
                                       <li className="active"><Link to="">10</Link></li>
                                       <li><Link to="">20</Link></li>
-                                      <li><Link to="">50</Link></li>
+                                      <li><Link to="">50</Link></li> */}
                                     </ul>
                                     <ul className="link-check">
-                                      <li><span>Order</span></li>
+                                      {/* <li><span>Order</span></li>
                                       <li className="active">
                                         <Link to="">DESC</Link>
                                       </li>
-                                      <li><Link to="">ASC</Link></li>
+                                      <li><Link to="">ASC</Link></li> */}
                                     </ul>
                                   </div>
                                 </div>
@@ -204,7 +203,7 @@ const Bounty = () => {
                                       <div className="nk-tb-col">
                                         <span className="tb-amount-sm">
                                           {
-                                            oneUsdPrice ?  userInfo?.currency_preference == 'inr' ? `${element?.token_price?.toFixed(6)} INRX` :
+                                            oneUsdPrice ? userInfo?.currency_preference == 'inr' ? `${element?.token_price?.toFixed(6)} INRX` :
                                               `${(element?.token_price / oneUsdPrice)?.toFixed(6)}  USDT` : 0
                                           }
                                         </span>
@@ -267,36 +266,36 @@ const Bounty = () => {
                                   )
                                 }) :
                                 <div className="">
-                                  <ThreeDots heigth="20" width="40" color="#1ee0ac" ariaLabel="loading-indicator" style={{textAlign: 'center'}}/>
+                                  <ThreeDots heigth="20" width="40" color="#1ee0ac" ariaLabel="loading-indicator" style={{ textAlign: 'center' }} />
                                 </div>}
                         </div>
-                      </div>                      
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div className="card-inner">
-                    <ReactPaginate
-                      previousLabel={'Prev'}
-                      nextLabel={'Next'}
-                      breakLabel={"..."}
-                      pageCount={Math.ceil(totalBounty / 10)}
-                      marginPagesDisplayed={2}
-                      pageRangeDisplayed={2}
-                      onPageChange={fun}
-                      containerClassName={'pagination justify-content-center'}
-                      pageClassName={'page-item'}
-                      pageLinkClassName={'page-link'}
-                      previousClassName={'page-item'}
-                      previousLinkClassName={'page-link'}
-                      nextClassName={'page-item'}
-                      nextLinkClassName={'page-link'}
-                      breakClassName={'page-item'}
-                      breakLinkClassName={'page-link'}
-                      activeClassName={"active"}
-                    />
+                  <ReactPaginate
+                    previousLabel={'Prev'}
+                    nextLabel={'Next'}
+                    breakLabel={"..."}
+                    pageCount={Math.ceil(totalBounty / 10)}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={2}
+                    onPageChange={fun}
+                    containerClassName={'pagination justify-content-center'}
+                    pageClassName={'page-item'}
+                    pageLinkClassName={'page-link'}
+                    previousClassName={'page-item'}
+                    previousLinkClassName={'page-link'}
+                    nextClassName={'page-item'}
+                    nextLinkClassName={'page-link'}
+                    breakClassName={'page-item'}
+                    breakLinkClassName={'page-link'}
+                    activeClassName={"active"}
+                  />
 
-                    {/* <PaginatedItems itemsPerPage={4}/> */}
-                  </div>
+                  {/* <PaginatedItems itemsPerPage={4}/> */}
+                </div>
               </div>
             </div>
           </div>

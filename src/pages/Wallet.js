@@ -11,6 +11,7 @@ import { Triangle } from 'react-loader-spinner'
 import { useSelector, useDispatch } from 'react-redux';
 import { BASE_URL, BASE_URL_2 } from "../Api_connection/config";
 import { setUserInfo } from "../redux/reducer/user";
+import { t } from "i18next";
 
 const { io } = require("socket.io-client");
 
@@ -36,26 +37,26 @@ const Wallet = (props) => {
 
 
   const email = user.email;
-  const socket = io(`https://api.analog.live:8080`,{secure: true})
-  // var status = 0;
-  useEffect(()=>{
-  socket.on('connect',()=>{
-    // console.log("Socket Connected");
-    socket.emit('join', {email: email });
-    socket.on('balance',(data)=>{
-      // console.log("BALANCE EVENT", data)
-      setWalletDetails([...data]);
-    })
+//   const socket = io(`https://api.analog.live:8080`,{secure: true})
+//   // var status = 0;
+//   useEffect(()=>{
+//   socket.on('connect',()=>{
+//     // console.log("Socket Connected");
+//     socket.emit('join', {email: email });
+//     socket.on('balance',(data)=>{
+//       // console.log("BALANCE EVENT", data)
+//       setWalletDetails([...data]);
+//     })
 
-    socket.on("msg",(data)=>{    
-        NotificationManager.success('Added',data)
-    })
+//     socket.on("msg",(data)=>{    
+//         NotificationManager.success('Added',data)
+//     })
 
-      socket.on('notification',(data)=>{
-        // console.log(data, "Notification data");
-      })
-  })
-},[])
+//       socket.on('notification',(data)=>{
+//         // console.log(data, "Notification data");
+//       })
+//   })
+// },[])
 
 
   const test = async()=>{
@@ -177,7 +178,7 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                         style={{ padding: "" }}
                       >
                         <span class="badge bg-outline-dark text-dark fs-5">
-                          Total Balance: 
+                          {t('total_balance')} : 
                           <span className="text-teal"> 
                           { coinWW.length > 0
                             ? <>
@@ -200,17 +201,17 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                         <div className="kanban-board-header kanban-success shadow-sm">
                           <div className="card-inner">
                             <p className="kanban-item-title">
-                              <span className="badge bg-light rounded-pill">Total Fund  </span>
+                              <span className="badge bg-light rounded-pill">{t('total_fund')}  </span>
                               <span className="text-teal"> {totalAna? totalAna?.toFixed(2): 0} ANA </span>
                             </p>
                             <p className="kanban-item-title">
-                              <span className="badge bg-light rounded-pill">Total Spend  </span>
+                              <span className="badge bg-light rounded-pill">{t('total_spend')}  </span>
                               <span className="text-teal"> {
                                totalSpendINR ?  userInfo?.currency_preference === 'inr' ? `${totalSpendINR?.toFixed(3)} INRX` : `${totalSpendUSDT?.toFixed(3)} USDT` : `0 ${userInfo?.currency_preference === 'inr'? "INRX" : "USDT"}`
                               }</span>
                             </p>
                             <p className="kanban-item-title">
-                              <span className="badge bg-light rounded-pill">Current Balance  </span>
+                              <span className="badge bg-light rounded-pill">{t('current_balance')}  </span>
                               <span className="text-teal">
                               { coinWW.length > 0
                                 ? <>
@@ -230,12 +231,12 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                           <div className="kanban-board-header kanban-success shadow-sm">
                             <div className="card-inner">
                               <p className="kanban-item-title">
-                                <span className="badge bg-light rounded-pill">Analog Value </span>
+                                <span className="badge bg-light rounded-pill">Analog {t('value')} </span>
                                 <span className="text-teal">{userInfo.currency_preference ==='inr' ? `${(userInfo?.anaPrice).toFixed(4)} INRX` : `${(userInfo?.anaPrice/ oneUsdPrice).toFixed(4)} USDT`}
                                 </span>
                               </p>
                               <p className="kanban-item-title">
-                                <span className="badge bg-light rounded-pill">Bonus </span>
+                                <span className="badge bg-light rounded-pill">{t('bouns')} </span>
                                 <span className="text-teal"> 
                                   {totalBonus?.toFixed(2)}&nbsp;&nbsp;{
                                                   userInfo?.currency_preference == 'inr' ? "INRX" : "USDT"
@@ -243,7 +244,7 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                                 </span>
                               </p>
                               <p className="kanban-item-title">
-                                <span className="badge bg-light rounded-pill">Total APY  </span>
+                                <span className="badge bg-light rounded-pill">{t('total')} APY  </span>
                                 <span className="text-teal"> 0</span>
                               </p>
                             </div>
