@@ -6,19 +6,19 @@ import { Link } from 'react-router-dom';
 import { Modal, Button } from "react-bootstrap"
 import { useSelector, useDispatch } from "react-redux";
 import { setUserInfo, setSettingPage } from "../redux/reducer/user";
-import { profileMenu } from '../Api_connection/ApiFunction';
 import toast from 'react-hot-toast';
 import OtpInput from 'react-otp-input';
 import './ss.css'
 import SettingButton from './SettingButton';
+import { useTranslation } from "react-i18next";
 
 const SecuritySettings = () => {
   const { userInfo, user } = useSelector((state) => state.user.value)
-  // console.log(":: USER INFO::::", userInfo);
   const [otp, setOtp] = useState("");
   const [otpD, setOtpD] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
 
   const email = user.email
@@ -39,12 +39,10 @@ const SecuritySettings = () => {
     try {
       const state = e.target.checked
       const data = await axios.post(`${BASE_URL}/login_activity`, { email: email, login_activity: state })
-      // console.log(data, "response from loginActivity api");
     } catch (error) {
       console.log(error);
     }
   }
-  // console.log(userInfo?.password_updated_at, "PASS UPDATED AT");
   useEffect(() => {
     const conSetting = async () => {
       const data = await axios.post(`${BASE_URL}/configSettings`, { email: email })
@@ -63,25 +61,14 @@ const SecuritySettings = () => {
         <div className="nk-block-head nk-block-head-lg">
           <div className="nk-block-between">
             <div className="nk-block-head-content">
-              <h4 className="nk-block-title">Security Settings</h4>
+              <h4 className="nk-block-title">{t('security_settings')}</h4>
               <div className="nk-block-des">
-                <p>
-                  These settings are helps you keep your account
-                  secure.
-                </p>
+                <p>{t('security_settings_tagline')}</p>
               </div>
             </div>
             <div
-              className="nk-block-head-content align-self-start d-lg-none"
-            >
-               <SettingButton></SettingButton>
-              {/* <Link
-                to=""
-                className="toggle btn btn-icon btn-trigger mt-n1"
-                data-target="userAside"
-                id="toggleBtn"
-              ><em className="icon ni ni-menu-alt-r" onClick={profileMenu}></em
-              ></Link> */}
+              className="nk-block-head-content align-self-start d-lg-none">
+              <SettingButton></SettingButton>
             </div>
           </div>
         </div>
@@ -93,11 +80,8 @@ const SecuritySettings = () => {
                   className="between-center flex-wrap flex-md-nowrap g-3"
                 >
                   <div>
-                    <h5 className='text-teal'>Save my Activity Logs</h5>
-                    <p>
-                      You can save your all activity logs
-                      including unusual activity detected.
-                    </p>
+                    <h5 className='text-teal'>{t('save_my_activity_log')}</h5>
+                    <p>{t('unusual_activity_tagline')}</p>
                   </div>
                   <div className="nk-block-actions">
                     <ul className="align-center gx-3">
@@ -110,7 +94,7 @@ const SecuritySettings = () => {
                             checked={userInfo?.login_activity}
                             onChange={(e) => {
                               const obj = { ...userInfo }
-                              toast.success(e.target.checked === true ? "Activity logs alert activated" : "Activity logs alert deactivated")
+                              toast.success(e.target.checked === true ? `${t('activity_log_alert_message_activited')}` : `${t('activity_log_alert_message_deactivited')}`)
                               obj['login_activity'] = e.target.checked
                               dispatch(setUserInfo({ userInfo: obj }))
                               handelLog(e)
@@ -126,11 +110,8 @@ const SecuritySettings = () => {
               <div className="card-inner">
                 <div className="between-center flex-wrap g-3">
                   <div>
-                    <h5 className='text-teal'>Change Password</h5>
-                    <p>
-                      Set a unique password to protect your
-                      account.
-                    </p>
+                    <h5 className='text-teal'>{t('change_password')}</h5>
+                    <p>{t('change_password_tagline')}</p>
                   </div>
                   <div
                     className="nk-block-actions flex-shrink-sm-0"
@@ -150,13 +131,13 @@ const SecuritySettings = () => {
                               ipWhiteListing: false
                             }
                             dispatch(setSettingPage({ settingPages: obj }))
-                          }}>Change Password</Link>
+                          }}>{t('change_password')}</Link>
                       </li>
                       {
                         userInfo?.password_updated_at ?
                           <li>
                             <em className="text-soft text-date fs-12px"
-                            >Last changed :
+                            >{t('last_changed')} :
                               <span> {new Date(userInfo?.password_updated_at).toDateString()}</span></em>
                           </li> : null
                       }
@@ -170,25 +151,17 @@ const SecuritySettings = () => {
                 >
                   <div>
                     <h5 className='text-teal'>
-                      2 Factor Auth &nbsp;
+                      2 {t('factoe_auth')} &nbsp;
                       {
                         Object?.values(userInfo)?.length > 0 ?
-                          !userInfo.googleAuth ? <span className="badge badge-danger ms-0">disabled</span>
-                            : <span className="badge badge-success ms-0">enabled</span>
+                          !userInfo.googleAuth ? <span className="badge badge-danger ms-0">{t('disabled')}</span>
+                            : <span className="badge badge-success ms-0">{t('enable')}</span>
                           : null
                       }
 
                     </h5>
-                    <p>
-                      Secure your account with Google 2FA security.
-                      <p>When it is activated you will need to
-                        enter not only your password, but also a
-                        special code using google Authenticator mobile app.
-                        {/* <p>You can receive
-                          this code by in mobile app.</p> */}
-                      </p>
-
-                    </p>
+                    <p>{t('2fa_tagline_1')}</p>
+                    <p> {t('2fa_tagline_2')}</p>
                   </div>
                   {Object?.values(userInfo)?.length > 0 ?
                     userInfo.googleAuth ?
@@ -198,7 +171,7 @@ const SecuritySettings = () => {
                           <button onClick={async () => {
                             handleShow1();
                             await axios.post(`${BASE_URL}/generateauthtoken`, { email: email })
-                          }} className="btn btn-danger">Disable</button>
+                          }} className="btn btn-danger">{t('disable')}</button>
                         </div>
 
                       ) :
@@ -210,7 +183,7 @@ const SecuritySettings = () => {
                             const obj = { ...userInfo }
                             obj['googleAuth'] = !userInfo.googleAuth
                             dispatch(setUserInfo({ userInfo: obj }))
-                          }} className="btn btn-outline-success">Enable</button>
+                          }} className="btn btn-outline-success">{t('enable')}</button>
                         </div>
                       ) : null
                   }
@@ -224,7 +197,7 @@ const SecuritySettings = () => {
                     }
                   }}>
                     <Modal.Header closeButton>
-                      <Modal.Title>Google Authentication</Modal.Title>
+                      <Modal.Title>{t('google_authentication')}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
 
@@ -244,12 +217,11 @@ const SecuritySettings = () => {
                           <form action="" style={{}}>
                             <div class="form-group">
                               <div class="form-group">
-                                {/* <label for="inputOtp" className='mb-1'> OTP</label> */}
-                                {/* <input type="text" class="form-control" id="inputOtp" placeholder="Enter OTP" onChange={(e) => setOtp(e.target.value)} /> */}
+          
                                 <OtpInput
-                                  inputStyle = "auth_style"
+                                  inputStyle="auth_style"
                                   value={otp}
-                                  onChange={(e)=>setOtp(e)}
+                                  onChange={(e) => setOtp(e)}
                                   numInputs={6}
                                   isInputNum={true}
                                   separator={<span>&nbsp;</span>}
@@ -258,19 +230,15 @@ const SecuritySettings = () => {
                               <button type="button" class="btn btn-outline-success btn-dim btn-block" onClick={() => {
                                 axios.post(`${BASE_URL}/generateauthtoken`, { email: email, token: otp }).then((resp) => {
                                   if (resp.data.status == 1) {
-                                    toast.success("Verified Succesfully. 2FA Activated")
-                                    // swal(`Verified Succesfully.`, "Welcome", "success");
+                                    toast.success(`${t('2fa_alert_message_sussesfully')}`)
+                                   
                                     navigate("/home")
                                   } else {
-                                    toast.error("Incorrect OTP")
-                                    // swal(
-                                    //   "Incorrect Credentials",
-                                    //   "Please Enter Right Credentials",
-                                    //   "error"
-                                    // );
+                                    toast.error(`${t('incorrect_otp')}`)
+                                   
                                   }
                                 })
-                              }}>Verify</button>
+                              }}>{t('verify')}</button>
                             </div>
                           </form>
                         </div>
@@ -297,7 +265,7 @@ const SecuritySettings = () => {
                     handleClose1()
                   }}>
                     <Modal.Header closeButton>
-                      <Modal.Title>Google Authentication</Modal.Title>
+                      <Modal.Title>{t('google_authentication')}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                       <div className='row d-flex justify-content-around flex-row align-items-center py-2'>
@@ -306,12 +274,10 @@ const SecuritySettings = () => {
                           <form action="" style={{}}>
                             <div className="form-group">
                               <div className="form-group">
-                                {/* <label for="inputOtp">Enter OTP to disable 2FA</label> */}
-                                {/* <input type="text" class="form-control" id="inputOtp" placeholder="Enter OTP" onChange={(e) => setOtpD(e.target.value)} /> */}
                                 <OtpInput
-                                  inputStyle = "auth_style"
+                                  inputStyle="auth_style"
                                   value={otpD}
-                                  onChange={(e)=>setOtpD(e)}
+                                  onChange={(e) => setOtpD(e)}
                                   numInputs={6}
                                   isInputNum={true}
                                   separator={<span>&nbsp;</span>}
@@ -320,8 +286,7 @@ const SecuritySettings = () => {
                               <button type="button" class="btn btn-outline-danger btn-dim btn-block" onClick={() => {
                                 axios.post(`${BASE_URL}/generateauthtoken`, { email: email, token2: otpD }).then((resp) => {
                                   if (resp.data.status == 1) {
-                                    toast.success("2FA Disabled Successfully")
-                                    // swal(`2FA Disabled Successfully.`, "", "success")
+                                    toast.success(`${t('2fa_disabled_successfully')}`)
                                     if (Object?.values(userInfo)?.length > 0) {
                                       handleClose1()
                                       const obj = { ...userInfo }
@@ -329,15 +294,10 @@ const SecuritySettings = () => {
                                       dispatch(setUserInfo({ userInfo: obj }))
                                     }
                                   } else {
-                                    toast.error("Incorrect Credentials")
-                                    // swal(
-                                    //   "Incorrect Credentials",
-                                    //   "Please Enter Right Credentials",
-                                    //   "error"
-                                    // );
+                                    toast.error(`${t('Incorrect_Credentials')}`)
                                   }
                                 })
-                              }}>Disable</button>
+                              }}>{t('disable')}</button>
                             </div>
                           </form>
                         </div>
@@ -347,13 +307,11 @@ const SecuritySettings = () => {
                       <Button variant="success" onClick={() => {
                         handleClose1()
                       }}>
-                        Close
+                        {t('close')}
                       </Button>
                     </Modal.Footer>
 
                   </Modal>
-
-
                 </div>
               </div>
             </div>

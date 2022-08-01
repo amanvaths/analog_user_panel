@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 // import { useSelec/tor} from "react-redux";
 import { Toaster } from 'react-hot-toast';
+import axios from "axios";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -41,16 +42,12 @@ import tEs from '../src/locales/es/translation.json';
 import tAr from '../src/locales/ar/translation.json';
 import tCh from '../src/locales/ch/translation.json';
 import tFr from '../src/locales/fr/translation.json';
-
-// const setLang = ()=>{
-//   const newLang = localStorage.getItem("lang")
-//   console.log(newLang, 'NEW LANG');
-//   return newLang
-// }
+// import { BASE_URL } from "./Api_connection/config";
 
 
 
 function App(props) {
+
   const { userInfo, user, selectedLanguage } = useSelector((state) => state.user.value)
   i18n
     .use(initReactI18next)
@@ -75,99 +72,7 @@ function App(props) {
          ch: {
           translation: tCh
          },
-
        }
-      //  {
-      //    en: {translation: tEn}
-      //   },
-      //    es: {
-      //    translation: tEs
-      //  {
-      //       "available_balance": "SALDO DISPONIBLE",
-      //       "dashboard": "Tablero",
-      //       "my_account": "Mi cuenta",
-      //       "wallets": "Carteras",
-      //       "buy_sell": "Compra venta",
-      //       "affiliate": "Afiliado",
-      //       "team_member": "Miembro del equipo",
-      //       "news_pr": "Noticias y relaciones públicas",
-      //       "offers": "Ofertas",
-      //       "blockchain": "cadena de bloques",
-      //       "docs": "documentos",
-      //       "roadmap": "Mapa vial",
-      //       "crypto_accounts": "CUENTAS CRIPTO",
-      //       "usdt_wallet": "CARTERA",
-      //       "support": "Apoyo",
-      //       "energy": "Energía"
-      //     }
-      //  },
-      //    fr: {
-      //      translation: tFr
-      //  {
-      //       "available_balance": "SOLDE DISPONIBLE",
-      //       "dashboard": "Tableau de bord",
-      //       "my_account": "Mon compte",
-      //       "wallets": "portefeuilles",
-      //       "buy_sell": "Acheter vendre",
-      //       "affiliate": "Affilier",
-      //       "team_member": "Membre de l'équipe",
-      //       "news_pr": "Actualités et RP",
-      //       "offers": "Des offres",
-      //       "blockchain": "Chaîne de blocs",
-      //       "docs": "Documents",
-      //       "roadmap": "Feuille de route",
-      //       "crypto_accounts": "COMPTES CRYPTO",
-      //       "usdt_wallet": "PORTE MONNAIE",
-      //       "support": "Soutien",
-      //       "energy": "Énergie"
-        //    }
-        //  },
-        //  ar: {
-      //     translation: {
-      //       "available_balance": "الرصيد المتوفر",
-      //       "dashboard": "لوحة القيادة",
-      //       "my_account": "حسابي",
-      //       "wallets": "محافظ",
-      //       "buy_sell": "شراء بيع",
-      //       "affiliate": "شركة تابعة",
-      //       "team_member": "أعضاء الفريق",
-      //       "news_pr": "الأخبار والعلاقات العامة",
-      //       "offers": "عروض",
-      //       "blockchain": "بلوكشين",
-      //       "docs": "المستندات",
-      //       "roadmap": "خريطة الطريق",
-      //       "crypto_accounts": "حسابات CRYPTO",
-      //       "usdt_wallet": "محفظة جيب",
-      //       "support": "الدعم",
-      //       "energy": "طاقة"
-      //     }
-      //   },
-      //   ch: {
-      //     translation: {
-      //       "available_balance": "可用余额",
-      //       "dashboard": "仪表板",
-      //       "my_account": "我的帐户",
-      //       "wallets": "钱包",
-      //       "buy_sell": "买卖",
-      //       "affiliate": "附属公司",
-      //       "team_member": "队员",
-      //       "news_pr": "新闻与公关",
-      //       "offers": "优惠",
-      //       "blockchain": "区块链",
-      //       "docs": "文档",
-      //       "roadmap": "路线图",
-      //       "crypto_accounts": "加密账户",
-      //       "usdt_wallet": "钱包",
-      //       "support": "支持",
-      //       "energy": "活力"
-      //     }
-      //   }
-      // }
-
-      // backend:{
-      //   // loadPath: '../src/locales/{{lng}}/translation.json',
-      //   // addPath: '../src/locales/add/{{lng}}/translation.json'
-      // }
     })
   console.log(userInfo?.webPush_Public_Key, "KEY");
   console.log(user?.email, "email");

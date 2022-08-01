@@ -4,9 +4,9 @@ import { isIP } from 'is-ip'
 import { BASE_URL } from '../Api_connection/config'
 import { useSelector } from "react-redux";
 import toast from 'react-hot-toast'
-import { profileMenu } from "../Api_connection/ApiFunction";
 import { Link } from "react-router-dom";
 import SettingButton from "./SettingButton";
+import { useTranslation } from "react-i18next";
 
 
 
@@ -16,6 +16,7 @@ const IPwhiteListing = () => {
     const [whiteIP, setWhiteIP] = useState([])
     const [ip, setIp] = useState('')
     const [ipError, setipError] = useState(false)
+    const { t } = useTranslation();
     
 
     const getCurrentAPI = async()=>{
@@ -40,7 +41,7 @@ const IPwhiteListing = () => {
         try {
             const data = await axios.post(`${BASE_URL}/add_whitelisted_ip`, { email: email, ip: ip })
             if(data.data.status == 1){
-                toast.success("IP Added")
+                toast.success(`${t('ip_added')}`)
             }
             getWhiteIP()
         } catch (error) {
@@ -53,7 +54,7 @@ const IPwhiteListing = () => {
             const data = await axios.post(`${BASE_URL}/removeWhiteListedIp`, { _id: id, email : email })
             // console.log(data, "delete Data");
             if(data.data.status == 1){
-                    toast.success("IP Removed")
+                    toast.success(t('ip_removed'))
             }
             getWhiteIP()
         } catch (error) {
@@ -81,52 +82,37 @@ const IPwhiteListing = () => {
 
                     <div className="nk-block-between">
                         <div className="nk-block-head-content">
-                            <h4 className="nk-block-title">Whitelisted IP</h4>
+                            <h4 className="nk-block-title">{t('whitelisted_ip')}</h4>
                             <div className="nk-block-des">
-                                {/* <p> {` Here is your last ${logData.length} login activities log.`}
-
-                                      <span className="text-soft">
-
-                                      </span>
-                                    </p> */}
                             </div>
                         </div>
 
                         <div className="nk-block-head-content align-self-start d-lg-none">
-                            {/* <b
-                                
-                                className="toggle btn btn-icon btn-trigger mt-n1"
-                                data-target="userAside"
-                                id = "toggleBtn"
-                            >
-                                <em className="icon ni ni-menu-alt-r" onClick={profileMenu }></em>
-                            </b> */}
                              <SettingButton></SettingButton>
                         </div>
                     </div>
-
                     <div className="row">
                         <div className="col-6">
                             <div className="form-group">
-                                <label className="form-label" for="default-01">IP Address</label>
+                                <label className="form-label" for="default-01">{t('ip_address')}</label>
                                 <div className="form-control-wrap w-50">
                                     <input type="text" className="form-control" id="default-01"
-                                        placeholder="Enter IP Address" style={{ fontSize: "13px" }}
+                                        placeholder={`${t('enter_ip_address')}`} style={{ fontSize: "13px" }}
                                         value={ip}
                                         onChange={(e) => setIp(e.target.value)} />
                                 </div>
                                 {
-                                    ipError == true ? <p style={{ color: "red", fontSize: "13px" }}>Enter correct IP</p> : null
+                                    ipError == true ? <p style={{ color: "red", fontSize: "13px" }}>{t('enter_correct_ip')}</p> : null
                                 }
 
                             </div>
                         </div>
                         <div className="col-6 d-flex pt-4 justify-content-end">
                             <div className="mr-3">
-                                <button href="#" className="btn btn-dim btn-light btn-sm" onClick={()=> getCurrentAPI()}>Add Current IP</button>
+                                <button href="#" className="btn btn-dim btn-light btn-sm" onClick={()=> getCurrentAPI()}>{t('add_current_ip')}</button>
                             </div>
                             <div>
-                                <Link to="" className="btn btn-dim btn-light btn-sm" onClick={() => handelSubmit()}>Add IP</Link>
+                                <Link to="" className="btn btn-dim btn-light btn-sm" onClick={() => handelSubmit()}>{t('add_ip')}</Link>
                             </div>
 
 
@@ -145,7 +131,7 @@ const IPwhiteListing = () => {
                                     </th>
 
                                     <th className="tb-col-action">
-                                        <span>Actions</span>
+                                        <span>{t('actions')}</span>
                                     </th>
                                     <th className="">                                        
                                     </th>
@@ -162,7 +148,7 @@ const IPwhiteListing = () => {
                                                 <td className="tb-col-action">
                                                     {/* <span className="sub-text">{a.toDateString()} {a.toLocaleTimeString()}</span> */}
 
-                                                    <button className="btn btn-dim btn-outline-success btn-sm" onClick={() => deleteWhiteIP(element._id)}>Delete</button>
+                                                    <button className="btn btn-dim btn-outline-success btn-sm" onClick={() => deleteWhiteIP(element._id)}>{t('delete')}</button>
                                                 </td>
                                                 <td className="tb-col-action">{ }</td>
                                             </tr>

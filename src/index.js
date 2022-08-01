@@ -9,12 +9,18 @@ import {store} from './redux/store/user';
 import {subscribeUser} from './web-push.config';
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
+// import axios from 'axios';
+// import { BASE_URL } from "./Api_connection/config";
+
+
 serviceWorker.register();
 let persistor = persistStore(store);
 // console.log(persistor, "persistor");
 const loadingMarkup = (
   <div></div>
 )
+// axios.defaults.baseURL = `${BASE_URL}`
+// axios.defaults.headers.common['Accept-Language'] = "fr";
 ReactDOM.render(
   <Suspense fallback={loadingMarkup}>
   <React.StrictMode>

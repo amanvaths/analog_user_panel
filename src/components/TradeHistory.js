@@ -4,6 +4,7 @@ import { BASE_URL } from "../Api_connection/config";
 import "./tradehistory.css";
 import { Triangle } from "react-loader-spinner";
 import { useSelector } from "react-redux";
+import { t } from "i18next";
 
 export default function TradeHistory() {
   const [history, setHistory] = useState([]);
@@ -26,18 +27,18 @@ export default function TradeHistory() {
   return (
     <div className="card mt-1">
       <div className="card-header bg-teal-dim font-weight-bold">
-        TRADE HISTORY
+        {t('trade_history')}
       </div>
       <div className="card-body table-responsive  p-0">
         <table className="table  mb-0">
           <div style={{ display: "contents" }}>
             <thead>
               <tr className="historyorder">
-                <th style={{ width: "20%" }}>Total Analog</th>
-                <th style={{ width: "20%" }}>Total Amount Pay</th>
-                <th style={{ width: "20%" }}>Buying Price</th>
-                <th style={{ width: "20%" }}>Pool</th>
-                <th style={{ width: "20%" }}>Time</th>
+                <th style={{ width: "20%" }}>{t('total')} Analog</th>
+                <th style={{ width: "20%" }}>{t('total_amount_pay')}</th>
+                <th style={{ width: "20%" }}>{t('buying_price')}</th>
+                <th style={{ width: "20%" }}>{t('pool')}</th>
+                <th style={{ width: "20%" }}>{t('time')}</th>
               </tr>
             </thead>
             <div

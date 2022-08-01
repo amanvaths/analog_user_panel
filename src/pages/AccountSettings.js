@@ -53,7 +53,7 @@ const AccountSettings = () => {
   useEffect( () => {
    go()
   }, [])
-
+console.log(logData, "LLOGDATA");
 
   return (
     <>
@@ -83,8 +83,9 @@ const AccountSettings = () => {
                                 <div className="nk-block-head-content">
                                   <h4 className="nk-block-title active" >{t('login_activity')}</h4>
                                   <div className="nk-block-des">
-                                    <p> {` Here is your last ${logData.length} login activities log.`}
-                                      {/* {t('login_activity_tagline')} */}
+                                    <p>
+                                       {/* {` Here is your last ${logData.length} login activities log.`} */}
+                                      {t('login_activity_tagline',{logData})}
                                       <span className="text-soft">
 
                                       </span>

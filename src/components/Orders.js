@@ -11,6 +11,7 @@ import toast from 'react-hot-toast'
 import { Triangle } from "react-loader-spinner";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { setBuyLoader, setTotalAna } from "../redux/reducer/user";
+import { t } from "i18next";
 
 export default function Orders(props) {
   const dispatch = useDispatch();
@@ -62,20 +63,7 @@ export default function Orders(props) {
       ? 5000
       : (5000 / oneUsdPrice)?.toFixed(2);
 
-  //  GetCoinData
-  // const getData = async () => {
-  //   try {
-  //     const res = await axios.post(`${BASE_URL}/getCoinData`, {
-  //       currency: userInfo?.currency_preference,
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  //  GetWalletData
-
-  console.log(userInfo?.currency_preference, "::REACT PERSISTENT CURRENCY PREFRENCE");
+  // console.log(userInfo?.currency_preference, "::REACT PERSISTENT CURRENCY PREFRENCE");
 
   const getWalletData = async () => {
     try {
@@ -134,7 +122,7 @@ export default function Orders(props) {
       .then((res) => {
         console.log(res.data, "RESULT");
         if (res.data.status == true) {
-          console.log(res.data.totalAna, "ANA BALANCE");
+          // console.log(res.data.totalAna, "ANA BALANCE");
           dispatch(setTotalAna({totalAna: res.data.totalAna}))
           toast.success(res.data.message)
           // swal(`${res.data.message}`, "", "success");
@@ -185,14 +173,14 @@ export default function Orders(props) {
     });
     swalWithBootstrapButtons
       .fire({
-        title: "Are you sure?",
-        text: `Buying Amount : ${Number(total)?.toFixed(2)
+        title: t('are_you_sure'),
+        text: `${t('buying_amount')} : ${Number(total)?.toFixed(2)
           
-        } , Quantity : ${ammount?.toFixed(2)}`,
+        } , ${t('quantity')} : ${ammount?.toFixed(2)}`,
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Yes, confirm it!",
-        cancelButtonText: "No, cancel!",
+        confirmButtonText: t('yes_confirm_it'),
+        cancelButtonText: t('no_cancel'),
         reverseButtons: true,
         
       })
@@ -201,7 +189,7 @@ export default function Orders(props) {
           dispatch(setBuyLoader({ buyloader: true }));
           TotalAmt();
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-          toast.error("Transaction Cancelled")
+          toast.error(t('transaction_cancelled'))
           // swalWithBootstrapButtons.fire("Cancelled", "", "error");
         }
       });
@@ -211,7 +199,7 @@ export default function Orders(props) {
     <div className="order">
       <div class="card">
         <div class="card-header bg-teal-dim justify-content-between align-items-center">
-          <span class="card-title font-weight-bold"> ORDER</span>
+          <span class="card-title font-weight-bold"> {t('order')}</span>
         </div>
         <div class="card-body table-responsive p-0">
           <table class="table table-hover mb-0">
@@ -222,25 +210,25 @@ export default function Orders(props) {
                     className="OrderHistoryHedding text-success"
                     style={{ width: "25%", padding: "7px 7px" }}
                   >
-                    Total Analog
+                    {t('total')} Analog
                   </th>
                   <th
                     className="OrderHistoryHedding text-success"
                     style={{ width: "25%", padding: "7px 7px" }}
                   >
-                    Total Amount Pay
+                   {t('total_amount_pay')}
                   </th>
                   <th
                     className="OrderHistoryHedding text-success"
                     style={{ width: "25%", padding: "7px 7px" }}
                   >
-                    Buying Price
+                   {t('buying_price')}
                   </th>
                   <th
                     className="OrderHistoryHedding text-success"
                     style={{ width: "25%", padding: "7px 7px" }}
                   >
-                    Pool
+                    {t('pool')}
                   </th>
                   {/* <th>Time</th> */}
                 </tr>
@@ -370,7 +358,7 @@ export default function Orders(props) {
               // margin: "4px 0px",
             }}
           >
-            BUY
+            {t('buy')}
           </div>
         </nav>
         <div
@@ -398,9 +386,9 @@ export default function Orders(props) {
                       borderColor: " rgb(202, 202, 204)",
                     }}
                   >
-                    AMOUNT
+                    {t('amount')}
                     <br />
-                    Qty
+                    {t('quentity')}
                   </span>
                 </div>
                 <input
@@ -457,7 +445,7 @@ export default function Orders(props) {
                   display: "flex",
                 }}
               >
-                Minimum Buying Amount{" "}
+                {t('minimum_buying_amount')}{" "}
                 <span style={{ color: "green", marginLeft: "5px" }}>
                   {MinAmount}{" "}
                 </span>
@@ -472,9 +460,9 @@ export default function Orders(props) {
                       borderColor: " rgb(202, 202, 204)",
                     }}
                   >
-                    BUYING
+                    {t('buying')}
                     <br />
-                    AMOUNT
+                    {t('amount')}
                   </span>
                 </div>
                 <input
@@ -512,54 +500,6 @@ export default function Orders(props) {
                 />
               </div>
               <div style={{ margin: "30px 0px" }}></div>
-              {/* 
-                 <div>
-                  {walletbalance && userInfo?.currency_preference ? (
-                    <MultiRangeSlider
-                   
-                      min={
-                        oneUsdPrice == ""
-                          ? 0
-                          : userInfo?.currency_preference == "inr"
-                          ? 5000
-                          : 5000 / oneUsdPrice
-                      }
-                      symbol={
-                        userInfo?.currency_preference == "usd" ? "USDT" : "INRX"
-                      }
-                      fixedmax={
-                        oneUsdPrice == ""
-                          ? 0
-                          : userInfo?.currency_preference == "usd"
-                          ? Number(balance)
-                          : Number(balance * oneUsdPrice)
-                      }
-                  
-                      max={
-                        oneUsdPrice == ""
-                          ? 0
-                          : userInfo?.currency_preference == "usd"
-                          ? Number(balance)
-                          : Number(balance * oneUsdPrice)
-                      }
-                      
-                      onChange={({ min, max, symbol }) => {
-                        console.log(`min = ${min}, max = ${max}`);
-                        if (userInfo?.currency_preference == "inr") {
-                          setAmmount(atprice && max / atprice);
-                          setTotal(max);
-                        } else if (userInfo?.currency_preference == "usd") {
-                          setAmmount(
-                            atprice &&
-                              oneUsdPrice &&
-                              max / (atprice / oneUsdPrice)
-                          );
-                          setTotal(max);
-                        }
-                      }}
-                    />
-                  ) : null}
-                </div>  */}
 
               <input
                 type="range"
