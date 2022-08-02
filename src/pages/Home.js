@@ -885,12 +885,8 @@ const Home = () => {
               </div>
             </div>
             <Footer />
-          </div>
-
-          < Mobile_Footer_Menu></Mobile_Footer_Menu>     
-        
-        </div>
-       
+          </div>        
+        </div>       
       </div>
       
       
