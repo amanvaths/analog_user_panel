@@ -37,7 +37,7 @@ const Getpresale = (props) => {
   }
 
   return (
-    <div className={`col-sm-12 col-md-6`}>
+    <div className={`col-sm-12 col-md-4`}>
 
       <div className="kanban-board-header kanban-success shadow-sm">
         <div className="text-teal h-100">
