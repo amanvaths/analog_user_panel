@@ -373,13 +373,24 @@ function Menu() {
                   </span>
                 </div>
               </div>
+
+             
+
               <div className="nk-sidebar-widget my-2">
-              <hr/>
-              <h6 class="mb-2">Color Mode</h6>
-                <div class="nk-opt-list">            
-                  <div class="nk-opt-item">
+            
+                <h6 class="overline-title-alt text-teal fs-6 mb-2">Color Mode</h6>
+                <hr/>               
+                <span> Light </span>
+                <label class="switch">
+                    <input type="checkbox" name=""/>
+                    <span class="slider round"></span>
+                </label>
+                <span class="text-dark"> Dark</span>
+
+                {/* <div class="nk-opt-list">            
+                  <div class="nk-opt-item active">
                     <Link to=""
-                      className="" onClick={() => {
+                      className="active" onClick={() => {
                         dispatch(setTheme({ theme: 1 }))
                         mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")
                       }}>
@@ -389,10 +400,10 @@ function Menu() {
                       <span class="nk-opt-item-name">Dark </span>
                     </Link> 
                   </div>
-                  <div class="nk-opt-item">
-                    <Link to="" className="" onClick={() => {
+                  <div class="nk-opt-item active">
+                    <Link to="" className="active" onClick={() => {
                       dispatch(setTheme({ theme: 0 }))
-                      mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")
+                      mode == 0 ? localStorage.setItem("theme", "1") : localStorage.setItem("theme", "1")
                     }}> 
                     <span class="nk-opt-item-bg is-light">
                       <span class="bg-light text-dark"></span>
@@ -400,7 +411,7 @@ function Menu() {
                       <span class="nk-opt-item-name">Light </span>
                     </Link>                    
                   </div>
-                </div>
+                </div> */}
               </div>
            
               <div className="nk-sidebar-footer sidebar-bg">

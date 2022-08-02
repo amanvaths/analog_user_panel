@@ -26,6 +26,7 @@ import { useTranslation } from "react-i18next";
 
 
 
+
 const Home = () => {
   const { user, userInfo, oneUsdPrice } = useSelector((state) => state.user.value);
   const email = user?.email;
@@ -268,6 +269,13 @@ const Home = () => {
                 })}
               </div>
             </div>
+            {/* <div class="card-carousel">
+              <div class="my-card">asas</div>
+              <div class="my-card"></div>
+              <div class="my-card"></div>
+              <div class="my-card"></div>
+              <div class="my-card"></div>            
+            </div> */}
             <div className="nk-content nk-content-fluid pt-0">
               <div className="container">
                 <div className="nk-content-body">
@@ -883,10 +891,9 @@ const Home = () => {
                 </div>
               </div>
             </div>
+            <Footer />
           </div>
-
-          <Footer />
-        </div>
+        </div>       
       </div>
       
       
@@ -915,6 +922,7 @@ const Home = () => {
       
       
     </div>
+    
     // </div>
   );
 };
