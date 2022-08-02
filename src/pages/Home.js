@@ -21,7 +21,7 @@ import { RWebShare } from "react-web-share";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useTranslation } from "react-i18next";
-import Mobile_Footer_Menu from "../components/mobile_footer_menu";
+
 
 
 
@@ -885,7 +885,7 @@ const Home = () => {
               </div>
             </div>
             <Footer />
-          </div>        
+          </div>
         </div>       
       </div>
       

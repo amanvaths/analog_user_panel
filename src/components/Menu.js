@@ -373,10 +373,21 @@ function Menu() {
                   </span>
                 </div>
               </div>
+
+             
+
               <div className="nk-sidebar-widget my-2">
-              <hr/>
-              <h6 class="mb-2">Color Mode</h6>
-                <div class="nk-opt-list">            
+            
+                <h6 class="overline-title-alt text-teal fs-6 mb-2">Color Mode</h6>
+                <hr/>               
+                <span> Light </span>
+                <label class="switch">
+                    <input type="checkbox" name=""/>
+                    <span class="slider round"></span>
+                </label>
+                <span class="text-dark"> Dark</span>
+
+                {/* <div class="nk-opt-list">            
                   <div class="nk-opt-item active">
                     <Link to=""
                       className="active" onClick={() => {
@@ -400,7 +411,7 @@ function Menu() {
                       <span class="nk-opt-item-name">Light </span>
                     </Link>                    
                   </div>
-                </div>
+                </div> */}
               </div>
            
               <div className="nk-sidebar-footer sidebar-bg">
