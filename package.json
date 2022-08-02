@@ -16,7 +16,7 @@
     "device-detector-js": "^3.0.3",
     "firebase": "^9.9.0",
     "i": "^0.3.7",
-    "i18next": "^21.8.14",
+    "i18next": "^21.8.16",
     "i18next-http-backend": "^1.4.1",
     "is-ip": "^4.0.0",
     "jquery": "^3.6.0",

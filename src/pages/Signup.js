@@ -423,7 +423,7 @@ const Signup = (props) => {
                 </form>
                 <div className="form-note-s2 pt-2 text-right">
                   {" "}
-                  Already have an account ? <Link class="text-teal" to="/login">Sign in</Link>
+                  Already have an account ? <Link class="text-teal" to="/login">Sign In</Link>
                 </div>
 
                 <div className="text-center pt-4 pb-3">
