@@ -1,4 +1,62 @@
 
+  
+.bottom-nav {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.8rem 0;
+  background-color: #F5F6FA;
+  z-index: 99;
+  will-change: transform;
+  transform: translateZ(0);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.24);
+}
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.3 em;
+  color: #222;
+}
+.bottom-nav-link {
+  display: flex;
+  flex-direction: column;
+}
+.bottom-nav .active {
+  color: #d32f2f;
+}
+
+
+
+/* 
+.mobile_footer_nav {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  background-color: #10ad83;
+}
+
+.mobile_footer_nav ul {
+  list-style: none;
+}
+
+.mobile_footer_nav ul li {
+  float: left;
+  padding: 20px 10px;
+}
+
+.mobile_footer_nav ul li a {
+  color: #fff;
+}
+
+.mobile_footer_nav ul li a:hover {
+  color: #96f6dc;
+} */
+
 .abc canvas+canvas {
   width:unset; 
   /* background:#333; */
@@ -70,6 +128,14 @@
   z-index: 0;
 }
 
+.dark-mode .bottom-nav {
+  background-color: #252a32;
+} 
+
+.dark-mode .bottom-nav-item {
+  color: #f1f5f8;
+}
+
 .dark-mode .hover_on_card:hover {
   background-color: #1f2b3a!important;
   border-color:#666!important;
@@ -119,6 +185,7 @@
 .nk-menu-footer .nk-menu-icon {
   color: #0fcf9b!important;
 }
+
 
 .min-height {
   min-height: 85vh;

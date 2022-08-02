@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { setUserInfo, logout, setTheme } from "../redux/reducer/user";
 import axios from "axios";
 import { BASE_URL, BASE_URL_2 } from "../Api_connection/config";
 import { setOneUsdPrice, setTotalAna, setLanguage } from "../redux/reducer/user";
@@ -23,6 +24,15 @@ function Menu() {
     window.location = location;
     window.location.reload();
   }
+
+  const mode = localStorage.getItem("theme")
+  if (mode == 1) {
+    var element = document.getElementById("myBody");
+    element.classList.add("dark-mode")
+  } else {
+    element = document.getElementById("myBody");
+    element.classList.remove("dark-mode")
+  }  
 
   const getData = async () => {
     try {
@@ -363,6 +373,35 @@ function Menu() {
                   </span>
                 </div>
               </div>
+              <div className="nk-sidebar-widget my-2">
+              <hr/>
+              <h6 class="mb-2">Color Mode</h6>
+                <div class="nk-opt-list">            
+                  <div class="nk-opt-item">
+                    {
+                      mode == 0 ? <Link to=""
+                        onClick={() => {
+                          dispatch(setTheme({ theme: 1 }))
+                          mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")
+                        }}>
+                        <span class="nk-opt-item-bg is-dark">
+                          <span class="bg-dark text-white">Dark</span>
+                        </span>
+                        {/* <span class="nk-opt-item-name">Dark </span> */}
+                        </Link> : <Link to="" onClick={() => {
+                          dispatch(setTheme({ theme: 0 }))
+                          mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")
+                        }}>
+                      <span class="nk-opt-item-bg is-light">
+                        <span class="bg-light text-black">Light</span>
+                      </span>
+                      {/* <span class="nk-opt-item-name">Light </span> */}
+                      </Link>
+                    }
+                  </div>
+                </div>
+              </div>
+           
               <div className="nk-sidebar-footer sidebar-bg">
                 <ul className="nk-menu nk-menu-footer">
                   <li className="nk-menu-item">

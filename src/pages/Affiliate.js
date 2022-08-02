@@ -218,16 +218,12 @@ const Affiliate = (props) => {
                                 filename={`Affiliate_List_Level_${level}.xls`}
                                 headers={headers}
                                 >   {t('export')} <BiExport/>
-                                </CSVLink>                               
+                                </CSVLink>                                                                
                               </div>
                           </div>
 
                         
-                        <Link
-                          to={'/Withdrawal'}
-                          className="btn btn-outline-warning mr-3"> 
-                          <span>Withdraw</span>
-                        </Link>   
+                       
                         
                         </div>
                       </div>

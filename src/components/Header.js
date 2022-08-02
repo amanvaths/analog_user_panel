@@ -45,14 +45,14 @@ const Header = () => {
 
    }
 
-  const mode = localStorage.getItem("theme")
-  if (mode == 1) {
-    var element = document.getElementById("myBody");
-    element.classList.add("dark-mode")
-  } else {
-    element = document.getElementById("myBody");
-    element.classList.remove("dark-mode")
-  }  
+  // const mode = localStorage.getItem("theme")
+  // if (mode == 1) {
+  //   var element = document.getElementById("myBody");
+  //   element.classList.add("dark-mode")
+  // } else {
+  //   element = document.getElementById("myBody");
+  //   element.classList.remove("dark-mode")
+  // }  
   
 
 
@@ -336,7 +336,7 @@ const Header = () => {
                             <span>Login Activity</span>
                           </Link>
                         </li> */}
-                        <li>
+                        {/* <li>
                           {
                             mode == 0 ? <Link to=""
                               onClick={() => {
@@ -353,7 +353,7 @@ const Header = () => {
                               <span className="mr-1">Light Mode</span>
                             </Link>
                           }
-                        </li>
+                        </li> */}
                       </ul>
                     </div>
                     <div className="dropdown-inner">
