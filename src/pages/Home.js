@@ -95,33 +95,35 @@ const Home = () => {
       // console.log(abortController, "ABORT");
       // abortController.abort();
       // abortController = new AbortController();
-      if(api == false){
-      setApi(true);
-      // console.log("called..........");
-      const res = await axios.post(`${BASE_URL}/buyChart`, { email: email});
-      const arr = res.data.data;
-      setApi(false)
-      arr.map((element, index) => {
-        total.push(element.total)
-        year.push(`${element.month}/${element.year}`)
-        // console.log(`${element.month}/${element.year}`, "element");
-      })
-      setChartAmt(total)
-      setChartLabel(year)
-    }else{
-      // console.log("cancelled..........");
-    }
+      if (api == false) {
+        setApi(true);
+        // console.log("called..........");
+        const res = await axios.post(`${BASE_URL}/buyChart`, { email: email });
+        const arr = res.data.data;
+        setApi(false)
+        arr.map((element, index) => {
+          total.push(element.total)
+          year.push(`${element.month}/${element.year}`)
+          // console.log(`${element.month}/${element.year}`, "element");
+        })
+        setChartAmt(total)
+        setChartLabel(year)
+      } else {
+        // console.log("cancelled..........");
+      }
       // controller.abort()
     } catch (error) {
       console.log(error);
     }
-   
+
   };
   // abortController.abort();
   const getPreSale = async () => {
     try {
-      const res = axios.get(`${BASE_URL}/getpresale`);
-      setData((await res).data.user_data);
+      const res = await axios.get(`${BASE_URL}/getpresale`);
+      const narr = res ? res.data ? [...res.data.user_data] : [] : [];
+      // console.log("mynbarr::",narr);
+      setData(narr.length > 0 ? narr : []);
     } catch (error) {
       console.log(error);
     }
@@ -182,24 +184,24 @@ const Home = () => {
     getUserWalletData();
     getPreSale();
     recentActivity();
-    reffetalData();   
-      chartData();  
-    
+    reffetalData();
+    chartData();
+
   }, []);
 
-//   useEffect(() => {
-//     console.log(firebase, "::OBJ");
-// // const initMessaging = firebase.messaging();
+  //   useEffect(() => {
+  //     console.log(firebase, "::OBJ");
+  // // const initMessaging = firebase.messaging();
 
-//     const messaging = firebase.messaging();
-//     messaging.requestPermission().then(()=>{
-//       return messaging.getToken()
-//     }).then(token=>{
-//       console.log(token, "::TOKEN FIREBASE");
-//     }).catch(error=> {
-//       console.log(error);
-//     })
-//   }, []);
+  //     const messaging = firebase.messaging();
+  //     messaging.requestPermission().then(()=>{
+  //       return messaging.getToken()
+  //     }).then(token=>{
+  //       console.log(token, "::TOKEN FIREBASE");
+  //     }).catch(error=> {
+  //       console.log(error);
+  //     })
+  //   }, []);
 
   const responsive = {
     superLargeDesktop: {
@@ -242,21 +244,21 @@ const Home = () => {
                     <div class="carousel-item active"> <img src="images/slides/2.gif" class="d-block w-100" alt="carousel" />
                     </div>
                     <div class="carousel-item"> <img src="images/slides/1.png" class="d-block w-100"
-                      alt="carousel" /> 
+                      alt="carousel" />
                     </div>
-                  </div> 
+                  </div>
                   <Link class="carousel-control-prev" to="#carouselExConInd" role="button" data-bs-slide="prev"> <span
                     class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
                   </Link> <Link class="carousel-control-next" to="#carouselExConInd" role="button" data-bs-slide="next"> <span
                     class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span> </Link>
                 </div>
-              
+
               </div>
             </div>
             {/* Add Slide small card */}
             <div className="container">
               <div className="row g-3 mt-4">
-                {data.map((data) => {
+                {data.length > 0 ? data.map((data) => {
                   return (
                     <Getpresale
                       levelname={data.levelname}
@@ -264,9 +266,11 @@ const Home = () => {
                       coinQty={data.coinquantity}
                       duration={data.duration}
                       persent={data.persentsold}
+                      startBlock={data.presalestart}
+                      endBlock={data.presaleend}
                     />
                   );
-                })}
+                }) : null}
               </div>
             </div>
             {/* <div class="card-carousel">
@@ -299,7 +303,7 @@ const Home = () => {
                               <div className="nk-wg7">
                                 <div className="nk-wg7-stats">
                                   <div className="nk-wg7-title">
-                                   {t('total_analog_buy')}
+                                    {t('total_analog_buy')}
                                   </div>
                                   <div className="number-lg amount text-white">
                                     {totalAnalogBuy.toFixed(3)}
@@ -361,19 +365,19 @@ const Home = () => {
                                     </h5>
                                   </div>
                                   <div className="nk-wgw-balance">
-                                    <div className="amount">  
-                                          {
-                                            inceptive 
-                                            ? <>
-                                              {
-                                                userInfo?.currency_preference == "inr"
+                                    <div className="amount">
+                                      {
+                                        inceptive
+                                          ? <>
+                                            {
+                                              userInfo?.currency_preference == "inr"
                                                 ? (inceptive * oneUsdPrice).toFixed(3)
                                                 : inceptive.toFixed(3)
-                                              }
-                                              </>
-                                            : 0
-                                          }
-                                       <span className="currency currency-nio">
+                                            }
+                                          </>
+                                          : 0
+                                      }
+                                      <span className="currency currency-nio">
                                         {userInfo?.currency_preference == "inr"
                                           ? "INRX"
                                           : "USDT"}
@@ -402,19 +406,19 @@ const Home = () => {
                                   </div>
                                   <div className="nk-wgw-balance">
                                     <div className="amount">
-                                   
-                                       {
-                                            airdrop 
-                                            ? <>
-                                              {
-                                                userInfo?.currency_preference == "inr"
+
+                                      {
+                                        airdrop
+                                          ? <>
+                                            {
+                                              userInfo?.currency_preference == "inr"
                                                 ? (airdrop * oneUsdPrice).toFixed(3)
-                                                : airdrop?.toFixed(3) 
-                                              }
-                                              </>
-                                            : 0
-                                          }                                      
-                                      
+                                                : airdrop?.toFixed(3)
+                                            }
+                                          </>
+                                          : 0
+                                      }
+
                                       <span className="currency currency-btc">
                                         {userInfo?.currency_preference == "inr"
                                           ? "INRX"
@@ -696,7 +700,7 @@ const Home = () => {
                       </div>
                       <div className="card card-bordered">
                         <div className="card-inner">
-                           
+
                           <div className="nk-ck3">
                             {/* <canvas
                               className="chart-account-summary"
@@ -873,7 +877,7 @@ const Home = () => {
                           <div className="nk-block-content-head px-lg-4">
                             <h5>{t('we_are_here_to_help_you')}</h5>
                             <p className="text-soft">
-                             {t('ask_for_support_support')}
+                              {t('ask_for_support_support')}
                             </p>
                           </div>
                         </div>
@@ -895,9 +899,9 @@ const Home = () => {
           </div>
         </div>       
       </div>
-      
-      
-        <Modal
+
+
+      <Modal
         onHide={handleClose}
         show={show}
         size="lg"
@@ -906,21 +910,21 @@ const Home = () => {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-          INRX
+            INRX
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <h4>Ana</h4>
           <p>
-           {t('dash')}
+            {t('dash')}
           </p>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={()=> handleClose()}>Close</Button>
+          <Button onClick={() => handleClose()}>Close</Button>
         </Modal.Footer>
       </Modal>
-      
-      
+
+
     </div>
     
     // </div>

@@ -1,40 +1,94 @@
 import React, { useEffect, useState } from "react";
-//import ProgressBar from "@ramonak/react-progress-bar";
 import ProgressBar from "react-bootstrap/ProgressBar";
-// import Countdown from "react-countdown";
+import Countdown from "react-countdown";
 import { useTranslation, Trans } from "react-i18next";
+import web3 from 'web3'
 
 const Getpresale = (props) => {
-  const { levelname, coinQty, coinPrice, duration, persent } = props;
-  const [timer, setTimer] = useState({
-    days: "",
-    hour: "",
-    minute: "",
-    second: "",
-  });
+  const { levelname, coinQty, coinPrice, duration, persent, startBlock, endBlock } = props;
+  const [blockNumber, setBlockNumber] = useState(0)
+  const [blockTime, setBlockTime] = useState('')
+  const [sales, setSales] = useState('')
+  const [endTime, setEndTime] = useState(0)
   const { t } = useTranslation();
 
-  useEffect(() => {
-    countdowntimer();
-  }, []);
+  // console.log(endBlock,"ENdBLOCk");
 
-  function countdowntimer() {
+  var Web3 = new web3('https://rabbit.analog-rpc.com');
 
-    var se = 86400 * duration;
-    var x = setInterval(function () {
-      let days = Math.floor(se / 86400);
-      let hours = Math.floor((se % 86400) / 3600);
-      let minutes = Math.floor(((se % 86400) % 3600) / 60);
-      let seconds = Math.floor(((se % 86400) % 3600) % 60);
-      se--;
-      if (se == 0) {
-        clearInterval(x);
-        setTimer({ days: 0, hour: 0, minute: 0, second: 0 });
-      } else {
-        setTimer({ days: days, hour: hours, minute: minutes, second: seconds });
-      }
-    }, 1000);
+  const getblockNumber = async () => {
+    Web3.eth.getBlockNumber()
+      .then((data) => {
+        // setBlockNumber(data);
+        const a = endBlock - data;
+        const endTimeInSec = a * 5;
+        // end =  ;
+        console.log(endTimeInSec, endBlock, data, Number(endTimeInSec * 1000));
+        setEndTime(Number(endTimeInSec*1000));
+        const tt = setTimeout(() => {
+          updateTime();
+        }, 5000);
+
+      });
   }
+
+  function updateTime() {
+    getblockNumber();
+  }
+  useEffect(() => {
+    if (endBlock) {
+      updateTime();
+    }
+  }, [])
+  //  var end;
+  // useEffect(() => {
+  //   if (endBlock) {
+  //     const a = endBlock - blockNumber;
+  //     const endTimeInSec = a * 5;
+  //     // end =  ;
+  //     setEndTime(endTimeInSec * 1000)
+  //     // Web3.eth.getBlock(blockNumber).then((data)=>{
+  //     //   setBlockTime(data?.timestamp)
+  //     //   v
+
+  //     // console.log(endTime, "ENdTIME");
+  //     // })
+  //   }
+  // }, [blockNumber, endBlock])
+
+
+  // const [timer, setTimer] = useState({
+  //   days: "",
+  //   hour: "",
+  //   minute: "",
+  //   second: "",
+  // });
+
+
+  useEffect(() => {
+    // countdowntimer();
+    console.log("endtime", endTime);
+    console.log(new Date(Number(endTime)).getDay() + " : " + new Date(Number(endTime)).getHours() + ": " + new Date(Number(endTime)).getMinutes() + " : " + new Date(Number(endTime)).getSeconds());
+
+  }, [endTime]);
+
+  // function countdowntimer() {
+
+  //   var se = Date.now() * duration;
+  //   var x = setInterval(function () {
+  //     let days = Math.floor(se / 86400);
+  //     let hours = Math.floor((se % 86400) / 3600);
+  //     let minutes = Math.floor(((se % 86400) % 3600) / 60);
+  //     let seconds = Math.floor(((se % 86400) % 3600) % 60);
+  //     se--;
+  //     if (se == 0) {
+  //       clearInterval(x);
+  //       setTimer({ days: 0, hour: 0, minute: 0, second: 0 });
+  //     } else {
+  //       setTimer({ days: days, hour: hours, minute: minutes, second: seconds });
+  //     }
+  //   }, 1000);
+  // }
 
   return (
     <div className={`col-sm-12 col-md-4`}>
@@ -46,11 +100,11 @@ const Getpresale = (props) => {
               <div className="nk-wg7-stats ">
                 <div className="nk-wg7-title is-dark text-work">
                   <Trans i18nKey="username"
-                    // defaults="<0>{levelname}</0>"
-                    // components={[<strong>dummyChild</strong>]}
-                    // values={{ levelname }}
+                  // defaults="<0>{levelname}</0>"
+                  // components={[<strong>dummyChild</strong>]}
+                  // values={{ levelname }}
                   >
-                    {{levelname}}
+                    {{ levelname }}
                   </Trans>
                   {/* {levelname} */}
                 </div>
@@ -89,7 +143,8 @@ const Getpresale = (props) => {
                 className="number text-dark countdown"
                 style={{ display: "flex", justifyContent: "end" }}
               >
-                {timer.days}:{timer.hour}:{timer.minute}:{timer.second}
+                {/* {new Date(Number(endTime)).getDay() + " : " + new Date(Number(endTime)).getHours() + ": " + new Date(Number(endTime)).getMinutes() + " : " + new Date(Number(endTime)).getSeconds()} */}
+                <Countdown date={Date.now() + endTime} />
               </div>
             </div>
           </div>

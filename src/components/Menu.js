@@ -18,7 +18,7 @@ function Menu() {
   const [usdPrice, setUsdPrice] = useState('')
   const [walletBalance, setWalletBalance] = useState(0)
   const { t } = useTranslation();
-  console.log(selectedLanguage, "selected language");
+  // console.log(selectedLanguage, "selected language");
 
   function refreshPage(location) {
     window.location = location;
