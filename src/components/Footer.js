@@ -20,44 +20,41 @@ const Footer = ()=>{
                             </div>
                         </div>
                 </div>
-                
-                 {/* Menus only for mobile screen < 576 */}
                 <div class="container d-sm-none d-block">
                     <nav class="bottom-nav">
                         <div class="bottom-nav-item">
-                            <div class="bottom-nav-link">
-                            <i class="icon ni ni-dashboard"></i>
-                            <span class="d-none">Dashboard</span>
-                            </div>
+                            <Link to="/home"  class="bottom-nav-link">
+                                <i class="icon ni ni-dashboard"></i>
+                                <span class="d-none">{t('dashboard')}</span>
+                            </Link>
                         </div>
                         <div class="bottom-nav-item">
-                            <div class="bottom-nav-link">
-                            <i class="icon ni ni-user-c"></i>
-                            <span class="d-none">My Account</span>
-                            </div>
+                            <Link to="/accountSettings"  class="bottom-nav-link">
+                                <i class="icon ni ni-user-c"></i>
+                                <span class="d-none">{t('my_account')}</span>
+                            </Link>
                         </div>
                         <div class="bottom-nav-item">
-                            <div class="bottom-nav-link">
-                            <i class="icon ni ni-wallet-alt"></i>
-                            <span class="d-none">Wallets</span>
-                            </div>
+                            <Link to="/wallet" class="bottom-nav-link">
+                                <i class="icon ni ni-wallet-alt"></i>
+                                <span class="d-none">{t('wallets')}</span>
+                            </Link>
                         </div>
                         
                         <div class="bottom-nav-item">
-                            <div class="bottom-nav-link">
-                            <i class="icon ni ni-coins"></i>
-                            <span class="d-none">   Buy / Sell</span>
-                            </div>
+                            <Link to="/buysell" class="bottom-nav-link">
+                                <i class="icon ni ni-coins"></i>
+                                <span class="d-none">{t('buy_sell')}</span>
+                            </Link>
                         </div>
                         <div class="bottom-nav-item">
-                            <div class="bottom-nav-link">
-                            <i class="icon ni ni-user-list"></i>
-                            <span class="d-none">Affiliate</span>
-                            </div>
+                            <Link to="/Affiliate"  class="bottom-nav-link">
+                                <i class="icon ni ni-user-list"></i>
+                                <span class="d-none"> {t('affiliate')} </span>
+                            </Link>
                         </div>
                     </nav>
-                </div> 
-   
+                </div>
            </>
        )
    

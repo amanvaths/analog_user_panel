@@ -148,13 +148,13 @@ const PersonalInfo = () => {
             </div>
           </div>
         </div>
-        <div className="card nk-block">
-          <div className="nk-data data-list">
+        <div className="card nk-block bg-transparent border-0">
+          <div className="nk-data data-list mb-4 bg-white border rounded pb-4">
             <div className="data-head kanban-board-header kanban-success bg-lighter rounded-0">
               <span className="overline-title">{t('basics')}</span>
             </div>
             {/* -------------- */}
-            <div className="row mx-auto mt-3 pb-3">
+            <div className="row mx-auto mt-3 pb-3 px-2">
               <div className="col-4">
                 <div className="">
                   <span className="data-label">{t('user_name')}</span>
@@ -190,7 +190,7 @@ const PersonalInfo = () => {
                 </div>
               </div>
             </div>
-            <div className="row mx-auto mt-3 pb-3">
+            <div className="row mx-auto mt-3 pb-3 px-2">
               <div className="col-4">
                 <div className="">
                   <span className="data-label">{t('email')}</span>
@@ -207,7 +207,7 @@ const PersonalInfo = () => {
                 </div>
               </div>
             </div>
-            <div className="row mx-auto mt-3">
+            <div className="row mx-auto mt-3 pb-3 px-2">
               <div className="col-4 ">
                 <div className="">
                   <span className="data-label">{t('phone_number')}</span>
@@ -253,13 +253,13 @@ const PersonalInfo = () => {
               </div>
             </div>
           </div>
-          <div className="nk-data data-list mt-3">
+          <div className="nk-data data-list mb-4 bg-white border rounded pb-4 mt-3">
             <div className="data-head kanban-board-header kanban-success bg-lighter rounded-0">
               <span className="overline-title">{t('currency_prefrences')}</span>
             </div>
             {
               showUser2 ? <>
-                <div className="data-item p-2 border-0">
+                <div className="data-item p-2 border-0 px-3">
                   <div className="data-col">
                     <span className="data-label">INRX</span>
                   </div>
@@ -283,7 +283,7 @@ const PersonalInfo = () => {
                     </div>
                   </div>
                 </div>
-                <div className="data-item p-2 border-0">
+                <div className="data-item p-2 border-0 px-3">
                   <div className="data-col">
                     <span className="data-label">USDT</span>
                   </div>
@@ -310,11 +310,11 @@ const PersonalInfo = () => {
               </> : null
             }
           </div>
-          <div className="nk-data data-list mt-2">
+          <div className="nk-data data-list mb-4 bg-white border rounded pb-4 mt-2">
             <div className="data-head kanban-board-header kanban-success bg-lighter rounded-0">
               <span className="overline-title">{t('referral')}</span>
             </div>
-            <div className="row mx-auto mt-3 pb-3">
+            <div className="row mx-auto mt-3 pb-3 px-2">
               <div className="col-4 ">
                 <div className="">
                   <span className="data-label">{t('referral')} {t('code')}</span>
