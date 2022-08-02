@@ -378,26 +378,27 @@ function Menu() {
               <h6 class="mb-2">Color Mode</h6>
                 <div class="nk-opt-list">            
                   <div class="nk-opt-item">
-                    {
-                      mode == 0 ? <Link to=""
-                        onClick={() => {
-                          dispatch(setTheme({ theme: 1 }))
-                          mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")
-                        }}>
-                        <span class="nk-opt-item-bg is-dark">
-                          <span class="bg-dark text-white">Dark</span>
-                        </span>
-                        {/* <span class="nk-opt-item-name">Dark </span> */}
-                        </Link> : <Link to="" onClick={() => {
-                          dispatch(setTheme({ theme: 0 }))
-                          mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")
-                        }}>
-                      <span class="nk-opt-item-bg is-light">
-                        <span class="bg-light text-black">Light</span>
+                    <Link to=""
+                      className="" onClick={() => {
+                        dispatch(setTheme({ theme: 1 }))
+                        mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")
+                      }}>
+                      <span class="nk-opt-item-bg is-dark">
+                        <span class="bg-dark text-white"></span>
                       </span>
-                      {/* <span class="nk-opt-item-name">Light </span> */}
-                      </Link>
-                    }
+                      <span class="nk-opt-item-name">Dark </span>
+                    </Link> 
+                  </div>
+                  <div class="nk-opt-item">
+                    <Link to="" className="" onClick={() => {
+                      dispatch(setTheme({ theme: 0 }))
+                      mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")
+                    }}> 
+                    <span class="nk-opt-item-bg is-light">
+                      <span class="bg-light text-dark"></span>
+                    </span>
+                      <span class="nk-opt-item-name">Light </span>
+                    </Link>                    
                   </div>
                 </div>
               </div>
