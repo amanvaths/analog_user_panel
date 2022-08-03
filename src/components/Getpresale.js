@@ -23,8 +23,8 @@ const Getpresale = (props) => {
         const a = endBlock - data;
         const endTimeInSec = a * 5;
         // end =  ;
-        console.log(endTimeInSec, endBlock, data, Number(endTimeInSec * 1000));
-        setEndTime(Number(endTimeInSec*1000));
+        // console.log(endTimeInSec, endBlock, data, Number(endTimeInSec * 1000));
+        setEndTime(Number(endTimeInSec * 1000));
         const tt = setTimeout(() => {
           updateTime();
         }, 5000);
@@ -65,12 +65,12 @@ const Getpresale = (props) => {
   // });
 
 
-  useEffect(() => {
-    // countdowntimer();
-    console.log("endtime", endTime);
-    console.log(new Date(Number(endTime)).getDay() + " : " + new Date(Number(endTime)).getHours() + ": " + new Date(Number(endTime)).getMinutes() + " : " + new Date(Number(endTime)).getSeconds());
+  // useEffect(() => {
+  //   // countdowntimer();
+  //   console.log("endtime", endTime);
+  //   console.log(new Date(Number(endTime)).getDay() + " : " + new Date(Number(endTime)).getHours() + ": " + new Date(Number(endTime)).getMinutes() + " : " + new Date(Number(endTime)).getSeconds());
 
-  }, [endTime]);
+  // }, [endTime]);
 
   // function countdowntimer() {
 
@@ -108,7 +108,9 @@ const Getpresale = (props) => {
                   </Trans>
                   {/* {levelname} */}
                 </div>
-                <div className="number-lg amount text-truncate text-wrap">{coinPrice}</div>
+                <div className="number-lg amount text-truncate text-wrap">{coinPrice}
+                 {/* <span style={{fontSize: "15px"}}>Inrx</span> */}
+                 </div>
               </div>
               <div
                 className="nk-wg7-stats-group mt-1"
@@ -119,6 +121,7 @@ const Getpresale = (props) => {
 
                   <div className="number-lg text-dark coinqty">
                     {coinQty}
+                    {/* <span style={{fontSize: "15px"}}> Volume</span> */}
                   </div>
                 </div>
                 <div
@@ -129,6 +132,12 @@ const Getpresale = (props) => {
                   <div className="number text-warning ">{duration} {t('days')}</div>
                 </div>
               </div>
+              {/* <div className="row">
+              <div className="col-3">Start Block</div>
+              <div className="col-6">Current Block</div>
+              <div className="col-3">End Block</div>
+              </div> */}
+             
               <div className="pt-4">
                 <ProgressBar
 
@@ -141,9 +150,7 @@ const Getpresale = (props) => {
 
               <div
                 className="number text-dark countdown"
-                style={{ display: "flex", justifyContent: "end" }}
-              >
-                {/* {new Date(Number(endTime)).getDay() + " : " + new Date(Number(endTime)).getHours() + ": " + new Date(Number(endTime)).getMinutes() + " : " + new Date(Number(endTime)).getSeconds()} */}
+                style={{ display: "flex", justifyContent: "end" }}>
                 <Countdown date={Date.now() + endTime} />
               </div>
             </div>

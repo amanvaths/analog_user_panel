@@ -6,33 +6,30 @@ import axios from "axios";
 import { BASE_URL, BASE_URL_2 } from "../Api_connection/config";
 import { setOneUsdPrice, setTotalAna, setLanguage } from "../redux/reducer/user";
 import { useTranslation } from "react-i18next";
-// import { FloatingLabel } from "react-bootstrap";
-import i18next from "i18next";
+
+
 
 
 function Menu() {
   const dispatch = useDispatch()
-  const { user, oneUsdPrice, totalAna, userInfo, selectedLanguage } = useSelector((state) => state.user.value)
+  const { user, oneUsdPrice, totalAna, userInfo, selectedLanguage, theme } = useSelector((state) => state.user.value)
   const email = user.email;
   const [anaBalancce, setAnaBalance] = useState('')
   const [usdPrice, setUsdPrice] = useState('')
   const [walletBalance, setWalletBalance] = useState(0)
   const { t } = useTranslation();
-  // console.log(selectedLanguage, "selected language");
+  const [th, setTh] = useState(true)
 
-  function refreshPage(location) {
-    window.location = location;
-    window.location.reload();
-  }
+    const mode = localStorage.getItem("theme")
+    if (mode == 1) {
+      var element = document.getElementById("myBody");
+      element.classList.add("dark-mode")
+    } else {
+      element = document.getElementById("myBody");
+      element.classList.remove("dark-mode")
+    }
 
-  const mode = localStorage.getItem("theme")
-  if (mode == 1) {
-    var element = document.getElementById("myBody");
-    element.classList.add("dark-mode")
-  } else {
-    element = document.getElementById("myBody");
-    element.classList.remove("dark-mode")
-  }  
+
 
   const getData = async () => {
     try {
@@ -71,9 +68,7 @@ function Menu() {
 
 
   const changeLang = (countryCode, lang) => {
-    // console.log(countryCode, lang);
-    // i18next.changeLanguage(countryCode)
-    dispatch(setLanguage({selectedLanguage:{ code: countryCode, name: lang }}))
+    dispatch(setLanguage({ selectedLanguage: { code: countryCode, name: lang } }))
   }
 
   const flags = [
@@ -112,7 +107,6 @@ function Menu() {
     gettotalWalletFund()
   }, [])
   const btn = useSelector(store => store.navsetter);
-  //  const {userInfo} = useSelector((state)=> state.user.value)
 
 
 
@@ -374,46 +368,28 @@ function Menu() {
                 </div>
               </div>
 
-             
-
               <div className="nk-sidebar-widget my-2">
-            
                 <h6 class="overline-title-alt text-teal fs-6 mb-2">Color Mode</h6>
-                <hr/>               
+                <hr />
                 <span> Light </span>
                 <label class="switch">
-                    <input type="checkbox" name=""/>
-                    <span class="slider round"></span>
+                  <input type="checkbox"
+                    name=""
+                    checked={th}
+                    onChange={(e) => {
+                      if(th === true){
+                        setTh(false)
+                        localStorage.setItem("theme", '0')
+                      }else{
+                        setTh(true)
+                        localStorage.setItem("theme", '1')
+                      }
+                    }} />
+                  <span class="slider round"></span>
                 </label>
                 <span class="text-dark"> Dark</span>
-
-                {/* <div class="nk-opt-list">            
-                  <div class="nk-opt-item active">
-                    <Link to=""
-                      className="active" onClick={() => {
-                        dispatch(setTheme({ theme: 1 }))
-                        mode == 1 ? localStorage.setItem("theme", "0") : localStorage.setItem("theme", "1")
-                      }}>
-                      <span class="nk-opt-item-bg is-dark">
-                        <span class="bg-dark text-white"></span>
-                      </span>
-                      <span class="nk-opt-item-name">Dark </span>
-                    </Link> 
-                  </div>
-                  <div class="nk-opt-item active">
-                    <Link to="" className="active" onClick={() => {
-                      dispatch(setTheme({ theme: 0 }))
-                      mode == 0 ? localStorage.setItem("theme", "1") : localStorage.setItem("theme", "1")
-                    }}> 
-                    <span class="nk-opt-item-bg is-light">
-                      <span class="bg-light text-dark"></span>
-                    </span>
-                      <span class="nk-opt-item-name">Light </span>
-                    </Link>                    
-                  </div>
-                </div> */}
               </div>
-           
+
               <div className="nk-sidebar-footer sidebar-bg">
                 <ul className="nk-menu nk-menu-footer">
                   <li className="nk-menu-item">
