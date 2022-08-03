@@ -28,7 +28,8 @@ const initialValue = {
   selectedLanguage: {
     code: "en",
     name: "English"
-  }
+  },
+  currentBlockNumber: ""
 };
 
 export const userSlice = createSlice({
@@ -80,9 +81,12 @@ export const userSlice = createSlice({
     },
     setLanguage: (state, action) => {
       state.value.selectedLanguage = action.payload.selectedLanguage
+    },
+    setCurrentBlockNumber: (state, action) => {
+      state.value.currentBlockNumber = action.payload.currentBlockNumber
     }
   },
 });
 
-export const { setIsLoggedIn, setUserInfo, setSettingPage, setOneUsdPrice, setTotalAna, logout, sendOtp, setOneCoinPrice, setTotalWalletBalance, setTheme, setBuyLoader, setLanguage } = userSlice.actions;
+export const { setIsLoggedIn, setUserInfo, setSettingPage, setOneUsdPrice, setTotalAna, logout, sendOtp, setOneCoinPrice, setTotalWalletBalance, setTheme, setBuyLoader, setLanguage, setCurrentBlockNumber } = userSlice.actions;
 export default userSlice.reducer;

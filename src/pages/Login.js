@@ -99,6 +99,7 @@ const Login = (props) => {
           // );
         }
         if (resp.status == 1) {
+       
           if (resp.googleAuth == 1) {
             navigate('/2faAuthentication', { state: { email: email, token: resp.token } })
           } else {

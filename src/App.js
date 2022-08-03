@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useParams  } from "react-router-dom";
+// import { setIsLoggedIn} from "./redux/reducer/user";
+// import { useDispatch } from "react-redux";
 import "./App.css";
 // import { useSelec/tor} from "react-redux";
 import { Toaster } from 'react-hot-toast';
@@ -47,8 +49,21 @@ import tFr from '../src/locales/fr/translation.json';
 
 
 function App(props) {
+  // const dispatch = useDispatch();
+  
 
+  // console.log(amit,yadav, 'tt');
+  // const par = useParams();
+  // console.log(props.location.search,"tt");
   const { userInfo, user, selectedLanguage } = useSelector((state) => state.user.value)
+  // if(!user.email&&!user.token){
+  //   const queryParams = new URLSearchParams(window.location.search);
+  //   const amit = queryParams.get('email');
+  //   const yadav = queryParams.get('token');
+  //   const obj = {email:amit,
+  //                 token: yadav}
+  //                 dispatch(setIsLoggedIn({ LoginDetails: obj }))
+  // }
   i18n
     .use(initReactI18next)
     .use(HttpApi) // passes i18n down to react-i18next
@@ -74,10 +89,13 @@ function App(props) {
          },
        }
     })
-  console.log(userInfo?.webPush_Public_Key, "KEY");
-  console.log(user?.email, "email");
+
+
+
+  // console.log(userInfo?.webPush_Public_Key, "KEY");
+  // console.log(user?.email, "email");
   if (userInfo?.webPush_Public_Key && user?.email) {
-    console.log('Called');
+    // console.log('Called');
     subscribeUser(userInfo?.webPush_Public_Key, user?.email);
   } else {
     console.log("User public key not found!");

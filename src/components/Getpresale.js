@@ -3,14 +3,18 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import Countdown from "react-countdown";
 import { useTranslation, Trans } from "react-i18next";
 import web3 from 'web3'
+import { useSelector, useDispatch } from "react-redux";
+import {setCurrentBlockNumber} from "../redux/reducer/user";
 
 const Getpresale = (props) => {
   const { levelname, coinQty, coinPrice, duration, persent, startBlock, endBlock } = props;
-  const [blockNumber, setBlockNumber] = useState(0)
+  const { currentBlockNumber } = useSelector((state) => state.user.value)
+  const [blockNumber, setBlockNumber] = useState('')
   const [blockTime, setBlockTime] = useState('')
   const [sales, setSales] = useState('')
   const [endTime, setEndTime] = useState(0)
   const { t } = useTranslation();
+  const dispatch = useDispatch()
 
   // console.log(endBlock,"ENdBLOCk");
 
@@ -19,6 +23,7 @@ const Getpresale = (props) => {
   const getblockNumber = async () => {
     Web3.eth.getBlockNumber()
       .then((data) => {
+        dispatch(setCurrentBlockNumber({currentBlockNumber: data}))
         // setBlockNumber(data);
         const a = endBlock - data;
         const endTimeInSec = a * 5;
@@ -28,7 +33,6 @@ const Getpresale = (props) => {
         const tt = setTimeout(() => {
           updateTime();
         }, 5000);
-
       });
   }
 
@@ -108,7 +112,7 @@ const Getpresale = (props) => {
                   </Trans>
                   {/* {levelname} */}
                 </div>
-                <div className="number-lg amount text-truncate text-wrap">{coinPrice}
+                <div className="number-lg amount text-truncate text-wrap">{currentBlockNumber}
                  {/* <span style={{fontSize: "15px"}}>Inrx</span> */}
                  </div>
               </div>
@@ -132,11 +136,11 @@ const Getpresale = (props) => {
                   <div className="number text-warning ">{duration} {t('days')}</div>
                 </div>
               </div>
-              {/* <div className="row">
-              <div className="col-3">Start Block</div>
-              <div className="col-6">Current Block</div>
-              <div className="col-3">End Block</div>
-              </div> */}
+              <div className="row">
+              <div className="col-3">Start Block {startBlock}</div>
+              {/* <div className="col-6">Current Block {}</div> */}
+              <div className="col-3">End Block {endBlock}</div>
+              </div>
              
               <div className="pt-4">
                 <ProgressBar
