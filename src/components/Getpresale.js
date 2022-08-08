@@ -13,10 +13,10 @@ const Getpresale = (props) => {
   const [blockTime, setBlockTime] = useState('')
   const [sales, setSales] = useState('')
   const [endTime, setEndTime] = useState(0)
+  const [d, setD] = useState(0)
   const { t } = useTranslation();
   const dispatch = useDispatch()
 
-  // console.log(endBlock,"ENdBLOCk");
 
   var Web3 = new web3('https://rabbit.analog-rpc.com');
 
@@ -27,8 +27,6 @@ const Getpresale = (props) => {
         // setBlockNumber(data);
         const a = endBlock - data;
         const endTimeInSec = a * 5;
-        // end =  ;
-        // console.log(endTimeInSec, endBlock, data, Number(endTimeInSec * 1000));
         setEndTime(Number(endTimeInSec * 1000));
         const tt = setTimeout(() => {
           updateTime();
@@ -39,61 +37,23 @@ const Getpresale = (props) => {
   function updateTime() {
     getblockNumber();
   }
+  const getDuration = ()=>{
+    const totalBlock = endBlock - startBlock;
+    const inseconds = totalBlock*5;
+    const inMinutes = inseconds/60;
+    const inHors = inMinutes/60;
+    const inDay = Math.ceil(inHors/24); 
+    setD(inDay)
+   }
   useEffect(() => {
     if (endBlock) {
+      getDuration()
       updateTime();
     }
   }, [])
-  //  var end;
-  // useEffect(() => {
-  //   if (endBlock) {
-  //     const a = endBlock - blockNumber;
-  //     const endTimeInSec = a * 5;
-  //     // end =  ;
-  //     setEndTime(endTimeInSec * 1000)
-  //     // Web3.eth.getBlock(blockNumber).then((data)=>{
-  //     //   setBlockTime(data?.timestamp)
-  //     //   v
 
-  //     // console.log(endTime, "ENdTIME");
-  //     // })
-  //   }
-  // }, [blockNumber, endBlock])
-
-
-  // const [timer, setTimer] = useState({
-  //   days: "",
-  //   hour: "",
-  //   minute: "",
-  //   second: "",
-  // });
-
-
-  // useEffect(() => {
-  //   // countdowntimer();
-  //   console.log("endtime", endTime);
-  //   console.log(new Date(Number(endTime)).getDay() + " : " + new Date(Number(endTime)).getHours() + ": " + new Date(Number(endTime)).getMinutes() + " : " + new Date(Number(endTime)).getSeconds());
-
-  // }, [endTime]);
-
-  // function countdowntimer() {
-
-  //   var se = Date.now() * duration;
-  //   var x = setInterval(function () {
-  //     let days = Math.floor(se / 86400);
-  //     let hours = Math.floor((se % 86400) / 3600);
-  //     let minutes = Math.floor(((se % 86400) % 3600) / 60);
-  //     let seconds = Math.floor(((se % 86400) % 3600) % 60);
-  //     se--;
-  //     if (se == 0) {
-  //       clearInterval(x);
-  //       setTimer({ days: 0, hour: 0, minute: 0, second: 0 });
-  //     } else {
-  //       setTimer({ days: days, hour: hours, minute: minutes, second: seconds });
-  //     }
-  //   }, 1000);
-  // }
-
+  
+ 
   return (
     <div className={`col-sm-12 col-md-4`}>
 
@@ -103,18 +63,12 @@ const Getpresale = (props) => {
             <div className="nk-wg7">
               <div className="nk-wg7-stats ">
                 <div className="nk-wg7-title is-dark text-work">
-                  <Trans i18nKey="username"
-                  // defaults="<0>{levelname}</0>"
-                  // components={[<strong>dummyChild</strong>]}
-                  // values={{ levelname }}
-                  >
-                    {{ levelname }}
-                  </Trans>
+                    { levelname }
                   {/* {levelname} */}
                 </div>
-                <div className="number-lg amount text-truncate text-wrap">{currentBlockNumber}
+                {/* <div className="number-lg amount text-truncate text-wrap">{currentBlockNumber} */}
                  {/* <span style={{fontSize: "15px"}}>Inrx</span> */}
-                 </div>
+                 {/* </div> */}
               </div>
               <div
                 className="nk-wg7-stats-group mt-1"
@@ -133,13 +87,18 @@ const Getpresale = (props) => {
                 // style={{ marginLeft: 150 }}
                 >
                   <div className="nk-wg7-title text-body ">{t('duration')}</div>
-                  <div className="number text-warning ">{duration} {t('days')}</div>
+                  <div className="number text-warning ">{d} {t('days')}</div>
                 </div>
               </div>
               <div className="row">
-              <div className="col-3">Start Block {startBlock}</div>
-              {/* <div className="col-6">Current Block {}</div> */}
-              <div className="col-3">End Block {endBlock}</div>
+              <div className="col-4"style={{color: "black", fontSize:"15px"}}>Start Block </div>
+              <div className="col-4" style={{color: "black",fontSize:"15px"}}>Current Block </div>
+              <div className="col-4" style={{color: "black", fontSize:"15px"}}>End Block </div>
+              </div>
+              <div className="row">
+              <div className="col-4" style={{color: "#51d3ae"}}>{startBlock}</div>
+              <div className="col-4" style={{color: "#51d3ae"}}>{currentBlockNumber}</div>
+              <div className="col-4" style={{color: "#51d3ae"}}>{endBlock}</div>
               </div>
              
               <div className="pt-4">

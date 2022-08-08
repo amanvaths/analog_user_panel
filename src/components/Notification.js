@@ -58,41 +58,41 @@ const Notification = () => {
 
     return (
         <>
-            <div class="card-inner card-inner-lg bg-light">
-                <div class="nk-block-head nk-block-head-lg">
-                    <div class="nk-block-between">
-                        <div class="nk-block-head-content">
-                            <h4 class="nk-block-title">{t('notification_settings')}</h4>
-                            <div class="nk-block-des">
+            <div className="card-inner card-inner-lg bg-light">
+                <div className="nk-block-head nk-block-head-lg">
+                    <div className="nk-block-between">
+                        <div className="nk-block-head-content">
+                            <h4 className="nk-block-title">{t('notification_settings')}</h4>
+                            <div className="nk-block-des">
                                 <p>{t('notification_tagline')}</p>
                             </div>
                         </div>
-                        <div class="nk-block-head-content align-self-start d-lg-none">
+                        <div className="nk-block-head-content align-self-start d-lg-none">
                         <SettingButton></SettingButton>
                             {/* <a
-                                href="#" class="toggle btn btn-icon btn-trigger mt-n1"
+                                href="#" className="toggle btn btn-icon btn-trigger mt-n1"
                                 data-target="userAside" id="toggleBtn">
                                 <em
-                                    class="icon ni ni-menu-alt-r" onClick={profileMenu}></em>
+                                    className="icon ni ni-menu-alt-r" onClick={profileMenu}></em>
                             </a> */}
                         </div>
                     </div>
-                    <hr class="mb-0"></hr>
+                    <hr className="mb-0"></hr>
                 </div>
-                <div class="nk-block-head nk-block-head-sm">
-                    <div class="nk-block-head-content">
+                <div className="nk-block-head nk-block-head-sm">
+                    <div className="nk-block-head-content">
                         <h4>{t('security_alert')}</h4>
                         <p>{t('notification_tagline2')}</p>
 
                     </div>
                 </div>
-                <div class="nk-block-content">
-                    <div class="gy-3">
-                        <div class="g-item">
-                            <div class="custom-control custom-switch">
+                <div className="nk-block-content">
+                    <div className="gy-3">
+                        <div className="g-item">
+                            <div className="custom-control custom-switch">
                                 <input
                                     type="checkbox"
-                                    class="custom-control-input"
+                                    className="custom-control-input"
                                     id="unusual-activity"
                                     checked={userInfo.unusual_activity}
                                     onChange={(e) => {
@@ -112,15 +112,15 @@ const Notification = () => {
                                     }}
                                 />
                                 <label
-                                    class="custom-control-label"
+                                    className="custom-control-label"
                                     for="unusual-activity">
                                     {t('unusual_activity_alert')}</label>
                             </div>
                         </div>
-                        <div class="g-item">
-                            <div class="custom-control custom-switch">
+                        <div className="g-item">
+                            <div className="custom-control custom-switch">
                                 <input type="checkbox"
-                                    class="custom-control-input"
+                                    className="custom-control-input"
                                     id="new-browser"
                                     checked={userInfo?.new_browser}
                                     onChange={() => {
@@ -139,24 +139,24 @@ const Notification = () => {
                                     }}
                                 />
                                 <label
-                                    class="custom-control-label" for="new-browser">
+                                    className="custom-control-label" for="new-browser">
                                         {t('new_browser_alert')}</label></div>
                         </div>
                     </div>
                 </div>
-                <div class="nk-block-head nk-block-head-sm">
-                    <div class="nk-block-head-content">
+                <div className="nk-block-head nk-block-head-sm">
+                    <div className="nk-block-head-content">
                         <h4>{t('news')}</h4>
                         <p>{t('notification_tagline2')}</p>
                     </div>
                 </div>
-                <div class="nk-block-content">
-                    <div class="gy-3">
-                        <div class="g-item">
-                            <div class="custom-control custom-switch">
+                <div className="nk-block-content">
+                    <div className="gy-3">
+                        <div className="g-item">
+                            <div className="custom-control custom-switch">
                                 <input
                                     type="checkbox"
-                                    class="custom-control-input"
+                                    className="custom-control-input"
                                     id="latest-sale"
 
                                     checked={userInfo?.sales_latest_news}
@@ -175,15 +175,15 @@ const Notification = () => {
                                         setReflect(!reflect);
                                     }}
                                 />
-                                <label class="custom-control-label"
+                                <label className="custom-control-label"
                                     for="latest-sale">
                                     {t('news_alert')}</label></div>
                         </div>
-                        <div class="g-item">
-                            <div class="custom-control custom-switch">
+                        <div className="g-item">
+                            <div className="custom-control custom-switch">
                                 <input
                                     type="checkbox"
-                                    class="custom-control-input"
+                                    className="custom-control-input"
                                     id="feature-update"
                                     checked={userInfo?.new_features_updates}
                                     onChange={() => {
@@ -202,13 +202,13 @@ const Notification = () => {
                                     }}
                                 />
                                 <label
-                                    class="custom-control-label" for="feature-update">{t('features_update_alert')}</label></div>
+                                    className="custom-control-label" for="feature-update">{t('features_update_alert')}</label></div>
                         </div>
-                        <div class="g-item">
-                            <div class="custom-control custom-switch">
+                        <div className="g-item">
+                            <div className="custom-control custom-switch">
                                 <input
                                     type="checkbox"
-                                    class="custom-control-input"
+                                    className="custom-control-input"
                                     id="account-tips"
                                     checked={userInfo?.tips ? userInfo?.tips : false}
                                     onChange={() => {
@@ -225,7 +225,7 @@ const Notification = () => {
                                         }
                                         setReflect(!reflect);
                                     }}
-                                /><label class="custom-control-label"
+                                /><label className="custom-control-label"
                                     for="account-tips">{t('tips_alert')}</label></div>
                         </div>
                     </div>

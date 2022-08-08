@@ -153,7 +153,7 @@ const Withdrawal = () => {
                                                                             setActive({ index: index })
                                                                             setfromWalletAddress(element.name)
                                                                         }}
-                                                                    >
+                                                                     >
                                                                         <div className={active.index == index ? "card bg-teal-dim" : "card bg-light "}>
                                                                             <div className="nk-wgw sm">
                                                                                 <Link className="nk-wgw-inner" to="">
@@ -185,11 +185,11 @@ const Withdrawal = () => {
                                             </div>
                                         </div>
                                         <div className="mt-5">
-                                            <div class="card card-bordered h-100 bg-lighter">
-                                                <div class="card-inner">
+                                            <div className="card card-bordered h-100 bg-lighter">
+                                                <div className="card-inner">
                                                     <div className="mb-4">
-                                                        <h3 class="text-center title">{t('withdrawal')}</h3>
-                                                        <p class="email-title text-center">{t('use_below_form_to_withdraw')}</p>
+                                                        <h3 className="text-center title">{t('withdrawal')}</h3>
+                                                        <p className="email-title text-center">{t('use_below_form_to_withdraw')}</p>
                                                         <div className="nk-block-head-content"></div>
                                                     </div>
                                                     <div className="components-preview wide-md mx-auto">

@@ -54,15 +54,11 @@ const Header = () => {
   //   element.classList.remove("dark-mode")
   // }  
   
-
-
-
-
-
     const signOut = () => {
     dispatch(logout());
     toast.success("Logout Successfully")
-    navigate("/login")
+      window.location.href = "/login"
+    // navigate("/login")
   };
 
   const userNotification = async () => {
@@ -156,9 +152,9 @@ const Header = () => {
                             </p>
                           </div> */}
                       </div>
-                      <div class="energy">
-                        <div class="nk-block-head-content">
-                          <ul class="nk-block-tools">
+                      <div className="energy">
+                        <div className="nk-block-head-content">
+                          <ul className="nk-block-tools">
                             <divx></divx>
                             <divx></divx>
                             <divx></divx>
@@ -229,7 +225,7 @@ const Header = () => {
 
                         {notification.map((element, index) => {                     
                       return (
-                        <div className="nk-notification-item dropdown-inner">
+                        <div className="nk-notification-item dropdown-inner" key={index}>
                           <div className="nk-notification-icon">
                             {
                                element.type ==1 ?

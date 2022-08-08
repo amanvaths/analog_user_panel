@@ -162,8 +162,8 @@ const PersonalInfo = () => {
               </div>
               <div className="col-4 ">
                 {showUser == true ? 
-                <div class="input-group-sm">
-                  <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1"
+                <div className="input-group-sm">
+                  <input type="text" className="form-control" aria-label="Username" aria-describedby="basic-addon1"
                     onChange={(e) => setLocalUserName(e.target.value)}
                     style={{
                       borderRadius: "0",
@@ -323,9 +323,9 @@ const PersonalInfo = () => {
               <div className="col-4">
                 {userInfo?.refferal ?
                   <span className="data-value">{userInfo?.refferal}</span> :
-                  <div class="input-group-sm">
+                  <div className="input-group-sm">
                     <input type="text"
-                      class="form-control"
+                      className="form-control"
                       aria-label="Username"
                       aria-describedby="basic-addon1"
                       value={ref}
@@ -344,7 +344,7 @@ const PersonalInfo = () => {
                   <span className="">
                     {userInfo?.refferal ? <span className=" disable">
                       <em className="ni ni-lock-alt text-gray"></em>
-                    </span> : <button class="btn btn-outline-success btn-sm" onClick={() => {
+                    </span> : <button className="btn btn-outline-success btn-sm" onClick={() => {
                       updateReferral();
                     }}>{t('update')}</button>
                     }

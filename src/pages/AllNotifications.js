@@ -66,49 +66,49 @@ const AllNotifications = () => {
                       </div>
                     </div>
 
-            <div class="card card-bordered" style={{borderLeftColor: "#364a63", borderLeftWidth: "5px"}}>    
+            <div className="card card-bordered" style={{borderLeftColor: "#364a63", borderLeftWidth: "5px"}}>    
              
-            <div class="card-inner">   
+            <div className="card-inner">   
             <div className="row">
                 <div className="col-md-1 col-12">   <img src="/images/usdt_icon.png" alt="" srcset="" /> </div>
-                <div className="col-md-9 col-12">  <h5 class="card-title">TRX Deposit</h5>        
-            {/* <h6 class="card-subtitle mb-2">Card subtitle</h6>         */}
-            <p class="card-text">10 TRX has been deposited in your wallet</p>  </div>
+                <div className="col-md-9 col-12">  <h5 className="card-title">TRX Deposit</h5>        
+            {/* <h6 className="card-subtitle mb-2">Card subtitle</h6>         */}
+            <p className="card-text">10 TRX has been deposited in your wallet</p>  </div>
                 <div className="col-md-2 col-12 text-right"> 
                 <p>10 Min ago</p>
-                <a href="#" class="card-link">Remove</a>
+                <a href="#" className="card-link">Remove</a>
                  </div>
             </div>    
                  
-            {/* <a href="#" class="card-link">Card link</a>        
-            <a href="#" class="card-link">Another link</a>     */}
+            {/* <a href="#" className="card-link">Card link</a>        
+            <a href="#" className="card-link">Another link</a>     */}
             </div>
             </div>
-            <div class="card card-bordered" style={{borderLeftColor: "#364a63", borderLeftWidth: "5px"}}>    
-            <div class="card-inner">        
-            <h5 class="card-title">ANA Buy</h5>        
-            {/* <h6 class="card-subtitle mb-2">Card subtitle</h6>         */}
-            <p class="card-text">100 ANA buy</p>        
-            {/* <a href="#" class="card-link">Card link</a>        
-            <a href="#" class="card-link">Another link</a>     */}
+            <div className="card card-bordered" style={{borderLeftColor: "#364a63", borderLeftWidth: "5px"}}>    
+            <div className="card-inner">        
+            <h5 className="card-title">ANA Buy</h5>        
+            {/* <h6 className="card-subtitle mb-2">Card subtitle</h6>         */}
+            <p className="card-text">100 ANA buy</p>        
+            {/* <a href="#" className="card-link">Card link</a>        
+            <a href="#" className="card-link">Another link</a>     */}
             </div>
             </div>
-            <div class="card card-bordered" style={{borderLeftColor: "#364a63", borderLeftWidth: "5px"}}>    
-            <div class="card-inner">        
-            <h5 class="card-title">New Refferal Joined</h5>        
-            {/* <h6 class="card-subtitle mb-2">Card subtitle</h6>         */}
-            <p class="card-text">New Refferaal added using your Refferal code</p>        
-            {/* <a href="#" class="card-link">Card link</a>        
-            <a href="#" class="card-link">Another link</a>     */}
+            <div className="card card-bordered" style={{borderLeftColor: "#364a63", borderLeftWidth: "5px"}}>    
+            <div className="card-inner">        
+            <h5 className="card-title">New Refferal Joined</h5>        
+            {/* <h6 className="card-subtitle mb-2">Card subtitle</h6>         */}
+            <p className="card-text">New Refferaal added using your Refferal code</p>        
+            {/* <a href="#" className="card-link">Card link</a>        
+            <a href="#" className="card-link">Another link</a>     */}
             </div>
             </div>
-            {/* <div class="card card-bordered">    
-            <div class="card-inner">        
-            <h5 class="card-title">Card title</h5>        
-            <h6 class="card-subtitle mb-2">Card subtitle</h6>        
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>        
-            <a href="#" class="card-link">Card link</a>        
-            <a href="#" class="card-link">Another link</a>    
+            {/* <div className="card card-bordered">    
+            <div className="card-inner">        
+            <h5 className="card-title">Card title</h5>        
+            <h6 className="card-subtitle mb-2">Card subtitle</h6>        
+            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>        
+            <a href="#" className="card-link">Card link</a>        
+            <a href="#" className="card-link">Another link</a>    
             </div>
             </div> */}
 

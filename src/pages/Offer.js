@@ -33,11 +33,11 @@ const Offer = () => {
           <div className="nk-content nk-content-fluid bg-light min-height">
             <div className="container-xl">
               <div className="nk-content-body">
-                <div class="nk-block-head nk-block-head-lg">
-                  <div class="nk-block-head-content text-center">
-                    <h2 class="nk-block-title fw-normal">Latest Offers</h2>
-                    <div class="nk-block-des">
-                      <p class="lead">Digital PR focuses on different forms of social media, blogs, online news sites, influencer marketing, and more.</p>
+                <div className="nk-block-head nk-block-head-lg">
+                  <div className="nk-block-head-content text-center">
+                    <h2 className="nk-block-title fw-normal">Latest Offers</h2>
+                    <div className="nk-block-des">
+                      <p className="lead">Digital PR focuses on different forms of social media, blogs, online news sites, influencer marketing, and more.</p>
                     </div>
                   </div>
                 </div>

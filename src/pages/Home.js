@@ -176,9 +176,6 @@ const Home = () => {
     }
   };
 
-  // const a = new Date(lastActivity);
-  // const date = a.toDateString();
-  // const time = a.toLocaleTimeString();
 
   useEffect(() => {
     getUserWalletData();
@@ -189,19 +186,6 @@ const Home = () => {
 
   }, []);
 
-  //   useEffect(() => {
-  //     console.log(firebase, "::OBJ");
-  // // const initMessaging = firebase.messaging();
-
-  //     const messaging = firebase.messaging();
-  //     messaging.requestPermission().then(()=>{
-  //       return messaging.getToken()
-  //     }).then(token=>{
-  //       console.log(token, "::TOKEN FIREBASE");
-  //     }).catch(error=> {
-  //       console.log(error);
-  //     })
-  //   }, []);
 
   const responsive = {
     superLargeDesktop: {
@@ -235,32 +219,33 @@ const Home = () => {
             <Header />
             <div className="container">
               <div className="shadow mt-3">
-                <div id="carouselExConInd" class="carousel slide carousel-fade" data-bs-ride="carousel">
-                  <ol class="carousel-indicators">
-                    <li data-bs-target="#carouselExConInd" data-bs-slide-to="0" class="active"></li>
+                <div id="carouselExConInd" className="carousel slide carousel-fade" data-bs-ride="carousel">
+                  <ol className="carousel-indicators">
+                    <li data-bs-target="#carouselExConInd" data-bs-slide-to="0" className="active"></li>
                     <li data-bs-target="#carouselExConInd" data-bs-slide-to="1"></li>
                   </ol>
-                  <div class="carousel-inner">
-                    <div class="carousel-item active"> <img src="images/slides/2.gif" class="d-block w-100" alt="carousel" />
+                  <div className="carousel-inner">
+                    <div className="carousel-item active"> <img src="images/slides/2.gif" className="d-block w-100" alt="carousel" />
                     </div>
-                    <div class="carousel-item"> <img src="images/slides/1.png" class="d-block w-100"
+                    <div className="carousel-item"> <img src="images/slides/1.png" className="d-block w-100"
                       alt="carousel" />
                     </div>
                   </div>
-                  <Link class="carousel-control-prev" to="#carouselExConInd" role="button" data-bs-slide="prev"> <span
-                    class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
-                  </Link> <Link class="carousel-control-next" to="#carouselExConInd" role="button" data-bs-slide="next"> <span
-                    class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span> </Link>
+                  <Link className="carousel-control-prev" to="#carouselExConInd" role="button" data-bs-slide="prev"> <span
+                    className="carousel-control-prev-icon" aria-hidden="true"></span> <span className="visually-hidden">Previous</span>
+                  </Link> <Link className="carousel-control-next" to="#carouselExConInd" role="button" data-bs-slide="next"> <span
+                    className="carousel-control-next-icon" aria-hidden="true"></span> <span className="visually-hidden">Next</span> </Link>
                 </div>
 
               </div>
             </div>
             {/* Add Slide small card */}
             <div className="container">
-              <div className="row g-3 mt-4">
-                {data.length > 0 ? data.map((data) => {
+              <div className="row g-3 mt-4" aria-disabled>
+                {data.length > 0 ? data.map((data, index) => {
                   return (
                     <Getpresale
+                      key={index}
                       levelname={data.levelname}
                       coinPrice={data.price}
                       coinQty={data.coinquantity}
@@ -273,12 +258,12 @@ const Home = () => {
                 }) : null}
               </div>
             </div>
-            {/* <div class="card-carousel">
-              <div class="my-card">asas</div>
-              <div class="my-card"></div>
-              <div class="my-card"></div>
-              <div class="my-card"></div>
-              <div class="my-card"></div>            
+            {/* <div className="card-carousel">
+              <div className="my-card">asas</div>
+              <div className="my-card"></div>
+              <div className="my-card"></div>
+              <div className="my-card"></div>
+              <div className="my-card"></div>            
             </div> */}
             <div className="nk-content nk-content-fluid pt-0">
               <div className="container">
@@ -602,10 +587,10 @@ const Home = () => {
                             />
                           </div>
                         ) : recentActivities.length > 0 ? (
-                          recentActivities.map((data) => {
+                          recentActivities.map((data, index) => {
                             const d = new Date(data.createdAt);
                             return (
-                              <div className="tranx-item">
+                              <div className="tranx-item" key={index}>
                                 <div className="tranx-col">
                                   <div className="tranx-info">
                                     <div className="tranx-data">
@@ -871,7 +856,7 @@ const Home = () => {
                     <div className="card-inner card-inner-lg">
                       <div className="align-center flex-wrap flex-md-nowrap g-4">
                         <div className="nk-block-image flex-shrink-0 bg-teal border rounded">
-                          <div class="text-white"><span className="ni ni-headphone-fill fs-1"></span></div>
+                          <div className="text-white"><span className="ni ni-headphone-fill fs-1"></span></div>
                         </div>
                         <div className="nk-block-content">
                           <div className="nk-block-content-head px-lg-4">

@@ -136,16 +136,16 @@ console.log(logData, "LLOGDATA");
                                         logData.map((element, index) => {
                                           const a = new Date(element.createdAt)
                                           return (
-                                            <tr className="zoom_on_table">
+                                            <tr className="zoom_on_table" key={index}>
                                               <td className="tb-col-os text-danger">{element.browser_name}</td>
                                               <td className="tb-col-os text-capitalize text-teal">{element.request_device}</td>
                                               <td className="tb-col-ip">
-                                              <span class="badge bg-light">
+                                              <span className="badge bg-light">
                                                   {element.request_address}
                                                 </span>
                                               </td>
                                               <td className="tb-col-time">
-                                              <span className="text-dark"> <em class="icon ni ni-clock valign"></em> {a.toDateString()} {a.toLocaleTimeString()}</span>
+                                              <span className="text-dark"> <em className="icon ni ni-clock valign"></em> {a.toDateString()} {a.toLocaleTimeString()}</span>
                                               </td>
                                               <td className="tb-col-action">{ }</td>
                                             </tr>

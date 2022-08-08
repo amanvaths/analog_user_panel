@@ -141,7 +141,7 @@ const AirDrop = () => {
                                 // const a = new Date(element.createdAt)
                                 return (
 
-                                  <div className="nk-tb-item">
+                                  <div className="nk-tb-item" key={index}>
                                     <div className="nk-tb-col">
                                       <div className="nk-tnx-type">
                                         <span className="nk-activity-media user-avatar xs bg-teal">{index + 1}</span>

@@ -1,11 +1,7 @@
-import React, { useEffect } from "react";
-import { BrowserRouter, Routes, Route, useParams  } from "react-router-dom";
-// import { setIsLoggedIn} from "./redux/reducer/user";
-// import { useDispatch } from "react-redux";
+import React from "react";
+import { BrowserRouter, Routes, Route} from "react-router-dom";
 import "./App.css";
-// import { useSelec/tor} from "react-redux";
 import { Toaster } from 'react-hot-toast';
-import axios from "axios";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";

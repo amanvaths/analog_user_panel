@@ -37,28 +37,28 @@ const TeamMember = () => {
                     {
                       team.map((element, index) => {
                         return (
-                          <div class="col-sm-6 col-lg-4 mb-4">
-                            <div class="card card-bordered shadow-sm">
-                              <div class="card-inner card-inner-sm">
-                                <div class="team">
-                                  <div class="user-card user-card-s2">
-                                    <div class="user-avatar md bg-teal">
+                          <div className="col-sm-6 col-lg-4 mb-4" key={index}>
+                            <div className="card card-bordered shadow-sm">
+                              <div className="card-inner card-inner-sm">
+                                <div className="team">
+                                  <div className="user-card user-card-s2">
+                                    <div className="user-avatar md bg-teal">
                                       {/* <img src="https://www.nadcab.com/public/uploads/team-member-37.jpeg" alt="" srcset="" /> */}
                                       <span>{element.name.charAt(0)}</span>
-                                      <div class="status dot dot-lg dot-success"></div>
+                                      <div className="status dot dot-lg dot-success"></div>
                                     </div>
-                                    <div class="user-info">
+                                    <div className="user-info">
                                       <h5>{element.name}</h5>
-                                      <span class="sub-text">{element.degination}</span>
+                                      <span className="sub-text">{element.degination}</span>
                                     </div>
                                   </div>
-                                  {/* <ul class="team-info">
+                                  {/* <ul className="team-info">
                                   <li><span>Join Date</span><span>27 Jun 2022</span></li>
                                   <li><span>Contact</span><span>+88 01713-123656</span></li>
                                   <li><span>Email</span><span>swati.nadcabtechnology@gmail.com</span></li>
                                 </ul>
-                                <div class="team-view">
-                                  <Link to="" class="btn btn-block btn-dim btn-success"><span>View Profile</span></Link>
+                                <div className="team-view">
+                                  <Link to="" className="btn btn-block btn-dim btn-success"><span>View Profile</span></Link>
                                 </div> */}
                                 </div>
                               </div>

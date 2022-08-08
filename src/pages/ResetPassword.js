@@ -150,12 +150,12 @@ const ResetPassword = (props) => {
   // console.log(params.restcode, "params");
   return (
     <div>
-      <div class="bg-login">
+      <div className="bg-login">
         <div className="nk-apps-root">
           <div className="nk-content container mt-lg-5 pt-lg-5 align-items-center">
             <div className="row justify-content-md-center">
-              <div class="col-md-4 bg-teal shadow  d-flex align-items-center">
-                <div class="card-inner text-white"> 
+              <div className="col-md-4 bg-teal shadow  d-flex align-items-center">
+                <div className="card-inner text-white"> 
                   <div className="nk-block-head-content">
                     <h2 className="nk-block-title">Forgot Password ?</h2>
                     <div className="lead">
@@ -256,7 +256,7 @@ const ResetPassword = (props) => {
                   </div>
 
                   <div id="validation-box">
-                    <p class="text-soft small">We suggest having at least one capital and one lower-case letter (Aa-Zz), 
+                    <p className="text-soft small">We suggest having at least one capital and one lower-case letter (Aa-Zz), 
                     one special symbol (#, &amp;, % etc) and one number (0-9) in your password for the best strength</p>
                   </div>
                 </div>

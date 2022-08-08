@@ -17,18 +17,18 @@ const NewsArticle = () => {
           <div className="nk-content nk-content-fluid bg-light min-height">
             <div className="container-xl">
               <div className="nk-content-body">
-              {/* <div class="nk-block-head nk-block-head-lg">
-                  <div class="nk-block-head-content">
-                    <h2 class="nk-block-title fw-normal">Latest News &amp; PR</h2>
-                    <div class="nk-block-des">
-                      <p class="lead">Digital PR focuses on different forms of social media, blogs, online news sites, influencer marketing, and more.</p>
+              {/* <div className="nk-block-head nk-block-head-lg">
+                  <div className="nk-block-head-content">
+                    <h2 className="nk-block-title fw-normal">Latest News &amp; PR</h2>
+                    <div className="nk-block-des">
+                      <p className="lead">Digital PR focuses on different forms of social media, blogs, online news sites, influencer marketing, and more.</p>
                     </div>
                   </div>
                 </div> */}
-                <div class="nk-block">
-                    <div class="card card-bordered">
-                        <div class="card-inner card-inner-xl">
-                            <article class="entry">
+                <div className="nk-block">
+                    <div className="card card-bordered">
+                        <div className="card-inner card-inner-xl">
+                            <article className="entry">
                                 <h3>{location.state.title}</h3>
                                 <img src={location.state.image} alt="" srcset="" />
                                 <p>{location.state.message}</p>

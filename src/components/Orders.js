@@ -197,12 +197,12 @@ export default function Orders(props) {
 
   return (
     <div className="order">
-      <div class="card">
-        <div class="card-header bg-teal-dim justify-content-between align-items-center">
-          <span class="card-title font-weight-bold"> {t('order')}</span>
+      <div className="card">
+        <div className="card-header bg-teal-dim justify-content-between align-items-center">
+          <span className="card-title font-weight-bold"> {t('order')}</span>
         </div>
-        <div class="card-body table-responsive p-0">
-          <table class="table table-hover mb-0">
+        <div className="card-body table-responsive p-0">
+          <table className="table table-hover mb-0">
             <div style={{ display: "contents" }}>
               <thead>
                 <tr style={{ fontSize: "10px" }}>
@@ -258,11 +258,12 @@ export default function Orders(props) {
                     </>
                   )}
                   {history &&
-                    history.map((h) => {
+                    history.map((h, index) => {
                       return (
                         <>
                           <tr
-                            class="zoom_on_table"
+                            className="zoom_on_table"
+                            key={index}
                             style={{ fontSize: "9.5px" }}
                           >
                             <td
@@ -304,17 +305,17 @@ export default function Orders(props) {
                                   className="img"
                                 />
                               )}
-                              <i class="ion ion-arrow-graph-up-right"></i>
+                              <i className="ion ion-arrow-graph-up-right"></i>
                             </td>
                             <td
-                              className="OrderhistorySize"
-                              class="text-success"
+                              className="OrderhistorySize text-success"
+                           
                               style={{ width: "17%" }}
                             >
                               {h.compair_currency == "usd"
                                 ? h.pref_raw_price.toFixed(8)
                                 : h.pref_raw_price.toFixed(8)}
-                              <i class="ion ion-arrow-graph-down-right"></i>
+                              <i className="ion ion-arrow-graph-down-right"></i>
                             </td>
                             <td
                               className="OrderhistorySize"
@@ -343,7 +344,7 @@ export default function Orders(props) {
         }}
       >
         <nav
-          class="coinsfather-theme-color bg-teal-dim"
+          className="coinsfather-theme-color bg-teal-dim"
           style={{
             border: "0.3px solid rgba(255, 255, 255, 0.2)",
             // marginTop: "6px",
@@ -376,11 +377,11 @@ export default function Orders(props) {
               flexDirection: "column",
             }}
           >
-            <div class="p-3 screenfix" style={{ width: "450px" }}>
-              <div class="input-group mb-3" style={{ margin: "0px" }}>
-                <div class="input-group-prepend">
+            <div className="p-3 screenfix" style={{ width: "450px" }}>
+              <div className="input-group mb-3" style={{ margin: "0px" }}>
+                <div className="input-group-prepend">
                   <span
-                    class="input-group-text buy-sell-form-bg buy-sell-theme"
+                    className="input-group-text buy-sell-form-bg buy-sell-theme"
                     style={{
                       fontSize: " 10px",
                       borderColor: " rgb(202, 202, 204)",
@@ -394,7 +395,7 @@ export default function Orders(props) {
                 <input
                   disabled
                   type="number"
-                  class="form-control buy-sell-form-bg buy-sell-theme"
+                  className="form-control buy-sell-form-bg buy-sell-theme"
                   value={
                     oneUsdPrice && ammount
                       ? ammount?.toFixed(2)
@@ -451,10 +452,10 @@ export default function Orders(props) {
                 </span>
                 <div style={{ marginLeft: "5px" }}>{img}</div>
               </div>
-              <div class="input-group mb-3" style={{ margin: "0px" }}>
-                <div class="input-group-prepend">
+              <div className="input-group mb-3" style={{ margin: "0px" }}>
+                <div className="input-group-prepend">
                   <span
-                    class="input-group-text buy-sell-form-bg buy-sell-theme"
+                    className="input-group-text buy-sell-form-bg buy-sell-theme"
                     style={{
                       fontSize: " 10px",
                       borderColor: " rgb(202, 202, 204)",
@@ -468,7 +469,7 @@ export default function Orders(props) {
                 <input
                   type="number"
                   id="total"
-                  class="form-control buy-sell-form-bg buy-sell-theme"
+                  className="form-control buy-sell-form-bg buy-sell-theme"
                   value={total}
                   // defaultValue={total?total: userInfo?.currency_preference == "inr"?5000:5000/oneUsdPrice}
                   style={{
@@ -560,7 +561,7 @@ export default function Orders(props) {
               </div>
 
               <button
-                class="btn btn-block my-2"
+                className="btn btn-block my-2"
                 style={{
                   background: "rgb(108, 183, 125)",
                   top: "40px",

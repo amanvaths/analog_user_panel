@@ -151,7 +151,7 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
       // setLoader(false)
     }
   }, [coinData, walletDetails]);
-  console.log(coinWW ,"COIN WW");
+  // console.log(coinWW ,"COIN WW");
 
   return (
     <>
@@ -177,7 +177,7 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                         className="float-right"
                         style={{ padding: "" }}
                       >
-                        <span class="badge bg-outline-dark text-dark fs-5">
+                        <span className="badge bg-outline-dark text-dark fs-5">
                           {t('total_balance')} : 
                           <span className="text-teal"> 
                           { coinWW.length > 0
@@ -195,9 +195,9 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                       </label>
                     </div>
                   </div>
-                  <div class="mb-4">
-                    <div class="row">
-                      <div class="col-md-6 col-lg-6 col-12">
+                  <div className="mb-4">
+                    <div className="row">
+                      <div className="col-md-6 col-lg-6 col-12">
                         <div className="kanban-board-header kanban-success shadow-sm">
                           <div className="card-inner">
                             <p className="kanban-item-title">
@@ -227,7 +227,7 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                           </div>                                                
                         </div>
                       </div>
-                      <div class="col-md-6 col-lg-6 col-12">
+                      <div className="col-md-6 col-lg-6 col-12">
                           <div className="kanban-board-header kanban-success shadow-sm">
                             <div className="card-inner">
                               <p className="kanban-item-title">
@@ -255,7 +255,7 @@ const totalBonus = Number(inceptive? inceptive: 0) + Number(airdrop? airdrop: 0)
                   <div className="row">
                     {coinWW.map((element, index) => {                     
                       return (
-                        <div className="col-md-6 col-lg-4 col-12">
+                        <div className="col-md-6 col-lg-4 col-12" key={index}>
                           <Card1
                             title={element.name}
                             priceInUsd={(element?.quote?.[userInfo?.currency_preference.toUpperCase()]?.price)?.toFixed(20).match(/^-?\d*\.?0*\d{0,2}/)[0]}

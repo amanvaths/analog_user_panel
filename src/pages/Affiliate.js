@@ -127,6 +127,7 @@ const Affiliate = (props) => {
                       affiliates[0].map((item, index) => {
                         return (
                           <AffiliatCard
+                            key={index}
                             level={`Level ${index + 1}`}
                             totalUser={affiliates[1][item].totalUsers}
                             totalAnalogBuy={`${affiliates[1][item].totalAna.toFixed(2)} ANA`}
@@ -280,7 +281,7 @@ const Affiliate = (props) => {
                                       tab.map((element, index) => {
                                         // console.log(index, "::INDEx");
                                         return (
-                                          <div className="nk-tb-item ">
+                                          <div className="nk-tb-item " key={index}>
 
                                             <div className="nk-tb-col tb-col-sm">
                                             </div>
@@ -450,7 +451,7 @@ const Affiliate = (props) => {
                                       tab.map((element, index) => {
                                         // console.log(index, "::INDEx");
                                         return (
-                                          <div className="nk-tb-item ">
+                                          <div className="nk-tb-item " key={index}>
 
                                             <div className="nk-tb-col tb-col-sm">
                                             </div>
@@ -618,7 +619,7 @@ const Affiliate = (props) => {
                                         // console.log(index, "::INDEx");
                                         return (
                                           <>
-                                            <div className="nk-tb-item ">
+                                            <div className="nk-tb-item " key={index}>
 
                                               <div className="nk-tb-col tb-col-sm">
                                               </div>

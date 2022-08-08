@@ -8,37 +8,37 @@ const Mobile_Footer_Menu = ()=>{
                 
                 
                  {/* Menus only for mobile screen < 576 */}
-                <div class="container d-sm-none d-block">
-                    <nav class="bottom-nav">
-                        <div class="bottom-nav-item">
-                            <div class="bottom-nav-link">
-                            <i class="icon ni ni-dashboard"></i>
-                            <span class="d-none">Dashboard</span>
+                <div className="container d-sm-none d-block">
+                    <nav className="bottom-nav">
+                        <div className="bottom-nav-item">
+                            <div className="bottom-nav-link">
+                            <i className="icon ni ni-dashboard"></i>
+                            <span className="d-none">Dashboard</span>
                             </div>
                         </div>
-                        <div class="bottom-nav-item">
-                            <div class="bottom-nav-link">
-                            <i class="icon ni ni-user-c"></i>
-                            <span class="d-none">My Account</span>
+                        <div className="bottom-nav-item">
+                            <div className="bottom-nav-link">
+                            <i className="icon ni ni-user-c"></i>
+                            <span className="d-none">My Account</span>
                             </div>
                         </div>
-                        <div class="bottom-nav-item">
-                            <div class="bottom-nav-link">
-                            <i class="icon ni ni-wallet-alt"></i>
-                            <span class="d-none">Wallets</span>
+                        <div className="bottom-nav-item">
+                            <div className="bottom-nav-link">
+                            <i className="icon ni ni-wallet-alt"></i>
+                            <span className="d-none">Wallets</span>
                             </div>
                         </div>
                         
-                        <div class="bottom-nav-item">
-                            <div class="bottom-nav-link">
-                            <i class="icon ni ni-coins"></i>
-                            <span class="d-none">   Buy / Sell</span>
+                        <div className="bottom-nav-item">
+                            <div className="bottom-nav-link">
+                            <i className="icon ni ni-coins"></i>
+                            <span className="d-none">   Buy / Sell</span>
                             </div>
                         </div>
-                        <div class="bottom-nav-item">
-                            <div class="bottom-nav-link">
-                            <i class="icon ni ni-user-list"></i>
-                            <span class="d-none">Affiliate</span>
+                        <div className="bottom-nav-item">
+                            <div className="bottom-nav-link">
+                            <i className="icon ni ni-user-list"></i>
+                            <span className="d-none">Affiliate</span>
                             </div>
                         </div>
                     </nav>

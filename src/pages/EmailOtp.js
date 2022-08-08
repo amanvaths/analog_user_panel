@@ -73,12 +73,12 @@ const EmailOtp = (props) => {
   return (
     <div>
      
-     <div class="bg-login">
+     <div className="bg-login">
       <div className="nk-apps-root">
         <div className="nk-content container mt-lg-5 pt-lg-5 align-items-center">
           <div className="row justify-content-md-center">
-            <div class="col-md-4 bg-teal shadow  d-flex align-items-center">
-                <div class="card-inner text-white"> 
+            <div className="col-md-4 bg-teal shadow  d-flex align-items-center">
+                <div className="card-inner text-white"> 
                   <div className="nk-block-head-content">
                     <h2 className="nk-block-title">OTP Verification</h2>
                     <div className="lead">

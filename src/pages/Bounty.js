@@ -202,7 +202,7 @@ const Bounty = () => {
                                 tab.map((element, index) => {
                                   const a = new Date(element.createdAt)
                                   return (
-                                    <div className="nk-tb-item">
+                                    <div className="nk-tb-item" key={index}>
                                       <div className="nk-tb-col">
                                         <div className="nk-tnx-type">
                                           <span className="nk-activity-media user-avatar xs bg-teal">{(((currentPage - 1) * 10) + index + 1)}</span>

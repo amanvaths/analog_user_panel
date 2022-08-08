@@ -9,9 +9,7 @@ import { setIsLoggedIn, sendOtp } from "../redux/reducer/user";
 import jwt_decode from 'jwt-decode'
 import axios from "axios";
 import toast from 'react-hot-toast';
-
-
-
+import $ from 'jquery'
 const Login = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -92,31 +90,27 @@ const Login = (props) => {
         console.log(resp, "rerere");
         if (resp.status == 0) {
           toast.error("Incorrect Credentials")
-          // swal(
-          //   "Incorrect Credentials",
-          //   "Please Enter Right Credentials",
-          //   "error"
-          // );
+
         }
         if (resp.status == 1) {
-       
           if (resp.googleAuth == 1) {
             navigate('/2faAuthentication', { state: { email: email, token: resp.token } })
           } else {
+
             toast.success("Login Successful")
             dispatch(setIsLoggedIn({ LoginDetails: resp }))
             navigate('/home')
-          } 
+          }
         }
         if (resp.status == 3) {
           toast.error("Email is not varified")
-          // swal("Email is not varified", "Verify Email before Login", "error");
+
           dispatch(sendOtp(({ LoginDetails: resp })))
           navigate("/ResendOtp");
         }
         if (resp.status == 4) {
           toast.error("Email not Registered")
-          // swal("Email not Registered", "Please signup", "error");
+
         }
       });
   }
@@ -128,27 +122,36 @@ const Login = (props) => {
     if (password == "") {
       setPassworderror(true);
     }
-    if (captcha === false) {
-      toast.error("Validate Captcha")
-    }
+    // if (captcha === false) {
+    //   toast.error("Validate Captcha")
+    // }
 
-    if (email !== "" && password !== "" && captcha === true) {
-      Login();
+    if (email !== "" && password !== "") {
+      const vbtn = document.getElementById("verify-captcha");
+      vbtn.click();
+      // console.log("kkkk");
+      // Login();
     }
-
+    const captchaInterval = setInterval(() => {
+      const ver = localStorage.getItem('captcha')
+      // console.log(ver, 'login status');
+      if (ver === 'success') {
+        clearInterval(captchaInterval);
+        Login();
+        localStorage.removeItem('captcha');
+      }
+    },500);
 
   };
 
-
-
   return (
     <div>
-      <div class="bg-login">
+      <div className="bg-login">
         <div className="nk-apps-root">
           <div className="nk-content container mt-lg-5 pt-lg-5 align-items-center">
             <div className="row justify-content-md-center">
-              <div class="col-md-4 bg-teal shadow  d-flex align-items-center">
-                <div class="card-inner text-white">
+              <div className="col-md-4 bg-teal shadow  d-flex align-items-center">
+                <div className="card-inner text-white">
                   <div className="nk-block-head-content">
                     <h2 className="nk-block-title">SIGN IN</h2>
                     <div className="lead">
@@ -159,9 +162,7 @@ const Login = (props) => {
                   </div>
                 </div>
               </div>
-
               {ii == "" ? null : <img src={ii} alt="" />}
-
               <div className="col-md-6 bg-light border shadow">
                 <div className="card-inner">
                   <div className="brand-logo pb-3">
@@ -186,6 +187,7 @@ const Login = (props) => {
                   <form
                     onSubmit={(e) => {
                       e.preventDefault();
+
                       handelFormSubmit(email, password);
                     }}
                   >
@@ -254,7 +256,7 @@ const Login = (props) => {
                       </p>
                     ) : null}
                     {/* <div style={{width: "320px", height: "160px"}}> */}
-                    <div className="abc">
+                    {/* <div className="abc">
                       <Vertify
 
                         width={320}
@@ -264,7 +266,7 @@ const Login = (props) => {
                         onFail={() => toast.error("Invalid Captcha")}
                         onRefresh={() => console.log("")}
                       />
-                    </div>
+                    </div> */}
 
                     {/* </div> */}
 
@@ -274,9 +276,10 @@ const Login = (props) => {
                         className="btn text-white bg-teal btn-dim btn-block"
                       // onClick={() => toast.success("HIII")}
                       // onClick={Login}
-                      >                                                
+                      >
                         Sign in
                       </button>
+                      <button style={{ display: "none" }} id="verify-captcha" type="button"></button>
                     </div>
                   </form>
                   <div className="form-note-s2 pt-2 text-right small">

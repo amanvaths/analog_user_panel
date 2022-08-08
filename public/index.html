@@ -4,12 +4,12 @@
 <head>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <meta charset="utf-8" />
-  <link rel="icon" href="images/logo-dark-small2x.png" />
+  <link rel="icon" href="images/Analog.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="Analog Inceptive" />
   <link rel="stylesheet" href="assets/css/dashlite.css" />
-
+  <script src="http://static.geetest.com/v4/gt4.js"></script>
   <script type="text/javascript">
     function googleTranslateElementInit() {
       new google.translate.TranslateElement(
@@ -34,7 +34,7 @@
 
   <!-- Progress Bar -->
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+  <!-- <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico"> -->
 
   <!-- JavaScripts for Clock -->
   <script
@@ -58,6 +58,48 @@
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root" />
   </div>
+
+  <script>
+    var captchaId = "47029b997bdee48165956e99c521b4a8"   // gt_id
+    initGeetest4({
+      captchaId: captchaId,
+      product: "bind",
+      language: "en",
+      outside: true,
+      // bgColor:"blue"
+    }, function (gt) {
+
+      gt.onReady(function () {
+        // please call the showCaptcha method to show the CAPTCHA when it is ready
+        // alert("captcha is ready")
+        const btn = document.getElementById("verify-captcha");
+        btn.addEventListener("click", () => {
+          gt.showBox();
+        })
+      })
+        .onSuccess(function (e) {
+          var result = gt.getValidate();
+          const a = result.captcha_id
+          console.log("mydata::", result);
+          fetch('https://api.analog.live/api/captchaVerify', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify(result),
+          }).then((res) => {
+             res.json().then((data) =>{
+              localStorage.setItem("captcha", data.data)
+              // console.log(data.data, "response")
+            });
+          })
+        }).onFail(function (e) {
+          console.log("Fail");
+        })
+    });
+
+  </script>
   <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

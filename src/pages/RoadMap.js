@@ -11,7 +11,7 @@ const RoadMap = () => {
   useEffect(() => {
 
 
-    $(function () { function injector(t, splitter, klass, after) { var a = t.text().split(splitter), inject = ''; if (a.length) { $(a).each(function (i, item) { inject += '<span class="' + klass + (i + 1) + '">' + item + '</span>' + after }); t.empty().append(inject) } } var methods = { init: function () { return this.each(function () { injector($(this), '', 'char', '') }) }, words: function () { return this.each(function () { injector($(this), ' ', 'word', ' ') }) }, lines: function () { return this.each(function () { var r = "eefec303079ad17405c889e092e105b0"; injector($(this).children("br").replaceWith(r).end(), r, 'line', '') }) } }; $.fn.lettering = function (method) { if (method && methods[method]) { return methods[method].apply(this, [].slice.call(arguments, 1)) } else if (method === 'letters' || !method) { return methods.init.apply(this, [].slice.call(arguments, 0)) } $.error('Method ' + method + ' does not exist on jQuery.lettering'); return this } });
+    $(function () { function injector(t, splitter, klass, after) { var a = t.text().split(splitter), inject = ''; if (a.length) { $(a).each(function (i, item) { inject += '<span className="' + klass + (i + 1) + '">' + item + '</span>' + after }); t.empty().append(inject) } } var methods = { init: function () { return this.each(function () { injector($(this), '', 'char', '') }) }, words: function () { return this.each(function () { injector($(this), ' ', 'word', ' ') }) }, lines: function () { return this.each(function () { var r = "eefec303079ad17405c889e092e105b0"; injector($(this).children("br").replaceWith(r).end(), r, 'line', '') }) } }; $.fn.lettering = function (method) { if (method && methods[method]) { return methods[method].apply(this, [].slice.call(arguments, 1)) } else if (method === 'letters' || !method) { return methods.init.apply(this, [].slice.call(arguments, 0)) } $.error('Method ' + method + ' does not exist on jQuery.lettering'); return this } });
 
     $(function () {
 
@@ -190,184 +190,184 @@ const RoadMap = () => {
           <div className="nk-content nk-content-fluid bg-light min-height ">
             <div className="container-xl">
               <div className="nk-content-body">
-                <div class="nk-block-head nk-block-head-lg text-center">
-                  <div class="nk-block-head-content">
-                    <h4 class="nk-block-title fw-normal">Roadmap</h4>
-                    <div class="nk-block-des">
+                <div className="nk-block-head nk-block-head-lg text-center">
+                  <div className="nk-block-head-content">
+                    <h4 className="nk-block-title fw-normal">Roadmap</h4>
+                    <div className="nk-block-des">
                       <p>A Complete Roadmap to Blockchain Development</p>
                     </div>
                   </div>
                 </div>
 
                 <div className="clockdate">
-                  <div class='center-dial'>
-                    <h1 class='center-preview'></h1>
-                    <div class='head'></div>
-                    <div class='torso'></div>
-                    <div class='hand-container' id='minutes'>
-                      <div class='minute-hand'></div>
+                  <div className='center-dial'>
+                    <h1 className='center-preview'></h1>
+                    <div className='head'></div>
+                    <div className='torso'></div>
+                    <div className='hand-container' id='minutes'>
+                      <div className='minute-hand'></div>
                     </div>
-                    <div class='hand-container' id='hours'>
-                      <div class='hour-hand'></div>
+                    <div className='hand-container' id='hours'>
+                      <div className='hour-hand'></div>
                     </div>
-                    <div class='hand-container' id='seconds'>
-                      <div class='second-hand'></div>
-                    </div>
-                  </div>
-                  <div class='day-name-dial'>
-                    <div class='ring-back'></div>
-                    <div class='ring' id='r1'>
-                      {/* <h1 class='day-name-preview'>DAY NAME</h1> */}
-                      <h2 class='day-name-text'>MON TUE WED THU FRI SAT SUN</h2>
+                    <div className='hand-container' id='seconds'>
+                      <div className='second-hand'></div>
                     </div>
                   </div>
-                  <div class='month-dial'>
-                    <div class='ring-back'></div>
-                    <div class='ring' id='r2'>
-                      {/* <h1 class='month-preview'>MONTH</h1> */}
-                      <h2 class='month-text'>JAN FEB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC</h2>
+                  <div className='day-name-dial'>
+                    <div className='ring-back'></div>
+                    <div className='ring' id='r1'>
+                      {/* <h1 className='day-name-preview'>DAY NAME</h1> */}
+                      <h2 className='day-name-text'>MON TUE WED THU FRI SAT SUN</h2>
                     </div>
                   </div>
-                  <div class='day-dial'>
-                    <div class='ring-back'></div>
-                    <div class='ring' id='r3'>
-                      {/* <h1 class='day-preview'>DAY</h1> */}
-                      <h2 class='day-text'>01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31</h2>
+                  <div className='month-dial'>
+                    <div className='ring-back'></div>
+                    <div className='ring' id='r2'>
+                      {/* <h1 className='month-preview'>MONTH</h1> */}
+                      <h2 className='month-text'>JAN FEB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC</h2>
+                    </div>
+                  </div>
+                  <div className='day-dial'>
+                    <div className='ring-back'></div>
+                    <div className='ring' id='r3'>
+                      {/* <h1 className='day-preview'>DAY</h1> */}
+                      <h2 className='day-text'>01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31</h2>
                     </div>
                   </div>
                 </div>
 
-                <div class="tab_content_div">
-                  <div class="card-inner">
-                    <ul class="nav nav-tabs nav-tabs-s2 mt-n2 border-bottom-0">
-                      <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tabItem9">07 July 2022</a></li>
-                      <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tabItem10">Data one</a></li>
-                      <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tabItem11">Data two</a>
+                <div className="tab_content_div">
+                  <div className="card-inner">
+                    <ul className="nav nav-tabs nav-tabs-s2 mt-n2 border-bottom-0">
+                      <li className="nav-item"><a className="nav-link" data-bs-toggle="tab" href="#tabItem9">07 July 2022</a></li>
+                      <li className="nav-item"><a className="nav-link" data-bs-toggle="tab" href="#tabItem10">Data one</a></li>
+                      <li className="nav-item"><a className="nav-link" data-bs-toggle="tab" href="#tabItem11">Data two</a>
                       </li>
-                      <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tabItem12">Data Three</a></li>
+                      <li className="nav-item"><a className="nav-link" data-bs-toggle="tab" href="#tabItem12">Data Three</a></li>
                     </ul>
-                    <div class="tab-content">
-                      <div class="tab-pane" id="tabItem9">
+                    <div className="tab-content">
+                      <div className="tab-pane" id="tabItem9">
                         <div className="row">
-                          <div class="col-md-6 col-xxl-4">
-                            <div class="card card-bordered card-full">
-                              <div class="card-inner">
-                                <div class="card-title-group mb-1">
-                                  <div class="card-title">
-                                    <h6 class="title">Investment Overview</h6>
+                          <div className="col-md-6 col-xxl-4">
+                            <div className="card card-bordered card-full">
+                              <div className="card-inner">
+                                <div className="card-title-group mb-1">
+                                  <div className="card-title">
+                                    <h6 className="title">Investment Overview</h6>
                                     <p>The investment overview of your platform. <a href="#">All Investment</a></p>
                                   </div>
                                 </div>
-                                <div class="invest-ov gy-2">
-                                  <div class="subtitle">Currently Actived Investment</div>
-                                  <div class="invest-ov-details">
-                                    <div class="invest-ov-info">
-                                      <div class="amount">49,395.395 <span class="currency currency-usd">USD</span></div>
-                                      <div class="title">Amount</div>
+                                <div className="invest-ov gy-2">
+                                  <div className="subtitle">Currently Actived Investment</div>
+                                  <div className="invest-ov-details">
+                                    <div className="invest-ov-info">
+                                      <div className="amount">49,395.395 <span className="currency currency-usd">USD</span></div>
+                                      <div className="title">Amount</div>
                                     </div>
-                                    <div class="invest-ov-stats">
-                                      <div><span class="amount">56</span><span class="change up text-danger"><em
-                                        class="icon ni ni-arrow-long-up"></em>1.93%</span></div>
-                                      <div class="title">Plans</div>
+                                    <div className="invest-ov-stats">
+                                      <div><span className="amount">56</span><span className="change up text-danger"><em
+                                        className="icon ni ni-arrow-long-up"></em>1.93%</span></div>
+                                      <div className="title">Plans</div>
                                     </div>
                                   </div>
-                                  <div class="invest-ov-details">
-                                    <div class="invest-ov-info">
-                                      <div class="amount">49,395.395 <span class="currency currency-usd">USD</span></div>
-                                      <div class="title">Paid Profit</div>
+                                  <div className="invest-ov-details">
+                                    <div className="invest-ov-info">
+                                      <div className="amount">49,395.395 <span className="currency currency-usd">USD</span></div>
+                                      <div className="title">Paid Profit</div>
                                     </div>
                                   </div>
                                 </div>
-                                <div class="invest-ov gy-2">
-                                  <div class="subtitle">Investment in this Month</div>
-                                  <div class="invest-ov-details">
-                                    <div class="invest-ov-info">
-                                      <div class="amount">49,395.395 <span class="currency currency-usd">USD</span></div>
-                                      <div class="title">Amount</div>
+                                <div className="invest-ov gy-2">
+                                  <div className="subtitle">Investment in this Month</div>
+                                  <div className="invest-ov-details">
+                                    <div className="invest-ov-info">
+                                      <div className="amount">49,395.395 <span className="currency currency-usd">USD</span></div>
+                                      <div className="title">Amount</div>
                                     </div>
-                                    <div class="invest-ov-stats">
-                                      <div><span class="amount">23</span><span class="change down text-danger"><em
-                                        class="icon ni ni-arrow-long-down"></em>1.93%</span></div>
-                                      <div class="title">Plans</div>
+                                    <div className="invest-ov-stats">
+                                      <div><span className="amount">23</span><span className="change down text-danger"><em
+                                        className="icon ni ni-arrow-long-down"></em>1.93%</span></div>
+                                      <div className="title">Plans</div>
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                          <div class="col-md-6 col-xxl-8">
-                            <div class="card card-bordered card-full">
-                              <table class="table table-tranx">
+                          <div className="col-md-6 col-xxl-8">
+                            <div className="card card-bordered card-full">
+                              <table className="table table-tranx">
                                 <thead>
-                                  <tr class="tb-tnx-head">
-                                    <th class="tb-tnx-id"><span class="">#</span></th>
-                                    <th class="tb-tnx-info"><span class="tb-tnx-desc d-none d-sm-inline-block"><span>Bill
-                                      For</span></span><span class="tb-tnx-date d-md-inline-block d-none"><span
-                                        class="d-md-none">Date</span><span class="d-none d-md-block"><span>Issue
+                                  <tr className="tb-tnx-head">
+                                    <th className="tb-tnx-id"><span className="">#</span></th>
+                                    <th className="tb-tnx-info"><span className="tb-tnx-desc d-none d-sm-inline-block"><span>Bill
+                                      For</span></span><span className="tb-tnx-date d-md-inline-block d-none"><span
+                                        className="d-md-none">Date</span><span className="d-none d-md-block"><span>Issue
                                           Date</span><span>Due Date</span></span></span></th>
-                                    <th class="tb-tnx-amount"><span class="tb-tnx-total">Total</span><span
-                                      class="tb-tnx-status d-none d-md-inline-block">Status</span></th>
+                                    <th className="tb-tnx-amount"><span className="tb-tnx-total">Total</span><span
+                                      className="tb-tnx-status d-none d-md-inline-block">Status</span></th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr class="tb-tnx-item zoom_on_table">
-                                    <td class="tb-tnx-id"><a href="#"><span>4947</span></a></td>
-                                    <td class="tb-tnx-info">
-                                      <div class="tb-tnx-desc"><span class="title">Enterprize Year Subscription</span></div>
-                                      <div class="tb-tnx-date"><span class="date">10-05-2019</span><span class="date">10-13-2019</span>
+                                  <tr className="tb-tnx-item zoom_on_table">
+                                    <td className="tb-tnx-id"><a href="#"><span>4947</span></a></td>
+                                    <td className="tb-tnx-info">
+                                      <div className="tb-tnx-desc"><span className="title">Enterprize Year Subscription</span></div>
+                                      <div className="tb-tnx-date"><span className="date">10-05-2019</span><span className="date">10-13-2019</span>
                                       </div>
                                     </td>
-                                    <td class="tb-tnx-amount">
-                                      <div class="tb-tnx-total"><span class="amount">$599.00</span></div>
-                                      <div class="tb-tnx-status"><span class="badge bg-warning">Due</span></div>
+                                    <td className="tb-tnx-amount">
+                                      <div className="tb-tnx-total"><span className="amount">$599.00</span></div>
+                                      <div className="tb-tnx-status"><span className="badge bg-warning">Due</span></div>
                                     </td>
                                   </tr>
-                                  <tr class="tb-tnx-item zoom_on_table">
-                                    <td class="tb-tnx-id"><a href="#"><span>4904</span></a></td>
-                                    <td class="tb-tnx-info">
-                                      <div class="tb-tnx-desc"><span class="title">Maintenance Year Subscription</span></div>
-                                      <div class="tb-tnx-date"><span class="date">06-19-2019</span><span class="date">06-26-2019</span>
+                                  <tr className="tb-tnx-item zoom_on_table">
+                                    <td className="tb-tnx-id"><a href="#"><span>4904</span></a></td>
+                                    <td className="tb-tnx-info">
+                                      <div className="tb-tnx-desc"><span className="title">Maintenance Year Subscription</span></div>
+                                      <div className="tb-tnx-date"><span className="date">06-19-2019</span><span className="date">06-26-2019</span>
                                       </div>
                                     </td>
-                                    <td class="tb-tnx-amount">
-                                      <div class="tb-tnx-total"><span class="amount">$99.00</span></div>
-                                      <div class="tb-tnx-status"><span class="badge bg-success">Paid</span></div>
+                                    <td className="tb-tnx-amount">
+                                      <div className="tb-tnx-total"><span className="amount">$99.00</span></div>
+                                      <div className="tb-tnx-status"><span className="badge bg-success">Paid</span></div>
                                     </td>
                                   </tr>
-                                  <tr class="tb-tnx-item zoom_on_table">
-                                    <td class="tb-tnx-id"><a href="#"><span>4829</span></a></td>
-                                    <td class="tb-tnx-info">
-                                      <div class="tb-tnx-desc"><span class="title">Enterprize Year Subscription</span></div>
-                                      <div class="tb-tnx-date"><span class="date">10-04-2018</span><span class="date">10-12-2018</span>
+                                  <tr className="tb-tnx-item zoom_on_table">
+                                    <td className="tb-tnx-id"><a href="#"><span>4829</span></a></td>
+                                    <td className="tb-tnx-info">
+                                      <div className="tb-tnx-desc"><span className="title">Enterprize Year Subscription</span></div>
+                                      <div className="tb-tnx-date"><span className="date">10-04-2018</span><span className="date">10-12-2018</span>
                                       </div>
                                     </td>
-                                    <td class="tb-tnx-amount">
-                                      <div class="tb-tnx-total"><span class="amount">$599.00</span></div>
-                                      <div class="tb-tnx-status"><span class="badge bg-success">Paid</span></div>
+                                    <td className="tb-tnx-amount">
+                                      <div className="tb-tnx-total"><span className="amount">$599.00</span></div>
+                                      <div className="tb-tnx-status"><span className="badge bg-success">Paid</span></div>
                                     </td>
                                   </tr>
-                                  <tr class="tb-tnx-item zoom_on_table">
-                                    <td class="tb-tnx-id"><a href="#"><span>4830</span></a></td>
-                                    <td class="tb-tnx-info">
-                                      <div class="tb-tnx-desc"><span class="title">Enterprize Anniversary Subscription</span></div>
-                                      <div class="tb-tnx-date"><span class="date">12-04-2018</span><span class="date">14-12-2018</span>
+                                  <tr className="tb-tnx-item zoom_on_table">
+                                    <td className="tb-tnx-id"><a href="#"><span>4830</span></a></td>
+                                    <td className="tb-tnx-info">
+                                      <div className="tb-tnx-desc"><span className="title">Enterprize Anniversary Subscription</span></div>
+                                      <div className="tb-tnx-date"><span className="date">12-04-2018</span><span className="date">14-12-2018</span>
                                       </div>
                                     </td>
-                                    <td class="tb-tnx-amount">
-                                      <div class="tb-tnx-total"><span class="amount">$399.00</span></div>
-                                      <div class="tb-tnx-status"><span class="badge bg-success">Paid</span></div>
+                                    <td className="tb-tnx-amount">
+                                      <div className="tb-tnx-total"><span className="amount">$399.00</span></div>
+                                      <div className="tb-tnx-status"><span className="badge bg-success">Paid</span></div>
                                     </td>
                                   </tr>
-                                  <tr class="tb-tnx-item zoom_on_table">
-                                    <td class="tb-tnx-id"><a href="#"><span>4840</span></a></td>
-                                    <td class="tb-tnx-info">
-                                      <div class="tb-tnx-desc"><span class="title">Enterprize Coverage Subscription</span></div>
-                                      <div class="tb-tnx-date"><span class="date">12-08-2018</span><span class="date">13-22-2018</span>
+                                  <tr className="tb-tnx-item zoom_on_table">
+                                    <td className="tb-tnx-id"><a href="#"><span>4840</span></a></td>
+                                    <td className="tb-tnx-info">
+                                      <div className="tb-tnx-desc"><span className="title">Enterprize Coverage Subscription</span></div>
+                                      <div className="tb-tnx-date"><span className="date">12-08-2018</span><span className="date">13-22-2018</span>
                                       </div>
                                     </td>
-                                    <td class="tb-tnx-amount">
-                                      <div class="tb-tnx-total"><span class="amount">$99.00</span></div>
-                                      <div class="tb-tnx-status"><span class="badge bg-danger">Cancel</span></div>
+                                    <td className="tb-tnx-amount">
+                                      <div className="tb-tnx-total"><span className="amount">$99.00</span></div>
+                                      <div className="tb-tnx-status"><span className="badge bg-danger">Cancel</span></div>
                                     </td>
                                   </tr>
                                 </tbody>
@@ -376,206 +376,206 @@ const RoadMap = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="tab-pane" id="tabItem10">
-                        <div class="card card-bordered card-preview">
-                          <table class="table table-tranx">
+                      <div className="tab-pane" id="tabItem10">
+                        <div className="card card-bordered card-preview">
+                          <table className="table table-tranx">
                             <thead>
-                              <tr class="tb-tnx-head">
-                                <th class="tb-tnx-id"><span class="">#</span></th>
-                                <th class="tb-tnx-info"><span class="tb-tnx-desc d-none d-sm-inline-block"><span>Bill
-                                  For</span></span><span class="tb-tnx-date d-md-inline-block d-none"><span
-                                    class="d-md-none">Date</span><span class="d-none d-md-block"><span>Issue
+                              <tr className="tb-tnx-head">
+                                <th className="tb-tnx-id"><span className="">#</span></th>
+                                <th className="tb-tnx-info"><span className="tb-tnx-desc d-none d-sm-inline-block"><span>Bill
+                                  For</span></span><span className="tb-tnx-date d-md-inline-block d-none"><span
+                                    className="d-md-none">Date</span><span className="d-none d-md-block"><span>Issue
                                       Date</span><span>Due Date</span></span></span></th>
-                                <th class="tb-tnx-amount"><span class="tb-tnx-total">Total</span><span
-                                  class="tb-tnx-status d-none d-md-inline-block">Status</span></th>
+                                <th className="tb-tnx-amount"><span className="tb-tnx-total">Total</span><span
+                                  className="tb-tnx-status d-none d-md-inline-block">Status</span></th>
                               </tr>
                             </thead>
                             <tbody>
-                              <tr class="tb-tnx-item zoom_on_table">
-                                <td class="tb-tnx-id"><a href="#"><span>4947</span></a></td>
-                                <td class="tb-tnx-info">
-                                  <div class="tb-tnx-desc"><span class="title">Enterprize Year Subscription</span></div>
-                                  <div class="tb-tnx-date"><span class="date">10-05-2019</span><span class="date">10-13-2019</span>
+                              <tr className="tb-tnx-item zoom_on_table">
+                                <td className="tb-tnx-id"><a href="#"><span>4947</span></a></td>
+                                <td className="tb-tnx-info">
+                                  <div className="tb-tnx-desc"><span className="title">Enterprize Year Subscription</span></div>
+                                  <div className="tb-tnx-date"><span className="date">10-05-2019</span><span className="date">10-13-2019</span>
                                   </div>
                                 </td>
-                                <td class="tb-tnx-amount">
-                                  <div class="tb-tnx-total"><span class="amount">$599.00</span></div>
-                                  <div class="tb-tnx-status"><span class="badge bg-warning">Due</span></div>
+                                <td className="tb-tnx-amount">
+                                  <div className="tb-tnx-total"><span className="amount">$599.00</span></div>
+                                  <div className="tb-tnx-status"><span className="badge bg-warning">Due</span></div>
                                 </td>
                               </tr>
-                              <tr class="tb-tnx-item zoom_on_table">
-                                <td class="tb-tnx-id"><a href="#"><span>4904</span></a></td>
-                                <td class="tb-tnx-info">
-                                  <div class="tb-tnx-desc"><span class="title">Maintenance Year Subscription</span></div>
-                                  <div class="tb-tnx-date"><span class="date">06-19-2019</span><span class="date">06-26-2019</span>
+                              <tr className="tb-tnx-item zoom_on_table">
+                                <td className="tb-tnx-id"><a href="#"><span>4904</span></a></td>
+                                <td className="tb-tnx-info">
+                                  <div className="tb-tnx-desc"><span className="title">Maintenance Year Subscription</span></div>
+                                  <div className="tb-tnx-date"><span className="date">06-19-2019</span><span className="date">06-26-2019</span>
                                   </div>
                                 </td>
-                                <td class="tb-tnx-amount">
-                                  <div class="tb-tnx-total"><span class="amount">$99.00</span></div>
-                                  <div class="tb-tnx-status"><span class="badge bg-success">Paid</span></div>
+                                <td className="tb-tnx-amount">
+                                  <div className="tb-tnx-total"><span className="amount">$99.00</span></div>
+                                  <div className="tb-tnx-status"><span className="badge bg-success">Paid</span></div>
                                 </td>
                               </tr>
-                              <tr class="tb-tnx-item zoom_on_table">
-                                <td class="tb-tnx-id"><a href="#"><span>4829</span></a></td>
-                                <td class="tb-tnx-info">
-                                  <div class="tb-tnx-desc"><span class="title">Enterprize Year Subscription</span></div>
-                                  <div class="tb-tnx-date"><span class="date">10-04-2018</span><span class="date">10-12-2018</span>
+                              <tr className="tb-tnx-item zoom_on_table">
+                                <td className="tb-tnx-id"><a href="#"><span>4829</span></a></td>
+                                <td className="tb-tnx-info">
+                                  <div className="tb-tnx-desc"><span className="title">Enterprize Year Subscription</span></div>
+                                  <div className="tb-tnx-date"><span className="date">10-04-2018</span><span className="date">10-12-2018</span>
                                   </div>
                                 </td>
-                                <td class="tb-tnx-amount">
-                                  <div class="tb-tnx-total"><span class="amount">$599.00</span></div>
-                                  <div class="tb-tnx-status"><span class="badge bg-success">Paid</span></div>
+                                <td className="tb-tnx-amount">
+                                  <div className="tb-tnx-total"><span className="amount">$599.00</span></div>
+                                  <div className="tb-tnx-status"><span className="badge bg-success">Paid</span></div>
                                 </td>
                               </tr>
-                              <tr class="tb-tnx-item zoom_on_table">
-                                <td class="tb-tnx-id"><a href="#"><span>4830</span></a></td>
-                                <td class="tb-tnx-info">
-                                  <div class="tb-tnx-desc"><span class="title">Enterprize Anniversary Subscription</span></div>
-                                  <div class="tb-tnx-date"><span class="date">12-04-2018</span><span class="date">14-12-2018</span>
+                              <tr className="tb-tnx-item zoom_on_table">
+                                <td className="tb-tnx-id"><a href="#"><span>4830</span></a></td>
+                                <td className="tb-tnx-info">
+                                  <div className="tb-tnx-desc"><span className="title">Enterprize Anniversary Subscription</span></div>
+                                  <div className="tb-tnx-date"><span className="date">12-04-2018</span><span className="date">14-12-2018</span>
                                   </div>
                                 </td>
-                                <td class="tb-tnx-amount">
-                                  <div class="tb-tnx-total"><span class="amount">$399.00</span></div>
-                                  <div class="tb-tnx-status"><span class="badge bg-success">Paid</span></div>
+                                <td className="tb-tnx-amount">
+                                  <div className="tb-tnx-total"><span className="amount">$399.00</span></div>
+                                  <div className="tb-tnx-status"><span className="badge bg-success">Paid</span></div>
                                 </td>
                               </tr>
-                              <tr class="tb-tnx-item zoom_on_table">
-                                <td class="tb-tnx-id"><a href="#"><span>4840</span></a></td>
-                                <td class="tb-tnx-info">
-                                  <div class="tb-tnx-desc"><span class="title">Enterprize Coverage Subscription</span></div>
-                                  <div class="tb-tnx-date"><span class="date">12-08-2018</span><span class="date">13-22-2018</span>
+                              <tr className="tb-tnx-item zoom_on_table">
+                                <td className="tb-tnx-id"><a href="#"><span>4840</span></a></td>
+                                <td className="tb-tnx-info">
+                                  <div className="tb-tnx-desc"><span className="title">Enterprize Coverage Subscription</span></div>
+                                  <div className="tb-tnx-date"><span className="date">12-08-2018</span><span className="date">13-22-2018</span>
                                   </div>
                                 </td>
-                                <td class="tb-tnx-amount">
-                                  <div class="tb-tnx-total"><span class="amount">$99.00</span></div>
-                                  <div class="tb-tnx-status"><span class="badge bg-danger">Cancel</span></div>
+                                <td className="tb-tnx-amount">
+                                  <div className="tb-tnx-total"><span className="amount">$99.00</span></div>
+                                  <div className="tb-tnx-status"><span className="badge bg-danger">Cancel</span></div>
                                 </td>
                               </tr>
                             </tbody>
                           </table>
                         </div>
                       </div>
-                      <div class="tab-pane" id="tabItem11">
+                      <div className="tab-pane" id="tabItem11">
                         <div className="row">
-                          <div class="col-md-6 col-xxl-4">
-                            <div class="card card-bordered card-full">
-                              <div class="card-inner">
-                                <div class="card-title-group mb-1">
-                                  <div class="card-title">
-                                    <h6 class="title">Crypto Investment</h6>
+                          <div className="col-md-6 col-xxl-4">
+                            <div className="card card-bordered card-full">
+                              <div className="card-inner">
+                                <div className="card-title-group mb-1">
+                                  <div className="card-title">
+                                    <h6 className="title">Crypto Investment</h6>
                                     <p>The investment overview of your platform.</p>
                                   </div>
                                 </div>
-                                <div class="invest-ov gy-2">
-                                  <div class="subtitle">Currently Actived Investment</div>
-                                  <div class="invest-ov-details">
-                                    <div class="invest-ov-info">
-                                      <div class="amount">49,395.395 <span class="currency currency-usd">USD</span></div>
-                                      <div class="title">Amount</div>
+                                <div className="invest-ov gy-2">
+                                  <div className="subtitle">Currently Actived Investment</div>
+                                  <div className="invest-ov-details">
+                                    <div className="invest-ov-info">
+                                      <div className="amount">49,395.395 <span className="currency currency-usd">USD</span></div>
+                                      <div className="title">Amount</div>
                                     </div>
-                                    <div class="invest-ov-stats">
-                                      <div><span class="amount">56</span><span class="change up text-danger"><em
-                                        class="icon ni ni-arrow-long-up"></em>1.93%</span></div>
-                                      <div class="title">Plans</div>
+                                    <div className="invest-ov-stats">
+                                      <div><span className="amount">56</span><span className="change up text-danger"><em
+                                        className="icon ni ni-arrow-long-up"></em>1.93%</span></div>
+                                      <div className="title">Plans</div>
                                     </div>
                                   </div>
-                                  <div class="invest-ov-details">
-                                    <div class="invest-ov-info">
-                                      <div class="amount">49,395.395 <span class="currency currency-usd">USD</span></div>
-                                      <div class="title">Paid Profit</div>
+                                  <div className="invest-ov-details">
+                                    <div className="invest-ov-info">
+                                      <div className="amount">49,395.395 <span className="currency currency-usd">USD</span></div>
+                                      <div className="title">Paid Profit</div>
                                     </div>
                                   </div>
                                 </div>
-                                <div class="invest-ov gy-2">
-                                  <div class="subtitle">Investment in this Month</div>
-                                  <div class="invest-ov-details">
-                                    <div class="invest-ov-info">
-                                      <div class="amount">49,395.395 <span class="currency currency-usd">USD</span></div>
-                                      <div class="title">Amount</div>
+                                <div className="invest-ov gy-2">
+                                  <div className="subtitle">Investment in this Month</div>
+                                  <div className="invest-ov-details">
+                                    <div className="invest-ov-info">
+                                      <div className="amount">49,395.395 <span className="currency currency-usd">USD</span></div>
+                                      <div className="title">Amount</div>
                                     </div>
-                                    <div class="invest-ov-stats">
-                                      <div><span class="amount">23</span><span class="change down text-danger"><em
-                                        class="icon ni ni-arrow-long-down"></em>1.93%</span></div>
-                                      <div class="title">Plans</div>
+                                    <div className="invest-ov-stats">
+                                      <div><span className="amount">23</span><span className="change down text-danger"><em
+                                        className="icon ni ni-arrow-long-down"></em>1.93%</span></div>
+                                      <div className="title">Plans</div>
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                          <div class="col-md-6 col-xxl-8">
-                            <div class="card card-bordered card-full">
-                              <table class="table table-tranx">
+                          <div className="col-md-6 col-xxl-8">
+                            <div className="card card-bordered card-full">
+                              <table className="table table-tranx">
                                 <thead>
-                                  <tr class="tb-tnx-head">
-                                    <th class="tb-tnx-id"><span class="">#</span></th>
-                                    <th class="tb-tnx-info"><span class="tb-tnx-desc d-none d-sm-inline-block"><span>Bill ID
-                                      For</span></span><span class="tb-tnx-date d-md-inline-block d-none"><span
-                                        class="d-md-none">Date</span><span class="d-none d-md-block"><span>Issue
+                                  <tr className="tb-tnx-head">
+                                    <th className="tb-tnx-id"><span className="">#</span></th>
+                                    <th className="tb-tnx-info"><span className="tb-tnx-desc d-none d-sm-inline-block"><span>Bill ID
+                                      For</span></span><span className="tb-tnx-date d-md-inline-block d-none"><span
+                                        className="d-md-none">Date</span><span className="d-none d-md-block"><span>Issue
                                           Date</span><span>Due Date</span></span></span></th>
-                                    <th class="tb-tnx-amount"><span class="tb-tnx-total">Total</span><span
-                                      class="tb-tnx-status d-none d-md-inline-block">Status</span></th>
+                                    <th className="tb-tnx-amount"><span className="tb-tnx-total">Total</span><span
+                                      className="tb-tnx-status d-none d-md-inline-block">Status</span></th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr class="tb-tnx-item zoom_on_table">
-                                    <td class="tb-tnx-id"><a href="#"><span>4947</span></a></td>
-                                    <td class="tb-tnx-info">
-                                      <div class="tb-tnx-desc"><span class="title">Enterprize Year Subscription</span></div>
-                                      <div class="tb-tnx-date"><span class="date">10-05-2019</span><span class="date">10-13-2019</span>
+                                  <tr className="tb-tnx-item zoom_on_table">
+                                    <td className="tb-tnx-id"><a href="#"><span>4947</span></a></td>
+                                    <td className="tb-tnx-info">
+                                      <div className="tb-tnx-desc"><span className="title">Enterprize Year Subscription</span></div>
+                                      <div className="tb-tnx-date"><span className="date">10-05-2019</span><span className="date">10-13-2019</span>
                                       </div>
                                     </td>
-                                    <td class="tb-tnx-amount">
-                                      <div class="tb-tnx-total"><span class="amount">$599.00</span></div>
-                                      <div class="tb-tnx-status"><span class="badge bg-warning">Due</span></div>
+                                    <td className="tb-tnx-amount">
+                                      <div className="tb-tnx-total"><span className="amount">$599.00</span></div>
+                                      <div className="tb-tnx-status"><span className="badge bg-warning">Due</span></div>
                                     </td>
                                   </tr>
-                                  <tr class="tb-tnx-item zoom_on_table">
-                                    <td class="tb-tnx-id"><a href="#"><span>4904</span></a></td>
-                                    <td class="tb-tnx-info">
-                                      <div class="tb-tnx-desc"><span class="title">Maintenance Year Subscription</span></div>
-                                      <div class="tb-tnx-date"><span class="date">06-19-2019</span><span class="date">06-26-2019</span>
+                                  <tr className="tb-tnx-item zoom_on_table">
+                                    <td className="tb-tnx-id"><a href="#"><span>4904</span></a></td>
+                                    <td className="tb-tnx-info">
+                                      <div className="tb-tnx-desc"><span className="title">Maintenance Year Subscription</span></div>
+                                      <div className="tb-tnx-date"><span className="date">06-19-2019</span><span className="date">06-26-2019</span>
                                       </div>
                                     </td>
-                                    <td class="tb-tnx-amount">
-                                      <div class="tb-tnx-total"><span class="amount">$99.00</span></div>
-                                      <div class="tb-tnx-status"><span class="badge bg-success">Paid</span></div>
+                                    <td className="tb-tnx-amount">
+                                      <div className="tb-tnx-total"><span className="amount">$99.00</span></div>
+                                      <div className="tb-tnx-status"><span className="badge bg-success">Paid</span></div>
                                     </td>
                                   </tr>
-                                  <tr class="tb-tnx-item zoom_on_table">
-                                    <td class="tb-tnx-id"><a href="#"><span>4829</span></a></td>
-                                    <td class="tb-tnx-info">
-                                      <div class="tb-tnx-desc"><span class="title">Enterprize Year Subscription</span></div>
-                                      <div class="tb-tnx-date"><span class="date">10-04-2018</span><span class="date">10-12-2018</span>
+                                  <tr className="tb-tnx-item zoom_on_table">
+                                    <td className="tb-tnx-id"><a href="#"><span>4829</span></a></td>
+                                    <td className="tb-tnx-info">
+                                      <div className="tb-tnx-desc"><span className="title">Enterprize Year Subscription</span></div>
+                                      <div className="tb-tnx-date"><span className="date">10-04-2018</span><span className="date">10-12-2018</span>
                                       </div>
                                     </td>
-                                    <td class="tb-tnx-amount">
-                                      <div class="tb-tnx-total"><span class="amount">$599.00</span></div>
-                                      <div class="tb-tnx-status"><span class="badge bg-success">Paid</span></div>
+                                    <td className="tb-tnx-amount">
+                                      <div className="tb-tnx-total"><span className="amount">$599.00</span></div>
+                                      <div className="tb-tnx-status"><span className="badge bg-success">Paid</span></div>
                                     </td>
                                   </tr>
-                                  <tr class="tb-tnx-item zoom_on_table">
-                                    <td class="tb-tnx-id"><a href="#"><span>4830</span></a></td>
-                                    <td class="tb-tnx-info">
-                                      <div class="tb-tnx-desc"><span class="title">Enterprize Anniversary Subscription</span></div>
-                                      <div class="tb-tnx-date"><span class="date">12-04-2018</span><span class="date">14-12-2018</span>
+                                  <tr className="tb-tnx-item zoom_on_table">
+                                    <td className="tb-tnx-id"><a href="#"><span>4830</span></a></td>
+                                    <td className="tb-tnx-info">
+                                      <div className="tb-tnx-desc"><span className="title">Enterprize Anniversary Subscription</span></div>
+                                      <div className="tb-tnx-date"><span className="date">12-04-2018</span><span className="date">14-12-2018</span>
                                       </div>
                                     </td>
-                                    <td class="tb-tnx-amount">
-                                      <div class="tb-tnx-total"><span class="amount">$399.00</span></div>
-                                      <div class="tb-tnx-status"><span class="badge bg-success">Paid</span></div>
+                                    <td className="tb-tnx-amount">
+                                      <div className="tb-tnx-total"><span className="amount">$399.00</span></div>
+                                      <div className="tb-tnx-status"><span className="badge bg-success">Paid</span></div>
                                     </td>
                                   </tr>
-                                  <tr class="tb-tnx-item zoom_on_table">
-                                    <td class="tb-tnx-id"><a href="#"><span>4840</span></a></td>
-                                    <td class="tb-tnx-info">
-                                      <div class="tb-tnx-desc"><span class="title">Enterprize Coverage Subscription</span></div>
-                                      <div class="tb-tnx-date"><span class="date">12-08-2018</span><span class="date">13-22-2018</span>
+                                  <tr className="tb-tnx-item zoom_on_table">
+                                    <td className="tb-tnx-id"><a href="#"><span>4840</span></a></td>
+                                    <td className="tb-tnx-info">
+                                      <div className="tb-tnx-desc"><span className="title">Enterprize Coverage Subscription</span></div>
+                                      <div className="tb-tnx-date"><span className="date">12-08-2018</span><span className="date">13-22-2018</span>
                                       </div>
                                     </td>
-                                    <td class="tb-tnx-amount">
-                                      <div class="tb-tnx-total"><span class="amount">$99.00</span></div>
-                                      <div class="tb-tnx-status"><span class="badge bg-danger">Cancel</span></div>
+                                    <td className="tb-tnx-amount">
+                                      <div className="tb-tnx-total"><span className="amount">$99.00</span></div>
+                                      <div className="tb-tnx-status"><span className="badge bg-danger">Cancel</span></div>
                                     </td>
                                   </tr>
                                 </tbody>
@@ -585,83 +585,83 @@ const RoadMap = () => {
 
                         </div>
                       </div>
-                      <div class="tab-pane" id="tabItem12">
+                      <div className="tab-pane" id="tabItem12">
                         <p>Eu dolore ea ullamco dolore Lorem id cupidatat excepteur reprehenderit consectetur elit id dolor
                           proident in cupidatat officia. Voluptate excepteur commodo labore nisi cillum duis aliqua do. Aliqua
                           amet qui mollit consectetur nulla mollit velit aliqua veniam nisi id do Lorem deserunt amet. Culpa
                           ullamco sit adipisicing labore officia magna elit nisi in aute tempor commodo eiusmod.</p>
-                        <div class="card card-bordered card-preview">
-                          <table class="table table-tranx">
+                        <div className="card card-bordered card-preview">
+                          <table className="table table-tranx">
                             <thead>
-                              <tr class="tb-tnx-head">
-                                <th class="tb-tnx-id"><span class="">#</span></th>
-                                <th class="tb-tnx-info"><span class="tb-tnx-desc d-none d-sm-inline-block"><span>Bill
-                                  For</span></span><span class="tb-tnx-date d-md-inline-block d-none"><span
-                                    class="d-md-none">Date</span><span class="d-none d-md-block"><span>Issue
+                              <tr className="tb-tnx-head">
+                                <th className="tb-tnx-id"><span className="">#</span></th>
+                                <th className="tb-tnx-info"><span className="tb-tnx-desc d-none d-sm-inline-block"><span>Bill
+                                  For</span></span><span className="tb-tnx-date d-md-inline-block d-none"><span
+                                    className="d-md-none">Date</span><span className="d-none d-md-block"><span>Issue
                                       Date</span><span>Due Date</span></span></span></th>
-                                <th class="tb-tnx-amount"><span class="tb-tnx-total">Total</span><span
-                                  class="tb-tnx-status d-none d-md-inline-block">Status</span></th>
+                                <th className="tb-tnx-amount"><span className="tb-tnx-total">Total</span><span
+                                  className="tb-tnx-status d-none d-md-inline-block">Status</span></th>
                               </tr>
                             </thead>
                             <tbody>
-                              <tr class="tb-tnx-item zoom_on_table">
-                                <td class="tb-tnx-id"><a href="#"><span>4947</span></a></td>
-                                <td class="tb-tnx-info">
-                                  <div class="tb-tnx-desc"><span class="title">Enterprize Year Subscription</span></div>
-                                  <div class="tb-tnx-date"><span class="date">10-05-2019</span><span class="date">10-13-2019</span>
+                              <tr className="tb-tnx-item zoom_on_table">
+                                <td className="tb-tnx-id"><a href="#"><span>4947</span></a></td>
+                                <td className="tb-tnx-info">
+                                  <div className="tb-tnx-desc"><span className="title">Enterprize Year Subscription</span></div>
+                                  <div className="tb-tnx-date"><span className="date">10-05-2019</span><span className="date">10-13-2019</span>
                                   </div>
                                 </td>
-                                <td class="tb-tnx-amount">
-                                  <div class="tb-tnx-total"><span class="amount">$599.00</span></div>
-                                  <div class="tb-tnx-status"><span class="badge bg-warning">Due</span></div>
+                                <td className="tb-tnx-amount">
+                                  <div className="tb-tnx-total"><span className="amount">$599.00</span></div>
+                                  <div className="tb-tnx-status"><span className="badge bg-warning">Due</span></div>
                                 </td>
                               </tr>
-                              <tr class="tb-tnx-item zoom_on_table">
-                                <td class="tb-tnx-id"><a href="#"><span>4904</span></a></td>
-                                <td class="tb-tnx-info">
-                                  <div class="tb-tnx-desc"><span class="title">Maintenance Year Subscription</span></div>
-                                  <div class="tb-tnx-date"><span class="date">06-19-2019</span><span class="date">06-26-2019</span>
+                              <tr className="tb-tnx-item zoom_on_table">
+                                <td className="tb-tnx-id"><a href="#"><span>4904</span></a></td>
+                                <td className="tb-tnx-info">
+                                  <div className="tb-tnx-desc"><span className="title">Maintenance Year Subscription</span></div>
+                                  <div className="tb-tnx-date"><span className="date">06-19-2019</span><span className="date">06-26-2019</span>
                                   </div>
                                 </td>
-                                <td class="tb-tnx-amount">
-                                  <div class="tb-tnx-total"><span class="amount">$99.00</span></div>
-                                  <div class="tb-tnx-status"><span class="badge bg-success">Paid</span></div>
+                                <td className="tb-tnx-amount">
+                                  <div className="tb-tnx-total"><span className="amount">$99.00</span></div>
+                                  <div className="tb-tnx-status"><span className="badge bg-success">Paid</span></div>
                                 </td>
                               </tr>
-                              <tr class="tb-tnx-item zoom_on_table">
-                                <td class="tb-tnx-id"><a href="#"><span>4829</span></a></td>
-                                <td class="tb-tnx-info">
-                                  <div class="tb-tnx-desc"><span class="title">Enterprize Year Subscription</span></div>
-                                  <div class="tb-tnx-date"><span class="date">10-04-2018</span><span class="date">10-12-2018</span>
+                              <tr className="tb-tnx-item zoom_on_table">
+                                <td className="tb-tnx-id"><a href="#"><span>4829</span></a></td>
+                                <td className="tb-tnx-info">
+                                  <div className="tb-tnx-desc"><span className="title">Enterprize Year Subscription</span></div>
+                                  <div className="tb-tnx-date"><span className="date">10-04-2018</span><span className="date">10-12-2018</span>
                                   </div>
                                 </td>
-                                <td class="tb-tnx-amount">
-                                  <div class="tb-tnx-total"><span class="amount">$599.00</span></div>
-                                  <div class="tb-tnx-status"><span class="badge bg-success">Paid</span></div>
+                                <td className="tb-tnx-amount">
+                                  <div className="tb-tnx-total"><span className="amount">$599.00</span></div>
+                                  <div className="tb-tnx-status"><span className="badge bg-success">Paid</span></div>
                                 </td>
                               </tr>
-                              <tr class="tb-tnx-item zoom_on_table">
-                                <td class="tb-tnx-id"><a href="#"><span>4830</span></a></td>
-                                <td class="tb-tnx-info">
-                                  <div class="tb-tnx-desc"><span class="title">Enterprize Anniversary Subscription</span></div>
-                                  <div class="tb-tnx-date"><span class="date">12-04-2018</span><span class="date">14-12-2018</span>
+                              <tr className="tb-tnx-item zoom_on_table">
+                                <td className="tb-tnx-id"><a href="#"><span>4830</span></a></td>
+                                <td className="tb-tnx-info">
+                                  <div className="tb-tnx-desc"><span className="title">Enterprize Anniversary Subscription</span></div>
+                                  <div className="tb-tnx-date"><span className="date">12-04-2018</span><span className="date">14-12-2018</span>
                                   </div>
                                 </td>
-                                <td class="tb-tnx-amount">
-                                  <div class="tb-tnx-total"><span class="amount">$399.00</span></div>
-                                  <div class="tb-tnx-status"><span class="badge bg-success">Paid</span></div>
+                                <td className="tb-tnx-amount">
+                                  <div className="tb-tnx-total"><span className="amount">$399.00</span></div>
+                                  <div className="tb-tnx-status"><span className="badge bg-success">Paid</span></div>
                                 </td>
                               </tr>
-                              <tr class="tb-tnx-item zoom_on_table">
-                                <td class="tb-tnx-id"><a href="#"><span>4840</span></a></td>
-                                <td class="tb-tnx-info">
-                                  <div class="tb-tnx-desc"><span class="title">Enterprize Coverage Subscription</span></div>
-                                  <div class="tb-tnx-date"><span class="date">12-08-2018</span><span class="date">13-22-2018</span>
+                              <tr className="tb-tnx-item zoom_on_table">
+                                <td className="tb-tnx-id"><a href="#"><span>4840</span></a></td>
+                                <td className="tb-tnx-info">
+                                  <div className="tb-tnx-desc"><span className="title">Enterprize Coverage Subscription</span></div>
+                                  <div className="tb-tnx-date"><span className="date">12-08-2018</span><span className="date">13-22-2018</span>
                                   </div>
                                 </td>
-                                <td class="tb-tnx-amount">
-                                  <div class="tb-tnx-total"><span class="amount">$99.00</span></div>
-                                  <div class="tb-tnx-status"><span class="badge bg-danger">Cancel</span></div>
+                                <td className="tb-tnx-amount">
+                                  <div className="tb-tnx-total"><span className="amount">$99.00</span></div>
+                                  <div className="tb-tnx-status"><span className="badge bg-danger">Cancel</span></div>
                                 </td>
                               </tr>
                             </tbody>

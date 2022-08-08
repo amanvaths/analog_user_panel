@@ -215,8 +215,8 @@ const SecuritySettings = () => {
                         <div className='col-7'>
 
                           <form action="" style={{}}>
-                            <div class="form-group">
-                              <div class="form-group">
+                            <div className="form-group">
+                              <div className="form-group">
           
                                 <OtpInput
                                   inputStyle="auth_style"
@@ -227,7 +227,7 @@ const SecuritySettings = () => {
                                   separator={<span>&nbsp;</span>}
                                 />
                               </div>
-                              <button type="button" class="btn btn-outline-success btn-dim btn-block" onClick={() => {
+                              <button type="button" className="btn btn-outline-success btn-dim btn-block" onClick={() => {
                                 axios.post(`${BASE_URL}/generateauthtoken`, { email: email, token: otp }).then((resp) => {
                                   if (resp.data.status == 1) {
                                     toast.success(`${t('2fa_alert_message_sussesfully')}`)
@@ -283,7 +283,7 @@ const SecuritySettings = () => {
                                   separator={<span>&nbsp;</span>}
                                 />
                               </div>
-                              <button type="button" class="btn btn-outline-danger btn-dim btn-block" onClick={() => {
+                              <button type="button" className="btn btn-outline-danger btn-dim btn-block" onClick={() => {
                                 axios.post(`${BASE_URL}/generateauthtoken`, { email: email, token2: otpD }).then((resp) => {
                                   if (resp.data.status == 1) {
                                     toast.success(`${t('2fa_disabled_successfully')}`)

@@ -140,20 +140,20 @@ const ChangePassword = () => {
     return (
         <>
 
-            <div class="card-inner card-inner-lg">
-                <div class="nk-block-head nk-block-head-lg">
-                    <div class="nk-block-between">
-                        <div class="nk-block-head-content">
-                            <h4 class="nk-block-title">{t('change_password')}</h4>
-                            <div class="nk-block-des">
+            <div className="card-inner card-inner-lg">
+                <div className="nk-block-head nk-block-head-lg">
+                    <div className="nk-block-between">
+                        <div className="nk-block-head-content">
+                            <h4 className="nk-block-title">{t('change_password')}</h4>
+                            <div className="nk-block-des">
                                 <p>{t('change_password_tagline1')}</p>
                             </div>
                             <hr></hr>
                         </div>
-                        <div class="nk-block-head-content align-self-start d-lg-none"><a
-                            href="#" class="toggle btn btn-icon btn-trigger mt-n1"
+                        <div className="nk-block-head-content align-self-start d-lg-none"><a
+                            href="#" className="toggle btn btn-icon btn-trigger mt-n1"
                             data-target="userAside"><em
-                                class="icon ni ni-menu-alt-r"></em></a></div>
+                                className="icon ni ni-menu-alt-r"></em></a></div>
                     </div>
                 </div>
                 <div className='container w-80'>

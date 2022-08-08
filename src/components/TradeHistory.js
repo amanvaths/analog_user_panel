@@ -64,7 +64,7 @@ export default function TradeHistory() {
                     </div>
                   </>
                 )}
-                {history.map((h) => {
+                {history.map((h, index) => {
                   let a = new Date(h.date).toLocaleString([], {
                     year: "numeric",
                     month: "numeric",
@@ -76,6 +76,7 @@ export default function TradeHistory() {
                     <>
                       <tr
                         className="zoom  historyorder"
+                        key={index}
                         style={{ fontSize: "16.6px", cursor: "pointer" }}
                       >
                         <td

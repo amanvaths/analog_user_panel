@@ -19,6 +19,7 @@ function Menu() {
   const [walletBalance, setWalletBalance] = useState(0)
   const { t } = useTranslation();
   const [th, setTh] = useState(true)
+  // console.log(oneUsdPrice, "Oneusd Price");
 
     const mode = localStorage.getItem("theme")
     if (mode == 1) {
@@ -126,14 +127,13 @@ function Menu() {
                 width={100}
                 className="logo-light logo-img"
                 src="https://api.analog.live/images/logo_1658832710895-image.svg"
-                // srcSet="images/logo-dark.png 2x"
+               
                 alt="logo"
               />
               <img
                 width={100}
                 className="logo-dark logo-img"
                 src="https://api.analog.live/images/dark_logo_1658832710900-image.svg"
-                // srcSet="images/logo-dark.png 2x"
                 alt="logo-dark"
               />
               {/* <span className="nio-version">ANALOG</span> */}
@@ -161,9 +161,7 @@ function Menu() {
                       <small className="currency currency-btc">ANA</small>
                     </div>
                     <div className="user-balance-alt">
-                      {userInfo?.currency_preference == "inr" ? (userInfo?.anaPrice * Number(anaBalancce)) > 0 ? (userInfo?.anaPrice * Number(anaBalancce)).toFixed(2) : 0 :
-                        ((userInfo?.anaPrice / usdPrice) * Number(anaBalancce)) > 0 ? ((userInfo?.anaPrice / usdPrice) * Number(anaBalancce)).toFixed(2) : 0
-                      }
+                      {userInfo?.currency_preference == 'inr' ? (userInfo?.anaPrice * anaBalancce).toFixed(2) : ((userInfo?.anaPrice / oneUsdPrice) * anaBalancce).toFixed(2)}
                       {" "}
                       <span className="currency currency-btc">
                         {userInfo?.currency_preference ? userInfo?.currency_preference == 'inr' ? "INRX" : "USDT" : ''}
@@ -354,7 +352,7 @@ function Menu() {
                       View All
                     </a> */}
                 </div>
-                <div class="">
+                <div className="">
                   <div className="text-dark wallet-name">
                     {userInfo?.currency_preference == 'inr' ? 'INRX' : "USDT"} {t('usdt_wallet')}</div>
 
@@ -369,10 +367,10 @@ function Menu() {
               </div>
 
               <div className="nk-sidebar-widget my-2">
-                <h6 class="overline-title-alt text-teal fs-6 mb-2">Color Mode</h6>
+                <h6 className="overline-title-alt text-teal fs-6 mb-2">Color Mode</h6>
                 <hr />
                 <span> Light </span>
-                <label class="switch">
+                <label className="switch">
                   <input type="checkbox"
                     name=""
                     checked={th}
@@ -385,9 +383,9 @@ function Menu() {
                         localStorage.setItem("theme", '1')
                       }
                     }} />
-                  <span class="slider round"></span>
+                  <span className="slider round"></span>
                 </label>
-                <span class="text-dark"> Dark</span>
+                <span className="text-dark"> Dark</span>
               </div>
 
               <div className="nk-sidebar-footer sidebar-bg">

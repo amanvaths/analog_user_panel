@@ -223,12 +223,12 @@ const Signup = (props) => {
   };
 
   return (
-    <div class="bg-login">
+    <div className="bg-login">
       <div className="nk-apps-root">
         <div className="nk-content container mt-lg-5 pt-lg-5 align-items-center">
           <div className="row justify-content-md-center">
-            <div class="col-md-4 bg-teal shadow  d-flex align-items-center">
-              <div class="card-inner text-white"> 
+            <div className="col-md-4 bg-teal shadow  d-flex align-items-center">
+              <div className="card-inner text-white"> 
                 <div className="nk-block-head-content">
                   <h2 className="nk-block-title">SIGN UP</h2>
                   <div className="lead">
@@ -340,7 +340,7 @@ const Signup = (props) => {
                     </div>
 
                     <div id="validation-box">
-                    <p class="text-soft small">We suggest having at least one capital and one lower-case letter (Aa-Zz), 
+                    <p className="text-soft small">We suggest having at least one capital and one lower-case letter (Aa-Zz), 
                     one special symbol (#, &amp;, % etc) and one number (0-9) in your password for the best strength</p>
                     </div>
                   </div>
@@ -423,7 +423,7 @@ const Signup = (props) => {
                 </form>
                 <div className="form-note-s2 pt-2 text-right">
                   {" "}
-                  Already have an account ? <Link class="text-teal" to="/login">Sign In</Link>
+                  Already have an account ? <Link className="text-teal" to="/login">Sign In</Link>
                 </div>
 
                 <div className="text-center pt-4 pb-3">
