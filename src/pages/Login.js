@@ -115,6 +115,7 @@ const Login = (props) => {
       });
   }
   const handelFormSubmit = (email, password) => {
+    console.log('Click0');
     if (email == "") {
       setEmailerror(true);
     }
@@ -127,12 +128,14 @@ const Login = (props) => {
     // }
 
     if (email !== "" && password !== "") {
+      // console.log('Click1');
       const vbtn = document.getElementById("verify-captcha");
       vbtn.click();
       // console.log("kkkk");
       // Login();
     }
     const captchaInterval = setInterval(() => {
+      // console.log('Click2');
       const ver = localStorage.getItem('captcha')
       // console.log(ver, 'login status');
       if (ver === 'success') {
@@ -187,7 +190,6 @@ const Login = (props) => {
                   <form
                     onSubmit={(e) => {
                       e.preventDefault();
-
                       handelFormSubmit(email, password);
                     }}
                   >
